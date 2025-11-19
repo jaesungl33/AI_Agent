@@ -1,0 +1,560 @@
+[
+    {
+        "type": "text",
+        "text": "Demo Map Design file ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            84,
+            489,
+            120
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Demo Map Design file ",
+        "bbox": [
+            47,
+            146,
+            262,
+            165
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Project TOG - Map Design Guideline: Desert Environment ",
+        "bbox": [
+            45,
+            177,
+            609,
+            196
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Mục tiêu thiết kế ",
+        "bbox": [
+            47,
+            207,
+            207,
+            225
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Test mecharicnic game. ",
+        "bbox": [
+            47,
+            238,
+            271,
+            257
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Test lợi thế của 2 bên theo giai đoạn của trận đấu ",
+        "bbox": [
+            45,
+            267,
+            510,
+            286
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Theme Overview ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            389,
+            237,
+            407
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tên bản đồ: Crimson Dunes / Rust Frontier / Khamsin Outpost ",
+        "bbox": [
+            52,
+            419,
+            661,
+            439
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Bối cảnh: Sa mạc khô cằn hậu tận thế, từng là căn cứ quân sự bỏ hoang nay trở thành điểm tranh chấp chiến lược giữa các phe tank. ",
+        "bbox": [
+            52,
+            447,
+            932,
+            492
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tông màu: Cam đất, vàng cháy, đỏ gỉ sét, điểm xanh bạc từ thiết bị công nghệ cũ. ",
+        "bbox": [
+            52,
+            501,
+            843,
+            522
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Phong cách kiến trúc: Hầm quân sự, trạm radar, container rỉ sét, tháp canh gãy đổ, tàn tích bê tông. ",
+        "bbox": [
+            48,
+            532,
+            939,
+            577
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Kết cấu bản đồ 3v3 ",
+        "bbox": [
+            48,
+            646,
+            257,
+            665
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.1 Kích thước đề xuất ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            686,
+            351,
+            713
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tổng diện tích: $\\mathord { \\sim } 5 0$ unit x 50unit • Lane chính: 3 lane (trung tâm $^ { + 2 }$ cánh) • Khoảng cách giữa các Outpost: 20‒25unit ",
+        "bbox": [
+            48,
+            722,
+            483,
+            804
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.2 Khu vực chính ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            826,
+            289,
+            851
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Click the image to view the sheet. ",
+        "bbox": [
+            333,
+            860,
+            666,
+            879
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Gợi ý Terrain & Chi tiết môi trường ",
+        "bbox": [
+            47,
+            34,
+            398,
+            54
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Click the image to view the sheet. ",
+        "bbox": [
+            333,
+            65,
+            668,
+            84
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Tỷ lệ bố trí ",
+        "bbox": [
+            48,
+            154,
+            178,
+            175
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Click the image to view the sheet. ",
+        "bbox": [
+            331,
+            185,
+            670,
+            205
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Lighting & FX ",
+        "bbox": [
+            48,
+            276,
+            202,
+            296
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Ánh sáng chiều đỏ cam ‒ ánh sáng chéo tạo bóng đậm để giúp phân biệt silhouette các tank.   \n• Hạt bụi bay nhẹ $^ +$ hiệu ứng nhiệt mờ xa.   \n• Âm thanh nền: gió sa mạc, tiếng kim loại va chạm nhẹ. ",
+        "bbox": [
+            48,
+            305,
+            944,
+            388
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Gameplay Notes ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            458,
+            234,
+            476
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Flank route giúp Scout tạo áp lực bất ngờ.   \n• Cát lún gần Outpost ép team phải kiểm soát map trước.   \n• Dốc cao có thể đặt turret hoặc sniping drone.   \n• Map lý tưởng để thử cơ chế buff từ terrain (vị trí cao tăng tầm nhìn). ",
+        "bbox": [
+            48,
+            485,
+            707,
+            600
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "7. Ghi chú kỹ thuật (Unity Setup) ",
+        "bbox": [
+            48,
+            669,
+            361,
+            689
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Đơn vị đo chuẩn: 1 Unity Unit $= 1 \\mathsf { m }$ • NavMesh: Dùng NavMesh Modifier cho cát lún, ramp dốc • Prefab khối chính: Container (2x4m), Bunker (6x6m), Wall (2x1m) • Lighting Bake: Static terrain, dynamic tank shadow ",
+        "bbox": [
+            48,
+            697,
+            695,
+            810
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "8. Mở rộng sau này ",
+        "bbox": [
+            48,
+            880,
+            234,
+            901
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Storm Event: Gió cát che tầm nhìn 5s/lần • Map Night Variant: Đèn pha xe tăng $^ +$ vùng ánh sáng động • Secret Tunnel: Tạo điểm dịch chuyển giữa 2 flank lane trong 10s cooldown ",
+        "bbox": [
+            50,
+            910,
+            621,
+            961
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            52,
+            34,
+            772,
+            54
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Chỉ số & Tỷ lệ quan trọng trong thiết kế bản đồ PvP ‒ Project Tank War ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            134,
+            939,
+            185
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "1. Tỷ lệ giao tranh dự kiến ",
+        "bbox": [
+            48,
+            197,
+            311,
+            217
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Click the image to view the sheet. ",
+        "bbox": [
+            333,
+            228,
+            668,
+            247
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Thiết kế map cần 2‒3 \"choke points\" để định hướng giao tranh tự nhiên. ",
+        "bbox": [
+            53,
+            284,
+            680,
+            303
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2. Tỷ lệ phân bổ khu vực bản đồ ",
+        "bbox": [
+            47,
+            397,
+            367,
+            417
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Click the image to view the sheet. ",
+        "bbox": [
+            333,
+            428,
+            668,
+            447
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "3. Tốc độ di chuyển & khoảng cách giao tranh Click the image to view the sheet. ",
+        "bbox": [
+            48,
+            517,
+            668,
+            569
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Đảm bảo tất cả tank có thể tiếp cận outpost đầu tiên trong ${ \\tt { \\tt { \\tt { \\tt { \\tt { \\tt { 7 5 } } } } } } }$ , tránh cảm giác bị bỏ lại quá xa. ",
+        "bbox": [
+            62,
+            603,
+            875,
+            623
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4. Phân bố Outpost & Combat Zone ",
+        "bbox": [
+            48,
+            717,
+            404,
+            736
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Tổng Outpost: 3 điểm chính (A ‒ B ‒ C) ",
+        "bbox": [
+            50,
+            747,
+            442,
+            767
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Khoảng cách Outpost - Base DEF: 10‒20 unit ",
+        "bbox": [
+            50,
+            778,
+            510,
+            798
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Khoảng cách giữa các Outpost: 25‒35 unit để tạo không gian chia lane & mở combat đa hướng ",
+        "bbox": [
+            52,
+            809,
+            909,
+            852
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Bán kính chiếm outpost: $\\sim 5 \\mathrm { - } 6$ unit ",
+        "bbox": [
+            50,
+            861,
+            414,
+            882
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Combat zone buffer: mỗi Outpost nên có ${ \\sim } 1 2 { - } 1 5$ unit vùng xung quanh có cover, flank lối và vật cản ",
+        "bbox": [
+            52,
+            892,
+            937,
+            934
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Ưu thế phe Def: Cần phải define rõ ưu thế của phe Def theo thứ tự của từng trụ. Ví dụ trụ A là vị trí dễ công khó thủ nhất, xếp sau là trụ B, và cuối cùng là trụ C nơi phe Def có nhiều lợi thế nhất để đảm bảo yếu tố bất ngờ có thể xảy ra. ",
+        "bbox": [
+            50,
+            33,
+            944,
+            101
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5. Tỷ lệ giao tranh 1v1 / 2v2 / tổng lực (teamfight) Click the image to view the sheet. ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            170,
+            670,
+            221
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Gợi ý: bản đồ 3v3 nên thiết kế thiên về chia lane $^ +$ đụng độ nhỏ, còn 5v5 nên có 1 khu vực “teamfight” chính để tận dụng DPS của Heavy tank. ",
+        "bbox": [
+            57,
+            257,
+            833,
+            297
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6. Nhịp chiến thuật & thời lượng vòng lặp Click the image to view the sheet. ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            390,
+            668,
+            441
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Tổng vòng lặp 1 combat ${ \\sim } 2 5 { \\mathrm { - } } 3 0 5 $ Trong 1 trận 10 phút có thể có 20‒25 lượt giao tranh nhỏ hoặc 8‒10 combat lớn. ",
+        "bbox": [
+            53,
+            477,
+            888,
+            516
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "7. Tổng Kill dự kiến ",
+        "bbox": [
+            48,
+            551,
+            237,
+            571
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "a. Tổng 30 kill cho 2 phe. ",
+        "bbox": [
+            79,
+            582,
+            319,
+            602
+        ],
+        "page_idx": 3
+    }
+]

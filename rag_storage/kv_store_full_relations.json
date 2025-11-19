@@ -1,0 +1,502 @@
+{
+  "demo_map": {
+    "relation_pairs": [
+      [
+        "Choke Point",
+        "Combat Zone"
+      ],
+      [
+        "Image",
+        "Sheet"
+      ],
+      [
+        "Storm Event",
+        "Visibility"
+      ],
+      [
+        "NavMesh Modifier",
+        "Unity Setup"
+      ],
+      [
+        "Flank Route",
+        "Secret Tunnel"
+      ],
+      [
+        "Demo Map Design File",
+        "Project TOG"
+      ],
+      [
+        "Gameplay Notes",
+        "Terrain"
+      ],
+      [
+        "Lighting Bake",
+        "Static Terrain"
+      ],
+      [
+        "Dynamic Tank Shadow",
+        "Tank"
+      ],
+      [
+        "Flank Route",
+        "Scout"
+      ],
+      [
+        "Combat",
+        "Sheet"
+      ],
+      [
+        "Outpost",
+        "Tank"
+      ],
+      [
+        "Crimson Dunes",
+        "Desert Environment"
+      ],
+      [
+        "Combat Zone",
+        "Outpost"
+      ],
+      [
+        "Combat",
+        "Kill"
+      ],
+      [
+        "Map Architecture",
+        "Prefab"
+      ]
+    ],
+    "count": 16,
+    "create_time": 1763543138,
+    "update_time": 1763543138,
+    "_id": "demo_map"
+  },
+  "demo_map_design_file": {
+    "relation_pairs": [
+      [
+        "High Ground",
+        "Tank"
+      ],
+      [
+        "Map Design",
+        "Secret Tunnel"
+      ],
+      [
+        "Desert Environment",
+        "Project TOG"
+      ],
+      [
+        "Demo Map Design File",
+        "Project TOG"
+      ],
+      [
+        "Desert Environment",
+        "Lighting Bake"
+      ],
+      [
+        "Flank Route",
+        "Scout Tank"
+      ],
+      [
+        "Desert Environment",
+        "Rust Frontier"
+      ],
+      [
+        "Flank Route",
+        "Secret Tunnel"
+      ],
+      [
+        "Heavy Tank",
+        "Teamfight"
+      ],
+      [
+        "Desert Environment",
+        "Storm Event"
+      ],
+      [
+        "Desert Environment",
+        "Radar Station"
+      ],
+      [
+        "High Ground",
+        "Outpost"
+      ],
+      [
+        "Desert Environment",
+        "Military Bunker"
+      ],
+      [
+        "Outpost",
+        "Quicksand"
+      ],
+      [
+        "Combat",
+        "Kill"
+      ],
+      [
+        "Container",
+        "Desert Environment"
+      ],
+      [
+        "Image",
+        "Sheet"
+      ],
+      [
+        "Concrete Ruins",
+        "Desert Environment"
+      ],
+      [
+        "NavMesh Modifier",
+        "Quicksand"
+      ],
+      [
+        "Combat",
+        "Match"
+      ],
+      [
+        "Combat Zone",
+        "Outpost"
+      ],
+      [
+        "Combat Zone",
+        "Kill Count"
+      ],
+      [
+        "Desert Environment",
+        "Khamsin Outpost"
+      ],
+      [
+        "Desert Environment",
+        "Watchtower"
+      ],
+      [
+        "Crimson Dunes",
+        "Desert Environment"
+      ]
+    ],
+    "count": 25,
+    "create_time": 1763543166,
+    "update_time": 1763543166,
+    "_id": "demo_map_design_file"
+  },
+  "design_db_schema": {
+    "relation_pairs": [
+      [
+        "Players",
+        "Tanks"
+      ],
+      [
+        "Garage",
+        "Players"
+      ],
+      [
+        "Matches",
+        "Players"
+      ],
+      [
+        "Decorations",
+        "Tanks"
+      ],
+      [
+        "Artifacts",
+        "Garage"
+      ],
+      [
+        "Players",
+        "Purchases"
+      ],
+      [
+        "Artifacts",
+        "Tanks"
+      ],
+      [
+        "Match Players",
+        "Tanks"
+      ],
+      [
+        "Decorations",
+        "Garage"
+      ],
+      [
+        "Garage",
+        "Tanks"
+      ],
+      [
+        "Players",
+        "Quests"
+      ]
+    ],
+    "count": 11,
+    "create_time": 1763543173,
+    "update_time": 1763543173,
+    "_id": "design_db_schema"
+  },
+  "world_tank_war_grass_logic_design": {
+    "relation_pairs": [
+      [
+        "Grass Logic Design",
+        "Skills"
+      ],
+      [
+        "Grass Logic Design",
+        "Unity"
+      ],
+      [
+        "Grass Logic Design",
+        "World Tank War"
+      ],
+      [
+        "Grass Logic Design",
+        "HỆ THỐNG LOGIC CỦA CỎ XANH"
+      ],
+      [
+        "Art & Dev Team",
+        "Grass Logic Design"
+      ],
+      [
+        "Grass Logic Design",
+        "Phucth12"
+      ]
+    ],
+    "count": 6,
+    "create_time": 1763543193,
+    "update_time": 1763543193,
+    "_id": "world_tank_war_grass_logic_design"
+  },
+  "demo_map_test": {
+    "relation_pairs": [
+      [
+        "High Ground",
+        "Tank"
+      ],
+      [
+        "Desert Environment",
+        "Project TOG"
+      ],
+      [
+        "Map Design",
+        "Secret Tunnel"
+      ],
+      [
+        "Demo Map Design File",
+        "Project TOG"
+      ],
+      [
+        "Desert Environment",
+        "Lighting Bake"
+      ],
+      [
+        "Flank Route",
+        "Scout Tank"
+      ],
+      [
+        "Desert Environment",
+        "Rust Frontier"
+      ],
+      [
+        "Flank Route",
+        "Secret Tunnel"
+      ],
+      [
+        "Heavy Tank",
+        "Teamfight"
+      ],
+      [
+        "Desert Environment",
+        "Storm Event"
+      ],
+      [
+        "Desert Environment",
+        "Radar Station"
+      ],
+      [
+        "Desert Environment",
+        "Military Bunker"
+      ],
+      [
+        "High Ground",
+        "Outpost"
+      ],
+      [
+        "Outpost",
+        "Quicksand"
+      ],
+      [
+        "Combat",
+        "Kill"
+      ],
+      [
+        "Container",
+        "Desert Environment"
+      ],
+      [
+        "Image",
+        "Sheet"
+      ],
+      [
+        "Concrete Ruins",
+        "Desert Environment"
+      ],
+      [
+        "NavMesh Modifier",
+        "Quicksand"
+      ],
+      [
+        "Combat",
+        "Match"
+      ],
+      [
+        "Combat Zone",
+        "Outpost"
+      ],
+      [
+        "Combat Zone",
+        "Kill Count"
+      ],
+      [
+        "Desert Environment",
+        "Khamsin Outpost"
+      ],
+      [
+        "Desert Environment",
+        "Watchtower"
+      ],
+      [
+        "Crimson Dunes",
+        "Desert Environment"
+      ]
+    ],
+    "count": 25,
+    "create_time": 1763543200,
+    "update_time": 1763543200,
+    "_id": "demo_map_test"
+  },
+  "world_tank_war_map_document": {
+    "relation_pairs": [
+      [
+        "Tank (TA)",
+        "Tank System Detail"
+      ],
+      [
+        "Combat Module",
+        "Tank War"
+      ],
+      [
+        "Map Design Document",
+        "World Tank War"
+      ],
+      [
+        "Assault",
+        "Heavy"
+      ],
+      [
+        "HI_Grass",
+        "Hiding Object"
+      ],
+      [
+        "BR_Gate",
+        "Breakable Object"
+      ],
+      [
+        "OP_Tower",
+        "Outpost Design - Base Capture Mode"
+      ],
+      [
+        "BR_Barrel",
+        "Breakable Object"
+      ],
+      [
+        "Outpost Design",
+        "Tank Team ATK"
+      ],
+      [
+        "Mode Outpost Breaker",
+        "Outpost Design"
+      ],
+      [
+        "Base Capture Mode",
+        "Tank War"
+      ],
+      [
+        "BO_Sign",
+        "Block Object"
+      ],
+      [
+        "GameAssets",
+        "Tank (TA)"
+      ],
+      [
+        "GR_Ground",
+        "Ground"
+      ],
+      [
+        "BR_Cactus",
+        "Breakable Object"
+      ],
+      [
+        "BO_Rock",
+        "Block Object"
+      ],
+      [
+        "OP_Tower",
+        "Outpost Object"
+      ],
+      [
+        "Map Design Document",
+        "Phucth12"
+      ],
+      [
+        "BR_Deco",
+        "Breakable Object"
+      ],
+      [
+        "BO_Container",
+        "BO_Container Variant"
+      ],
+      [
+        "BO_Collider",
+        "Block Object"
+      ],
+      [
+        "BO_Container",
+        "Block Object"
+      ],
+      [
+        "Grass Logic Design",
+        "HI_Grass"
+      ],
+      [
+        "Mode Deathmatch",
+        "Tank War"
+      ],
+      [
+        "BO_Mountain",
+        "Block Object"
+      ],
+      [
+        "DE_Deco",
+        "Decorations"
+      ],
+      [
+        "DE",
+        "Unity Unit"
+      ],
+      [
+        "Assault",
+        "Scout"
+      ],
+      [
+        "BO_Building",
+        "Block Object"
+      ],
+      [
+        "Outpost Design",
+        "Tank (TA)"
+      ]
+    ],
+    "count": 30,
+    "create_time": 1763543238,
+    "update_time": 1763543238,
+    "_id": "world_tank_war_map_document"
+  }
+}

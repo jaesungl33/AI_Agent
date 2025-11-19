@@ -1,0 +1,2775 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        70,
+                        488,
+                        101
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                65,
+                                489,
+                                107
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        65,
+                                        489,
+                                        107
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[World] [Tank War] Grass Logic Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        120,
+                        213,
+                        140
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                121,
+                                214,
+                                139
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        121,
+                                        214,
+                                        139
+                                    ],
+                                    "score": 1.0,
+                                    "content": "HỆ THỐNG LOGIC CỦA CỎ XANH",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        149,
+                        263,
+                        217
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                148,
+                                109,
+                                164
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        148,
+                                        109,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: 1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                172,
+                                262,
+                                191
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        172,
+                                        106,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        173,
+                                        190,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        173,
+                                        262,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                199,
+                                176,
+                                217
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        199,
+                                        176,
+                                        217
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 11 - 09 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        239,
+                        556,
+                        418
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                239,
+                                556,
+                                418
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        239,
+                                        556,
+                                        418
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                239,
+                                                556,
+                                                418
+                                            ],
+                                            "score": 0.888,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>11-09-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "6a3a93b1cca57544516a10620ff62caa0428bb9a460fb11a45e011a1efc0ce58.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 6,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        239,
+                                        556,
+                                        298.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        298.6666666666667,
+                                        556,
+                                        358.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        358.33333333333337,
+                                        556,
+                                        418.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        437,
+                        185,
+                        458
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                435,
+                                187,
+                                458
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        435,
+                                        187,
+                                        458
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        466,
+                        254,
+                        483
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                464,
+                                255,
+                                486
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        464,
+                                        255,
+                                        486
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu thiết kế chức năng cỏ trong map.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        492,
+                        304,
+                        509
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                491,
+                                306,
+                                511
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        491,
+                                        306,
+                                        511
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Cung cấp chiều sâu về mặt chiến thuật cho game.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        552,
+                        175,
+                        574
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                551,
+                                177,
+                                575
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        551,
+                                        177,
+                                        575
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        581,
+                        406,
+                        599
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                579,
+                                407,
+                                602
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        579,
+                                        407,
+                                        602
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev thiết kế cỏ đúng chức năng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        642,
+                        191,
+                        664
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                640,
+                                193,
+                                666
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        640,
+                                        193,
+                                        666
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        70,
+                        488,
+                        101
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                65,
+                                489,
+                                107
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        65,
+                                        489,
+                                        107
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[World] [Tank War] Grass Logic Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        120,
+                        213,
+                        140
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                121,
+                                214,
+                                139
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        121,
+                                        214,
+                                        139
+                                    ],
+                                    "score": 1.0,
+                                    "content": "HỆ THỐNG LOGIC CỦA CỎ XANH",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1,
+                    "bbox_fs": [
+                        27,
+                        121,
+                        214,
+                        139
+                    ]
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        36,
+                        149,
+                        263,
+                        217
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                148,
+                                109,
+                                164
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        148,
+                                        109,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: 1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                172,
+                                262,
+                                191
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        172,
+                                        106,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        173,
+                                        190,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        173,
+                                        262,
+                                        191
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                199,
+                                176,
+                                217
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        199,
+                                        176,
+                                        217
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 11 - 09 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4,
+                            "is_list_start_line": true
+                        }
+                    ],
+                    "index": 3,
+                    "bbox_fs": [
+                        35,
+                        148,
+                        262,
+                        217
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        239,
+                        556,
+                        418
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                239,
+                                556,
+                                418
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        239,
+                                        556,
+                                        418
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                239,
+                                                556,
+                                                418
+                                            ],
+                                            "score": 0.888,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>11-09-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "6a3a93b1cca57544516a10620ff62caa0428bb9a460fb11a45e011a1efc0ce58.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 6,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        239,
+                                        556,
+                                        298.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        298.6666666666667,
+                                        556,
+                                        358.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        358.33333333333337,
+                                        556,
+                                        418.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        437,
+                        185,
+                        458
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                435,
+                                187,
+                                458
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        435,
+                                        187,
+                                        458
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        466,
+                        254,
+                        483
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                464,
+                                255,
+                                486
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        464,
+                                        255,
+                                        486
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu thiết kế chức năng cỏ trong map.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9,
+                    "bbox_fs": [
+                        26,
+                        464,
+                        255,
+                        486
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        492,
+                        304,
+                        509
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                491,
+                                306,
+                                511
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        491,
+                                        306,
+                                        511
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Cung cấp chiều sâu về mặt chiến thuật cho game.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10,
+                    "bbox_fs": [
+                        25,
+                        491,
+                        306,
+                        511
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        552,
+                        175,
+                        574
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                551,
+                                177,
+                                575
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        551,
+                                        177,
+                                        575
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        581,
+                        406,
+                        599
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                579,
+                                407,
+                                602
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        579,
+                                        407,
+                                        602
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev thiết kế cỏ đúng chức năng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12,
+                    "bbox_fs": [
+                        26,
+                        579,
+                        407,
+                        602
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        642,
+                        191,
+                        664
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                640,
+                                193,
+                                666
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        640,
+                                        193,
+                                        666
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 13,
+                    "bbox_fs": [
+                        26,
+                        640,
+                        193,
+                        666
+                    ]
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        53,
+                        95,
+                        156,
+                        111
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                95,
+                                157,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        95,
+                                        157,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        120,
+                        232,
+                        183
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                118,
+                                138,
+                                136
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        118,
+                                        138,
+                                        136
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Ảnh hưởng tới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                141,
+                                225,
+                                159
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        141,
+                                        225,
+                                        159
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Ảnh hưởng tới đối tượng khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                166,
+                                233,
+                                183
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        166,
+                                        233,
+                                        183
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Trường hợp ảnh hưởng ngoại lệ",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        192,
+                        131,
+                        207
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                191,
+                                131,
+                                207
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        191,
+                                        131,
+                                        207
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tác động bởi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        217,
+                        96,
+                        230
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                215,
+                                97,
+                                231
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        215,
+                                        97,
+                                        231
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        299,
+                        162,
+                        321
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                32,
+                                295,
+                                164,
+                                324
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        32,
+                                        307,
+                                        38,
+                                        313
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        45,
+                                        295,
+                                        164,
+                                        324
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ảnh hưởng tới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        45,
+                        335,
+                        253,
+                        355
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                43,
+                                333,
+                                254,
+                                356
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        43,
+                                        333,
+                                        254,
+                                        356
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Ảnh hưởng tới đối tượng khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        375,
+                        548,
+                        640
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                375,
+                                548,
+                                640
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        375,
+                                        548,
+                                        640
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                375,
+                                                548,
+                                                640
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1> Két qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Tank</td><td rowspan=1 colspan=1>Tank sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Dan</td><td rowspan=1 colspan=1>Dan se tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>VFX</td><td rowspan=1 colspan=1>：  Sat thuong c6 hien thiEffect ban dan khong hien thi：：  Khói xe khong hien thiEffect Bear Trap c6 hien thi·： Effect Kamikaze có hien thi： Effect Hook</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Moitruong</td><td rowspan=1 colspan=1>Có có shadow</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "2b398fc53b4989886c3add1f114485bb58aeee89887b5ef4593837ad70e8f064.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        375,
+                                        548,
+                                        463.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        463.3333333333333,
+                                        548,
+                                        551.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        551.6666666666666,
+                                        548,
+                                        640.0
+                                    ],
+                                    "spans": [],
+                                    "index": 10
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        660,
+                        65,
+                        676
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                660,
+                                67,
+                                677
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        660,
+                                        67,
+                                        677
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Skills:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        699,
+                        548,
+                        791
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                699,
+                                548,
+                                791
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        699,
+                                        548,
+                                        791
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                699,
+                                                548,
+                                                791
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1>Ket qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Bear Trap</td><td rowspan=1 colspan=1>Bay sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Hook</td><td rowspan=1 colspan=1>Hook khong tang hinh</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "8702ced17d45c80aef246d79a771f9b94c17454a3816fa134acce2c306748e38.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        699,
+                                        548,
+                                        729.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 12
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        729.6666666666666,
+                                        548,
+                                        760.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 13
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        760.3333333333333,
+                                        548,
+                                        790.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 14
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 13
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        53,
+                        95,
+                        156,
+                        111
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                95,
+                                157,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        95,
+                                        157,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "bbox_fs": [
+                        51,
+                        95,
+                        157,
+                        111
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        120,
+                        232,
+                        183
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                118,
+                                138,
+                                136
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        118,
+                                        138,
+                                        136
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Ảnh hưởng tới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                141,
+                                225,
+                                159
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        141,
+                                        225,
+                                        159
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Ảnh hưởng tới đối tượng khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                166,
+                                233,
+                                183
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        166,
+                                        233,
+                                        183
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Trường hợp ảnh hưởng ngoại lệ",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 2,
+                    "bbox_fs": [
+                        51,
+                        118,
+                        233,
+                        183
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        192,
+                        131,
+                        207
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                191,
+                                131,
+                                207
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        191,
+                                        131,
+                                        207
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tác động bởi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        51,
+                        191,
+                        131,
+                        207
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        217,
+                        96,
+                        230
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                215,
+                                97,
+                                231
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        215,
+                                        97,
+                                        231
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5,
+                    "bbox_fs": [
+                        51,
+                        215,
+                        97,
+                        231
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        299,
+                        162,
+                        321
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                32,
+                                295,
+                                164,
+                                324
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        32,
+                                        307,
+                                        38,
+                                        313
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        45,
+                                        295,
+                                        164,
+                                        324
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ảnh hưởng tới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        45,
+                        335,
+                        253,
+                        355
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                43,
+                                333,
+                                254,
+                                356
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        43,
+                                        333,
+                                        254,
+                                        356
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Ảnh hưởng tới đối tượng khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7,
+                    "bbox_fs": [
+                        43,
+                        333,
+                        254,
+                        356
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        375,
+                        548,
+                        640
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                375,
+                                548,
+                                640
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        375,
+                                        548,
+                                        640
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                375,
+                                                548,
+                                                640
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1> Két qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Tank</td><td rowspan=1 colspan=1>Tank sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Dan</td><td rowspan=1 colspan=1>Dan se tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>VFX</td><td rowspan=1 colspan=1>：  Sat thuong c6 hien thiEffect ban dan khong hien thi：：  Khói xe khong hien thiEffect Bear Trap c6 hien thi·： Effect Kamikaze có hien thi： Effect Hook</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Moitruong</td><td rowspan=1 colspan=1>Có có shadow</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "2b398fc53b4989886c3add1f114485bb58aeee89887b5ef4593837ad70e8f064.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        375,
+                                        548,
+                                        463.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        463.3333333333333,
+                                        548,
+                                        551.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        551.6666666666666,
+                                        548,
+                                        640.0
+                                    ],
+                                    "spans": [],
+                                    "index": 10
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        660,
+                        65,
+                        676
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                660,
+                                67,
+                                677
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        660,
+                                        67,
+                                        677
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Skills:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        699,
+                        548,
+                        791
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                699,
+                                548,
+                                791
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        699,
+                                        548,
+                                        791
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                699,
+                                                548,
+                                                791
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1>Ket qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Bear Trap</td><td rowspan=1 colspan=1>Bay sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Hook</td><td rowspan=1 colspan=1>Hook khong tang hinh</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "8702ced17d45c80aef246d79a771f9b94c17454a3816fa134acce2c306748e38.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        699,
+                                        548,
+                                        729.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 12
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        729.6666666666666,
+                                        548,
+                                        760.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 13
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        760.3333333333333,
+                                        548,
+                                        790.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 14
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 13
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        61,
+                        245,
+                        81
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                59,
+                                246,
+                                82
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        59,
+                                        246,
+                                        82
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Trường hợp ảnh hưởng ngoại lệ",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        99,
+                        556,
+                        614
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                99,
+                                556,
+                                614
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        99,
+                                        556,
+                                        614
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                99,
+                                                556,
+                                                614
+                                            ],
+                                            "score": 0.979,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Truong hop</td><td rowspan=1 colspan=1>Dieu kien phu</td><td rowspan=1 colspan=1>Ket qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=3 colspan=1>Tank dongdoidivaotham co</td><td rowspan=1 colspan=1> Player dang dung 8ngoai</td><td rowspan=3 colspan=1>Tank dong doi khong tang hinhTank dong di hien thi dan + VFX.day du</td><td rowspan=3 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Player trong cungtham co</td></tr><tr><td rowspan=1 colspan=1> Player trong thamco khac</td></tr><tr><td rowspan=4 colspan=1>Tank dich divao tham co</td><td rowspan=1 colspan=1>Player dang dung &amp;ngoai</td><td rowspan=2 colspan=1>Tank dich tang hinh</td><td rowspan=4 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Player trong thamco khac</td></tr><tr><td rowspan=1 colspan=1> Player trong cungtham co</td><td rowspan=1 colspan=1>·Tank dich khóng tang hinh·Tank dich hien thi dan + VFX däy du</td></tr><tr><td rowspan=1 colspan=1>Tank dich bi bäntrung</td><td rowspan=1 colspan=1> Hien thichi sö sat thuong</td></tr><tr><td rowspan=2 colspan=1>Player8trong tham co</td><td rowspan=1 colspan=1>Tank dich trongtham co khac</td><td rowspan=1 colspan=1>Tank dich tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Tank dich bän trungminh</td><td rowspan=1 colspan=1> Hien thi chi so sat thuong</td><td rowspan=1 colspan=1>Player van thäy VFXdan</td></tr><tr><td rowspan=1 colspan=1>Outpost bänvao tham co</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1> Hien thi VFX outpost day du</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "771f63d66f0b171ab36f327d321c4f3ff2c11db72215f54d34834e289bc8dc77.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        99,
+                                        556,
+                                        270.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        270.66666666666663,
+                                        556,
+                                        442.33333333333326
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        442.33333333333326,
+                                        556,
+                                        613.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        666,
+                        151,
+                        687
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                663,
+                                153,
+                                689
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        663,
+                                        153,
+                                        689
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tác động bởi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        709,
+                        555,
+                        801
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                709,
+                                555,
+                                801
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        709,
+                                        555,
+                                        801
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                709,
+                                                555,
+                                                801
+                                            ],
+                                            "score": 0.972,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1>Két quä mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>VFX</td><td rowspan=1 colspan=1>Gi6 lam co dung dua</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Tank</td><td rowspan=1 colspan=1>· Tao SFX có khi tank di chuyén trong thäm co</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "777ea8336a41af990285c75d2c1042826016eb99fab76b8051e9d16f4c554cfc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 6,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        709,
+                                        555,
+                                        739.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        739.6666666666666,
+                                        555,
+                                        770.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        770.3333333333333,
+                                        555,
+                                        800.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 6
+                }
+            ],
+            "page_idx": 2,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        61,
+                        245,
+                        81
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                59,
+                                246,
+                                82
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        59,
+                                        246,
+                                        82
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Trường hợp ảnh hưởng ngoại lệ",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        99,
+                        556,
+                        614
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                99,
+                                556,
+                                614
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        99,
+                                        556,
+                                        614
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                99,
+                                                556,
+                                                614
+                                            ],
+                                            "score": 0.979,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Truong hop</td><td rowspan=1 colspan=1>Dieu kien phu</td><td rowspan=1 colspan=1>Ket qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=3 colspan=1>Tank dongdoidivaotham co</td><td rowspan=1 colspan=1> Player dang dung 8ngoai</td><td rowspan=3 colspan=1>Tank dong doi khong tang hinhTank dong di hien thi dan + VFX.day du</td><td rowspan=3 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Player trong cungtham co</td></tr><tr><td rowspan=1 colspan=1> Player trong thamco khac</td></tr><tr><td rowspan=4 colspan=1>Tank dich divao tham co</td><td rowspan=1 colspan=1>Player dang dung &amp;ngoai</td><td rowspan=2 colspan=1>Tank dich tang hinh</td><td rowspan=4 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Player trong thamco khac</td></tr><tr><td rowspan=1 colspan=1> Player trong cungtham co</td><td rowspan=1 colspan=1>·Tank dich khóng tang hinh·Tank dich hien thi dan + VFX däy du</td></tr><tr><td rowspan=1 colspan=1>Tank dich bi bäntrung</td><td rowspan=1 colspan=1> Hien thichi sö sat thuong</td></tr><tr><td rowspan=2 colspan=1>Player8trong tham co</td><td rowspan=1 colspan=1>Tank dich trongtham co khac</td><td rowspan=1 colspan=1>Tank dich tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Tank dich bän trungminh</td><td rowspan=1 colspan=1> Hien thi chi so sat thuong</td><td rowspan=1 colspan=1>Player van thäy VFXdan</td></tr><tr><td rowspan=1 colspan=1>Outpost bänvao tham co</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1> Hien thi VFX outpost day du</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "771f63d66f0b171ab36f327d321c4f3ff2c11db72215f54d34834e289bc8dc77.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        99,
+                                        556,
+                                        270.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        270.66666666666663,
+                                        556,
+                                        442.33333333333326
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        442.33333333333326,
+                                        556,
+                                        613.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        666,
+                        151,
+                        687
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                663,
+                                153,
+                                689
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        663,
+                                        153,
+                                        689
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tác động bởi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        709,
+                        555,
+                        801
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                709,
+                                555,
+                                801
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        709,
+                                        555,
+                                        801
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                709,
+                                                555,
+                                                801
+                                            ],
+                                            "score": 0.972,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1>Két quä mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>VFX</td><td rowspan=1 colspan=1>Gi6 lam co dung dua</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Tank</td><td rowspan=1 colspan=1>· Tao SFX có khi tank di chuyén trong thäm co</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "777ea8336a41af990285c75d2c1042826016eb99fab76b8051e9d16f4c554cfc.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 6,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        709,
+                                        555,
+                                        739.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        739.6666666666666,
+                                        555,
+                                        770.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        770.3333333333333,
+                                        555,
+                                        800.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 6
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        29,
+                        294,
+                        46
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                27,
+                                296,
+                                47
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        27,
+                                        296,
+                                        47
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Note: Sẽ được cập nhật khi có trường hợp mới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        91,
+                        97,
+                        109
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                89,
+                                99,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        89,
+                                        99,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        118,
+                        440,
+                        188
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                116,
+                                441,
+                                138
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        124,
+                                        36,
+                                        131
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        43,
+                                        116,
+                                        441,
+                                        138
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Kích thước đối tượng được đo bằng đơn vị mặc định trong Unity (Unit):",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                49,
+                                142,
+                                214,
+                                164
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        142,
+                                        98,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "◦ 1 mét",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        99,
+                                        145,
+                                        119,
+                                        159
+                                    ],
+                                    "score": 0.54,
+                                    "content": "\\mathbf { \\lambda } = \\mathbf { 1 }",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        119,
+                                        142,
+                                        214,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Unit trong Unity",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "bbox": [
+                                30,
+                                170,
+                                269,
+                                188
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        175,
+                                        37,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        45,
+                                        170,
+                                        269,
+                                        188
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Trường hợp liệt kê áp dụng cho cả 2 đội.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 3
+                }
+            ],
+            "page_idx": 3,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        29,
+                        294,
+                        46
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                27,
+                                296,
+                                47
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        27,
+                                        296,
+                                        47
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Note: Sẽ được cập nhật khi có trường hợp mới",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "bbox_fs": [
+                        36,
+                        27,
+                        296,
+                        47
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        91,
+                        97,
+                        109
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                89,
+                                99,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        89,
+                                        99,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        28,
+                        118,
+                        440,
+                        188
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                116,
+                                441,
+                                138
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        124,
+                                        36,
+                                        131
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        43,
+                                        116,
+                                        441,
+                                        138
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Kích thước đối tượng được đo bằng đơn vị mặc định trong Unity (Unit):",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                49,
+                                142,
+                                214,
+                                164
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        142,
+                                        98,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "◦ 1 mét",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        99,
+                                        145,
+                                        119,
+                                        159
+                                    ],
+                                    "score": 0.54,
+                                    "content": "\\mathbf { \\lambda } = \\mathbf { 1 }",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        119,
+                                        142,
+                                        214,
+                                        164
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Unit trong Unity",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                30,
+                                170,
+                                269,
+                                188
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        175,
+                                        37,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        45,
+                                        170,
+                                        269,
+                                        188
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Trường hợp liệt kê áp dụng cho cả 2 đội.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4,
+                            "is_list_start_line": true,
+                            "is_list_end_line": true
+                        }
+                    ],
+                    "index": 3,
+                    "bbox_fs": [
+                        30,
+                        116,
+                        441,
+                        188
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

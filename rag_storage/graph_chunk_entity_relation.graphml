@@ -1,0 +1,1627 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d13" for="edge" attr.name="truncate" attr.type="string"/>
+<key id="d12" for="edge" attr.name="created_at" attr.type="long"/>
+<key id="d11" for="edge" attr.name="file_path" attr.type="string"/>
+<key id="d10" for="edge" attr.name="source_id" attr.type="string"/>
+<key id="d9" for="edge" attr.name="keywords" attr.type="string"/>
+<key id="d8" for="edge" attr.name="description" attr.type="string"/>
+<key id="d7" for="edge" attr.name="weight" attr.type="double"/>
+<key id="d6" for="node" attr.name="truncate" attr.type="string"/>
+<key id="d5" for="node" attr.name="created_at" attr.type="long"/>
+<key id="d4" for="node" attr.name="file_path" attr.type="string"/>
+<key id="d3" for="node" attr.name="source_id" attr.type="string"/>
+<key id="d2" for="node" attr.name="description" attr.type="string"/>
+<key id="d1" for="node" attr.name="entity_type" attr.type="string"/>
+<key id="d0" for="node" attr.name="entity_id" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Demo Map Design File">
+  <data key="d0">Demo Map Design File</data>
+  <data key="d1">artifact</data>
+  <data key="d2">The Demo Map Design file is a document containing guidelines and specifications for designing a desert-themed map for Project TOG.&lt;SEP&gt;A design file used for creating maps in the game Project TOG.&lt;SEP&gt;A design file used for creating maps in the game Project TOG.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Project TOG">
+  <data key="d0">Project TOG</data>
+  <data key="d1">organization</data>
+  <data key="d2">Project TOG is the governing project under which the desert environment map design guidelines are being developed.&lt;SEP&gt;An organization responsible for developing map design guidelines for a desert environment in a game.&lt;SEP&gt;An organization responsible for developing map design guidelines for a desert environment in a game.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Crimson Dunes">
+  <data key="d0">Crimson Dunes</data>
+  <data key="d1">location</data>
+  <data key="d2">Crimson Dunes is one of the proposed names for the desert-themed map, representing a post-apocalyptic battleground.&lt;SEP&gt;One of the proposed names for the desert-themed map in Project TOG.&lt;SEP&gt;One of the proposed names for the desert-themed map in Project TOG.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Rust Frontier">
+  <data key="d0">Rust Frontier</data>
+  <data key="d1">location</data>
+  <data key="d2">Rust Frontier is another proposed name for the desert-themed map, symbolizing an arid wasteland with remnants of military structures.&lt;SEP&gt;Another proposed name for the desert-themed map in Project TOG.&lt;SEP&gt;Another proposed name for the desert-themed map in Project TOG.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Khamsin Outpost">
+  <data key="d0">Khamsin Outpost</data>
+  <data key="d1">location</data>
+  <data key="d2">Khamsin Outpost refers to a specific area within the desert map, previously a military base now turned into a strategic conflict zone.&lt;SEP&gt;A third proposed name for the desert-themed map in Project TOG.&lt;SEP&gt;A third proposed name for the desert-themed map in Project TOG.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Desert Environment">
+  <data key="d0">Desert Environment</data>
+  <data key="d1">naturalobject</data>
+  <data key="d2">The Desert Environment represents the barren, post-apocalyptic setting that serves as the thematic backdrop of the map.&lt;SEP&gt;The desert environment serves as the setting for the map, featuring arid landscapes and remnants of military bases.&lt;SEP&gt;The desert environment serves as the setting for the map, featuring arid landscapes and remnants of military bases.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank">
+  <data key="d0">Tank</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Tanks are vehicles used by competing factions in the game for strategic control over the desert map.&lt;SEP&gt;Vehicles used by players in the game, designed to interact with terrain mechanics.&lt;SEP&gt;Vehicles used by players in the game, designed to interact with terrain mechanics.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Outpost">
+  <data key="d0">Outpost</data>
+  <data key="d1">location</data>
+  <data key="d2">Outposts are key strategic points on the map where players engage in combat to gain territorial control.&lt;SEP&gt;Strategic locations on the map where players engage in combat and resource control.&lt;SEP&gt;Strategic locations on the map where players engage in combat and resource control.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Terrain">
+  <data key="d0">Terrain</data>
+  <data key="d1">naturalobject</data>
+  <data key="d2">Terrain refers to the physical features of the map such as sand dunes, slopes, and other environmental elements that influence gameplay dynamics.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543136</data>
+  <data key="d6"></data>
+</node>
+<node id="Flank Route">
+  <data key="d0">Flank Route</data>
+  <data key="d1">concept</data>
+  <data key="d2">Flank Routes are alternative paths designed to allow scouts to apply pressure by attacking from unexpected angles.&lt;SEP&gt;A gameplay element allowing Scout tanks to apply unexpected pressure during battles.&lt;SEP&gt;A gameplay element allowing Scout tanks to apply unexpected pressure during battles.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Storm Event">
+  <data key="d0">Storm Event</data>
+  <data key="d1">event</data>
+  <data key="d2">Storm Event is a dynamic in-game occurrence that temporarily reduces visibility due to wind and sandstorms.&lt;SEP&gt;A dynamic weather event that temporarily reduces visibility with sandstorms.&lt;SEP&gt;A dynamic weather event that temporarily reduces visibility with sandstorms.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Secret Tunnel">
+  <data key="d0">Secret Tunnel</data>
+  <data key="d1">location</data>
+  <data key="d2">Secret Tunnels provide teleportation points between flank lanes, adding a strategic element to the gameplay.&lt;SEP&gt;Hidden tunnels allowing fast travel between flank lanes with a cooldown period.&lt;SEP&gt;Hidden tunnels allowing fast travel between flank lanes with a cooldown period.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Unity Setup">
+  <data key="d0">Unity Setup</data>
+  <data key="d1">method</data>
+  <data key="d2">Unity Setup refers to the technical configuration process used to implement the map design within the Unity game engine.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543136</data>
+  <data key="d6"></data>
+</node>
+<node id="NavMesh Modifier">
+  <data key="d0">NavMesh Modifier</data>
+  <data key="d1">method</data>
+  <data key="d2">NavMesh Modifier is a tool used in Unity to define areas like sinking sand and ramps for optimal pathfinding in the game.&lt;SEP&gt;A Unity setup tool used to create interactive terrain features like quicksand and ramps.&lt;SEP&gt;A Unity setup tool used to create interactive terrain features like quicksand and ramps.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Prefab">
+  <data key="d0">Prefab</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Prefabs are reusable assets in Unity such as containers, bunkers, and walls used to construct the map's architecture.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543136</data>
+  <data key="d6"></data>
+</node>
+<node id="Lighting Bake">
+  <data key="d0">Lighting Bake</data>
+  <data key="d1">method</data>
+  <data key="d2">Lighting Bake is a technique in Unity to precompute static lighting and shadows for improved performance.&lt;SEP&gt;A Unity technique used to generate static lighting effects on terrain while keeping tank shadows dynamic.&lt;SEP&gt;A Unity technique used to generate static lighting effects on terrain while keeping tank shadows dynamic.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Combat Zone">
+  <data key="d0">Combat Zone</data>
+  <data key="d1">location</data>
+  <data key="d2">Combat Zones are designated areas surrounding outposts where intense player-versus-player battles occur.&lt;SEP&gt;Areas surrounding outposts where most of the fighting occurs, providing cover and flanking routes.&lt;SEP&gt;Areas surrounding outposts where most of the fighting occurs, providing cover and flanking routes.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Choke Point">
+  <data key="d0">Choke Point</data>
+  <data key="d1">concept</data>
+  <data key="d2">Choke Points are narrow passages strategically placed on the map to encourage concentrated and natural engagements between players.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543136</data>
+  <data key="d6"></data>
+</node>
+<node id="Gameplay Notes">
+  <data key="d0">Gameplay Notes</data>
+  <data key="d1">concept</data>
+  <data key="d2">Gameplay Notes provide insights into how the terrain and environmental factors affect player strategies during matches.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543137</data>
+  <data key="d6"></data>
+</node>
+<node id="Scout">
+  <data key="d0">Scout</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Scouts are units or roles within the game designed to utilize flank routes for tactical advantages.&lt;SEP&gt;Scout is the smallest class of tank, characterized by its speed and agility in combat scenarios.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4&lt;SEP&gt;chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">Demo Map Design file.pdf&lt;SEP&gt;[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Visibility">
+  <data key="d0">Visibility</data>
+  <data key="d1">concept</data>
+  <data key="d2">Visibility refers to the clarity of sight within the game environment, often affected by dynamic events like Storm Events.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543137</data>
+  <data key="d6"></data>
+</node>
+<node id="Combat">
+  <data key="d0">Combat</data>
+  <data key="d1">event</data>
+  <data key="d2">Combat refers to a fight or conflict within the context of a game or match.&lt;SEP&gt;Combat refers to a fight or conflict, specifically in the context of a game or competition where multiple engagements occur.&lt;SEP&gt;Combat refers to a fight or conflict, specifically in the context of a game or competition where multiple engagements occur.</data>
+  <data key="d3">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Kill">
+  <data key="d0">Kill</data>
+  <data key="d1">concept</data>
+  <data key="d2">Kill represents the elimination of an opponent in a competitive setting, contributing to the overall score.&lt;SEP&gt;Kill represents the act of defeating an opponent, with an expected total of 30 kills for both sides in a match.&lt;SEP&gt;Kill represents the act of defeating an opponent, with an expected total of 30 kills for both sides in a match.</data>
+  <data key="d3">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Sheet">
+  <data key="d0">Sheet</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Sheet is a visual or informational resource that can be accessed by clicking on an image.&lt;SEP&gt;Sheet refers to a document or visual display that can be accessed by clicking on an image, likely containing data or information.&lt;SEP&gt;Sheet refers to a document or visual display that can be accessed by clicking on an image, likely containing data or information.</data>
+  <data key="d3">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Image">
+  <data key="d0">Image</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Image is a clickable object that provides access to additional information or resources.&lt;SEP&gt;Image is a visual representation that can be clicked to access additional content, such as a sheet.&lt;SEP&gt;Image is a visual representation that can be clicked to access additional content, such as a sheet.</data>
+  <data key="d3">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Map Architecture">
+  <data key="d0">Map Architecture</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d2">Prefabs are fundamental building blocks used to assemble the architectural components of the map.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543137</data>
+  <data key="d6"></data>
+</node>
+<node id="Static Terrain">
+  <data key="d0">Static Terrain</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d2">Lighting Bake is applied to static terrain to optimize lighting and shadow effects in the game environment.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543137</data>
+  <data key="d6"></data>
+</node>
+<node id="Dynamic Tank Shadow">
+  <data key="d0">Dynamic Tank Shadow</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d2">Dynamic Tank Shadows add a layer of realism by casting moving shadows from tanks onto the terrain.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543137</data>
+  <data key="d6"></data>
+</node>
+<node id="Match">
+  <data key="d0">Match</data>
+  <data key="d1">event</data>
+  <data key="d2">Match refers to a competitive event lasting 10 minutes, involving multiple small skirmishes or larger combat engagements.&lt;SEP&gt;Match refers to a competitive event lasting 10 minutes, involving multiple small skirmishes or larger combat engagements.</data>
+  <data key="d3">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543194</data>
+  <data key="d6"></data>
+</node>
+<node id="Military Bunker">
+  <data key="d0">Military Bunker</data>
+  <data key="d1">artifact</data>
+  <data key="d2">A structure within the map's architecture, representing abandoned military installations.&lt;SEP&gt;A structure within the map's architecture, representing abandoned military installations.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Radar Station">
+  <data key="d0">Radar Station</data>
+  <data key="d1">artifact</data>
+  <data key="d2">A radar station, part of the architectural style of the map, indicating remnants of old technology.&lt;SEP&gt;A radar station, part of the architectural style of the map, indicating remnants of old technology.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Container">
+  <data key="d0">Container</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Rusted containers that are part of the environmental details within the map.&lt;SEP&gt;Rusted containers that are part of the environmental details within the map.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Watchtower">
+  <data key="d0">Watchtower</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Broken watchtowers found within the map’s architecture.&lt;SEP&gt;Broken watchtowers found within the map’s architecture.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Concrete Ruins">
+  <data key="d0">Concrete Ruins</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Ruins made of concrete scattered across the map environment.&lt;SEP&gt;Ruins made of concrete scattered across the map environment.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Quicksand">
+  <data key="d0">Quicksand</data>
+  <data key="d1">naturalobject</data>
+  <data key="d2">Areas near outposts where quicksand is present, affecting player movement and strategy.&lt;SEP&gt;Areas near outposts where quicksand is present, affecting player movement and strategy.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="High Ground">
+  <data key="d0">High Ground</data>
+  <data key="d1">location</data>
+  <data key="d2">Elevated areas on the map that provide strategic advantages such as increased visibility and sniping positions.&lt;SEP&gt;Elevated areas on the map that provide strategic advantages such as increased visibility and sniping positions.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543195</data>
+  <data key="d6"></data>
+</node>
+<node id="Kill Count">
+  <data key="d0">Kill Count</data>
+  <data key="d1">data</data>
+  <data key="d2">The expected total number of kills for both teams during a match.&lt;SEP&gt;The expected total number of kills for both teams during a match.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543196</data>
+  <data key="d6"></data>
+</node>
+<node id="Scout Tank">
+  <data key="d0">Scout Tank</data>
+  <data key="d1">artifact</data>
+  <data key="d2">A type of tank in the game designed to utilize flank routes for tactical advantages.&lt;SEP&gt;A type of tank in the game designed to utilize flank routes for tactical advantages.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543196</data>
+  <data key="d6"></data>
+</node>
+<node id="Teamfight">
+  <data key="d0">Teamfight</data>
+  <data key="d1">concept</data>
+  <data key="d2">A gameplay phase where all players engage in large-scale combat, typically occurring in maps designed for 5v5 play.&lt;SEP&gt;A gameplay phase where all players engage in large-scale combat, typically occurring in maps designed for 5v5 play.</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543196</data>
+  <data key="d6"></data>
+</node>
+<node id="Map Design">
+  <data key="d0">Map Design</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d2">Secret tunnels add a hidden mechanic allowing players to traverse the map quickly between specific lanes.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543164</data>
+  <data key="d6"></data>
+</node>
+<node id="Heavy Tank">
+  <data key="d0">Heavy Tank</data>
+  <data key="d3">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d2">Teamfights are designed to leverage the high damage output of heavy tanks during large-scale engagements.</data>
+  <data key="d1">UNKNOWN</data>
+  <data key="d4">Demo Map Design file.pdf</data>
+  <data key="d5">1763543164</data>
+  <data key="d6"></data>
+</node>
+<node id="Decorations">
+  <data key="d0">Decorations</data>
+  <data key="d1">concept</data>
+  <data key="d2">Decorations are items used for tank customization, including wraps, decals, and stickers.&lt;SEP&gt;Decorations are small map elements that players can pass through and do not interact with significantly.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd&lt;SEP&gt;chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">Design DB schema.pdf&lt;SEP&gt;[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="Players">
+  <data key="d0">Players</data>
+  <data key="d1">person</data>
+  <data key="d2">Players represent the accounts of users participating in the game, with attributes such as name, level, gold, diamonds, and achievements.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Tanks">
+  <data key="d0">Tanks</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Tanks are vehicles owned by players, with attributes like speed, damage, and fire rate. They can be customized with decorations and artifacts.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank Decorations">
+  <data key="d0">Tank Decorations</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Tank Decorations refer to the link between tanks and decoration items, indicating which decorations a player owns or has applied.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Artifacts">
+  <data key="d0">Artifacts</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Artifacts are special items that provide buffs to tanks, stored in a master data list.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank Artifacts">
+  <data key="d0">Tank Artifacts</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Tank Artifacts represent the association between tanks and artifacts, showing which artifacts a player owns or has equipped.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Quests">
+  <data key="d0">Quests</data>
+  <data key="d1">event</data>
+  <data key="d2">Quests define objectives and rewards within the game, categorized as daily, weekly, or event-based.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Player Quests">
+  <data key="d0">Player Quests</data>
+  <data key="d1">concept</data>
+  <data key="d2">Player Quests track the progress and status of quests completed or in progress by individual players.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Purchases">
+  <data key="d0">Purchases</data>
+  <data key="d1">data</data>
+  <data key="d2">Purchases log the transaction history of players, including items bought using gold, diamonds, or real money.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Matches">
+  <data key="d0">Matches</data>
+  <data key="d1">event</data>
+  <data key="d2">Matches represent individual game sessions, storing information about start/end times, game modes, and winning teams.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Match Players">
+  <data key="d0">Match Players</data>
+  <data key="d1">concept</data>
+  <data key="d2">Match Players represent the association between players and their performance metrics in matches, including kills, deaths, assists, and scores.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="Garage">
+  <data key="d0">Garage</data>
+  <data key="d1">concept</data>
+  <data key="d2">Garage refers to the system allowing players to customize their tanks with decorations and artifacts.</data>
+  <data key="d3">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d4">Design DB schema.pdf</data>
+  <data key="d5">1763543171</data>
+  <data key="d6"></data>
+</node>
+<node id="World Tank War">
+  <data key="d0">World Tank War</data>
+  <data key="d1">event</data>
+  <data key="d2">World Tank War is a game event that involves strategic gameplay elements, including the design of grass logic for tactical purposes.&lt;SEP&gt;World Tank War is a game event for which the map document provides design guidelines and asset descriptions.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84&lt;SEP&gt;chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf&lt;SEP&gt;[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="Grass Logic Design">
+  <data key="d0">Grass Logic Design</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Grass Logic Design refers to the system logic governing the behavior and functionality of grass within the game map to enhance tactical depth.&lt;SEP&gt;Grass Logic Design is a reference document detailing the behavior and characteristics of the HI_Grass hiding object in the game.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84&lt;SEP&gt;chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf&lt;SEP&gt;[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Phucth12">
+  <data key="d0">Phucth12</data>
+  <data key="d1">person</data>
+  <data key="d2">Phucth12 is the author of the Grass Logic Design document, responsible for its creation and version management.&lt;SEP&gt;Phucth12 is the author of the map design document for the World Tank War game.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84&lt;SEP&gt;chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf&lt;SEP&gt;[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="Art &amp; Dev Team">
+  <data key="d0">Art &amp; Dev Team</data>
+  <data key="d1">organization</data>
+  <data key="d2">The Art &amp; Dev Team is responsible for designing the grass functionality based on the provided documentation.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d5">1763543188</data>
+  <data key="d6"></data>
+</node>
+<node id="Unity">
+  <data key="d0">Unity</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Unity is a software platform used as the default measurement system for object dimensions in the game design process.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d5">1763543188</data>
+  <data key="d6"></data>
+</node>
+<node id="Skills">
+  <data key="d0">Skills</data>
+  <data key="d1">concept</data>
+  <data key="d2">Skills refer to the game mechanics or abilities influenced by the grass logic design, impacting gameplay interactions.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d5">1763543188</data>
+  <data key="d6"></data>
+</node>
+<node id="HỆ THỐNG LOGIC CỦA CỎ XANH">
+  <data key="d0">HỆ THỐNG LOGIC CỦA CỎ XANH</data>
+  <data key="d1">concept</data>
+  <data key="d2">HỆ THỐNG LOGIC CỦA CỎ XANH is the Vietnamese title for the Grass Logic Design document, describing the logic system of grass within the game.</data>
+  <data key="d3">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d4">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d5">1763543188</data>
+  <data key="d6"></data>
+</node>
+<node id="Map Design Document">
+  <data key="d0">Map Design Document</data>
+  <data key="d1">artifact</data>
+  <data key="d2">The Map Design Document is a guide that describes and categorizes important objects used in the maps of the World Tank War game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="Block Object">
+  <data key="d0">Block Object</data>
+  <data key="d1">concept</data>
+  <data key="d2">Block Objects are map elements that players and projectiles cannot pass through, serving as obstacles or boundaries.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Building">
+  <data key="d0">BO_Building</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Building is a type of Block Object in the game that players and projectiles cannot pass through.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Collider">
+  <data key="d0">BO_Collider</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Collider is a type of Block Object used as a map boundary in the game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Container">
+  <data key="d0">BO_Container</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Container is a type of Block Object with variants differing in dimensions and color.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Mountain">
+  <data key="d0">BO_Mountain</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Mountain is a type of Block Object representing a mountain in the game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543233</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Rock">
+  <data key="d0">BO_Rock</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Rock is a type of Block Object representing a rock in the game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Sign">
+  <data key="d0">BO_Sign</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Sign is a type of Block Object representing a sign in the game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="Breakable Object">
+  <data key="d0">Breakable Object</data>
+  <data key="d1">concept</data>
+  <data key="d2">Breakable Objects are map elements that players cannot pass through but can be destroyed by projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="BR_Barrel">
+  <data key="d0">BR_Barrel</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BR_Barrel is a type of Breakable Object in the game that can be destroyed by projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="BR_Cactus">
+  <data key="d0">BR_Cactus</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BR_Cactus is a type of Breakable Object in the game that can be destroyed by projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="BR_Deco">
+  <data key="d0">BR_Deco</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BR_Deco is a type of Breakable Object in the game that can be destroyed by projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="BR_Gate">
+  <data key="d0">BR_Gate</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BR_Gate is a type of Breakable Object in the game that can be destroyed by projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="DE_Deco">
+  <data key="d0">DE_Deco</data>
+  <data key="d1">artifact</data>
+  <data key="d2">DE_Deco is a type of Decoration in the game that players can pass through.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543234</data>
+  <data key="d6"></data>
+</node>
+<node id="Ground">
+  <data key="d0">Ground</data>
+  <data key="d1">concept</data>
+  <data key="d2">Ground objects are map elements that players cannot pass through and serve as the floor or terrain.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="GR_Ground">
+  <data key="d0">GR_Ground</data>
+  <data key="d1">artifact</data>
+  <data key="d2">GR_Ground is a type of Ground object in the game that serves as the floor or terrain.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Hiding Object">
+  <data key="d0">Hiding Object</data>
+  <data key="d1">concept</data>
+  <data key="d2">Hiding Objects are map elements that players and projectiles can pass through, providing stealth capabilities to players.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="HI_Grass">
+  <data key="d0">HI_Grass</data>
+  <data key="d1">artifact</data>
+  <data key="d2">HI_Grass is a type of Hiding Object in the game that allows players to become invisible when inside it.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Outpost Object">
+  <data key="d0">Outpost Object</data>
+  <data key="d1">concept</data>
+  <data key="d2">Outpost Objects are map elements that players and projectiles cannot pass through, except for specific tank team projectiles designed to destroy them.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="OP_Tower">
+  <data key="d0">OP_Tower</data>
+  <data key="d1">artifact</data>
+  <data key="d2">OP_Tower is a specific type of outpost structure within the game, designed for defensive purposes.&lt;SEP&gt;OP_Tower is a type of Outpost Object in the game that serves as a base structure that can be targeted and destroyed by specific tank team projectiles.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88&lt;SEP&gt;chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="BO_Container Variant">
+  <data key="d0">BO_Container Variant</data>
+  <data key="d1">artifact</data>
+  <data key="d2">BO_Container Variant refers to modified versions of BO_Container with altered dimensions and colors.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Outpost Design - Base Capture Mode">
+  <data key="d0">Outpost Design - Base Capture Mode</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Outpost Design - Base Capture Mode is a reference document detailing the behavior and destruction mechanics of Outpost Objects like OP_Tower in the game.</data>
+  <data key="d3">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank Team ATK">
+  <data key="d0">Tank Team ATK</data>
+  <data key="d1">organization</data>
+  <data key="d2">Tank Team ATK is a group capable of destroying outposts with their tank ammunition.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Combat Module">
+  <data key="d0">Combat Module</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Combat Module refers to a system component related to the design and functionality of outposts in the Base Capture Mode.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank War">
+  <data key="d0">Tank War</data>
+  <data key="d1">event</data>
+  <data key="d2">Tank War represents a game mode involving combat between tanks and strategic objectives like base capture.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Outpost Design">
+  <data key="d0">Outpost Design</data>
+  <data key="d1">concept</data>
+  <data key="d2">Outpost Design describes structures used as strategic points in the game, which can be destroyed by tank ammunition.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Base Capture Mode">
+  <data key="d0">Base Capture Mode</data>
+  <data key="d1">concept</data>
+  <data key="d2">Base Capture Mode is a gameplay mode focused on capturing enemy bases using tanks and other combat assets.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank (TA)">
+  <data key="d0">Tank (TA)</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Tank (TA) refers to in-game tank objects that cannot pass through each other and have specific interactions with ammunition.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Character Module">
+  <data key="d0">Character Module</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Character Module is a system component detailing the characteristics and classifications of tanks in Tank War.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Tank System Detail">
+  <data key="d0">Tank System Detail</data>
+  <data key="d1">concept</data>
+  <data key="d2">Tank System Detail outlines the specifications and behavior of different tank classes in the game.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Assault">
+  <data key="d0">Assault</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Assault is a medium-sized tank class offering a balance between speed and firepower in combat.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Heavy">
+  <data key="d0">Heavy</data>
+  <data key="d1">artifact</data>
+  <data key="d2">Heavy is the largest and most powerful tank class, known for its durability and high damage output.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543235</data>
+  <data key="d6"></data>
+</node>
+<node id="Mode Outpost Breaker">
+  <data key="d0">Mode Outpost Breaker</data>
+  <data key="d1">concept</data>
+  <data key="d2">Mode Outpost Breaker is a game mode where players aim to destroy enemy outposts using tanks and other weapons.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543236</data>
+  <data key="d6"></data>
+</node>
+<node id="Mode Deathmatch">
+  <data key="d0">Mode Deathmatch</data>
+  <data key="d1">concept</data>
+  <data key="d2">Mode Deathmatch is a free-for-all game mode where players compete to achieve the highest score by eliminating opponents.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543236</data>
+  <data key="d6"></data>
+</node>
+<node id="Unity Unit">
+  <data key="d0">Unity Unit</data>
+  <data key="d1">concept</data>
+  <data key="d2">Unity Unit is the default measurement unit in Unity, where 1 meter equals 1 Unity Unit.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543236</data>
+  <data key="d6"></data>
+</node>
+<node id="DE">
+  <data key="d0">DE</data>
+  <data key="d1">artifact</data>
+  <data key="d2">DE refers to the smallest measurable object within the game environment.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543236</data>
+  <data key="d6"></data>
+</node>
+<node id="GameAssets">
+  <data key="d0">GameAssets</data>
+  <data key="d1">artifact</data>
+  <data key="d2">GameAssets refers to the directory containing models and assets for Tank Wars, including tank models.</data>
+  <data key="d3">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d4">[World] [Tank War] Map Document.pdf</data>
+  <data key="d5">1763543236</data>
+  <data key="d6"></data>
+</node>
+<edge source="Demo Map Design File" target="Project TOG">
+  <data key="d7">3.0</data>
+  <data key="d8">The Demo Map Design file serves as a detailed guideline for creating maps under Project TOG.&lt;SEP&gt;The demo map design file is associated with the Project TOG's map creation process.&lt;SEP&gt;The demo map design file is associated with the Project TOG's map creation process.</data>
+  <data key="d9">design guideline,document association,game asset,project resource</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Project TOG" target="Desert Environment">
+  <data key="d7">2.0</data>
+  <data key="d8">Project TOG created guidelines for designing maps set in a desert environment.&lt;SEP&gt;Project TOG created guidelines for designing maps set in a desert environment.</data>
+  <data key="d9">game development,thematic design</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Crimson Dunes" target="Desert Environment">
+  <data key="d7">3.0</data>
+  <data key="d8">Crimson Dunes embodies the aesthetic and thematic essence of the desert environment.&lt;SEP&gt;Crimson Dunes represents one of the potential themes for the desert environment map.&lt;SEP&gt;Crimson Dunes represents one of the potential themes for the desert environment map.</data>
+  <data key="d9">conceptualization,location theme,visual representation</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Rust Frontier" target="Desert Environment">
+  <data key="d7">2.0</data>
+  <data key="d8">Rust Frontier represents one of the potential themes for the desert environment map.&lt;SEP&gt;Rust Frontier represents one of the potential themes for the desert environment map.</data>
+  <data key="d9">conceptualization,location theme</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Khamsin Outpost" target="Desert Environment">
+  <data key="d7">2.0</data>
+  <data key="d8">Khamsin Outpost represents one of the potential themes for the desert environment map.&lt;SEP&gt;Khamsin Outpost represents one of the potential themes for the desert environment map.</data>
+  <data key="d9">conceptualization,location theme</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543199</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Military Bunker">
+  <data key="d7">2.0</data>
+  <data key="d8">Military bunkers are architectural components integrated into the desert environment.&lt;SEP&gt;Military bunkers are architectural components integrated into the desert environment.</data>
+  <data key="d9">architectural feature,environmental detail</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Radar Station">
+  <data key="d7">2.0</data>
+  <data key="d8">Radar stations are remnants of old technology scattered throughout the desert environment.&lt;SEP&gt;Radar stations are remnants of old technology scattered throughout the desert environment.</data>
+  <data key="d9">environmental feature,technological remnant</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Storm Event">
+  <data key="d7">2.0</data>
+  <data key="d8">Storm events temporarily obscure vision, adding realism to the desert environment.&lt;SEP&gt;Storm events temporarily obscure vision, adding realism to the desert environment.</data>
+  <data key="d9">dynamic event,visual effect</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Lighting Bake">
+  <data key="d7">2.0</data>
+  <data key="d8">Lighting bake enhances the visual appearance of the desert environment through static and dynamic lighting effects.&lt;SEP&gt;Lighting bake enhances the visual appearance of the desert environment through static and dynamic lighting effects.</data>
+  <data key="d9">lighting technique,visual enhancement</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Container">
+  <data key="d7">2.0</data>
+  <data key="d8">Containers are part of the architectural details scattered throughout the desert environment.&lt;SEP&gt;Containers are part of the architectural details scattered throughout the desert environment.</data>
+  <data key="d9">architectural feature,environmental detail</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543199</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Watchtower">
+  <data key="d7">2.0</data>
+  <data key="d8">Broken watchtowers are architectural features found within the desert environment.&lt;SEP&gt;Broken watchtowers are architectural features found within the desert environment.</data>
+  <data key="d9">architectural feature,environmental detail</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543199</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Desert Environment" target="Concrete Ruins">
+  <data key="d7">2.0</data>
+  <data key="d8">Concrete ruins are remnants of structures found within the desert environment.&lt;SEP&gt;Concrete ruins are remnants of structures found within the desert environment.</data>
+  <data key="d9">architectural feature,environmental detail</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543199</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank" target="Outpost">
+  <data key="d7">1.0</data>
+  <data key="d8">Tanks vie for control over outposts to secure a positional advantage during battles.</data>
+  <data key="d9">strategic control,tactical advantage</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543137</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank" target="Dynamic Tank Shadow">
+  <data key="d7">1.0</data>
+  <data key="d8">Dynamic Tank Shadows add a layer of realism by casting moving shadows from tanks onto the terrain.</data>
+  <data key="d9">realism enhancement,visual effect</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543138</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank" target="High Ground">
+  <data key="d7">2.0</data>
+  <data key="d8">High ground provides tanks with an advantage due to better visibility and positioning opportunities.&lt;SEP&gt;High ground provides tanks with an advantage due to better visibility and positioning opportunities.</data>
+  <data key="d9">increased visibility,terrain advantage</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost" target="Combat Zone">
+  <data key="d7">3.0</data>
+  <data key="d8">Combat Zones surround outposts, serving as focal points for skirmishes and territorial dominance.&lt;SEP&gt;Outposts serve as key locations surrounded by combat zones where players fight.&lt;SEP&gt;Outposts serve as key locations surrounded by combat zones where players fight.</data>
+  <data key="d9">combat engagement,engagement area,strategic location,territorial control</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost" target="Quicksand">
+  <data key="d7">2.0</data>
+  <data key="d8">Quicksand near outposts adds strategic challenges for controlling these areas.&lt;SEP&gt;Quicksand near outposts adds strategic challenges for controlling these areas.</data>
+  <data key="d9">environmental hazard,strategic challenge</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost" target="High Ground">
+  <data key="d7">2.0</data>
+  <data key="d8">Elevated areas near outposts provide strategic advantages such as increased visibility and defensive positioning.&lt;SEP&gt;Elevated areas near outposts provide strategic advantages such as increased visibility and defensive positioning.</data>
+  <data key="d9">positional benefit,strategic advantage</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Terrain" target="Gameplay Notes">
+  <data key="d7">1.0</data>
+  <data key="d8">The terrain significantly influences gameplay mechanics, offering both challenges and opportunities for players.</data>
+  <data key="d9">environmental impact,gameplay strategy</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543137</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flank Route" target="Scout">
+  <data key="d7">1.0</data>
+  <data key="d8">Flank Routes enable scouts to maneuver discreetly and launch surprise attacks on opponents.</data>
+  <data key="d9">movement option,tactical surprise</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543137</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flank Route" target="Secret Tunnel">
+  <data key="d7">3.0</data>
+  <data key="d8">Secret Tunnels act as hidden pathways that complement flank routes, enhancing strategic depth.&lt;SEP&gt;Secret tunnels offer alternative paths connecting flank routes.&lt;SEP&gt;Secret tunnels offer alternative paths connecting flank routes.</data>
+  <data key="d9">alternate path,hidden path,mobility option,strategic mobility</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Flank Route" target="Scout Tank">
+  <data key="d7">2.0</data>
+  <data key="d8">Flank routes allow scout tanks to gain tactical advantages during gameplay.&lt;SEP&gt;Flank routes allow scout tanks to gain tactical advantages during gameplay.</data>
+  <data key="d9">gameplay mechanic,tactical advantage</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Storm Event" target="Visibility">
+  <data key="d7">1.0</data>
+  <data key="d8">Storm Events reduce visibility temporarily, forcing players to adapt their strategies accordingly.</data>
+  <data key="d9">dynamic event,sensory disruption</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543137</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Secret Tunnel" target="Map Design">
+  <data key="d7">2.0</data>
+  <data key="d8">Secret tunnels add a hidden mechanic allowing players to traverse the map quickly between specific lanes.&lt;SEP&gt;Secret tunnels add a hidden mechanic allowing players to traverse the map quickly between specific lanes.</data>
+  <data key="d9">hidden mechanic,traversal option</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Unity Setup" target="NavMesh Modifier">
+  <data key="d7">1.0</data>
+  <data key="d8">Unity Setup incorporates NavMesh Modifiers to ensure smooth navigation across complex terrains.</data>
+  <data key="d9">pathfinding optimization,technical implementation</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543137</data>
+  <data key="d13"></data>
+</edge>
+<edge source="NavMesh Modifier" target="Quicksand">
+  <data key="d7">2.0</data>
+  <data key="d8">NavMesh modifiers enable the technical implementation of interactive terrain features like quicksand.&lt;SEP&gt;NavMesh modifiers enable the technical implementation of interactive terrain features like quicksand.</data>
+  <data key="d9">interactive terrain,technical implementation</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Prefab" target="Map Architecture">
+  <data key="d7">1.0</data>
+  <data key="d8">Prefabs are fundamental building blocks used to assemble the architectural components of the map.</data>
+  <data key="d9">construction element,modular design</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543138</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Lighting Bake" target="Static Terrain">
+  <data key="d7">1.0</data>
+  <data key="d8">Lighting Bake is applied to static terrain to optimize lighting and shadow effects in the game environment.</data>
+  <data key="d9">technical process,visual enhancement</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543138</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat Zone" target="Choke Point">
+  <data key="d7">1.0</data>
+  <data key="d8">Choke Points funnel players into combat zones, intensifying encounters and promoting decisive battles.</data>
+  <data key="d9">engagement focus,strategic positioning</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543138</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat Zone" target="Kill Count">
+  <data key="d7">2.0</data>
+  <data key="d8">The kill count reflects the intensity and outcomes of battles occurring within the combat zones.&lt;SEP&gt;The kill count reflects the intensity and outcomes of battles occurring within the combat zones.</data>
+  <data key="d9">battle outcome,statistical data</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Scout" target="Assault">
+  <data key="d7">1.0</data>
+  <data key="d8">Scout is smaller than Assault in terms of size and scale.</data>
+  <data key="d9">class hierarchy,size comparison</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat" target="Kill">
+  <data key="d7">3.0</data>
+  <data key="d8">Kills are outcomes that occur during combat events and contribute to the progression or result of the game.&lt;SEP&gt;The combat events contribute to the overall expected number of kills in the match.&lt;SEP&gt;The combat events contribute to the overall expected number of kills in the match.</data>
+  <data key="d9">conflict outcome,event outcome,expectation,scoring</data>
+  <data key="d10">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat" target="Sheet">
+  <data key="d7">1.0</data>
+  <data key="d8">The sheet provides information related to combat events, including statistics such as kills and rounds.</data>
+  <data key="d9">event tracking,information display</data>
+  <data key="d10">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543138</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat" target="Match">
+  <data key="d7">2.0</data>
+  <data key="d8">Combat events are components of the match, which lasts for a duration of 10 minutes.&lt;SEP&gt;Combat events are components of the match, which lasts for a duration of 10 minutes.</data>
+  <data key="d9">event component,time-bound</data>
+  <data key="d10">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Sheet" target="Image">
+  <data key="d7">3.0</data>
+  <data key="d8">Clicking the image allows users to view the sheet, which contains detailed information.&lt;SEP&gt;Clicking the image provides access to view the sheet, which contains relevant information.&lt;SEP&gt;Clicking the image provides access to view the sheet, which contains relevant information.</data>
+  <data key="d9">access method,content delivery,information retrieval,visual access</data>
+  <data key="d10">chunk-a6be005ac9de5bc3e2187965dcd707f9</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543197</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Teamfight" target="Heavy Tank">
+  <data key="d7">2.0</data>
+  <data key="d8">Teamfights are designed to leverage the high damage output of heavy tanks during large-scale engagements.&lt;SEP&gt;Teamfights are designed to leverage the high damage output of heavy tanks during large-scale engagements.</data>
+  <data key="d9">damage output,gameplay focus</data>
+  <data key="d10">chunk-ed9904103a868cdb170acb76f76ccab4</data>
+  <data key="d11">Demo Map Design file.pdf</data>
+  <data key="d12">1763543198</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Decorations" target="Tanks">
+  <data key="d7">1.0</data>
+  <data key="d8">Decorations are applied to tanks to customize their appearance and enhance their attributes.</data>
+  <data key="d9">customization,enhancement</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Decorations" target="Garage">
+  <data key="d7">1.0</data>
+  <data key="d8">The Garage system includes a collection of decoration items for tank customization.</data>
+  <data key="d9">customization options,item storage</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Decorations" target="DE_Deco">
+  <data key="d7">1.0</data>
+  <data key="d8">DE_Deco is categorized as a type of Decoration in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Players" target="Tanks">
+  <data key="d7">1.0</data>
+  <data key="d8">Players own tanks, which they use in matches and customize with decorations and artifacts.</data>
+  <data key="d9">gameplay,ownership</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Players" target="Quests">
+  <data key="d7">1.0</data>
+  <data key="d8">Quests are completed by players to earn rewards and track progress.</data>
+  <data key="d9">progress tracking,reward system</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Players" target="Purchases">
+  <data key="d7">1.0</data>
+  <data key="d8">Purchases record the items bought by players and the currency used.</data>
+  <data key="d9">resource management,transaction logging</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Players" target="Matches">
+  <data key="d7">1.0</data>
+  <data key="d8">Matches involve players, whose performance is recorded in match-related data.</data>
+  <data key="d9">gameplay participation,performance tracking</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Players" target="Garage">
+  <data key="d7">1.0</data>
+  <data key="d8">Players interact with the Garage system to manage tank customizations using decorations and artifacts.</data>
+  <data key="d9">customization management,resource allocation</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tanks" target="Artifacts">
+  <data key="d7">1.0</data>
+  <data key="d8">Artifacts are equipped on tanks to provide special effects and improve performance.</data>
+  <data key="d9">buffing,enhancement</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tanks" target="Match Players">
+  <data key="d7">1.0</data>
+  <data key="d8">Match Players data tracks which tanks are used by players during matches.</data>
+  <data key="d9">performance metrics,usage tracking</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543172</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tanks" target="Garage">
+  <data key="d7">1.0</data>
+  <data key="d8">Tanks are customized within the Garage system through the application of decorations and artifacts.</data>
+  <data key="d9">customization options,enhancement integration</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543173</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Artifacts" target="Garage">
+  <data key="d7">1.0</data>
+  <data key="d8">The Garage system allows players to equip artifacts for additional enhancements.</data>
+  <data key="d9">buff integration,customization options</data>
+  <data key="d10">chunk-6b71f5adbea8e71e9c46d4c048ccfffd</data>
+  <data key="d11">Design DB schema.pdf</data>
+  <data key="d12">1763543173</data>
+  <data key="d13"></data>
+</edge>
+<edge source="World Tank War" target="Grass Logic Design">
+  <data key="d7">1.0</data>
+  <data key="d8">Grass Logic Design is a feature designed to provide tactical depth to the World Tank War game.</data>
+  <data key="d9">game feature,tactical enhancement</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543190</data>
+  <data key="d13"></data>
+</edge>
+<edge source="World Tank War" target="Map Design Document">
+  <data key="d7">1.0</data>
+  <data key="d8">The Map Design Document provides guidelines and categorizations for assets used in the World Tank War game.</data>
+  <data key="d9">design guideline,documentation</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="Phucth12">
+  <data key="d7">1.0</data>
+  <data key="d8">Phucth12 authored the Grass Logic Design document, detailing the functionality of grass in the game.</data>
+  <data key="d9">authorship,documentation</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543190</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="Art &amp; Dev Team">
+  <data key="d7">1.0</data>
+  <data key="d8">The Art &amp; Dev Team uses the Grass Logic Design document to implement grass functionality in the game.</data>
+  <data key="d9">collaboration,implementation</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543192</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="Unity">
+  <data key="d7">1.0</data>
+  <data key="d8">Unity serves as the default measurement system for object dimensions referenced in the Grass Logic Design.</data>
+  <data key="d9">measurement standard,technical dependency</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543193</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="Skills">
+  <data key="d7">1.0</data>
+  <data key="d8">Skills are influenced by the Grass Logic Design, affecting gameplay dynamics and interactions.</data>
+  <data key="d9">game mechanics,interaction</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543193</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="HỆ THỐNG LOGIC CỦA CỎ XANH">
+  <data key="d7">1.0</data>
+  <data key="d8">HỆ THỐNG LOGIC CỦA CỎ XANH is the Vietnamese equivalent of the Grass Logic Design concept, representing the same system logic.</data>
+  <data key="d9">equivalence,translation</data>
+  <data key="d10">chunk-984424688523b07eded180ad03e62e84</data>
+  <data key="d11">[World] [Tank War] Grass Logic Design.pdf</data>
+  <data key="d12">1763543193</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Grass Logic Design" target="HI_Grass">
+  <data key="d7">1.0</data>
+  <data key="d8">HI_Grass is described and detailed in the Grass Logic Design document, outlining its behavior and functionality.</data>
+  <data key="d9">documentation,reference</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Phucth12" target="Map Design Document">
+  <data key="d7">1.0</data>
+  <data key="d8">Phucth12 authored the Map Design Document for the World Tank War game.</data>
+  <data key="d9">authorship,creation</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Building">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Building is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Collider">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Collider is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Container">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Container is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Mountain">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Mountain is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Rock">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Rock is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Block Object" target="BO_Sign">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Sign is categorized as a type of Block Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="BO_Container" target="BO_Container Variant">
+  <data key="d7">1.0</data>
+  <data key="d8">BO_Container Variant represents dimensional and color variations of the original BO_Container object.</data>
+  <data key="d9">modification,variation</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Breakable Object" target="BR_Barrel">
+  <data key="d7">1.0</data>
+  <data key="d8">BR_Barrel is categorized as a type of Breakable Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Breakable Object" target="BR_Cactus">
+  <data key="d7">1.0</data>
+  <data key="d8">BR_Cactus is categorized as a type of Breakable Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543236</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Breakable Object" target="BR_Deco">
+  <data key="d7">1.0</data>
+  <data key="d8">BR_Deco is categorized as a type of Breakable Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Breakable Object" target="BR_Gate">
+  <data key="d7">1.0</data>
+  <data key="d8">BR_Gate is categorized as a type of Breakable Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Ground" target="GR_Ground">
+  <data key="d7">1.0</data>
+  <data key="d8">GR_Ground is categorized as a type of Ground object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Hiding Object" target="HI_Grass">
+  <data key="d7">1.0</data>
+  <data key="d8">HI_Grass is categorized as a type of Hiding Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost Object" target="OP_Tower">
+  <data key="d7">1.0</data>
+  <data key="d8">OP_Tower is categorized as a type of Outpost Object in the game.</data>
+  <data key="d9">category,inclusion</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="OP_Tower" target="Outpost Design - Base Capture Mode">
+  <data key="d7">1.0</data>
+  <data key="d8">OP_Tower's mechanics are detailed in the Outpost Design - Base Capture Mode document, which describes its role in gameplay.</data>
+  <data key="d9">documentation,reference</data>
+  <data key="d10">chunk-a62040648c8939993b5089d71479dc88</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank Team ATK" target="Outpost Design">
+  <data key="d7">1.0</data>
+  <data key="d8">Tank Team ATK has the ability to destroy outposts using specialized ammunition.</data>
+  <data key="d9">combat strategy,destruction capability</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Combat Module" target="Tank War">
+  <data key="d7">1.0</data>
+  <data key="d8">Combat Module provides the framework for designing and managing combat systems in Tank War.</data>
+  <data key="d9">game mechanics,system integration</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank War" target="Base Capture Mode">
+  <data key="d7">1.0</data>
+  <data key="d8">Tank War includes Base Capture Mode, where players aim to capture enemy bases.</data>
+  <data key="d9">gameplay mode,strategic objective</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank War" target="Mode Deathmatch">
+  <data key="d7">1.0</data>
+  <data key="d8">Mode Deathmatch is a competitive game mode within Tank War where players aim to eliminate opponents.</data>
+  <data key="d9">competitive gameplay,game mode</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost Design" target="Tank (TA)">
+  <data key="d7">1.0</data>
+  <data key="d8">Tanks cannot pass through each other but can destroy outposts using specially designed ammunition.</data>
+  <data key="d9">destruction capability,interaction</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543237</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Outpost Design" target="Mode Outpost Breaker">
+  <data key="d7">1.0</data>
+  <data key="d8">Mode Outpost Breaker focuses on destroying outposts as part of its gameplay mechanics.</data>
+  <data key="d9">destruction strategy,game objective</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank (TA)" target="Tank System Detail">
+  <data key="d7">1.0</data>
+  <data key="d8">Tank System Detail defines the size and capabilities of different tank classes, including Scout, Assault, and Heavy.</data>
+  <data key="d9">classification,system specification</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Tank (TA)" target="GameAssets">
+  <data key="d7">1.0</data>
+  <data key="d8">Tank models and related assets are stored within the GameAssets directory for use in the game.</data>
+  <data key="d9">asset management,storage</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Assault" target="Heavy">
+  <data key="d7">1.0</data>
+  <data key="d8">Assault is smaller than Heavy in terms of size and scale.</data>
+  <data key="d9">class hierarchy,size comparison</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+<edge source="Unity Unit" target="DE">
+  <data key="d7">1.0</data>
+  <data key="d8">Unity Unit measures the size of objects, with DE representing the smallest measurable entity.</data>
+  <data key="d9">measurement standard,object size</data>
+  <data key="d10">chunk-8d8fe3d33191b35be77a591de251d057</data>
+  <data key="d11">[World] [Tank War] Map Document.pdf</data>
+  <data key="d12">1763543238</data>
+  <data key="d13"></data>
+</edge>
+</graph></graphml>

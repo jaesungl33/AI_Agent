@@ -1,0 +1,109 @@
+{
+  "demo_map": {
+    "status": "processed",
+    "chunks_count": 2,
+    "chunks_list": [
+      "chunk-ed9904103a868cdb170acb76f76ccab4",
+      "chunk-a6be005ac9de5bc3e2187965dcd707f9"
+    ],
+    "content_summary": "Demo Map Design file \n\nDemo Map Design file \n\nProject TOG - Map Design Guideline: Desert Environment \n\nMục tiêu thiết kế \n\nTest mecharicnic game. \n\nTest lợi thế của 2 bên theo giai đoạn của trận đấu \n\n1. Theme Overview \n\n• Tên bản đồ: Crimson Dunes /...",
+    "content_length": 3607,
+    "created_at": "2025-11-19T08:10:49.248249+00:00",
+    "updated_at": "2025-11-19T09:05:38.554930+00:00",
+    "file_path": "Demo Map Design file.pdf",
+    "track_id": "insert_20251119_151049_4290f328",
+    "metadata": {
+      "processing_start_time": 1763543092,
+      "processing_end_time": 1763543138
+    }
+  },
+  "demo_map_design_file": {
+    "status": "processed",
+    "chunks_count": 2,
+    "chunks_list": [
+      "chunk-ed9904103a868cdb170acb76f76ccab4",
+      "chunk-a6be005ac9de5bc3e2187965dcd707f9"
+    ],
+    "content_summary": "Demo Map Design file \n\nDemo Map Design file \n\nProject TOG - Map Design Guideline: Desert Environment \n\nMục tiêu thiết kế \n\nTest mecharicnic game. \n\nTest lợi thế của 2 bên theo giai đoạn của trận đấu \n\n1. Theme Overview \n\n• Tên bản đồ: Crimson Dunes /...",
+    "content_length": 3607,
+    "created_at": "2025-11-19T08:13:36.955153+00:00",
+    "updated_at": "2025-11-19T09:06:06.759894+00:00",
+    "file_path": "Demo Map Design file.pdf",
+    "track_id": "insert_20251119_151336_ddf81f4d",
+    "metadata": {
+      "processing_start_time": 1763543092,
+      "processing_end_time": 1763543166
+    }
+  },
+  "design_db_schema": {
+    "status": "processed",
+    "chunks_count": 1,
+    "chunks_list": [
+      "chunk-6b71f5adbea8e71e9c46d4c048ccfffd"
+    ],
+    "content_summary": "Design DB schema \n\nhttps://dbdiagram.io/d/tank-war-db-schema-682aefca1227bdcb4eee723c \n\ndecorations decor_idA uuid type varchar name varchar description text preview_url varchar price_gold int price_diamond int rarity varchar created_at timestamp \n\n?...",
+    "content_length": 1854,
+    "created_at": "2025-11-19T08:14:22.936129+00:00",
+    "updated_at": "2025-11-19T09:06:13.628357+00:00",
+    "file_path": "Design DB schema.pdf",
+    "track_id": "insert_20251119_151422_087b09b0",
+    "metadata": {
+      "processing_start_time": 1763543138,
+      "processing_end_time": 1763543173
+    }
+  },
+  "world_tank_war_grass_logic_design": {
+    "status": "processed",
+    "chunks_count": 1,
+    "chunks_list": [
+      "chunk-984424688523b07eded180ad03e62e84"
+    ],
+    "content_summary": "[World] [Tank War] Grass Logic Design \n\nHỆ THỐNG LOGIC CỦA CỎ XANH \n\nVersion: 1.1   \nNgười viết: phucth12 (phucth12)   \nNgày tạo: 11 - 09 - 2025 \n\n1. Mục đích thiết kế \n\nTài liệu thiết kế chức năng cỏ trong map. \n\nCung cấp chiều sâu về mặt chiến thuậ...",
+    "content_length": 872,
+    "created_at": "2025-11-19T08:18:57.212308+00:00",
+    "updated_at": "2025-11-19T09:06:33.933694+00:00",
+    "file_path": "[World] [Tank War] Grass Logic Design.pdf",
+    "track_id": "insert_20251119_151857_d96dd5f1",
+    "metadata": {
+      "processing_start_time": 1763543166,
+      "processing_end_time": 1763543193
+    }
+  },
+  "world_tank_war_map_document": {
+    "status": "processed",
+    "chunks_count": 2,
+    "chunks_list": [
+      "chunk-a62040648c8939993b5089d71479dc88",
+      "chunk-8d8fe3d33191b35be77a591de251d057"
+    ],
+    "content_summary": "[World] [Tank War] Map Document \n\nHỆ THỐNG THIẾT KẾ MAP \n\nNgày khởi tạo: 18 - 09 - 2025 \n\nNgười soạn: $\\textcircled{9}$ phucth12 (phucth12) \n\nPhiên bản mới nhất: v1.0 \n\n1. Mục đích thiết kế. \n\nTài liệu này là hướng dẫn thiết kế map. Tài liệu mô tả và...",
+    "content_length": 4359,
+    "created_at": "2025-11-19T08:22:51.552075+00:00",
+    "updated_at": "2025-11-19T09:07:18.620382+00:00",
+    "file_path": "[World] [Tank War] Map Document.pdf",
+    "track_id": "insert_20251119_152251_3c1d2797",
+    "metadata": {
+      "processing_start_time": 1763543173,
+      "processing_end_time": 1763543238
+    }
+  },
+  "demo_map_test": {
+    "status": "processed",
+    "chunks_count": 2,
+    "chunks_list": [
+      "chunk-ed9904103a868cdb170acb76f76ccab4",
+      "chunk-a6be005ac9de5bc3e2187965dcd707f9"
+    ],
+    "content_summary": "Demo Map Design file \n\nDemo Map Design file \n\nProject TOG - Map Design Guideline: Desert Environment \n\nMục tiêu thiết kế \n\nTest mecharicnic game. \n\nTest lợi thế của 2 bên theo giai đoạn của trận đấu \n\n1. Theme Overview \n\n• Tên bản đồ: Crimson Dunes /...",
+    "content_length": 3607,
+    "created_at": "2025-11-19T08:46:46.126629+00:00",
+    "updated_at": "2025-11-19T16:10:08+00:00",
+    "file_path": "Demo Map Design file.pdf",
+    "track_id": "insert_20251119_154646_708937bc",
+    "metadata": {
+      "processing_start_time": 1763543193,
+      "processing_end_time": 1763543200
+    },
+    "multimodal_processed": true
+  }
+}
