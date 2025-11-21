@@ -10,6 +10,11 @@ This script:
 import sys
 from pathlib import Path
 
+if "pytest" in sys.modules:  # pragma: no cover - integration script
+    import pytest
+
+    pytest.skip("Integration script skipped during unit tests", allow_module_level=True)
+
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 

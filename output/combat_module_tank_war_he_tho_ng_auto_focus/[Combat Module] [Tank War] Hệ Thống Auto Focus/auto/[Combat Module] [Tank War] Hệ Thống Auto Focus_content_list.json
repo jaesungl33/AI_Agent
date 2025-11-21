@@ -1,0 +1,478 @@
+[
+    {
+        "type": "text",
+        "text": "[Combat Module] [Tank War] Hệ Thống Auto Focus ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            946,
+            166
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "HỆ THỐNG AUTO FOCUS ",
+        "bbox": [
+            45,
+            192,
+            287,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản:v1.1 ",
+        "bbox": [
+            62,
+            223,
+            218,
+            246
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Người tạo file: $\\textcircled{9}$ Kent (QuocTA) ",
+        "bbox": [
+            62,
+            255,
+            400,
+            276
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ngày cập nhật: 17 - 09 - 2025 ",
+        "bbox": [
+            63,
+            285,
+            348,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/71433b5be4078ed48e9e892cd3e904665187debed009015f27dc17274f87057d.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6 ta</td><td rowspan=1 colspan=1>Nguoiviet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>18-08-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>03-10-2025</td><td rowspan=1 colspan=1>Update lai co ché auto target</td><td rowspan=1 colspan=1> linhttd</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            45,
+            333,
+            936,
+            602
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1.1 Mục tiêu thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            666,
+            328,
+            692
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Đơn giản hóa trải nghiệm gameplay: người chơi không cần liên tục thao tác ngắm bắn thủ công. ",
+        "bbox": [
+            48,
+            702,
+            919,
+            745
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tăng tính chiến thuật: hệ thống Auto Focus phải hỗ trợ quyết định ưu tiên mục tiêu hợp lý, giúp gameplay công bằng nhưng vẫn giữ chiều sâu. ",
+        "bbox": [
+            48,
+            754,
+            925,
+            800
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Giảm tải thao tác, giữ sự tập trung của người chơi vào di chuyển, chọn vị trí, kỹ năng, và phối hợp đồng đội. ",
+        "bbox": [
+            50,
+            809,
+            939,
+            853
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1.2 Nguyên tắc cốt lõi ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            933,
+            345,
+            960
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Hệ thống Auto Focus chỉ hỗ trợ, không thay thế hoàn toàn kỹ năng ngắm bắn thủ công. • Các tầng rules ưu tiên được thiết kế dựa trên trải nghiệm người dùng (UX) và chiến thuật (Strategy). • Auto Focus luôn hoạt động theo logic “dễ bị hạ nhất $= >$ ưu tiên nguy hiểm nhất”. ",
+        "bbox": [
+            47,
+            32,
+            946,
+            140
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2. Chi tiết thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            225,
+            329,
+            253
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.1 Nguyên tắc chọn mục tiêu ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            275,
+            456,
+            302
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3.1. Tầng 1 ‒ Ưu tiên dựa trên tình huống cá nhân (Survival Priority) Kẻ địch đang có HP thấp nhất trong tầm bắn.   \nKẻ địch tấn công trực tiếp người chơi (đang bắn mình).   \nKẻ địch trong phạm vi gần nhất. 3.2. Tầng 2 $=$ Ưu tiên theo vai trò (Class Priority) (Optional ưu tiên dev 3.1 trước) Scout: Ưu tiên Scout địch (máu thấp, dễ tiêu diệt, tránh bị quấy rối).   \nAssault: Ưu tiên Assault địch (sát thương cao, là mối nguy hại chính).   \nHeavy: Ưu tiên Heavy địch khi gần hoặc khi không có Scout/Assault trong phạm vi.   \nThứ tự ưu tiên mặc định: Scout > Assault > Heavy. ",
+        "bbox": [
+            82,
+            309,
+            717,
+            422
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            84,
+            457,
+            855,
+            603
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Cơ chế thay đổi mục tiêu: ",
+        "bbox": [
+            87,
+            614,
+            328,
+            634
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ Nếu đang có target A, nhưng xuất hiện target B ở gần hơn Auto-focus chuyển sang target B (ưu tiên khoảng cách gần nhất). Đồng thời nòng súng đổi hướng qua mục tiêu mới   \n◦ Nếu target hiện tại chết hoặc ra khỏi Scan Range mất lock quét lại để tìm mục tiêu mới.   \n◦ Không lock vào vật thể môi trường (crate, wall, obstacle\u0000) hoặc unit không thuộc phe địch. ",
+        "bbox": [
+            89,
+            644,
+            930,
+            817
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.2 Tầm quét Auto-Target ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            840,
+            388,
+            865
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Base Scan Range $= 2 \\times$ Attack Range. ",
+        "bbox": [
+            50,
+            876,
+            424,
+            895
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Cách trigger: ",
+        "bbox": [
+            50,
+            905,
+            200,
+            925
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ Tap (button-down): Bắt đầu auto-focus scan (kích hoạt cơ chế tìm mục tiêu). ",
+        "bbox": [
+            79,
+            935,
+            833,
+            955
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ Button-up (release): Thực hiện bắn vào mục tiêu đang focus. Nếu không có mục tiêu hợp lệ bắn vào hướng theo nòng súng Nếu trong tầm view có kẻ địch, nòng súng tự động quay về phía kẻ địch được target (không target được các đối tượng nằm trong bụi cỏ, bị che khuất, tàng hình,...) ",
+        "bbox": [
+            85,
+            33,
+            898,
+            140
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.3 Manual Override ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            160,
+            323,
+            184
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Kéo/giữ nút bắn: Chuyển sang manual aim mode (hiển thị đường thẳng chỉ thị tầm bắn/trajectory). ",
+        "bbox": [
+            50,
+            195,
+            851,
+            239
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Khi nhả nút: Nếu không có target, bắn theo hướng manual chỉ định. ",
+        "bbox": [
+            50,
+            247,
+            708,
+            270
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Manual luôn override auto-target. ",
+        "bbox": [
+            48,
+            279,
+            397,
+            300
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Trong trường hợp nếu nhấn giữ button bắn và ko dịch chuyển hướng của button thì sẽ không có action gì xảy ra, đạn sẽ không được bắn ra ",
+        "bbox": [
+            48,
+            309,
+            947,
+            354
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.4 Luồng hoạt động Auto Focus ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            403,
+            489,
+            430
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Quét phạm vi (Scan Range): ◦ Xác định tất cả mục tiêu trong tầm bắn. ",
+        "bbox": [
+            50,
+            439,
+            488,
+            490
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Áp dụng tầng rules theo thứ tự: ◦ Survival $>$ Class. ",
+        "bbox": [
+            48,
+            498,
+            388,
+            550
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Khóa mục tiêu: ",
+        "bbox": [
+            50,
+            560,
+            228,
+            579
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Đạn sẽ auto lock vào mục tiêu ưu tiên và bắt đầu bắn.   \n◦ Nếu mục tiêu bị hạ hoặc ra khỏi tầm hệ thống tự động chọn lại theo rules. ",
+        "bbox": [
+            53,
+            572,
+            870,
+            642
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.5 Trải nghiệm người dùng (UX) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            721,
+            489,
+            750
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Indicator hiển thị: khung đỏ quanh mục tiêu đang bị Auto Focus. ",
+        "bbox": [
+            50,
+            758,
+            691,
+            778
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Hiển thị đường thẳng định hướng phạm vi bắn khi kéo manual ",
+        "bbox": [
+            53,
+            788,
+            661,
+            809
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Bỏ mũi tên định hướng di chuyển ở dưới Tank ",
+        "bbox": [
+            48,
+            817,
+            505,
+            839
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.6 Chiến thuật & Cân bằng ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            889,
+            425,
+            916
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Giữ nhịp độ trận đấu nhanh, giảm thao tác thừa. ",
+        "bbox": [
+            50,
+            925,
+            530,
+            945
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Đảm bảo Auto Focus không quá OP người chơi vẫn cần positioning, skill shots, teamwork. ",
+        "bbox": [
+            57,
+            33,
+            944,
+            54
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "2.7 Edge Case ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            77,
+            235,
+            102
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Nếu tank đang lock 1 enemy trong bụi, enemy đi sâu vào bụi mất lock ngay lập tức.   \n• Nếu có 2 enemy cùng xuất hiện chọn enemy đầu tiên quét được trong khung scan, nhưng sẽ switch sang mục tiêu gần hơn ngay khi phát hiện.   \n• Nếu player manual aim vào một enemy trong bụi vẫn cho phép bắn, nhưng không autolock. Tuy nhiên sẽ lock nếu địch để lộ vị trí (bị lộ bởi các skill khác, bị phát hiện nếu bản thân cũng vào bụi và trong phạm vi thấy được địch) ",
+        "bbox": [
+            47,
+            110,
+            942,
+            263
+        ],
+        "page_idx": 3
+    }
+]

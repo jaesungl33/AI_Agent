@@ -1,0 +1,2310 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        562,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                69,
+                                565,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        69,
+                                        565,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Asset, UI] [Tank War] Tank Selection Screen",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                110,
+                                347,
+                                145
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        110,
+                                        347,
+                                        145
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Design (Cơ chế chọn tank)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        215,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                162,
+                                217,
+                                181
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        162,
+                                        217,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN CƠ CHẾ CHỌN TANK",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        190,
+                        262,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                189,
+                                116,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        189,
+                                        116,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                213,
+                                262,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        213,
+                                        106,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        190,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        214,
+                                        262,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                240,
+                                176,
+                                258
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        240,
+                                        176,
+                                        258
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 28 - 07 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        281,
+                        556,
+                        459
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                281,
+                                556,
+                                459
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        281,
+                                        556,
+                                        459
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                281,
+                                                556,
+                                                459
+                                            ],
+                                            "score": 0.958,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-08-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d79978d6a54c6cc5de0b9ceff09df2c108b27c83b16d9ffc193310f481da155e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        281,
+                                        556,
+                                        340.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        340.3333333333333,
+                                        556,
+                                        399.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        399.66666666666663,
+                                        556,
+                                        458.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        478,
+                        185,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                477,
+                                187,
+                                499
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        477,
+                                        187,
+                                        499
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        507,
+                        487,
+                        525
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                506,
+                                488,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        506,
+                                        488,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Xác định với người chơi những gì họ có thể làm trong giai đoạn chuẩn bị chiến đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        533,
+                        260,
+                        550
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                532,
+                                261,
+                                550
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        532,
+                                        261,
+                                        550
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        558,
+                        443,
+                        602
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                558,
+                                292,
+                                577
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        565,
+                                        36,
+                                        569
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        558,
+                                        292,
+                                        577
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Giữ công bằng giữa 2 đội chơi khi chọn tank.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "bbox": [
+                                42,
+                                582,
+                                442,
+                                603
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        42,
+                                        582,
+                                        442,
+                                        603
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người chơi cảm thấy giai đoạn chọn tank diễn ra phù hợp và không lâu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 12.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        645,
+                        175,
+                        666
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                644,
+                                177,
+                                668
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        644,
+                                        177,
+                                        668
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 14
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        674,
+                        540,
+                        710
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                672,
+                                541,
+                                693
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        672,
+                                        541,
+                                        693
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev hình dung rõ ràng hơn về các yếu tố trong màn hình",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                693,
+                                90,
+                                711
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        693,
+                                        90,
+                                        711
+                                    ],
+                                    "score": 1.0,
+                                    "content": "chọn tank.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        }
+                    ],
+                    "index": 15.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        754,
+                        191,
+                        776
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                751,
+                                193,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        751,
+                                        193,
+                                        778
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        562,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                69,
+                                565,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        69,
+                                        565,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Asset, UI] [Tank War] Tank Selection Screen",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                110,
+                                347,
+                                145
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        110,
+                                        347,
+                                        145
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Design (Cơ chế chọn tank)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        215,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                162,
+                                217,
+                                181
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        162,
+                                        217,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN CƠ CHẾ CHỌN TANK",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2,
+                    "bbox_fs": [
+                        25,
+                        162,
+                        217,
+                        181
+                    ]
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        36,
+                        190,
+                        262,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                189,
+                                116,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        189,
+                                        116,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                213,
+                                262,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        213,
+                                        106,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        190,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        214,
+                                        262,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                240,
+                                176,
+                                258
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        240,
+                                        176,
+                                        258
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 28 - 07 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5,
+                            "is_list_start_line": true
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        35,
+                        189,
+                        262,
+                        258
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        281,
+                        556,
+                        459
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                281,
+                                556,
+                                459
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        281,
+                                        556,
+                                        459
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                281,
+                                                556,
+                                                459
+                                            ],
+                                            "score": 0.958,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-08-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d79978d6a54c6cc5de0b9ceff09df2c108b27c83b16d9ffc193310f481da155e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        281,
+                                        556,
+                                        340.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        340.3333333333333,
+                                        556,
+                                        399.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        399.66666666666663,
+                                        556,
+                                        458.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        478,
+                        185,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                477,
+                                187,
+                                499
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        477,
+                                        187,
+                                        499
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        507,
+                        487,
+                        525
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                506,
+                                488,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        506,
+                                        488,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Xác định với người chơi những gì họ có thể làm trong giai đoạn chuẩn bị chiến đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10,
+                    "bbox_fs": [
+                        25,
+                        506,
+                        488,
+                        526
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        533,
+                        260,
+                        550
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                532,
+                                261,
+                                550
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        532,
+                                        261,
+                                        550
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11,
+                    "bbox_fs": [
+                        26,
+                        532,
+                        261,
+                        550
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        558,
+                        443,
+                        602
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                558,
+                                292,
+                                577
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        565,
+                                        36,
+                                        569
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        558,
+                                        292,
+                                        577
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Giữ công bằng giữa 2 đội chơi khi chọn tank.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "bbox": [
+                                42,
+                                582,
+                                442,
+                                603
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        42,
+                                        582,
+                                        442,
+                                        603
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người chơi cảm thấy giai đoạn chọn tank diễn ra phù hợp và không lâu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 12.5,
+                    "bbox_fs": [
+                        31,
+                        558,
+                        442,
+                        603
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        645,
+                        175,
+                        666
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                644,
+                                177,
+                                668
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        644,
+                                        177,
+                                        668
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 14
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        674,
+                        540,
+                        710
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                672,
+                                541,
+                                693
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        672,
+                                        541,
+                                        693
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev hình dung rõ ràng hơn về các yếu tố trong màn hình",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                693,
+                                90,
+                                711
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        693,
+                                        90,
+                                        711
+                                    ],
+                                    "score": 1.0,
+                                    "content": "chọn tank.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        }
+                    ],
+                    "index": 15.5,
+                    "bbox_fs": [
+                        25,
+                        672,
+                        541,
+                        711
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        754,
+                        191,
+                        776
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                751,
+                                193,
+                                778
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        751,
+                                        193,
+                                        778
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "bbox_fs": [
+                        25,
+                        751,
+                        193,
+                        778
+                    ]
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        51,
+                        48,
+                        223,
+                        135
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                47,
+                                128,
+                                63
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        47,
+                                        128,
+                                        63
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                118,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        118,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tương tác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                94,
+                                223,
+                                110
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        94,
+                                        223,
+                                        110
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Tương tác với các thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                65,
+                                118,
+                                199,
+                                135
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        65,
+                                        118,
+                                        199,
+                                        135
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Các cách tương tác khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 1.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        145,
+                        96,
+                        158
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                143,
+                                97,
+                                160
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        143,
+                                        97,
+                                        160
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        227,
+                        146,
+                        249
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                225,
+                                147,
+                                251
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        225,
+                                        147,
+                                        251
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        268,
+                        556,
+                        801
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                268,
+                                556,
+                                801
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        268,
+                                        556,
+                                        801
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                268,
+                                                556,
+                                                801
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thanh phän</td><td rowspan=1 colspan=1>Muc dich</td><td rowspan=1 colspan=1>Design Note</td></tr><tr><td rowspan=1 colspan=1>Thdi gian</td><td rowspan=1 colspan=1> Hién thi thdi gian cho phép 8trong manhinh chon tank va thoi gian chuan bidévao tran Khi hét thαi gian chon, players va nhüng tanks ho chon dugc dua vao trong map：  Thoi gian chon tank: 15sGET READY!: 5s.</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Danh sách tank</td><td rowspan=1 colspan=1>Liét ké cac loai tank</td><td rowspan=1 colspan=1>Tank duαc säp xép theo class Sé dugc än di sau khi het thoi gian chon tank (15s)</td></tr><tr><td rowspan=1 colspan=1>Danh sách 2 doi choi</td><td rowspan=1 colspan=1>Cac nguoi chdi dugc chia thanh 2 doi.Danh sách nay cho thäy nguoichoi voiminh sé la aiva sé chon tank gi</td><td rowspan=1 colspan=1>Vi tri 2 team sé dugc säp sän la:·ATK: TraiDEF: Phai Hién thi ten,avatar cua player, tén tank va model 3D tank hochon</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Giup nguoi choi (mói) hiéu muc tiéu chdicua team minhDugc hien ra sau khi moi nguoi hoanthanh giai doan chon tank</td><td rowspan=1 colspan=1>Thoi gian hien thi nhiém vu la5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Chän ngudi chdi d6itank sau khi dudebdit</td><td rowspan=1 colspan=1> Nam trong hogc gän danh sach tank</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        268,
+                                        556,
+                                        445.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        445.66666666666663,
+                                        556,
+                                        623.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        623.3333333333333,
+                                        556,
+                                        800.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "list",
+                    "bbox": [
+                        51,
+                        48,
+                        223,
+                        135
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                47,
+                                128,
+                                63
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        47,
+                                        128,
+                                        63
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0,
+                            "is_list_start_line": true,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                118,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        118,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tương tác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1,
+                            "is_list_start_line": true,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                64,
+                                94,
+                                223,
+                                110
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        64,
+                                        94,
+                                        223,
+                                        110
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Tương tác với các thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        },
+                        {
+                            "bbox": [
+                                65,
+                                118,
+                                199,
+                                135
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        65,
+                                        118,
+                                        199,
+                                        135
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Các cách tương tác khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_end_line": true
+                        }
+                    ],
+                    "index": 1.5,
+                    "bbox_fs": [
+                        50,
+                        47,
+                        223,
+                        135
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        145,
+                        96,
+                        158
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                143,
+                                97,
+                                160
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        143,
+                                        97,
+                                        160
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        51,
+                        143,
+                        97,
+                        160
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        227,
+                        146,
+                        249
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                225,
+                                147,
+                                251
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        225,
+                                        147,
+                                        251
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        268,
+                        556,
+                        801
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                268,
+                                556,
+                                801
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        268,
+                                        556,
+                                        801
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                268,
+                                                556,
+                                                801
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thanh phän</td><td rowspan=1 colspan=1>Muc dich</td><td rowspan=1 colspan=1>Design Note</td></tr><tr><td rowspan=1 colspan=1>Thdi gian</td><td rowspan=1 colspan=1> Hién thi thdi gian cho phép 8trong manhinh chon tank va thoi gian chuan bidévao tran Khi hét thαi gian chon, players va nhüng tanks ho chon dugc dua vao trong map：  Thoi gian chon tank: 15sGET READY!: 5s.</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Danh sách tank</td><td rowspan=1 colspan=1>Liét ké cac loai tank</td><td rowspan=1 colspan=1>Tank duαc säp xép theo class Sé dugc än di sau khi het thoi gian chon tank (15s)</td></tr><tr><td rowspan=1 colspan=1>Danh sách 2 doi choi</td><td rowspan=1 colspan=1>Cac nguoi chdi dugc chia thanh 2 doi.Danh sách nay cho thäy nguoichoi voiminh sé la aiva sé chon tank gi</td><td rowspan=1 colspan=1>Vi tri 2 team sé dugc säp sän la:·ATK: TraiDEF: Phai Hién thi ten,avatar cua player, tén tank va model 3D tank hochon</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Giup nguoi choi (mói) hiéu muc tiéu chdicua team minhDugc hien ra sau khi moi nguoi hoanthanh giai doan chon tank</td><td rowspan=1 colspan=1>Thoi gian hien thi nhiém vu la5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Chän ngudi chdi d6itank sau khi dudebdit</td><td rowspan=1 colspan=1> Nam trong hogc gän danh sach tank</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        268,
+                                        556,
+                                        445.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        445.66666666666663,
+                                        556,
+                                        623.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        623.3333333333333,
+                                        556,
+                                        800.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        65,
+                        129,
+                        85
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                63,
+                                131,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        63,
+                                        131,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tương tác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        50,
+                        100,
+                        257,
+                        119
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                49,
+                                99,
+                                257,
+                                119
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        99,
+                                        257,
+                                        119
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Tương tác với các thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        140,
+                        424,
+                        421
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                140,
+                                424,
+                                421
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        140,
+                                        424,
+                                        421
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                140,
+                                                424,
+                                                421
+                                            ],
+                                            "score": 0.892,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thänh phän</td><td rowspan=1 colspan=1>Cach tuong tác</td></tr><tr><td rowspan=1 colspan=1>Thoi gian chon tank</td><td rowspan=1 colspan=1>Quan sat</td></tr><tr><td rowspan=1 colspan=1>Danh säch tank</td><td rowspan=1 colspan=1>Nhän vao các ó tank dé́ chon loai tank muönchoi, tank khong chon du@c sé bi xám/den di.Sé än di sau khi hét thoi gian chon tank</td></tr><tr><td rowspan=1 colspan=1>2 hang doi choi</td><td rowspan=1 colspan=1>Quan sät xem các tank dä dugc chon la gi décó thé lén chien thuät</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Doc nhiem vuThoi gian: 5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Nam trong hoac gän danh sach tank, nhan vao icon de khoa lua chon tank ctia minh</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "074534f307775e6048f98a98f19ad03249a2a75ca3a953bf10cefca2bfc714a1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        140,
+                                        424,
+                                        233.66666666666669
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        233.66666666666669,
+                                        424,
+                                        327.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        327.33333333333337,
+                                        424,
+                                        421.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        473,
+                        223,
+                        492
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                472,
+                                224,
+                                492
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        472,
+                                        224,
+                                        492
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Các cách tương tác khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        512,
+                        555,
+                        622
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                512,
+                                555,
+                                622
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        512,
+                                        555,
+                                        622
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                512,
+                                                555,
+                                                622
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Case</td><td rowspan=1 colspan=1>Behaviour/Solution</td></tr><tr><td rowspan=1 colspan=1> Khi player thoat app</td><td rowspan=1 colspan=1>Néu thαi gian chua hét, vän cho phép player ＆ trong trän khi quay lai</td></tr><tr><td rowspan=1 colspan=1>Khi player chua chon tank</td><td rowspan=1 colspan=1>Mäc dinh möi player chon tank δ däu danh sách tank khi bätdäu screenchon</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        512,
+                                        555,
+                                        548.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        548.6666666666666,
+                                        555,
+                                        585.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        585.3333333333333,
+                                        555,
+                                        621.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        679,
+                        97,
+                        697
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                676,
+                                100,
+                                699
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        676,
+                                        100,
+                                        699
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                }
+            ],
+            "page_idx": 2,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        65,
+                        129,
+                        85
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                63,
+                                131,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        63,
+                                        131,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Tương tác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        50,
+                        100,
+                        257,
+                        119
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                49,
+                                99,
+                                257,
+                                119
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        99,
+                                        257,
+                                        119
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Tương tác với các thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        140,
+                        424,
+                        421
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                140,
+                                424,
+                                421
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        140,
+                                        424,
+                                        421
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                140,
+                                                424,
+                                                421
+                                            ],
+                                            "score": 0.892,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thänh phän</td><td rowspan=1 colspan=1>Cach tuong tác</td></tr><tr><td rowspan=1 colspan=1>Thoi gian chon tank</td><td rowspan=1 colspan=1>Quan sat</td></tr><tr><td rowspan=1 colspan=1>Danh säch tank</td><td rowspan=1 colspan=1>Nhän vao các ó tank dé́ chon loai tank muönchoi, tank khong chon du@c sé bi xám/den di.Sé än di sau khi hét thoi gian chon tank</td></tr><tr><td rowspan=1 colspan=1>2 hang doi choi</td><td rowspan=1 colspan=1>Quan sät xem các tank dä dugc chon la gi décó thé lén chien thuät</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Doc nhiem vuThoi gian: 5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Nam trong hoac gän danh sach tank, nhan vao icon de khoa lua chon tank ctia minh</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "074534f307775e6048f98a98f19ad03249a2a75ca3a953bf10cefca2bfc714a1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        140,
+                                        424,
+                                        233.66666666666669
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        233.66666666666669,
+                                        424,
+                                        327.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        327.33333333333337,
+                                        424,
+                                        421.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        473,
+                        223,
+                        492
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                472,
+                                224,
+                                492
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        472,
+                                        224,
+                                        492
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Các cách tương tác khác",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        512,
+                        555,
+                        622
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                512,
+                                555,
+                                622
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        512,
+                                        555,
+                                        622
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                512,
+                                                555,
+                                                622
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Case</td><td rowspan=1 colspan=1>Behaviour/Solution</td></tr><tr><td rowspan=1 colspan=1> Khi player thoat app</td><td rowspan=1 colspan=1>Néu thαi gian chua hét, vän cho phép player ＆ trong trän khi quay lai</td></tr><tr><td rowspan=1 colspan=1>Khi player chua chon tank</td><td rowspan=1 colspan=1>Mäc dinh möi player chon tank δ däu danh sách tank khi bätdäu screenchon</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        512,
+                                        555,
+                                        548.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        548.6666666666666,
+                                        555,
+                                        585.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        585.3333333333333,
+                                        555,
+                                        621.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        679,
+                        97,
+                        697
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                676,
+                                100,
+                                699
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        676,
+                                        100,
+                                        699
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

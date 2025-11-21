@@ -1,0 +1,2370 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        538,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                69,
+                                539,
+                                100
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        69,
+                                        539,
+                                        100
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Character Module] [Tank War] [Elemental",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                106,
+                                106,
+                                146
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        106,
+                                        106,
+                                        146
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Class]",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        163,
+                        227,
+                        190
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                158,
+                                231,
+                                192
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        158,
+                                        231,
+                                        192
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Tổng quan thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        198,
+                        245,
+                        215
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                198,
+                                246,
+                                215
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        198,
+                                        246,
+                                        215
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tên Class: Elemental - Nguyên tố chính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        224,
+                        563,
+                        280
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                222,
+                                564,
+                                242
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        222,
+                                        564,
+                                        242
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mô tả ngắn: Tank sử dụng năng lượng nguyên tố (Fire, Ice, Lightning, Earth, Poison) để kiểm soát",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                242,
+                                557,
+                                262
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        242,
+                                        557,
+                                        262
+                                    ],
+                                    "score": 1.0,
+                                    "content": "chiến trường. Thay vì dựa vào sát thương thô, Elemental tập trung vào gây hiệu ứng bất thường",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                263,
+                                330,
+                                281
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        263,
+                                        330,
+                                        281
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(Abnormal State) và tạo vùng hiệu ứng (Zone Control).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        288,
+                        162,
+                        305
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                288,
+                                163,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        288,
+                                        163,
+                                        306
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Vai trò chính trong trận:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        313,
+                        230,
+                        382
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                312,
+                                164,
+                                334
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        319,
+                                        36,
+                                        326
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        312,
+                                        164,
+                                        334
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khống chế diện rộng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                30,
+                                339,
+                                220,
+                                357
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        345,
+                                        36,
+                                        351
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        339,
+                                        220,
+                                        357
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tạo combo hiệu ứng nguyên tố",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                363,
+                                230,
+                                384
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        371,
+                                        36,
+                                        376
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        363,
+                                        230,
+                                        384
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ép đối thủ vào tình huống bất lợi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        390,
+                        457,
+                        407
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                389,
+                                460,
+                                409
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        389,
+                                        460,
+                                        409
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Độ khó sử dụng: Trung bình ‒ Khó (phải tính toán thời điểm và vị trí cast skill).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        430,
+                        209,
+                        454
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                429,
+                                209,
+                                453
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        429,
+                                        209,
+                                        453
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        464,
+                        534,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                462,
+                                536,
+                                483
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        469,
+                                        37,
+                                        476
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        42,
+                                        462,
+                                        536,
+                                        483
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đa dạng hóa gameplay: Thêm 1 archetype khác biệt so với Scout (mobility), Assault (all-",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                45,
+                                484,
+                                192,
+                                502
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        45,
+                                        484,
+                                        192,
+                                        502
+                                    ],
+                                    "score": 1.0,
+                                    "content": "rounder), Heavy (bruiser).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 13.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        509,
+                        198,
+                        527
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                509,
+                                198,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        515,
+                                        36,
+                                        520
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        509,
+                                        198,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tăng chiều sâu chiến thuật",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        534,
+                        562,
+                        572
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                533,
+                                563,
+                                552
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        540,
+                                        38,
+                                        546
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        41,
+                                        533,
+                                        563,
+                                        552
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Retention hook: Cung cấp trải nghiệm “cool fantasy” ‒ điều khiển nguyên tố, khác biệt hẳn",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "bbox": [
+                                44,
+                                552,
+                                232,
+                                573
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        44,
+                                        552,
+                                        232,
+                                        573
+                                    ],
+                                    "score": 1.0,
+                                    "content": "với các tank cơ giới truyền thống.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 16.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        593,
+                        195,
+                        617
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                591,
+                                197,
+                                617
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        591,
+                                        197,
+                                        617
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Chi tiết thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        635,
+                        193,
+                        658
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                635,
+                                194,
+                                657
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        635,
+                                        194,
+                                        657
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.1 Chỉ số thuộc tính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        680,
+                        270,
+                        815
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                680,
+                                270,
+                                815
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        680,
+                                        270,
+                                        815
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                680,
+                                                270,
+                                                815
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Thu@c tinh</td><td rowspan=1 colspan=1>Elemental</td></tr><tr><td rowspan=1 colspan=1>HP</td><td rowspan=1 colspan=1>Trung binh</td></tr><tr><td rowspan=1 colspan=1>Move Speed</td><td rowspan=1 colspan=1>Trung binh/cao</td></tr><tr><td rowspan=1 colspan=1>Base Attack Dmg</td><td rowspan=1 colspan=1>Trung binh - cao</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "bed046aafa8504836d93fca7f9e2df86598a5254f6f7151aab8451cf67e4c357.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        680,
+                                        270,
+                                        725.0
+                                    ],
+                                    "spans": [],
+                                    "index": 20
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        725.0,
+                                        270,
+                                        770.0
+                                    ],
+                                    "spans": [],
+                                    "index": 21
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        770.0,
+                                        270,
+                                        815.0
+                                    ],
+                                    "spans": [],
+                                    "index": 22
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 21
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        538,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                69,
+                                539,
+                                100
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        69,
+                                        539,
+                                        100
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Character Module] [Tank War] [Elemental",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                106,
+                                106,
+                                146
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        106,
+                                        106,
+                                        146
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Class]",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        163,
+                        227,
+                        190
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                158,
+                                231,
+                                192
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        158,
+                                        231,
+                                        192
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Tổng quan thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        198,
+                        245,
+                        215
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                198,
+                                246,
+                                215
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        198,
+                                        246,
+                                        215
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tên Class: Elemental - Nguyên tố chính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3,
+                    "bbox_fs": [
+                        26,
+                        198,
+                        246,
+                        215
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        224,
+                        563,
+                        280
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                222,
+                                564,
+                                242
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        222,
+                                        564,
+                                        242
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mô tả ngắn: Tank sử dụng năng lượng nguyên tố (Fire, Ice, Lightning, Earth, Poison) để kiểm soát",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                242,
+                                557,
+                                262
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        242,
+                                        557,
+                                        262
+                                    ],
+                                    "score": 1.0,
+                                    "content": "chiến trường. Thay vì dựa vào sát thương thô, Elemental tập trung vào gây hiệu ứng bất thường",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                263,
+                                330,
+                                281
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        263,
+                                        330,
+                                        281
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(Abnormal State) và tạo vùng hiệu ứng (Zone Control).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 5,
+                    "bbox_fs": [
+                        25,
+                        222,
+                        564,
+                        281
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        288,
+                        162,
+                        305
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                288,
+                                163,
+                                306
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        288,
+                                        163,
+                                        306
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Vai trò chính trong trận:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7,
+                    "bbox_fs": [
+                        25,
+                        288,
+                        163,
+                        306
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        313,
+                        230,
+                        382
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                312,
+                                164,
+                                334
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        319,
+                                        36,
+                                        326
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        312,
+                                        164,
+                                        334
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khống chế diện rộng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                30,
+                                339,
+                                220,
+                                357
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        345,
+                                        36,
+                                        351
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        339,
+                                        220,
+                                        357
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tạo combo hiệu ứng nguyên tố",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                363,
+                                230,
+                                384
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        371,
+                                        36,
+                                        376
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        363,
+                                        230,
+                                        384
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ép đối thủ vào tình huống bất lợi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 9,
+                    "bbox_fs": [
+                        30,
+                        312,
+                        230,
+                        384
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        390,
+                        457,
+                        407
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                389,
+                                460,
+                                409
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        389,
+                                        460,
+                                        409
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Độ khó sử dụng: Trung bình ‒ Khó (phải tính toán thời điểm và vị trí cast skill).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11,
+                    "bbox_fs": [
+                        27,
+                        389,
+                        460,
+                        409
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        430,
+                        209,
+                        454
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                429,
+                                209,
+                                453
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        429,
+                                        209,
+                                        453
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        464,
+                        534,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                462,
+                                536,
+                                483
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        469,
+                                        37,
+                                        476
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        42,
+                                        462,
+                                        536,
+                                        483
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đa dạng hóa gameplay: Thêm 1 archetype khác biệt so với Scout (mobility), Assault (all-",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                45,
+                                484,
+                                192,
+                                502
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        45,
+                                        484,
+                                        192,
+                                        502
+                                    ],
+                                    "score": 1.0,
+                                    "content": "rounder), Heavy (bruiser).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 13.5,
+                    "bbox_fs": [
+                        30,
+                        462,
+                        536,
+                        502
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        509,
+                        198,
+                        527
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                509,
+                                198,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        515,
+                                        36,
+                                        520
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        509,
+                                        198,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tăng chiều sâu chiến thuật",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        }
+                    ],
+                    "index": 15,
+                    "bbox_fs": [
+                        31,
+                        509,
+                        198,
+                        526
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        534,
+                        562,
+                        572
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                533,
+                                563,
+                                552
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        540,
+                                        38,
+                                        546
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        41,
+                                        533,
+                                        563,
+                                        552
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Retention hook: Cung cấp trải nghiệm “cool fantasy” ‒ điều khiển nguyên tố, khác biệt hẳn",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        },
+                        {
+                            "bbox": [
+                                44,
+                                552,
+                                232,
+                                573
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        44,
+                                        552,
+                                        232,
+                                        573
+                                    ],
+                                    "score": 1.0,
+                                    "content": "với các tank cơ giới truyền thống.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 16.5,
+                    "bbox_fs": [
+                        30,
+                        533,
+                        563,
+                        573
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        593,
+                        195,
+                        617
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                591,
+                                197,
+                                617
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        591,
+                                        197,
+                                        617
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Chi tiết thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 18
+                        }
+                    ],
+                    "index": 18
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        635,
+                        193,
+                        658
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                635,
+                                194,
+                                657
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        635,
+                                        194,
+                                        657
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.1 Chỉ số thuộc tính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 19
+                        }
+                    ],
+                    "index": 19
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        680,
+                        270,
+                        815
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                680,
+                                270,
+                                815
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        680,
+                                        270,
+                                        815
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                680,
+                                                270,
+                                                815
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td colspan=\"1\" rowspan=\"1\">Thu@c tinh</td><td colspan=\"1\" rowspan=\"1\">Elemental</td></tr><tr><td colspan=\"1\" rowspan=\"1\">HP</td><td colspan=\"1\" rowspan=\"1\">Trung binh</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Move Speed</td><td colspan=\"1\" rowspan=\"1\">Trung binh/cao</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Base Attack Dmg</td><td colspan=\"1\" rowspan=\"1\">Trung binh - cao</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td>Special Strength</td><td>Hiéu ung nguyén tó</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "bed046aafa8504836d93fca7f9e2df86598a5254f6f7151aab8451cf67e4c357.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 21,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        680,
+                                        270,
+                                        725.0
+                                    ],
+                                    "spans": [],
+                                    "index": 20
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        725.0,
+                                        270,
+                                        770.0
+                                    ],
+                                    "spans": [],
+                                    "index": 21
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        770.0,
+                                        270,
+                                        815.0
+                                    ],
+                                    "spans": [],
+                                    "index": 22
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 21
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        29,
+                        27,
+                        263,
+                        52
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                29,
+                                27,
+                                263,
+                                52
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        27,
+                                        263,
+                                        52
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                29,
+                                                27,
+                                                263,
+                                                52
+                                            ],
+                                            "score": 0.548,
+                                            "html": "<table><tr><td>Special Strength</td><td>Hiéu ung nguyén tó</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "2c25da8e912c07e4eab2edf16bc3d3c977ba89088d4e2b33bea36dfe18c1f04f.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 0,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        27,
+                                        263,
+                                        52
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        72,
+                        142,
+                        95
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                71,
+                                144,
+                                95
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        71,
+                                        144,
+                                        95
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.2 Nguyên tố",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        115,
+                        556,
+                        425
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                115,
+                                556,
+                                425
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        115,
+                                        556,
+                                        425
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                115,
+                                                556,
+                                                425
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Nguyén tó</td><td rowspan=1 colspan=1>Dac diem chinh</td><td rowspan=1 colspan=1> Hiéu ung chu dao</td><td rowspan=1 colspan=1>Uu diem</td><td rowspan=1 colspan=1>Nhugc diem</td></tr><tr><td rowspan=1 colspan=1>Fire</td><td rowspan=1 colspan=1>Gay sat thuong kéodai (DOT)</td><td rowspan=1 colspan=1> Burn (Damage overTime)</td><td rowspan=1 colspan=1>Ep góc,zonecontrol, gay áp luc</td><td rowspan=1 colspan=1>Burst yéu,dé né</td></tr><tr><td rowspan=1 colspan=1>Ice</td><td rowspan=1 colspan=1>Giam töc, han ché dichuyen</td><td rowspan=1 colspan=1>Slow / Freeze</td><td rowspan=1 colspan=1>CC tot,tao loi thécho team</td><td rowspan=1 colspan=1> Damage thäp, phu thuoc teamwork</td></tr><tr><td rowspan=1 colspan=1>Lightning</td><td rowspan=1 colspan=1> Sät thuong lan, bungnδ AoE nhó</td><td rowspan=1 colspan=1> Stun / Chain Lightning</td><td rowspan=1 colspan=1>Tao dot bien,khóa cung doi thu</td><td rowspan=1 colspan=1>CD cao,damagekhóng ón dinh</td></tr><tr><td rowspan=1 colspan=1>Poison</td><td rowspan=1 colspan=1>Suy yeu,phä hoi mäu</td><td rowspan=1 colspan=1>Anti-Heal/Poison DOT</td><td rowspan=1 colspan=1>Khac chéheal/sustain</td><td rowspan=1 colspan=1>Anh huong chäm,thieu burst</td></tr><tr><td rowspan=1 colspan=1>Water</td><td rowspan=1 colspan=1>Gay hieu ung bat ón,lam troi vi tri</td><td rowspan=1 colspan=1>Washback /Drench(giam tóc + debuff)</td><td rowspan=1 colspan=1>Zone controlmém,day doi thura khoi vi tri</td><td rowspan=1 colspan=1> Sat thuong thap, thien ve utility</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "87e5a83107b991b848a784f711de0af8724ba7d3e41daaf390cc5dd140a63366.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        115,
+                                        556,
+                                        218.33333333333331
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        218.33333333333331,
+                                        556,
+                                        321.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        321.66666666666663,
+                                        556,
+                                        424.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        444,
+                        125,
+                        464
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                443,
+                                127,
+                                466
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        443,
+                                        127,
+                                        466
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.3 Skill Set",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        473,
+                        222,
+                        490
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                472,
+                                222,
+                                490
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        472,
+                                        222,
+                                        490
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mỗi tank thuộc class Elemental có:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        23,
+                        498,
+                        559,
+                        581
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                42,
+                                497,
+                                557,
+                                518
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        42,
+                                        497,
+                                        294,
+                                        518
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Basic Attack: đòn bắn thường gây sát thương",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        295,
+                                        501,
+                                        305,
+                                        513
+                                    ],
+                                    "score": 0.69,
+                                    "content": "^ +",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        305,
+                                        497,
+                                        557,
+                                        518
+                                    ],
+                                    "score": 1.0,
+                                    "content": "hiệu ứng nguyên tố vfx lên đòn đánh thường,",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "bbox": [
+                                44,
+                                516,
+                                558,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        44,
+                                        516,
+                                        558,
+                                        536
+                                    ],
+                                    "score": 1.0,
+                                    "content": "cơ chế đòn đánh thường sẽ có chút khác biệt so với 3 class còn lại, chi tiết sẽ được define khi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                45,
+                                538,
+                                144,
+                                554
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        45,
+                                        538,
+                                        144,
+                                        554
+                                    ],
+                                    "score": 1.0,
+                                    "content": "thiết kế Skil Tank",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                563,
+                                375,
+                                580
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        569,
+                                        36,
+                                        575
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        39,
+                                        563,
+                                        375,
+                                        580
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1 Active Skill: đặc trưng nguyên tố, là điểm khác biệt chính.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 8.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        26,
+                        588,
+                        432,
+                        606
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                588,
+                                433,
+                                607
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        588,
+                                        433,
+                                        607
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Nguyên tố chính quyết định hiệu ứng phụ (DOT, Slow, Stun, Anti-Heal\u0000).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        29,
+                        27,
+                        263,
+                        52
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                29,
+                                27,
+                                263,
+                                52
+                            ],
+                            "group_id": 0,
+                            "lines": [],
+                            "index": 0,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        27,
+                                        263,
+                                        52
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                }
+                            ],
+                            "lines_deleted": true
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        72,
+                        142,
+                        95
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                71,
+                                144,
+                                95
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        71,
+                                        144,
+                                        95
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.2 Nguyên tố",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        115,
+                        556,
+                        425
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                115,
+                                556,
+                                425
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        115,
+                                        556,
+                                        425
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                115,
+                                                556,
+                                                425
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Nguyén tó</td><td rowspan=1 colspan=1>Dac diem chinh</td><td rowspan=1 colspan=1> Hiéu ung chu dao</td><td rowspan=1 colspan=1>Uu diem</td><td rowspan=1 colspan=1>Nhugc diem</td></tr><tr><td rowspan=1 colspan=1>Fire</td><td rowspan=1 colspan=1>Gay sat thuong kéodai (DOT)</td><td rowspan=1 colspan=1> Burn (Damage overTime)</td><td rowspan=1 colspan=1>Ep góc,zonecontrol, gay áp luc</td><td rowspan=1 colspan=1>Burst yéu,dé né</td></tr><tr><td rowspan=1 colspan=1>Ice</td><td rowspan=1 colspan=1>Giam töc, han ché dichuyen</td><td rowspan=1 colspan=1>Slow / Freeze</td><td rowspan=1 colspan=1>CC tot,tao loi thécho team</td><td rowspan=1 colspan=1> Damage thäp, phu thuoc teamwork</td></tr><tr><td rowspan=1 colspan=1>Lightning</td><td rowspan=1 colspan=1> Sät thuong lan, bungnδ AoE nhó</td><td rowspan=1 colspan=1> Stun / Chain Lightning</td><td rowspan=1 colspan=1>Tao dot bien,khóa cung doi thu</td><td rowspan=1 colspan=1>CD cao,damagekhóng ón dinh</td></tr><tr><td rowspan=1 colspan=1>Poison</td><td rowspan=1 colspan=1>Suy yeu,phä hoi mäu</td><td rowspan=1 colspan=1>Anti-Heal/Poison DOT</td><td rowspan=1 colspan=1>Khac chéheal/sustain</td><td rowspan=1 colspan=1>Anh huong chäm,thieu burst</td></tr><tr><td rowspan=1 colspan=1>Water</td><td rowspan=1 colspan=1>Gay hieu ung bat ón,lam troi vi tri</td><td rowspan=1 colspan=1>Washback /Drench(giam tóc + debuff)</td><td rowspan=1 colspan=1>Zone controlmém,day doi thura khoi vi tri</td><td rowspan=1 colspan=1> Sat thuong thap, thien ve utility</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "87e5a83107b991b848a784f711de0af8724ba7d3e41daaf390cc5dd140a63366.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 3,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        115,
+                                        556,
+                                        218.33333333333331
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        218.33333333333331,
+                                        556,
+                                        321.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        321.66666666666663,
+                                        556,
+                                        424.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        444,
+                        125,
+                        464
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                443,
+                                127,
+                                466
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        443,
+                                        127,
+                                        466
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3.3 Skill Set",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        473,
+                        222,
+                        490
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                472,
+                                222,
+                                490
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        472,
+                                        222,
+                                        490
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mỗi tank thuộc class Elemental có:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6,
+                    "bbox_fs": [
+                        26,
+                        472,
+                        222,
+                        490
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        23,
+                        498,
+                        559,
+                        581
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                42,
+                                497,
+                                557,
+                                518
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        42,
+                                        497,
+                                        294,
+                                        518
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Basic Attack: đòn bắn thường gây sát thương",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        295,
+                                        501,
+                                        305,
+                                        513
+                                    ],
+                                    "score": 0.69,
+                                    "content": "^ +",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        305,
+                                        497,
+                                        557,
+                                        518
+                                    ],
+                                    "score": 1.0,
+                                    "content": "hiệu ứng nguyên tố vfx lên đòn đánh thường,",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        },
+                        {
+                            "bbox": [
+                                44,
+                                516,
+                                558,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        44,
+                                        516,
+                                        558,
+                                        536
+                                    ],
+                                    "score": 1.0,
+                                    "content": "cơ chế đòn đánh thường sẽ có chút khác biệt so với 3 class còn lại, chi tiết sẽ được define khi",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                45,
+                                538,
+                                144,
+                                554
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        45,
+                                        538,
+                                        144,
+                                        554
+                                    ],
+                                    "score": 1.0,
+                                    "content": "thiết kế Skil Tank",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                563,
+                                375,
+                                580
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        569,
+                                        36,
+                                        575
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        39,
+                                        563,
+                                        375,
+                                        580
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1 Active Skill: đặc trưng nguyên tố, là điểm khác biệt chính.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 8.5,
+                    "bbox_fs": [
+                        31,
+                        497,
+                        558,
+                        580
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        26,
+                        588,
+                        432,
+                        606
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                588,
+                                433,
+                                607
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        588,
+                                        433,
+                                        607
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Nguyên tố chính quyết định hiệu ứng phụ (DOT, Slow, Stun, Anti-Heal\u0000).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11,
+                    "bbox_fs": [
+                        26,
+                        588,
+                        433,
+                        607
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

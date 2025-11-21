@@ -1,0 +1,3268 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        500,
+                        144
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                28,
+                                69,
+                                500,
+                                102
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        69,
+                                        500,
+                                        102
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Multiplayer Module] [Tank War] Match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                107,
+                                199,
+                                146
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        107,
+                                        199,
+                                        146
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Profile Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        159,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                163,
+                                160,
+                                180
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        163,
+                                        160,
+                                        180
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN TRẬN ĐẤU",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        190,
+                        263,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                190,
+                                116,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        190,
+                                        116,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.3",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                213,
+                                262,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        213,
+                                        106,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        190,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        214,
+                                        262,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "bbox": [
+                                37,
+                                240,
+                                177,
+                                259
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        240,
+                                        177,
+                                        259
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 03 - 07 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        281,
+                        556,
+                        588
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                281,
+                                556,
+                                588
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        281,
+                                        556,
+                                        588
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                281,
+                                                556,
+                                                588
+                                            ],
+                                            "score": 0.949,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Ngudireview</td><td rowspan=1 colspan=1>Duyet？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-07-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>15-07-2025</td><td rowspan=1 colspan=1> Update limit cac value</td><td rowspan=1 colspan=1> phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>25-07-2025</td><td rowspan=1 colspan=1>Update thong só</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.3</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format laifile+Chuän bi phänDeathmatch</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c554f39c479693f85bbdecf3ebaa8d466ff8a387e652f853df43a468ca3234c8.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        281,
+                                        556,
+                                        383.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        383.3333333333333,
+                                        556,
+                                        485.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        485.66666666666663,
+                                        556,
+                                        588.0
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        607,
+                        185,
+                        628
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                606,
+                                186,
+                                628
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        606,
+                                        186,
+                                        628
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        636,
+                        557,
+                        672
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                635,
+                                558,
+                                656
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        635,
+                                        558,
+                                        656
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Phân định rõ ràng các thông tin nhận được từ bên ngoài trận vào và trong quá trình diễn ra trận",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                654,
+                                57,
+                                675
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        654,
+                                        57,
+                                        675
+                                    ],
+                                    "score": 1.0,
+                                    "content": "đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        681,
+                        259,
+                        699
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                680,
+                                261,
+                                699
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        680,
+                                        261,
+                                        699
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        707,
+                        385,
+                        750
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                705,
+                                385,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        713,
+                                        37,
+                                        719
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        705,
+                                        385,
+                                        726
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Giữ các thông số đồng nhất ở các loại mode game khác nhau",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                731,
+                                283,
+                                752
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        739,
+                                        36,
+                                        744
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        43,
+                                        731,
+                                        283,
+                                        752
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Những thông số phải có định dạng rõ ràng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 13.5
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        500,
+                        144
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                28,
+                                69,
+                                500,
+                                102
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        69,
+                                        500,
+                                        102
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Multiplayer Module] [Tank War] Match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                107,
+                                199,
+                                146
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        107,
+                                        199,
+                                        146
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Profile Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        159,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                163,
+                                160,
+                                180
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        163,
+                                        160,
+                                        180
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN TRẬN ĐẤU",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2,
+                    "bbox_fs": [
+                        26,
+                        163,
+                        160,
+                        180
+                    ]
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        36,
+                        190,
+                        263,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                190,
+                                116,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        190,
+                                        116,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.3",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                35,
+                                213,
+                                262,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        35,
+                                        213,
+                                        106,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        190,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        192,
+                                        214,
+                                        262,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "(phucth12)",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                37,
+                                240,
+                                177,
+                                259
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        240,
+                                        177,
+                                        259
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 03 - 07 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5,
+                            "is_list_start_line": true
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        35,
+                        190,
+                        262,
+                        259
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        281,
+                        556,
+                        588
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                281,
+                                556,
+                                588
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        281,
+                                        556,
+                                        588
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                281,
+                                                556,
+                                                588
+                                            ],
+                                            "score": 0.949,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Ngudireview</td><td rowspan=1 colspan=1>Duyet？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-07-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>15-07-2025</td><td rowspan=1 colspan=1> Update limit cac value</td><td rowspan=1 colspan=1> phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>25-07-2025</td><td rowspan=1 colspan=1>Update thong só</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.3</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format laifile+Chuän bi phänDeathmatch</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c554f39c479693f85bbdecf3ebaa8d466ff8a387e652f853df43a468ca3234c8.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        281,
+                                        556,
+                                        383.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        383.3333333333333,
+                                        556,
+                                        485.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        485.66666666666663,
+                                        556,
+                                        588.0
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        607,
+                        185,
+                        628
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                606,
+                                186,
+                                628
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        606,
+                                        186,
+                                        628
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        636,
+                        557,
+                        672
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                635,
+                                558,
+                                656
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        635,
+                                        558,
+                                        656
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Phân định rõ ràng các thông tin nhận được từ bên ngoài trận vào và trong quá trình diễn ra trận",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                24,
+                                654,
+                                57,
+                                675
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        24,
+                                        654,
+                                        57,
+                                        675
+                                    ],
+                                    "score": 1.0,
+                                    "content": "đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5,
+                    "bbox_fs": [
+                        24,
+                        635,
+                        558,
+                        675
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        681,
+                        259,
+                        699
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                680,
+                                261,
+                                699
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        680,
+                                        261,
+                                        699
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12,
+                    "bbox_fs": [
+                        25,
+                        680,
+                        261,
+                        699
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        707,
+                        385,
+                        750
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                705,
+                                385,
+                                726
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        713,
+                                        37,
+                                        719
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        705,
+                                        385,
+                                        726
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Giữ các thông số đồng nhất ở các loại mode game khác nhau",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                731,
+                                283,
+                                752
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        739,
+                                        36,
+                                        744
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        43,
+                                        731,
+                                        283,
+                                        752
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Những thông số phải có định dạng rõ ràng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 13.5,
+                    "bbox_fs": [
+                        30,
+                        705,
+                        385,
+                        752
+                    ]
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        28,
+                        176,
+                        49
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                27,
+                                177,
+                                51
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        27,
+                                        177,
+                                        51
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        78,
+                        496,
+                        115
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                77,
+                                496,
+                                98
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        77,
+                                        496,
+                                        98
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Dev xây dựng thông tin trận đấu phù hợp cho các loại",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                99,
+                                164,
+                                116
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        99,
+                                        164,
+                                        116
+                                    ],
+                                    "score": 1.0,
+                                    "content": "gamemodes khác nhau.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 1.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        159,
+                        191,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                157,
+                                193,
+                                182
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        157,
+                                        193,
+                                        182
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        213,
+                        191,
+                        229
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                212,
+                                191,
+                                229
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        212,
+                                        191,
+                                        229
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Các yếu tố trong 1 match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        64,
+                        237,
+                        190,
+                        276
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                63,
+                                236,
+                                170,
+                                253
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        63,
+                                        236,
+                                        170,
+                                        253
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Thông số của user",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                63,
+                                259,
+                                190,
+                                277
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        63,
+                                        259,
+                                        190,
+                                        277
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Thông số của trận đấu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 5.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        285,
+                        231,
+                        301
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                283,
+                                233,
+                                303
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        283,
+                                        233,
+                                        303
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Các giá trị theo từng gamemodes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        76,
+                        310,
+                        155,
+                        348
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                75,
+                                310,
+                                156,
+                                324
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        310,
+                                        156,
+                                        324
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Base capture",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                75,
+                                330,
+                                155,
+                                349
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        330,
+                                        155,
+                                        349
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Deathmatch",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 8.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        408,
+                        245,
+                        430
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                406,
+                                247,
+                                432
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        414,
+                                        39,
+                                        424
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        46,
+                                        406,
+                                        247,
+                                        432
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Các yếu tố trong 1 match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        51,
+                        446,
+                        200,
+                        466
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                48,
+                                444,
+                                202,
+                                466
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        48,
+                                        444,
+                                        202,
+                                        466
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Thông số của user",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        489,
+                        558,
+                        815
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                489,
+                                558,
+                                815
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        489,
+                                        558,
+                                        815
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                51,
+                                                489,
+                                                558,
+                                                815
+                                            ],
+                                            "score": 0.98,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Thanhphan</td><td rowspan=1 colspan=1>Dinhdang</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>TeamID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>Trän däu dugc chia thanh nhiéu team khácnhau Nhän dang qua ten va mau säc</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Playerlndex</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Xac dinh vi tri cua cac nhan vat trong team</td><td rowspan=1 colspan=1>Moi player c6 1index rieng</td></tr><tr><td rowspan=1 colspan=1>PlayerName</td><td rowspan=1 colspan=1>Chuoi kitu</td><td rowspan=1 colspan=1> Nhän dang cac players qua qua ten dugc hiénthi trong tran dau</td><td rowspan=1 colspan=1>Tham khao UserProfile Design:[Tank War] UserProfile Design</td></tr><tr><td rowspan=1 colspan=1>AvatarID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so cua avatar nguoi choi</td><td rowspan=1 colspan=1>Tham khao ItemList Design: 目</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "2c2a7a16812c9843ab41dc3d88bab7e3abee05e46e692b42e888d4b266b03e88.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        489,
+                                        558,
+                                        597.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 12
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        597.6666666666666,
+                                        558,
+                                        706.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 13
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        706.3333333333333,
+                                        558,
+                                        814.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 14
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 13
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        28,
+                        176,
+                        49
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                27,
+                                177,
+                                51
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        27,
+                                        177,
+                                        51
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        78,
+                        496,
+                        115
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                77,
+                                496,
+                                98
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        77,
+                                        496,
+                                        98
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Dev xây dựng thông tin trận đấu phù hợp cho các loại",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                99,
+                                164,
+                                116
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        99,
+                                        164,
+                                        116
+                                    ],
+                                    "score": 1.0,
+                                    "content": "gamemodes khác nhau.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 1.5,
+                    "bbox_fs": [
+                        25,
+                        77,
+                        496,
+                        116
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        159,
+                        191,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                157,
+                                193,
+                                182
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        157,
+                                        193,
+                                        182
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        213,
+                        191,
+                        229
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                212,
+                                191,
+                                229
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        212,
+                                        191,
+                                        229
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Các yếu tố trong 1 match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        51,
+                        212,
+                        191,
+                        229
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        64,
+                        237,
+                        190,
+                        276
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                63,
+                                236,
+                                170,
+                                253
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        63,
+                                        236,
+                                        170,
+                                        253
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Thông số của user",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        },
+                        {
+                            "bbox": [
+                                63,
+                                259,
+                                190,
+                                277
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        63,
+                                        259,
+                                        190,
+                                        277
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Thông số của trận đấu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 5.5,
+                    "bbox_fs": [
+                        63,
+                        236,
+                        190,
+                        277
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        285,
+                        231,
+                        301
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                283,
+                                233,
+                                303
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        283,
+                                        233,
+                                        303
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Các giá trị theo từng gamemodes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7,
+                    "bbox_fs": [
+                        51,
+                        283,
+                        233,
+                        303
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        76,
+                        310,
+                        155,
+                        348
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                75,
+                                310,
+                                156,
+                                324
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        310,
+                                        156,
+                                        324
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Base capture",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        },
+                        {
+                            "bbox": [
+                                75,
+                                330,
+                                155,
+                                349
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        75,
+                                        330,
+                                        155,
+                                        349
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Deathmatch",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 8.5,
+                    "bbox_fs": [
+                        75,
+                        310,
+                        156,
+                        349
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        408,
+                        245,
+                        430
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                406,
+                                247,
+                                432
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        414,
+                                        39,
+                                        424
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        46,
+                                        406,
+                                        247,
+                                        432
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Các yếu tố trong 1 match",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        }
+                    ],
+                    "index": 10
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        51,
+                        446,
+                        200,
+                        466
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                48,
+                                444,
+                                202,
+                                466
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        48,
+                                        444,
+                                        202,
+                                        466
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Thông số của user",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11,
+                    "bbox_fs": [
+                        48,
+                        444,
+                        202,
+                        466
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        489,
+                        558,
+                        815
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                489,
+                                558,
+                                815
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        489,
+                                        558,
+                                        815
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                51,
+                                                489,
+                                                558,
+                                                815
+                                            ],
+                                            "score": 0.98,
+                                            "html": "<table><tr><td colspan=\"1\" rowspan=\"1\">Thanhphan</td><td colspan=\"1\" rowspan=\"1\">Dinhdang</td><td colspan=\"1\" rowspan=\"1\"> Muc dich</td><td colspan=\"1\" rowspan=\"1\">Note</td></tr><tr><td colspan=\"1\" rowspan=\"1\">TeamID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Trän däu dugc chia thanh nhiéu team khácnhau Nhän dang qua ten va mau säc</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Playerlndex</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Xac dinh vi tri cua cac nhan vat trong team</td><td colspan=\"1\" rowspan=\"1\">Moi player c6 1index rieng</td></tr><tr><td colspan=\"1\" rowspan=\"1\">PlayerName</td><td colspan=\"1\" rowspan=\"1\">Chuoi kitu</td><td colspan=\"1\" rowspan=\"1\"> Nhän dang cac players qua qua ten dugc hiénthi trong tran dau</td><td colspan=\"1\" rowspan=\"1\">Tham khao UserProfile Design:[Tank War] UserProfile Design</td></tr><tr><td colspan=\"1\" rowspan=\"1\">AvatarID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Mä so cua avatar nguoi choi</td><td colspan=\"1\" rowspan=\"1\">Tham khao ItemList Design: 目</td></tr><tr><td colspan=\"1\" rowspan=\"1\">SkillIDs</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Ma cua cac skill</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">TankID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Thé hien mä so class tank Mi player có 1tank gän lien voi ho Nhän dang qua model tank va ten tank</td><td colspan=\"1\" rowspan=\"1\">Ngudi chdichiduoc phép thay d6iTank 8 dau trandau,trong pickscreen</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Gold</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6 tien tung player s8 huu trong quä trinhchoi 1 match</td><td colspan=\"1\" rowspan=\"4\">Thong s6 ca nhan theo tung player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Kill</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6 tank dich dä phä huy</td></tr><tr><td colspan=\"1\" rowspan=\"1\"> KillStreak</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6lugng gietlien tiep cua tuing player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Death</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Chi so sδ lan chet cua player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">HitPoints(HP)</td><td colspan=\"1\" rowspan=\"1\">S</td><td colspan=\"1\" rowspan=\"1\"> Mäu hien taicua tank</td><td colspan=\"1\" rowspan=\"10\">Thóng so ca nhantheo tung tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MaxHitPoints</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Mau toi da cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MovementSpeed</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Toc do cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Damage</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Tan cong cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ReloadTime</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Thoi gian nap dan cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">FireRate</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Toc do ban cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ProjectileSpeed</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Toc do dan bay cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Range</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Pham vi ban cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MagazineSize</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Kich co cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ProjectileCount</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">S6 dan ban ra trong 1lan bän</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Fime ptayed</td><td colspan=\"1\" rowspan=\"1\">sithapphan</td><td colspan=\"1\" rowspan=\"1\"> Th8igian choi</td><td colspan=\"1\" rowspan=\"1\">Duge bieu dierr trong game qua s6tunhien,don vitaiy</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "2c2a7a16812c9843ab41dc3d88bab7e3abee05e46e692b42e888d4b266b03e88.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 13,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        489,
+                                        558,
+                                        597.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 12
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        597.6666666666666,
+                                        558,
+                                        706.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 13
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        706.3333333333333,
+                                        558,
+                                        814.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 14
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 13
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        69,
+                        554,
+                        819
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                69,
+                                554,
+                                819
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        69,
+                                        554,
+                                        819
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                51,
+                                                69,
+                                                554,
+                                                819
+                                            ],
+                                            "score": 0.956,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>SkillIDs</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Ma cua cac skill</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>TankID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Thé hien mä so class tank Mi player có 1tank gän lien voi ho Nhän dang qua model tank va ten tank</td><td rowspan=1 colspan=1>Ngudi chdichiduoc phép thay d6iTank 8 dau trandau,trong pickscreen</td></tr><tr><td rowspan=1 colspan=1>Gold</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> S6 tien tung player s8 huu trong quä trinhchoi 1 match</td><td rowspan=4 colspan=1>Thong s6 ca nhan theo tung player</td></tr><tr><td rowspan=1 colspan=1>Kill</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> S6 tank dich dä phä huy</td></tr><tr><td rowspan=1 colspan=1> KillStreak</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> S6lugng gietlien tiep cua tuing player</td></tr><tr><td rowspan=1 colspan=1>Death</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Chi so sδ lan chet cua player</td></tr><tr><td rowspan=1 colspan=1>HitPoints(HP)</td><td rowspan=1 colspan=1>S</td><td rowspan=1 colspan=1> Mäu hien taicua tank</td><td rowspan=10 colspan=1>Thóng so ca nhantheo tung tank</td></tr><tr><td rowspan=1 colspan=1>MaxHitPoints</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mau toi da cua tank</td></tr><tr><td rowspan=1 colspan=1>MovementSpeed</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>Toc do cua tank</td></tr><tr><td rowspan=1 colspan=1>Damage</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Tan cong cua tank</td></tr><tr><td rowspan=1 colspan=1>ReloadTime</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>Thoi gian nap dan cua tank</td></tr><tr><td rowspan=1 colspan=1>FireRate</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>Toc do ban cua tank</td></tr><tr><td rowspan=1 colspan=1>ProjectileSpeed</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Toc do dan bay cua tank</td></tr><tr><td rowspan=1 colspan=1>Range</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>Pham vi ban cua tank</td></tr><tr><td rowspan=1 colspan=1>MagazineSize</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Kich co cua tank</td></tr><tr><td rowspan=1 colspan=1>ProjectileCount</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1>S6 dan ban ra trong 1lan bän</td></tr><tr><td rowspan=1 colspan=1>Fime ptayed</td><td rowspan=1 colspan=1>sithapphan</td><td rowspan=1 colspan=1> Th8igian choi</td><td rowspan=1 colspan=1>Duge bieu dierr trong game qua s6tunhien,don vitaiy</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "cb85c02d6c7edbeb312f16c150b1276bbf88b2acc5ef71026608c2f96d0bba13.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        69,
+                                        554,
+                                        319.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        319.0,
+                                        554,
+                                        569.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        569.0,
+                                        554,
+                                        819.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 1
+                }
+            ],
+            "page_idx": 2,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        69,
+                        554,
+                        819
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                69,
+                                554,
+                                819
+                            ],
+                            "group_id": 0,
+                            "lines": [],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        69,
+                                        554,
+                                        319.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        319.0,
+                                        554,
+                                        569.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        569.0,
+                                        554,
+                                        819.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ],
+                            "lines_deleted": true
+                        }
+                    ],
+                    "index": 1
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        106,
+                        230,
+                        127
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                49,
+                                105,
+                                231,
+                                127
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        105,
+                                        231,
+                                        127
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Thông số của trận đấu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        147,
+                        555,
+                        554
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                147,
+                                555,
+                                554
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        147,
+                                        555,
+                                        554
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                51,
+                                                147,
+                                                555,
+                                                554
+                                            ],
+                                            "score": 0.983,
+                                            "html": "<table><tr><td rowspan=1 colspan=1> Thanhphan</td><td rowspan=1 colspan=1>Dinhdang</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Gia trimacdinh</td><td rowspan=1 colspan=1>Limit</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>MapID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so map users sé chditren</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>ModelD</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so gamemode cuatran dau</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Match Type</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Chi dinh tran däu la däu rank hay thuong</td><td rowspan=1 colspan=1>Thuong:0Rank: 1</td><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>Chi khi däu rankmoi can quantam toi gia triRank W/L</td></tr><tr><td rowspan=1 colspan=1> Max players</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Xac dinh so nguoi cänthiet dé vao 1 man chdi</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Maximumtime</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Thαi gian chdi toi da Khi thoi gian user thäytrong game dat toinguong nay thi game séket thuc</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Tinh theo 1f= 1s</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "456df3df009a73051380647c93261ef0fc349275e2562fc3d0539bebf97efd98.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        147,
+                                        555,
+                                        282.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        282.66666666666663,
+                                        555,
+                                        418.33333333333326
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        418.33333333333326,
+                                        555,
+                                        553.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        573,
+                        411,
+                        591
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                573,
+                                411,
+                                592
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        573,
+                                        411,
+                                        592
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khi định dạng là Hằng số, giá trị không lệch đi khỏi giá trị mặc định",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        634,
+                        310,
+                        657
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                631,
+                                313,
+                                658
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        631,
+                                        313,
+                                        658
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Các giá trị theo từng gamemodes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        672,
+                        153,
+                        689
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                671,
+                                153,
+                                690
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        671,
+                                        153,
+                                        690
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Base capture",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        52,
+                        709,
+                        475,
+                        816
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                52,
+                                709,
+                                475,
+                                816
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        709,
+                                        475,
+                                        816
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                52,
+                                                709,
+                                                475,
+                                                816
+                                            ],
+                                            "score": 0.979,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Thänh phän</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Gia tri</td></tr><tr><td rowspan=2 colspan=1>Team ID</td><td rowspan=1 colspan=1>Doicong:</td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1>Doi thu:</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1></td><td></td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "ac1daf00f3f6112f98aae382895af4512c3253b211adb6d5710b4bc2f1ca574e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        709,
+                                        475,
+                                        744.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        744.6666666666666,
+                                        475,
+                                        780.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        780.3333333333333,
+                                        475,
+                                        815.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 8
+                }
+            ],
+            "page_idx": 3,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [
+                {
+                    "type": "discarded",
+                    "bbox": [
+                        53,
+                        26,
+                        555,
+                        53
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                448,
+                                27,
+                                533,
+                                44
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        448,
+                                        27,
+                                        533,
+                                        44
+                                    ],
+                                    "score": 0.957,
+                                    "content": " Tinh theo 1f = 1s",
+                                    "type": "text"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        106,
+                        230,
+                        127
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                49,
+                                105,
+                                231,
+                                127
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        49,
+                                        105,
+                                        231,
+                                        127
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Thông số của trận đấu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        51,
+                        147,
+                        555,
+                        554
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                51,
+                                147,
+                                555,
+                                554
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        147,
+                                        555,
+                                        554
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                51,
+                                                147,
+                                                555,
+                                                554
+                                            ],
+                                            "score": 0.983,
+                                            "html": "<table><tr><td rowspan=1 colspan=1> Thanhphan</td><td rowspan=1 colspan=1>Dinhdang</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Gia trimacdinh</td><td rowspan=1 colspan=1>Limit</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>MapID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so map users sé chditren</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>ModelD</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so gamemode cuatran dau</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Match Type</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Chi dinh tran däu la däu rank hay thuong</td><td rowspan=1 colspan=1>Thuong:0Rank: 1</td><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>Chi khi däu rankmoi can quantam toi gia triRank W/L</td></tr><tr><td rowspan=1 colspan=1> Max players</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Xac dinh so nguoi cänthiet dé vao 1 man chdi</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Maximumtime</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Thαi gian chdi toi da Khi thoi gian user thäytrong game dat toinguong nay thi game séket thuc</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Tinh theo 1f= 1s</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "456df3df009a73051380647c93261ef0fc349275e2562fc3d0539bebf97efd98.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 2,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        147,
+                                        555,
+                                        282.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        282.66666666666663,
+                                        555,
+                                        418.33333333333326
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                },
+                                {
+                                    "bbox": [
+                                        51,
+                                        418.33333333333326,
+                                        555,
+                                        553.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        573,
+                        411,
+                        591
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                573,
+                                411,
+                                592
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        573,
+                                        411,
+                                        592
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khi định dạng là Hằng số, giá trị không lệch đi khỏi giá trị mặc định",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        37,
+                        573,
+                        411,
+                        592
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        634,
+                        310,
+                        657
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                631,
+                                313,
+                                658
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        631,
+                                        313,
+                                        658
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Các giá trị theo từng gamemodes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        672,
+                        153,
+                        689
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                671,
+                                153,
+                                690
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        671,
+                                        153,
+                                        690
+                                    ],
+                                    "score": 1.0,
+                                    "content": "a. Base capture",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 6
+                        }
+                    ],
+                    "index": 6
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        52,
+                        709,
+                        475,
+                        816
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                52,
+                                709,
+                                475,
+                                816
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        709,
+                                        475,
+                                        816
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                52,
+                                                709,
+                                                475,
+                                                816
+                                            ],
+                                            "score": 0.979,
+                                            "html": "<table><tr><td colspan=\"1\" rowspan=\"1\">Thänh phän</td><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\">Gia tri</td></tr><tr><td colspan=\"1\" rowspan=\"2\">Team ID</td><td colspan=\"1\" rowspan=\"1\">Doicong:</td><td colspan=\"1\" rowspan=\"1\">0</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Doi thu:</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Map ID</td><td colspan=\"1\" rowspan=\"1\">Test_Map (Tén sé dugc thay thé sau khi hoan tätcäc yéu tó choi khác)</td><td colspan=\"1\" rowspan=\"1\">0</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Maximum time</td><td colspan=\"1\" rowspan=\"1\">Thoi gian choi toi da</td><td colspan=\"1\" rowspan=\"1\">300 giay= 5 phut</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "ac1daf00f3f6112f98aae382895af4512c3253b211adb6d5710b4bc2f1ca574e.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 8,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        709,
+                                        475,
+                                        744.6666666666666
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        744.6666666666666,
+                                        475,
+                                        780.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        780.3333333333333,
+                                        475,
+                                        815.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 8
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        52,
+                        27,
+                        476,
+                        126
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                52,
+                                27,
+                                476,
+                                126
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        27,
+                                        476,
+                                        126
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                52,
+                                                27,
+                                                476,
+                                                126
+                                            ],
+                                            "score": 0.966,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Map ID</td><td rowspan=1 colspan=1>Test_Map (Tén sé dugc thay thé sau khi hoan tätcäc yéu tó choi khác)</td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1>Maximum time</td><td rowspan=1 colspan=1>Thoi gian choi toi da</td><td rowspan=1 colspan=1>300 giay= 5 phut</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "0afd6543234ae68f03f6010be0d9fcd4611e91c8472e403d0f99989bae297375.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        27,
+                                        476,
+                                        60.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        60.0,
+                                        476,
+                                        93.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        93.0,
+                                        476,
+                                        126.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        179,
+                        148,
+                        196
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                178,
+                                149,
+                                196
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        178,
+                                        149,
+                                        196
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Deathmatch",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        218,
+                        452,
+                        411
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                218,
+                                452,
+                                411
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        218,
+                                        452,
+                                        411
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                218,
+                                                452,
+                                                411
+                                            ],
+                                            "score": 0.982,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Thänh phän</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Gia tri</td></tr><tr><td rowspan=2 colspan=1>Team ID</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>Map ID</td><td rowspan=1 colspan=1>Test_Map (Tén sé dugc thay thé sau khi hoan tatcac yéu tä choi khac)</td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1>Maximum time</td><td rowspan=1 colspan=1>Thoi gian choi toi da</td><td rowspan=1 colspan=1>300 giay= 5 phut</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "fb31051198f2968eb306becb757d33a552171ba1753f335bf0aebfaf3b883914.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        218,
+                                        452,
+                                        282.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        282.3333333333333,
+                                        452,
+                                        346.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        346.66666666666663,
+                                        452,
+                                        410.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        468,
+                        97,
+                        486
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                465,
+                                100,
+                                488
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        465,
+                                        100,
+                                        488
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        496,
+                        267,
+                        512
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                494,
+                                268,
+                                514
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        494,
+                                        268,
+                                        514
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Deathmatch profile sẽ được cập nhật sau",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8
+                }
+            ],
+            "page_idx": 4,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        52,
+                        27,
+                        476,
+                        126
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                52,
+                                27,
+                                476,
+                                126
+                            ],
+                            "group_id": 0,
+                            "lines": [],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        52,
+                                        27,
+                                        476,
+                                        60.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        60.0,
+                                        476,
+                                        93.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        52,
+                                        93.0,
+                                        476,
+                                        126.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ],
+                            "lines_deleted": true
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        51,
+                        179,
+                        148,
+                        196
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                178,
+                                149,
+                                196
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        178,
+                                        149,
+                                        196
+                                    ],
+                                    "score": 1.0,
+                                    "content": "b. Deathmatch",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        218,
+                        452,
+                        411
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                218,
+                                452,
+                                411
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        218,
+                                        452,
+                                        411
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                218,
+                                                452,
+                                                411
+                                            ],
+                                            "score": 0.982,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Thänh phän</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Gia tri</td></tr><tr><td rowspan=2 colspan=1>Team ID</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>Map ID</td><td rowspan=1 colspan=1>Test_Map (Tén sé dugc thay thé sau khi hoan tatcac yéu tä choi khac)</td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1>Maximum time</td><td rowspan=1 colspan=1>Thoi gian choi toi da</td><td rowspan=1 colspan=1>300 giay= 5 phut</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "fb31051198f2968eb306becb757d33a552171ba1753f335bf0aebfaf3b883914.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        218,
+                                        452,
+                                        282.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        282.3333333333333,
+                                        452,
+                                        346.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        346.66666666666663,
+                                        452,
+                                        410.99999999999994
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        468,
+                        97,
+                        486
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                465,
+                                100,
+                                488
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        465,
+                                        100,
+                                        488
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        496,
+                        267,
+                        512
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                494,
+                                268,
+                                514
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        494,
+                                        268,
+                                        514
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Deathmatch profile sẽ được cập nhật sau",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 8
+                        }
+                    ],
+                    "index": 8,
+                    "bbox_fs": [
+                        37,
+                        494,
+                        268,
+                        514
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

@@ -94,7 +94,7 @@ gdd_rag_backbone/
 
 3. **Install dependencies** (if needed):
    ```bash
-   pip install raganything pydantic pytest
+   pip install -r requirements.txt
    ```
 
 ## Quick Start
@@ -171,6 +171,53 @@ export GDD_DOC_PATH="docs/sample_gdd.pdf"
 export GDD_DOC_ID="my_gdd"
 python gdd_rag_backbone/scripts/index_and_test.py
 ```
+
+## Streamlit UI
+
+A zero-code dashboard lives in `ui/app.py` and bundles indexing, extraction, and requirement coverage workflows into one place.
+
+### Features
+
+1. **GDD & Indexing**
+   - Upload a new PDF or pick an indexed doc_id
+   - Trigger (re)indexing through RAG-Anything
+   - Preview the first few chunks and run ad-hoc QA with chunk-level retrieval (no LightRAG instance required)
+
+2. **Extraction & Requirements**
+   - Run the existing extraction functions (objects, tanks, maps, requirements)
+   - Results are saved under `checklists/<doc_id>_{objects|tanks|maps|requirements}.json`
+   - Inspect the extracted data using interactive tables and filters
+
+3. **Code Coverage Check**
+   - Point the evaluator at a document + a code index (`code_indexes/<code_index_id>.json`)
+   - Run requirement → code heuristic matching and review implemented / partial / missing requirements
+   - Coverage artifacts are stored under `results/<doc_id>_<code_index_id>_coverage.json`
+
+### Running the UI
+
+```bash
+streamlit run ui/app.py
+```
+
+Make sure your LLM keys (e.g., `QWEN_API_KEY` / `DASHSCOPE_API_KEY`) are set in the environment or `.env` before launching Streamlit.
+
+### File Locations & Formats
+
+- **Indexed docs** live under `docs/`
+- **RAG storage** is under `rag_storage/`
+- **Extraction outputs** are placed in `checklists/`
+- **Coverage outputs** are placed in `results/`
+- **Code indexes** should live in `code_indexes/` and follow:
+
+  ```json
+  {
+    "files": [
+      {"path": "path/to/file.py", "content": "full file content as text"}
+    ]
+  }
+  ```
+
+> Tip: The UI will create missing folders automatically the first time you run each workflow.
 
 ## Core Components
 

@@ -1,0 +1,570 @@
+[
+    {
+        "type": "text",
+        "text": "[Game Mode Module] [Tank War] Outpost Breaker ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            892,
+            166
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "GAMEMODE OUTPOST BREAKER ",
+        "bbox": [
+            47,
+            195,
+            365,
+            214
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: v1.5 ",
+        "text_level": 1,
+        "bbox": [
+            63,
+            225,
+            220,
+            245
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Người tạo file: $\\textcircled{9}$ Kent (QuocTA) ",
+        "bbox": [
+            63,
+            254,
+            400,
+            276
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ngày cập nhật: 17 - 09 - 2025 ",
+        "bbox": [
+            65,
+            285,
+            348,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/44c7ea21d0d19aa7f27d236f7b311dae564a8aea1aa9bbfcae418293b03dfc16.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Ngudireview</td><td rowspan=1 colspan=1>Duyet?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>10-07-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>QuocTA</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>10-07-2025</td><td rowspan=1 colspan=1>Chinh thdi gian trän däu + dieu kien thängthua</td><td rowspan=1 colspan=1> phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>31-07-2025</td><td rowspan=1 colspan=1>Chinh lai base thanh outpost</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.3</td><td rowspan=1 colspan=1>06-08-2025</td><td rowspan=1 colspan=1>Dieu chinh gold</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.4</td><td rowspan=1 colspan=1>20-08-2025</td><td rowspan=1 colspan=1>Cap nhaät file dung voi design hien tai:- Bó passive gold tang giam dua vaooutpost bipha- Bó shop,chinh upgrade stats- Dieu chinh sang het Eng</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.5</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1>Kent</td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            45,
+            328,
+            936,
+            876
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mode Overview ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            77,
+            291,
+            100
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.1 Mode Name: ",
+        "bbox": [
+            90,
+            121,
+            287,
+            142
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Capture Base (Chiếm Căn Cứ) ",
+        "bbox": [
+            47,
+            154,
+            324,
+            173
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.2 Team Format: ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            195,
+            304,
+            215
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• 5v5 ",
+        "bbox": [
+            50,
+            229,
+            112,
+            244
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.3 Match Duration: ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            269,
+            331,
+            289
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• 4 minutes per match ",
+        "bbox": [
+            50,
+            302,
+            274,
+            319
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.4 Map Setup: ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            341,
+            279,
+            363
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• 3 outpostbases positioned on the map • 2 teams set on the opposite sides of the map ",
+        "bbox": [
+            48,
+            375,
+            500,
+            423
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2. Victory Conditions ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            536,
+            329,
+            560
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.1 Win Conditions: ",
+        "bbox": [
+            87,
+            580,
+            329,
+            603
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Attacking Team (ATK): Wins if they capture all 3 outposts within 4 minutes. Defending Team (DEF): Wins if they retain at least 1 outpost until time runs out.   \n• Either Team: Wins if they can kill 20 enemies first. ",
+        "bbox": [
+            50,
+            614,
+            833,
+            694
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.2 Lose Conditions: ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            715,
+            340,
+            736
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Attacking Team (ATK): Loses if they fail to capture all outposts within the time limit.   \n• Defending Team (DEF): Loses if they lose control of all outposts before the match ends.   \n• Either Team: Loses if the other team meets 20 kills first. ",
+        "bbox": [
+            48,
+            747,
+            905,
+            828
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Gameplay Flow ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            941,
+            291,
+            965
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Players are assigned to ATK or DEF teams pre-match.   \n• Outposts start under DEF control. ATK must coordinate and advance to capture outposts sequentially or simultaneously.   \n• Once an outpost is captured by ATK, it cannot be retaken by DEF.   \n• Gold generation systems are introduced to accelerate match pacing and reinforce comeback mechanics. ",
+        "bbox": [
+            47,
+            34,
+            937,
+            198
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4. Gold & Upgrade System ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            311,
+            398,
+            336
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4.1 Gold Earning Sources: ",
+        "bbox": [
+            87,
+            355,
+            402,
+            378
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Enemy Tank Kill: Grants Gold for team.   \n• Outpost Base Capture (ATK): Fixed Gold reward shared among all attackers.   \n• Outpost Base Hold (DEF): Generates passive Gold per second per player while holding outpost. ",
+        "bbox": [
+            48,
+            389,
+            893,
+            494
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4.2 Balance Design Philosophy: ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            513,
+            471,
+            536
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• ATK Gold spikes with aggressive plays and coordinated captures. ",
+        "bbox": [
+            50,
+            547,
+            685,
+            566
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Both sides can achieve power scaling via kill streaks and team strategy. ",
+        "bbox": [
+            50,
+            577,
+            742,
+            596
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• DEF Base close to outpost position ",
+        "bbox": [
+            48,
+            608,
+            405,
+            626
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• ATK Base far from outpost position ",
+        "bbox": [
+            50,
+            638,
+            407,
+            655
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4.3 Upgrade Shop: ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            678,
+            318,
+            701
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Players spend Gold during matches to upgrade: ",
+        "bbox": [
+            48,
+            710,
+            525,
+            730
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ HP   \n◦ Damage   \n◦ Fire Rate   \n◦ Movement Speed ",
+        "bbox": [
+            89,
+            741,
+            286,
+            852
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "5. UI/UX & Map Design ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            34,
+            346,
+            58
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Outpost Icons: Clearly marked A / B / C points on minimap, set position. ",
+        "bbox": [
+            52,
+            73,
+            747,
+            94
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Capture Progress Icon: Each outpost shows real-time capture status. ",
+        "bbox": [
+            53,
+            104,
+            730,
+            123
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Gold Counter: Visible for each player, shows earning rate and spend. ",
+        "bbox": [
+            55,
+            134,
+            725,
+            153
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Skill Slot: A skill slot for each class for quick activation with cooldown visuals. ",
+        "bbox": [
+            55,
+            165,
+            836,
+            184
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Upgrade Shop: Has 4 icons displaying side-by-side with gold value and stat value. ",
+        "bbox": [
+            50,
+            195,
+            843,
+            215
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6. Gold Balance ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            328,
+            260,
+            351
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6.1 Gold Sources In-Match (Calculate by Gold - g) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            372,
+            683,
+            395
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/d9310483beccaaebe353f4f7520ef4208dc5f3a59fbc7083a36a4d0141c07c6b.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Event</td><td rowspan=1 colspan=1>ATK Team</td><td rowspan=1 colspan=1>DEF Team</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1> Tank takedown</td><td rowspan=1 colspan=2>100g (per person)</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Pha Outpost (ATK)</td><td rowspan=1 colspan=1>+300g/person/outpost</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Passive gold</td><td rowspan=1 colspan=2>+14g/s</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Kill streak (3 kills beyond)</td><td rowspan=1 colspan=2>+50g bonus</td><td rowspan=1 colspan=1> Streak rewardDoesn&#x27;t stack forfurther kill streaks</td></tr><tr><td rowspan=1 colspan=1> Streak ends</td><td rowspan=1 colspan=2>+100g bonus to the player that ends the streak</td><td rowspan=1 colspan=1></td></tr></table>",
+        "bbox": [
+            45,
+            420,
+            936,
+            708
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6.2 Gold flow estimate (Summarized) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            730,
+            513,
+            754
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/1f3b2c25c222bbd0fc9b38b09279a1a20d6070ea5fd62615d2614a8bfafde8b7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Period</td><td colspan=\"1\" rowspan=\"1\">Gold total (Est. avg/person)</td><td colspan=\"1\" rowspan=\"1\">Est. objectives</td></tr><tr><td colspan=\"1\" rowspan=\"1\">0-1 mins</td><td colspan=\"1\" rowspan=\"1\">1200g-1600g</td><td colspan=\"1\" rowspan=\"1\"> Kill + Hold</td></tr><tr><td colspan=\"1\" rowspan=\"1\">1-3 mins</td><td colspan=\"1\" rowspan=\"1\">2000g-2400g</td><td colspan=\"1\" rowspan=\"1\">Snowball (ATK)A successful defense (DEF)</td></tr><tr><td colspan=\"1\" rowspan=\"1\">3-4 mins</td><td colspan=\"1\" rowspan=\"1\">3000g-4500g</td><td colspan=\"1\" rowspan=\"1\">Finish all upgrades</td></tr><tr><td></td><td></td><td>Finish pushing (ATK)</td></tr><tr><td></td><td></td><td>Complete 20 kills (DEF)</td></tr></table>",
+        "bbox": [
+            47,
+            779,
+            675,
+            970
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            47,
+            29,
+            671,
+            89
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7. Conclusion ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            216,
+            234,
+            240
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The \"Capture Base\" mode for Project TOG introduces a strategic tug-of-war between offense and defense. With asymmetric buffs and a resource-based upgrade system, it creates high-paced tactical gameplay, rewarding both coordination and moment-to-moment skill. ",
+        "bbox": [
+            45,
+            250,
+            952,
+            316
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "8. Scalability & Future Additions ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            429,
+            479,
+            453
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Map pools with different base layouts and terrain types.   \n• Outpost-specific hazards (e.g., rotating turrets, flame walls).   \n• Weather modifiers (fog, sandstorm) affect visibility.   \n• Progression-based item unlock system.   \nWeekly ranked mode with rotation between Capture Base and other PvP modes.   \n• DEF teams can rebuild outposts by spending gold and time. ",
+        "bbox": [
+            48,
+            463,
+            833,
+            638
+        ],
+        "page_idx": 4
+    }
+]

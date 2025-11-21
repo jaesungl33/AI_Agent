@@ -1,9 +1,11 @@
 """
 Document indexing functionality using RAG-Anything.
 """
+from __future__ import annotations
+
 import asyncio
 from pathlib import Path
-from typing import Optional, Callable
+from typing import Optional, Callable, Union
 from gdd_rag_backbone.config import DEFAULT_OUTPUT_DIR, DEFAULT_WORKING_DIR
 from gdd_rag_backbone.rag_backend.rag_config import get_rag_instance
 
@@ -13,13 +15,13 @@ _rag_instances: dict[str, object] = {}
 
 
 async def index_document(
-    doc_path: str | Path,
+    doc_path: Union[str, Path],
     doc_id: str,
     *,
     llm_func: Optional[Callable] = None,
     embedding_func: Optional[Callable] = None,
-    working_dir: Optional[Path | str] = None,
-    output_dir: Optional[Path | str] = None,
+    working_dir: Optional[Union[Path, str]] = None,
+    output_dir: Optional[Union[Path, str]] = None,
     parser: Optional[str] = None,
     parse_method: Optional[str] = None,
     **parser_kwargs

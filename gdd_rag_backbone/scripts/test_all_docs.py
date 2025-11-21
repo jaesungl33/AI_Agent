@@ -6,6 +6,11 @@ import asyncio
 import sys
 from pathlib import Path
 
+if "pytest" in sys.modules:  # pragma: no cover - integration script
+    import pytest
+
+    pytest.skip("Integration script skipped during test suite", allow_module_level=True)
+
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from gdd_rag_backbone.config import DEFAULT_DOCS_DIR

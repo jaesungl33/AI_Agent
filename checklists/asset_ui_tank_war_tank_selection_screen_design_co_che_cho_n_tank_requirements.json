@@ -1,0 +1,175 @@
+{
+  "objects": [
+    {
+      "id": "obj_time_display",
+      "name": "Thời gian",
+      "category": "UI",
+      "description": "Hiển thị thời gian cho phép trong màn hình chọn tank và thời gian chuẩn bị vào trận.",
+      "size_x": null,
+      "size_y": null,
+      "size_z": null,
+      "hp": null,
+      "armor": null,
+      "speed": null,
+      "player_pass_through": null,
+      "bullet_pass_through": null,
+      "destructible": null,
+      "special_rules": "Thời gian chọn tank: 15s, GET READY!: 5s. Khi hết thời gian chọn, players và những tanks họ chọn được đưa vào trong map.",
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    },
+    {
+      "id": "obj_tank_list",
+      "name": "Danh sách tank",
+      "category": "UI",
+      "description": "Liệt kê các loại tank.",
+      "size_x": null,
+      "size_y": null,
+      "size_z": null,
+      "hp": null,
+      "armor": null,
+      "speed": null,
+      "player_pass_through": null,
+      "bullet_pass_through": null,
+      "destructible": null,
+      "special_rules": "Tank được sắp xếp theo class. Sẽ được ẩn đi sau khi hết thời gian chọn tank (15s).",
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    },
+    {
+      "id": "obj_team_lists",
+      "name": "Danh sách 2 đội chơi",
+      "category": "UI",
+      "description": "Các người chơi được chia thành 2 đội. Danh sách này cho thấy người chơi với mình sẽ là ai và sẽ chọn tank gì.",
+      "size_x": null,
+      "size_y": null,
+      "size_z": null,
+      "hp": null,
+      "armor": null,
+      "speed": null,
+      "player_pass_through": null,
+      "bullet_pass_through": null,
+      "destructible": null,
+      "special_rules": "Vị trí 2 team sẽ được sắp sẵn là: ATK: Trái, DEF: Phải. Hiển thị tên, avatar của player, tên tank và model 3D tank họ chọn.",
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    },
+    {
+      "id": "obj_mission_display",
+      "name": "Nhiệm vụ",
+      "category": "UI",
+      "description": "Giúp người chơi (mới) hiểu mục tiêu chính của team mình. Được hiện ra sau khi mọi người hoàn thành giai đoạn chọn tank.",
+      "size_x": null,
+      "size_y": null,
+      "size_z": null,
+      "hp": null,
+      "armor": null,
+      "speed": null,
+      "player_pass_through": null,
+      "bullet_pass_through": null,
+      "destructible": null,
+      "special_rules": "Thời gian hiển thị nhiệm vụ là 5s.",
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    },
+    {
+      "id": "obj_tank_lock_button",
+      "name": "Nút khóa tank",
+      "category": "UI",
+      "description": "Chọn người chơi đổi tank sau khi được bắt đầu.",
+      "size_x": null,
+      "size_y": null,
+      "size_z": null,
+      "hp": null,
+      "armor": null,
+      "speed": null,
+      "player_pass_through": null,
+      "bullet_pass_through": null,
+      "destructible": null,
+      "special_rules": "Nằm trong hoặc gần danh sách tank.",
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    }
+  ],
+  "systems": [
+    {
+      "id": "sys_tank_selection",
+      "name": "Tank Selection System",
+      "description": "Hệ thống quản lý quá trình chọn tank của người chơi trước trận đấu.",
+      "mechanics": "Người chơi có 15 giây để chọn tank từ danh sách. Sau đó, hệ thống tự động khóa lựa chọn và chuyển sang màn hình nhiệm vụ trong 5 giây.",
+      "objectives": "Đảm bảo công bằng giữa hai đội và giúp người chơi nhanh chóng hiểu vai trò của mình.",
+      "related_objects": [
+        "obj_time_display",
+        "obj_tank_list",
+        "obj_team_lists",
+        "obj_mission_display",
+        "obj_tank_lock_button"
+      ],
+      "interactions": [
+        "Người chơi tương tác với obj_tank_list để chọn tank.",
+        "obj_time_display đếm ngược thời gian chọn tank.",
+        "obj_team_lists cập nhật thông tin về lựa chọn của từng đội.",
+        "obj_mission_display hiển thị nhiệm vụ sau khi chọn tank."
+      ],
+      "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+    }
+  ],
+  "logic_rules": [
+    {
+      "id": "rule_player_exit_app",
+      "summary": "Xử lý khi người chơi thoát ứng dụng.",
+      "description": "Nếu thời gian chưa hết, vẫn cho phép người chơi quay lại trận đấu khi mở lại ứng dụng.",
+      "trigger": "Người chơi thoát ứng dụng trong quá trình chọn tank.",
+      "effect": "Người chơi có thể tiếp tục tham gia trận đấu nếu thời gian chọn tank chưa kết thúc.",
+      "related_objects": [],
+      "related_systems": [
+        "sys_tank_selection"
+      ],
+      "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+    },
+    {
+      "id": "rule_default_tank_selection",
+      "summary": "Xử lý khi người chơi không chọn tank.",
+      "description": "Mặc định mỗi người chơi chọn tank đầu tiên trong danh sách tank khi bắt đầu màn hình chọn.",
+      "trigger": "Người chơi không thực hiện bất kỳ lựa chọn nào trong thời gian chọn tank.",
+      "effect": "Hệ thống tự động chọn tank đầu tiên trong danh sách cho người chơi.",
+      "related_objects": [
+        "obj_tank_list"
+      ],
+      "related_systems": [
+        "sys_tank_selection"
+      ],
+      "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "req_fairness_in_tank_selection",
+      "title": "Đảm bảo công bằng trong quá trình chọn tank.",
+      "description": "Thiết kế phải giữ công bằng giữa hai đội chơi khi chọn tank. Người chơi cảm thấy giai đoạn chọn tank diễn ra phù hợp và không lâu.",
+      "category": "progression",
+      "priority": "high",
+      "status": "proposed",
+      "acceptance_criteria": "Người chơi có đủ thời gian (15s) để chọn tank mà không cảm thấy bị ép buộc. Hai đội có cơ hội ngang nhau trong việc chọn tank.",
+      "related_objects": [
+        "obj_tank_list",
+        "obj_team_lists"
+      ],
+      "related_systems": [
+        "sys_tank_selection"
+      ],
+      "source_note": "[Asset, UI] [Tank War] Tank Selection Screen Design (Cơ chế chọn tank)"
+    },
+    {
+      "id": "req_clear_mission_display",
+      "title": "Hiển thị nhiệm vụ rõ ràng sau khi chọn tank.",
+      "description": "Sau khi người chơi hoàn thành việc chọn tank, hệ thống cần hiển thị nhiệm vụ trong 5 giây để giúp người chơi hiểu mục tiêu chính.",
+      "category": "ui",
+      "priority": "medium",
+      "status": "proposed",
+      "acceptance_criteria": "Nhiệm vụ được hiển thị đầy đủ và dễ đọc trong vòng 5 giây sau khi kết thúc giai đoạn chọn tank.",
+      "related_objects": [
+        "obj_mission_display"
+      ],
+      "related_systems": [
+        "sys_tank_selection"
+      ],
+      "source_note": "[Asset, UI] [Tank War] Tank Selection Screen Design (Cơ chế chọn tank)"
+    }
+  ]
+}

@@ -1,0 +1,2135 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        69,
+                        523,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                69,
+                                525,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        69,
+                                        525,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Combat Module] [Tank War] Mobile Skill",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                110,
+                                218,
+                                144
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        110,
+                                        218,
+                                        144
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Control System",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        359,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                162,
+                                360,
+                                181
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        162,
+                                        360,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THIẾT KẾ HỆ THỐNG ĐIỀU KHIỂN KỸ NĂNG TRÊN MOBILE",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        38,
+                        190,
+                        115,
+                        206
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                189,
+                                117,
+                                207
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        189,
+                                        117,
+                                        207
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        38,
+                        214,
+                        171,
+                        232
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                34,
+                                212,
+                                173,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        34,
+                                        212,
+                                        108,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        108,
+                                        214,
+                                        126,
+                                        232
+                                    ],
+                                    "score": 0.32,
+                                    "content": "\\textcircled{9}",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        127,
+                                        212,
+                                        173,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "linhttd",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        39,
+                        240,
+                        207,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                239,
+                                208,
+                                257
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        239,
+                                        208,
+                                        257
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày cập nhật: 17 - 09 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        280,
+                        555,
+                        459
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                280,
+                                555,
+                                459
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        280,
+                                        555,
+                                        459
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                280,
+                                                555,
+                                                459
+                                            ],
+                                            "score": 0.947,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>16-09-2025</td><td rowspan=1 colspan=1>Tao file</td><td rowspan=1 colspan=1> linhttd </td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "97e5599b42cd03fd4825eaff6726bffce69688c3759ccc518038d815a403adeb.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        280,
+                                        555,
+                                        339.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        339.6666666666667,
+                                        555,
+                                        399.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        399.33333333333337,
+                                        555,
+                                        459.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        478,
+                        134,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                475,
+                                137,
+                                505
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        475,
+                                        137,
+                                        505
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Tổng quan",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        507,
+                        527,
+                        543
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                506,
+                                527,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        506,
+                                        527,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Hệ thống này định nghĩa các kiểu điều khiển kỹ năng (Skill Control Types) dành cho game",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                526,
+                                74,
+                                545
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        526,
+                                        74,
+                                        545
+                                    ],
+                                    "score": 1.0,
+                                    "content": "mobile.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        547,
+                        83,
+                        563
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                546,
+                                84,
+                                564
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        546,
+                                        84,
+                                        564
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mục tiêu:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        571,
+                        553,
+                        660
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                571,
+                                401,
+                                590
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        577,
+                                        37,
+                                        585
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        571,
+                                        401,
+                                        590
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Chuẩn hóa input để dễ triển khai cho nhiều loại skill khác nhau.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                41,
+                                596,
+                                365,
+                                616
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        41,
+                                        596,
+                                        365,
+                                        616
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Hỗ trợ UX thân thiện, dễ thao tác trên màn hình cảm ứng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                621,
+                                552,
+                                643
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        628,
+                                        36,
+                                        634
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        41,
+                                        621,
+                                        552,
+                                        643
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tối ưu sự đa dạng: từ skill buff nhanh, kỹ năng định hướng, kỹ năng chọn vị trí, đến kỹ năng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        },
+                        {
+                            "bbox": [
+                                43,
+                                641,
+                                162,
+                                662
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        43,
+                                        641,
+                                        162,
+                                        662
+                                    ],
+                                    "score": 1.0,
+                                    "content": "duy trì (channeling).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        }
+                    ],
+                    "index": 14.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        704,
+                        111,
+                        725
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                702,
+                                114,
+                                727
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        702,
+                                        114,
+                                        727
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục lục",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        27,
+                        69,
+                        523,
+                        143
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                69,
+                                525,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        69,
+                                        525,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Combat Module] [Tank War] Mobile Skill",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                110,
+                                218,
+                                144
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        110,
+                                        218,
+                                        144
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Control System",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        359,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                162,
+                                360,
+                                181
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        162,
+                                        360,
+                                        181
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THIẾT KẾ HỆ THỐNG ĐIỀU KHIỂN KỸ NĂNG TRÊN MOBILE",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2,
+                    "bbox_fs": [
+                        27,
+                        162,
+                        360,
+                        181
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        38,
+                        190,
+                        115,
+                        206
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                37,
+                                189,
+                                117,
+                                207
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        37,
+                                        189,
+                                        117,
+                                        207
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        38,
+                        214,
+                        171,
+                        232
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                34,
+                                212,
+                                173,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        34,
+                                        212,
+                                        108,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        108,
+                                        214,
+                                        126,
+                                        232
+                                    ],
+                                    "score": 0.32,
+                                    "content": "\\textcircled{9}",
+                                    "type": "inline_equation"
+                                },
+                                {
+                                    "bbox": [
+                                        127,
+                                        212,
+                                        173,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "linhttd",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        34,
+                        212,
+                        173,
+                        233
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        39,
+                        240,
+                        207,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                239,
+                                208,
+                                257
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        239,
+                                        208,
+                                        257
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày cập nhật: 17 - 09 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 5,
+                    "bbox_fs": [
+                        36,
+                        239,
+                        208,
+                        257
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        280,
+                        555,
+                        459
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                280,
+                                555,
+                                459
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        280,
+                                        555,
+                                        459
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                280,
+                                                555,
+                                                459
+                                            ],
+                                            "score": 0.947,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>16-09-2025</td><td rowspan=1 colspan=1>Tao file</td><td rowspan=1 colspan=1> linhttd </td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "97e5599b42cd03fd4825eaff6726bffce69688c3759ccc518038d815a403adeb.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        280,
+                                        555,
+                                        339.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        339.6666666666667,
+                                        555,
+                                        399.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        399.33333333333337,
+                                        555,
+                                        459.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        478,
+                        134,
+                        500
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                475,
+                                137,
+                                505
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        475,
+                                        137,
+                                        505
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Tổng quan",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        507,
+                        527,
+                        543
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                506,
+                                527,
+                                526
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        506,
+                                        527,
+                                        526
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Hệ thống này định nghĩa các kiểu điều khiển kỹ năng (Skill Control Types) dành cho game",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                526,
+                                74,
+                                545
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        526,
+                                        74,
+                                        545
+                                    ],
+                                    "score": 1.0,
+                                    "content": "mobile.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5,
+                    "bbox_fs": [
+                        25,
+                        506,
+                        527,
+                        545
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        30,
+                        547,
+                        83,
+                        563
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                29,
+                                546,
+                                84,
+                                564
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        29,
+                                        546,
+                                        84,
+                                        564
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Mục tiêu:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12,
+                    "bbox_fs": [
+                        29,
+                        546,
+                        84,
+                        564
+                    ]
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        29,
+                        571,
+                        553,
+                        660
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                30,
+                                571,
+                                401,
+                                590
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        30,
+                                        577,
+                                        37,
+                                        585
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        571,
+                                        401,
+                                        590
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Chuẩn hóa input để dễ triển khai cho nhiều loại skill khác nhau.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13,
+                            "is_list_start_line": true,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                41,
+                                596,
+                                365,
+                                616
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        41,
+                                        596,
+                                        365,
+                                        616
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Hỗ trợ UX thân thiện, dễ thao tác trên màn hình cảm ứng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                621,
+                                552,
+                                643
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        628,
+                                        36,
+                                        634
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        41,
+                                        621,
+                                        552,
+                                        643
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tối ưu sự đa dạng: từ skill buff nhanh, kỹ năng định hướng, kỹ năng chọn vị trí, đến kỹ năng",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                43,
+                                641,
+                                162,
+                                662
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        43,
+                                        641,
+                                        162,
+                                        662
+                                    ],
+                                    "score": 1.0,
+                                    "content": "duy trì (channeling).",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16,
+                            "is_list_end_line": true
+                        }
+                    ],
+                    "index": 14.5,
+                    "bbox_fs": [
+                        30,
+                        571,
+                        552,
+                        662
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        704,
+                        111,
+                        725
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                702,
+                                114,
+                                727
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        702,
+                                        114,
+                                        727
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục lục",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        53,
+                        48,
+                        136,
+                        62
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                47,
+                                138,
+                                64
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        47,
+                                        138,
+                                        64
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Control Types",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        72,
+                        96,
+                        86
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                98,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        98,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. UI/UX",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        191,
+                        161,
+                        212
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                189,
+                                162,
+                                213
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        189,
+                                        162,
+                                        213
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Control Types",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        229,
+                        555,
+                        822
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                229,
+                                555,
+                                822
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        229,
+                                        555,
+                                        822
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                229,
+                                                555,
+                                                822
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>ControlType</td><td rowspan=1 colspan=1>Dac diem</td><td rowspan=1 colspan=1>Use-case</td><td rowspan=1 colspan=1>Mobile Control</td><td rowspan=1 colspan=1>Auto Focus</td></tr><tr><td rowspan=1 colspan=1>Instant(Kich hoatngay）</td><td rowspan=1 colspan=1>Cast ngay khi bam Khóng bat buocphaitarget/huong/vi tride kich hoatPhan hoi nhanh</td><td rowspan=1 colspan=1>Buff ban than(giap,toc, hoimau) Trang thai (tanghinh,bat tu)</td><td rowspan=1 colspan=1>- Tap nut skill= kichhoat ngay- Khong can giu/kéotha</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Direction(Ky nangtheohuong)</td><td rowspan=1 colspan=1> Yéu cau xac dinhhu6ng Skillshot c6 thé bine</td><td rowspan=1 colspan=1> Skillshot tam xa Dash dinh huongNé tranh</td><td rowspan=1 colspan=1> Manual: Nhän&amp; giu→hien vong dinh huóngKéo tay de chinhhuóng -&gt; Tha = cast theo huong chon</td><td rowspan=1 colspan=1>· C6 Target trongpham vi Kich hoat -&gt;Hien thinhanh dinh huongngay khi bam -&gt;Dinh huong Cast skilltheo vi tri cua Targetngay thoi diem kichhoat· Khóng c6 Target trong pham vi: Kich hoat -&gt; Cast skilltheo huong mäcdinh (truoc mat)theo pham vi toi dacua skill</td></tr><tr><td rowspan=1 colspan=1>Ground(Chon vitr1)</td><td rowspan=1 colspan=1> Yéu cäu chon 1diem tren ban doTao hieu ung dienrong (AOE)</td><td rowspan=1 colspan=1>DatbayGoi ky näng AOE(Meteor,Tornado)Zone Control</td><td rowspan=1 colspan=1>Manual: Nhän &amp; giu→hién vong chon khuvuc -&gt; Kéo tay de xäcdinh vi tri Tha = casttai vi tri chon</td><td rowspan=2 colspan=1>· C6 Target trongpham vi Auto cast skill taichan tuong dich bilock target</td></tr><tr><td rowspan=1 colspan=1></td><td></td><td></td><td></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d4792e31c30f9805a1b620063f67e77752af803d233ab955417b989e29845461.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 4,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        229,
+                                        555,
+                                        426.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        426.66666666666663,
+                                        555,
+                                        624.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        624.3333333333333,
+                                        555,
+                                        821.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 4
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        53,
+                        48,
+                        136,
+                        62
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                47,
+                                138,
+                                64
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        47,
+                                        138,
+                                        64
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Control Types",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        }
+                    ],
+                    "index": 0,
+                    "bbox_fs": [
+                        51,
+                        47,
+                        138,
+                        64
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        72,
+                        96,
+                        86
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                98,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        98,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. UI/UX",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 1,
+                    "bbox_fs": [
+                        50,
+                        70,
+                        98,
+                        88
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        191,
+                        161,
+                        212
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                189,
+                                162,
+                                213
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        189,
+                                        162,
+                                        213
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Control Types",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        229,
+                        555,
+                        822
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                229,
+                                555,
+                                822
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        229,
+                                        555,
+                                        822
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                229,
+                                                555,
+                                                822
+                                            ],
+                                            "score": 0.977,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>ControlType</td><td rowspan=1 colspan=1>Dac diem</td><td rowspan=1 colspan=1>Use-case</td><td rowspan=1 colspan=1>Mobile Control</td><td rowspan=1 colspan=1>Auto Focus</td></tr><tr><td rowspan=1 colspan=1>Instant(Kich hoatngay）</td><td rowspan=1 colspan=1>Cast ngay khi bam Khóng bat buocphaitarget/huong/vi tride kich hoatPhan hoi nhanh</td><td rowspan=1 colspan=1>Buff ban than(giap,toc, hoimau) Trang thai (tanghinh,bat tu)</td><td rowspan=1 colspan=1>- Tap nut skill= kichhoat ngay- Khong can giu/kéotha</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Direction(Ky nangtheohuong)</td><td rowspan=1 colspan=1> Yéu cau xac dinhhu6ng Skillshot c6 thé bine</td><td rowspan=1 colspan=1> Skillshot tam xa Dash dinh huongNé tranh</td><td rowspan=1 colspan=1> Manual: Nhän&amp; giu→hien vong dinh huóngKéo tay de chinhhuóng -&gt; Tha = cast theo huong chon</td><td rowspan=1 colspan=1>· C6 Target trongpham vi Kich hoat -&gt;Hien thinhanh dinh huongngay khi bam -&gt;Dinh huong Cast skilltheo vi tri cua Targetngay thoi diem kichhoat· Khóng c6 Target trong pham vi: Kich hoat -&gt; Cast skilltheo huong mäcdinh (truoc mat)theo pham vi toi dacua skill</td></tr><tr><td rowspan=1 colspan=1>Ground(Chon vitr1)</td><td rowspan=1 colspan=1> Yéu cäu chon 1diem tren ban doTao hieu ung dienrong (AOE)</td><td rowspan=1 colspan=1>DatbayGoi ky näng AOE(Meteor,Tornado)Zone Control</td><td rowspan=1 colspan=1>Manual: Nhän &amp; giu→hién vong chon khuvuc -&gt; Kéo tay de xäcdinh vi tri Tha = casttai vi tri chon</td><td rowspan=2 colspan=1>· C6 Target trongpham vi Auto cast skill taichan tuong dich bilock target</td></tr><tr><td rowspan=1 colspan=1></td><td></td><td></td><td></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d4792e31c30f9805a1b620063f67e77752af803d233ab955417b989e29845461.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 4,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        229,
+                                        555,
+                                        426.66666666666663
+                                    ],
+                                    "spans": [],
+                                    "index": 3
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        426.66666666666663,
+                                        555,
+                                        624.3333333333333
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        624.3333333333333,
+                                        555,
+                                        821.9999999999999
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 4
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        22,
+                        559,
+                        428
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                26,
+                                22,
+                                559,
+                                428
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        22,
+                                        559,
+                                        428
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                22,
+                                                559,
+                                                428
+                                            ],
+                                            "score": 0.98,
+                                            "html": "<table><tr><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=2></td><td rowspan=2 colspan=1>Auto Focus: Nhän -&gt;Hien thi nhanh dinhhuong theo AutoFocus -&gt; Kich hoat</td><td rowspan=1 colspan=1> Khong c6 Target·trong pham viNéu khong locktarget → cast vao</td></tr><tr><td rowspan=1 colspan=1>khoang cäch toi datheo huong joystick.</td></tr><tr><td rowspan=2 colspan=1>Channeling (Duytri)</td><td rowspan=2 colspan=1>Cast ngay lap tuc,duy tri den khi hétthdi gianC6 thé ngat boi Cchoäc khi thä nutMt so skill bätbu@c giu den hetchannel</td><td rowspan=2 colspan=2>Beam (tia laserduytri)Ban lien tuc Hoi mau lien tuc</td><td rowspan=1 colspan=1> Nhän &amp; giu = cast lién</td><td rowspan=1 colspan=1>Néu khong có：</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>tucNhän lai= cancelC6 thé chinh huóngbang joystickC6 thé bi cancel khi bi khöng ché (define tuyskill)</td><td rowspan=1 colspan=1>TargetBeam skill → bäntheo huong macdinh (truoc mät) taikhoang cach toi da.AOE Skill: dät vungchannel ngay tru8cmät caster theo pham vi preset(config 70% Range)cua Skill</td></tr><tr><td rowspan=1 colspan=1>CancelSkill</td><td rowspan=1 colspan=5>·Khi dang Hold skill sé hién thi button Cancel &amp; góc phai trén cung cua man hinh，Cancel bäng cách kéo joystick di chuyén lén nut cancel (X).</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c27553135afc799c2657b9500fbdb1bdc972bf3f49c887bd837f8dc407ec3fd6.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        22,
+                                        559,
+                                        157.33333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        157.33333333333334,
+                                        559,
+                                        292.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        292.6666666666667,
+                                        559,
+                                        428.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        482,
+                        97,
+                        502
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                480,
+                                100,
+                                505
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        480,
+                                        100,
+                                        505
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. UI/UX",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        525,
+                        556,
+                        814
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                26,
+                                525,
+                                556,
+                                814
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        525,
+                                        556,
+                                        814
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                525,
+                                                556,
+                                                814
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Control Type</td><td rowspan=1 colspan=1>UI</td><td rowspan=1 colspan=1>UX Behavior</td><td rowspan=1 colspan=1>Reference</td></tr><tr><td rowspan=1 colspan=1>Instant (Tapcast)</td><td rowspan=1 colspan=1>：  Icon skill säng lén khisan sang.</td><td rowspan=1 colspan=1>- Tap = cast ngay, khöng cänkéo.- Däm bao latency = 0.- Nguoichoi phai cäm thayresponsive.</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Direction(Skillshot)</td><td rowspan=1 colspan=1>：   Hien thi pham vi toi dacast cua skill theo hinhtron,bän kinh theo dódai toi da cua skill (1mau mäc dinh)·  Hien thi Duong Cast cuaskill (1 mau mäc dinh)</td><td rowspan=1 colspan=1>- Giu = hien huóng.- Kéo = thay doi huongrealtime.- Tha = cast theo huong.- Auto Aim Option: néu chitap → auto lock target gännhat.</td><td rowspan=1 colspan=1></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "edfda5e82d4c9324afac91957a72c4ede151e70d5ecec9d7219cbb15caf50045.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        525,
+                                        556,
+                                        621.3333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        621.3333333333334,
+                                        556,
+                                        717.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        717.6666666666667,
+                                        556,
+                                        814.0000000000001
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                }
+            ],
+            "page_idx": 2,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        22,
+                        559,
+                        428
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                26,
+                                22,
+                                559,
+                                428
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        22,
+                                        559,
+                                        428
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                22,
+                                                559,
+                                                428
+                                            ],
+                                            "score": 0.98,
+                                            "html": "<table><tr><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=2></td><td rowspan=2 colspan=1>Auto Focus: Nhän -&gt;Hien thi nhanh dinhhuong theo AutoFocus -&gt; Kich hoat</td><td rowspan=1 colspan=1> Khong c6 Target·trong pham viNéu khong locktarget → cast vao</td></tr><tr><td rowspan=1 colspan=1>khoang cäch toi datheo huong joystick.</td></tr><tr><td rowspan=2 colspan=1>Channeling (Duytri)</td><td rowspan=2 colspan=1>Cast ngay lap tuc,duy tri den khi hétthdi gianC6 thé ngat boi Cchoäc khi thä nutMt so skill bätbu@c giu den hetchannel</td><td rowspan=2 colspan=2>Beam (tia laserduytri)Ban lien tuc Hoi mau lien tuc</td><td rowspan=1 colspan=1> Nhän &amp; giu = cast lién</td><td rowspan=1 colspan=1>Néu khong có：</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>tucNhän lai= cancelC6 thé chinh huóngbang joystickC6 thé bi cancel khi bi khöng ché (define tuyskill)</td><td rowspan=1 colspan=1>TargetBeam skill → bäntheo huong macdinh (truoc mät) taikhoang cach toi da.AOE Skill: dät vungchannel ngay tru8cmät caster theo pham vi preset(config 70% Range)cua Skill</td></tr><tr><td rowspan=1 colspan=1>CancelSkill</td><td rowspan=1 colspan=5>·Khi dang Hold skill sé hién thi button Cancel &amp; góc phai trén cung cua man hinh，Cancel bäng cách kéo joystick di chuyén lén nut cancel (X).</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "c27553135afc799c2657b9500fbdb1bdc972bf3f49c887bd837f8dc407ec3fd6.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        22,
+                                        559,
+                                        157.33333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        157.33333333333334,
+                                        559,
+                                        292.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        292.6666666666667,
+                                        559,
+                                        428.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        482,
+                        97,
+                        502
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                480,
+                                100,
+                                505
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        480,
+                                        100,
+                                        505
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. UI/UX",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        26,
+                        525,
+                        556,
+                        814
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                26,
+                                525,
+                                556,
+                                814
+                            ],
+                            "group_id": 1,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        525,
+                                        556,
+                                        814
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                26,
+                                                525,
+                                                556,
+                                                814
+                                            ],
+                                            "score": 0.976,
+                                            "html": "<table><tr><td colspan=\"1\" rowspan=\"1\">Control Type</td><td colspan=\"1\" rowspan=\"1\">UI</td><td colspan=\"1\" rowspan=\"1\">UX Behavior</td><td colspan=\"1\" rowspan=\"1\">Reference</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Instant (Tapcast)</td><td colspan=\"1\" rowspan=\"1\">：  Icon skill säng lén khisan sang.</td><td colspan=\"1\" rowspan=\"1\">- Tap = cast ngay, khöng cänkéo.- Däm bao latency = 0.- Nguoichoi phai cäm thayresponsive.</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Direction(Skillshot)</td><td colspan=\"1\" rowspan=\"1\">：   Hien thi pham vi toi dacast cua skill theo hinhtron,bän kinh theo dódai toi da cua skill (1mau mäc dinh)·  Hien thi Duong Cast cuaskill (1 mau mäc dinh)</td><td colspan=\"1\" rowspan=\"1\">- Giu = hien huóng.- Kéo = thay doi huongrealtime.- Tha = cast theo huong.- Auto Aim Option: néu chitap → auto lock target gännhat.</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td></td><td>Khi kéo giu, icon skill doi . trang thai (expand).</td><td></td><td></td></tr><tr><td>Ground (AOE select)</td><td>Hien thivong tron bān · kinh AOE tai vi tri chi dinh Mau säc feedback: xanh · (valid),do (invalid). Highlight outline khu . vuc sé anh huong.</td><td>- Giu = hien vong AOE. - Kéo = thay doi vi tri. - Tha = cast. - Auto Mode: tap nhanh →&gt; cast auto duoi chän target hoäc theo huong joystick.</td><td></td></tr><tr><td>Channeling (Hold skill)</td><td>Hien thi pham vi cast theo hinh tron,bän kinh theo pham vi toi da cua skill Beam/laser→vé duong · thäng realtime</td><td>- Giu = duy tri cast. - Tha = cancel.</td><td></td></tr><tr><td>Cancel</td><td>Döi mau hien thi pham vi cast va mau cua dinh huöng skill</td><td></td><td></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "edfda5e82d4c9324afac91957a72c4ede151e70d5ecec9d7219cbb15caf50045.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        525,
+                                        556,
+                                        621.3333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        621.3333333333334,
+                                        556,
+                                        717.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        26,
+                                        717.6666666666667,
+                                        556,
+                                        814.0000000000001
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        21,
+                        554,
+                        441
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                21,
+                                554,
+                                441
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        21,
+                                        554,
+                                        441
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                21,
+                                                554,
+                                                441
+                                            ],
+                                            "score": 0.969,
+                                            "html": "<table><tr><td></td><td>Khi kéo giu, icon skill doi . trang thai (expand).</td><td></td><td></td></tr><tr><td>Ground (AOE select)</td><td>Hien thivong tron bān · kinh AOE tai vi tri chi dinh Mau säc feedback: xanh · (valid),do (invalid). Highlight outline khu . vuc sé anh huong.</td><td>- Giu = hien vong AOE. - Kéo = thay doi vi tri. - Tha = cast. - Auto Mode: tap nhanh →&gt; cast auto duoi chän target hoäc theo huong joystick.</td><td></td></tr><tr><td>Channeling (Hold skill)</td><td>Hien thi pham vi cast theo hinh tron,bän kinh theo pham vi toi da cua skill Beam/laser→vé duong · thäng realtime</td><td>- Giu = duy tri cast. - Tha = cancel.</td><td></td></tr><tr><td>Cancel</td><td>Döi mau hien thi pham vi cast va mau cua dinh huöng skill</td><td></td><td></td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "6a36e25fe64e6a0b5e0d9806b25c371478b1d5c692d0ee76a26bb8440781afb0.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        21,
+                                        554,
+                                        161.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        161.0,
+                                        554,
+                                        301.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        301.0,
+                                        554,
+                                        441.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 1
+                }
+            ],
+            "page_idx": 3,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        21,
+                        554,
+                        441
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                21,
+                                554,
+                                441
+                            ],
+                            "group_id": 0,
+                            "lines": [],
+                            "index": 1,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        21,
+                                        554,
+                                        161.0
+                                    ],
+                                    "spans": [],
+                                    "index": 0
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        161.0,
+                                        554,
+                                        301.0
+                                    ],
+                                    "spans": [],
+                                    "index": 1
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        301.0,
+                                        554,
+                                        441.0
+                                    ],
+                                    "spans": [],
+                                    "index": 2
+                                }
+                            ],
+                            "lines_deleted": true
+                        }
+                    ],
+                    "index": 1
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

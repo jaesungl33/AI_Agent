@@ -1,0 +1,275 @@
+[
+    {
+        "type": "text",
+        "text": "[Asset, UI] [Tank War] Reward Screen Design ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            83,
+            942,
+            120
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "THÔNG TIN MÀN HÌNH NHẬN THƯỞNG ",
+        "bbox": [
+            47,
+            142,
+            425,
+            166
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: v1.1   \nNgười viết: phucth12 (phucth12)   \nNgày tạo: 06 - 08 - 2025 ",
+        "bbox": [
+            60,
+            176,
+            442,
+            258
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/0876f9034d853f24d312206991a7ad64daaa28f488c743e88c20a7d18fb7fa13.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Ngudireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>06-08-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            284,
+            936,
+            497
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục đích thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            520,
+            311,
+            545
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Xác định những gì người chơi có thể tương tác được trong màn hình nhận thưởng của game. ",
+        "bbox": [
+            50,
+            554,
+            902,
+            576
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Đảm bảo thiết kế có những đặc điểm sau: ",
+        "bbox": [
+            47,
+            585,
+            436,
+            605
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Người chơi đọc được các tất cả các phần thưởng nhận được.   \nPhần thưởng nhận được nên hấp dẫn đủ để thu hút người chơi tiếp tục chơi. ",
+        "bbox": [
+            47,
+            615,
+            794,
+            666
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            717,
+            294,
+            742
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Tài liệu được dùng để giúp đội Art & Dev hình dung rõ ràng hơn về các yếu tố trong màn hình phần thưởng. ",
+        "bbox": [
+            47,
+            752,
+            910,
+            796
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Tổng quan tài liệu ",
+        "bbox": [
+            48,
+            848,
+            321,
+            875
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "4. Thành phần   \n5. Tương tác a. Tương tác với các thành phần b. Các cách tương tác khác ",
+        "bbox": [
+            85,
+            57,
+            375,
+            160
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Notes ",
+        "bbox": [
+            87,
+            172,
+            161,
+            188
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Thành phần ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            270,
+            245,
+            296
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/6c8c3d5861c49015811e7f1e70d3121011b03200e241b5af600d8a95d2a1ed06.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén thanh phän</td><td rowspan=1 colspan=1>Muc dich</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Thong tin phän thuong</td><td rowspan=1 colspan=1> Hien thi phän, bao gom:：ELO·vang：  (Sé dugc thém sau)</td><td rowspan=1 colspan=1>Tham khao file: *Dienfile economy vao day*</td></tr><tr><td rowspan=1 colspan=1> Nut &quot;Collect&quot;</td><td rowspan=1 colspan=1>Chuyén nguαi choivé lai man hinh chinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Nut &quot;Double&quot;</td><td rowspan=1 colspan=1>Cho nguoi choi xem quang cao dé́ nhän gapdoi phän thuäng</td><td rowspan=1 colspan=1>Chua áp dung</td></tr></table>",
+        "bbox": [
+            47,
+            322,
+            930,
+            570
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Note: Thành phần màu xám sẽ được thêm sau ",
+        "bbox": [
+            60,
+            592,
+            496,
+            613
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Tương tác ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            666,
+            217,
+            690
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. Tương tác với các thành phần ",
+        "text_level": 1,
+        "bbox": [
+            84,
+            708,
+            432,
+            730
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/4113514e1541174fab8233906ddd8922258711325a76f0449a16d7d24469ff58.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén thanh phän</td><td rowspan=1 colspan=1>Cách tuong täc</td></tr><tr><td rowspan=1 colspan=1>Nut &quot;Collect&quot;</td><td rowspan=1 colspan=1>Khi nhän, phän thuäng du@c dua vao taikhoän vä nguαi choi chuyén vé man hinh chinh</td></tr><tr><td rowspan=1 colspan=1>Nut &quot;Double&quot;</td><td rowspan=1 colspan=1>Khi nhän, hien thi quang cáo Sau khi quang cáo chay xong, ngudi choi quaylai man hinh nhän thuong vói phän thuäng x2</td></tr></table>",
+        "bbox": [
+            47,
+            755,
+            718,
+            933
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "b. Các cách tương tác khác ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            103,
+            375,
+            125
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/9307610430ee00f3598d26ac92bc90c4d22882c6a4516f4d2c7ef3828a75a130.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Case</td><td rowspan=1 colspan=1>Behaviour/Solution</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Nhän nut quay lai tren dien thoai</td><td rowspan=1 colspan=1>Nhäy sang man hinh tiép theo (Man hinhchinh)</td><td rowspan=1 colspan=1>Optional</td></tr></table>",
+        "bbox": [
+            47,
+            151,
+            919,
+            245
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "6. Notes ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            313,
+            163,
+            334
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "discarded",
+        "text": "Note: Những thành phần tô xám sẽ được thêm sau ",
+        "bbox": [
+            60,
+            34,
+            535,
+            54
+        ],
+        "page_idx": 2
+    }
+]

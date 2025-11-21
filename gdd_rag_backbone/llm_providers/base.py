@@ -146,10 +146,19 @@ def make_embedding_func(provider: EmbeddingProvider):
         return await asyncio.to_thread(provider.embed, text_list)
     
     # Wrap in EmbeddingFunc class (makes it compatible with LightRAG)
-    embedding_func = EmbeddingFunc(
-        embedding_dim=embedding_dim,
-        func=async_embedding_func,
-    )
+    # lightrag-hku requires max_token_size parameter
+    try:
+        embedding_func = EmbeddingFunc(
+            embedding_dim=embedding_dim,
+            func=async_embedding_func,
+            max_token_size=8192,  # Default token size for embeddings
+        )
+    except TypeError:
+        # Fallback for different API versions
+        embedding_func = EmbeddingFunc(
+            embedding_dim=embedding_dim,
+            func=async_embedding_func,
+        )
     
     return embedding_func
 

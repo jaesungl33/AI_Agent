@@ -1,81 +1,159 @@
 """
-Pydantic schemas for structured GDD data extraction.
-
-This module defines the data models for various game design elements
-that can be extracted from Game Design Documents.
+Structured dataclasses for the GDD pipeline.
 """
-from typing import Optional
-from dataclasses import dataclass, asdict
-from pydantic import BaseModel, Field
+
+from dataclasses import asdict, dataclass, field
+from typing import List, Optional
 
 
 @dataclass
 class GddObject:
-    """
-    Represents a game object with physical and interaction properties.
-    
-    Categories include:
-    - BR: Breakable objects
-    - BO: Blocking objects
-    - DE: Decorative objects
-    - GR: Ground objects
-    - HI: Hiding objects
-    - OP: Objective points
-    - TA: Tactical objects
-    """
     id: str
-    category: str  # e.g., "BR", "HI", "TA"
     name: str
+    category: Optional[str] = None
+    description: Optional[str] = None
     size_x: Optional[float] = None
     size_y: Optional[float] = None
     size_z: Optional[float] = None
     hp: Optional[int] = None
+    armor: Optional[int] = None
+    speed: Optional[float] = None
     player_pass_through: Optional[bool] = None
     bullet_pass_through: Optional[bool] = None
     destructible: Optional[bool] = None
-    special_notes: Optional[str] = None
-    source_section: Optional[str] = None
-    
+    special_rules: Optional[str] = None
+    source_note: Optional[str] = None
+
     def to_dict(self) -> dict:
-        """Convert to dictionary."""
         return asdict(self)
 
 
-class TankSpec(BaseModel):
-    """
-    Represents a tank specification with class, attributes, and gameplay notes.
-    """
-    id: str = Field(description="Unique identifier for the tank")
-    class_name: str = Field(description="Tank class (e.g., 'Heavy', 'Light', 'Medium')")
-    name: str = Field(description="Tank name")
-    size_x: Optional[float] = Field(None, description="Length in meters")
-    size_y: Optional[float] = Field(None, description="Width in meters")
-    size_z: Optional[float] = Field(None, description="Height in meters")
-    hp: Optional[int] = Field(None, description="Hit points / Health")
-    armor: Optional[int] = Field(None, description="Armor value")
-    speed: Optional[float] = Field(None, description="Movement speed")
-    firepower: Optional[int] = Field(None, description="Attack damage")
-    range: Optional[float] = Field(None, description="Attack range in meters")
-    special_abilities: Optional[str] = Field(None, description="Special abilities or features")
-    gameplay_notes: Optional[str] = Field(None, description="Design notes and gameplay considerations")
-    source_section: Optional[str] = Field(None, description="Section of GDD where this was found")
+@dataclass
+class TankSpec:
+    id: str
+    name: Optional[str] = None
+    class_name: Optional[str] = None
+    size_x: Optional[float] = None
+    size_y: Optional[float] = None
+    size_z: Optional[float] = None
+    hp: Optional[int] = None
+    armor: Optional[int] = None
+    speed: Optional[float] = None
+    firepower: Optional[float] = None
+    range: Optional[float] = None
+    special_abilities: Optional[str] = None
+    gameplay_notes: Optional[str] = None
+    source_note: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
 
 
-class MapSpec(BaseModel):
-    """
-    Represents a map specification with mode, scene, size, and layout information.
-    """
-    id: str = Field(description="Unique identifier for the map")
-    name: str = Field(description="Map name")
-    mode: Optional[str] = Field(None, description="Game mode (e.g., 'CTF', 'TDM', 'Assault')")
-    scene: Optional[str] = Field(None, description="Scene or environment type")
-    size_x: Optional[float] = Field(None, description="Map length in meters")
-    size_y: Optional[float] = Field(None, description="Map width in meters")
-    player_count: Optional[int] = Field(None, description="Recommended player count")
-    objective_locations: Optional[str] = Field(None, description="Description of objective points")
-    spawn_points: Optional[int] = Field(None, description="Number of spawn points")
-    cover_elements: Optional[str] = Field(None, description="Description of cover and tactical elements")
-    special_features: Optional[str] = Field(None, description="Unique map features")
-    gameplay_notes: Optional[str] = Field(None, description="Design notes and gameplay considerations")
-    source_section: Optional[str] = Field(None, description="Section of GDD where this was found")
+@dataclass
+class GddMap:
+    id: str
+    name: str
+    mode: Optional[str] = None
+    scene: Optional[str] = None
+    size_x: Optional[float] = None
+    size_y: Optional[float] = None
+    player_count: Optional[int] = None
+    objective_locations: Optional[str] = None
+    spawn_points: Optional[int] = None
+    cover_elements: Optional[str] = None
+    special_features: Optional[str] = None
+    gameplay_notes: Optional[str] = None
+    source_note: Optional[str] = None
 
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class GddSystem:
+    id: str
+    name: str
+    description: Optional[str] = None
+    mechanics: Optional[str] = None
+    objectives: Optional[str] = None
+    related_objects: List[str] = field(default_factory=list)
+    interactions: List[str] = field(default_factory=list)
+    source_note: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class GddInteraction:
+    id: str
+    summary: str
+    description: Optional[str] = None
+    trigger: Optional[str] = None
+    effect: Optional[str] = None
+    related_objects: List[str] = field(default_factory=list)
+    related_systems: List[str] = field(default_factory=list)
+    source_note: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class GddLogicRule:
+    id: str
+    statement: str
+    applies_to: List[str] = field(default_factory=list)
+    condition: Optional[str] = None
+    result: Optional[str] = None
+    priority: Optional[str] = None
+    source_note: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class GddRequirement:
+    id: str
+    title: str
+    description: str
+    category: Optional[str] = None
+    priority: Optional[str] = None
+    status: Optional[str] = None
+    acceptance_criteria: Optional[str] = None
+    related_objects: List[str] = field(default_factory=list)
+    related_systems: List[str] = field(default_factory=list)
+    source_note: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class RequirementSpec:
+    """Backwards-compatible alias used by older helpers."""
+
+    id: str
+    summary: str
+    category: Optional[str] = None
+    details: Optional[str] = None
+    priority: Optional[str] = None
+    status: Optional[str] = None
+    acceptance_criteria: Optional[str] = None
+    source_section: Optional[str] = None
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+__all__ = [
+    "GddObject",
+    "TankSpec",
+    "GddMap",
+    "GddSystem",
+    "GddInteraction",
+    "GddLogicRule",
+    "GddRequirement",
+    "RequirementSpec",
+]

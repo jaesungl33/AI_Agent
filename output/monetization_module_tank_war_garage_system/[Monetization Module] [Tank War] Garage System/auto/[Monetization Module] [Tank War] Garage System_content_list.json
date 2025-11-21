@@ -1,0 +1,1469 @@
+[
+    {
+        "type": "text",
+        "text": "[Monetization Module] [Tank War] Garage System ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            893,
+            169
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "HỆ THỐNG GARAGE ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            192,
+            240,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: v1.0 Người tạo file: Kent (QuocTA) Ngày tạo: 17 - 11 - 2025 ",
+        "bbox": [
+            60,
+            225,
+            402,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/198b4705242f3c98a973452ff8d5f4cfb88756c041bb4b1b61b78891e3269941.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>17-11-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            333,
+            936,
+            484
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Tổng quan hệ thống (Overview) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            507,
+            494,
+            534
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Garage là hệ thống tuỳ biến trực quan cho mỗi chiếc Tank, cho phép người chơi cá nhân hoá diện mạo thông qua 3 lớp vật phẩm chính: Warp (tấm phủ thân xe), Decal (hình/biểu tượng dán chồng lên Warp), và Sticker (vật phẩm tiêu hao — chữ/hình do người chơi AI-gen hoặc mua sẵn). Mục tiêu chính: tăng tương tác cá nhân hoá, giữ retention, và tạo kênh monetization bền vững. ",
+        "bbox": [
+            45,
+            542,
+            946,
+            633
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Nguyên tắc chính ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            641,
+            222,
+            663
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi Warp/Decal gắn theo từng xe cụ thể (một tank A mua Warp X không thể dùng trên tank B nếu người chơi chưa mua Warp X cho tank B).   \n• Inventory lưu theo loại xe (per-tank inventory). Sticker là consumable: khi dán là mất, thay thế không hoàn trả. Decal/Warp có thể gỡ/đổi ‒ cho phép tái sử dụng (trong cùng loại xe đã mua).   \n• Hệ thống hỗ trợ kéo-thả (optional UX) khi apply để gia tăng cảm giác “thực hành” (drag & drop). ",
+        "bbox": [
+            45,
+            672,
+            944,
+            861
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Định nghĩa vật phẩm & thuộc tính (Item definitions) ",
+        "bbox": [
+            43,
+            910,
+            760,
+            939
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.1 Warp (Tấm phủ) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            33,
+            282,
+            57
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Mô tả: Tấm phủ toàn thân xe (tương tự sơn/skin). ",
+        "bbox": [
+            50,
+            79,
+            537,
+            100
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Đơn vị bán: 1 tấm / 1 tank. ",
+        "bbox": [
+            50,
+            110,
+            329,
+            129
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Thuộc tính (game-design): ",
+        "bbox": [
+            52,
+            140,
+            340,
+            160
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ ID , Tên , Rarity (Common/Uncommon/Rare/Epic/Legendary), Collection (bộ series), VisualPreview (thumbnail $+ 3 0$ preview angles), Price (currency), ApplySlots (vị trí mặc định toàn thân), IsAnimated (true/false), HasVariants (màu/alpha variants), Duration (nếu temporary skin event), EquipLimit (số lượng tank cùng 1 lúc — thường 1). ",
+        "bbox": [
+            85,
+            170,
+            947,
+            284
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Hành vi: ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            296,
+            161,
+            314
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ Khi mua: thêm vào Inventory của loại tank đã chỉ định.   \n◦ Có thể equip / unequip vào tank trong Garage (không tiêu hao).   \n◦ Có thể preview trên tank (3D/AR/angle rotate). ",
+        "bbox": [
+            89,
+            326,
+            717,
+            408
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• UI: preview full-body, switch variants, animation toggle. ",
+        "bbox": [
+            50,
+            417,
+            604,
+            438
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.2 Decal ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            458,
+            159,
+            479
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Mô tả: Hình ảnh dán chồng lên Warp. Có thể layer nhiều decal (layer order quan trọng). ",
+        "bbox": [
+            55,
+            490,
+            895,
+            510
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Thuộc tính: ID , Name , Rarity , ImageAsset , AllowedPositions (list of position IDs trên tank), Scale/RotationLimits (nếu cho phép chỉnh), Price , Stackable (true/false), IsPermanent (true). ",
+        "bbox": [
+            48,
+            519,
+            937,
+            589
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Hành vi: ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            600,
+            161,
+            617
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ Decal được bán/cho/trao đổi và lưu vào Inventory per-tank.   \n◦ Có vị trí dán được chỉ định — người chơi chỉ có thể dán decal vào các vị trí này (xem phần vị trí).   \n◦ Decal có thể gỡ ra và trở về Inventory (không tiêu hao).   \n◦ Cho phép layer ordering (bring forward / send backward). ",
+        "bbox": [
+            87,
+            628,
+            907,
+            764
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• UI: khu vực vị trí decal highlight, snap & grid, tool để thay đổi kích thước/rotation (nếu mở). ",
+        "bbox": [
+            50,
+            773,
+            930,
+            795
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2.3 Sticker (Consumable, AI-gen) ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            814,
+            441,
+            836
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Mô tả: Hình/Chữ do player tạo qua prompt AI hoặc mua sẵn; dùng một lần khi dán. • Thuộc tính: ID , Name , Type (Text/Image), GeneratedFromPrompt (true/false), PromptMeta (ẩn/ghi chú), AllowedPositions , Rarity , Price (nếu mua), IsConsumable = true . ",
+        "bbox": [
+            47,
+            847,
+            898,
+            946
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Hành vi: ",
+        "bbox": [
+            50,
+            34,
+            161,
+            53
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Consumable: dán xong item biến mất. Không thể gỡ để trả lại. Thay sticker mới lên vị trí đã dán sticker cũ mất (bị ghi đè, không hoàn tiền). ◦ ${ \\mathsf { H } } { \\hat { \\mathsf { e } } }$ thống AI-gen: chặn prompt NSFW và nội dung vi phạm (chi tiết moderation bên dưới). ",
+        "bbox": [
+            70,
+            64,
+            946,
+            139
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• UI: form nhập prompt, preview, confirm cost (may be free with cooldown / cost currency). ",
+        "bbox": [
+            55,
+            147,
+            927,
+            170
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "3. Vị trí dán (Attachment Points) ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            220,
+            469,
+            246
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi loại tank có một tập các Attachment Points được map sẵn (ví dụ: hatch_left , turret_front , rear_panel , side_skirt_left , roof_center , v.v.). ",
+        "bbox": [
+            50,
+            253,
+            927,
+            301
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Quy tắc: ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            309,
+            161,
+            329
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Warp phủ toàn thân — không bị ràng buộc vị trí.   \n◦ Decal & Sticker chỉ có thể đặt vào Attachment Points được định nghĩa cho tank đó.   \n◦ Attachment Points không giới hạn loại decal/sticker; chỉ giới hạn vị trí vật phẩm được đặt. ",
+        "bbox": [
+            77,
+            339,
+            929,
+            469
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Thiết kế UX: tại thời điểm chỉnh sửa, attachment points hiển thị highlight, khi hover/drag sẽ cho thấy snap preview. ",
+        "bbox": [
+            48,
+            478,
+            939,
+            522
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4. Inventory & Item Management (Per-tank) ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            575,
+            621,
+            600
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Cấu trúc: Inventory lưu trên cơ sở mỗi loại tank. Khi người chơi mở Garage cho tank X: ",
+        "bbox": [
+            53,
+            608,
+            898,
+            629
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Hiển thị Warp Inventory (tấm warp đã mua cho tank X)   \n◦ Hiển thị Decal Inventory (decal có thể dùng cho tank X)   \n◦ Hiển thị Sticker Inventory (consumables, nếu có) — có thể kết hợp cả shop AI-gen output recent. ",
+        "bbox": [
+            79,
+            636,
+            947,
+            745
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Chức năng: ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            754,
+            190,
+            773
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ filter/sort (by Rarity, Collection, Recently Acquired), search, favorite.   \n◦ bulk unequip (ví dụ remove all decals).   \n◦ preview mode: xem hiện trạng tank với warp+decals+stickers. ",
+        "bbox": [
+            84,
+            784,
+            757,
+            866
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Edge case: nếu người chơi sở hữu warp A cho tank X rồi chuyển tank X sang phiên bản khác (chỉ xảy ra nếu tank có nhiều variant) check compatibility; nếu incompatible, vẫn giữ trong inventory nhưng không thể equip. ",
+        "bbox": [
+            48,
+            875,
+            952,
+            944
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "5. UX Flow (chi tiết hành trình người chơi) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            55,
+            592,
+            83
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.1. Mở Garage Edit Tank ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            102,
+            377,
+            126
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "1. Player chọn Garage từ menu chính. ",
+        "bbox": [
+            48,
+            135,
+            412,
+            155
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "2. Chọn tank (list tank owned). ",
+        "bbox": [
+            48,
+            166,
+            343,
+            185
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "3. Hệ thống load preview tank ở center; sidebar trái: Warp Inventory $^ +$ shop actions; sidebar phải: Decal Inventory , Sticker Inventory , Layers và Position map. ",
+        "bbox": [
+            47,
+            195,
+            888,
+            240
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "4. Người chơi: chọn 1 Warp preview full-body Confirm Apply (instant). (Optional: drag & drop từ inventory lên model). ",
+        "bbox": [
+            45,
+            250,
+            942,
+            294
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5. Sau khi warp apply, player chọn decal từ inventory $ \\mathsf { k e o }$ vào Attachment Point (snap). Hệ thống hiển thị ghost preview trước khi drop. ",
+        "bbox": [
+            47,
+            303,
+            949,
+            350
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6. Nếu chọn sticker: open prompt UI (nếu AI-gen) hoặc chọn sticker consumable từ inventory chọn Attachment Point System show cost & confirm (sticker sẽ bị tiêu khi Apply). ",
+        "bbox": [
+            47,
+            359,
+            947,
+            403
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "7. Player có thể save preset tên preset $+$ thumbnail. Preset lưu cấu hình warp+layer order+decals để dùng sau. ",
+        "bbox": [
+            48,
+            413,
+            860,
+            457
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.2. Mua & Preview từ Shop ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            477,
+            375,
+            500
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Từ Garage, player bấm Shop thấy warp/decal/sticker dành cho tank hiện tại (filter pertank). ",
+        "bbox": [
+            48,
+            508,
+            924,
+            552
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Có nút Preview on my tank để xem trước. Nếu mua: checkout item vào Inventory của tank đó. ",
+        "bbox": [
+            50,
+            561,
+            920,
+            607
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.3. AI-Generate Sticker Flow ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            628,
+            395,
+            650
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "1. Player mở Create Sticker nhập prompt text. ",
+        "bbox": [
+            48,
+            659,
+            570,
+            682
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "2. System chạy moderation (block NSFW/hate/PII) nếu pass generate thumbnail show options variations (3). ",
+        "bbox": [
+            47,
+            690,
+            932,
+            734
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "3. Player chọn variant confirm cost & position apply sticker consumable giảm 1. ",
+        "bbox": [
+            48,
+            745,
+            875,
+            765
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "4. Log prompt meta cho moderation & appeals (ẩn cho người khác). ",
+        "bbox": [
+            48,
+            775,
+            691,
+            795
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Note: néu player muon save generated image as tradeable item $\\Rightarrow$ [Speculation] co théban khoän phi nho dé mint/convert thänh non-consumable -dé xuät δ phän Monetization. ",
+        "bbox": [
+            62,
+            804,
+            924,
+            848
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "discarded",
+        "text": "6. Moderation / Content Safety (AI sticker) ",
+        "bbox": [
+            45,
+            900,
+            601,
+            925
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Cắt ngang NSFW & nội dung cấm: trước khi gửi prompt vào generator, apply filter keyword $+$ classifier. Nếu nghi ngờ $- >$ refuse $^ +$ show reason. ",
+        "bbox": [
+            48,
+            34,
+            949,
+            77
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Takedown / Report: người chơi có thể report sticker; hệ thống có cơ chế undo (ban account, rollback). ",
+        "bbox": [
+            55,
+            86,
+            936,
+            130
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Privacy: không cho phép input prompts chứa PII (số điện thoại, CC). Nếu phát hiện, từ chối. ",
+        "bbox": [
+            60,
+            141,
+            936,
+            163
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Audit logs: lưu prompt $^ +$ generated hash $^ +$ userID để kiểm tra khiếu nại. ",
+        "bbox": [
+            53,
+            172,
+            747,
+            192
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7. Monetization (GD đề xuất & options) [Speculation] ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            242,
+            750,
+            269
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Những đề xuất sau là chiến lược GD để tối ưu hóa doanh thu từ Garage. Do anh chưa đưa ra chính sách tiền tệ, từng đề xuất có thể điều chỉnh. ",
+        "bbox": [
+            60,
+            278,
+            914,
+            321
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.1 Cơ chế mua/bán cơ bản ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            340,
+            373,
+            364
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Mua trực tiếp (Direct Purchase): warp/decal/sticker bán theo giá cố định (với tier rarity).   \n• Bundle & Sets: bán warp $^ +$ decal combo với giá giảm (khuyến khích cross-sell).   \n• Limited Time/Seasonal Skins: skins theo sự kiện (về mùa, collab), tạo FOMO.   \n• Presets/Theme Packs: nhiều decals theme, dành cho preset nhanh. ",
+        "bbox": [
+            47,
+            373,
+            912,
+            486
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.2 Sticker AI-gen monetization ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            505,
+            424,
+            528
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Pay-per-generate: mỗi lần generate tốn X (currency), free quota mỗi ngày (win retention). ",
+        "bbox": [
+            57,
+            539,
+            929,
+            559
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Premium generator: subscription hàng tháng để mở high-res hoặc unlock more variations. ",
+        "bbox": [
+            58,
+            569,
+            930,
+            590
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Consumable packs: bán gói Sticker consumables (e.g., 10 stickers) rẻ hơn mua lẻ. ",
+        "bbox": [
+            55,
+            600,
+            848,
+            620
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• One-click conversion: cho phép convert AI sticker thành non-consumable “badge” NFTlike trong game bằng phí (optional / [Speculation]). ",
+        "bbox": [
+            50,
+            629,
+            927,
+            675
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.3 Gacha / Mystery Box (Optional) [Speculation] ",
+        "text_level": 1,
+        "bbox": [
+            43,
+            692,
+            641,
+            717
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Hộp warp/decal “mystery” (gacha) với tỷ lệ drop rarer. Kích thích repeat purchase. Cần tuân thủ luật địa phương về gacha/gambling. (Nếu dùng: minh bạch tỷ lệ) ",
+        "bbox": [
+            48,
+            726,
+            909,
+            771
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.4 Cosmetic Progression & Rewards ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            790,
+            486,
+            813
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Battle pass / Season pass: reward warp/decal tiers as progression incentive.   \n• Daily/Weekly Login quests: tặng decal/sticker consumables để drive DAU.   \n• Achievements: reward exclusive decal for milestones. ",
+        "bbox": [
+            48,
+            822,
+            799,
+            903
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.5 Marketplace & Trading (Optional) [Speculation] ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            923,
+            668,
+            947
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Cho phép người chơi trade/auction decals giữa nhau (take cut fee). Tăng LTV nhưng cần hệ thống anti-fraud. ",
+        "bbox": [
+            50,
+            34,
+            920,
+            77
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "7.6 Pricing Strategy (example tiers) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            97,
+            469,
+            121
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Common Warp: low price (encourage ownership) ",
+        "bbox": [
+            50,
+            132,
+            538,
+            151
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Rare/Epic/Legendary: progressively higher — Legendary limited. ",
+        "bbox": [
+            53,
+            161,
+            681,
+            182
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Decals: cheap/common; special artist/brand decals pricier. ",
+        "bbox": [
+            48,
+            192,
+            629,
+            211
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Stickers: consumable sold in packs; AI generation has per-use fee. ",
+        "bbox": [
+            50,
+            222,
+            715,
+            241
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Theo dõi KPIs (Monetization): ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            252,
+            341,
+            271
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• ARPDAU for cosmetics, Conversion Rate (visit Shop buy), LTV per user, Repeat-purchase rate (buy same collection), Sticker gen ARPU, $\\%$ of players using AI-gen. ",
+        "bbox": [
+            50,
+            283,
+            920,
+            327
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "8. Economy & Balance considerations ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            377,
+            542,
+            402
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Avoid pay-to-win: cosmetics only; ensure no gameplay advantage. ",
+        "bbox": [
+            48,
+            413,
+            708,
+            433
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Prevent inflation: giới hạn supply cho rare items. ",
+        "bbox": [
+            50,
+            442,
+            545,
+            463
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Exchange fairness: nếu có gacha, đảm bảo pity system (garantee rare after N pulls). ",
+        "bbox": [
+            50,
+            472,
+            867,
+            494
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Consumable sticker replacement policy: không refund; nhưng có thể thiết lập “grace” policy (1-time refund for accidental purchase) — [Speculation]. ",
+        "bbox": [
+            53,
+            503,
+            907,
+            547
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "9. UX details & Accessibility ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            597,
+            407,
+            622
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Drag & Drop khi apply warp/decal (optional) — improves tactile feel. ",
+        "bbox": [
+            52,
+            633,
+            722,
+            653
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Undo/Redo cho thao tác chỉnh sửa trước khi Save. ",
+        "bbox": [
+            52,
+            663,
+            552,
+            683
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Snap & Grid cho precise decal placement; kèm tooltip hiển thị thông số (scale/rotation). ",
+        "bbox": [
+            53,
+            692,
+            909,
+            714
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Preview Modes: static 360, animated (rotate), battle preview (in-match look). ",
+        "bbox": [
+            57,
+            723,
+            808,
+            744
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Mobile vs PC: tối ưu UI positions — mobile: simplified drag & drop with gestures. ",
+        "bbox": [
+            57,
+            754,
+            841,
+            775
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Save Presets: allow multiple named presets $+$ set primary for matchmaking display. ",
+        "bbox": [
+            55,
+            785,
+            868,
+            804
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Thumbnail auto-gen: for sharing (social) — share preview to socials. ",
+        "bbox": [
+            50,
+            815,
+            723,
+            835
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "10. Social / Display mechanics ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            886,
+            446,
+            911
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Showcase: tank cosmetics hiển thị trong lobbies, profile, leaderboards. ",
+        "bbox": [
+            50,
+            921,
+            747,
+            941
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Emote/Badge: generate small badges from sticker to show under player name (optional). ",
+        "bbox": [
+            60,
+            34,
+            914,
+            54
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Share/Export: share preview images to socials (encourage UGC & acquisition). ",
+        "bbox": [
+            55,
+            65,
+            818,
+            85
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "11. Analytics & Instrumentation (Game Design reqs) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            136,
+            730,
+            161
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Track events: ",
+        "bbox": [
+            50,
+            172,
+            203,
+            189
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "◦ garage_enter , warp_preview , warp_apply , decal_apply , sticker_generate_request , sticker_apply , shop_visit , shop_purchase , preset_save . ",
+        "bbox": [
+            90,
+            198,
+            789,
+            269
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Metrics: Conversion Funnel (visit preview buy), Time Spent in Garage, Average spend per session, Sticker generation acceptance rate, Reported/staged moderation incidents. ",
+        "bbox": [
+            50,
+            280,
+            919,
+            323
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "12. Data model (conceptual, non-tech) ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            375,
+            553,
+            400
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Player owns Tanks[] ",
+        "bbox": [
+            75,
+            408,
+            350,
+            430
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Tank has Inventory { Warps[] , Decals[] , Stickers[] } + EquippedState (current warp $^ +$ decals list $^ +$ stickers applied) $^ +$ Presets[] ",
+        "bbox": [
+            67,
+            438,
+            944,
+            483
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Item base class with subtype Warp|Decal|Sticker $^ +$ attributes described ở phần 2. ",
+        "bbox": [
+            62,
+            492,
+            942,
+            515
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "([Inference]): đây là mô hình conceptual phục vụ giao tiếp giữa GD và Dev/PM. ",
+        "bbox": [
+            48,
+            526,
+            774,
+            546
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "13. Roadmap ngắn (GD milestones) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            596,
+            511,
+            622
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "1. Wireframe & UX prototype: Garage main screen, inventory panels, preview. ",
+        "bbox": [
+            50,
+            633,
+            776,
+            652
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "2. Item spec sheet: templates for warp/decal/sticker metadata. ",
+        "bbox": [
+            53,
+            661,
+            644,
+            682
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "3. AI-sticker moderation policy doc & testcases. ",
+        "bbox": [
+            48,
+            694,
+            500,
+            713
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "4. Monetization offers & pricing experiment plan (A/B). ",
+        "bbox": [
+            48,
+            723,
+            563,
+            742
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "5. KPI dashboard spec. ",
+        "bbox": [
+            48,
+            754,
+            271,
+            773
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "14. Một số đề xuất tối ưu hoá (Monetization & Engagement) — [Speculation] ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            823,
+            856,
+            877
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Daily free sticker credit (1 free generate per day) để giữ DAU. ",
+        "bbox": [
+            52,
+            885,
+            654,
+            907
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Try-before-buy: cho phép preview limited-time overlay từ shop (xem 1 trận có watermark) tăng conversion. ",
+        "bbox": [
+            50,
+            917,
+            927,
+            959
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Seasonal challenges unlock exclusive decal for limited time retention. ",
+        "bbox": [
+            52,
+            34,
+            767,
+            54
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Social contest: best-decorated tank share award rare decal free marketing. ",
+        "bbox": [
+            53,
+            65,
+            835,
+            85
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Bundle discounts when buy Warp $^ +$ Decal together for same tank. (Tất cả trên cần A/B test.) ",
+        "bbox": [
+            52,
+            96,
+            702,
+            139
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "15. Ghi chú tuân thủ (policy / legal) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            189,
+            508,
+            215
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Nếu áp dụng gacha: công khai tỉ lệ drop. ",
+        "bbox": [
+            48,
+            225,
+            456,
+            245
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• AI-generation: tuân thủ luật bản quyền, không cho phép gen art sao chép verbatim art có bản quyền (design policy cần rõ). [Speculation] ",
+        "bbox": [
+            50,
+            253,
+            952,
+            300
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "16. Tóm tắt ngắn cho PM / Stakeholders ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            348,
+            570,
+            375
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Garage gồm 3 lớp: Warp (per-tank, permanent), Decal (per-tank, re-usable, attachment-pointlimited), Sticker (per-tank, consumable, AI-gen). ",
+        "bbox": [
+            48,
+            385,
+            951,
+            428
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Inventory lưu theo tank; UX drag&drop $^ +$ preview $+$ presets. ",
+        "bbox": [
+            48,
+            438,
+            629,
+            458
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Monetization đa kênh: direct buy, bundles, sticker-pay-per-gen, seasonal limited items — kèm KPI & moderation. ",
+        "bbox": [
+            53,
+            469,
+            907,
+            510
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Yêu cầu tiếp theo: wireframe UI và danh sách metadata item chuẩn để hand-off. ",
+        "bbox": [
+            53,
+            521,
+            824,
+            542
+        ],
+        "page_idx": 7
+    }
+]

@@ -1,0 +1,970 @@
+[
+    {
+        "type": "text",
+        "text": "[Monetization Module] [Tank War] Economy & Monetization System ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            82,
+            941,
+            169
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "HỆ THỐNG KINH TẾ VÀ PHƯƠNG THỨC KINH DOANH ",
+        "bbox": [
+            45,
+            192,
+            558,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: v1.1 Người tạo file: Kent (QuocTA) Ngày tạo: 07 - 09 - 2025 ",
+        "bbox": [
+            60,
+            225,
+            400,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/5c5c80b995ec6ca34aae48391eac9dfb3b7b13fc3d024a38bcb045cd0859cd7e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duy@t?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>07-09-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>QuocTA</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            333,
+            936,
+            526
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Currency Flow (Nguồn & Sink) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            621,
+            479,
+            646
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1.1 Diamond (Hard Currency) ",
+        "bbox": [
+            89,
+            664,
+            412,
+            686
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/1c70870c09a21f8de942b296c1cb9c5467faea727060dd0508bf3bd7e8320eca.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Nh6m</td><td>Nguon sinh</td><td>Sink (Tieu thu)</td></tr><tr><td rowspan=\"6\">Nap</td><td rowspan=\"5\">Thanh toan IAP (góilé, gói nap dinh ky)</td><td>Buff Premium (thé tháng, Battle Pass Premium)</td></tr><tr><td>Ticket Gen-Al</td></tr><tr><td>Warp Premium (gacha cao cäp) Decal Premium (Seasonal, Limited Edition)</td></tr><tr><td></td></tr><tr><td>Al Companion</td></tr><tr><td rowspan=\"2\"></td><td>Effect Premium (trails,aura,animation) Tank Skin (LE, Seasonal)</td></tr><tr><td></td></tr></table>",
+        "bbox": [
+            87,
+            714,
+            952,
+            909
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1.2 Coin (Soft Currency) ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            60,
+            353,
+            82
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/e4d92a998d6f8c75e10e9632c1f1308bb72195bf4eef17d8c4df40b580f2c4b3.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Nh6m</td><td rowspan=1 colspan=1>Nguon sinh</td><td rowspan=1 colspan=1> Sink (Tieu thu)</td></tr><tr><td rowspan=1 colspan=1>Gameplay</td><td rowspan=1 colspan=1>Thuong trän (theo KDA, Win/Lose, Mode)</td><td rowspan=1 colspan=1> Mua xe Tank</td></tr><tr><td rowspan=1 colspan=1>Gameplay</td><td rowspan=1 colspan=1>LiveOps Event Reward</td><td rowspan=1 colspan=1>Mua Warp (gacha thuong)</td></tr><tr><td rowspan=1 colspan=1>Gameplay</td><td rowspan=1 colspan=1>Daily Dungeon (PvE)</td><td rowspan=1 colspan=1>Mua Decal thuong</td></tr><tr><td rowspan=1 colspan=1>Meta Layer</td><td rowspan=1 colspan=1>Battle Pass Free Track</td><td rowspan=1 colspan=1>Luyén Gen Al (Al decal, Al companion)</td></tr><tr><td rowspan=1 colspan=1>Meta Layer</td><td rowspan=1 colspan=1>In-App Ads Reward</td><td rowspan=1 colspan=1>Artifact shards, nang cap Artifact</td></tr></table>",
+        "bbox": [
+            85,
+            109,
+            954,
+            257
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.3 Battle Pass ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            345,
+            254,
+            365
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/530b3ffb11e41bf39e572feb2337c4fd062f1907d3f92b1899a67b64d1d802d1.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Track</td><td rowspan=1 colspan=1>Reward</td></tr><tr><td rowspan=1 colspan=1>Free</td><td rowspan=1 colspan=1>Coin, Decal (gacha thuong), Warp thuong</td></tr><tr><td rowspan=1 colspan=1>Paid</td><td rowspan=1 colspan=1>Coin,Ticket Gen-Al, Warp Premium, Decal Premium</td></tr></table>",
+        "bbox": [
+            85,
+            394,
+            954,
+            469
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.4 In-App Ads (Rewarded Ads) ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            557,
+            427,
+            578
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/60f3ca9bfbcce417f86839cbe62bdf5c17ca4b8c2c60510e7d62c2b69c5072c1.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Loai Reward</td><td rowspan=1 colspan=1>Tan suat (cap/ngay)</td><td rowspan=1 colspan=1>G</td></tr><tr><td rowspan=1 colspan=1>Ticket Gen-Al</td><td rowspan=1 colspan=1>1-2 lan/ngay</td><td rowspan=1 colspan=1>Tao nhu cau thu nghiém Al Decal</td></tr><tr><td rowspan=1 colspan=1>Coin</td><td rowspan=1 colspan=1>3-5 lan/ngay</td><td rowspan=1 colspan=1> Gia tri~0.5 tran thang</td></tr><tr><td rowspan=1 colspan=1>Näng luong Event (LiveOps)</td><td rowspan=1 colspan=1>1lan/ngay</td><td rowspan=1 colspan=1> Gän voi event gioi han</td></tr><tr><td rowspan=1 colspan=1>Näng luong PvE (Daily Dungeon)</td><td rowspan=1 colspan=1>1-2 lan/ngay</td><td rowspan=1 colspan=1>Gi chan F2P</td></tr></table>",
+        "bbox": [
+            87,
+            605,
+            954,
+            729
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.5 Shop In-Game ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            817,
+            289,
+            836
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/49aa550dba423378fec06e7a5d71d9d80f352ed0ed8c3ff100387b68e55556e7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1> Danh muc</td><td rowspan=1 colspan=1>Gia (Coin/Diamond)</td><td rowspan=1 colspan=1> Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Xe Tank</td><td rowspan=1 colspan=1>Coin</td><td rowspan=1 colspan=1>Gia theo tier (Scout ré hon Heavy)</td></tr><tr><td rowspan=1 colspan=1>Artifact</td><td rowspan=1 colspan=1>Coin + shards</td><td rowspan=1 colspan=1>Craft, nang cap,combine</td></tr><tr><td rowspan=1 colspan=1>Decalthuong</td><td rowspan=1 colspan=1>Coin</td><td rowspan=1 colspan=1>Seasonal, rotation</td></tr><tr><td rowspan=1 colspan=1>Decal Premium</td><td rowspan=1 colspan=1>Diamond</td><td rowspan=1 colspan=1>LE, collab</td></tr><tr><td rowspan=1 colspan=1>Warp thuong</td><td rowspan=1 colspan=1>Coin</td><td rowspan=1 colspan=1>RNG cosmetic/decoration</td></tr><tr><td rowspan=1 colspan=1>Warp Premium</td><td rowspan=1 colspan=1>Diamond</td><td rowspan=1 colspan=1>RNG high rarity cosmetic</td></tr></table>",
+        "bbox": [
+            85,
+            53,
+            952,
+            225
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2. Công thức Cơ bản (Draft) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            315,
+            419,
+            340
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.1 Phần thưởng trận (Match Reward Formula) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            359,
+            595,
+            380
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "CoinReward $=$ BaseReward $\\times$ ModeMultiplier × (WinBonus/LoseFactor) $\\times$ C S ",
+        "bbox": [
+            129,
+            389,
+            673,
+            433
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ BaseReward: 50 coin. ",
+        "bbox": [
+            132,
+            442,
+            370,
+            461
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ ModeMultiplier: • Deathmatch $= 1 . 0$ • Capture Base $= 1 . 2$ ",
+        "bbox": [
+            129,
+            473,
+            378,
+            553
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ WinBonus: x1.5. ",
+        "bbox": [
+            131,
+            565,
+            318,
+            583
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ LoseFactor: x1.0. ",
+        "bbox": [
+            131,
+            596,
+            326,
+            613
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ Combat Score: • $\\mathsf { C S } = ( 0 . 5 \\times [ ( \\mathsf { K i l } | \\mathsf { l } \\mathsf { s } ) + ( 0 . 6 \\times \\mathsf { A s s i s t s } ) - ( 0 . 8 \\times \\mathsf { D e a t h s } ) ] ) + ( 0 . 4 \\times \\mathsf { D a m a g e 5 c o r e } )$ + (0.1 × Streak Bonus) ",
+        "bbox": [
+            131,
+            627,
+            939,
+            698
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Ví dụ minh họa ",
+        "text_level": 1,
+        "bbox": [
+            126,
+            708,
+            277,
+            728
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Player thắng Capture Base. ",
+        "bbox": [
+            132,
+            739,
+            414,
+            758
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Kills $= 5$ , Assists $= 4$ , Deaths $= 3 $ KDA Impact = 5 + (0.6×4) ‒ (0.8×3) = 5 + 2.4 ‒ $2 . 4 = 5 . 0$   \n• Damage Score $= 1 . 1$ (trên trung bình role). Streak Bonus $= 1 . 0 5$ (Double Kill).   \n• $\\mathsf { C S } = ( 0 . 5 \\times 5 . 0 ) + ( 0 . 4 \\times 1 . 1 ) + ( 0 . 1 \\times 1 . 0 5 ) = 2 . 5 + 0 . 4 4 + 0 . 1 0 5 = 3 . 0 4 5$ ",
+        "bbox": [
+            168,
+            769,
+            936,
+            903
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ CoinReward $= 5 0 \\times 1 . 2 \\times 1 . 5 \\times 3 . 0 4 5 \\approx 2 7 4$ coin (chỉ lấy số nguyên và sẽ làm tròn lén néu só thäp phän lón hon hoäc bäng 0.5,lam tron xuöng néu nhó hdn 0.5) ",
+        "bbox": [
+            131,
+            914,
+            951,
+            958
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "2.2 Chi phí mở Tank ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            72,
+            308,
+            94
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Nguyên tắc thiết kế ",
+        "bbox": [
+            126,
+            102,
+            323,
+            122
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ F2P-friendly: tất cả Tank đều mở bằng Coin (soft currency). Tier-based progression: chi phí tăng theo Tier để khuyến khích người chơi gắn bó.   \n▪ Class factor: mỗi Class (Scout, Assault, Heavy) có hệ số chi phí khác nhau phản ánh độ phức tạp & vai trò. ",
+        "bbox": [
+            131,
+            133,
+            941,
+            238
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ Time-to-Unlock: ",
+        "text_level": 1,
+        "bbox": [
+            131,
+            248,
+            321,
+            267
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Tank đầu tiên ngoài default $ \\leqslant 3$ ngày chơi đều đặn.   \n• Tank Tier $_ { 3 } \\to$ khoảng 14 ngày.   \n• Giữ động lực cho cả F2P và P2W. ",
+        "bbox": [
+            168,
+            278,
+            705,
+            359
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Công thức tính chi phí ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            398,
+            348,
+            419
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "TankCost $\\underline { { \\underline { { \\mathbf { \\Pi } } } } }$ TierBase × ClassFactor ",
+        "bbox": [
+            129,
+            429,
+            550,
+            448
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "TierBase (Coin): ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            489,
+            287,
+            508
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/a68e217930ac4fbe252b6d6c6c3779a6514dc76355f10a84f3498484c83bb04f.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tier</td><td rowspan=1 colspan=1>BaseCost (Coin)</td><td rowspan=1 colspan=1>Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Tier1</td><td rowspan=1 colspan=1>2,000</td><td rowspan=1 colspan=1>Xe nhäp món,dé tiep can</td></tr><tr><td rowspan=1 colspan=1>Tier2</td><td rowspan=1 colspan=1>3,000</td><td rowspan=1 colspan=1>Meta co ban</td></tr><tr><td rowspan=1 colspan=1>Tier 3</td><td rowspan=1 colspan=1>5,000</td><td rowspan=1 colspan=1>Meta nang cao</td></tr><tr><td rowspan=1 colspan=1>Tier 4</td><td rowspan=1 colspan=1>8,000</td><td rowspan=1 colspan=1> Xe hiem/late progression</td></tr></table>",
+        "bbox": [
+            126,
+            538,
+            760,
+            661
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "ClassFactor: ",
+        "text_level": 1,
+        "bbox": [
+            126,
+            711,
+            250,
+            729
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/b55e95e47194cc5aa16b48ba2c538892a0f6fdac8c0944c6c332f9d65a45a481.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>class</td><td rowspan=1 colspan=1>He s6</td><td rowspan=1 colspan=1>Giai thich</td></tr><tr><td rowspan=1 colspan=1>Scout</td><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>Dé choi,sat thuong thäp,vai tro m&amp; däu</td></tr><tr><td rowspan=1 colspan=1>Assault</td><td rowspan=1 colspan=1>1.2</td><td rowspan=1 colspan=1>Damage +da dung,d khó vua</td></tr><tr><td rowspan=1 colspan=1>Heavy</td><td rowspan=1 colspan=1>1.3</td><td rowspan=1 colspan=1>Tank trau,late-game manh</td></tr><tr><td rowspan=1 colspan=1>Elemental</td><td rowspan=1 colspan=1>1.4</td><td rowspan=1 colspan=1>Damage to + hieu ung</td></tr></table>",
+        "bbox": [
+            126,
+            760,
+            833,
+            883
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Bảng chi phí mẫu (Coin) ",
+        "text_level": 1,
+        "bbox": [
+            126,
+            932,
+            365,
+            952
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/010af7991c27c77de69371d4a640a436606b40946e1115823e3e80136a899b3e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tier</td><td rowspan=1 colspan=1>Scout</td><td rowspan=1 colspan=1>Assault</td><td rowspan=1 colspan=1>Heavy</td></tr><tr><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>2,000</td><td rowspan=1 colspan=1>2,400</td><td rowspan=1 colspan=1>2,600</td></tr><tr><td rowspan=1 colspan=1>2</td><td rowspan=1 colspan=1>3,000</td><td rowspan=1 colspan=1>3,600</td><td rowspan=1 colspan=1>3,900</td></tr><tr><td rowspan=1 colspan=1>3</td><td rowspan=1 colspan=1>5,000</td><td rowspan=1 colspan=1>6,000</td><td rowspan=1 colspan=1>6,500</td></tr><tr><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>8,000</td><td rowspan=1 colspan=1>9,600</td><td rowspan=1 colspan=1>10,400</td></tr></table>",
+        "bbox": [
+            126,
+            53,
+            824,
+            177
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Time-to-Unlock (ước tính) ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            225,
+            387,
+            245
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Giả định trung bình CoinReward $\\approx 2 0 0$ coin/trận, 15 trận/ngày ( ${ \\sim } 3 0$ phút): ",
+        "bbox": [
+            126,
+            255,
+            833,
+            276
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Scout Tier $\\pm  \\mathord { \\sim } 1 0$ trận. Assault Tier $2  \\mathord { \\sim } 1 8$ trận. Heavy Tier $\\ 3  \\sim 3 8$ trận. Heavy Tier $4  { \\sim } 6 0$ trận. ",
+        "bbox": [
+            129,
+            285,
+            405,
+            397
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "(Voi Battle PassAds va su kien,thoi gian thuc te' sé rut ngan.Tuy nhien Coin con dung cho cac tinh näng khac nén c6 the anh huang tocdo Unlockxe Tank moi cua ngudi chdi) ",
+        "bbox": [
+            127,
+            407,
+            952,
+            452
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "2.3 Warp (Gacha) ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            501,
+            281,
+            521
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Normal Warp (Coin): ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            530,
+            321,
+            550
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "$N = \\pm 0 0$ coin/lần Bảo hiểm (optional): 30 lần guaranteed Rare. ",
+        "bbox": [
+            129,
+            559,
+            604,
+            610
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Premium Warp (Diamond): ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            621,
+            383,
+            640
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ $N = 5 0$ Diamond/lần ▪ Bảo hiểm (optional): 50 lần guaranteed Epic, 90 lần Legendary. ",
+        "bbox": [
+            129,
+            652,
+            796,
+            702
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "2.4 Battle Pass Progression ",
+        "bbox": [
+            89,
+            752,
+            388,
+            772
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Nguyên tắc thiết kế: ",
+        "bbox": [
+            126,
+            779,
+            328,
+            801
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Seasonal cycle: mỗi Battle Pass (BP) kéo dài 6‒8 tuần (theo chu kỳ meta).   \n• Dual track: Free track (Coin $^ +$ cosmetic cơ bản) & Paid track (Diamond-exclusive, Gen-AI ticket, premium cosmetic).   \n• Match-driven: XP nhận chủ yếu qua chơi trận (Deathmatch, Capture Base).   \n• Quest-driven: Daily/Weekly quest tăng tốc độ progression, chống nhàm chán. ",
+        "bbox": [
+            168,
+            810,
+            951,
+            947
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Time-to-Complete: ",
+        "text_level": 1,
+        "bbox": [
+            171,
+            35,
+            388,
+            53
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "◦ Người chơi bình thường (\\~10‒15 trận/ngày) hoàn thành $8 0 { - } 9 0 \\%$ BP.   \n◦ Người chơi hardcore/dùng boost hoàn thành $100 \\%$ . ",
+        "bbox": [
+            191,
+            64,
+            895,
+            115
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Công thức tính XP ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            184,
+            306,
+            204
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "BP_XP = MatchXP $\\times$ ModeMultiplier × WinFactor ",
+        "bbox": [
+            127,
+            216,
+            686,
+            235
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "MatchXP: ",
+        "text_level": 1,
+        "bbox": [
+            143,
+            247,
+            252,
+            264
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/496974e8ee0ea51f5cf264186b6a886572e7941f0c14115e308fffd2cbc776f2.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Mode</td><td rowspan=1 colspan=1>MatchXP (thua)</td><td rowspan=1 colspan=1>MatchXP (thäng)</td><td rowspan=1 colspan=1>Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Deathmatch</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>15Tran nhanh, nhip cao,XP thap hon</td></tr><tr><td rowspan=1 colspan=1>Capture Base</td><td rowspan=1 colspan=1>12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>18 Tran dai hon,chien thuät, XP cao hor</td></tr></table>",
+        "bbox": [
+            126,
+            296,
+            954,
+            370
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "▪ ModeMultiplier: ",
+        "text_level": 1,
+        "bbox": [
+            134,
+            391,
+            316,
+            409
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Deathmatch $= 1 . 0$ • Capture Base $= 1 . 2$ ",
+        "bbox": [
+            170,
+            421,
+            375,
+            470
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "WinFactor: 1.2 khi thắng, 1.0 khi thua. ",
+        "bbox": [
+            131,
+            480,
+            518,
+            501
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "▪ QuestBonus: • Daily Quest $= + 3 0$ XP (khoảng 2‒3 trận). • Weekly Quest $= + 1 5 0$ XP (khoảng 8‒10 trận). ",
+        "bbox": [
+            131,
+            513,
+            609,
+            592
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Level Progression (ước tính) ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            632,
+            405,
+            651
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• XP per Level $= 1 0 0$ XP.   \n• Target Level: 50‒60 cấp / Season.   \n• Completion Time: ◦ Casual: ${ \\sim } 1 . 5 { - 2 }$ tuần để đạt lv30. ◦ Active: 5‒6 tuần đạt lv50 (max). ",
+        "bbox": [
+            170,
+            663,
+            538,
+            804
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Reward Distribution: ",
+        "text_level": 1,
+        "bbox": [
+            127,
+            844,
+            336,
+            863
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "• Free Track: ◦ Coin (đều đặn mỗi 5 lv). ◦ Warp thường (Coin-based gacha). ",
+        "bbox": [
+            170,
+            875,
+            555,
+            955
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "◦ Decal thường.   \n◦ Một số Artifact shard. ",
+        "bbox": [
+            212,
+            34,
+            441,
+            84
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Paid Track: ",
+        "text_level": 1,
+        "bbox": [
+            171,
+            96,
+            311,
+            114
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "◦ Diamond (refund một phần phí BP).   \n◦ Warp Premium (Diamond-based gacha).   \n◦ Ticket Gen-AI (tạo Decal/Companion).   \n◦ Decal Premium (Seasonal/LE).   \n◦ Skin Premium (ở milestone cuối: lv50). ",
+        "bbox": [
+            210,
+            125,
+            614,
+            267
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Ví dụ milestone (Season length $5 0 \\left. \\mathbf { v } \\right.$ ) ",
+        "text_level": 1,
+        "bbox": [
+            126,
+            307,
+            494,
+            327
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "table",
+        "img_path": "images/c2aa1e877aa3a6da9321b10515591942b609320417a3553dabed095c98d0e33a.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Level</td><td rowspan=1 colspan=1>Free Track</td><td rowspan=1 colspan=1>Paid Track</td></tr><tr><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>Coin X200</td><td rowspan=1 colspan=1>Coin X500 + Ticket Gen-Al</td></tr><tr><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>Warp thuong X1</td><td rowspan=1 colspan=1>Warp Premium X1</td></tr><tr><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1>Decal thuong</td><td rowspan=1 colspan=1>Decal Premium</td></tr><tr><td rowspan=1 colspan=1>20</td><td rowspan=1 colspan=1>Coin ×500</td><td rowspan=1 colspan=1>Ticket Gen-Al ×2</td></tr><tr><td rowspan=1 colspan=1>30</td><td rowspan=1 colspan=1>Artifact shard ×10</td><td rowspan=1 colspan=1>Warp Premium ×2</td></tr><tr><td rowspan=1 colspan=1>40</td><td rowspan=1 colspan=1>Warp thuong ×2</td><td rowspan=1 colspan=1>Coin X 1000 + Ticket Gen-Al</td></tr><tr><td rowspan=1 colspan=1>50</td><td rowspan=1 colspan=1>Coin ×1000</td><td rowspan=1 colspan=1>Skin Premium (LE)</td></tr></table>",
+        "bbox": [
+            127,
+            355,
+            900,
+            552
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Monetization Hooks ",
+        "text_level": 1,
+        "bbox": [
+            126,
+            601,
+            328,
+            620
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "• Paid Upgrade: 300‒500 Diamond/Season (\\~5‒7 USD).   \n• BP Boost: mua thêm “ $^ { 6 6 } + 1 0$ lv” hoặc $^ { 6 6 } { + } 1 0 0 0 \\times \\mathsf { P } ^ { 9 }$ ” bằng Diamond.   \n• Engagement Loop: Paid track gắn Gen-AI & Skin để tạo động lực nạp. ",
+        "bbox": [
+            170,
+            630,
+            850,
+            713
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "3. Guardrails (Chống Pay-to-Win) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            792,
+            486,
+            819
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "1. Tank Unlock ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            836,
+            260,
+            858
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Tất cả Tank có thể mua bằng Coin.   \n▪ Thời gian mở tank đầu tiên $\\leqslant 3$ ngày; tank meta $\\leqslant 2$ tuần. ",
+        "bbox": [
+            129,
+            866,
+            702,
+            917
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "2. Artifact Balance (optional) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            935,
+            415,
+            957
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "PvP Ranked: giới hạn Epic trở xuống.   \nLegendary/Outstanding chỉ kích hoạt trong PvE/Event. ",
+        "bbox": [
+            129,
+            34,
+            670,
+            85
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "3. Cosmetic Economy ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            104,
+            335,
+            125
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Warp/Decal/Skin không buff chỉ số. ",
+        "bbox": [
+            129,
+            133,
+            489,
+            153
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "4. Ads vs Gameplay ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            173,
+            311,
+            194
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Giá trị $\\mathsf { A d s } \\leqslant 2 0 \\%$ thu nhập Coin trung bình/ngày để tránh bypass gameplay. ",
+        "bbox": [
+            122,
+            202,
+            843,
+            222
+        ],
+        "page_idx": 7
+    }
+]

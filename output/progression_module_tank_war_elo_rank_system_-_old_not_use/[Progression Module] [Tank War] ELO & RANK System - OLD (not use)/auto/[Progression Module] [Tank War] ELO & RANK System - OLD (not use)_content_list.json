@@ -1,0 +1,336 @@
+[
+    {
+        "type": "text",
+        "text": "[Progression Module] [Tank War] ELO & RANK System - OLD (not use) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            848,
+            169
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "TANK WAR - ELO & RANK SYSTEM DESIGN ",
+        "bbox": [
+            45,
+            194,
+            451,
+            214
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: 1.0 Ngày cập nhật: 09.07.2025 Người phụ trách: QuocTA ",
+        "bbox": [
+            45,
+            225,
+            304,
+            292
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/19e38d2694fe3d181b883a66d54b10303fcba8e51b32cc6435f8f86c94b20f83.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phien ban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>09.07.2025Tao file</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>QuocTA</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>",
+        "bbox": [
+            47,
+            321,
+            954,
+            421
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục đích thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            469,
+            240,
+            489
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Thiết lập hệ thống điểm Elo kèm hệ thống Rank dựa trên phong cách MOBA, nhằm tăng tính cạnh tranh, háo hứng khi leo hạng và duy trì độ hút trong game Tank War. ",
+        "bbox": [
+            45,
+            500,
+            909,
+            544
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Hệ thống Elo ",
+        "bbox": [
+            48,
+            583,
+            200,
+            602
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.1 Cách tính điểm ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            621,
+            250,
+            642
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Elo mặc định khi bắt đầu: 1000   \n• Chiến thắng: $+ 2 0$   \n• Thua trận: -15   \n• Disconnect: $^ { - 1 5 + }$ thay bằng bot   \n• $\\mathbb { A } \\mathbb { F } \\mathbb { K } > \\mathbb { X }$ phút đầu trận: xem như Disconnect ",
+        "bbox": [
+            48,
+            650,
+            494,
+            794
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.2 Tối đa/ Tối thiểu ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            811,
+            260,
+            833
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Elo tối thiểu: 500 • Elo tối đa: không giới hạn ",
+        "bbox": [
+            48,
+            841,
+            318,
+            892
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2.3 Có độ điều chỉnh ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            910,
+            267,
+            932
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Có thể dựa trên chênh lệch Elo giữa hai đội: ",
+        "bbox": [
+            48,
+            941,
+            486,
+            960
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "◦ Thắng trước đội cao hơn: $+ 2 5$ , thua -10   \n◦ Thắng trước đội thấp hơn: $+ 1 5$ , thua -20 ",
+        "bbox": [
+            89,
+            33,
+            503,
+            85
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Có thể lựa chọn sử dụng trong v1.2 trở đi ",
+        "bbox": [
+            50,
+            95,
+            461,
+            115
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Hệ thống Rank ",
+        "bbox": [
+            48,
+            154,
+            220,
+            175
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3.1 Cấu trúc Rank ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            194,
+            239,
+            215
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/4ef0e9ac59770e50941f2943c81194dad754e8cc8ccdb2bfb3702c825f1d3db7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Rank</td><td rowspan=1 colspan=1> Elo Range</td><td rowspan=1 colspan=1>Sub-division</td><td rowspan=1 colspan=1>Bieu tuong</td></tr><tr><td rowspan=1 colspan=1>Bronze</td><td rowspan=1 colspan=1>500-799</td><td rowspan=1 colspan=1>三 =, </td><td rowspan=1 colspan=1>←</td></tr><tr><td rowspan=1 colspan=1>Silver</td><td rowspan=1 colspan=1>800-999</td><td rowspan=1 colspan=1>三 =,</td><td rowspan=1 colspan=1>→</td></tr><tr><td rowspan=1 colspan=1>Gold</td><td rowspan=1 colspan=1>1000 - 1199</td><td rowspan=1 colspan=1>, 1</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Platinum</td><td rowspan=1 colspan=1>1200 - 1399</td><td rowspan=1 colspan=1>三 ,1</td><td rowspan=1 colspan=1>★</td></tr><tr><td rowspan=1 colspan=1>Diamond</td><td rowspan=1 colspan=1>1400 - 1599</td><td rowspan=1 colspan=1>三, , I</td><td rowspan=1 colspan=1>★★</td></tr><tr><td rowspan=1 colspan=1>Master</td><td rowspan=1 colspan=1>1600 - 1799</td><td rowspan=1 colspan=1>,</td><td rowspan=1 colspan=1>★★★</td></tr><tr><td rowspan=1 colspan=1>Grandmaster</td><td rowspan=1 colspan=1>1800+</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>☆</td></tr></table>",
+        "bbox": [
+            45,
+            242,
+            579,
+            438
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3.2 Quy tắc thăng hạng ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            458,
+            299,
+            482
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Tại mỗi mốc sub-rank ( $\\lvert \\lvert 1 \\rvert  \\lvert 1 \\rvert  \\lvert \\lvert \\xrightarrow { } \\lvert \\lvert$ rank tiếp theo): ◦ Cần đạt ngưỡng Elo quy định ◦ Thắng 3/5 trận cuối để được thăng (hoặc quy tắc linh hoạt) ",
+        "bbox": [
+            48,
+            489,
+            685,
+            570
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3.3 Quy tắc giữ hạng / rơi hạng ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            589,
+            378,
+            611
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Tụt Rank khi Elo thấp hơn mức Rank hiện tại $> 5 0$ Elo trong 5 trận liên tiếp • Không tụt Rank trong Gold trở xuống Silver (giữ Rank) • Master trở xuống Diamond được bật điều kiện tụt Rank. ",
+        "bbox": [
+            48,
+            619,
+            771,
+            700
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3.4 Season Reset ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            719,
+            232,
+            739
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Có thể reset Rank theo mùa (dự kiến 3 tháng / mùa).   \n• Elo sẽ bị soft reset về mốc trung bình tống hợp. ",
+        "bbox": [
+            48,
+            747,
+            567,
+            800
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Hiển thị & UI ",
+        "bbox": [
+            48,
+            839,
+            198,
+            858
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Hiển thị Rank hiện tại ngay trong lobby   \n• Sau mỗi trận, thông báo thắng/thua $^ +$ cập nhật điểm Elo và Rank   \n• Biểu tượng Rank dễ nhận biết, tăng hứng thú ",
+        "bbox": [
+            50,
+            869,
+            688,
+            950
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Dự phòng về Smurf / đều hạng không đúng ",
+        "bbox": [
+            47,
+            53,
+            484,
+            73
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Có thể dùng thuật toán để điều chỉnh nhanh Elo của người chơi có winrate cao bất thường trong 10 trận đầu ",
+        "bbox": [
+            48,
+            83,
+            914,
+            126
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Đặt giới hạn vào lobby theo Rank (v1.2) ",
+        "bbox": [
+            50,
+            136,
+            447,
+            157
+        ],
+        "page_idx": 2
+    }
+]

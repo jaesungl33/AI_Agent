@@ -1,0 +1,588 @@
+[
+    {
+        "type": "text",
+        "text": "[Combat Module] [Tank War] Hệ Thống Nâng Cấp Tank In-Match ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            841,
+            169
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "HỆ THỐNG NÂNG CẤP XE TANK IN-MATCH ",
+        "bbox": [
+            45,
+            192,
+            452,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: v1.2 ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            225,
+            202,
+            245
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Người tạo file: Kent ",
+        "bbox": [
+            47,
+            254,
+            279,
+            276
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ngày cập nhật: 22 - 09 - 2025 ",
+        "bbox": [
+            48,
+            285,
+            329,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/e6b562e146e5f61d6ab03a6996d0000a59f1d667f8081572c1ac445ef8471ec9.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguireview</td><td rowspan=1 colspan=1>Duyét</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>29-06-2025</td><td rowspan=1 colspan=1>Tao file</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Forrmat lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>22-09-2025</td><td rowspan=1 colspan=1> Dieu chinh lai chi so va so lan nang cap</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            45,
+            333,
+            936,
+            582
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Tổng quan hệ thống ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            645,
+            360,
+            673
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Hệ thống nâng cấp xe Tank trong trận giúp người chơi tối ưu hóa chiến thuật theo diễn biến trận đấu. ",
+        "bbox": [
+            50,
+            682,
+            934,
+            725
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi trận có thời lượng tối đa: 4 phút. ",
+        "bbox": [
+            50,
+            734,
+            422,
+            755
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi xe Tank được phép nâng cấp tối đa 12 lần cho 4 Stats - Mỗi Stat sẽ có 3 level trong màn chơi. ",
+        "bbox": [
+            50,
+            764,
+            942,
+            808
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Sau khi trận kết thúc, toàn bộ chỉ số trở về mặc định ban đầu. ",
+        "bbox": [
+            52,
+            817,
+            670,
+            840
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Hệ thống nâng cấp trong trận tạo ra chiều sâu chiến thuật mỗi trận, giúp người chơi thích nghi với nhiều tình huống và phong cách Tank khác nhau. ",
+        "bbox": [
+            48,
+            850,
+            917,
+            894
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục lục ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            34,
+            190,
+            59
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Các thuộc tính được phép nâng cấp   \n4. Nguyên tắc thiết kế   \n5. Bảng tăng chỉ số theo lần nâng 5.1 Cấu trúc tăng mỗi lần nâng cấp (Unit $= \\%$ so với base) Scout (cơ động ‒ dồn nhịp bắn) Assault (toàn diện ‒ nhịp giao tranh chính) Heavy (chống chịu ‒ giữ tuyến) ",
+        "bbox": [
+            85,
+            121,
+            579,
+            313
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Quy tắc stack Ví dụ: ",
+        "bbox": [
+            87,
+            323,
+            228,
+            369
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "7. Ghi chú thiết kế ",
+        "bbox": [
+            87,
+            380,
+            244,
+            398
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Các thuộc tính được phép nâng cấp ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            509,
+            563,
+            536
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Chỉ có 4 chỉ số được phép nâng cấp trong trận: ",
+        "bbox": [
+            47,
+            546,
+            483,
+            565
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• HP $=$ Health Points (Tăng lượng máu tối đa) • SPD $=$ Speed (Tăng tốc độ di chuyển) • DMG $=$ Damage (Tăng sát thương cơ bản) • FR $=$ Fire Rate (Tăng tốc độ bắn) ",
+        "bbox": [
+            48,
+            575,
+            489,
+            688
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Nguyên tắc thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            767,
+            350,
+            794
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi loại Tank sẽ nhận được lợi ích khác nhau khi nâng cấp từng thuộc tính.   \n• Trọng số mỗi lần nâng sẽ không đồng đều, nhưng phải đảm bảo WI (Weighted Index) sau nâng đứng trong khung cho phép.   \n• Hiệu quả mỗi lần nâng sẽ tăng tuyến tính, nhưng theo quy tắc “lợi ích giảm dần” (diminishing returns). ",
+        "bbox": [
+            45,
+            802,
+            925,
+            930
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Bảng tăng chỉ số theo lần nâng ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            73,
+            503,
+            102
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "5.1 Cấu trúc tăng mỗi lần nâng cấp (Unit $= \\%$ so với base) ",
+        "text_level": 1,
+        "bbox": [
+            82,
+            117,
+            717,
+            140
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Scout (cơ động ‒ dồn nhịp bắn) ",
+        "bbox": [
+            45,
+            153,
+            383,
+            180
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/cfe8f668314cfa9ff12e770c2895a3a6b7395e7a5c825bac319ab6bc41481ac4.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1> Stat</td><td rowspan=1 colspan=1>L1 (%)</td><td rowspan=1 colspan=1>L2 (%)</td><td rowspan=1 colspan=1>L3 (%)</td><td rowspan=1 colspan=1>Tong cong</td></tr><tr><td rowspan=1 colspan=1>HP</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>3</td><td rowspan=1 colspan=1>12.50%</td></tr><tr><td rowspan=1 colspan=1>SPD</td><td rowspan=1 colspan=1>9</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>20.20%</td></tr><tr><td rowspan=1 colspan=1>DMG</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>19.10%</td></tr><tr><td rowspan=1 colspan=1>FR</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>23.60%</td></tr></table>",
+        "bbox": [
+            47,
+            205,
+            713,
+            329
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• DPS multiplier $( \\mathsf { D M G } \\times \\mathsf { F R } )$ khi max: $\\times 1 . 4 7 2 $ đóng vai trò như xạ thủ ◦ Ví dụ cụ thể (DPS): ",
+        "bbox": [
+            50,
+            348,
+            747,
+            398
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Final Stat Multiplier $= ( 1 + P 1 ) \\times ( 1 + P 2 ) \\times ( 1 + P 3 )$   \n▪ Với Scout ‒ DMG: $( 1 + 0 . 0 7 ) \\times ( 1 + 0 . 0 6 ) \\times ( 1 + 0 . 0 5 ) { = } 1 . 1 9 1 ( k h o 3 n g 1 9 . 1 \\% )$ Với Scout ‒ FR: $( 1 + 0 . 1 0 ) \\times ( 1 + 0 . 0 7 ) \\times ( 1 + 0 . 0 5 ) { = } 1 . 2 3 6 ( k h o 3 n g 2 3 . 6 ^ { \\circ } \\theta )$   \n▪ Nhân hai multiplier lại để ra DPS multiplier • DPS Multiplier $=$ DMG Multiplier $\\times F R$ Multiplier • Với Scout: $\\scriptstyle 1 . 1 9 1 \\times 1 . 2 3 6 = 1 . 4 7 2 1$ (1.472 nghĩa là DPS khi max upgrade sẽ ca hon ${ \\sim } 4 7 . 2 \\%$ so voi base) ",
+        "bbox": [
+            127,
+            409,
+            915,
+            605
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• SPD cao để bảo toàn “hit-and-run”, HP chỉ đủ chống sốc sát thương. ",
+        "bbox": [
+            48,
+            614,
+            734,
+            635
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Assault (toàn diện ‒ nhịp giao tranh chính) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            680,
+            505,
+            707
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/f5a95159ad2ae55c14db79eff7c1ade55bc228ac11df11f349a2e55e43baa49e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Stat</td><td rowspan=1 colspan=1>L1(%)</td><td rowspan=1 colspan=1>L2 (%)</td><td rowspan=1 colspan=1>L3 (%)</td><td rowspan=1 colspan=1>Tong cong</td></tr><tr><td rowspan=1 colspan=1>HP</td><td rowspan=1 colspan=1>8</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>21.30%</td></tr><tr><td rowspan=1 colspan=1>SPD</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>3</td><td rowspan=1 colspan=1>13.50%</td></tr><tr><td rowspan=1 colspan=1>DMG</td><td rowspan=1 colspan=1>8</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>22.50%</td></tr><tr><td rowspan=1 colspan=1>FR</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>19.10%</td></tr></table>",
+        "bbox": [
+            47,
+            732,
+            712,
+            854
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• DPS multiplier khi max: ×1.459 — bám sát Scout nhưng bền hơn (HP cao hơn) để giữ vai “carry mid-game” ",
+        "bbox": [
+            47,
+            875,
+            914,
+            919
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Heavy (chống chịu ‒ giữ tuyến) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            32,
+            380,
+            57
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/6e25c1bacd1f9fe7599fe2d53a2d4bbf7ce13ac619ee10a27a7aff0db7a037d7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Stat</td><td rowspan=1 colspan=1>L1 (%)</td><td rowspan=1 colspan=1>L2 (%)</td><td rowspan=1 colspan=1>L3 (%)</td><td rowspan=1 colspan=1>Tong cong</td></tr><tr><td rowspan=1 colspan=1>HP</td><td rowspan=1 colspan=1>12</td><td rowspan=1 colspan=1>9</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>29.40%</td></tr><tr><td rowspan=1 colspan=1>SPD</td><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>3</td><td rowspan=1 colspan=1>2</td><td rowspan=1 colspan=1>9.30%</td></tr><tr><td rowspan=1 colspan=1>DMG</td><td rowspan=1 colspan=1>7</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>19.10%</td></tr><tr><td rowspan=1 colspan=1>FR</td><td rowspan=1 colspan=1>6</td><td rowspan=1 colspan=1>5</td><td rowspan=1 colspan=1>4</td><td rowspan=1 colspan=1>15.80%</td></tr></table>",
+        "bbox": [
+            47,
+            86,
+            712,
+            210
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• DPS multiplier khi max: $\\times 1 . 3 7 9$ — thấp hơn 2 class kia để không lấn tuyến, bù lại EHP cao nhất $\\left( \\mathsf { H P } + 2 9 . 4 \\% \\right)$ . ",
+        "bbox": [
+            48,
+            228,
+            934,
+            272
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6. Quy tắc stack ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            353,
+            269,
+            379
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi lần nâng cấp sẽ cộng dồn (stack) với lần trước đó. ",
+        "bbox": [
+            48,
+            388,
+            587,
+            409
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Công thức tính tổng hiệu ứng cộng dồn: ",
+        "bbox": [
+            50,
+            419,
+            449,
+            440
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Trong đó: ",
+        "bbox": [
+            47,
+            480,
+            139,
+            500
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• P1, P2, ..., Pn: phần trăm tăng của từng lần nâng cấp. • n: số lần nâng (tối đa 10) ",
+        "bbox": [
+            47,
+            509,
+            584,
+            560
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Kết quả là tỷ lệ phần trăm tổng cộng được cộng dồn theo cấp số nhân, phản ánh đúng đặc điểm giảm dần lợi ích. ",
+        "bbox": [
+            43,
+            570,
+            936,
+            614
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Ví dụ: ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            632,
+            106,
+            651
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Giả sử Scout Tank nâng Fire Rate theo các mốc: ",
+        "bbox": [
+            48,
+            660,
+            520,
+            680
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Lần 1: $+ 1 0 \\%$ ◦ Lần 2: +7% ◦ Lần 3: +5% ",
+        "bbox": [
+            89,
+            691,
+            234,
+            771
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Tính: ",
+        "bbox": [
+            48,
+            783,
+            127,
+            801
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Total Bonus $( \\% ) = ( 1 + 0 . 1 ) \\times ( 1 + 0 . 0 7 ) \\times ( 1 + 0 . 0 5 ) \\cdot 1$ $= 1 . 1 \\times 1 . 0 7 \\times 1 . 0 5 - 1$ $\\approx 1 . 2 3 5 8 5 - 1 = 0 . 2 3 5 = 2 3 . 5 8 5 \\% \\sim 2 3 . 6 \\%$ ",
+        "bbox": [
+            90,
+            811,
+            617,
+            892
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Sau 3 lần nâng, Fire Rate tăng tổng cộng khoảng $2 3 . 6 \\%$ , chứ không phải $1 0 \\% + 7 \\% + 5 \\%$ $= 2 2 \\%$ như cộng tuyến tính. ",
+        "bbox": [
+            89,
+            903,
+            941,
+            947
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "7. Ghi chú thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            60,
+            299,
+            86
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Bảng nâng cấp sẽ được áp dụng linh hoạt trong Mode PvE/PvP. ",
+        "bbox": [
+            52,
+            97,
+            664,
+            117
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Tối ưu hóa trải nghiệm của người chơi bằng việc chọn đồng bộ với vai trò Class Tank. ",
+        "bbox": [
+            50,
+            126,
+            863,
+            148
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Phần thưởng (vàng, XP trong trận) sẽ dùng để mở khóa các lần nâng. ",
+        "bbox": [
+            50,
+            157,
+            722,
+            178
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "• Hệ thống có thể mở rộng sau này (Skill, Aura, Passive\u0000) ",
+        "bbox": [
+            50,
+            188,
+            604,
+            209
+        ],
+        "page_idx": 4
+    }
+]

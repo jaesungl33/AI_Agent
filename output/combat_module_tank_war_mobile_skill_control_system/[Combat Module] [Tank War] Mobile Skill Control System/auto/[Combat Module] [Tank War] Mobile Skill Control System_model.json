@@ -1,0 +1,1118 @@
+[
+    {
+        "layout_dets": [
+            {
+                "category_id": 1,
+                "poly": [
+                    78,
+                    1411,
+                    1465,
+                    1411,
+                    1465,
+                    1509,
+                    78,
+                    1509
+                ],
+                "score": 0.963
+            },
+            {
+                "category_id": 5,
+                "poly": [
+                    78,
+                    780,
+                    1544,
+                    780,
+                    1544,
+                    1276,
+                    78,
+                    1276
+                ],
+                "score": 0.947,
+                "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>16-09-2025</td><td rowspan=1 colspan=1>Tao file</td><td rowspan=1 colspan=1> linhttd </td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>"
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    76,
+                    193,
+                    1455,
+                    193,
+                    1455,
+                    398,
+                    76,
+                    398
+                ],
+                "score": 0.947
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    83,
+                    1330,
+                    374,
+                    1330,
+                    374,
+                    1390,
+                    83,
+                    1390
+                ],
+                "score": 0.919
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    79,
+                    451,
+                    999,
+                    451,
+                    999,
+                    503,
+                    79,
+                    503
+                ],
+                "score": 0.919
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    106,
+                    597,
+                    476,
+                    597,
+                    476,
+                    645,
+                    106,
+                    645
+                ],
+                "score": 0.901
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    85,
+                    1522,
+                    232,
+                    1522,
+                    232,
+                    1565,
+                    85,
+                    1565
+                ],
+                "score": 0.887
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    81,
+                    1958,
+                    311,
+                    1958,
+                    311,
+                    2015,
+                    81,
+                    2015
+                ],
+                "score": 0.827
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    107,
+                    529,
+                    321,
+                    529,
+                    321,
+                    573,
+                    107,
+                    573
+                ],
+                "score": 0.819
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    109,
+                    669,
+                    575,
+                    669,
+                    575,
+                    719,
+                    109,
+                    719
+                ],
+                "score": 0.798
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    82,
+                    1588,
+                    1538,
+                    1588,
+                    1538,
+                    1835,
+                    82,
+                    1835
+                ],
+                "score": 0.796
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    81,
+                    1958,
+                    311,
+                    1958,
+                    311,
+                    2015,
+                    81,
+                    2015
+                ],
+                "score": 0.095
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    301,
+                    596,
+                    352,
+                    596,
+                    352,
+                    645,
+                    301,
+                    645
+                ],
+                "score": 0.32,
+                "latex": "\\textcircled{9}"
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    74.0,
+                    194.0,
+                    1459.0,
+                    194.0,
+                    1459.0,
+                    281.0,
+                    74.0,
+                    281.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    74.0,
+                    306.0,
+                    607.0,
+                    306.0,
+                    607.0,
+                    401.0,
+                    74.0,
+                    401.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    72.0,
+                    1320.0,
+                    383.0,
+                    1320.0,
+                    383.0,
+                    1404.0,
+                    72.0,
+                    1404.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    71.0,
+                    1950.0,
+                    319.0,
+                    1950.0,
+                    319.0,
+                    2020.0,
+                    71.0,
+                    2020.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    104.0,
+                    525.0,
+                    326.0,
+                    525.0,
+                    326.0,
+                    576.0,
+                    104.0,
+                    576.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    71.0,
+                    1407.0,
+                    1464.0,
+                    1407.0,
+                    1464.0,
+                    1463.0,
+                    71.0,
+                    1463.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    71.0,
+                    1463.0,
+                    206.0,
+                    1463.0,
+                    206.0,
+                    1514.0,
+                    71.0,
+                    1514.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    75.0,
+                    451.0,
+                    1001.0,
+                    451.0,
+                    1001.0,
+                    503.0,
+                    75.0,
+                    503.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    96.0,
+                    589.0,
+                    300.0,
+                    589.0,
+                    300.0,
+                    648.0,
+                    96.0,
+                    648.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    353.0,
+                    591.0,
+                    481.0,
+                    591.0,
+                    481.0,
+                    647.0,
+                    353.0,
+                    647.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    81.0,
+                    1518.0,
+                    236.0,
+                    1518.0,
+                    236.0,
+                    1568.0,
+                    81.0,
+                    1568.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    102.0,
+                    665.0,
+                    580.0,
+                    665.0,
+                    580.0,
+                    716.0,
+                    102.0,
+                    716.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    85.0,
+                    1605.0,
+                    103.0,
+                    1605.0,
+                    103.0,
+                    1625.0,
+                    85.0,
+                    1625.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    123.0,
+                    1588.0,
+                    1115.0,
+                    1588.0,
+                    1115.0,
+                    1639.0,
+                    123.0,
+                    1639.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    116.0,
+                    1657.0,
+                    1016.0,
+                    1657.0,
+                    1016.0,
+                    1712.0,
+                    116.0,
+                    1712.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    87.0,
+                    1747.0,
+                    102.0,
+                    1747.0,
+                    102.0,
+                    1763.0,
+                    87.0,
+                    1763.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    116.0,
+                    1725.0,
+                    1536.0,
+                    1725.0,
+                    1536.0,
+                    1787.0,
+                    116.0,
+                    1787.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    122.0,
+                    1781.0,
+                    452.0,
+                    1781.0,
+                    452.0,
+                    1839.0,
+                    122.0,
+                    1839.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    71.0,
+                    1950.0,
+                    319.0,
+                    1950.0,
+                    319.0,
+                    2020.0,
+                    71.0,
+                    2020.0
+                ],
+                "score": 1.0,
+                "text": ""
+            }
+        ],
+        "page_info": {
+            "page_no": 0,
+            "width": 1653,
+            "height": 2337
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "category_id": 5,
+                "poly": [
+                    78,
+                    637,
+                    1542,
+                    637,
+                    1542,
+                    2285,
+                    78,
+                    2285
+                ],
+                "score": 0.977,
+                "html": "<table><tr><td rowspan=1 colspan=1>ControlType</td><td rowspan=1 colspan=1>Dac diem</td><td rowspan=1 colspan=1>Use-case</td><td rowspan=1 colspan=1>Mobile Control</td><td rowspan=1 colspan=1>Auto Focus</td></tr><tr><td rowspan=1 colspan=1>Instant(Kich hoatngay）</td><td rowspan=1 colspan=1>Cast ngay khi bam Khóng bat buocphaitarget/huong/vi tride kich hoatPhan hoi nhanh</td><td rowspan=1 colspan=1>Buff ban than(giap,toc, hoimau) Trang thai (tanghinh,bat tu)</td><td rowspan=1 colspan=1>- Tap nut skill= kichhoat ngay- Khong can giu/kéotha</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Direction(Ky nangtheohuong)</td><td rowspan=1 colspan=1> Yéu cau xac dinhhu6ng Skillshot c6 thé bine</td><td rowspan=1 colspan=1> Skillshot tam xa Dash dinh huongNé tranh</td><td rowspan=1 colspan=1> Manual: Nhän&amp; giu→hien vong dinh huóngKéo tay de chinhhuóng -&gt; Tha = cast theo huong chon</td><td rowspan=1 colspan=1>· C6 Target trongpham vi Kich hoat -&gt;Hien thinhanh dinh huongngay khi bam -&gt;Dinh huong Cast skilltheo vi tri cua Targetngay thoi diem kichhoat· Khóng c6 Target trong pham vi: Kich hoat -&gt; Cast skilltheo huong mäcdinh (truoc mat)theo pham vi toi dacua skill</td></tr><tr><td rowspan=1 colspan=1>Ground(Chon vitr1)</td><td rowspan=1 colspan=1> Yéu cäu chon 1diem tren ban doTao hieu ung dienrong (AOE)</td><td rowspan=1 colspan=1>DatbayGoi ky näng AOE(Meteor,Tornado)Zone Control</td><td rowspan=1 colspan=1>Manual: Nhän &amp; giu→hién vong chon khuvuc -&gt; Kéo tay de xäcdinh vi tri Tha = casttai vi tri chon</td><td rowspan=2 colspan=1>· C6 Target trongpham vi Auto cast skill taichan tuong dich bilock target</td></tr><tr><td rowspan=1 colspan=1></td><td></td><td></td><td></td></tr></table>"
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    82,
+                    532,
+                    448,
+                    532,
+                    448,
+                    589,
+                    82,
+                    589
+                ],
+                "score": 0.902
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    147,
+                    202,
+                    268,
+                    202,
+                    268,
+                    240,
+                    147,
+                    240
+                ],
+                "score": 0.651
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    148,
+                    136,
+                    379,
+                    136,
+                    379,
+                    174,
+                    148,
+                    174
+                ],
+                "score": 0.464
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1063,
+                    2155,
+                    1089,
+                    2155,
+                    1089,
+                    2182,
+                    1063,
+                    2182
+                ],
+                "score": 0.79,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1057,
+                    810,
+                    1083,
+                    810,
+                    1083,
+                    838,
+                    1057,
+                    838
+                ],
+                "score": 0.65,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1055,
+                    1310,
+                    1081,
+                    1310,
+                    1081,
+                    1338,
+                    1055,
+                    1338
+                ],
+                "score": 0.59,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1359,
+                    1736,
+                    1392,
+                    1736,
+                    1392,
+                    1763,
+                    1359,
+                    1763
+                ],
+                "score": 0.56,
+                "latex": "_ { - > }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    966,
+                    1310,
+                    1000,
+                    1310,
+                    1000,
+                    1338,
+                    966,
+                    1338
+                ],
+                "score": 0.51,
+                "latex": "_ - >"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1142,
+                    2010,
+                    1178,
+                    2010,
+                    1178,
+                    2039,
+                    1142,
+                    2039
+                ],
+                "score": 0.51,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    926,
+                    2107,
+                    962,
+                    2107,
+                    962,
+                    2135,
+                    926,
+                    2135
+                ],
+                "score": 0.47,
+                "latex": "\\mathbf { \\varepsilon } _ { - > }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1142,
+                    1166,
+                    1178,
+                    1166,
+                    1178,
+                    1195,
+                    1142,
+                    1195
+                ],
+                "score": 0.45,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1410,
+                    1371,
+                    1446,
+                    1371,
+                    1446,
+                    1399,
+                    1410,
+                    1399
+                ],
+                "score": 0.39,
+                "latex": "- >"
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    74.0,
+                    525.0,
+                    451.0,
+                    525.0,
+                    451.0,
+                    594.0,
+                    74.0,
+                    594.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    141.0,
+                    196.0,
+                    273.0,
+                    196.0,
+                    273.0,
+                    247.0,
+                    141.0,
+                    247.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    143.0,
+                    131.0,
+                    384.0,
+                    131.0,
+                    384.0,
+                    179.0,
+                    143.0,
+                    179.0
+                ],
+                "score": 1.0,
+                "text": ""
+            }
+        ],
+        "page_info": {
+            "page_no": 1,
+            "width": 1653,
+            "height": 2337
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "category_id": 5,
+                "poly": [
+                    74,
+                    63,
+                    1554,
+                    63,
+                    1554,
+                    1190,
+                    74,
+                    1190
+                ],
+                "score": 0.98,
+                "html": "<table><tr><td rowspan=2 colspan=1></td><td rowspan=2 colspan=1></td><td rowspan=2 colspan=2></td><td rowspan=2 colspan=1>Auto Focus: Nhän -&gt;Hien thi nhanh dinhhuong theo AutoFocus -&gt; Kich hoat</td><td rowspan=1 colspan=1> Khong c6 Target·trong pham viNéu khong locktarget → cast vao</td></tr><tr><td rowspan=1 colspan=1>khoang cäch toi datheo huong joystick.</td></tr><tr><td rowspan=2 colspan=1>Channeling (Duytri)</td><td rowspan=2 colspan=1>Cast ngay lap tuc,duy tri den khi hétthdi gianC6 thé ngat boi Cchoäc khi thä nutMt so skill bätbu@c giu den hetchannel</td><td rowspan=2 colspan=2>Beam (tia laserduytri)Ban lien tuc Hoi mau lien tuc</td><td rowspan=1 colspan=1> Nhän &amp; giu = cast lién</td><td rowspan=1 colspan=1>Néu khong có：</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>tucNhän lai= cancelC6 thé chinh huóngbang joystickC6 thé bi cancel khi bi khöng ché (define tuyskill)</td><td rowspan=1 colspan=1>TargetBeam skill → bäntheo huong macdinh (truoc mät) taikhoang cach toi da.AOE Skill: dät vungchannel ngay tru8cmät caster theo pham vi preset(config 70% Range)cua Skill</td></tr><tr><td rowspan=1 colspan=1>CancelSkill</td><td rowspan=1 colspan=5>·Khi dang Hold skill sé hién thi button Cancel &amp; góc phai trén cung cua man hinh，Cancel bäng cách kéo joystick di chuyén lén nut cancel (X).</td></tr></table>"
+            },
+            {
+                "category_id": 5,
+                "poly": [
+                    73,
+                    1460,
+                    1547,
+                    1460,
+                    1547,
+                    2263,
+                    73,
+                    2263
+                ],
+                "score": 0.976,
+                "html": "<table><tr><td rowspan=1 colspan=1>Control Type</td><td rowspan=1 colspan=1>UI</td><td rowspan=1 colspan=1>UX Behavior</td><td rowspan=1 colspan=1>Reference</td></tr><tr><td rowspan=1 colspan=1>Instant (Tapcast)</td><td rowspan=1 colspan=1>：  Icon skill säng lén khisan sang.</td><td rowspan=1 colspan=1>- Tap = cast ngay, khöng cänkéo.- Däm bao latency = 0.- Nguoichoi phai cäm thayresponsive.</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Direction(Skillshot)</td><td rowspan=1 colspan=1>：   Hien thi pham vi toi dacast cua skill theo hinhtron,bän kinh theo dódai toi da cua skill (1mau mäc dinh)·  Hien thi Duong Cast cuaskill (1 mau mäc dinh)</td><td rowspan=1 colspan=1>- Giu = hien huóng.- Kéo = thay doi huongrealtime.- Tha = cast theo huong.- Auto Aim Option: néu chitap → auto lock target gännhat.</td><td rowspan=1 colspan=1></td></tr></table>"
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    82,
+                    1341,
+                    271,
+                    1341,
+                    271,
+                    1395,
+                    82,
+                    1395
+                ],
+                "score": 0.861
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1310,
+                    243,
+                    1348,
+                    243,
+                    1348,
+                    270,
+                    1310,
+                    270
+                ],
+                "score": 0.82,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    840,
+                    2169,
+                    877,
+                    2169,
+                    877,
+                    2196,
+                    840,
+                    2196
+                ],
+                "score": 0.8,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1324,
+                    928,
+                    1389,
+                    928,
+                    1389,
+                    965,
+                    1324,
+                    965
+                ],
+                "score": 0.78,
+                "latex": "7 0 \\%"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    859,
+                    1571,
+                    886,
+                    1571,
+                    886,
+                    1597,
+                    859,
+                    1597
+                ],
+                "score": 0.75,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1378,
+                    529,
+                    1415,
+                    529,
+                    1415,
+                    559,
+                    1378,
+                    559
+                ],
+                "score": 0.75,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1026,
+                    423,
+                    1050,
+                    423,
+                    1050,
+                    449,
+                    1026,
+                    449
+                ],
+                "score": 0.73,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    958,
+                    230,
+                    992,
+                    230,
+                    992,
+                    257,
+                    958,
+                    257
+                ],
+                "score": 0.72,
+                "latex": "_ { - > }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1038,
+                    1681,
+                    1084,
+                    1681,
+                    1084,
+                    1713,
+                    1038,
+                    1713
+                ],
+                "score": 0.72,
+                "latex": "= 0"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    857,
+                    1878,
+                    882,
+                    1878,
+                    882,
+                    1904,
+                    857,
+                    1904
+                ],
+                "score": 0.65,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    989,
+                    536,
+                    1016,
+                    536,
+                    1016,
+                    563,
+                    989,
+                    563
+                ],
+                "score": 0.65,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    861,
+                    2055,
+                    888,
+                    2055,
+                    888,
+                    2082,
+                    861,
+                    2082
+                ],
+                "score": 0.64,
+                "latex": "\\underline { { \\underline { { \\mathbf { \\delta \\pi } } } } }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    863,
+                    1943,
+                    888,
+                    1943,
+                    888,
+                    1969,
+                    863,
+                    1969
+                ],
+                "score": 0.62,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1113,
+                    85,
+                    1149,
+                    85,
+                    1149,
+                    113,
+                    1113,
+                    113
+                ],
+                "score": 0.32,
+                "latex": "- >"
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    70.0,
+                    1336.0,
+                    278.0,
+                    1336.0,
+                    278.0,
+                    1403.0,
+                    70.0,
+                    1403.0
+                ],
+                "score": 1.0,
+                "text": ""
+            }
+        ],
+        "page_info": {
+            "page_no": 2,
+            "width": 1653,
+            "height": 2337
+        }
+    },
+    {
+        "layout_dets": [
+            {
+                "category_id": 5,
+                "poly": [
+                    76,
+                    61,
+                    1541,
+                    61,
+                    1541,
+                    1227,
+                    76,
+                    1227
+                ],
+                "score": 0.969,
+                "html": "<table><tr><td></td><td>Khi kéo giu, icon skill doi . trang thai (expand).</td><td></td><td></td></tr><tr><td>Ground (AOE select)</td><td>Hien thivong tron bān · kinh AOE tai vi tri chi dinh Mau säc feedback: xanh · (valid),do (invalid). Highlight outline khu . vuc sé anh huong.</td><td>- Giu = hien vong AOE. - Kéo = thay doi vi tri. - Tha = cast. - Auto Mode: tap nhanh →&gt; cast auto duoi chän target hoäc theo huong joystick.</td><td></td></tr><tr><td>Channeling (Hold skill)</td><td>Hien thi pham vi cast theo hinh tron,bän kinh theo pham vi toi da cua skill Beam/laser→vé duong · thäng realtime</td><td>- Giu = duy tri cast. - Tha = cancel.</td><td></td></tr><tr><td>Cancel</td><td>Döi mau hien thi pham vi cast va mau cua dinh huöng skill</td><td></td><td></td></tr></table>"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    573,
+                    810,
+                    611,
+                    810,
+                    611,
+                    839,
+                    573,
+                    839
+                ],
+                "score": 0.79,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    1110,
+                    406,
+                    1148,
+                    406,
+                    1148,
+                    434,
+                    1110,
+                    434
+                ],
+                "score": 0.78,
+                "latex": ""
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    857,
+                    651,
+                    882,
+                    651,
+                    882,
+                    677,
+                    857,
+                    677
+                ],
+                "score": 0.73,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    862,
+                    714,
+                    888,
+                    714,
+                    888,
+                    742,
+                    862,
+                    742
+                ],
+                "score": 0.65,
+                "latex": "\\underline { { \\underline { { \\mathbf { \\delta \\pi } } } } }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    857,
+                    213,
+                    882,
+                    213,
+                    882,
+                    239,
+                    857,
+                    239
+                ],
+                "score": 0.63,
+                "latex": "="
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    863,
+                    278,
+                    888,
+                    278,
+                    888,
+                    304,
+                    863,
+                    304
+                ],
+                "score": 0.59,
+                "latex": "\\underline { { \\underline { { \\mathbf { \\delta \\pi } } } } }"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    862,
+                    341,
+                    887,
+                    341,
+                    887,
+                    368,
+                    862,
+                    368
+                ],
+                "score": 0.51,
+                "latex": "="
+            }
+        ],
+        "page_info": {
+            "page_no": 3,
+            "width": 1653,
+            "height": 2337
+        }
+    }
+]

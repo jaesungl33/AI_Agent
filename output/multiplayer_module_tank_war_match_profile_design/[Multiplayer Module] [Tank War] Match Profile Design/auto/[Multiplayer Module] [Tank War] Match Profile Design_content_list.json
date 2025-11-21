@@ -1,0 +1,372 @@
+[
+    {
+        "type": "text",
+        "text": "[Multiplayer Module] [Tank War] Match Profile Design ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            841,
+            171
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "THÔNG TIN TRẬN ĐẤU ",
+        "bbox": [
+            47,
+            192,
+            267,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: v1.3   \nNgười viết: phucth12 (phucth12)   \nNgày tạo: 03 - 07 - 2025 ",
+        "bbox": [
+            60,
+            226,
+            442,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/c554f39c479693f85bbdecf3ebaa8d466ff8a387e652f853df43a468ca3234c8.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Ngudireview</td><td rowspan=1 colspan=1>Duyet？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-07-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>15-07-2025</td><td rowspan=1 colspan=1> Update limit cac value</td><td rowspan=1 colspan=1> phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.2</td><td rowspan=1 colspan=1>25-07-2025</td><td rowspan=1 colspan=1>Update thong só</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.3</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format laifile+Chuän bi phänDeathmatch</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            45,
+            334,
+            936,
+            700
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục đích thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            722,
+            311,
+            747
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phân định rõ ràng các thông tin nhận được từ bên ngoài trận vào và trong quá trình diễn ra trận đấu. ",
+        "bbox": [
+            45,
+            757,
+            937,
+            800
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Đảm bảo thiết kế có những đặc điểm sau: ",
+        "bbox": [
+            47,
+            810,
+            436,
+            832
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Giữ các thông số đồng nhất ở các loại mode game khác nhau • Những thông số phải có định dạng rõ ràng ",
+        "bbox": [
+            47,
+            841,
+            648,
+            892
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            33,
+            296,
+            58
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Tài liệu được dùng để giúp đội Dev xây dựng thông tin trận đấu phù hợp cho các loại gamemodes khác nhau. ",
+        "bbox": [
+            45,
+            92,
+            835,
+            136
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Tổng quan tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            189,
+            321,
+            215
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Các yếu tố trong 1 match ",
+        "bbox": [
+            87,
+            253,
+            321,
+            272
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. Thông số của user b. Thông số của trận đấu ",
+        "bbox": [
+            107,
+            282,
+            319,
+            328
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Các giá trị theo từng gamemodes ",
+        "bbox": [
+            87,
+            339,
+            388,
+            358
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. Base capture b. Deathmatch ",
+        "bbox": [
+            127,
+            369,
+            260,
+            414
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4 Các yếu tố trong 1 match ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            485,
+            412,
+            511
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. Thông số của user ",
+        "bbox": [
+            85,
+            530,
+            336,
+            554
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/2c2a7a16812c9843ab41dc3d88bab7e3abee05e46e692b42e888d4b266b03e88.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Thanhphan</td><td colspan=\"1\" rowspan=\"1\">Dinhdang</td><td colspan=\"1\" rowspan=\"1\"> Muc dich</td><td colspan=\"1\" rowspan=\"1\">Note</td></tr><tr><td colspan=\"1\" rowspan=\"1\">TeamID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Trän däu dugc chia thanh nhiéu team khácnhau Nhän dang qua ten va mau säc</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Playerlndex</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Xac dinh vi tri cua cac nhan vat trong team</td><td colspan=\"1\" rowspan=\"1\">Moi player c6 1index rieng</td></tr><tr><td colspan=\"1\" rowspan=\"1\">PlayerName</td><td colspan=\"1\" rowspan=\"1\">Chuoi kitu</td><td colspan=\"1\" rowspan=\"1\"> Nhän dang cac players qua qua ten dugc hiénthi trong tran dau</td><td colspan=\"1\" rowspan=\"1\">Tham khao UserProfile Design:[Tank War] UserProfile Design</td></tr><tr><td colspan=\"1\" rowspan=\"1\">AvatarID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Mä so cua avatar nguoi choi</td><td colspan=\"1\" rowspan=\"1\">Tham khao ItemList Design: 目</td></tr><tr><td colspan=\"1\" rowspan=\"1\">SkillIDs</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Ma cua cac skill</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">TankID</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Thé hien mä so class tank Mi player có 1tank gän lien voi ho Nhän dang qua model tank va ten tank</td><td colspan=\"1\" rowspan=\"1\">Ngudi chdichiduoc phép thay d6iTank 8 dau trandau,trong pickscreen</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Gold</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6 tien tung player s8 huu trong quä trinhchoi 1 match</td><td colspan=\"1\" rowspan=\"4\">Thong s6 ca nhan theo tung player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Kill</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6 tank dich dä phä huy</td></tr><tr><td colspan=\"1\" rowspan=\"1\"> KillStreak</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> S6lugng gietlien tiep cua tuing player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Death</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Chi so sδ lan chet cua player</td></tr><tr><td colspan=\"1\" rowspan=\"1\">HitPoints(HP)</td><td colspan=\"1\" rowspan=\"1\">S</td><td colspan=\"1\" rowspan=\"1\"> Mäu hien taicua tank</td><td colspan=\"1\" rowspan=\"10\">Thóng so ca nhantheo tung tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MaxHitPoints</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Mau toi da cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MovementSpeed</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Toc do cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Damage</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Tan cong cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ReloadTime</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Thoi gian nap dan cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">FireRate</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Toc do ban cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ProjectileSpeed</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Toc do dan bay cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Range</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">Pham vi ban cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">MagazineSize</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\"> Kich co cua tank</td></tr><tr><td colspan=\"1\" rowspan=\"1\">ProjectileCount</td><td colspan=\"1\" rowspan=\"1\">S6</td><td colspan=\"1\" rowspan=\"1\">S6 dan ban ra trong 1lan bän</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Fime ptayed</td><td colspan=\"1\" rowspan=\"1\">sithapphan</td><td colspan=\"1\" rowspan=\"1\"> Th8igian choi</td><td colspan=\"1\" rowspan=\"1\">Duge bieu dierr trong game qua s6tunhien,don vitaiy</td></tr></table>",
+        "bbox": [
+            85,
+            582,
+            939,
+            970
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            85,
+            82,
+            932,
+            975
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "b. Thông số của trận đấu ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            126,
+            387,
+            151
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/456df3df009a73051380647c93261ef0fc349275e2562fc3d0539bebf97efd98.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1> Thanhphan</td><td rowspan=1 colspan=1>Dinhdang</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Gia trimacdinh</td><td rowspan=1 colspan=1>Limit</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>MapID</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so map users sé chditren</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>ModelD</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Mä so gamemode cuatran dau</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1> Match Type</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Chi dinh tran däu la däu rank hay thuong</td><td rowspan=1 colspan=1>Thuong:0Rank: 1</td><td rowspan=1 colspan=1>1</td><td rowspan=1 colspan=1>Chi khi däu rankmoi can quantam toi gia triRank W/L</td></tr><tr><td rowspan=1 colspan=1> Max players</td><td rowspan=1 colspan=1>S6</td><td rowspan=1 colspan=1> Xac dinh so nguoi cänthiet dé vao 1 man chdi</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1>10</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Maximumtime</td><td rowspan=1 colspan=1>Hang s6</td><td rowspan=1 colspan=1>Thαi gian chdi toi da Khi thoi gian user thäytrong game dat toinguong nay thi game séket thuc</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Tinh theo 1f= 1s</td></tr></table>",
+        "bbox": [
+            85,
+            175,
+            934,
+            659
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Khi định dạng là Hằng số, giá trị không lệch đi khỏi giá trị mặc định ",
+        "bbox": [
+            60,
+            682,
+            691,
+            703
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5. Các giá trị theo từng gamemodes ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            754,
+            521,
+            782
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "a. Base capture ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            800,
+            257,
+            820
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/ac1daf00f3f6112f98aae382895af4512c3253b211adb6d5710b4bc2f1ca574e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Thänh phän</td><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\">Gia tri</td></tr><tr><td colspan=\"1\" rowspan=\"2\">Team ID</td><td colspan=\"1\" rowspan=\"1\">Doicong:</td><td colspan=\"1\" rowspan=\"1\">0</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Doi thu:</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Map ID</td><td colspan=\"1\" rowspan=\"1\">Test_Map (Tén sé dugc thay thé sau khi hoan tätcäc yéu tó choi khác)</td><td colspan=\"1\" rowspan=\"1\">0</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Maximum time</td><td colspan=\"1\" rowspan=\"1\">Thoi gian choi toi da</td><td colspan=\"1\" rowspan=\"1\">300 giay= 5 phut</td></tr></table>",
+        "bbox": [
+            87,
+            844,
+            799,
+            971
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "discarded",
+        "text": "Tinh theo 1f = 1s ",
+        "bbox": [
+            89,
+            30,
+            934,
+            63
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            87,
+            32,
+            801,
+            150
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "b. Deathmatch ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            213,
+            249,
+            233
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "table",
+        "img_path": "images/fb31051198f2968eb306becb757d33a552171ba1753f335bf0aebfaf3b883914.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Thänh phän</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Gia tri</td></tr><tr><td rowspan=2 colspan=1>Team ID</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>Map ID</td><td rowspan=1 colspan=1>Test_Map (Tén sé dugc thay thé sau khi hoan tatcac yéu tä choi khac)</td><td rowspan=1 colspan=1>0</td></tr><tr><td rowspan=1 colspan=1>Maximum time</td><td rowspan=1 colspan=1>Thoi gian choi toi da</td><td rowspan=1 colspan=1>300 giay= 5 phut</td></tr></table>",
+        "bbox": [
+            47,
+            259,
+            760,
+            489
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "6. Notes ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            557,
+            163,
+            578
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Deathmatch profile sẽ được cập nhật sau ",
+        "bbox": [
+            60,
+            590,
+            449,
+            609
+        ],
+        "page_idx": 4
+    }
+]

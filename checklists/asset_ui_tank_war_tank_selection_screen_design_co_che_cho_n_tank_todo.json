@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Implement Fair Tank Selection Timer",
+    "description": "Develop a timer system that ensures each player has exactly 15 seconds to select their tank without feeling rushed.",
+    "related_objects": [
+      "obj_tank_list",
+      "obj_team_lists"
+    ],
+    "priority": "high",
+    "implementation_notes": "Integrate the timer into the sys_tank_selection system. Ensure visual feedback (e.g., countdown) is displayed on the UI. Test for edge cases where players may disconnect or skip selection."
+  },
+  {
+    "title": "Balance Tank Selection Between Teams",
+    "description": "Ensure both teams have equal opportunities to pick tanks during the selection phase.",
+    "related_objects": [
+      "obj_tank_list",
+      "obj_team_lists"
+    ],
+    "priority": "high",
+    "implementation_notes": "Modify the sys_tank_selection logic to alternate picks between teams fairly. Implement safeguards to prevent duplicate selections and ensure all available tanks are accessible to both sides."
+  },
+  {
+    "title": "Display Mission Objectives After Tank Selection",
+    "description": "Show mission objectives clearly for 5 seconds after the tank selection process ends.",
+    "related_objects": [
+      "obj_mission_display"
+    ],
+    "priority": "medium",
+    "implementation_notes": "Integrate with the sys_tank_selection system to trigger the display of obj_mission_display immediately after selections are finalized. Use animations or highlights to make text easily readable within the 5-second window."
+  }
+]

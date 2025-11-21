@@ -1,0 +1,253 @@
+[
+    {
+        "type": "text",
+        "text": "[Asset, UI] [Tank War] Tank Selection Screen Design (Cơ chế chọn tank) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            946,
+            170
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "THÔNG TIN CƠ CHẾ CHỌN TANK ",
+        "bbox": [
+            47,
+            192,
+            361,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: v1.1   \nNgười viết: phucth12 (phucth12)   \nNgày tạo: 28 - 07 - 2025 ",
+        "bbox": [
+            60,
+            226,
+            441,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/d79978d6a54c6cc5de0b9ceff09df2c108b27c83b16d9ffc193310f481da155e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>04-08-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1>®phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            334,
+            936,
+            546
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục đích thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            569,
+            311,
+            595
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Xác định với người chơi những gì họ có thể làm trong giai đoạn chuẩn bị chiến đấu. ",
+        "bbox": [
+            45,
+            603,
+            819,
+            625
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Đảm bảo thiết kế có những đặc điểm sau: ",
+        "bbox": [
+            47,
+            634,
+            437,
+            654
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Giữ công bằng giữa 2 đội chơi khi chọn tank. Người chơi cảm thấy giai đoạn chọn tank diễn ra phù hợp và không lâu. ",
+        "bbox": [
+            48,
+            664,
+            745,
+            716
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            767,
+            294,
+            792
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Tài liệu được dùng để giúp đội Art & Dev hình dung rõ ràng hơn về các yếu tố trong màn hình chọn tank. ",
+        "bbox": [
+            45,
+            802,
+            909,
+            845
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Tổng quan tài liệu ",
+        "bbox": [
+            48,
+            897,
+            321,
+            923
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "4. Thành phần   \n5. Tương tác a. Tương tác với các thành phần b. Các cách tương tác khác ",
+        "bbox": [
+            85,
+            57,
+            375,
+            160
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Notes ",
+        "bbox": [
+            87,
+            172,
+            161,
+            188
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Thành phần ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            270,
+            245,
+            296
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén thanh phän</td><td rowspan=1 colspan=1>Muc dich</td><td rowspan=1 colspan=1>Design Note</td></tr><tr><td rowspan=1 colspan=1>Thdi gian</td><td rowspan=1 colspan=1> Hién thi thdi gian cho phép 8trong manhinh chon tank va thoi gian chuan bidévao tran Khi hét thαi gian chon, players va nhüng tanks ho chon dugc dua vao trong map：  Thoi gian chon tank: 15sGET READY!: 5s.</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Danh sách tank</td><td rowspan=1 colspan=1>Liét ké cac loai tank</td><td rowspan=1 colspan=1>Tank duαc säp xép theo class Sé dugc än di sau khi het thoi gian chon tank (15s)</td></tr><tr><td rowspan=1 colspan=1>Danh sách 2 doi choi</td><td rowspan=1 colspan=1>Cac nguoi chdi dugc chia thanh 2 doi.Danh sách nay cho thäy nguoichoi voiminh sé la aiva sé chon tank gi</td><td rowspan=1 colspan=1>Vi tri 2 team sé dugc säp sän la:·ATK: TraiDEF: Phai Hién thi ten,avatar cua player, tén tank va model 3D tank hochon</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Giup nguoi choi (mói) hiéu muc tiéu chdicua team minhDugc hien ra sau khi moi nguoi hoanthanh giai doan chon tank</td><td rowspan=1 colspan=1>Thoi gian hien thi nhiém vu la5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Chän ngudi chdi d6itank sau khi dudebdit</td><td rowspan=1 colspan=1> Nam trong hogc gän danh sach tank</td></tr></table>",
+        "bbox": [
+            45,
+            319,
+            936,
+            953
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Tương tác ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            77,
+            217,
+            101
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "a. Tương tác với các thành phần ",
+        "text_level": 1,
+        "bbox": [
+            84,
+            119,
+            432,
+            141
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/074534f307775e6048f98a98f19ad03249a2a75ca3a953bf10cefca2bfc714a1.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén thänh phän</td><td rowspan=1 colspan=1>Cach tuong tác</td></tr><tr><td rowspan=1 colspan=1>Thoi gian chon tank</td><td rowspan=1 colspan=1>Quan sat</td></tr><tr><td rowspan=1 colspan=1>Danh säch tank</td><td rowspan=1 colspan=1>Nhän vao các ó tank dé́ chon loai tank muönchoi, tank khong chon du@c sé bi xám/den di.Sé än di sau khi hét thoi gian chon tank</td></tr><tr><td rowspan=1 colspan=1>2 hang doi choi</td><td rowspan=1 colspan=1>Quan sät xem các tank dä dugc chon la gi décó thé lén chien thuät</td></tr><tr><td rowspan=1 colspan=1>Nhiem vu</td><td rowspan=1 colspan=1>Doc nhiem vuThoi gian: 5s</td></tr><tr><td rowspan=1 colspan=1> Nut khoa tank</td><td rowspan=1 colspan=1> Nam trong hoac gän danh sach tank, nhan vao icon de khoa lua chon tank ctia minh</td></tr></table>",
+        "bbox": [
+            45,
+            166,
+            713,
+            501
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "b. Các cách tương tác khác ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            563,
+            375,
+            585
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Case</td><td rowspan=1 colspan=1>Behaviour/Solution</td></tr><tr><td rowspan=1 colspan=1> Khi player thoat app</td><td rowspan=1 colspan=1>Néu thαi gian chua hét, vän cho phép player ＆ trong trän khi quay lai</td></tr><tr><td rowspan=1 colspan=1>Khi player chua chon tank</td><td rowspan=1 colspan=1>Mäc dinh möi player chon tank δ däu danh sách tank khi bätdäu screenchon</td></tr></table>",
+        "bbox": [
+            47,
+            609,
+            934,
+            740
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "6. Notes ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            808,
+            163,
+            829
+        ],
+        "page_idx": 2
+    }
+]

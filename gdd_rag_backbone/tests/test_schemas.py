@@ -1,37 +1,28 @@
-"""
-Tests for GDD schemas.
-"""
-import pytest
-from gdd_rag_backbone.gdd.schemas import GddObject, TankSpec, MapSpec
+"""Tests for GDD schemas."""
+
+from gdd_rag_backbone.gdd.schemas import GddMap, GddObject, TankSpec
 
 
 def test_gdd_object_creation():
-    """Test creating a GddObject."""
     obj = GddObject(
         id="obj_1",
-        category="BR",
         name="Barrel",
+        category="BR",
         size_x=1.0,
         size_y=1.0,
         size_z=1.5,
         hp=100,
         destructible=True,
     )
-    
     assert obj.id == "obj_1"
     assert obj.category == "BR"
     assert obj.name == "Barrel"
     assert obj.size_x == 1.0
     assert obj.destructible is True
-    
-    # Test to_dict conversion
-    obj_dict = obj.to_dict()
-    assert isinstance(obj_dict, dict)
-    assert obj_dict["id"] == "obj_1"
+    assert obj.to_dict()["id"] == "obj_1"
 
 
 def test_tank_spec_creation():
-    """Test creating a TankSpec."""
     tank = TankSpec(
         id="tank_1",
         class_name="Heavy",
@@ -40,7 +31,6 @@ def test_tank_spec_creation():
         armor=100,
         speed=30.0,
     )
-    
     assert tank.id == "tank_1"
     assert tank.class_name == "Heavy"
     assert tank.name == "Tiger Tank"
@@ -49,26 +39,22 @@ def test_tank_spec_creation():
 
 
 def test_map_spec_creation():
-    """Test creating a MapSpec."""
-    map_spec = MapSpec(
+    gdd_map = GddMap(
         id="map_1",
         name="Desert Oasis",
         mode="CTF",
         scene="Desert",
         player_count=16,
     )
-    
-    assert map_spec.id == "map_1"
-    assert map_spec.name == "Desert Oasis"
-    assert map_spec.mode == "CTF"
-    assert map_spec.player_count == 16
+    assert gdd_map.id == "map_1"
+    assert gdd_map.name == "Desert Oasis"
+    assert gdd_map.mode == "CTF"
+    assert gdd_map.player_count == 16
 
 
 def test_schemas_import():
-    """Test that schemas can be imported correctly."""
-    from gdd_rag_backbone.gdd.schemas import GddObject, TankSpec, MapSpec
-    
+    from gdd_rag_backbone.gdd.schemas import GddMap, GddObject, TankSpec
+
     assert GddObject is not None
     assert TankSpec is not None
-    assert MapSpec is not None
-
+    assert GddMap is not None

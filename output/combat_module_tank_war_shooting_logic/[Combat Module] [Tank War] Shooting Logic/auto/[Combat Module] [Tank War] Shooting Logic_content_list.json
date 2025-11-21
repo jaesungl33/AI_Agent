@@ -1,0 +1,1177 @@
+[
+    {
+        "type": "text",
+        "text": "[Combat Module] [Tank War] Shooting Logic ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            82,
+            942,
+            120
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "THIẾT KẾ LOGIC BẮN (2.5D-aware, Unity Kinematic)",
+        "bbox": [
+            47,
+            144,
+            557,
+            166
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: 1.1 ",
+        "text_level": 1,
+        "bbox": [
+            63,
+            177,
+            181,
+            195
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Người viết: O Kent (QuocTA) ",
+        "bbox": [
+            62,
+            205,
+            368,
+            227
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ngày cập nhật: 17 - 09 - 2025 ",
+        "bbox": [
+            65,
+            236,
+            346,
+            258
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/2e10ecaa05b458bd2c9d43717ae3a7509073552d285a58405fa0e6ff5d09c2c3.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Nguoiviet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyet?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>08-09-2025</td><td rowspan=1 colspan=1> Xong noi dung cua file</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>O phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            284,
+            936,
+            476
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục lục ",
+        "bbox": [
+            48,
+            542,
+            188,
+            567
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu & Phạm vi ",
+        "bbox": [
+            87,
+            57,
+            272,
+            73
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.1 Mục tiêu UX   \n1.2 Phạm vi   \n1.3 Vấn đề hiện tại ",
+        "bbox": [
+            109,
+            84,
+            265,
+            159
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Nguyên tắc thiết kế ",
+        "bbox": [
+            89,
+            171,
+            276,
+            188
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Thuật ngữ & Định nghĩa ",
+        "bbox": [
+            89,
+            200,
+            311,
+            216
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Tổng quan kiến trúc hệ thống ",
+        "bbox": [
+            89,
+            228,
+            360,
+            246
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5.1 Lớp A — 2.5D Collision Band (MẶC ĐỊNH ON)   \n5.2 Lớp B — Multi-Height Sweep (OPTIONAL)   \n5.3 Lớp C — Smart Pitch Assist (OPTIONAL) ",
+        "bbox": [
+            107,
+            255,
+            500,
+            330
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Yêu cầu (Request) 6.1 Yêu cầu chức năng (FR) 6.2 Yêu cầu phi chức năng (NFR) ",
+        "bbox": [
+            85,
+            342,
+            375,
+            417
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "7. Cấu hình dữ liệu (không code) 7.1 BulletProfile (đề xuất trường) 7.2 ClassProfile (band preset theo class) 7.3 Blocker Category (cho Level/Art/Dev cấu hình) ",
+        "bbox": [
+            89,
+            428,
+            521,
+            532
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "8. Quy trình bắn (Flow — không code) ",
+        "bbox": [
+            87,
+            542,
+            405,
+            560
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu & Phạm vi ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            658,
+            338,
+            683
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.1 Mục tiêu UX ",
+        "text_level": 1,
+        "bbox": [
+            85,
+            701,
+            257,
+            722
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Đạn không “lướt qua” vật cản thấp khi người chơi kỳ vọng bị chặn. Giữ đạn kinematic (không dùng Rigidbody/forces) để dễ kiểm soát & nhẹ CPU. ▪ Tăng tính “công bằng trực quan” trong bắn ngang (mặt phẳng XZ) nhưng vẫn tôn trọng chênh lệch cao độ (Y). ▪ Cấu hình linh hoạt theo tank class, bản đồ, mode. ",
+        "bbox": [
+            129,
+            730,
+            949,
+            866
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1.2 Phạm vi ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            923,
+            215,
+            944
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "▪ Áp dụng cho đạn thẳng (hitscan-like kinematic projectile) của mọi class. Không bao gồm tên lửa đạn đạo/đạn cong/đạn bám mục tiêu (sẽ có GDD riêng). ",
+        "bbox": [
+            131,
+            33,
+            905,
+            85
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "1.3 Vấn đề hiện tại ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            141,
+            286,
+            164
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "▪ Vì muzzle (nòng súng) cao, đạn bay thẳng ở cao độ Y cố định vật cản thấp (thùng, tường lửng, lan can) bị lướt qua đỉnh $ \\mathsf { U X }$ cảm giác “đạn xuyên vật cản”. ",
+        "bbox": [
+            131,
+            171,
+            946,
+            215
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "3. Nguyên tắc thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            296,
+            341,
+            322
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ 2.5D trước, 3D sau: Quyết định va chạm ưu tiên theo mặt phẳng XZ (nhận thức của người chơi), sau đó kiểm tra chồng lấn theo Y để xác thực.   \n◦ Tha lỗi có kiểm soát: Cho phép yForgiveness nhỏ để giảm các trường hợp “suýt trúng”.   \n◦ Data-driven: Toàn bộ tham số có thể cấu hình per-class, per-mode.   \n◦ Hiệu năng: Tối đa 1 sphere/capsule cast mỗi frame/đạn $[ \\mathsf { m a c }$ định); các sweep bổ sung có thể bật/tắt theo map.   \n◦ Khả dụng đa bộ phận: Dev đọc implement; Art đọc sản xuất VFX/SFX/UI; Level Design đọc quy ước chiều cao; QA đọc test. ",
+        "bbox": [
+            84,
+            330,
+            927,
+            567
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4. Thuật ngữ & Định nghĩa ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            647,
+            397,
+            673
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Muzzle: điểm phát bắn trên nòng súng.   \n◦ Attack Band (Y-band của đạn): khoảng cao độ mà đạn được phép coi là chạm va chạm. Xác định bởi [y − bandDown, y $^ +$ bandUp] .   \n◦ Hit Band (Y-band của vật cản): khoảng cao độ “thân” của vật cản/đối tượng được tính va chạm, lấy từ collider.bounds và HitBandPad.   \n◦ yForgiveness: biên độ “tha lỗi” khi hai band gần chạm nhau. Multi-Height Sweep: bó ray/cast song song tại nhiều cao độ mẫu từ mặt đất đến gần muzzle để phát hiện vật cản thấp ở gần.   \n◦ Smart Pitch Assist: dịch nhẹ góc pitch của hướng bắn $( \\pm 1 ^ { \\circ } { \\sim } 3 ^ { \\circ } )$ trước khi spawn đạn để giảm các tình huống hụt vô lý. ",
+        "bbox": [
+            84,
+            680,
+            951,
+            951
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Blocker Category: phân loại vật cản (Wall_Low/Wall_High/Fence_Thin/Vehicle/Shield/Vegetation\u0000). ",
+        "bbox": [
+            90,
+            34,
+            723,
+            78
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5. Tổng quan kiến trúc hệ thống ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            158,
+            476,
+            184
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Hệ thống gồm 3 lớp; có thể bật/tắt độc lập theo mode/map: ",
+        "bbox": [
+            45,
+            194,
+            609,
+            215
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.1 Lớp A — 2.5D Collision Band (MẶC ĐỊNH ON) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            230,
+            617,
+            254
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ Đạn di chuyển kinematic; mỗi frame thực hiện Sphere/Capsule Cast theo hướng bắn nếu trúng collider, kiểm tra overlap Y-band giữa Attack Band (đạn) và Hit Band (đối tượng).   \n▪ Nếu overlap (kể cả trong ngưỡng yForgiveness) tính là HIT.   \n▪ Nếu không overlap bỏ qua va chạm (tiếp tục bay). ",
+        "bbox": [
+            129,
+            263,
+            925,
+            391
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.2 Lớp B — Multi-Height Sweep (OPTIONAL) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            408,
+            589,
+            430
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ Khi bóp cò, thực hiện thêm 2‒3 sweep tại các cao độ mẫu ( groundY+0.3, $^ { + } \\Theta . \\odot , ^ { \\phantom { + } } + \\Theta . \\odot \\phantom { | } \\mathsf { m } )$ .   \n▪ Nếu bất kỳ sweep nào báo va chạm sớm hơn đường thẳng từ muzzle ưu tiên vị trí đó để chặn đạn.   \n▪ Dùng khi map có nhiều vật cản lùn/khe hở. ",
+        "bbox": [
+            129,
+            438,
+            947,
+            567
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "5.3 Lớp C — Smart Pitch Assist (OPTIONAL) ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            584,
+            569,
+            607
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ Trước khi spawn đạn, điều chỉnh nhẹ pitch trong phạm vi $\\pm 3 ^ { \\circ }$ để “ghé xuống” nếu trước mặt có blocker thấp. Không phải auto-aim; chỉ giảm case “bay sượt đỉnh” khó chịu. ",
+        "bbox": [
+            126,
+            614,
+            947,
+            689
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "[Inference] Multiplayer có thể cần xử lý hit server-authoritative. Khi đó, logic 3 lớp cần phản chiếu tương đương ở server hoặc dùng seed/lockstep để tránh lệch. ",
+        "bbox": [
+            67,
+            698,
+            944,
+            742
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6. Yêu cầu (Request) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            823,
+            321,
+            848
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "6.1 Yêu cầu chức năng (FR) ",
+        "bbox": [
+            89,
+            866,
+            383,
+            889
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ FR-1: Đạn bị block khi đường bay giao XZ với collider thuộc Blocker Category và Attack Band overlap Hit Band của đối tượng. ",
+        "bbox": [
+            89,
+            897,
+            942,
+            941
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ FR-2: yForgiveness áp dụng cả hai phía (đạn & vật cản).   \nFR-3: Cho phép bật/tắt Multi-Height Sweep và Pitch Assist theo map/mode.   \n◦ FR-4: Cho phép preset per-class (Scout/Assault/Heavy) cho bandUp/bandDown.   \n◦ FR-5: Tôn trọng team filtering (không hit đồng đội nếu thiết kế yêu cầu).   \n◦ FR-6: End-of-Range: đạn nổ/biến mất khi đạt range tối đa, có VFX khác biệt so với hit.   \n◦ FR-7: Bề mặt khác nhau tạo VFX vật liệu khác nhau (kim loại/đất/đá/wood/shield). ",
+        "bbox": [
+            89,
+            33,
+            920,
+            208
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "6.2 Yêu cầu phi chức năng (NFR) ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            254,
+            441,
+            277
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ NFR-Perf: Mặc định $\\leqslant 1$ shape cast/frame/bullet (Lớp A). Nếu bật Lớp B, tổng $\\leqslant 3$ cast thêm ở khởi phát.   \n◦ NFR-Data: Mọi tham số có thể chỉnh via ScriptableObject (BulletProfile, ClassProfile, MapProfile).   \n◦ NFR-UX: Tỷ lệ “khi người chơi nghĩ trúng mà game báo hụt” phải $< 5 \\%$ trong playtes   \n◦ NFR-QA: Có ma trận test kèm tiêu chí pass/fail. ",
+        "bbox": [
+            89,
+            285,
+            939,
+            444
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7. Cấu hình dữ liệu (không code) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            523,
+            479,
+            550
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "7.1 BulletProfile (đề xuất trường) ",
+        "bbox": [
+            87,
+            567,
+            454,
+            590
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "table",
+        "img_path": "images/41c4fe5ddffe8506dd7e37def763a7761899b346e1eef032661fea6bbe352dcc.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Truong</td><td rowspan=1 colspan=1>Kieu</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Default[Baseline]</td></tr><tr><td rowspan=1 colspan=1>Speed</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>Tc do dan (m/s)</td><td rowspan=1 colspan=1>40</td></tr><tr><td rowspan=1 colspan=1>Range</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>Tam ban toi da（m）</td><td rowspan=1 colspan=1>Theo vu khi</td></tr><tr><td rowspan=1 colspan=1>Radius</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>Ban kinh cast（m）</td><td rowspan=1 colspan=1>0.1</td></tr><tr><td rowspan=1 colspan=1>BandUp</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>D day bandphia tren (m)</td><td rowspan=1 colspan=1>0.5</td></tr><tr><td rowspan=1 colspan=1>BandDown</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>D day bandphia duoi (m)</td><td rowspan=1 colspan=1>0.8</td></tr><tr><td rowspan=1 colspan=1>YForgiveness</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>Tha loi chénh Y（m）</td><td rowspan=1 colspan=1>0.15</td></tr><tr><td rowspan=1 colspan=1>UseMultiHeightSweep</td><td rowspan=1 colspan=1>bool</td><td rowspan=1 colspan=1>Bat lop B</td><td rowspan=1 colspan=1> Map-dependent</td></tr><tr><td rowspan=1 colspan=1>SweepHeights</td><td rowspan=1 colspan=1>float]</td><td rowspan=1 colspan=1>Cac cao domau (m)</td><td rowspan=1 colspan=1>[0.3,0.6,0.9]</td></tr><tr><td rowspan=1 colspan=1>UsePitchAssist</td><td rowspan=1 colspan=1>bool</td><td rowspan=1 colspan=1>Batl6p C</td><td rowspan=1 colspan=1>Off(mac dinh)</td></tr><tr><td rowspan=1 colspan=1>PitchAssistMaxDeg</td><td rowspan=1 colspan=1>float</td><td rowspan=1 colspan=1>Bien pitch toida（</td><td rowspan=1 colspan=1>3</td></tr><tr><td rowspan=1 colspan=1>HitMask</td><td rowspan=1 colspan=1>mask</td><td rowspan=1 colspan=1>Layer blocker/target</td><td rowspan=1 colspan=1>Theo du an</td></tr></table>",
+        "bbox": [
+            87,
+            51,
+            619,
+            530
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "7.2 ClassProfile (band preset theo class) ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            590,
+            528,
+            611
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/3e3a24a21f019d73753690dc091592a76dfb33b993198e37b69e20687e0e0ac4.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Class</td><td rowspan=1 colspan=1>BandDown</td><td rowspan=1 colspan=1>BandUp</td><td rowspan=1 colspan=1>Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Scout</td><td rowspan=1 colspan=1>0.9</td><td rowspan=1 colspan=1>0.4</td><td rowspan=1 colspan=1>“ap san” hon→de biblocker lunchan (fair)</td></tr><tr><td rowspan=1 colspan=1>Assault</td><td rowspan=1 colspan=1>0.8</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0.5Can bang</td></tr><tr><td rowspan=1 colspan=1>Heavy</td><td rowspan=1 colspan=1>0.7</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>Muzzle cao,0.6band tren ronghdn chut</td></tr></table>",
+        "bbox": [
+            87,
+            639,
+            619,
+            822
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Toàn bộ con số là [Baseline] để playtest/tuning. ",
+        "bbox": [
+            99,
+            842,
+            557,
+            863
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "discarded",
+        "text": "7.3 Blocker Category (cho Level/Art/Dev cấu hình) ",
+        "bbox": [
+            90,
+            911,
+            631,
+            933
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "table",
+        "img_path": "images/9e290715407de53a45881dfb2cda0b3f0bf93efb57ab7b947cbbaee76f3016c2.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Category</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Height goi y（m)</td><td rowspan=1 colspan=1> HitBandPad（m）</td><td rowspan=1 colspan=1> VFX vat lieu</td></tr><tr><td rowspan=1 colspan=1>Wall_Low</td><td rowspan=1 colspan=1>Tuong lung,thung cao</td><td rowspan=1 colspan=1>0.7-1.1</td><td rowspan=1 colspan=1>0.05</td><td rowspan=1 colspan=1>da/xi mang/kim loai</td></tr><tr><td rowspan=1 colspan=1>Wall_High</td><td rowspan=1 colspan=1>Tuong cao,cotlon</td><td rowspan=1 colspan=1>&gt;1.2</td><td rowspan=1 colspan=1>0</td><td rowspan=1 colspan=1>da/xi mang/kim loai</td></tr><tr><td rowspan=1 colspan=1>Fence_Thin</td><td rowspan=1 colspan=1>Hang rao mong 0.9-1.2</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0.08</td><td rowspan=1 colspan=1>tia lua kim loainho</td></tr><tr><td rowspan=1 colspan=1>Vehicle</td><td rowspan=1 colspan=1>Xe/chuongngailon</td><td rowspan=1 colspan=1>&gt;1.0</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0.05kim loai näng</td></tr><tr><td rowspan=1 colspan=1>Shield</td><td rowspan=1 colspan=1>Khien nangluong</td><td rowspan=1 colspan=1>0.518</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>0nangluong</td></tr><tr><td rowspan=1 colspan=1>Vegetation</td><td rowspan=1 colspan=1>Cay bui</td><td rowspan=1 colspan=1>0.3-1.2</td><td rowspan=1 colspan=1>18(khongblock)</td><td rowspan=1 colspan=1>la/bui (chi FXxuyen）</td></tr></table>",
+        "bbox": [
+            85,
+            53,
+            752,
+            344
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Vegetation mặc định không block (trừ khi có thiết kế đặc biệt). ",
+        "bbox": [
+            97,
+            363,
+            691,
+            383
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "8. Quy trình bắn (Flow — không code) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            464,
+            548,
+            490
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Pre-Fire ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            501,
+            129,
+            517
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "◦ Lấy ClassProfile set bandUp/bandDown.   \n◦ (Nếu bật) Smart Pitch Assist : đánh giá blocker thấp trong 2‒6m trước mặt áp pitch offset $\\leqslant$ PitchAssistMaxDeg .   \n◦ (Nếu bật) Multi‑Height Sweep : cast tại SweepHeights (theo groundY). Nếu phát hiện hit sớm hơn đường thẳng từ muzzle lưu HitCandidate. ",
+        "bbox": [
+            87,
+            528,
+            937,
+            660
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Flight ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            670,
+            107,
+            689
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "◦ Mỗi frame: Sphere/Capsule Cast theo hướng bay trong khoảng Speed \\* Δt .   \n◦ Nếu trúng collider thuộc HitMask tính overlap Y-band (Attack vs Hit).   \n◦ Nếu overlap (kể cả trong YForgiveness ) HIT (ưu tiên HitCandidate nếu có).   \n◦ Nếu không có hit & đã bay hết $\\mathsf { R a n g e } \\mid \\to$ End-of-Range. ",
+        "bbox": [
+            89,
+            698,
+            883,
+            814
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Impact ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            825,
+            119,
+            842
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "◦ Tạo VFX vật liệu, SFX, decal (nếu bề mặt cho phép); gửi sự kiện damage; sinh camera shake nhỏ (xem mục 9).   \n◦ Ghi Telemetry (xem mục 9). ",
+        "bbox": [
+            89,
+            853,
+            917,
+            927
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "9. Tương tác & Quy tắc đặc biệt ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            71,
+            462,
+            98
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Đồng đội: mặc định không block (friendly-fire off). Nếu bật friendly-block, thêm Outline/UI cảnh báo. ◦ Shield: luôn block, hiển thị impact FX energy đặc trưng; xuyên shield cần đạn/skill đặc biệt. ◦ Vật thể rất mỏng (cọc/thanh): ưu tiên CapsuleCast hoặc tăng Radius ở bullet nhanh. ◦ Mặt dốc/ramps: Multi-Height Sweep tính groundY tại XZ để không sai lệch. ◦ Tốc độ đạn rất cao: giữ shape cast (không dùng ray đơn) để tránh tunneling. ",
+        "bbox": [
+            87,
+            107,
+            941,
+            297
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "10. Art / VFX / SFX / UI (Asset Bible rút gọn) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            377,
+            611,
+            403
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "10.1 VFX ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            421,
+            190,
+            440
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "▪ Hit Blocker (vật liệu): 3‒5 preset theo vật liệu (đá/kim loại/gỗ/đất/năng lượng).   \n▪ Hit Shield: flare năng lượng $^ +$ ripple. End-of-Range: pop nhẹ, khác biệt với Hit Blocker. Tracer: chiều cao bám đường đạn; có thể khóa Y theo bullet để nhất quán.   \n▪ Debris: bụi/đá vụn/tia lửa nhỏ; scale theo tốc độ va chạm. ",
+        "bbox": [
+            131,
+            450,
+            905,
+            592
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "10.2 SFX ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            642,
+            193,
+            661
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "▪ Impact theo vật liệu; Shield riêng.   \n▪ End-of-Range: âm “tắt” nhẹ, không nhầm với trúng mục tiêu.   \n▪ Ducking ngắn khi hit gần camera. ",
+        "bbox": [
+            129,
+            671,
+            759,
+            752
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "10.3 UI/Camera Feedback ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            802,
+            373,
+            821
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Crosshair State: • Idle, Firing, Blocked-Soon (nếu Sweep báo blocker $8 2 - 3 m$ trước mặt viền crosshair mờ cảnh báo 150ms). ",
+        "bbox": [
+            131,
+            832,
+            919,
+            904
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "▪ Camera Shake: • Hit Blocker: 0.15‒0.2 amplitude, 0.1s. ",
+        "bbox": [
+            132,
+            915,
+            548,
+            965
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "• Hit Shield: 0.1 amplitude, 0.12s. ",
+        "bbox": [
+            170,
+            34,
+            498,
+            54
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "• End-of-Range: không rung. ",
+        "bbox": [
+            171,
+            65,
+            452,
+            84
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "▪ Aim Assist Indicator (nếu Pitch Assist on): icon mờ 100ms để truyền thông minh bạch. ",
+        "bbox": [
+            131,
+            95,
+            912,
+            138
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "10.4 Yêu cầu Naming & Foldering ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            188,
+            457,
+            209
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "VFX/Bullet/Hit_Metal , VFX/Bullet/Hit_Stone ,   \nVFX/Bullet/Hit_Shield   \nSFX/Bullet/Impact_Metal   \nUI/Crosshair/\\* ",
+        "bbox": [
+            139,
+            215,
+            712,
+            323
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "11. Level Design Guideline (Chiều cao & Tags) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            402,
+            649,
+            428
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ Quy ước đơn vị: 1 Unity unit $= 1 \\mathsf { m }$ . ",
+        "bbox": [
+            89,
+            438,
+            446,
+            458
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ Dải chiều cao khuyến nghị: ",
+        "bbox": [
+            90,
+            467,
+            385,
+            489
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "▪ Blocker thấp: $0 . 7 \\mathrm { - } 1 . 1 \\mathrm { m }  \\mathrm { t a g }$ Wall_Low . ▪ Blocker cao: $> 1 . 2 \\ : \\mathsf { m }  \\mathrm { t a g }$ Wall_High Lan can/hàng rào mỏng: $0 . 9 \\mathrm { - } 1 . 2 \\mathrm { m } \\mathrm {  } \\mathrm { t a g }$ Fence_Thin ",
+        "bbox": [
+            129,
+            497,
+            705,
+            580
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ Collider: ưu tiên Box/Convex Mesh, tránh concave phức tạp. ",
+        "bbox": [
+            90,
+            590,
+            690,
+            610
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ HitBandPad: theo bảng 7.3; có thể override ở prefab. ",
+        "bbox": [
+            92,
+            620,
+            617,
+            640
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ Vegetation: $\\mathsf { m a c }$ định không block (trừ prefab đặc biệt có tag Blocker ) ",
+        "bbox": [
+            94,
+            650,
+            814,
+            671
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "◦ Scene Test: mỗi map cần khu test gồm: tường 0.8/1.0/1.2m, lan can mỏng, dốc $1 5 ^ { \\circ }$ , bồn cây. ",
+        "bbox": [
+            89,
+            680,
+            942,
+            725
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "12. QA — Ma trận Test & Tiêu chí Pass ",
+        "bbox": [
+            48,
+            805,
+            540,
+            832
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "table",
+        "img_path": "images/9f8e04ffa08018531311ef3d8bebe09cf50afd0cb5316815db0356795c662dae.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Case</td><td rowspan=1 colspan=1>Thiet lap</td><td rowspan=1 colspan=1>Ky vong</td><td rowspan=1 colspan=1> Pass neu</td></tr><tr><td rowspan=1 colspan=1>T1</td><td rowspan=1 colspan=1>Ban vao tuong0.8m 8 cu ly5m</td><td rowspan=1 colspan=1>Dan bi chan</td><td rowspan=1 colspan=1>Ty le chan ≥99%/100 phat</td></tr><tr><td rowspan=1 colspan=1>T2</td><td rowspan=1 colspan=1>Tu8ng 1.2 m,moi class</td><td rowspan=1 colspan=1>Chan voi moiclass</td><td rowspan=1 colspan=1>100%</td></tr><tr><td rowspan=1 colspan=1>T3</td><td rowspan=1 colspan=1> Lan can mong1.0m</td><td rowspan=1 colspan=1>Chan; VFX kimloai mong</td><td rowspan=1 colspan=1>99% + dung VFX</td></tr><tr><td rowspan=1 colspan=1>T4</td><td rowspan=1 colspan=1>Bui cay 1.0 m</td><td rowspan=1 colspan=1>Khong chan(FXla m8 neuco）</td><td rowspan=1 colspan=1>100%</td></tr><tr><td rowspan=1 colspan=1>T5</td><td rowspan=1 colspan=1>Blocker 0.9 mrat gan (2 m)</td><td rowspan=1 colspan=1>Chän (Sweep/Pitch Assist xu</td><td rowspan=1 colspan=1>98%</td></tr><tr><td rowspan=1 colspan=1>T6</td><td rowspan=1 colspan=1>D6c 15°</td><td rowspan=1 colspan=1>Ket qua nhatquan</td><td rowspan=1 colspan=1>≥ 98%</td></tr><tr><td rowspan=1 colspan=1>T7</td><td rowspan=1 colspan=1>Dan toc do cao</td><td rowspan=1 colspan=1>Khongtunneling</td><td rowspan=1 colspan=1>100%</td></tr><tr><td rowspan=1 colspan=1>T8</td><td rowspan=1 colspan=1>Friendly truócmat</td><td rowspan=1 colspan=1>Khong block (ffoff) hoac blocktheo rule</td><td rowspan=1 colspan=1>Dung rule</td></tr></table>",
+        "bbox": [
+            45,
+            53,
+            579,
+            477
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Telemetry đối chiếu: ghi PerceivedHitMismatch (người chơi ngắm blocker nhưng game cho xuyên) mục tiêu $< 5 \\%$ . ",
+        "bbox": [
+            60,
+            495,
+            946,
+            539
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "13. Telemetry & Tuning ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            622,
+            361,
+            646
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Sự kiện ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            655,
+            122,
+            676
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "◦ Bullet.Fire {class, map, pitchAssistUsed}   \n◦ Bullet.HitBlocker {blockerCategory, distance, normalY, bandOverlapDelta}   \n◦ Bullet.EndOfRange {distance}   \n◦ UX.PerceivedHitMismatch {context} (đánh dấu khi người chơi ngắm XZ trúng blocker nhung khong hit; thu thäp qua debug tool/QA) ",
+        "bbox": [
+            87,
+            685,
+            892,
+            825
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Dashboard đề xuất ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            833,
+            237,
+            852
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "◦ Tỉ lệ HitBlocker theo blockerCategory & class.   \n◦ Phân bố bandOverlapDelta để điều chỉnh YForgiveness .   \n◦ Tỉ lệ pitchAssistUsed theo map cân nhắc bật/tắt mặc định. ",
+        "bbox": [
+            89,
+            864,
+            744,
+            946
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "14. Rủi ro & Kế hoạch triển khai ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            104,
+            468,
+            130
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "◦ Rủi ro: Over-assist cảm giác “dính ảo”. Mitigation: Giới hạn PitchAssistMaxDeg ≤ 3° ; review clip QA.   \n◦ Rủi ro: Hiệu năng giảm khi bật Sweep toàn map. Mitigation: Chỉ bật ở map nhiều blocker thấp; cache groundY.   \n◦ Triển khai từng bước: ▪ Lớp A (mặc định) $ 2$ ) Lớp B (map-specific) $ 3$ ) Lớp C (A/B test). ",
+        "bbox": [
+            85,
+            140,
+            774,
+            301
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "◦ Fallback: Cho phép tắt Lớp B/C bằng config runtime. ",
+        "bbox": [
+            89,
+            308,
+            614,
+            329
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "15. Tích hợp hệ thống liên quan ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            409,
+            471,
+            436
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "◦ Damage & Combat Log: sự kiện OnBulletHit gọi damage, ghi Combat Score.   \n◦ VFX Tiers (3/6/9/10): kế thừa hiệu ứng theo ATK/FireRate; Hit FX material tách riêng.   \n◦ Audio Mix: route Impact bus SFX_Impact; Shield SFX_Energy.   \n◦ UI: Crosshair state $^ +$ icon PitchAssist (nếu bật) 100‒150 ms. ",
+        "bbox": [
+            87,
+            444,
+            917,
+            558
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "16. Phụ lục ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            639,
+            202,
+            664
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "16.1 Layer & Tag (đề xuất) ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            682,
+            373,
+            703
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Layers: Obstacle_Blocker , Unit_Tank , Shield , Vegetation , Projectile .   \nTags: Wall_Low , Wall_High , Fence_Thin , Vehicle , Shield , NonBlock_Vegetation . ",
+        "bbox": [
+            129,
+            709,
+            851,
+            810
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "16.2 Tham số gợi ý theo mode ",
+        "bbox": [
+            89,
+            857,
+            420,
+            879
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "table",
+        "img_path": "images/e542ce8d795c5f5434fbdae26a81dfa6ec5c06070222f4d5f57d8635737cbe13.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Mode</td><td rowspan=1 colspan=1>UseMultiHeightSweep</td><td rowspan=1 colspan=1>UsePitchAssist</td><td rowspan=1 colspan=1> Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Death Match</td><td rowspan=1 colspan=1>ON (map cónhieu thung)</td><td rowspan=1 colspan=1>OFF</td><td rowspan=1 colspan=1>Uu tién camgiac“da”nhung minhbach</td></tr><tr><td rowspan=1 colspan=1>Base Capture</td><td rowspan=1 colspan=1> ON selective</td><td rowspan=1 colspan=1>ON(≤2°</td><td rowspan=1 colspan=1>Tranh spam“sugt dinh”khi thu base</td></tr></table>",
+        "bbox": [
+            87,
+            53,
+            619,
+            229
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "16.3 Glossary ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            289,
+            242,
+            308
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "2.5D: logic ưu tiên XZ, kiểm chứng Y.   \nBand: khoảng chiều cao chấp nhận va chạm.   \nSweep: loạt kiểm tra song song ở nhiều cao độ. ",
+        "bbox": [
+            131,
+            319,
+            604,
+            400
+        ],
+        "page_idx": 11
+    }
+]

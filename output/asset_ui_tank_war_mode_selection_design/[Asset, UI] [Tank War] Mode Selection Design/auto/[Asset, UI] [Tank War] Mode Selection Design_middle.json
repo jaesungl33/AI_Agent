@@ -1,0 +1,2025 @@
+{
+    "pdf_info": [
+        {
+            "preproc_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        482,
+                        144
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                69,
+                                484,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        69,
+                                        484,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Asset, UI] [Tank War] Mode Selection",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                108,
+                                116,
+                                147
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        108,
+                                        116,
+                                        147
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        262,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                162,
+                                263,
+                                180
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        162,
+                                        263,
+                                        180
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN THIẾT KẾ CHỌN MODE CHƠI",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        36,
+                        190,
+                        188,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                189,
+                                117,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        189,
+                                        117,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        },
+                        {
+                            "bbox": [
+                                34,
+                                213,
+                                189,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        34,
+                                        213,
+                                        107,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        189,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                240,
+                                177,
+                                258
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        240,
+                                        177,
+                                        258
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 15 - 08 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5
+                        }
+                    ],
+                    "index": 4
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        280,
+                        555,
+                        424
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                280,
+                                555,
+                                424
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        280,
+                                        555,
+                                        424
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                280,
+                                                555,
+                                                424
+                                            ],
+                                            "score": 0.975,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>30-07-2025</td><td rowspan=1 colspan=1> Hoan thanh file</td><td rowspan=1 colspan=1>Pphucth12 &amp;1 thanhdv2</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12 </td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d8ab48a0f7d6242460488f01232a7d5ac58434192e40ef3ed9f826047bb68ea1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        280,
+                                        555,
+                                        328.0
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        328.0,
+                                        555,
+                                        376.0
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        376.0,
+                                        555,
+                                        424.0
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        443,
+                        185,
+                        465
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                443,
+                                186,
+                                464
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        443,
+                                        186,
+                                        464
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        473,
+                        559,
+                        509
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                471,
+                                562,
+                                491
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        471,
+                                        562,
+                                        491
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Phân định rõ ràng các thông tin cần trình bày và các cách tương tác với nó trong màn hình chính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                491,
+                                104,
+                                510
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        491,
+                                        104,
+                                        510
+                                    ],
+                                    "score": 1.0,
+                                    "content": "của trận đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        518,
+                        260,
+                        535
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                517,
+                                260,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        517,
+                                        260,
+                                        536
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        543,
+                        379,
+                        587
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                543,
+                                379,
+                                561
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        549,
+                                        36,
+                                        555
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        543,
+                                        379,
+                                        561
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người chơi cảm thấy dễ hiểu và tiện lợi khi chọn mode chơi.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                567,
+                                310,
+                                589
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        575,
+                                        36,
+                                        580
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        567,
+                                        310,
+                                        589
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Những thông số nếu có phải định dạng rõ ràng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14
+                        }
+                    ],
+                    "index": 13.5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        630,
+                        175,
+                        651
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                629,
+                                177,
+                                651
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        629,
+                                        177,
+                                        651
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        659,
+                        401,
+                        676
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                656,
+                                402,
+                                679
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        656,
+                                        402,
+                                        679
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev thiết kế thông tin phù hợp.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        }
+                    ],
+                    "index": 16
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        720,
+                        191,
+                        741
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                717,
+                                194,
+                                743
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        717,
+                                        194,
+                                        743
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17
+                }
+            ],
+            "page_idx": 0,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "title",
+                    "bbox": [
+                        28,
+                        69,
+                        482,
+                        144
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                69,
+                                484,
+                                101
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        69,
+                                        484,
+                                        101
+                                    ],
+                                    "score": 1.0,
+                                    "content": "[Asset, UI] [Tank War] Mode Selection",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                25,
+                                108,
+                                116,
+                                147
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        108,
+                                        116,
+                                        147
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Design",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        }
+                    ],
+                    "index": 0.5
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        28,
+                        162,
+                        262,
+                        181
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                162,
+                                263,
+                                180
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        162,
+                                        263,
+                                        180
+                                    ],
+                                    "score": 1.0,
+                                    "content": "THÔNG TIN THIẾT KẾ CHỌN MODE CHƠI",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 2,
+                    "bbox_fs": [
+                        25,
+                        162,
+                        263,
+                        180
+                    ]
+                },
+                {
+                    "type": "index",
+                    "bbox": [
+                        36,
+                        190,
+                        188,
+                        258
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                36,
+                                189,
+                                117,
+                                206
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        189,
+                                        117,
+                                        206
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Version: v1.1",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                34,
+                                213,
+                                189,
+                                233
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        34,
+                                        213,
+                                        107,
+                                        233
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người viết:",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        124,
+                                        214,
+                                        189,
+                                        232
+                                    ],
+                                    "score": 1.0,
+                                    "content": "phucth12",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 4,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                36,
+                                240,
+                                177,
+                                258
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        36,
+                                        240,
+                                        177,
+                                        258
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Ngày tạo: 15 - 08 - 2025",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 5,
+                            "is_list_start_line": true
+                        }
+                    ],
+                    "index": 4,
+                    "bbox_fs": [
+                        34,
+                        189,
+                        189,
+                        258
+                    ]
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        27,
+                        280,
+                        555,
+                        424
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                27,
+                                280,
+                                555,
+                                424
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        280,
+                                        555,
+                                        424
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                27,
+                                                280,
+                                                555,
+                                                424
+                                            ],
+                                            "score": 0.975,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mota</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét?</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>30-07-2025</td><td rowspan=1 colspan=1> Hoan thanh file</td><td rowspan=1 colspan=1>Pphucth12 &amp;1 thanhdv2</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>P phucth12 </td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "d8ab48a0f7d6242460488f01232a7d5ac58434192e40ef3ed9f826047bb68ea1.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 7,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        280,
+                                        555,
+                                        328.0
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        328.0,
+                                        555,
+                                        376.0
+                                    ],
+                                    "spans": [],
+                                    "index": 7
+                                },
+                                {
+                                    "bbox": [
+                                        27,
+                                        376.0,
+                                        555,
+                                        424.0
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        443,
+                        185,
+                        465
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                27,
+                                443,
+                                186,
+                                464
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        443,
+                                        186,
+                                        464
+                                    ],
+                                    "score": 1.0,
+                                    "content": "1. Mục đích thiết kế",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 9
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        473,
+                        559,
+                        509
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                471,
+                                562,
+                                491
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        471,
+                                        562,
+                                        491
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Phân định rõ ràng các thông tin cần trình bày và các cách tương tác với nó trong màn hình chính",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 10
+                        },
+                        {
+                            "bbox": [
+                                26,
+                                491,
+                                104,
+                                510
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        491,
+                                        104,
+                                        510
+                                    ],
+                                    "score": 1.0,
+                                    "content": "của trận đấu.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 10.5,
+                    "bbox_fs": [
+                        25,
+                        471,
+                        562,
+                        510
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        518,
+                        260,
+                        535
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                517,
+                                260,
+                                536
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        517,
+                                        260,
+                                        536
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Đảm bảo thiết kế có những đặc điểm sau:",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        }
+                    ],
+                    "index": 12,
+                    "bbox_fs": [
+                        26,
+                        517,
+                        260,
+                        536
+                    ]
+                },
+                {
+                    "type": "list",
+                    "bbox": [
+                        29,
+                        543,
+                        379,
+                        587
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                31,
+                                543,
+                                379,
+                                561
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        549,
+                                        36,
+                                        555
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        543,
+                                        379,
+                                        561
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Người chơi cảm thấy dễ hiểu và tiện lợi khi chọn mode chơi.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13,
+                            "is_list_end_line": true
+                        },
+                        {
+                            "bbox": [
+                                31,
+                                567,
+                                310,
+                                589
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        31,
+                                        575,
+                                        36,
+                                        580
+                                    ],
+                                    "score": 1.0,
+                                    "content": "•",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        567,
+                                        310,
+                                        589
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Những thông số nếu có phải định dạng rõ ràng.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 14,
+                            "is_list_start_line": true,
+                            "is_list_end_line": true
+                        }
+                    ],
+                    "index": 13.5,
+                    "bbox_fs": [
+                        31,
+                        543,
+                        379,
+                        589
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        630,
+                        175,
+                        651
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                629,
+                                177,
+                                651
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        629,
+                                        177,
+                                        651
+                                    ],
+                                    "score": 1.0,
+                                    "content": "2. Mục tiêu tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 15
+                        }
+                    ],
+                    "index": 15
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        659,
+                        401,
+                        676
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                656,
+                                402,
+                                679
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        656,
+                                        402,
+                                        679
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Tài liệu được dùng để giúp đội Art & Dev thiết kế thông tin phù hợp.",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 16
+                        }
+                    ],
+                    "index": 16,
+                    "bbox_fs": [
+                        26,
+                        656,
+                        402,
+                        679
+                    ]
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        29,
+                        720,
+                        191,
+                        741
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                717,
+                                194,
+                                743
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        717,
+                                        194,
+                                        743
+                                    ],
+                                    "score": 1.0,
+                                    "content": "3. Tổng quan tài liệu",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 17
+                        }
+                    ],
+                    "index": 17,
+                    "bbox_fs": [
+                        25,
+                        717,
+                        194,
+                        743
+                    ]
+                }
+            ]
+        },
+        {
+            "preproc_blocks": [
+                {
+                    "type": "text",
+                    "bbox": [
+                        52,
+                        47,
+                        127,
+                        110
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                46,
+                                129,
+                                63
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        46,
+                                        129,
+                                        63
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                114,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        114,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Userflow",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                95,
+                                98,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        95,
+                                        98,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2
+                        }
+                    ],
+                    "index": 1
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        190,
+                        146,
+                        211
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                32,
+                                187,
+                                148,
+                                213
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        32,
+                                        197,
+                                        41,
+                                        205
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4.",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        187,
+                                        148,
+                                        213
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        235,
+                        556,
+                        429
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                235,
+                                556,
+                                429
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        235,
+                                        556,
+                                        429
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                235,
+                                                556,
+                                                429
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thänhphan</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Cach tuong täc</td><td rowspan=1 colspan=1>Design Note</td></tr><tr><td rowspan=1 colspan=1>Back button</td><td rowspan=1 colspan=1>Cho phép nguαi choiquay lai main menu</td><td rowspan=1 colspan=1> Nhän vao nut dé quay lai main menu</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Danh sachgamemodes</td><td rowspan=1 colspan=1>Cho nguoi chdi chonmode choi</td><td rowspan=1 colspan=1>Nhän khung mode choi mong muön sédän vé lai main menu va cäp nhät téngamemode dä chon bén canh</td><td rowspan=1 colspan=1>Tham khao cáchBrawl Stars chophép nguoi chdithay doi mode dehinh dung rδ hon</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "b7a89f946a99569bdb062570ce992612b705567929f4825a3697517422972ced.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        235,
+                                        556,
+                                        299.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        299.6666666666667,
+                                        556,
+                                        364.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        364.33333333333337,
+                                        556,
+                                        429.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        486,
+                        122,
+                        505
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                485,
+                                124,
+                                506
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        485,
+                                        124,
+                                        506
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Userflow",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        33,
+                        521,
+                        552,
+                        666
+                    ],
+                    "blocks": [
+                        {
+                            "type": "image_body",
+                            "bbox": [
+                                33,
+                                521,
+                                552,
+                                666
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        33,
+                                        521,
+                                        552,
+                                        666
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                33,
+                                                521,
+                                                552,
+                                                666
+                                            ],
+                                            "score": 0.911,
+                                            "type": "image",
+                                            "image_path": "3ad270d2b77e9919145d2ee37d5bb61a5d36ed4c91765487294049891b535294.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        33,
+                                        521,
+                                        552,
+                                        569.3333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        33,
+                                        569.3333333333334,
+                                        552,
+                                        617.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                },
+                                {
+                                    "bbox": [
+                                        33,
+                                        617.6666666666667,
+                                        552,
+                                        666.0000000000001
+                                    ],
+                                    "spans": [],
+                                    "index": 10
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        717,
+                        97,
+                        735
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                715,
+                                100,
+                                737
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        715,
+                                        100,
+                                        737
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        745,
+                        541,
+                        781
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                743,
+                                541,
+                                763
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        743,
+                                        541,
+                                        763
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khi chọn mode xong, người chơi lập tức quay về màn hình chính với thông tin mode mới cập",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                764,
+                                165,
+                                780
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        764,
+                                        165,
+                                        780
+                                    ],
+                                    "score": 1.0,
+                                    "content": "nhật bên cạnh nút Mode",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 12.5
+                }
+            ],
+            "page_idx": 1,
+            "page_size": [
+                594,
+                840
+            ],
+            "discarded_blocks": [],
+            "para_blocks": [
+                {
+                    "type": "index",
+                    "bbox": [
+                        52,
+                        47,
+                        127,
+                        110
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                51,
+                                46,
+                                129,
+                                63
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        51,
+                                        46,
+                                        129,
+                                        63
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4. Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 0,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                70,
+                                114,
+                                88
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        70,
+                                        114,
+                                        88
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Userflow",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 1,
+                            "is_list_start_line": true
+                        },
+                        {
+                            "bbox": [
+                                50,
+                                95,
+                                98,
+                                111
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        50,
+                                        95,
+                                        98,
+                                        111
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 2,
+                            "is_list_start_line": true
+                        }
+                    ],
+                    "index": 1,
+                    "bbox_fs": [
+                        50,
+                        46,
+                        129,
+                        111
+                    ]
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        190,
+                        146,
+                        211
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                32,
+                                187,
+                                148,
+                                213
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        32,
+                                        197,
+                                        41,
+                                        205
+                                    ],
+                                    "score": 1.0,
+                                    "content": "4.",
+                                    "type": "text"
+                                },
+                                {
+                                    "bbox": [
+                                        44,
+                                        187,
+                                        148,
+                                        213
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Thành phần",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 3
+                        }
+                    ],
+                    "index": 3
+                },
+                {
+                    "type": "table",
+                    "bbox": [
+                        28,
+                        235,
+                        556,
+                        429
+                    ],
+                    "blocks": [
+                        {
+                            "type": "table_body",
+                            "bbox": [
+                                28,
+                                235,
+                                556,
+                                429
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        235,
+                                        556,
+                                        429
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                28,
+                                                235,
+                                                556,
+                                                429
+                                            ],
+                                            "score": 0.981,
+                                            "html": "<table><tr><td rowspan=1 colspan=1>Tén thänhphan</td><td rowspan=1 colspan=1> Muc dich</td><td rowspan=1 colspan=1>Cach tuong täc</td><td rowspan=1 colspan=1>Design Note</td></tr><tr><td rowspan=1 colspan=1>Back button</td><td rowspan=1 colspan=1>Cho phép nguαi choiquay lai main menu</td><td rowspan=1 colspan=1> Nhän vao nut dé quay lai main menu</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Danh sachgamemodes</td><td rowspan=1 colspan=1>Cho nguoi chdi chonmode choi</td><td rowspan=1 colspan=1>Nhän khung mode choi mong muön sédän vé lai main menu va cäp nhät téngamemode dä chon bén canh</td><td rowspan=1 colspan=1>Tham khao cáchBrawl Stars chophép nguoi chdithay doi mode dehinh dung rδ hon</td></tr></table>",
+                                            "type": "table",
+                                            "image_path": "b7a89f946a99569bdb062570ce992612b705567929f4825a3697517422972ced.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 5,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        28,
+                                        235,
+                                        556,
+                                        299.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 4
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        299.6666666666667,
+                                        556,
+                                        364.33333333333337
+                                    ],
+                                    "spans": [],
+                                    "index": 5
+                                },
+                                {
+                                    "bbox": [
+                                        28,
+                                        364.33333333333337,
+                                        556,
+                                        429.00000000000006
+                                    ],
+                                    "spans": [],
+                                    "index": 6
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 5
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        486,
+                        122,
+                        505
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                485,
+                                124,
+                                506
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        485,
+                                        124,
+                                        506
+                                    ],
+                                    "score": 1.0,
+                                    "content": "5. Userflow",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 7
+                        }
+                    ],
+                    "index": 7
+                },
+                {
+                    "type": "image",
+                    "bbox": [
+                        33,
+                        521,
+                        552,
+                        666
+                    ],
+                    "blocks": [
+                        {
+                            "type": "image_body",
+                            "bbox": [
+                                33,
+                                521,
+                                552,
+                                666
+                            ],
+                            "group_id": 0,
+                            "lines": [
+                                {
+                                    "bbox": [
+                                        33,
+                                        521,
+                                        552,
+                                        666
+                                    ],
+                                    "spans": [
+                                        {
+                                            "bbox": [
+                                                33,
+                                                521,
+                                                552,
+                                                666
+                                            ],
+                                            "score": 0.911,
+                                            "type": "image",
+                                            "image_path": "3ad270d2b77e9919145d2ee37d5bb61a5d36ed4c91765487294049891b535294.jpg"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "index": 9,
+                            "virtual_lines": [
+                                {
+                                    "bbox": [
+                                        33,
+                                        521,
+                                        552,
+                                        569.3333333333334
+                                    ],
+                                    "spans": [],
+                                    "index": 8
+                                },
+                                {
+                                    "bbox": [
+                                        33,
+                                        569.3333333333334,
+                                        552,
+                                        617.6666666666667
+                                    ],
+                                    "spans": [],
+                                    "index": 9
+                                },
+                                {
+                                    "bbox": [
+                                        33,
+                                        617.6666666666667,
+                                        552,
+                                        666.0000000000001
+                                    ],
+                                    "spans": [],
+                                    "index": 10
+                                }
+                            ]
+                        }
+                    ],
+                    "index": 9
+                },
+                {
+                    "type": "title",
+                    "bbox": [
+                        29,
+                        717,
+                        97,
+                        735
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                26,
+                                715,
+                                100,
+                                737
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        26,
+                                        715,
+                                        100,
+                                        737
+                                    ],
+                                    "score": 1.0,
+                                    "content": "6. Notes",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 11
+                        }
+                    ],
+                    "index": 11
+                },
+                {
+                    "type": "text",
+                    "bbox": [
+                        27,
+                        745,
+                        541,
+                        781
+                    ],
+                    "lines": [
+                        {
+                            "bbox": [
+                                25,
+                                743,
+                                541,
+                                763
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        25,
+                                        743,
+                                        541,
+                                        763
+                                    ],
+                                    "score": 1.0,
+                                    "content": "Khi chọn mode xong, người chơi lập tức quay về màn hình chính với thông tin mode mới cập",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 12
+                        },
+                        {
+                            "bbox": [
+                                27,
+                                764,
+                                165,
+                                780
+                            ],
+                            "spans": [
+                                {
+                                    "bbox": [
+                                        27,
+                                        764,
+                                        165,
+                                        780
+                                    ],
+                                    "score": 1.0,
+                                    "content": "nhật bên cạnh nút Mode",
+                                    "type": "text"
+                                }
+                            ],
+                            "index": 13
+                        }
+                    ],
+                    "index": 12.5,
+                    "bbox_fs": [
+                        25,
+                        743,
+                        541,
+                        780
+                    ]
+                }
+            ]
+        }
+    ],
+    "_backend": "pipeline",
+    "_version_name": "2.6.4"
+}

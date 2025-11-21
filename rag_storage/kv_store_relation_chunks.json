@@ -327,11 +327,11 @@
   },
   "Artifacts<SEP>Tanks": {
     "chunk_ids": [
-      "chunk-6b71f5adbea8e71e9c46d4c048ccfffd"
+      "chunk-6b71f5adbea8e71e9c46d4c048ccfffd",
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
     ],
-    "count": 1,
-    "create_time": 1763543172,
-    "update_time": 1763543172,
+    "count": 2,
+    "update_time": 1763695960,
     "_id": "Artifacts<SEP>Tanks"
   },
   "Decorations<SEP>Garage": {
@@ -615,11 +615,18 @@
   },
   "Combat Module<SEP>Tank War": {
     "chunk_ids": [
-      "chunk-8d8fe3d33191b35be77a591de251d057"
+      "chunk-8d8fe3d33191b35be77a591de251d057",
+      "chunk-d4e6db08efe723d794488d411618bf86",
+      "chunk-044054359456cb0d2d5c6c305f664fdb",
+      "chunk-20fc94f1cf498d75cd7242f656ca1134",
+      "chunk-23fa6540034a6802d517d7b88bd1d869",
+      "chunk-2fb3307cad33dcb7bce940d24141600c",
+      "chunk-ff016178cab6a91c77a236b054ef19fd",
+      "chunk-d13eaba79b4de934df0b735502354ebd",
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
     ],
-    "count": 1,
-    "create_time": 1763543237,
-    "update_time": 1763543237,
+    "count": 9,
+    "update_time": 1763699408,
     "_id": "Combat Module<SEP>Tank War"
   },
   "BO_Sign<SEP>Block Object": {
@@ -711,5 +718,4957 @@
     "create_time": 1763543238,
     "update_time": 1763543238,
     "_id": "GameAssets<SEP>Tank (TA)"
+  },
+  "Tank<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "Tank<SEP>Weighted Index"
+  },
+  "Design Weight<SEP>Game Designer": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "Design Weight<SEP>Game Designer"
+  },
+  "Assault Tank<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "Assault Tank<SEP>Weighted Index"
+  },
+  "Multiplier<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "Multiplier<SEP>Tank"
+  },
+  "Scout<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "Scout<SEP>Tank"
+  },
+  "HP<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695782,
+    "update_time": 1763695782,
+    "_id": "HP<SEP>Weighted Index"
+  },
+  "Design Weight<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Design Weight<SEP>Tank"
+  },
+  "Speed<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Speed<SEP>Weighted Index"
+  },
+  "Damage<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Damage<SEP>Weighted Index"
+  },
+  "Assault Tank<SEP>Multiplier": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Assault Tank<SEP>Multiplier"
+  },
+  "Reload<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Reload<SEP>Weighted Index"
+  },
+  "Fire Rate<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695783,
+    "update_time": 1763695783,
+    "_id": "Fire Rate<SEP>Weighted Index"
+  },
+  "Projectile Speed<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695784,
+    "update_time": 1763695784,
+    "_id": "Projectile Speed<SEP>Weighted Index"
+  },
+  "Range<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695784,
+    "update_time": 1763695784,
+    "_id": "Range<SEP>Weighted Index"
+  },
+  "Game Designer<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-a21e5d2fe37ad2c576b6dc50006a2272"
+    ],
+    "count": 1,
+    "create_time": 1763695784,
+    "update_time": 1763695784,
+    "_id": "Game Designer<SEP>Weighted Index"
+  },
+  "Ban<SEP>Cchän": {
+    "chunk_ids": [
+      "chunk-792b5e6d7ffd99165504af41a281d044"
+    ],
+    "count": 1,
+    "create_time": 1763695959,
+    "update_time": 1763695959,
+    "_id": "Ban<SEP>Cchän"
+  },
+  "Apply Decor<SEP>Player": {
+    "chunk_ids": [
+      "chunk-792b5e6d7ffd99165504af41a281d044"
+    ],
+    "count": 1,
+    "create_time": 1763695959,
+    "update_time": 1763695959,
+    "_id": "Apply Decor<SEP>Player"
+  },
+  "Garage Design<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98",
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 2,
+    "update_time": 1763697619,
+    "_id": "Garage Design<SEP>Tank War"
+  },
+  "Art & Dev Team<SEP>Character Module": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695959,
+    "update_time": 1763695959,
+    "_id": "Art & Dev Team<SEP>Character Module"
+  },
+  "Cchän<SEP>Quay Lai": {
+    "chunk_ids": [
+      "chunk-792b5e6d7ffd99165504af41a281d044"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Cchän<SEP>Quay Lai"
+  },
+  "Ban<SEP>Prompt": {
+    "chunk_ids": [
+      "chunk-792b5e6d7ffd99165504af41a281d044"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Ban<SEP>Prompt"
+  },
+  "Giao Diện Ban Đầu<SEP>Player": {
+    "chunk_ids": [
+      "chunk-792b5e6d7ffd99165504af41a281d044"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Giao Diện Ban Đầu<SEP>Player"
+  },
+  "AI Gen Decor<SEP>Decor Tank": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "AI Gen Decor<SEP>Decor Tank"
+  },
+  "Diamond<SEP>Gold": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Diamond<SEP>Gold"
+  },
+  "Garage Design<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98",
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 2,
+    "update_time": 1763697305,
+    "_id": "Garage Design<SEP>Phucth12"
+  },
+  "Home Screen<SEP>Mode Selection": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Home Screen<SEP>Mode Selection"
+  },
+  "Garage Design<SEP>Version 1.1": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Garage Design<SEP>Version 1.1"
+  },
+  "Player<SEP>Prompt": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "Player<SEP>Prompt"
+  },
+  "AI Gen Decor<SEP>Tokens": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695960,
+    "update_time": 1763695960,
+    "_id": "AI Gen Decor<SEP>Tokens"
+  },
+  "AI Gen Decor<SEP>Custom Section": {
+    "chunk_ids": [
+      "chunk-baa6dd01ede2bd24a94000acad52de98"
+    ],
+    "count": 1,
+    "create_time": 1763695961,
+    "update_time": 1763695961,
+    "_id": "AI Gen Decor<SEP>Custom Section"
+  },
+  "GUI Design Document<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696285,
+    "update_time": 1763696285,
+    "_id": "GUI Design Document<SEP>Phucth12"
+  },
+  "Tank System Detail<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1",
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 2,
+    "update_time": 1763697850,
+    "_id": "Tank System Detail<SEP>Tank War"
+  },
+  "Outpost Design - Base Capture Mode<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696286,
+    "update_time": 1763696286,
+    "_id": "Outpost Design - Base Capture Mode<SEP>Tank War"
+  },
+  "Map Design Document<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696286,
+    "update_time": 1763696286,
+    "_id": "Map Design Document<SEP>Tank War"
+  },
+  "Tank UI<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696287,
+    "update_time": 1763696287,
+    "_id": "Tank UI<SEP>Tank War"
+  },
+  "HP Display<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696288,
+    "update_time": 1763696288,
+    "_id": "HP Display<SEP>Tank War"
+  },
+  "GUI Design Document<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696288,
+    "update_time": 1763696288,
+    "_id": "GUI Design Document<SEP>Tank War"
+  },
+  "HP Display<SEP>Tank UI": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696288,
+    "update_time": 1763696288,
+    "_id": "HP Display<SEP>Tank UI"
+  },
+  "HP Display<SEP>Outpost Design - Base Capture Mode": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696288,
+    "update_time": 1763696288,
+    "_id": "HP Display<SEP>Outpost Design - Base Capture Mode"
+  },
+  "Art & Dev Team<SEP>GUI Design Document": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696289,
+    "update_time": 1763696289,
+    "_id": "Art & Dev Team<SEP>GUI Design Document"
+  },
+  "HP Display<SEP>Map Design Document": {
+    "chunk_ids": [
+      "chunk-5b7e8698070a33a2b73441127d13bbe1"
+    ],
+    "count": 1,
+    "create_time": 1763696289,
+    "update_time": 1763696289,
+    "_id": "HP Display<SEP>Map Design Document"
+  },
+  "Main Screen Design Document<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Main Screen Design Document<SEP>Phucth12"
+  },
+  "Shop Function<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Shop Function<SEP>Tank War"
+  },
+  "Events Function<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Events Function<SEP>Tank War"
+  },
+  "Main Screen<SEP>Shop Function": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Main Screen<SEP>Shop Function"
+  },
+  "Mode Function<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Mode Function<SEP>Tank War"
+  },
+  "Events Function<SEP>Main Screen": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696520,
+    "update_time": 1763696520,
+    "_id": "Events Function<SEP>Main Screen"
+  },
+  "Mission Function<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696521,
+    "update_time": 1763696521,
+    "_id": "Mission Function<SEP>Tank War"
+  },
+  "Main Screen<SEP>Mode Function": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696521,
+    "update_time": 1763696521,
+    "_id": "Main Screen<SEP>Mode Function"
+  },
+  "Phucth12<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-cb2d717dafabf8b38457cfc05cfc609c",
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 2,
+    "create_time": 1763696521,
+    "update_time": 1763696521,
+    "_id": "Phucth12<SEP>Tank War"
+  },
+  "Main Screen<SEP>Mission Function": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696521,
+    "update_time": 1763696521,
+    "_id": "Main Screen<SEP>Mission Function"
+  },
+  "Main Screen Design Document<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696522,
+    "update_time": 1763696522,
+    "_id": "Main Screen Design Document<SEP>Tank War"
+  },
+  "Art & Dev Team<SEP>Main Screen Design Document": {
+    "chunk_ids": [
+      "chunk-dd4d6beba27aa85761eef0fd1fdfbba5"
+    ],
+    "count": 1,
+    "create_time": 1763696522,
+    "update_time": 1763696522,
+    "_id": "Art & Dev Team<SEP>Main Screen Design Document"
+  },
+  "Mode Selection Design Document<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-62121bb71d32abba30c9c9c466209bc1"
+    ],
+    "count": 1,
+    "create_time": 1763696670,
+    "update_time": 1763696670,
+    "_id": "Mode Selection Design Document<SEP>Phucth12"
+  },
+  "Main Screen<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-62121bb71d32abba30c9c9c466209bc1"
+    ],
+    "count": 1,
+    "create_time": 1763696670,
+    "update_time": 1763696670,
+    "_id": "Main Screen<SEP>Tank War"
+  },
+  "Game Mode<SEP>Main Screen": {
+    "chunk_ids": [
+      "chunk-62121bb71d32abba30c9c9c466209bc1"
+    ],
+    "count": 1,
+    "create_time": 1763696670,
+    "update_time": 1763696670,
+    "_id": "Game Mode<SEP>Main Screen"
+  },
+  "Mode Selection Design Document<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-62121bb71d32abba30c9c9c466209bc1"
+    ],
+    "count": 1,
+    "create_time": 1763696670,
+    "update_time": 1763696670,
+    "_id": "Mode Selection Design Document<SEP>Tank War"
+  },
+  "Art & Dev Team<SEP>Mode Selection Design Document": {
+    "chunk_ids": [
+      "chunk-62121bb71d32abba30c9c9c466209bc1"
+    ],
+    "count": 1,
+    "create_time": 1763696670,
+    "update_time": 1763696670,
+    "_id": "Art & Dev Team<SEP>Mode Selection Design Document"
+  },
+  "Phucth12<SEP>Result Screen": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696814,
+    "update_time": 1763696814,
+    "_id": "Phucth12<SEP>Result Screen"
+  },
+  "Shop<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696814,
+    "update_time": 1763696814,
+    "_id": "Shop<SEP>Tank War"
+  },
+  "Events<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696815,
+    "update_time": 1763696815,
+    "_id": "Events<SEP>Tank War"
+  },
+  "Mode<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696815,
+    "update_time": 1763696815,
+    "_id": "Mode<SEP>Tank War"
+  },
+  "Mission<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696815,
+    "update_time": 1763696815,
+    "_id": "Mission<SEP>Tank War"
+  },
+  "Result Screen<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696816,
+    "update_time": 1763696816,
+    "_id": "Result Screen<SEP>Tank War"
+  },
+  "Art & Dev Team<SEP>Result Screen": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696816,
+    "update_time": 1763696816,
+    "_id": "Art & Dev Team<SEP>Result Screen"
+  },
+  "Interaction Design<SEP>Result Screen": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696816,
+    "update_time": 1763696816,
+    "_id": "Interaction Design<SEP>Result Screen"
+  },
+  "Art & Dev Team<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-2de13ab38d64bc6a726b27e8406f51c3"
+    ],
+    "count": 1,
+    "create_time": 1763696816,
+    "update_time": 1763696816,
+    "_id": "Art & Dev Team<SEP>Phucth12"
+  },
+  "Reward Screen<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696968,
+    "update_time": 1763696968,
+    "_id": "Reward Screen<SEP>Tank War"
+  },
+  "Phucth12<SEP>Reward Screen": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696968,
+    "update_time": 1763696968,
+    "_id": "Phucth12<SEP>Reward Screen"
+  },
+  "Art & Dev Team<SEP>Reward Screen": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696968,
+    "update_time": 1763696968,
+    "_id": "Art & Dev Team<SEP>Reward Screen"
+  },
+  "Reward Screen<SEP>Version V1.1": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696969,
+    "update_time": 1763696969,
+    "_id": "Reward Screen<SEP>Version V1.1"
+  },
+  "Player Rewards<SEP>Reward Screen": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696969,
+    "update_time": 1763696969,
+    "_id": "Player Rewards<SEP>Reward Screen"
+  },
+  "Player<SEP>Reward Screen": {
+    "chunk_ids": [
+      "chunk-f736cff212b8fa79d257d66c07c6e41c"
+    ],
+    "count": 1,
+    "create_time": 1763696969,
+    "update_time": 1763696969,
+    "_id": "Player<SEP>Reward Screen"
+  },
+  "Tank Selection Screen<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-3b93b394b3e1a306ed0f9ae589f941b2"
+    ],
+    "count": 1,
+    "create_time": 1763697117,
+    "update_time": 1763697117,
+    "_id": "Tank Selection Screen<SEP>Tank War"
+  },
+  "Phucth12<SEP>Tank Selection Screen": {
+    "chunk_ids": [
+      "chunk-3b93b394b3e1a306ed0f9ae589f941b2"
+    ],
+    "count": 1,
+    "create_time": 1763697117,
+    "update_time": 1763697117,
+    "_id": "Phucth12<SEP>Tank Selection Screen"
+  },
+  "Art & Dev Team<SEP>Tank Selection Screen": {
+    "chunk_ids": [
+      "chunk-3b93b394b3e1a306ed0f9ae589f941b2"
+    ],
+    "count": 1,
+    "create_time": 1763697117,
+    "update_time": 1763697117,
+    "_id": "Art & Dev Team<SEP>Tank Selection Screen"
+  },
+  "Tank Selection Screen<SEP>Version 1.1": {
+    "chunk_ids": [
+      "chunk-3b93b394b3e1a306ed0f9ae589f941b2"
+    ],
+    "count": 1,
+    "create_time": 1763697117,
+    "update_time": 1763697117,
+    "_id": "Tank Selection Screen<SEP>Version 1.1"
+  },
+  "Combat Preparation Phase<SEP>Tank Selection Screen": {
+    "chunk_ids": [
+      "chunk-3b93b394b3e1a306ed0f9ae589f941b2"
+    ],
+    "count": 1,
+    "create_time": 1763697118,
+    "update_time": 1763697118,
+    "_id": "Combat Preparation Phase<SEP>Tank Selection Screen"
+  },
+  "Decor<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697301,
+    "update_time": 1763697301,
+    "_id": "Decor<SEP>Tank"
+  },
+  "Shop<SEP>Transaction": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697301,
+    "update_time": 1763697301,
+    "_id": "Shop<SEP>Transaction"
+  },
+  "Player<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8",
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 2,
+    "create_time": 1763697302,
+    "update_time": 1763697302,
+    "_id": "Player<SEP>Tank"
+  },
+  "Party<SEP>Player": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8",
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 2,
+    "create_time": 1763697303,
+    "update_time": 1763697303,
+    "_id": "Party<SEP>Player"
+  },
+  "Home<SEP>Player": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8",
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 2,
+    "create_time": 1763697303,
+    "update_time": 1763697303,
+    "_id": "Home<SEP>Player"
+  },
+  "Player<SEP>Shop": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8",
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 2,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Player<SEP>Shop"
+  },
+  "Home<SEP>Party": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Home<SEP>Party"
+  },
+  "Elements<SEP>Functions": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Elements<SEP>Functions"
+  },
+  "AI<SEP>Player": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "AI<SEP>Player"
+  },
+  "Documentation<SEP>Elements": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Documentation<SEP>Elements"
+  },
+  "Decor<SEP>Player": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Decor<SEP>Player"
+  },
+  "Character Module<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697304,
+    "update_time": 1763697304,
+    "_id": "Character Module<SEP>Tank War"
+  },
+  "Player<SEP>Userflow": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Player<SEP>Userflow"
+  },
+  "Decor<SEP>Icon": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Decor<SEP>Icon"
+  },
+  "Skin<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Skin<SEP>Tank"
+  },
+  "Documentation<SEP>Functions": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Documentation<SEP>Functions"
+  },
+  "Decal<SEP>Decor": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Decal<SEP>Decor"
+  },
+  "Artifact<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Artifact<SEP>Tank"
+  },
+  "Art Team<SEP>Garage Design": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Art Team<SEP>Garage Design"
+  },
+  "Player<SEP>Resource": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Player<SEP>Resource"
+  },
+  "Currency<SEP>Player": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Currency<SEP>Player"
+  },
+  "Decor<SEP>Sticker": {
+    "chunk_ids": [
+      "chunk-3f02b09ff5b9620743965435906918c8"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Decor<SEP>Sticker"
+  },
+  "AI Gen - Ver 1<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "AI Gen - Ver 1<SEP>Tank"
+  },
+  "Dev Team<SEP>Garage Design": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697305,
+    "update_time": 1763697305,
+    "_id": "Dev Team<SEP>Garage Design"
+  },
+  "Garage Design<SEP>Garage Design - Main": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697306,
+    "update_time": 1763697306,
+    "_id": "Garage Design<SEP>Garage Design - Main"
+  },
+  "Tank<SEP>Wrap": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697306,
+    "update_time": 1763697306,
+    "_id": "Tank<SEP>Wrap"
+  },
+  "Decal<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697306,
+    "update_time": 1763697306,
+    "_id": "Decal<SEP>Tank"
+  },
+  "Garage Design<SEP>Garage Design - UI/UX": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b"
+    ],
+    "count": 1,
+    "create_time": 1763697306,
+    "update_time": 1763697306,
+    "_id": "Garage Design<SEP>Garage Design - UI/UX"
+  },
+  "Sticker<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-c97a4c69e80100089bef939029cb6b4b",
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 2,
+    "update_time": 1763701039,
+    "_id": "Sticker<SEP>Tank"
+  },
+  "Garage Design<SEP>Tank Garage": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Garage Design<SEP>Tank Garage"
+  },
+  "Tank Decor<SEP>Wrap": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Tank Decor<SEP>Wrap"
+  },
+  "Decal<SEP>Tank Decor": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Decal<SEP>Tank Decor"
+  },
+  "Player<SEP>Tank Garage": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Player<SEP>Tank Garage"
+  },
+  "Garage Design<SEP>Tank Decor": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Garage Design<SEP>Tank Decor"
+  },
+  "AI<SEP>Custom Section": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "AI<SEP>Custom Section"
+  },
+  "Artifact<SEP>Tank Garage": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697618,
+    "update_time": 1763697618,
+    "_id": "Artifact<SEP>Tank Garage"
+  },
+  "Sticker<SEP>Tank Decor": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Sticker<SEP>Tank Decor"
+  },
+  "Garage Design<SEP>phucth12": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Garage Design<SEP>phucth12"
+  },
+  "Home Screen<SEP>Tank Garage": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Home Screen<SEP>Tank Garage"
+  },
+  "Art & Dev Team<SEP>Garage Design": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Art & Dev Team<SEP>Garage Design"
+  },
+  "Player<SEP>Tank Decor": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Player<SEP>Tank Decor"
+  },
+  "Custom Section<SEP>Tank Decor": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697619,
+    "update_time": 1763697619,
+    "_id": "Custom Section<SEP>Tank Decor"
+  },
+  "Garage Design<SEP>Userflow Document": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697620,
+    "update_time": 1763697620,
+    "_id": "Garage Design<SEP>Userflow Document"
+  },
+  "Functions Document<SEP>Garage Design": {
+    "chunk_ids": [
+      "chunk-be78771b5800b064a27712f5dec69c63"
+    ],
+    "count": 1,
+    "create_time": 1763697620,
+    "update_time": 1763697620,
+    "_id": "Functions Document<SEP>Garage Design"
+  },
+  "QuocTA<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86",
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 2,
+    "update_time": 1763702125,
+    "_id": "QuocTA<SEP>Tank War"
+  },
+  "Scout Tank<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697847,
+    "update_time": 1763697847,
+    "_id": "Scout Tank<SEP>Tank War"
+  },
+  "Assault Tank<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697848,
+    "update_time": 1763697848,
+    "_id": "Assault Tank<SEP>Tank War"
+  },
+  "Against All Odds<SEP>Scout Tank": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697848,
+    "update_time": 1763697848,
+    "_id": "Against All Odds<SEP>Scout Tank"
+  },
+  "Heavy Tank<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697848,
+    "update_time": 1763697848,
+    "_id": "Heavy Tank<SEP>Tank War"
+  },
+  "Assault Tank<SEP>Bloodlust": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697848,
+    "update_time": 1763697848,
+    "_id": "Assault Tank<SEP>Bloodlust"
+  },
+  "Like A Bat Out Of Hell<SEP>Scout Tank": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697848,
+    "update_time": 1763697848,
+    "_id": "Like A Bat Out Of Hell<SEP>Scout Tank"
+  },
+  "Assault Tank<SEP>Domination": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Assault Tank<SEP>Domination"
+  },
+  "Tank War<SEP>Unity": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Tank War<SEP>Unity"
+  },
+  "Heavy Tank<SEP>Intimidation": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86",
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 2,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Heavy Tank<SEP>Intimidation"
+  },
+  "Heavy Tank<SEP>Squid": {
+    "chunk_ids": [
+      "chunk-d4e6db08efe723d794488d411618bf86",
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 2,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Heavy Tank<SEP>Squid"
+  },
+  "Joystick<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Joystick<SEP>Tank"
+  },
+  "Hitbox<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Hitbox<SEP>Tank"
+  },
+  "Heavy Tank<SEP>K": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Heavy Tank<SEP>K"
+  },
+  "Overdrive<SEP>Scout Tank Skills": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697849,
+    "update_time": 1763697849,
+    "_id": "Overdrive<SEP>Scout Tank Skills"
+  },
+  "Balance và bảng tính<SEP>Heavy Tank": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Balance và bảng tính<SEP>Heavy Tank"
+  },
+  "Scout Tank Skills<SEP>Smoke Dash": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Scout Tank Skills<SEP>Smoke Dash"
+  },
+  "Armor Shift<SEP>Assault Tank Skills": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Armor Shift<SEP>Assault Tank Skills"
+  },
+  "EMP Blast<SEP>Heavy Tank Skills": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "EMP Blast<SEP>Heavy Tank Skills"
+  },
+  "Tank<SEP>World Tank War Map Design Document": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Tank<SEP>World Tank War Map Design Document"
+  },
+  "Assault Tank Skills<SEP>Ricochet Round": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Assault Tank Skills<SEP>Ricochet Round"
+  },
+  "Joystick<SEP>Shooting Mechanic": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Joystick<SEP>Shooting Mechanic"
+  },
+  "Game Balance<SEP>Hitbox": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Game Balance<SEP>Hitbox"
+  },
+  "Scout Tank<SEP>Scout Tank Skills": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Scout Tank<SEP>Scout Tank Skills"
+  },
+  "Assault Tank<SEP>Assault Tank Skills": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697850,
+    "update_time": 1763697850,
+    "_id": "Assault Tank<SEP>Assault Tank Skills"
+  },
+  "EMP Blast<SEP>Heavy Tank": {
+    "chunk_ids": [
+      "chunk-eb450d3919bde82723672a72cdbc5181"
+    ],
+    "count": 1,
+    "create_time": 1763697851,
+    "update_time": 1763697851,
+    "_id": "EMP Blast<SEP>Heavy Tank"
+  },
+  "Elemental Class<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698032,
+    "update_time": 1763698032,
+    "_id": "Elemental Class<SEP>Tank War"
+  },
+  "Elemental Class<SEP>Fire": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698032,
+    "update_time": 1763698032,
+    "_id": "Elemental Class<SEP>Fire"
+  },
+  "Elemental Class<SEP>Ice": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698033,
+    "update_time": 1763698033,
+    "_id": "Elemental Class<SEP>Ice"
+  },
+  "Elemental Class<SEP>Lightning": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698033,
+    "update_time": 1763698033,
+    "_id": "Elemental Class<SEP>Lightning"
+  },
+  "Earth<SEP>Elemental Class": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698033,
+    "update_time": 1763698033,
+    "_id": "Earth<SEP>Elemental Class"
+  },
+  "Elemental Class<SEP>Poison": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698034,
+    "update_time": 1763698034,
+    "_id": "Elemental Class<SEP>Poison"
+  },
+  "Elemental Class<SEP>Scout": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698034,
+    "update_time": 1763698034,
+    "_id": "Elemental Class<SEP>Scout"
+  },
+  "Assault<SEP>Elemental Class": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698034,
+    "update_time": 1763698034,
+    "_id": "Assault<SEP>Elemental Class"
+  },
+  "Elemental Class<SEP>Heavy": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698034,
+    "update_time": 1763698034,
+    "_id": "Elemental Class<SEP>Heavy"
+  },
+  "Basic Attack<SEP>Elemental Class": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698035,
+    "update_time": 1763698035,
+    "_id": "Basic Attack<SEP>Elemental Class"
+  },
+  "Active Skill<SEP>Elemental Class": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698035,
+    "update_time": 1763698035,
+    "_id": "Active Skill<SEP>Elemental Class"
+  },
+  "Abnormal State<SEP>Elemental Class": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698035,
+    "update_time": 1763698035,
+    "_id": "Abnormal State<SEP>Elemental Class"
+  },
+  "Elemental Class<SEP>Zone Control": {
+    "chunk_ids": [
+      "chunk-bd0b7c3e3758ac06ca198c8bea279008"
+    ],
+    "count": 1,
+    "create_time": 1763698035,
+    "update_time": 1763698035,
+    "_id": "Elemental Class<SEP>Zone Control"
+  },
+  "Auto Focus System<SEP>Kent (QuocTA)": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Auto Focus System<SEP>Kent (QuocTA)"
+  },
+  "Class Priority<SEP>Survival Priority": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Class Priority<SEP>Survival Priority"
+  },
+  "Class Priority<SEP>Scout": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Class Priority<SEP>Scout"
+  },
+  "Auto Focus System<SEP>Gameplay": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Auto Focus System<SEP>Gameplay"
+  },
+  "Auto Focus System<SEP>Target Selection Rules": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Auto Focus System<SEP>Target Selection Rules"
+  },
+  "Assault<SEP>Class Priority": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698179,
+    "update_time": 1763698179,
+    "_id": "Assault<SEP>Class Priority"
+  },
+  "Auto Focus System<SEP>Scan Range": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Auto Focus System<SEP>Scan Range"
+  },
+  "Class Priority<SEP>Heavy": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Class Priority<SEP>Heavy"
+  },
+  "Bụi<SEP>Enemy": {
+    "chunk_ids": [
+      "chunk-befdf32596e2f5d14c2f88cd730c5620"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Bụi<SEP>Enemy"
+  },
+  "Base Scan Range<SEP>Scan Range": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Base Scan Range<SEP>Scan Range"
+  },
+  "Auto Focus System<SEP>Manual Override": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Auto Focus System<SEP>Manual Override"
+  },
+  "Enemy<SEP>Skill": {
+    "chunk_ids": [
+      "chunk-befdf32596e2f5d14c2f88cd730c5620"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Enemy<SEP>Skill"
+  },
+  "Autolock<SEP>Enemy": {
+    "chunk_ids": [
+      "chunk-befdf32596e2f5d14c2f88cd730c5620"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Autolock<SEP>Enemy"
+  },
+  "Auto Focus System<SEP>User Experience (UX)": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Auto Focus System<SEP>User Experience (UX)"
+  },
+  "Auto Focus System<SEP>Edge Case": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698180,
+    "update_time": 1763698180,
+    "_id": "Auto Focus System<SEP>Edge Case"
+  },
+  "Attack Range<SEP>Auto Focus System": {
+    "chunk_ids": [
+      "chunk-044054359456cb0d2d5c6c305f664fdb"
+    ],
+    "count": 1,
+    "create_time": 1763698181,
+    "update_time": 1763698181,
+    "_id": "Attack Range<SEP>Auto Focus System"
+  },
+  "Hệ Thống Nâng Cấp Tank In-Match<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698317,
+    "update_time": 1763698317,
+    "_id": "Hệ Thống Nâng Cấp Tank In-Match<SEP>Tank War"
+  },
+  "Hệ Thống Nâng Cấp Tank In-Match<SEP>Kent": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698317,
+    "update_time": 1763698317,
+    "_id": "Hệ Thống Nâng Cấp Tank In-Match<SEP>Kent"
+  },
+  "Hệ Thống Nâng Cấp Tank In-Match<SEP>Scout": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698317,
+    "update_time": 1763698317,
+    "_id": "Hệ Thống Nâng Cấp Tank In-Match<SEP>Scout"
+  },
+  "Assault<SEP>Hệ Thống Nâng Cấp Tank In-Match": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "Assault<SEP>Hệ Thống Nâng Cấp Tank In-Match"
+  },
+  "DPS Multiplier<SEP>Scout": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "DPS Multiplier<SEP>Scout"
+  },
+  "Heavy<SEP>Hệ Thống Nâng Cấp Tank In-Match": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "Heavy<SEP>Hệ Thống Nâng Cấp Tank In-Match"
+  },
+  "Fire Rate<SEP>Scout Tank": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "Fire Rate<SEP>Scout Tank"
+  },
+  "HP<SEP>Hệ Thống Nâng Cấp Tank In-Match": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "HP<SEP>Hệ Thống Nâng Cấp Tank In-Match"
+  },
+  "EHP<SEP>Heavy": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "EHP<SEP>Heavy"
+  },
+  "Scout Tank<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698318,
+    "update_time": 1763698318,
+    "_id": "Scout Tank<SEP>Upgrade System"
+  },
+  "Hệ Thống Nâng Cấp Tank In-Match<SEP>SPD": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Hệ Thống Nâng Cấp Tank In-Match<SEP>SPD"
+  },
+  "Class Tank<SEP>Mode PvE/PvP": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Class Tank<SEP>Mode PvE/PvP"
+  },
+  "Total Bonus<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Total Bonus<SEP>Upgrade System"
+  },
+  "DMG<SEP>Hệ Thống Nâng Cấp Tank In-Match": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "DMG<SEP>Hệ Thống Nâng Cấp Tank In-Match"
+  },
+  "Gold<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Gold<SEP>Upgrade System"
+  },
+  "FR<SEP>Hệ Thống Nâng Cấp Tank In-Match": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "FR<SEP>Hệ Thống Nâng Cấp Tank In-Match"
+  },
+  "Fire Rate<SEP>Total Bonus": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Fire Rate<SEP>Total Bonus"
+  },
+  "Upgrade System<SEP>XP": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Upgrade System<SEP>XP"
+  },
+  "Hệ Thống Nâng Cấp Tank In-Match<SEP>Weighted Index": {
+    "chunk_ids": [
+      "chunk-20fc94f1cf498d75cd7242f656ca1134"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Hệ Thống Nâng Cấp Tank In-Match<SEP>Weighted Index"
+  },
+  "Skill<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698319,
+    "update_time": 1763698319,
+    "_id": "Skill<SEP>Upgrade System"
+  },
+  "Aura<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698320,
+    "update_time": 1763698320,
+    "_id": "Aura<SEP>Upgrade System"
+  },
+  "Passive<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698320,
+    "update_time": 1763698320,
+    "_id": "Passive<SEP>Upgrade System"
+  },
+  "Mode PvE/PvP<SEP>Upgrade System": {
+    "chunk_ids": [
+      "chunk-104061e02c3001ea8b1d9264dfa9f3ea"
+    ],
+    "count": 1,
+    "create_time": 1763698320,
+    "update_time": 1763698320,
+    "_id": "Mode PvE/PvP<SEP>Upgrade System"
+  },
+  "Mobile Skill Control System<SEP>Skill Control Types": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698503,
+    "update_time": 1763698503,
+    "_id": "Mobile Skill Control System<SEP>Skill Control Types"
+  },
+  "Version V1.1<SEP>linhttd": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698503,
+    "update_time": 1763698503,
+    "_id": "Version V1.1<SEP>linhttd"
+  },
+  "Control Types<SEP>Skill Control Types": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698504,
+    "update_time": 1763698504,
+    "_id": "Control Types<SEP>Skill Control Types"
+  },
+  "Mobile Skill Control System<SEP>UX": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698504,
+    "update_time": 1763698504,
+    "_id": "Mobile Skill Control System<SEP>UX"
+  },
+  "Ngày Cập Nhật<SEP>Version V1.1": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698504,
+    "update_time": 1763698504,
+    "_id": "Ngày Cập Nhật<SEP>Version V1.1"
+  },
+  "Mobile Skill Control System<SEP>linhttd": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698504,
+    "update_time": 1763698504,
+    "_id": "Mobile Skill Control System<SEP>linhttd"
+  },
+  "Mobile Skill Control System<SEP>UI/UX": {
+    "chunk_ids": [
+      "chunk-23fa6540034a6802d517d7b88bd1d869"
+    ],
+    "count": 1,
+    "create_time": 1763698504,
+    "update_time": 1763698504,
+    "_id": "Mobile Skill Control System<SEP>UI/UX"
+  },
+  "Base Capture Mode<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698695,
+    "update_time": 1763698695,
+    "_id": "Base Capture Mode<SEP>Outpost"
+  },
+  "Outpost 1<SEP>Outpost 2": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698695,
+    "update_time": 1763698695,
+    "_id": "Outpost 1<SEP>Outpost 2"
+  },
+  "Outpost<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698695,
+    "update_time": 1763698695,
+    "_id": "Outpost<SEP>Phucth12"
+  },
+  "Outpost 2<SEP>Outpost 3": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698695,
+    "update_time": 1763698695,
+    "_id": "Outpost 2<SEP>Outpost 3"
+  },
+  "Outpost<SEP>Unity": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698695,
+    "update_time": 1763698695,
+    "_id": "Outpost<SEP>Unity"
+  },
+  "Art & Dev Team<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698696,
+    "update_time": 1763698696,
+    "_id": "Art & Dev Team<SEP>Outpost"
+  },
+  "Bullet Logic<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698696,
+    "update_time": 1763698696,
+    "_id": "Bullet Logic<SEP>Outpost"
+  },
+  "Balancing File<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698696,
+    "update_time": 1763698696,
+    "_id": "Balancing File<SEP>Outpost"
+  },
+  "Outpost<SEP>OutpostMultiplier": {
+    "chunk_ids": [
+      "chunk-2fb3307cad33dcb7bce940d24141600c"
+    ],
+    "count": 1,
+    "create_time": 1763698696,
+    "update_time": 1763698696,
+    "_id": "Outpost<SEP>OutpostMultiplier"
+  },
+  "O Kent (QuocTA)<SEP>Shooting Logic": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "O Kent (QuocTA)<SEP>Shooting Logic"
+  },
+  "Blocker Category<SEP>Collision Detection": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "Blocker Category<SEP>Collision Detection"
+  },
+  "2.5D Collision Band<SEP>Shooting Logic": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "2.5D Collision Band<SEP>Shooting Logic"
+  },
+  "Muzzle<SEP>Projectile Spawning": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "Muzzle<SEP>Projectile Spawning"
+  },
+  "ClassProfile<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "ClassProfile<SEP>Tank War"
+  },
+  "Attack Band<SEP>Collision Detection": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698957,
+    "update_time": 1763698957,
+    "_id": "Attack Band<SEP>Collision Detection"
+  },
+  "Multi-Height Sweep<SEP>Shooting Logic": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Multi-Height Sweep<SEP>Shooting Logic"
+  },
+  "2.5D Collision Band<SEP>Sphere/Capsule Cast": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "2.5D Collision Band<SEP>Sphere/Capsule Cast"
+  },
+  "Collision Detection<SEP>Hit Band": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Collision Detection<SEP>Hit Band"
+  },
+  "Projectile Movement<SEP>Unity Kinematic": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Projectile Movement<SEP>Unity Kinematic"
+  },
+  "Projectile Spawning<SEP>Smart Pitch Assist": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Projectile Spawning<SEP>Smart Pitch Assist"
+  },
+  "Collision Detection<SEP>yForgiveness": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Collision Detection<SEP>yForgiveness"
+  },
+  "Multi-Height Sweep<SEP>Obstacle Detection": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Multi-Height Sweep<SEP>Obstacle Detection"
+  },
+  "Blocker Category<SEP>Gameplay Mechanics": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Blocker Category<SEP>Gameplay Mechanics"
+  },
+  "Shooting Logic<SEP>Smart Pitch Assist": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Shooting Logic<SEP>Smart Pitch Assist"
+  },
+  "Attack Band<SEP>yForgiveness": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Attack Band<SEP>yForgiveness"
+  },
+  "Hit Band<SEP>Multi-Height Sweep": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Hit Band<SEP>Multi-Height Sweep"
+  },
+  "End-of-Range<SEP>Sphere/Capsule Cast": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "End-of-Range<SEP>Sphere/Capsule Cast"
+  },
+  "BulletProfile<SEP>Shooting Logic": {
+    "chunk_ids": [
+      "chunk-ff016178cab6a91c77a236b054ef19fd"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "BulletProfile<SEP>Shooting Logic"
+  },
+  "Blocker Category<SEP>Smart Pitch Assist": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Blocker Category<SEP>Smart Pitch Assist"
+  },
+  "Friendly-Fire<SEP>Shield": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698958,
+    "update_time": 1763698958,
+    "_id": "Friendly-Fire<SEP>Shield"
+  },
+  "Hit Band<SEP>YForgiveness": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Hit Band<SEP>YForgiveness"
+  },
+  "Blocker Category<SEP>Vegetation": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Blocker Category<SEP>Vegetation"
+  },
+  "Sphere/Capsule Cast<SEP>Tunneling": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Sphere/Capsule Cast<SEP>Tunneling"
+  },
+  "GroundY<SEP>Multi-Height Sweep": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "GroundY<SEP>Multi-Height Sweep"
+  },
+  "BulletProfile<SEP>ClassProfile": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "BulletProfile<SEP>ClassProfile"
+  },
+  "Multiplayer<SEP>Seed/Lockstep": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Multiplayer<SEP>Seed/Lockstep"
+  },
+  "End-of-Range<SEP>HitCandidate": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "End-of-Range<SEP>HitCandidate"
+  },
+  "Attack Band<SEP>Hit Band": {
+    "chunk_ids": [
+      "chunk-bd0e1bfe4b189f19fafa9def3fc41bb1"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Attack Band<SEP>Hit Band"
+  },
+  "Audio Mix<SEP>FX Material": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Audio Mix<SEP>FX Material"
+  },
+  "Impact Bus<SEP>SFX_Impact": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Impact Bus<SEP>SFX_Impact"
+  },
+  "Crosshair State<SEP>UI": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Crosshair State<SEP>UI"
+  },
+  "Obstacle_Blocker<SEP>Shield": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Obstacle_Blocker<SEP>Shield"
+  },
+  "Projectile<SEP>Unit_Tank": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Projectile<SEP>Unit_Tank"
+  },
+  "Audio Mix<SEP>Impact Bus": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Audio Mix<SEP>Impact Bus"
+  },
+  "NonBlock_Vegetation<SEP>Vegetation": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "NonBlock_Vegetation<SEP>Vegetation"
+  },
+  "PitchAssist Icon<SEP>UI": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "PitchAssist Icon<SEP>UI"
+  },
+  "Wall_High<SEP>Wall_Low": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Wall_High<SEP>Wall_Low"
+  },
+  "2.5D Logic<SEP>Band": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "2.5D Logic<SEP>Band"
+  },
+  "Audio Mix<SEP>SFX_Energy": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Audio Mix<SEP>SFX_Energy"
+  },
+  "Projectile<SEP>Sweep": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698959,
+    "update_time": 1763698959,
+    "_id": "Projectile<SEP>Sweep"
+  },
+  "Debris<SEP>Hit Blocker": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Debris<SEP>Hit Blocker"
+  },
+  "PitchAssist<SEP>UI": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "PitchAssist<SEP>UI"
+  },
+  "End-of-Range<SEP>Hit Shield": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "End-of-Range<SEP>Hit Shield"
+  },
+  "Blocker<SEP>Crosshair State": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Blocker<SEP>Crosshair State"
+  },
+  "Telemetry<SEP>UX.PerceivedHitMismatch": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Telemetry<SEP>UX.PerceivedHitMismatch"
+  },
+  "Bullet.Fire<SEP>Bullet.HitBlocker": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Bullet.Fire<SEP>Bullet.HitBlocker"
+  },
+  "Camera Shake<SEP>Hit Blocker": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Camera Shake<SEP>Hit Blocker"
+  },
+  "2.5D Logic<SEP>Sweep": {
+    "chunk_ids": [
+      "chunk-3a50d53a4c721686b5ebe57167b35756"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "2.5D Logic<SEP>Sweep"
+  },
+  "Audio Mix<SEP>Impact": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Audio Mix<SEP>Impact"
+  },
+  "Hit Blocker<SEP>VFX Tiers": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Hit Blocker<SEP>VFX Tiers"
+  },
+  "Fallback<SEP>Layer": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Fallback<SEP>Layer"
+  },
+  "Bullet.EndOfRange<SEP>Bullet.HitBlocker": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Bullet.EndOfRange<SEP>Bullet.HitBlocker"
+  },
+  "Bullet.Fire<SEP>Tracer": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Bullet.Fire<SEP>Tracer"
+  },
+  "Ducking<SEP>Impact": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Ducking<SEP>Impact"
+  },
+  "PitchAssistMaxDeg<SEP>Sweep": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "PitchAssistMaxDeg<SEP>Sweep"
+  },
+  "Bullet.HitBlocker<SEP>Damage & Combat Log": {
+    "chunk_ids": [
+      "chunk-25d8e58824865274f259ef4b1be66e33"
+    ],
+    "count": 1,
+    "create_time": 1763698960,
+    "update_time": 1763698960,
+    "_id": "Bullet.HitBlocker<SEP>Damage & Combat Log"
+  },
+  "Phucth12<SEP>Skill Design Document": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699234,
+    "update_time": 1763699234,
+    "_id": "Phucth12<SEP>Skill Design Document"
+  },
+  "Kamikaze<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699234,
+    "update_time": 1763699234,
+    "_id": "Kamikaze<SEP>Outpost"
+  },
+  "Attack Drone<SEP>Suicide Drone": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699234,
+    "update_time": 1763699234,
+    "_id": "Attack Drone<SEP>Suicide Drone"
+  },
+  "Easy to Pick Up Hard to Master<SEP>Skill Design Document": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699235,
+    "update_time": 1763699235,
+    "_id": "Easy to Pick Up Hard to Master<SEP>Skill Design Document"
+  },
+  "Skill Design Document<SEP>Unity Units": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699235,
+    "update_time": 1763699235,
+    "_id": "Skill Design Document<SEP>Unity Units"
+  },
+  "Art Team<SEP>Skill Design Document": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699235,
+    "update_time": 1763699235,
+    "_id": "Art Team<SEP>Skill Design Document"
+  },
+  "Dev Team<SEP>Skill Design Document": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699235,
+    "update_time": 1763699235,
+    "_id": "Dev Team<SEP>Skill Design Document"
+  },
+  "Cancel Skill Adjustment<SEP>Skill Design Document": {
+    "chunk_ids": [
+      "chunk-d13eaba79b4de934df0b735502354ebd"
+    ],
+    "count": 1,
+    "create_time": 1763699235,
+    "update_time": 1763699235,
+    "_id": "Cancel Skill Adjustment<SEP>Skill Design Document"
+  },
+  "Game Mode Module<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b",
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 2,
+    "update_time": 1763700092,
+    "_id": "Game Mode Module<SEP>Tank War"
+  },
+  "Obstacles<SEP>Spawn Point": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699407,
+    "update_time": 1763699407,
+    "_id": "Obstacles<SEP>Spawn Point"
+  },
+  "Deathmatch<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699407,
+    "update_time": 1763699407,
+    "_id": "Deathmatch<SEP>Tank War"
+  },
+  "Deathmatch<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Deathmatch<SEP>Phucth12"
+  },
+  "Gold<SEP>Kill Gold": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Gold<SEP>Kill Gold"
+  },
+  "Gold<SEP>Safe Zone": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Gold<SEP>Safe Zone"
+  },
+  "Damage Dealt<SEP>Ranking System": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Damage Dealt<SEP>Ranking System"
+  },
+  "Deathmatch<SEP>Matchmaking System Design": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Deathmatch<SEP>Matchmaking System Design"
+  },
+  "Deathmatch<SEP>Spawn Point": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Deathmatch<SEP>Spawn Point"
+  },
+  "Gold Chest<SEP>Safe Zone": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699408,
+    "update_time": 1763699408,
+    "_id": "Gold Chest<SEP>Safe Zone"
+  },
+  "Deathmatch<SEP>Respawn Shield": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Deathmatch<SEP>Respawn Shield"
+  },
+  "Gold Spawn<SEP>Safe Zone": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Gold Spawn<SEP>Safe Zone"
+  },
+  "Gold<SEP>Gold Chest": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Gold<SEP>Gold Chest"
+  },
+  "Sentry<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Sentry<SEP>Tank"
+  },
+  "Base Capture<SEP>Deathmatch": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Base Capture<SEP>Deathmatch"
+  },
+  "Mine<SEP>Shrinking Arena": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Mine<SEP>Shrinking Arena"
+  },
+  "Gameplay Dynamics<SEP>RNG Events": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Gameplay Dynamics<SEP>RNG Events"
+  },
+  "Energy Orb<SEP>Sentry": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Energy Orb<SEP>Sentry"
+  },
+  "Divine Rapier<SEP>Player Competition": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Divine Rapier<SEP>Player Competition"
+  },
+  "Headhunt System<SEP>Player Interaction": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Headhunt System<SEP>Player Interaction"
+  },
+  "Deathmatch<SEP>Gold": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Deathmatch<SEP>Gold"
+  },
+  "Resource Management<SEP>Weapon Crafting": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Resource Management<SEP>Weapon Crafting"
+  },
+  "Fog of War<SEP>Visibility Reduction": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Fog of War<SEP>Visibility Reduction"
+  },
+  "Farming Crates<SEP>Resource Diversification": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699409,
+    "update_time": 1763699409,
+    "_id": "Farming Crates<SEP>Resource Diversification"
+  },
+  "Deathmatch<SEP>Ranking System": {
+    "chunk_ids": [
+      "chunk-0ada5276da6c9d0ca153a30e6453339b"
+    ],
+    "count": 1,
+    "create_time": 1763699410,
+    "update_time": 1763699410,
+    "_id": "Deathmatch<SEP>Ranking System"
+  },
+  "Dynamic Terrain<SEP>Gameplay Impact": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699410,
+    "update_time": 1763699410,
+    "_id": "Dynamic Terrain<SEP>Gameplay Impact"
+  },
+  "Grass<SEP>Player Confrontation": {
+    "chunk_ids": [
+      "chunk-f8acec06896791d9f3064f7125a4b700"
+    ],
+    "count": 1,
+    "create_time": 1763699410,
+    "update_time": 1763699410,
+    "_id": "Grass<SEP>Player Confrontation"
+  },
+  "ATK<SEP>DEF": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "ATK<SEP>DEF"
+  },
+  "Gold in Match<SEP>Kill Gold": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Gold in Match<SEP>Kill Gold"
+  },
+  "HP<SEP>Upgrade Cost": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "HP<SEP>Upgrade Cost"
+  },
+  "Speed<SEP>Upgrade Cost": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Speed<SEP>Upgrade Cost"
+  },
+  "ATK<SEP>Rubber-Band Mechanic": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "ATK<SEP>Rubber-Band Mechanic"
+  },
+  "Gold in Match<SEP>Objective Gold": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Gold in Match<SEP>Objective Gold"
+  },
+  "Q Kent<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Q Kent<SEP>Tank War"
+  },
+  "FireRate<SEP>Upgrade Cost": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "FireRate<SEP>Upgrade Cost"
+  },
+  "DEF<SEP>Rubber-Band Mechanic": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "DEF<SEP>Rubber-Band Mechanic"
+  },
+  "ATK<SEP>Gold Per Second": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "ATK<SEP>Gold Per Second"
+  },
+  "GpS<SEP>rho": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "GpS<SEP>rho"
+  },
+  "Damage<SEP>Upgrade Cost": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Damage<SEP>Upgrade Cost"
+  },
+  "Kill Event<SEP>KillerGold": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Kill Event<SEP>KillerGold"
+  },
+  "Tower Event<SEP>TowerGold_per_player": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "Tower Event<SEP>TowerGold_per_player"
+  },
+  "DEF<SEP>Gold Per Second": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "DEF<SEP>Gold Per Second"
+  },
+  "ATK<SEP>Tower Gold": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700092,
+    "update_time": 1763700092,
+    "_id": "ATK<SEP>Tower Gold"
+  },
+  "Upgrade Cost<SEP>g_s": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "Upgrade Cost<SEP>g_s"
+  },
+  "ATK<SEP>Tower Event": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "ATK<SEP>Tower Event"
+  },
+  "EndMatch<SEP>Kill Event": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "EndMatch<SEP>Kill Event"
+  },
+  "DEF<SEP>Tower Gold": {
+    "chunk_ids": [
+      "chunk-f2aa085a63af6791e6667d3a526a6976"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "DEF<SEP>Tower Gold"
+  },
+  "Gold<SEP>GpS": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "Gold<SEP>GpS"
+  },
+  "ATK<SEP>rb_strength": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "ATK<SEP>rb_strength"
+  },
+  "DEF<SEP>Tower Event": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "DEF<SEP>Tower Event"
+  },
+  "DEF<SEP>rb_strength": {
+    "chunk_ids": [
+      "chunk-9007aed86a9cb47e8bb708df35778feb"
+    ],
+    "count": 1,
+    "create_time": 1763700093,
+    "update_time": 1763700093,
+    "_id": "DEF<SEP>rb_strength"
+  },
+  "Game Mode Module<SEP>Outpost Breaker": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Game Mode Module<SEP>Outpost Breaker"
+  },
+  "Attacking Team (ATK)<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Attacking Team (ATK)<SEP>Outpost"
+  },
+  "Gold<SEP>Upgrade Shop": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Gold<SEP>Upgrade Shop"
+  },
+  "Outpost Breaker<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Outpost Breaker<SEP>Tank War"
+  },
+  "Defending Team (DEF)<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Defending Team (DEF)<SEP>Outpost"
+  },
+  "Map<SEP>Outpost": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Map<SEP>Outpost"
+  },
+  "Kent (QuocTA)<SEP>Outpost Breaker": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700438,
+    "update_time": 1763700438,
+    "_id": "Kent (QuocTA)<SEP>Outpost Breaker"
+  },
+  "Enemy Tank<SEP>Gold": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700439,
+    "update_time": 1763700439,
+    "_id": "Enemy Tank<SEP>Gold"
+  },
+  "Capture Base<SEP>Outpost Breaker": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700439,
+    "update_time": 1763700439,
+    "_id": "Capture Base<SEP>Outpost Breaker"
+  },
+  "Capture Base<SEP>Gold": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700439,
+    "update_time": 1763700439,
+    "_id": "Capture Base<SEP>Gold"
+  },
+  "Capture Base<SEP>UI/UX Design": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700439,
+    "update_time": 1763700439,
+    "_id": "Capture Base<SEP>UI/UX Design"
+  },
+  "Capture Base<SEP>Project TOG": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700439,
+    "update_time": 1763700439,
+    "_id": "Capture Base<SEP>Project TOG"
+  },
+  "Capture Base<SEP>Weather Modifiers": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700440,
+    "update_time": 1763700440,
+    "_id": "Capture Base<SEP>Weather Modifiers"
+  },
+  "Capture Base<SEP>Progression-Based Item Unlock System": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700440,
+    "update_time": 1763700440,
+    "_id": "Capture Base<SEP>Progression-Based Item Unlock System"
+  },
+  "Capture Base<SEP>Skill Slot": {
+    "chunk_ids": [
+      "chunk-de6b4d4f981130c2db0e694a153ad24c"
+    ],
+    "count": 1,
+    "create_time": 1763700440,
+    "update_time": 1763700440,
+    "_id": "Capture Base<SEP>Skill Slot"
+  },
+  "Monetization Module<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a",
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 2,
+    "update_time": 1763701217,
+    "_id": "Monetization Module<SEP>Tank War"
+  },
+  "Diamond<SEP>Premium Warp": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700657,
+    "update_time": 1763700657,
+    "_id": "Diamond<SEP>Premium Warp"
+  },
+  "Coin<SEP>Normal Warp": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700657,
+    "update_time": 1763700657,
+    "_id": "Coin<SEP>Normal Warp"
+  },
+  "Coin<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a",
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 2,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Coin<SEP>Tank"
+  },
+  "Combat Score<SEP>Match Reward Formula": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Combat Score<SEP>Match Reward Formula"
+  },
+  "Kent (QuocTA)<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Kent (QuocTA)<SEP>Tank War"
+  },
+  "Normal Warp<SEP>Premium Warp": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Normal Warp<SEP>Premium Warp"
+  },
+  "Battle Pass<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a",
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 2,
+    "update_time": 1763701219,
+    "_id": "Battle Pass<SEP>Tank War"
+  },
+  "Battle Pass Progression<SEP>Match-driven XP": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Battle Pass Progression<SEP>Match-driven XP"
+  },
+  "In-App Ads<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "In-App Ads<SEP>Tank War"
+  },
+  "Battle Pass<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Battle Pass<SEP>Tank"
+  },
+  "Battle Pass Progression<SEP>XP": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Battle Pass Progression<SEP>XP"
+  },
+  "Coin<SEP>Free Track": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Coin<SEP>Free Track"
+  },
+  "Battle Pass<SEP>Gen-AI Ticket": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Battle Pass<SEP>Gen-AI Ticket"
+  },
+  "Shop In-Game<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Shop In-Game<SEP>Tank War"
+  },
+  "Diamond<SEP>Paid Track": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700658,
+    "update_time": 1763700658,
+    "_id": "Diamond<SEP>Paid Track"
+  },
+  "Battle Pass<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Battle Pass<SEP>XP"
+  },
+  "Gen-AI Ticket<SEP>Paid Track": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Gen-AI Ticket<SEP>Paid Track"
+  },
+  "Free Track<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Free Track<SEP>Warp"
+  },
+  "Deathmatch<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Deathmatch<SEP>XP"
+  },
+  "Artifact Balance<SEP>PvP Ranked": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Artifact Balance<SEP>PvP Ranked"
+  },
+  "Tank War<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-e1b3859da80fc2e7f94430e2b1a1e54a"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Tank War<SEP>Warp"
+  },
+  "Artifact Shard<SEP>Free Track": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Artifact Shard<SEP>Free Track"
+  },
+  "Legendary Artifact<SEP>PvE": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Legendary Artifact<SEP>PvE"
+  },
+  "Capture Base<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Capture Base<SEP>XP"
+  },
+  "Ads<SEP>Coin": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Ads<SEP>Coin"
+  },
+  "Battle Pass<SEP>Seasonal Cycle": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Battle Pass<SEP>Seasonal Cycle"
+  },
+  "Daily Quest<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Daily Quest<SEP>XP"
+  },
+  "BP Boost<SEP>Diamond": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "BP Boost<SEP>Diamond"
+  },
+  "Battle Pass<SEP>Time-to-Complete": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700659,
+    "update_time": 1763700659,
+    "_id": "Battle Pass<SEP>Time-to-Complete"
+  },
+  "Weekly Quest<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700660,
+    "update_time": 1763700660,
+    "_id": "Weekly Quest<SEP>XP"
+  },
+  "Match-Driven Progression<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700660,
+    "update_time": 1763700660,
+    "_id": "Match-Driven Progression<SEP>XP"
+  },
+  "Quest-Driven Progression<SEP>XP": {
+    "chunk_ids": [
+      "chunk-29bf5c4fdd333ae34c106f6410921d33"
+    ],
+    "count": 1,
+    "create_time": 1763700660,
+    "update_time": 1763700660,
+    "_id": "Quest-Driven Progression<SEP>XP"
+  },
+  "Garage System<SEP>Monetization Module": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701038,
+    "update_time": 1763701038,
+    "_id": "Garage System<SEP>Monetization Module"
+  },
+  "Tank<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701038,
+    "update_time": 1763701038,
+    "_id": "Tank<SEP>Warp"
+  },
+  "Garage System<SEP>Kent (QuocTA)": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701038,
+    "update_time": 1763701038,
+    "_id": "Garage System<SEP>Kent (QuocTA)"
+  },
+  "Garage System<SEP>Retention": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Garage System<SEP>Retention"
+  },
+  "Decal<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Decal<SEP>Warp"
+  },
+  "Garage<SEP>Player": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Garage<SEP>Player"
+  },
+  "Inventory<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd",
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 2,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Inventory<SEP>Tank"
+  },
+  "AI-gen System<SEP>Sticker": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "AI-gen System<SEP>Sticker"
+  },
+  "Visual Preview<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Visual Preview<SEP>Warp"
+  },
+  "Decal<SEP>Layer Ordering": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Decal<SEP>Layer Ordering"
+  },
+  "AI-Generate Sticker Flow<SEP>Player": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "AI-Generate Sticker Flow<SEP>Player"
+  },
+  "Attachment Points<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-67ce1c8003b2a9a25804677e366282fd"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Attachment Points<SEP>Tank"
+  },
+  "Battle Pass<SEP>Player": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Battle Pass<SEP>Player"
+  },
+  "Tank<SEP>Warp Inventory": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701039,
+    "update_time": 1763701039,
+    "_id": "Tank<SEP>Warp Inventory"
+  },
+  "Decal Inventory<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Decal Inventory<SEP>Tank"
+  },
+  "Marketplace<SEP>Player": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Marketplace<SEP>Player"
+  },
+  "AI-Generate Sticker Flow<SEP>Moderation System": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "AI-Generate Sticker Flow<SEP>Moderation System"
+  },
+  "Sticker Inventory<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Sticker Inventory<SEP>Tank"
+  },
+  "Battle Pass<SEP>Decals": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Battle Pass<SEP>Decals"
+  },
+  "Attachment Point<SEP>Player": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Attachment Point<SEP>Player"
+  },
+  "Season Pass<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Season Pass<SEP>Warp"
+  },
+  "Daily Login Quests<SEP>Stickers": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Daily Login Quests<SEP>Stickers"
+  },
+  "Shop<SEP>Tank": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Shop<SEP>Tank"
+  },
+  "Achievements<SEP>Decals": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Achievements<SEP>Decals"
+  },
+  "Pricing Strategy<SEP>Warp": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Pricing Strategy<SEP>Warp"
+  },
+  "Player<SEP>Preset": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Player<SEP>Preset"
+  },
+  "ARPDAU<SEP>KPIs": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "ARPDAU<SEP>KPIs"
+  },
+  "Decals<SEP>Marketplace": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Decals<SEP>Marketplace"
+  },
+  "Economy & Balance<SEP>Pay-to-Win": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Economy & Balance<SEP>Pay-to-Win"
+  },
+  "Monetization<SEP>Shop": {
+    "chunk_ids": [
+      "chunk-0355b78676a31bbe8272488d19452c43"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Monetization<SEP>Shop"
+  },
+  "Drag & Drop<SEP>UX Details": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Drag & Drop<SEP>UX Details"
+  },
+  "Battle Preview<SEP>Preview Modes": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Battle Preview<SEP>Preview Modes"
+  },
+  "Pricing Strategy<SEP>Stickers": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Pricing Strategy<SEP>Stickers"
+  },
+  "Showcase<SEP>Social Mechanics": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701040,
+    "update_time": 1763701040,
+    "_id": "Showcase<SEP>Social Mechanics"
+  },
+  "Analytics & Instrumentation<SEP>Shop Visit": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Analytics & Instrumentation<SEP>Shop Visit"
+  },
+  "Data Model<SEP>Inventory": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Data Model<SEP>Inventory"
+  },
+  "Roadmap<SEP>Wireframe": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Roadmap<SEP>Wireframe"
+  },
+  "Bundle Discounts<SEP>Monetization Optimization": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Bundle Discounts<SEP>Monetization Optimization"
+  },
+  "Compliance Notes<SEP>Gacha Drop Rates": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Compliance Notes<SEP>Gacha Drop Rates"
+  },
+  "Anti-Fraud System<SEP>Marketplace": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Anti-Fraud System<SEP>Marketplace"
+  },
+  "Gacha System<SEP>Pity System": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Gacha System<SEP>Pity System"
+  },
+  "Consumable Sticker<SEP>Grace Policy": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "Consumable Sticker<SEP>Grace Policy"
+  },
+  "AI-Generation<SEP>Copyright Law": {
+    "chunk_ids": [
+      "chunk-c9a28bcff73dae5f3dfd24e5a0faf949"
+    ],
+    "count": 1,
+    "create_time": 1763701041,
+    "update_time": 1763701041,
+    "_id": "AI-Generation<SEP>Copyright Law"
+  },
+  "Kent<SEP>Monetization Localization Addendum": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701217,
+    "update_time": 1763701217,
+    "_id": "Kent<SEP>Monetization Localization Addendum"
+  },
+  "Latin America<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701218,
+    "update_time": 1763701218,
+    "_id": "Latin America<SEP>Tank War"
+  },
+  "AI Skin Hub<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701219,
+    "update_time": 1763701219,
+    "_id": "AI Skin Hub<SEP>Tank War"
+  },
+  "Tank War<SEP>Transparent Crate System": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "Tank War<SEP>Transparent Crate System"
+  },
+  "AI Skin Hub<SEP>AI Token": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "AI Skin Hub<SEP>AI Token"
+  },
+  "Tank War<SEP>VIP Membership": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "Tank War<SEP>VIP Membership"
+  },
+  "AI Skin Hub<SEP>Premium Canvas": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "AI Skin Hub<SEP>Premium Canvas"
+  },
+  "Battle Pass<SEP>MiTanqueIA": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "Battle Pass<SEP>MiTanqueIA"
+  },
+  "Rewarded Ads<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "Rewarded Ads<SEP>Tank War"
+  },
+  "Clarity+Choice<SEP>Transparent Crate System": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701220,
+    "update_time": 1763701220,
+    "_id": "Clarity+Choice<SEP>Transparent Crate System"
+  },
+  "AI Skin Hub<SEP>Creator Choice": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701221,
+    "update_time": 1763701221,
+    "_id": "AI Skin Hub<SEP>Creator Choice"
+  },
+  "Cultural Event Calendar<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701221,
+    "update_time": 1763701221,
+    "_id": "Cultural Event Calendar<SEP>Tank War"
+  },
+  "AI Skin Hub<SEP>Creator Badge": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701221,
+    "update_time": 1763701221,
+    "_id": "AI Skin Hub<SEP>Creator Badge"
+  },
+  "Cultural Economy Loop<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-05f469265f2d7d7094a446d586b35807"
+    ],
+    "count": 1,
+    "create_time": 1763701221,
+    "update_time": 1763701221,
+    "_id": "Cultural Economy Loop<SEP>Tank War"
+  },
+  "Multiplayer Module<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2",
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 2,
+    "update_time": 1763701905,
+    "_id": "Multiplayer Module<SEP>Tank War"
+  },
+  "Match Profile Design<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701532,
+    "update_time": 1763701532,
+    "_id": "Match Profile Design<SEP>Tank War"
+  },
+  "Phucth12<SEP>Version V1.3": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701532,
+    "update_time": 1763701532,
+    "_id": "Phucth12<SEP>Version V1.3"
+  },
+  "Match Profile Design<SEP>Phucth12": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701532,
+    "update_time": 1763701532,
+    "_id": "Match Profile Design<SEP>Phucth12"
+  },
+  "Dev Team<SEP>Match Profile Design": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701533,
+    "update_time": 1763701533,
+    "_id": "Dev Team<SEP>Match Profile Design"
+  },
+  "Base Capture<SEP>Match Profile Design": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701533,
+    "update_time": 1763701533,
+    "_id": "Base Capture<SEP>Match Profile Design"
+  },
+  "Deathmatch<SEP>Match Profile Design": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701533,
+    "update_time": 1763701533,
+    "_id": "Deathmatch<SEP>Match Profile Design"
+  },
+  "Match Profile Design<SEP>User Parameters": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701533,
+    "update_time": 1763701533,
+    "_id": "Match Profile Design<SEP>User Parameters"
+  },
+  "Match Parameters<SEP>Match Profile Design": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701534,
+    "update_time": 1763701534,
+    "_id": "Match Parameters<SEP>Match Profile Design"
+  },
+  "Creation Date 03-07-2025<SEP>Match Profile Design": {
+    "chunk_ids": [
+      "chunk-7f9181352fd2e478f2c81e7b37543ad2"
+    ],
+    "count": 1,
+    "create_time": 1763701534,
+    "update_time": 1763701534,
+    "_id": "Creation Date 03-07-2025<SEP>Match Profile Design"
+  },
+  "Matchmaking System<SEP>QuocTA": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701783,
+    "update_time": 1763701783,
+    "_id": "Matchmaking System<SEP>QuocTA"
+  },
+  "Matchmaking System<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701783,
+    "update_time": 1763701783,
+    "_id": "Matchmaking System<SEP>Tank War"
+  },
+  "Elo Points<SEP>Matchmaking System": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701784,
+    "update_time": 1763701784,
+    "_id": "Elo Points<SEP>Matchmaking System"
+  },
+  "Matchmaking System<SEP>Solo Match": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701784,
+    "update_time": 1763701784,
+    "_id": "Matchmaking System<SEP>Solo Match"
+  },
+  "Bot<SEP>Matchmaking System": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701784,
+    "update_time": 1763701784,
+    "_id": "Bot<SEP>Matchmaking System"
+  },
+  "Matchmaking System<SEP>Team Match": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Matchmaking System<SEP>Team Match"
+  },
+  "Bot<SEP>Disconnect": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Bot<SEP>Disconnect"
+  },
+  "Custom Room<SEP>Matchmaking System": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Custom Room<SEP>Matchmaking System"
+  },
+  "Cancel Mechanism<SEP>Client-Side": {
+    "chunk_ids": [
+      "chunk-c3e70e1e45ad26ce8d6d377c849fff08"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Cancel Mechanism<SEP>Client-Side"
+  },
+  "Matchmaking System<SEP>Power Rating": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Matchmaking System<SEP>Power Rating"
+  },
+  "Auto-Confirm<SEP>Client-Side": {
+    "chunk_ids": [
+      "chunk-c3e70e1e45ad26ce8d6d377c849fff08"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Auto-Confirm<SEP>Client-Side"
+  },
+  "Merge Success<SEP>Notification": {
+    "chunk_ids": [
+      "chunk-c3e70e1e45ad26ce8d6d377c849fff08"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Merge Success<SEP>Notification"
+  },
+  "Auto-Confirm<SEP>Notification": {
+    "chunk_ids": [
+      "chunk-c3e70e1e45ad26ce8d6d377c849fff08"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Auto-Confirm<SEP>Notification"
+  },
+  "Matchmaking System<SEP>PvP": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Matchmaking System<SEP>PvP"
+  },
+  "Matchmaking System<SEP>PvE": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701785,
+    "update_time": 1763701785,
+    "_id": "Matchmaking System<SEP>PvE"
+  },
+  "Loading Screen<SEP>Matchmaking System": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701786,
+    "update_time": 1763701786,
+    "_id": "Loading Screen<SEP>Matchmaking System"
+  },
+  "Game Screen<SEP>Matchmaking System": {
+    "chunk_ids": [
+      "chunk-f5a0813762dcbd312799847bb8d8556f"
+    ],
+    "count": 1,
+    "create_time": 1763701786,
+    "update_time": 1763701786,
+    "_id": "Game Screen<SEP>Matchmaking System"
+  },
+  "Game Rank<SEP>User Statistics": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701905,
+    "update_time": 1763701905,
+    "_id": "Game Rank<SEP>User Statistics"
+  },
+  "Post-Match Profile<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701905,
+    "update_time": 1763701905,
+    "_id": "Post-Match Profile<SEP>Tank War"
+  },
+  "Phucth12<SEP>Post-Match Profile": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701905,
+    "update_time": 1763701905,
+    "_id": "Phucth12<SEP>Post-Match Profile"
+  },
+  "Dev Team<SEP>Post-Match Profile": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701905,
+    "update_time": 1763701905,
+    "_id": "Dev Team<SEP>Post-Match Profile"
+  },
+  "Phucth12<SEP>Version V1.2": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701905,
+    "update_time": 1763701905,
+    "_id": "Phucth12<SEP>Version V1.2"
+  },
+  "Game Mode<SEP>Post-Match Profile": {
+    "chunk_ids": [
+      "chunk-a1c40de3facf565ff49082251f8fd4eb"
+    ],
+    "count": 1,
+    "create_time": 1763701906,
+    "update_time": 1763701906,
+    "_id": "Game Mode<SEP>Post-Match Profile"
+  },
+  "Progression Module<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e",
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 2,
+    "update_time": 1763702342,
+    "_id": "Progression Module<SEP>Tank War"
+  },
+  "Elo System<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Elo System<SEP>Tank War"
+  },
+  "Rank System<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Rank System<SEP>Tank War"
+  },
+  "Elo System<SEP>Rank System": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Elo System<SEP>Rank System"
+  },
+  "MOBA<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "MOBA<SEP>Tank War"
+  },
+  "Gold<SEP>Silver": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Gold<SEP>Silver"
+  },
+  "Rank System<SEP>Season Reset": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Rank System<SEP>Season Reset"
+  },
+  "Disconnect<SEP>Elo System": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Disconnect<SEP>Elo System"
+  },
+  "Diamond<SEP>Master": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702125,
+    "update_time": 1763702125,
+    "_id": "Diamond<SEP>Master"
+  },
+  "Rank System<SEP>Smurf": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702126,
+    "update_time": 1763702126,
+    "_id": "Rank System<SEP>Smurf"
+  },
+  "Elo System<SEP>Winrate": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702126,
+    "update_time": 1763702126,
+    "_id": "Elo System<SEP>Winrate"
+  },
+  "AFK<SEP>Disconnect": {
+    "chunk_ids": [
+      "chunk-34db7dfab1d03cacd6e754cccab2904e"
+    ],
+    "count": 1,
+    "create_time": 1763702126,
+    "update_time": 1763702126,
+    "_id": "AFK<SEP>Disconnect"
+  },
+  "Team A<SEP>Team B": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159",
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 2,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Team A<SEP>Team B"
+  },
+  "Combat Score<SEP>KDA Impact": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Combat Score<SEP>KDA Impact"
+  },
+  "Capture Score<SEP>Objective Score": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Capture Score<SEP>Objective Score"
+  },
+  "Defense Score<SEP>Objective Score": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Defense Score<SEP>Objective Score"
+  },
+  "Combat Score<SEP>Damage Score": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Combat Score<SEP>Damage Score"
+  },
+  "CS_class_norm<SEP>CS_season": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "CS_class_norm<SEP>CS_season"
+  },
+  "Elo Rating System<SEP>Team A": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Elo Rating System<SEP>Team A"
+  },
+  "Elo Rating System<SEP>Team B": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Elo Rating System<SEP>Team B"
+  },
+  "Combat Score<SEP>Streak Bonus": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Combat Score<SEP>Streak Bonus"
+  },
+  "Objective Score<SEP>Zone Time Score": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "Objective Score<SEP>Zone Time Score"
+  },
+  "CS_class_norm<SEP>CS_role_avg_season": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702339,
+    "update_time": 1763702339,
+    "_id": "CS_class_norm<SEP>CS_role_avg_season"
+  },
+  "Combat Score<SEP>Player": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "Combat Score<SEP>Player"
+  },
+  "CS_class_norm<SEP>Top Scout": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_class_norm<SEP>Top Scout"
+  },
+  "D<SEP>MMR": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "D<SEP>MMR"
+  },
+  "K<SEP>Meta Tank War": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "K<SEP>Meta Tank War"
+  },
+  "CS_class_norm<SEP>Top Assault": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_class_norm<SEP>Top Assault"
+  },
+  "K<SEP>Totalmatches": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "K<SEP>Totalmatches"
+  },
+  "CS_player<SEP>CS_team_avg": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_player<SEP>CS_team_avg"
+  },
+  "Objective Score<SEP>Player": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "Objective Score<SEP>Player"
+  },
+  "Combat Score<SEP>Performance Modifier": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "Combat Score<SEP>Performance Modifier"
+  },
+  "Elo<SEP>MMR": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "Elo<SEP>MMR"
+  },
+  "CS_class_norm<SEP>Top Heavy": {
+    "chunk_ids": [
+      "chunk-5f3e99a812491b726805dcae6d6e3159"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_class_norm<SEP>Top Heavy"
+  },
+  "K<SEP>Matchcap": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "K<SEP>Matchcap"
+  },
+  "CS_role_avg_season<SEP>CS_season": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_role_avg_season<SEP>CS_season"
+  },
+  "CS_norm<SEP>Performance Modifier": {
+    "chunk_ids": [
+      "chunk-bda3aa2635470b1e6188903168d6317c"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "CS_norm<SEP>Performance Modifier"
+  },
+  "Performance Index<SEP>Scout Weight": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702340,
+    "update_time": 1763702340,
+    "_id": "Performance Index<SEP>Scout Weight"
+  },
+  "CS_class_norm<SEP>Player A": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "CS_class_norm<SEP>Player A"
+  },
+  "Rotating Boards<SEP>Weekly Challenge": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394",
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 2,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Rotating Boards<SEP>Weekly Challenge"
+  },
+  "Assault Weight<SEP>Performance Index": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Assault Weight<SEP>Performance Index"
+  },
+  "Event Board<SEP>Heavy Week": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Event Board<SEP>Heavy Week"
+  },
+  "Anti-cheat System<SEP>Outlier Filter": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Anti-cheat System<SEP>Outlier Filter"
+  },
+  "Decay<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Decay<SEP>Season Rank"
+  },
+  "Rotating Boards<SEP>Weekly Rewards": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Rotating Boards<SEP>Weekly Rewards"
+  },
+  "Anti-cheat System<SEP>Boosting Heuristics": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Anti-cheat System<SEP>Boosting Heuristics"
+  },
+  "Landing<SEP>UI/UX Design": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Landing<SEP>UI/UX Design"
+  },
+  "Monthly Rewards<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Monthly Rewards<SEP>Season Rank"
+  },
+  "Rotating Boards<SEP>Snipers Mark": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Rotating Boards<SEP>Snipers Mark"
+  },
+  "Heavy Weight<SEP>Performance Index": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702341,
+    "update_time": 1763702341,
+    "_id": "Heavy Weight<SEP>Performance Index"
+  },
+  "Event Board<SEP>Scout Relay": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702342,
+    "update_time": 1763702342,
+    "_id": "Event Board<SEP>Scout Relay"
+  },
+  "Clutch Defender<SEP>Rotating Boards": {
+    "chunk_ids": [
+      "chunk-994d2eeed684d25ff916fc8caf602394"
+    ],
+    "count": 1,
+    "create_time": 1763702342,
+    "update_time": 1763702342,
+    "_id": "Clutch Defender<SEP>Rotating Boards"
+  },
+  "Leaderboard System<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702343,
+    "update_time": 1763702343,
+    "_id": "Leaderboard System<SEP>Tank War"
+  },
+  "Kent<SEP>Leaderboard System": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702343,
+    "update_time": 1763702343,
+    "_id": "Kent<SEP>Leaderboard System"
+  },
+  "Event Board<SEP>Rotating Boards": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702343,
+    "update_time": 1763702343,
+    "_id": "Event Board<SEP>Rotating Boards"
+  },
+  "Leaderboard System<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702343,
+    "update_time": 1763702343,
+    "_id": "Leaderboard System<SEP>Season Rank"
+  },
+  "Combat Board<SEP>Leaderboard System": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702344,
+    "update_time": 1763702344,
+    "_id": "Combat Board<SEP>Leaderboard System"
+  },
+  "Leaderboard System<SEP>Objective Board": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702344,
+    "update_time": 1763702344,
+    "_id": "Leaderboard System<SEP>Objective Board"
+  },
+  "Class Boards<SEP>Leaderboard System": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702344,
+    "update_time": 1763702344,
+    "_id": "Class Boards<SEP>Leaderboard System"
+  },
+  "Arpad Elo<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702344,
+    "update_time": 1763702344,
+    "_id": "Arpad Elo<SEP>Season Rank"
+  },
+  "Elo Rating System<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Elo Rating System<SEP>Season Rank"
+  },
+  "Leaderboard System<SEP>Performance Index": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Leaderboard System<SEP>Performance Index"
+  },
+  "Battle Pass Points<SEP>Currency": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Battle Pass Points<SEP>Currency"
+  },
+  "Gacha Item<SEP>Token": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Gacha Item<SEP>Token"
+  },
+  "Leaderboard System<SEP>Rotating Boards": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Leaderboard System<SEP>Rotating Boards"
+  },
+  "Leaderboard Home<SEP>Theme": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Leaderboard Home<SEP>Theme"
+  },
+  "Badget Rank<SEP>Rank Legend": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702345,
+    "update_time": 1763702345,
+    "_id": "Badget Rank<SEP>Rank Legend"
+  },
+  "Anti-Cheat System<SEP>Leaderboard System": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Anti-Cheat System<SEP>Leaderboard System"
+  },
+  "Leaderboard Home<SEP>Leaderboard Snapshot": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Leaderboard Home<SEP>Leaderboard Snapshot"
+  },
+  "Matches Data<SEP>Player Match Stats": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Matches Data<SEP>Player Match Stats"
+  },
+  "Assist Rule<SEP>Tank War": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Assist Rule<SEP>Tank War"
+  },
+  "Agg Player Season<SEP>Leaderboard Snapshot": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Agg Player Season<SEP>Leaderboard Snapshot"
+  },
+  "Battle Pass Points<SEP>Top 100": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Battle Pass Points<SEP>Top 100"
+  },
+  "Token<SEP>Top 200": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Token<SEP>Top 200"
+  },
+  "Leaderboard System<SEP>UI/UX Design": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Leaderboard System<SEP>UI/UX Design"
+  },
+  "Elo Rating<SEP>Leaderboard Home": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702346,
+    "update_time": 1763702346,
+    "_id": "Elo Rating<SEP>Leaderboard Home"
+  },
+  "Rank Icon<SEP>Season Rank": {
+    "chunk_ids": [
+      "chunk-e33f58129a3c2e6723a7be5cdb6032ea"
+    ],
+    "count": 1,
+    "create_time": 1763702347,
+    "update_time": 1763702347,
+    "_id": "Rank Icon<SEP>Season Rank"
+  },
+  "Data Model<SEP>Leaderboard System": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702347,
+    "update_time": 1763702347,
+    "_id": "Data Model<SEP>Leaderboard System"
+  },
+  "Leaderboard System<SEP>Pipeline": {
+    "chunk_ids": [
+      "chunk-5d92bbcb6f07ad92135153c312e8c6f5"
+    ],
+    "count": 1,
+    "create_time": 1763702347,
+    "update_time": 1763702347,
+    "_id": "Leaderboard System<SEP>Pipeline"
   }
 }
