@@ -1,0 +1,162 @@
+﻿Tên,Catergory,Parent achievement,Nội dung,Phần thưởng,,,,,,,,,,,,,,,
+Tutorial,Onboarding,-,Hoàn thành tutorial,Tank mới ,,,,,,,,,,,,,,,
+First match,Onboarding,-,Chơi trận đấu đầu tiên của mình,,,,,,,,,,,,,,,,
+Attacking,Onboarding,-,Thắng khi ở phe ATK,"
+",,,,,,,,,,,,,,,
+Defending,Onboarding,-,Thắng khi ở phe DEF,"
+",,,,,,,,,,,,,,,
+Upgrade,Onboarding,-,Nâng Sao tank lần đầu,1 Tank mới (Choice),,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Wrap_10,Combat Progression,-,Sở hữu 10 wraps,Huy hiệu collector (Common),,,,,,,,,,,,,,,
+Wrap_30,Combat Progression,Wrap_10,Sở hữu 30 wraps,Huy hiệu collector (Epic),,,,,,,,,,,,,,,
+Wrap_50,Combat Progression,Wrap_30,Sở hữu 50 wraps,Huy hiệu collector (Legendary),,,,,,,,,,,,,,,
+Wrap_100,Combat Progression,Wrap_50,Sở hữu 100 wraps,Huy hiệu collector (Mythical),,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Win_100,Combat Progression,-,Thắng 100 trận đấu,"
+",,,,,,,,,,,,,,,
+Win_200,Combat Progression,Win_100,Thắng 200 trận đấu,"
+",,,,,,,,,,,,,,,
+Win_500,Combat Progression,Win_200,Thắng 500 trận đấu,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Win_OB_100,Combat Progression,-,Thắng 100 trận đấu Outpost Breaker,"
+",,,,,,,,,,,,,,,
+Win_OB_200,Combat Progression,Win_OB_100,Thắng 200 trận đấu Outpost Breaker,"
+",,,,,,,,,,,,,,,
+Win_OB_500,Combat Progression,Win_OB_200,Thắng 500 trận đấu Outpost Breaker,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Win_DM_100,Core Progression,-,Thắng 100 trận đấu Death Match,"
+",,,,,,,,,,,,,,,
+Win_DM_200,Core Progression,Win_DM_100,Thắng 200 trận đấu Death Match,"
+",,,,,,,,,,,,,,,
+Win_DM_500,Core Progression,Win_DM_200,Thắng 500 trận đấu Death Match,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+1st time MVP!,Combat Progression,-,Đạt MVP lần đầu,"
+",,,,,,,,,,,,,,,
+10th time MVP!,Combat Progression,1st time MVP!,Đạt MVP 10 lần ,"
+",,,,,,,,,,,,,,,
+30th time MVP!,Combat Progression,10th time MVP!,Đạt MVP 30 lần,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Small time collector,Combat Progression,-,Sở hữu 10 tanks,"
+",,,,,,,,,,,,,,,
+Big time collector,Combat Progression,Small time collector,Sở hữu 25 tanks,"
+",,,,,,,,,,,,,,,
+Grand collector,Combat Progression,Big time collector,Sở hữu 50 tanks,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+10 artifacts,Combat Progression,-,Sở hữu 10 artifacts,"
+",,,,,,,,,,,,,,,
+25 artifacts,Combat Progression,10 artifacts,Sở hữu 25 artifacts,"
+",,,,,,,,,,,,,,,
+50 artifacts,Combat Progression,25 artifacts,Sở hữu 50 artifacts,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Heavy_Win_20,Combat Progression,-,Thắng 20 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_Win_40,Combat Progression,Heavy_Win_20,Thắng 40 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_Win_60,Combat Progression,Heavy_Win_40,Thắng 60 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Assault_Win_20,Combat Progression,-,Thắng 20 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_Win_40,Combat Progression,Assault_Win_20,Thắng 40 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_Win_60,Combat Progression,Assault_Win_40,Thắng 60 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Scout_Win_20,Combat Progression,-,Thắng 20 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+Scout_Win_40,Combat Progression,Scout_Win_20,Thắng 40 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+Scout_Win_60,Combat Progression,Scout_Win_40,Thắng 60 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Heavy_BrOutpost_50,Combat Progression,-,Phá 50 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_BrOutpost_100,Combat Progression,Heavy_BrOutpost_10,Phá 100 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_BrOutpost_200,Combat Progression,Heavy_BrOutpost_20,Phá 200 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Assault_BrOutpost_50,Combat Progression,-,Phá 50 outposts dùng tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_BrOutpost_100,Combat Progression,Assault_BrOutpost_50,Phá 100 outposts dùng tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_BrOutpost_200,Combat Progression,Assault_BrOutpost_100,Phá 200 outposts dùng tank class Assault,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Heavy_BrOutpost_50,Combat Progression,-,Phá 50 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_BrOutpost_100,Combat Progression,Heavy_BrOutpost_10,Phá 100 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_BrOutpost_200,Combat Progression,Heavy_BrOutpost_20,Phá 200 outposts dùng tank class Heavy,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Heavy_Use_100,Combat Progression,-,Chơi 100 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_Use_300,Combat Progression,Heavy_Use_100,Chơi 300 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+Heavy_Use_500,Combat Progression,Heavy_Use_300,Chơi 500 trận với tank class Heavy,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Assault_Use_100,Combat Progression,-,Chơi 100 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_Use_300,Combat Progression,Assault_Use_100,Chơi 300 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+Assault_Use_500,Combat Progression,Assault_Use_300,Chơi 500 trận với tank class Assault,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Scout_Use_100,Combat Progression,-,Chơi 100 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+Scout_Use_300,Combat Progression,Scout_Use_100,Chơi 300 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+Scout_Use_500,Combat Progression,Scout_Use_300,Chơi 500 trận với tank class Scout,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Hook_15,Combat Progression,-,Sử dụng thành công Hook 15 lần,"
+",,,,,,,,,,,,,,,
+Hook_30,Combat Progression,- Hook_15,Sử dụng thành công Hook 30 lần,"
+",,,,,,,,,,,,,,,
+Hook_Friendly,Combat Progression,-,Sử dụng hook để kéo đồng đội về mình,"
+",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+1_Star,Combat Progression,-,Sưu tầm được 1 star,"Unlock 1 Tank(Choice: Steeljaw, Harpooner, Blaze Wraith, Phantom Striker, Storm Breaker, Grinder)",,,,,,,,,,,,,,,
+2_Stars,Combat Progression,1 star collected,Sưu tầm được 2 star ,"Unlock 1 Tank(Choice: Steeljaw, Harpooner, Blaze Wraith, Phantom Striker, Storm Breaker, Grinder)",,,,,,,,,,,,,,,
+3_Stars,Combat Progression,2 star collected,Sưu tầm được 3 star,Common Chest,,,,,,,,,,,,,,,
+4_Stars,Combat Progression,3 star collected,Sưu tầm được 4 star,"Unlock 1 Scout class(Choice: Blaze Wraith, Phantom Striker....)",,,,,,,,,,,,,,,
+5_Stars,Combat Progression,4 star collected,Sưu tầm được 5 star,Regular Chest x2,,,,,,,,,,,,,,,
+6_Stars,Combat Progression,5 star collected,Sưu tầm được 6 star,Special chest x1,,,,,,,,,,,,,,,
+7_Stars,Combat Progression,6 star collected,Sưu tầm được 7 star,"Unlock 1 Assault class( choice: Steeljaw, Storm Breaker,....",,,,,,,,,,,,,,,
+8_Stars,Combat Progression,7 star collected,Sưu tầm được 8 star,Regular Chest x2,,,,,,,,,,,,,,,
+9_Stars,Combat Progression,8 star collected,Sưu tầm được 9 star,Victory Emote,,,,,,,,,,,,,,,
+10_Stars,Combat Progression,9 star collected,Sưu tầm được 10 star,Special Chest x1,,,,,,,,,,,,,,,
+11_Stars,Combat Progression,10 star collected,Sưu tầm được 11 star,Regular Chest x2,,,,,,,,,,,,,,,
+12_Stars,Combat Progression,11 star collected,Sưu tầm được 12 star,"Unlock 1 Heavy Class(Choice: Harpooner, Grinder)",,,,,,,,,,,,,,,
+13_Stars,Combat Progression,12 star collected,Sưu tầm được 13 star,Regular Chest x2,,,,,,,,,,,,,,,
+14_Stars,Combat Progression,13 star collected,Sưu tầm được 14 star,Special chest x1,,,,,,,,,,,,,,,
+15_Stars,Combat Progression,14 star collected,Sưu tầm được 15 star,Regular Chest x2,,,,,,,,,,,,,,,
+16_Stars,Combat Progression,15 star collected,Sưu tầm được 16 star,Regular Chest x2,,,,,,,,,,,,,,,
+17_Stars,Combat Progression,16 star collected,Sưu tầm được 17 star,Special Chest x 1,,,,,,,,,,,,,,,
+18_Stars,Combat Progression,17 star collected,Sưu tầm được 18 star,Victory Emote,,,,,,,,,,,,,,,
+19_Stars,Combat Progression,18 star collected,Sưu tầm được 19 star,Regular Chest x2,,,,,,,,,,,,,,,
+20_Stars,Combat Progression,19 star collected,Sưu tầm được 20 star,Unlock 1 Tank(Choice),,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Friend_10,Social Progression,-,Kết 10 người bạn,,,,,,,,,,,,,,,,
+Friend_50,Social Progression,Friend_10,Kết 50 người bạn,,,,,,,,,,,,,,,,
+Party,Social Progression,-,Chơi chung với bạn,,,,,,,,,,,,,,,,
+Party_Win_1,Social Progression,-,Thắng 1 game với party,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Opening Days!!!,Feats,-,Chơi game trong tuần mới ra mắt,"Title, Frame, Avatar",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Tet_Play,Feats,-,Chơi sự kiện Tết,"
+",,,,,,,,,,,,,,,
+Holiday Celebration 2025,Time-limited,-,Chơi game trong tháng 12 2025,"Holiday wraps(applicable to all tanks), Winter holiday Frame, snowy background",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+Win_2_Min_Under_OB,Challenges,-,Thắng 1 trận Outpost Breaker dưới 2 phút với team ATK,"
+",,,,,,,,,,,,,,,
+Kill_3_Tanks_Kamikaze,Challenges,-,Phá huỷ 3 Tank một lúc với Kamikaze,"Title ""Maniac""",,,,,,,,,,,,,,,
+Hide_Grass,Challenges,-,Nằm trong bụi cỏ trong vòng 2 phút mà không di chuyển ra ngoài,"Title ""Maniac""",,,,,,,,,,,,,,,
