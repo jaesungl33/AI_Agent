@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2dc400f78baa64749ba59bc8b8f6e3fb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Tank/Teleport/pfx_Teleport_BeamUp.prefab
+  uploadId: 739895

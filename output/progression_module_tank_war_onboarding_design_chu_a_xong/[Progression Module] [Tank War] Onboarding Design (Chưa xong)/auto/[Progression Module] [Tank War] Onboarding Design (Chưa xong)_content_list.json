@@ -1,0 +1,276 @@
+[
+    {
+        "type": "text",
+        "text": "[Progression Module] [Tank War] Onboarding Design (Chưa xong) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            713,
+            171
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "THÔNG TIN THIẾT KẾ ONBOARDING",
+        "bbox": [
+            45,
+            192,
+            398,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: v0.1   \nNgười viết: phucth12 (phucth12)   \nNgày tạo: 19 - 08 - 2025 ",
+        "bbox": [
+            60,
+            226,
+            442,
+            307
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/24e513d630c4a648fe2d5e9e020ac438b41327f975821c4d32cfe47cadbd1655.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét?</td></tr><tr><td rowspan=1 colspan=1>v0.1</td><td rowspan=1 colspan=1>19-08-2025</td><td rowspan=1 colspan=1>Tao file</td><td rowspan=1 colspan=1>P phucth12</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            333,
+            934,
+            469
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục đích thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            535,
+            311,
+            559
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Viết kịch bản Onboarding giúp người chơi mới làm quen với game và hiểu rõ các thao tác cơ bản trong game. ",
+        "bbox": [
+            45,
+            570,
+            941,
+            613
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục tiêu thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            665,
+            306,
+            690
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Giới thiệu đầy đủ các chức năng chơi cơ bản của Tank Wars như tìm trận (Sẽ được cập nhật). • Tạo cảm giác thoải mái và mong muốn chơi thêm từ người chơi. ",
+        "bbox": [
+            48,
+            700,
+            934,
+            752
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Mục tiêu & tổng quan tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            803,
+            462,
+            828
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Tài liệu được dùng để giúp đội Art & Dev hình dung rõ ràng hơn về quá trình Onboarding của game. ",
+        "bbox": [
+            47,
+            838,
+            909,
+            880
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "4. Journey ",
+        "bbox": [
+            89,
+            58,
+            181,
+            73
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. First open app b. Tutorial ",
+        "bbox": [
+            107,
+            85,
+            252,
+            130
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Notes ",
+        "bbox": [
+            87,
+            144,
+            161,
+            159
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Journey ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            244,
+            196,
+            267
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Quá trình onboarding của user mới sẽ bao gồm 3 giai đoạn: ",
+        "bbox": [
+            84,
+            277,
+            644,
+            297
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ First open app   \n◦ Tutorial   \n◦ Finish ",
+        "bbox": [
+            89,
+            308,
+            257,
+            388
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "a. First open app ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            408,
+            271,
+            428
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Khi mở app, qua 1 đoạn loading xong, người chơi phép đặt username của mình. ",
+        "bbox": [
+            84,
+            436,
+            831,
+            458
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Xong, người chơi vào main menu, có chỉ dẫn người chơi nhấn Find Match với gamemode để sẵn là Tutorial. ",
+        "bbox": [
+            85,
+            466,
+            942,
+            510
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Sau khi hoàn thành thao tác, người chơi sẽ sang bước tutorial. ",
+        "bbox": [
+            84,
+            520,
+            668,
+            541
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "b. Tutorial ",
+        "bbox": [
+            85,
+            590,
+            202,
+            610
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Notes ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            694,
+            163,
+            715
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Tất cả chỉ số và đơn vị đều được quy đổi theo chuẩn Unity: ",
+        "bbox": [
+            47,
+            727,
+            594,
+            747
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "◦ 1 unit Unity $= 1$ mét ",
+        "bbox": [
+            90,
+            758,
+            304,
+            777
+        ],
+        "page_idx": 1
+    }
+]

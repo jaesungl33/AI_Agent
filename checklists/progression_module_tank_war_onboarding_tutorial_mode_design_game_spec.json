@@ -1,0 +1,195 @@
+{
+  "doc_id": "progression_module_tank_war_onboarding_tutorial_mode_design",
+  "metadata": {
+    "created_at": "2025-11-26T10:56:06.199159",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Tank",
+        "category": "BO",
+        "description": "Player controllable tank, customizable based on class selection.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": false,
+        "destructible": true,
+        "special_rules": "Objectives in stage 3 change depending on the selected tank class.",
+        "source_note": "Table: Thành phần - Tank"
+      },
+      {
+        "id": "obj_002",
+        "name": "Pin",
+        "category": "DE",
+        "description": "Checkpoint for the Moving stage.",
+        "size_x": 2,
+        "size_y": 2,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table: Thành phần - Pin"
+      },
+      {
+        "id": "obj_003",
+        "name": "Dummy Tank",
+        "category": "DE",
+        "description": "Stationary or moving targets for Shooting and Skill stages.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": false,
+        "destructible": true,
+        "special_rules": "Does not shoot at the player. Future updates may include enemy tanks firing back.",
+        "source_note": "Table: Thành phần - Dummy tanks"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Moving System",
+        "description": "System to teach players how to move their tank using a joystick.",
+        "mechanics": "Player uses Move Joystick to navigate to checkpoints (Pins).",
+        "objectives": "Reach specified points on the map.",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "interactions": [
+          "logic_001"
+        ],
+        "source_note": "Flow table stages 1-2"
+      },
+      {
+        "id": "sys_002",
+        "name": "Shooting System",
+        "description": "System to teach players how to shoot enemies using a joystick.",
+        "mechanics": "Player uses Shoot Joystick to destroy stationary or moving dummy tanks.",
+        "objectives": "Destroy all specified enemy targets.",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "interactions": [
+          "logic_002"
+        ],
+        "source_note": "Flow table stages 3-4"
+      },
+      {
+        "id": "sys_003",
+        "name": "Skill Usage System",
+        "description": "System to teach players how to use special skills based on their tank class.",
+        "mechanics": "Player uses Skill Button to perform specific actions like trapping or dragging enemy tanks.",
+        "objectives": "Complete skill-based tasks such as destroying, trapping, or dragging enemy tanks.",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "interactions": [
+          "logic_003"
+        ],
+        "source_note": "Flow table stages 5-6"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "logic_001",
+        "summary": "Movement Completion Rule",
+        "description": "Player must reach all designated Pins to complete the Moving stage.",
+        "trigger": "Player reaches all Pins.",
+        "effect": "Progress to the next stage of the tutorial.",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Flow table stages 1-2"
+      },
+      {
+        "id": "logic_002",
+        "summary": "Shooting Completion Rule",
+        "description": "Player must destroy all dummy tanks to complete the Shooting stage.",
+        "trigger": "Player destroys all dummy tanks.",
+        "effect": "Progress to the next stage of the tutorial.",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_002"
+        ],
+        "source_note": "Flow table stages 3-4"
+      },
+      {
+        "id": "logic_003",
+        "summary": "Skill Usage Completion Rule",
+        "description": "Player must successfully use their skill to complete objectives like trapping or dragging enemy tanks.",
+        "trigger": "Player completes skill-based task.",
+        "effect": "Progress to Victory screen.",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_003"
+        ],
+        "source_note": "Flow table stages 5-6"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Tutorial Progression Requirement",
+        "description": "Ensure players can complete the tutorial by introducing mechanics in stages: Moving, Shooting, and Using Skills.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Players must understand and complete each stage without confusion.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001",
+          "sys_002",
+          "sys_003"
+        ],
+        "source_note": "Section 2: Mục tiêu thiết kế"
+      },
+      {
+        "id": "req_002",
+        "title": "UI Display Requirement",
+        "description": "Only display relevant UI elements for each stage of the tutorial.",
+        "category": "ui",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "UI elements correspond to the current tutorial stage (e.g., Move Joystick in Moving stage).",
+        "related_objects": [],
+        "related_systems": [
+          "sys_001",
+          "sys_002",
+          "sys_003"
+        ],
+        "source_note": "Section 6: Userflow"
+      }
+    ]
+  }
+}

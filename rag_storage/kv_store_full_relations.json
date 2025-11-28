@@ -1345,33 +1345,448 @@
   "world_tank_war_grass_logic_design": {
     "relation_pairs": [
       [
-        "Grass Logic Design",
-        "Skills"
+        "Tank Dong Doi",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "V1.0",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Version Control Log",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Doi Tuong",
+        "Game Object Behavior Specifications (table)"
+      ],
+      [
+        "Grass Logic System",
+        "Hook"
       ],
       [
         "Grass Logic Design",
-        "Unity"
+        "Smoke Effects"
       ],
       [
-        "Grass Logic Design",
-        "World Tank War"
+        "Grass Interaction Object Outcomes (table)",
+        "Smoke Effects"
       ],
       [
-        "Grass Logic Design",
-        "HỆ THỐNG LOGIC CỦA CỎ XANH"
+        "Grass Logic System",
+        "World Tank War Grass Logic Design"
       ],
       [
-        "Art & Dev Team",
+        "Game Object Behavior Specifications (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "V1.1",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Bullet",
         "Grass Logic Design"
       ],
       [
+        "P Phucth12",
+        "V1.1"
+      ],
+      [
+        "Doi Tuong",
+        "Ket Qua Mong Muon"
+      ],
+      [
+        "Version Control Log for Grass Logic Design (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
         "Grass Logic Design",
-        "Phucth12"
+        "Trap Effects"
+      ],
+      [
+        "Gameplay Mechanics",
+        "SFX"
+      ],
+      [
+        "Mo Ta",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Nguoireview",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Grass Interaction Object Outcomes (table)",
+        "Trap Effects"
+      ],
+      [
+        "Bullet",
+        "Grass Interaction Object Outcomes (table)"
+      ],
+      [
+        "Game Map",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Art and Development Teams",
+        "Grass Logic Design"
+      ],
+      [
+        "Bullet Impact Effects",
+        "Grass Logic Design"
+      ],
+      [
+        "Ngudi Viet",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Tank",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Truong Hop",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Duyet?",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Image Path",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Player",
+        "Tham Co"
+      ],
+      [
+        "Art and Development Teams",
+        "Grass Interaction Object Outcomes (table)"
+      ],
+      [
+        "P Phucth12",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Art & Dev Teams",
+        "Grass Logic Interaction Table (table)"
+      ],
+      [
+        "Grass Logic System",
+        "Tank War"
+      ],
+      [
+        "Chi So Sat Thuong",
+        "Tank Dong Doi"
+      ],
+      [
+        "Outpost",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Version Control Log",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Tank Dich",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Tank Dong Doi",
+        "VFX"
+      ],
+      [
+        "Art & Dev Teams",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "Ket Qua Mong Muon"
+      ],
+      [
+        "Ngay",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank Interaction Scenarios Table (table)",
+        "Truong Hop"
+      ],
+      [
+        "Tank Dong Doi",
+        "Tham Co"
+      ],
+      [
+        "Bear Trap",
+        "Grass Logic System"
+      ],
+      [
+        "Game Map",
+        "Grass Logic Design"
+      ],
+      [
+        "Kent",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "SFX"
+      ],
+      [
+        "Grass Logic Interaction Table (table)",
+        "Tactical Depth"
+      ],
+      [
+        "Nguoireview",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "Unity"
+      ],
+      [
+        "Environment",
+        "Grass Interaction Object Outcomes (table)"
+      ],
+      [
+        "P Phucth12",
+        "V1.0"
+      ],
+      [
+        "Ket Qua Mong Muon",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Grass Logic Design",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Grass Interaction Object Outcomes (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Dieu Kien Phu",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "P Phucth12",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Kent",
+        "V1.1"
+      ],
+      [
+        "Phienban",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank",
+        "Unity"
+      ],
+      [
+        "Art & Dev Team",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "VFX",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank Dich",
+        "VFX"
+      ],
+      [
+        "Grass Logic Design",
+        "VFX"
+      ],
+      [
+        "Grass Interaction Object Outcomes (table)",
+        "VFX"
+      ],
+      [
+        "SFX",
+        "Tank"
+      ],
+      [
+        "Player",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Ngay",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Tank Interaction Scenarios Table (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Damage Effects",
+        "Grass Interaction Object Outcomes (table)"
+      ],
+      [
+        "Grass Logic Design",
+        "Tank"
+      ],
+      [
+        "Grass Interaction Object Outcomes (table)",
+        "Tank"
+      ],
+      [
+        "Environment",
+        "Grass Logic Design"
+      ],
+      [
+        "Ket Qua Mong Muon",
+        "Truong Hop"
+      ],
+      [
+        "Kent",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Gameplay Mechanics",
+        "VFX"
+      ],
+      [
+        "Unity Units",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Image Path",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Grass Logic Interaction Table (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank Interaction Scenarios Table (table)",
+        "VFX"
+      ],
+      [
+        "Dieu Kien Phu",
+        "Truong Hop"
+      ],
+      [
+        "Art & Dev Team",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "V1.0",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Ket Qua Mong Muon",
+        "VFX"
+      ],
+      [
+        "Grass Logic Design",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Tank Interaction Scenarios Table (table)",
+        "Tham Co"
+      ],
+      [
+        "Ket Qua Mong Muon",
+        "Tank"
+      ],
+      [
+        "Phienban",
+        "Version Control Log for Grass Logic Design (table)"
+      ],
+      [
+        "Grass Logic System",
+        "Tactical Depth"
+      ],
+      [
+        "Grass Logic Interaction Table (table)",
+        "Grass Logic System"
+      ],
+      [
+        "Damage Effects",
+        "Grass Logic Design"
+      ],
+      [
+        "V1.1",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank Interaction Scenarios Table (table)",
+        "Unity Units"
+      ],
+      [
+        "Grass Logic Interaction Table (table)",
+        "Tank War"
+      ],
+      [
+        "Outpost",
+        "Tham Co"
+      ],
+      [
+        "Mo Ta",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Chi So Sat Thuong",
+        "Tank Interaction Scenarios Table (table)"
+      ],
+      [
+        "Game Map",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Tank Dich",
+        "Tham Co"
+      ],
+      [
+        "Chi So Sat Thuong",
+        "Tank Dich"
+      ],
+      [
+        "Grass Logic Interaction Table (table)",
+        "Hook"
+      ],
+      [
+        "Ngudi Viet",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "VFX"
+      ],
+      [
+        "Duyet?",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "Game Object Behavior Specifications (table)",
+        "Tank"
+      ],
+      [
+        "Bear Trap",
+        "Grass Logic Interaction Table (table)"
+      ],
+      [
+        "Bullet Impact Effects",
+        "Grass Interaction Object Outcomes (table)"
+      ],
+      [
+        "Unity",
+        "VFX"
+      ],
+      [
+        "Grass Interaction Object Outcomes (table)",
+        "Grass Logic Design"
       ]
     ],
-    "count": 6,
-    "create_time": 1763543193,
-    "update_time": 1763543193,
+    "count": 110,
+    "update_time": 1764131154,
     "_id": "world_tank_war_grass_logic_design"
   },
   "demo_map_test": {
@@ -1485,129 +1900,1864 @@
   "world_tank_war_map_document": {
     "relation_pairs": [
       [
-        "Tank (TA)",
-        "Tank System Detail"
-      ],
-      [
-        "Combat Module",
-        "Tank War"
-      ],
-      [
-        "Map Design Document",
-        "World Tank War"
-      ],
-      [
-        "Assault",
-        "Heavy"
-      ],
-      [
-        "HI_Grass",
-        "Hiding Object"
-      ],
-      [
-        "BR_Gate",
-        "Breakable Object"
-      ],
-      [
-        "OP_Tower",
-        "Outpost Design - Base Capture Mode"
-      ],
-      [
-        "BR_Barrel",
-        "Breakable Object"
-      ],
-      [
-        "Outpost Design",
-        "Tank Team ATK"
-      ],
-      [
-        "Mode Outpost Breaker",
-        "Outpost Design"
-      ],
-      [
-        "Base Capture Mode",
-        "Tank War"
-      ],
-      [
-        "BO_Sign",
-        "Block Object"
-      ],
-      [
-        "GameAssets",
-        "Tank (TA)"
-      ],
-      [
-        "GR_Ground",
-        "Ground"
-      ],
-      [
-        "BR_Cactus",
-        "Breakable Object"
-      ],
-      [
-        "BO_Rock",
-        "Block Object"
-      ],
-      [
-        "OP_Tower",
-        "Outpost Object"
-      ],
-      [
-        "Map Design Document",
-        "Phucth12"
-      ],
-      [
-        "BR_Deco",
-        "Breakable Object"
-      ],
-      [
-        "BO_Container",
-        "BO_Container Variant"
-      ],
-      [
-        "BO_Collider",
-        "Block Object"
-      ],
-      [
-        "BO_Container",
-        "Block Object"
-      ],
-      [
-        "Grass Logic Design",
-        "HI_Grass"
-      ],
-      [
-        "Mode Deathmatch",
-        "Tank War"
-      ],
-      [
-        "BO_Mountain",
-        "Block Object"
-      ],
-      [
         "DE_Deco",
         "Decorations"
       ],
       [
-        "DE",
-        "Unity Unit"
+        "Block Object (Bo)",
+        "Lighting Conditions"
       ],
       [
-        "Assault",
-        "Scout"
+        "BR_Gate_7x2.5x1",
+        "Breakable Gates Specifications (table)"
       ],
       [
-        "BO_Building",
+        "Heavy-Class Tank Dimensions Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Color Palette",
+        "Muted Tones"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Level Design"
+      ],
+      [
+        "GR Objects",
+        "GR_Grass_01"
+      ],
+      [
+        "Combat Module Tank War Outpost Design Base Capture Mode",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "Gameplay Mechanics"
+      ],
+      [
+        "BO_Container_02",
+        "Table"
+      ],
+      [
+        "Box_1x1x1",
+        "Table Analysis"
+      ],
+      [
+        "BR_Cactus_1x3x1",
+        "Breakable Object"
+      ],
+      [
+        "GR_Grass_01",
+        "Game Environment"
+      ],
+      [
+        "Scout Class",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "Map Dimensions Reference Table (table)",
+        "Unity"
+      ],
+      [
+        "DE_Grass_02_Green",
+        "DE_Objects_Dimensions_Table (table)"
+      ],
+      [
+        "Gameplay Mechanics",
+        "TA_Scout_01"
+      ],
+      [
+        "Tank War Map Metadata Table (table)",
+        "TankGamePlay-Final"
+      ],
+      [
+        "BO_Signage_02",
+        "Game Environment"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_04_Sand"
+      ],
+      [
+        "BO_Container_03",
+        "Table"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "BR_Cactus_1x2x1",
+        "Breakable Object"
+      ],
+      [
+        "Outpost Tower Dimensions (table)",
+        "Table"
+      ],
+      [
+        "Outpost Tower Dimensions (table)",
+        "Table Structure"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Player Interaction"
+      ],
+      [
+        "Gameplay Mechanics",
+        "HI_Object_Dimensions_Table (table)"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Interaction Rules"
+      ],
+      [
+        "BO_House_02",
         "Block Object"
       ],
       [
-        "Outpost Design",
-        "Tank (TA)"
+        "Desert",
+        "Thé Tich"
+      ],
+      [
+        "DE",
+        "Unity"
+      ],
+      [
+        "DE_Stone_04_SandDark",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Container_04",
+        "BO_Container_Dimensions_Table (table)"
+      ],
+      [
+        "BO_CaveGate_01",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "BO_CaveGate_01",
+        "BO_CaveRoof_02"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "World Tank War"
+      ],
+      [
+        "BR_Cactus_1x3x1",
+        "Breakable Cactus Variants Table (table)"
+      ],
+      [
+        "HI_Category",
+        "HI_Grass_1x1x1"
+      ],
+      [
+        "Rework And Split File Process",
+        "World Tank War Map Document"
+      ],
+      [
+        "Scout Class",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "Breakable Objects",
+        "Table"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Grid-Like Layout"
+      ],
+      [
+        "TA_Heavy_01",
+        "TA_Heavy_02"
+      ],
+      [
+        "Breakable Objects Specifications (table)",
+        "Game Environment"
+      ],
+      [
+        "BO_Signage_01",
+        "Game Environment"
+      ],
+      [
+        "Box_1x1x1",
+        "World Tank War Map Document"
+      ],
+      [
+        "Block Object",
+        "Block Object Dimension Specification Table (table)"
+      ],
+      [
+        "BR_ToxicBarrel_03",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Desert",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Railway_02"
+      ],
+      [
+        "GR_Grass_01",
+        "Ground Object Dimensions Table (table)"
+      ],
+      [
+        "BO_CaveRoof_02",
+        "BO_Mountain_03"
+      ],
+      [
+        "Breakable Object",
+        "Health Points"
+      ],
+      [
+        "Scalable Design",
+        "Table"
+      ],
+      [
+        "Block Object Dimension Specification Table (table)",
+        "Thé Tich (Dai x Cao x Róng)"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "Game World Tank War"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "Object Variability"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Low-Poly Art Style"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Rework And Split File Process"
+      ],
+      [
+        "GR_Sand_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_Stone_02_Sand",
+        "World Tank War Map Document"
+      ],
+      [
+        "Bo_Container",
+        "Color Palette"
+      ],
+      [
+        "Map Dimensions Reference Table (table)",
+        "Tank War"
+      ],
+      [
+        "Version Control",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_StoneGrass_02_Green",
+        "World Tank War Map Document"
+      ],
+      [
+        "Aesthetic Purposes",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "BO_Container_Dimensions_Table (table)",
+        "Game Environment"
+      ],
+      [
+        "TA_Heavy_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Container_04",
+        "Block Object"
+      ],
+      [
+        "Breakable Object",
+        "World Tank War Map Document"
+      ],
+      [
+        "Decoration Objects",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "BR_ToxicBarrel_03",
+        "Breakable Object"
+      ],
+      [
+        "BO_Container_01",
+        "Table"
+      ],
+      [
+        "BO_Container_01",
+        "BO_Container_02"
+      ],
+      [
+        "BO_Workbench_01",
+        "Thetich"
+      ],
+      [
+        "BO_Rock",
+        "Level Design"
+      ],
+      [
+        "BR_ToxicBarrel_02_3x3x2",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Block Object",
+        "Table"
+      ],
+      [
+        "Ground Objects",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "Tank System Design",
+        "Tank War System"
+      ],
+      [
+        "BR_Box_02_2x2x2",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_02_SandDark"
+      ],
+      [
+        "BO_Rock",
+        "Section 4.1.5"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "Thetich"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_05_SandDark"
+      ],
+      [
+        "BO_Mountain_03",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "BO_Rock",
+        "Non-Breakable Objects"
+      ],
+      [
+        "BO_Rock",
+        "Breakable Objects"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "Game Environment"
+      ],
+      [
+        "Developers",
+        "Gameplay Mechanics"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Color Palette"
+      ],
+      [
+        "BR_Cactus_1x0.5x1",
+        "Breakable Object"
+      ],
+      [
+        "Boundary Objects",
+        "Breakable Objects"
+      ],
+      [
+        "HI_Object_Dimensions_Table (table)",
+        "Table"
+      ],
+      [
+        "Object Type",
+        "Table"
+      ],
+      [
+        "Folder Naming Convention",
+        "OP_Tower_01_6x7x6"
+      ],
+      [
+        "Block Object (Bo)",
+        "Color Palette"
+      ],
+      [
+        "BO_Rock",
+        "World Tank War Map Document"
+      ],
+      [
+        "BR_Gate_4x2.5x1",
+        "Health Points"
+      ],
+      [
+        "BR_ToxicBarrel_02_3x3x2",
+        "Breakable Object"
+      ],
+      [
+        "BO_Signage_02",
+        "Table Analysis"
+      ],
+      [
+        "Block Object (Bo)",
+        "Variant Label"
+      ],
+      [
+        "BR_Skull_01",
+        "Breakable Object Specifications Table (table)"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "Scout"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_House_04_6x6x6"
+      ],
+      [
+        "OP_Tower_01_6x7x6",
+        "Vật Thể Outpost (OP)"
+      ],
+      [
+        "Map Design Philosophy",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "Game Environment"
+      ],
+      [
+        "BO_Rock",
+        "Rock Dimensions"
+      ],
+      [
+        "BO_Sign",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "BR_Gate_4x2.5x1",
+        "Breakable Objects"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "Outpost Objects"
+      ],
+      [
+        "Outpost Breaker",
+        "Tank War"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "HI_Category",
+        "HI_Grass_2x1x2"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_House_01"
+      ],
+      [
+        "BO_Mountain_03",
+        "World Tank War"
+      ],
+      [
+        "Assault Class",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_House_02"
+      ],
+      [
+        "DE_StoneGrass_01_Green",
+        "World Tank War Map Document"
+      ],
+      [
+        "Outposts",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_01_SandDark"
+      ],
+      [
+        "Block Object Dimension Specification Table (table)",
+        "Box_1x1x1"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Game Development"
+      ],
+      [
+        "Game Design Document",
+        "OP_Tower_01_6x7x6"
+      ],
+      [
+        "Mục Đích Thiết Kế",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Objects",
+        "Table Analysis"
+      ],
+      [
+        "HI_Grass_1x1x1",
+        "HI_Grass_2x1x2"
+      ],
+      [
+        "DE_Railway_02",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "Section 4.2"
+      ],
+      [
+        "BR_Cactus_1x0.5x1",
+        "Breakable Cactus Variants Table (table)"
+      ],
+      [
+        "Outposts",
+        "Tank War System"
+      ],
+      [
+        "BO_CaveRoof_02",
+        "Breakable Objects"
+      ],
+      [
+        "Outpost Objects",
+        "Player"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Game Map Assets"
+      ],
+      [
+        "Block Object Dimension Specification Table (table)",
+        "Table Analysis"
+      ],
+      [
+        "BO_Signage_01",
+        "Table Analysis"
+      ],
+      [
+        "BR_Skull_01",
+        "Game World Tank War"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Identifier"
+      ],
+      [
+        "Block Object (Bo)",
+        "Game Map Assets"
+      ],
+      [
+        "BR_Barrel",
+        "File Naming Convention"
+      ],
+      [
+        "DE_Railway_03",
+        "World Tank War Map Document"
+      ],
+      [
+        "Desert(?))",
+        "Tank War"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_StoneGrass_01_Green"
+      ],
+      [
+        "Breakable Object",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Characteristics",
+        "Object Type"
+      ],
+      [
+        "Characteristics",
+        "Table"
+      ],
+      [
+        "OP_Tower_01_6x7x6",
+        "World Tank War Map Document"
+      ],
+      [
+        "OP_Tower_01_6x7x6",
+        "Outpost Tower Dimensions (table)"
+      ],
+      [
+        "BO_Workbench_01",
+        "Block Object"
+      ],
+      [
+        "BO_Sign",
+        "Breakable Objects"
+      ],
+      [
+        "DE_Stone_02_SandDark",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Lighting Conditions"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "Breakable Objects",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Map Design Philosophy"
+      ],
+      [
+        "Game Design Document",
+        "Vật Thể Outpost (OP)"
+      ],
+      [
+        "TA_Scout_01",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Hiding Objects"
+      ],
+      [
+        "Tank Dimensions Table (table)",
+        "Unity Measurement System"
+      ],
+      [
+        "BO_Container_01",
+        "BO_Container_04"
+      ],
+      [
+        "Pphucth12",
+        "World Tank War Map Document"
+      ],
+      [
+        "Tank Assault Dimension Table (table)",
+        "Tank War"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "Block Object"
+      ],
+      [
+        "Breakable Objects",
+        "Interaction Rules"
+      ],
+      [
+        "Aesthetic Purposes",
+        "Decorations"
+      ],
+      [
+        "Breakable Objects",
+        "Object Variability"
+      ],
+      [
+        "Destructibility",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "Map Design"
+      ],
+      [
+        "BO_House_03_4x4x4",
+        "Thetich"
+      ],
+      [
+        "Assault Class",
+        "TA_Assault_02"
+      ],
+      [
+        "Folder Naming Convention",
+        "Outpost Tower Dimensions (table)"
+      ],
+      [
+        "Outposts",
+        "TA_Assault_02"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "Health Points"
+      ],
+      [
+        "BO_Rock",
+        "Table"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Section 4.1.5"
+      ],
+      [
+        "BR_Gate_7x2.5x1",
+        "Health Points"
+      ],
+      [
+        "Scout Class",
+        "TA_Scout_02"
+      ],
+      [
+        "Map Dimensions Reference Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_DrainCover_01",
+        "DE_Objects_Dimensions_Table (table)"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "Unity Units"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Non-Breakable Objects"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "Breakable Objects"
+      ],
+      [
+        "Player",
+        "Tank Objects"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Table"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Object Type"
+      ],
+      [
+        "BR_Gate_7x2.5x1",
+        "Breakable Objects"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "Outposts"
+      ],
+      [
+        "Hiding Objects",
+        "Player"
+      ],
+      [
+        "BO_VanCar_01_3x2x2",
+        "Thetich"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "Table Analysis"
+      ],
+      [
+        "DE_Stone_01_Gray",
+        "World Tank War Map Document"
+      ],
+      [
+        "Tank War Map Metadata Table (table)",
+        "Unity"
+      ],
+      [
+        "Heavy",
+        "TA_Heavy_02"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "Invisibility Effects"
+      ],
+      [
+        "Desert(?))",
+        "Map Design"
+      ],
+      [
+        "BR_Gate_4x2.5x1",
+        "Table"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Version Control"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Rock Dimensions"
+      ],
+      [
+        "Block Object Dimension Specification Table (table)",
+        "Game Map"
+      ],
+      [
+        "GR_Naming Convention",
+        "Ground Object Dimensions Table (table)"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_VanCar_01_3x2x2"
+      ],
+      [
+        "BR_Barrel",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "HI_Category",
+        "HI_Object_Dimensions_Table (table)"
+      ],
+      [
+        "Block Object (Bo)",
+        "Pixelated Art Style"
+      ],
+      [
+        "BO_Container_04",
+        "Table"
+      ],
+      [
+        "Tank War",
+        "World Tank War Map Document"
+      ],
+      [
+        "Thé Tich (Dai X Cao X Róng)",
+        "Unity"
+      ],
+      [
+        "OP_Tower_01_6x7x6",
+        "Table Structure"
+      ],
+      [
+        "Breakable Object Dimensions Table (table)",
+        "Breakable Objects"
+      ],
+      [
+        "HI_Grass_1x1x1",
+        "HI_Object_Dimensions_Table (table)"
+      ],
+      [
+        "TA_Assault_02",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "DE_Stone_03_Gray",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Block Object (Bo)"
+      ],
+      [
+        "Combat Interactions",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "Block Object (Bo)",
+        "Tank War-Themed Map"
+      ],
+      [
+        "BR_Cactus_1x2x1",
+        "Breakable Cactus Variants Table (table)"
+      ],
+      [
+        "BR_ToxicBarrel_04",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "Health Points"
+      ],
+      [
+        "BR_Skull_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE",
+        "Tank War Map Metadata Table (table)"
+      ],
+      [
+        "TA_Assault_01",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "Game Development",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_Stone_05_SandDark",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_CaveGate_01",
+        "World Tank War"
+      ],
+      [
+        "TA_Heavy_02",
+        "World Tank War Map Document"
+      ],
+      [
+        "GR Objects",
+        "GR_Naming Convention"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Outpost"
+      ],
+      [
+        "BO_House_03_4x4x4",
+        "Block Object"
+      ],
+      [
+        "TA_Scout_02",
+        "Tank Class"
+      ],
+      [
+        "Section 4.2",
+        "Table"
+      ],
+      [
+        "Breakable Object",
+        "Volume"
+      ],
+      [
+        "DE_Grass_01_Green",
+        "DE_Objects_Dimensions_Table (table)"
+      ],
+      [
+        "Desert",
+        "TankGamePlay-Final"
+      ],
+      [
+        "Developers",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "BR_Barrel",
+        "Breakable Objects"
+      ],
+      [
+        "Image Path",
+        "World Tank War Map Document"
+      ],
+      [
+        "Decorations",
+        "Interaction Rules"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_House_03_4x4x4"
+      ],
+      [
+        "Tank War",
+        "Tank War Map Metadata Table (table)"
+      ],
+      [
+        "Game Map Assets",
+        "Technical Catalog"
+      ],
+      [
+        "BR_ToxicBarrel_04",
+        "Breakable Object"
+      ],
+      [
+        "Table",
+        "World Tank War Map Document"
+      ],
+      [
+        "Outpost",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "Block Object",
+        "Game Environment"
+      ],
+      [
+        "TA_Heavy_02",
+        "Unity Units"
+      ],
+      [
+        "Desert(?))",
+        "World Tank War Map Document"
+      ],
+      [
+        "TA_Scout_02",
+        "Unity Measurement System"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Game Environment"
+      ],
+      [
+        "BO_VanCar_01_3x2x2",
+        "Block Object"
+      ],
+      [
+        "TA_Heavy_01",
+        "Unity Units"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Table"
+      ],
+      [
+        "File Naming Convention",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "Outpost Breaker",
+        "Tank War Map Metadata Table (table)"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "TA_Heavy_01"
+      ],
+      [
+        "BR_Gate_7x2.5x1",
+        "Table"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "Breakable Objects (BR)"
+      ],
+      [
+        "Ground Object Dimensions Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Desert(?))",
+        "Map Dimensions Reference Table (table)"
+      ],
+      [
+        "Map Design",
+        "Tank War"
+      ],
+      [
+        "BO_Container_Dimensions_Table (table)",
+        "Variant"
+      ],
+      [
+        "TA_Scout_01",
+        "Tank Class"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "List Of Assets"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "Hit Points (HP)"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Variant Label"
+      ],
+      [
+        "Heavy Class",
+        "Tank Assault Dimension Table (table)"
+      ],
+      [
+        "DE_Railway_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_04_SandDark"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_05_Sand"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "Tank System Design"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "Player"
+      ],
+      [
+        "BO_Mountain",
+        "File Naming Convention"
+      ],
+      [
+        "BO_House_01",
+        "Thetich"
+      ],
+      [
+        "BR_ToxicBarrel_02_2x3x3",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Size Constraints"
+      ],
+      [
+        "Outpost Tower Dimensions (table)",
+        "Vật Thể Outpost (OP)"
+      ],
+      [
+        "BO_CaveRoof_02",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "Tank Objects"
+      ],
+      [
+        "Breakable Objects",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "DE_DrainCover_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Gameplay Mechanics"
+      ],
+      [
+        "BO_Container_01",
+        "BO_Container_03"
+      ],
+      [
+        "Scout Class",
+        "Tank Class"
+      ],
+      [
+        "GR_Sand_01",
+        "Game Environment"
+      ],
+      [
+        "Destructibility",
+        "Player Interaction"
+      ],
+      [
+        "DE_Grass_02_Green",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "Game Environment"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "Table"
+      ],
+      [
+        "Thé Tich",
+        "Unity"
+      ],
+      [
+        "Desert",
+        "Tank War"
+      ],
+      [
+        "Assault",
+        "Heavy-Class Tank Dimensions Table (table)"
+      ],
+      [
+        "Breakable Objects",
+        "Combat Interactions"
+      ],
+      [
+        "BO_Container_02",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Rock",
+        "BO_Rock_Dimensions_Table (table)"
+      ],
+      [
+        "BO_Signage_02",
+        "Breakable Objects"
+      ],
+      [
+        "Tank Objects",
+        "World Tank War Grass Logic Design"
+      ],
+      [
+        "BO_Mountain_03",
+        "Boundary Objects"
+      ],
+      [
+        "GR_Grass_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Object",
+        "Table"
+      ],
+      [
+        "Assault Class",
+        "Heavy Class"
+      ],
+      [
+        "BR_ToxicBarrel_02_2x3x3",
+        "Breakable Object"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "Decorations (DE)"
+      ],
+      [
+        "BO_Rock",
+        "Collision Mechanics"
+      ],
+      [
+        "Deathmatch",
+        "Tank War"
+      ],
+      [
+        "Gameplay Mechanics",
+        "TA_Scout_02"
+      ],
+      [
+        "BO_Container_03",
+        "World Tank War Map Document"
+      ],
+      [
+        "HI_Object_Dimensions_Table (table)",
+        "Scalable Design"
+      ],
+      [
+        "BO_House_04_6x6x6",
+        "Thetich"
+      ],
+      [
+        "Outpost Tower Dimensions (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "BR_Cactus_1x1x1",
+        "Breakable Object"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_01_Gray"
+      ],
+      [
+        "Block Object",
+        "Box_1x1x1"
+      ],
+      [
+        "Map Dimensions Reference Table (table)",
+        "Tén"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_StoneGrass_02_Green"
+      ],
+      [
+        "BO_Signage_01",
+        "Breakable Objects"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_03_Gray"
+      ],
+      [
+        "Ground Object Dimensions Table (table)",
+        "Table"
+      ],
+      [
+        "GR_Sand_01",
+        "Ground Object Dimensions Table (table)"
+      ],
+      [
+        "Identifier",
+        "Object Type"
+      ],
+      [
+        "Tank War Map Metadata Table (table)",
+        "Thé Tich"
+      ],
+      [
+        "DE_Stone_03_Sand",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "Breakable Object"
+      ],
+      [
+        "BO_Rock",
+        "Game Environment"
+      ],
+      [
+        "Danh Sách Vật Thể",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Objects Specifications (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Pphucth12"
+      ],
+      [
+        "HI_Grass_1x1x1",
+        "Hiding Objects"
+      ],
+      [
+        "Block Object Dimension Specification Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Game Environment",
+        "Tank War"
+      ],
+      [
+        "BR_Box_01_2x2x2",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "Breakable Objects",
+        "Destructibility"
+      ],
+      [
+        "BR_Skull_01",
+        "Breakable Objects (BR)"
+      ],
+      [
+        "BO_Mountain",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "HI_Object_Dimensions_Table (table)",
+        "Hiding Objects"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_02_Gray"
+      ],
+      [
+        "BO_House_01",
+        "Block Object"
+      ],
+      [
+        "DE_Grass_01_Green",
+        "World Tank War Map Document"
+      ],
+      [
+        "BR_Cactus_1x1x1",
+        "Breakable Cactus Variants Table (table)"
+      ],
+      [
+        "BR_Skull_01",
+        "Hit Points (HP)"
+      ],
+      [
+        "Map Dimensions Reference Table (table)",
+        "Thé Tich (Dai X Cao X Róng)"
+      ],
+      [
+        "Decoration Objects",
+        "Player"
+      ],
+      [
+        "Tank War Map Metadata Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Game Design Document",
+        "Outpost Tower Dimensions (table)"
+      ],
+      [
+        "Collision Detection",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "Assault Class",
+        "Scout Class"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Muted Tones"
+      ],
+      [
+        "HI_Grass_2x1x2",
+        "HI_Object_Dimensions_Table (table)"
+      ],
+      [
+        "BO_Container_02",
+        "BO_Container_Dimensions_Table (table)"
+      ],
+      [
+        "Ground Objects",
+        "Player"
+      ],
+      [
+        "BO_Container_Dimensions_Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Game Environment",
+        "Ground Object Dimensions Table (table)"
+      ],
+      [
+        "BR_Box_01_2x2x2",
+        "Breakable Object"
+      ],
+      [
+        "BO_Container_01",
+        "World Tank War Map Document"
+      ],
+      [
+        "Decorations",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Pixelated Art Style"
+      ],
+      [
+        "BR_ToxicBarrel_01",
+        "Breakable Objects Specifications (table)"
+      ],
+      [
+        "BO_Container_03",
+        "BO_Container_Dimensions_Table (table)"
+      ],
+      [
+        "OP_Tower_01_6x7x6",
+        "Table"
+      ],
+      [
+        "BO_Mountain",
+        "Breakable Objects"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Tank War-Themed Map"
+      ],
+      [
+        "GR_Grass_01",
+        "GR_Sand_01"
+      ],
+      [
+        "BO_House_04_6x6x6",
+        "Block Object"
+      ],
+      [
+        "BO_Entity_Dimensions_Table (table)",
+        "BO_Workbench_01"
+      ],
+      [
+        "Characteristics",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "BO_Rock_Dimensions_Table (table)",
+        "Collision Mechanics"
+      ],
+      [
+        "Interaction Rules",
+        "Table"
+      ],
+      [
+        "Map Design",
+        "Map Dimensions Reference Table (table)"
+      ],
+      [
+        "BO_Container_02",
+        "Block Object"
+      ],
+      [
+        "HI_Object_Dimensions_Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "BR_ToxicBarrel_01",
+        "Breakable Object"
+      ],
+      [
+        "Block Object",
+        "Game Map"
+      ],
+      [
+        "Scout Class",
+        "TA_Scout_01"
+      ],
+      [
+        "Block Object (Bo)",
+        "Grid-Like Layout"
+      ],
+      [
+        "Desert(?))",
+        "Tén"
+      ],
+      [
+        "Tank War",
+        "Unity"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "Volume"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_CaveGate_01",
+        "Breakable Objects"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "Volume (Length x Height x Width)"
+      ],
+      [
+        "In-Game Object Classification Table (table)",
+        "Tank War"
+      ],
+      [
+        "BO_Container_03",
+        "Block Object"
+      ],
+      [
+        "Tank Class",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "DE_Deco",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "DE_Stone_04_Sand",
+        "World Tank War Map Document"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Mục Đích Thiết Kế"
+      ],
+      [
+        "Danh Sách Vật Thể",
+        "Document Version Metadata Table (table)"
+      ],
+      [
+        "Game Design Document",
+        "Table"
+      ],
+      [
+        "BO_Rock",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "Block Object (Bo)",
+        "Low-Poly Art Style"
+      ],
+      [
+        "Breakable Gates Specifications (table)",
+        "Table"
+      ],
+      [
+        "BR_Cactus",
+        "Game Object Classification Table (table)"
+      ],
+      [
+        "Boundary Objects",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "Desert(?))",
+        "Thé Tich (Dai X Cao X Róng)"
+      ],
+      [
+        "Assault Class",
+        "TA_Assault_01"
+      ],
+      [
+        "HI_Grass",
+        "Hiding Objects"
+      ],
+      [
+        "TA_Assault_02",
+        "Unity Units"
+      ],
+      [
+        "BO_Container_01",
+        "BO_Container_Dimensions_Table (table)"
+      ],
+      [
+        "Characteristics",
+        "Interaction Rules"
+      ],
+      [
+        "Outposts",
+        "TA_Assault_01"
+      ],
+      [
+        "Box_1x1x1",
+        "Game Map"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Tank Class"
+      ],
+      [
+        "BO_Container_Dimensions_Table (table)",
+        "Table"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Railway_03"
+      ],
+      [
+        "List Of Assets",
+        "World Tank War Map Document"
+      ],
+      [
+        "Hiding Objects",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_01_Sand"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Desert",
+        "Tank War Map Metadata Table (table)"
+      ],
+      [
+        "DE_Stone_03_SandDark",
+        "World Tank War Map Document"
+      ],
+      [
+        "TA_Assault_01",
+        "Unity Units"
+      ],
+      [
+        "TA_Assault_01",
+        "TA_Assault_02"
+      ],
+      [
+        "Block Object",
+        "Variant"
+      ],
+      [
+        "BR_Gate_4x2.5x1",
+        "Breakable Gates Specifications (table)"
+      ],
+      [
+        "GR Objects",
+        "GR_Sand_01"
+      ],
+      [
+        "Box_1x1x1",
+        "Thé Tich (Dai x Cao x Róng)"
+      ],
+      [
+        "Deathmatch",
+        "Tank War Map Metadata Table (table)"
+      ],
+      [
+        "TA_Scout_01",
+        "Unity Measurement System"
+      ],
+      [
+        "Game Environment",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "BO_Signage_02",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "Tank Assault Dimension Table (table)",
+        "Unity Units"
+      ],
+      [
+        "BR_Cactus",
+        "Breakable Objects"
+      ],
+      [
+        "Hiding Objects",
+        "Invisibility Effects"
+      ],
+      [
+        "Heavy",
+        "Heavy-Class Tank Dimensions Table (table)"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Bo_Container"
+      ],
+      [
+        "BR_Cactus_2x2x1",
+        "Breakable Object"
+      ],
+      [
+        "BO_Container_Dimensions_Table (table)",
+        "Block Object"
+      ],
+      [
+        "BO_Container_01",
+        "Block Object"
+      ],
+      [
+        "Game Object Classification Table (table)",
+        "Interaction Rules"
+      ],
+      [
+        "Breakable Object",
+        "Game Environment"
+      ],
+      [
+        "DE_Stone_05_Sand",
+        "World Tank War Map Document"
+      ],
+      [
+        "Rock Dimensions",
+        "Table"
+      ],
+      [
+        "DE_Stone_01_SandDark",
+        "World Tank War Map Document"
+      ],
+      [
+        "GR Objects",
+        "Ground Object Dimensions Table (table)"
+      ],
+      [
+        "BR_Box_02_2x2x2",
+        "Breakable Object"
+      ],
+      [
+        "Breakable Cactus Variants Table (table)",
+        "Table"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_03_SandDark"
+      ],
+      [
+        "Combat Module Tank War Outpost Design Base Capture Mode",
+        "Outpost Objects"
+      ],
+      [
+        "DE_Stone_02_Gray",
+        "World Tank War Map Document"
+      ],
+      [
+        "TA_Scout_02",
+        "Tank Dimensions Table (table)"
+      ],
+      [
+        "HI_Grass",
+        "In-Game Object Classification Table (table)"
+      ],
+      [
+        "Decorations",
+        "Table"
+      ],
+      [
+        "BO_CaveRoof_02",
+        "World Tank War"
+      ],
+      [
+        "HI_Grass_2x1x2",
+        "Hiding Objects"
+      ],
+      [
+        "DE_Stone_01_Sand",
+        "World Tank War Map Document"
+      ],
+      [
+        "BO_Signage_01",
+        "Breakable Object Dimensions Table (table)"
+      ],
+      [
+        "Heavy",
+        "TA_Heavy_01"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Railway_01"
+      ],
+      [
+        "Document Version Metadata Table (table)",
+        "Table"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "TA_Heavy_02"
+      ],
+      [
+        "BO_House_02",
+        "Thetich"
+      ],
+      [
+        "BR_Cactus_2x2x1",
+        "Breakable Cactus Variants Table (table)"
+      ],
+      [
+        "BR_Skull_01",
+        "Volume (Length x Height x Width)"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_02_Sand"
+      ],
+      [
+        "BO_Container_Variants_Catalog (image)",
+        "Technical Catalog"
+      ],
+      [
+        "BO_Container_04",
+        "World Tank War Map Document"
+      ],
+      [
+        "Heavy",
+        "Tank System Design"
+      ],
+      [
+        "Heavy-Class Tank Dimensions Table (table)",
+        "Tank War System"
+      ],
+      [
+        "DE_Objects_Dimensions_Table (table)",
+        "DE_Stone_03_Sand"
+      ],
+      [
+        "Breakable Object Specifications Table (table)",
+        "World Tank War Map Document"
+      ],
+      [
+        "Breakable Objects (BR)",
+        "Decorations (DE)"
+      ],
+      [
+        "BO_Signage_01",
+        "BO_Signage_02"
+      ],
+      [
+        "HI_Object_Dimensions_Table (table)",
+        "Image Path"
       ]
     ],
-    "count": 30,
-    "create_time": 1763543238,
-    "update_time": 1763543238,
+    "count": 464,
+    "update_time": 1764138601,
     "_id": "world_tank_war_map_document"
   },
   "weighted_index_formular": {
@@ -18580,5 +20730,5621 @@
     "count": 167,
     "update_time": 1763702507,
     "_id": "progression_module_tank_war_leaderboard_system"
+  },
+  "progression_module_tank_war_onboarding_design_chu_a_xong": {
+    "relation_pairs": [
+      [
+        "Duyet?",
+        "Table"
+      ],
+      [
+        "Onboarding Design Version Control Table (table)",
+        "Table"
+      ],
+      [
+        "Table",
+        "Version Control Log"
+      ],
+      [
+        "Ngay",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Onboarding Design Document",
+        "P Phucth12"
+      ],
+      [
+        "Phienban",
+        "Table"
+      ],
+      [
+        "Onboarding Design Version Control Table (table)",
+        "P Phucth12"
+      ],
+      [
+        "Mo Ta",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Nguoireview",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Onboarding Design Document",
+        "Version Control Log"
+      ],
+      [
+        "Ngudi Viet",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Ngay",
+        "Table"
+      ],
+      [
+        "Onboarding Design Version Control Table (table)",
+        "Version Control Log"
+      ],
+      [
+        "Duyet?",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Onboarding Design Document",
+        "Onboarding Design Version Control Table (table)"
+      ],
+      [
+        "Mo Ta",
+        "Table"
+      ],
+      [
+        "Onboarding Design Document",
+        "Tank War"
+      ],
+      [
+        "Onboarding Design Version Control Table (table)",
+        "Phienban"
+      ],
+      [
+        "Nguoireview",
+        "Table"
+      ],
+      [
+        "Onboarding Design Version Control Table (table)",
+        "Tank War"
+      ],
+      [
+        "Ngudi Viet",
+        "Table"
+      ]
+    ],
+    "count": 21,
+    "create_time": 1764129154,
+    "update_time": 1764129154,
+    "_id": "progression_module_tank_war_onboarding_design_chu_a_xong"
+  },
+  "progression_module_tank_war_onboarding_tutorial_mode_design": {
+    "relation_pairs": [
+      [
+        "Phucth12",
+        "v1.0"
+      ],
+      [
+        "Phase 1",
+        "Pin"
+      ],
+      [
+        "Progressive Learning Systems",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Game Tutorial",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Phase 2",
+        "Pin"
+      ],
+      [
+        "Dieu Kien Hoan Thanh",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "H Tro User",
+        "Kich Ban"
+      ],
+      [
+        "Tank",
+        "User"
+      ],
+      [
+        "Shoot Joystick",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Ngay",
+        "Phienban"
+      ],
+      [
+        "Duyét?",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Tank War Tutorial Components Overview (table)",
+        "Thanh Phan"
+      ],
+      [
+        "Table",
+        "Tutorial"
+      ],
+      [
+        "Tank War Tutorial Components Overview (table)",
+        "Thanhphan"
+      ],
+      [
+        "Note",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Tank",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Pin",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Ngay",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Shoot Joystick",
+        "User"
+      ],
+      [
+        "Move Joystick",
+        "User"
+      ],
+      [
+        "Point",
+        "User"
+      ],
+      [
+        "Digital Interface Design",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Nguoi Viet",
+        "Phienban"
+      ],
+      [
+        "Key Patterns",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Move Joystick",
+        "Tank"
+      ],
+      [
+        "Shoot Joystick",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "TankWar_OnboardingTutorial_Flowchart (image)",
+        "Tutorial Process"
+      ],
+      [
+        "Kent",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Kich Ban",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Phase 3",
+        "Skill Button"
+      ],
+      [
+        "Game Mode",
+        "Tank Warfare Simulation"
+      ],
+      [
+        "Flowchart-Like Diagram",
+        "Tutorial Process"
+      ],
+      [
+        "Image Path",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Phucth12",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Table",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Nguoi Viet",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Pin",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Notes",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Dummy Tanks",
+        "Skill Button"
+      ],
+      [
+        "Dummy Tanks",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Tutorial",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Tank",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Tank War Onboarding Tutorial Mode",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Game Tutorial",
+        "Phase 2"
+      ],
+      [
+        "Muc Tieu & Textbox",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Skill Button",
+        "Tank"
+      ],
+      [
+        "Shoot Joystick",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Tutorial",
+        "Using A Skill"
+      ],
+      [
+        "Game Tutorial",
+        "Phase 3"
+      ],
+      [
+        "Phienban",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Moving",
+        "Tutorial"
+      ],
+      [
+        "Digital Interface Design",
+        "Flowchart-Like Diagram"
+      ],
+      [
+        "Muc Dich",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Move Joystick",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Game Tutorial",
+        "Phase 1"
+      ],
+      [
+        "Tutorial",
+        "UI Elements"
+      ],
+      [
+        "Pin",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Dummy Tanks",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Column Headers",
+        "Table"
+      ],
+      [
+        "Game Mode",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Game Tutorial",
+        "Victory Screen"
+      ],
+      [
+        "Flowchart-Like Diagram",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Dieu Kien Hoan Thanh",
+        "H Tro User"
+      ],
+      [
+        "Muc Tieu & Textbox",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Moving",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Mota",
+        "Phienban"
+      ],
+      [
+        "Iterative Refinement",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Phase 3",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Tutorial Stages and UI Elements Table (table)",
+        "User Flow"
+      ],
+      [
+        "Kent",
+        "v1.1"
+      ],
+      [
+        "Move Joystick",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "TankWar_OnboardingTutorial_Flowchart (image)",
+        "UI Mockup"
+      ],
+      [
+        "Muc Dich",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Game Mode",
+        "UI Mockup"
+      ],
+      [
+        "Tank",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Approval Bottleneck",
+        "Version Control Log"
+      ],
+      [
+        "Skill Button",
+        "User"
+      ],
+      [
+        "Mode-Specific Tutorials",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Dieu Chinh",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Giaidoan",
+        "Kich Ban"
+      ],
+      [
+        "Mieu Ta",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Shooting",
+        "Tutorial"
+      ],
+      [
+        "Arrows",
+        "Tutorial Process"
+      ],
+      [
+        "Phase 1",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Skill Button",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Textbox",
+        "User"
+      ],
+      [
+        "Phase 2",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Color Scheme",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Move Joystick",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Point",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Core Gameplay Features",
+        "Tutorial"
+      ],
+      [
+        "H Tro User",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Tank War Onboarding Tutorial Mode",
+        "Version Control Log"
+      ],
+      [
+        "Mieu Ta",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Digital Interface Design",
+        "Image Path"
+      ],
+      [
+        "Key Patterns",
+        "Table"
+      ],
+      [
+        "Shooting",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Skill Button",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Rectangular Box",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Tutorial",
+        "User Flow"
+      ],
+      [
+        "v1.0",
+        "v1.1"
+      ],
+      [
+        "Skill Button",
+        "Tank War Tutorial Components Overview (table)"
+      ],
+      [
+        "Arrows",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Core Gameplay Features",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Tutorial Progression Flow Table (table)",
+        "Victory Screen"
+      ],
+      [
+        "Mota",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Duyét?",
+        "Phienban"
+      ],
+      [
+        "Tutorial Stages and UI Elements Table (table)",
+        "Using A Skill"
+      ],
+      [
+        "Dieu Chinh",
+        "v1.1"
+      ],
+      [
+        "Rectangular Box",
+        "Tutorial Process"
+      ],
+      [
+        "Version Control Log",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Tutorial Stages and UI Elements Table (table)",
+        "UI Elements"
+      ],
+      [
+        "Giaidoan",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Phase 2",
+        "Shoot Joystick"
+      ],
+      [
+        "Hoan Thanh File",
+        "v1.0"
+      ],
+      [
+        "Flow",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Dieu Kien Hoan Thanh",
+        "Notes"
+      ],
+      [
+        "Tank War Onboarding Tutorial Mode",
+        "Thanh Phan"
+      ],
+      [
+        "MapTutorial",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Move Joystick",
+        "Phase 1"
+      ],
+      [
+        "Approval Bottleneck",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Flow",
+        "Giaidoan"
+      ],
+      [
+        "Core Gameplay Features",
+        "Mode-Specific Tutorials"
+      ],
+      [
+        "Nguoireview",
+        "Phienban"
+      ],
+      [
+        "Column Headers",
+        "Tutorial Stages and UI Elements Table (table)"
+      ],
+      [
+        "Game Mode",
+        "Progressive Learning Systems"
+      ],
+      [
+        "Color Scheme",
+        "Digital Interface Design"
+      ],
+      [
+        "Shoot Joystick",
+        "Tank"
+      ],
+      [
+        "Tank Warfare Simulation",
+        "TankWar_OnboardingTutorial_Flowchart (image)"
+      ],
+      [
+        "Nguoireview",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Note",
+        "Tank War Onboarding Tutorial Mode"
+      ],
+      [
+        "Tank War Onboarding Tutorial Mode",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Textbox",
+        "Tutorial Progression Flow Table (table)"
+      ],
+      [
+        "Tutorial Progression Flow Table (table)",
+        "User"
+      ],
+      [
+        "Hoan Thanh File",
+        "Version Control Log for Tutorial Mode Design (table)"
+      ],
+      [
+        "Dummy Tanks",
+        "Shoot Joystick"
+      ],
+      [
+        "MapTutorial",
+        "Tank War Tutorial Components Overview (table)"
+      ]
+    ],
+    "count": 137,
+    "create_time": 1764129323,
+    "update_time": 1764129323,
+    "_id": "progression_module_tank_war_onboarding_tutorial_mode_design"
+  },
+  "progression_module_tank_wars_achievement_design": {
+    "relation_pairs": [
+      [
+        "Nguoireview",
+        "Version V1.0"
+      ],
+      [
+        "Asset Lists",
+        "Gaming Application"
+      ],
+      [
+        "Core Progression Achievements",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Icon"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Game"
+      ],
+      [
+        "Game Progression",
+        "Parent Achievement"
+      ],
+      [
+        "Game Design Document",
+        "Tank Wars"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Lighting"
+      ],
+      [
+        "Achievement Design",
+        "Achievement_Design_Table_Tank_Wars (image)"
+      ],
+      [
+        "Achievement Design",
+        "Gameplay Milestones"
+      ],
+      [
+        "Sans-Serif Font",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievements",
+        "Beginner"
+      ],
+      [
+        "Dacdiem",
+        "Table"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Social Progression"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Dacdiem"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Table"
+      ],
+      [
+        "Achievement Screen Userflow",
+        "Discarded Achievement Screen Userflow Heading (discarded)"
+      ],
+      [
+        "Achievement System",
+        "Chest"
+      ],
+      [
+        "In-Game Items",
+        "Reward Display"
+      ],
+      [
+        "Achievement Design",
+        "User Experience (UX)"
+      ],
+      [
+        "4.3 Cơ Chế Sắp Xếp Thành Tựu Trong UI",
+        "Discarded Achievement Screen Userflow Heading (discarded)"
+      ],
+      [
+        "Child Achievement",
+        "Game Progression"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Home"
+      ],
+      [
+        "Claim Reward Button",
+        "Reward Display"
+      ],
+      [
+        "In-Game Items",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Table"
+      ],
+      [
+        "Gaming System",
+        "Retention Strategy Fragment (discarded)"
+      ],
+      [
+        "Achievement System",
+        "Feats"
+      ],
+      [
+        "Achievement Unlocked Text",
+        "Text Description Area"
+      ],
+      [
+        "Version V1.0",
+        "Version V1.1"
+      ],
+      [
+        "Achievement Design",
+        "Sans-Serif Font"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Milestones"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Player Engagement"
+      ],
+      [
+        "Achievement System",
+        "Thành Tựu Nhận Được"
+      ],
+      [
+        "Achievements Tab",
+        "Red Exclamation Mark Badge"
+      ],
+      [
+        "Golden Trophy Symbol",
+        "Icon Area"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Feats (Bonus Achievement)"
+      ],
+      [
+        "Icon Area",
+        "Pop-Up Notification Window"
+      ],
+      [
+        "Achievement Name",
+        "Type"
+      ],
+      [
+        "Retention Strategy Fragment (discarded)",
+        "UI/UX Design"
+      ],
+      [
+        "Home",
+        "Player"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Image Path"
+      ],
+      [
+        "Text Description Area",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Child Achievement",
+        "Parent Achievement"
+      ],
+      [
+        "Core Progression Achievements",
+        "Onboarding Achievements"
+      ],
+      [
+        "Difficulty Levels",
+        "Player Engagement"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Backend Reference"
+      ],
+      [
+        "Achievements",
+        "Icon"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Game Design Process"
+      ],
+      [
+        "Modern Design Language",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Notification Banner"
+      ],
+      [
+        "Nguoireview",
+        "Table"
+      ],
+      [
+        "Achievement Listing",
+        "Achievement_Design_Table_Tank_Wars (image)"
+      ],
+      [
+        "Onboarding",
+        "Social Progression"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Core Progression"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Progress"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Core Progression"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Mo Ta"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Completion Percentage"
+      ],
+      [
+        "Achievement System",
+        "Notification System"
+      ],
+      [
+        "Achievement Categories",
+        "Table-Like Structure"
+      ],
+      [
+        "Tab Category",
+        "Type"
+      ],
+      [
+        "UI Design Discussion",
+        "UI/UX Design Process"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Asset Lists"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Game Design Document"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Table Structure"
+      ],
+      [
+        "Achievement Design",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Game Progression",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Gaming Interface"
+      ],
+      [
+        "Achievement Design",
+        "Icons"
+      ],
+      [
+        "Nguoiviet",
+        "Version V1.0"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "UI/UX Design Process"
+      ],
+      [
+        "Achievement Unlocked Text",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Categories",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievements",
+        "UI/UX Design Process"
+      ],
+      [
+        "Core Progression",
+        "Onboarding"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Red Exclamation Marks"
+      ],
+      [
+        "Icon Area",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Screen Userflow",
+        "Game Design Documentation"
+      ],
+      [
+        "Design Decisions",
+        "UI"
+      ],
+      [
+        "Page 5",
+        "Retention Strategy Fragment (discarded)"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Combat Achievements"
+      ],
+      [
+        "Tank Wars",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Progress",
+        "Status"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Push Notification"
+      ],
+      [
+        "Parent Achievement",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Achievements Tab"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Beginner"
+      ],
+      [
+        "Feats",
+        "Progression Module"
+      ],
+      [
+        "Color Scheme",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Screen Userflow",
+        "User Flow"
+      ],
+      [
+        "Destroy 100 Enemy Tanks",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "UI Design Discussion"
+      ],
+      [
+        "Challenges",
+        "Progression Module"
+      ],
+      [
+        "Icons",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Discarded Content",
+        "Player Retention"
+      ],
+      [
+        "Achievement Design",
+        "Table"
+      ],
+      [
+        "Ngay",
+        "Version V1.0"
+      ],
+      [
+        "Responsive UI",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Digital Interface Design",
+        "Pop-Up Notification Window"
+      ],
+      [
+        "Duyet?",
+        "Version V1.1"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Mobile Screen"
+      ],
+      [
+        "Onboarding",
+        "Progression Module"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Animation"
+      ],
+      [
+        "Achievement Design",
+        "Priority Levels"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Game Interface"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Tab Category"
+      ],
+      [
+        "Combat Progression",
+        "Social Progression"
+      ],
+      [
+        "Child Achievement",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Digital Design Mockup",
+        "Image Path"
+      ],
+      [
+        "Red Exclamation Marks",
+        "Visual Indicators"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Chest"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Onboarding"
+      ],
+      [
+        "Phienban",
+        "Version V1.0"
+      ],
+      [
+        "Back Button",
+        "Home"
+      ],
+      [
+        "Achievement Design",
+        "Progression System"
+      ],
+      [
+        "Nguoireview",
+        "Version V1.1"
+      ],
+      [
+        "Gaming Application",
+        "UI/UX Design Principles"
+      ],
+      [
+        "Digital Interface Design",
+        "Responsive UI"
+      ],
+      [
+        "Achievement Design",
+        "Header Section"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Priority Levels"
+      ],
+      [
+        "Achievement Design",
+        "Reward"
+      ],
+      [
+        "Achievement System",
+        "Backend Reference"
+      ],
+      [
+        "Linhttd",
+        "Version V1.0"
+      ],
+      [
+        "Reward",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Nguoiviet",
+        "Table"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Feats"
+      ],
+      [
+        "Achievements",
+        "Player"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "UI/UX Design Principles"
+      ],
+      [
+        "Claim Reward Button",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Image Path"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Icon"
+      ],
+      [
+        "Achievement System",
+        "Table Structure"
+      ],
+      [
+        "Achievement Icon",
+        "Notification Banner"
+      ],
+      [
+        "Achievement System",
+        "Gaming Interface"
+      ],
+      [
+        "Achievement Design",
+        "Icon"
+      ],
+      [
+        "Combat Progression",
+        "Feats (Bonus Achievement)"
+      ],
+      [
+        "Icon",
+        "Reward"
+      ],
+      [
+        "Digital Interface Design",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Linhttd"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Nguoireview"
+      ],
+      [
+        "Pop-Up Notification Window",
+        "Reward Display"
+      ],
+      [
+        "Mo Ta",
+        "Version V1.0"
+      ],
+      [
+        "Duyet?",
+        "Table"
+      ],
+      [
+        "Bounding Box",
+        "Discarded Content"
+      ],
+      [
+        "Chi Tiết Thiết Kế",
+        "Discarded Achievement Screen Userflow Heading (discarded)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Achievement Ui/Ux Design"
+      ],
+      [
+        "High-Resolution Screenshot",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Thanhdv2"
+      ],
+      [
+        "Achievement Screen Userflow",
+        "Chi Tiết Thiết Kế"
+      ],
+      [
+        "Ngay",
+        "Table"
+      ],
+      [
+        "Table-Like Structure",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievement System",
+        "Challenges"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Digital Design Mockup"
+      ],
+      [
+        "Challenges",
+        "Social Progression"
+      ],
+      [
+        "Achievement Categories",
+        "Win 5 Matches In A Row"
+      ],
+      [
+        "Ref",
+        "Table"
+      ],
+      [
+        "Discarded Content",
+        "UI Design Discussion"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Onboarding"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "Discarded Content"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Onboarding"
+      ],
+      [
+        "Game Interface",
+        "Visual Indicators"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Ref"
+      ],
+      [
+        "Achievements",
+        "Discarded Content"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "Brainstorming Phase"
+      ],
+      [
+        "Brainstorming Phase",
+        "UI/UX Design Process"
+      ],
+      [
+        "Phienban",
+        "Table"
+      ],
+      [
+        "Discarded Content",
+        "UI/UX Design"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Duyet?"
+      ],
+      [
+        "Game Design Document",
+        "Table"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Player Progress"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Phucth12"
+      ],
+      [
+        "Player Engagement",
+        "Push Notification"
+      ],
+      [
+        "Achievements",
+        "Feats"
+      ],
+      [
+        "Design Decisions",
+        "Game Achievements Overview Table (table)"
+      ],
+      [
+        "Future Updates",
+        "Game Achievements Overview Table (table)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Phienban"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "Bounding Box"
+      ],
+      [
+        "Header Section",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievement Metrics",
+        "Design Decisions"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "Onboarding Achievements",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Challenges",
+        "Feats (Bonus Achievement)"
+      ],
+      [
+        "Achievement Listing",
+        "Image Path"
+      ],
+      [
+        "Nguoiviet",
+        "Version V1.1"
+      ],
+      [
+        "Achievement Ui/Ux Design",
+        "Tank Wars"
+      ],
+      [
+        "Progression Module",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Core Progression",
+        "Tank Wars"
+      ],
+      [
+        "Digital Design Mockup",
+        "User Interface (UI)"
+      ],
+      [
+        "Discarded Achievement Screen Userflow Heading (discarded)",
+        "User Flow"
+      ],
+      [
+        "Achievement System",
+        "Table"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Wireframe-Style Representation"
+      ],
+      [
+        "Core Progression",
+        "Progression Module"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Version V1.0"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Asset List"
+      ],
+      [
+        "Achievements",
+        "UI/UX Components"
+      ],
+      [
+        "Achievements",
+        "Challenges"
+      ],
+      [
+        "Mo Ta",
+        "Table"
+      ],
+      [
+        "Achievement Icon",
+        "Achievement Notification Wireframe for Gaming App (image)"
+      ],
+      [
+        "Achievement Metrics",
+        "Game Achievements Overview Table (table)"
+      ],
+      [
+        "Achievement Listing",
+        "Completion Percentage"
+      ],
+      [
+        "Color Palette",
+        "User Interface (UI)"
+      ],
+      [
+        "4.3 Cơ Chế Sắp Xếp Thành Tựu Trong UI",
+        "Achievement Screen Userflow"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "Notification System"
+      ],
+      [
+        "Achievement Design",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Player"
+      ],
+      [
+        "Discarded Content",
+        "Unresolved Issue"
+      ],
+      [
+        "Achievement Categories",
+        "Destroy 100 Enemy Tanks"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "User Interface (UI)"
+      ],
+      [
+        "Ngay",
+        "Version V1.1"
+      ],
+      [
+        "Achievement Design",
+        "Social Interactions"
+      ],
+      [
+        "Reward Display",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Design",
+        "Achievement Listing"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Nguoiviet"
+      ],
+      [
+        "Digital Interface Design",
+        "Modern Design Language"
+      ],
+      [
+        "Cơ Chế Sắp Xếp Thành Tựu Trong UI",
+        "Discarded Achievement Screen Userflow Heading (discarded)"
+      ],
+      [
+        "Achievement Metrics",
+        "Future Updates"
+      ],
+      [
+        "Phienban",
+        "Version V1.1"
+      ],
+      [
+        "Achievement Design",
+        "Color Scheme"
+      ],
+      [
+        "Progression System",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Discarded Content",
+        "Retention Strategy Fragment (discarded)"
+      ],
+      [
+        "Game Design Document",
+        "High-Resolution Screenshot"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Rank"
+      ],
+      [
+        "Achievement System",
+        "Icon"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Achievement System"
+      ],
+      [
+        "Achievement System",
+        "Game"
+      ],
+      [
+        "Achievements",
+        "Attention Marker Placeholder (discarded)"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Back Button"
+      ],
+      [
+        "Thanhdv2",
+        "Version V1.0"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Social Interactions"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Core Progression"
+      ],
+      [
+        "Progression Module",
+        "Tank Wars"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Combat Progression"
+      ],
+      [
+        "Game Interface",
+        "UI"
+      ],
+      [
+        "Notification System",
+        "Red Exclamation Mark"
+      ],
+      [
+        "Discarded Content",
+        "Page 5"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Visual Indicators"
+      ],
+      [
+        "Achievement System",
+        "Future-Proofing Strategy"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Gameplay Milestones"
+      ],
+      [
+        "Mobile Screen",
+        "Wireframe-Style Representation"
+      ],
+      [
+        "Achievements",
+        "Achievements and Rank UI Component Design (table)"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Player Engagement"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Color Palette"
+      ],
+      [
+        "Attention Marker Placeholder (discarded)",
+        "Unresolved Issue"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Challenges"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Tank Wars"
+      ],
+      [
+        "Game Interface",
+        "Tab Category"
+      ],
+      [
+        "Pop-Up Notification Window",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Golden Trophy Symbol",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Gaming Application"
+      ],
+      [
+        "Color Scheme",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievements",
+        "Rank"
+      ],
+      [
+        "Achievement Design",
+        "Tank Wars"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Functional Areas"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Progression Module"
+      ],
+      [
+        "Mo Ta",
+        "Version V1.1"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Feats"
+      ],
+      [
+        "Animation",
+        "Chest"
+      ],
+      [
+        "Combat Progression",
+        "Onboarding"
+      ],
+      [
+        "Achievement Design",
+        "Progression Module"
+      ],
+      [
+        "Achievement System",
+        "Asset List"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Status"
+      ],
+      [
+        "Blurred Game Environment",
+        "Pop-Up Notification Window"
+      ],
+      [
+        "Discarded Content",
+        "Notification System"
+      ],
+      [
+        "Achievement Name",
+        "Game Achievements Overview Table (table)"
+      ],
+      [
+        "Table",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Phucth12",
+        "Version V1.0"
+      ],
+      [
+        "Exploration Achievements",
+        "Player Progress"
+      ],
+      [
+        "Functional Areas",
+        "Mobile Screen"
+      ],
+      [
+        "Achievement Categories",
+        "Achievement Design"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Tank Wars"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Tank Wars"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Exploration Achievements"
+      ],
+      [
+        "3. User Flow",
+        "Achievement Screen Userflow"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Ngay"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Progression Module"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Feats"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "UI/UX Components"
+      ],
+      [
+        "Achievements and Rank UI Component Design (table)",
+        "Challenges"
+      ],
+      [
+        "Achievement System",
+        "Achievement System UI Components (table)"
+      ],
+      [
+        "Achievement Design",
+        "Player Progression"
+      ],
+      [
+        "Game Design Document",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Future-Proofing Strategy"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Red Exclamation Mark"
+      ],
+      [
+        "Achievements",
+        "Milestones"
+      ],
+      [
+        "TankWars_AchievementDesign_Schematic (image)",
+        "Win 5 Matches In A Row"
+      ],
+      [
+        "Achievement Notification Wireframe for Gaming App (image)",
+        "Red Exclamation Mark Badge"
+      ],
+      [
+        "Discarded Achievement Screen Userflow Heading (discarded)",
+        "Game Design Documentation"
+      ],
+      [
+        "Achievement System UI Components (table)",
+        "Table"
+      ],
+      [
+        "Thiết kế Thành tựu Chi tiết (table)",
+        "User Experience (UX)"
+      ],
+      [
+        "Player",
+        "Rank"
+      ],
+      [
+        "Combat Achievements",
+        "Player Progress"
+      ],
+      [
+        "Achievements Tab",
+        "User Interface (UI)"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Player Progression"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Thành Tựu Nhận Được"
+      ],
+      [
+        "Art Requirements",
+        "Discarded Content"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "Type"
+      ],
+      [
+        "Achievement_Design_Table_Tank_Wars (image)",
+        "Challenges"
+      ],
+      [
+        "Achievement Categories and Features (table)",
+        "Challenges"
+      ],
+      [
+        "Icon",
+        "Player Engagement"
+      ],
+      [
+        "Art Requirements",
+        "Retention Strategy Fragment (discarded)"
+      ],
+      [
+        "Achievement Screen Userflow",
+        "Cơ Chế Sắp Xếp Thành Tựu Trong UI"
+      ],
+      [
+        "Blurred Game Environment",
+        "achievement_notification_system_tank_wars_v1 (image)"
+      ],
+      [
+        "Difficulty Levels",
+        "Game Achievements Overview Table (table)"
+      ],
+      [
+        "Icon",
+        "Thiết kế Thành tựu Chi tiết (table)"
+      ],
+      [
+        "Achievement Design Progression Table (table)",
+        "Version V1.1"
+      ],
+      [
+        "Pop-Up Notification Window",
+        "Text Description Area"
+      ],
+      [
+        "Duyet?",
+        "Version V1.0"
+      ],
+      [
+        "Digital Design Mockup",
+        "Lighting"
+      ],
+      [
+        "Achievement Ui/Ux Design",
+        "Version V1.1"
+      ],
+      [
+        "3. User Flow",
+        "Discarded Achievement Screen Userflow Heading (discarded)"
+      ],
+      [
+        "Color Scheme",
+        "Digital Interface Design"
+      ],
+      [
+        "Player Retention",
+        "Retention Strategy Fragment (discarded)"
+      ],
+      [
+        "Achievement Management Table (table)",
+        "Notification System"
+      ],
+      [
+        "Achievement System",
+        "Push Notification"
+      ],
+      [
+        "Onboarding",
+        "Tank Wars"
+      ],
+      [
+        "Game Achievements Overview Table (table)",
+        "UI"
+      ],
+      [
+        "Gaming System",
+        "Player Retention"
+      ],
+      [
+        "Tank Wars",
+        "TankWars_AchievementDesign_Schematic (image)"
+      ]
+    ],
+    "count": 319,
+    "create_time": 1764129700,
+    "update_time": 1764129700,
+    "_id": "progression_module_tank_wars_achievement_design"
+  },
+  "progression_module_tank_wars_artifact_enhancement": {
+    "relation_pairs": [
+      [
+        "Enhancement Jump",
+        "Lv.20"
+      ],
+      [
+        "Core Dust",
+        "Level Range 16-20"
+      ],
+      [
+        "Balance Direction",
+        "Overclock Bonus"
+      ],
+      [
+        "Taofile",
+        "Version V1.0"
+      ],
+      [
+        "Phienban",
+        "Table"
+      ],
+      [
+        "Enhancement Jumps",
+        "RNG System"
+      ],
+      [
+        "Legendary Artifact",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Lv.20"
+      ],
+      [
+        "Coin",
+        "Level Range 6-10"
+      ],
+      [
+        "Overclock Bonus",
+        "Table"
+      ],
+      [
+        "Legendary Artifact",
+        "Rarity Level"
+      ],
+      [
+        "Overclock Bonus Table (table)",
+        "Player Experience"
+      ],
+      [
+        "Overclock Bonus Table (table)",
+        "Randomization"
+      ],
+      [
+        "Epic Artifact",
+        "Rarity Level"
+      ],
+      [
+        "Game Economy",
+        "Rarity"
+      ],
+      [
+        "M6ta",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Progression Loop",
+        "Tank Wars"
+      ],
+      [
+        "Coin",
+        "Level Range 11-15"
+      ],
+      [
+        "Table",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Lv.1-2"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Ghi Chu"
+      ],
+      [
+        "Mythic Artifact",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Coin",
+        "Level Range 1-5"
+      ],
+      [
+        "Nguoireview",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Progression Loop"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Ghi Chu"
+      ],
+      [
+        "Overclock Bonus",
+        "Player Experience"
+      ],
+      [
+        "Taofile",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Kent",
+        "Version V1.0"
+      ],
+      [
+        "Enhancement Jump",
+        "Progression Loop"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Balance Direction"
+      ],
+      [
+        "Duyét",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "0Tomato",
+        "Version V1.0"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Sub-Stat"
+      ],
+      [
+        "Artifact Meta Build",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Progression Loop"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Grindable Currency"
+      ],
+      [
+        "Lv20 Overclock Bonus Activation Note (discarded)",
+        "Progression Loop"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Progression Loop"
+      ],
+      [
+        "Bonus Đặc Biệt Theo Rarity",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Core Dust"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "RNG System"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Level Range 11-15"
+      ],
+      [
+        "Epic Artifact",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Coin"
+      ],
+      [
+        "Lv.20",
+        "Overclock Bonus"
+      ],
+      [
+        "Balance Direction",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Ngay",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Level Range 1-5"
+      ],
+      [
+        "Artifact Meta Build",
+        "Table"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Game Economy"
+      ],
+      [
+        "Balance Direction",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Enhancement Jump",
+        "Lv.15"
+      ],
+      [
+        "Effect Strength",
+        "Overclock Bonus"
+      ],
+      [
+        "Ngudi Viet",
+        "Table"
+      ],
+      [
+        "Kent",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact",
+        "Rarity"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Non-Pay-To-Win Principle"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Lv.15"
+      ],
+      [
+        "Coin",
+        "Level Range 16-20"
+      ],
+      [
+        "Mythic Artifact",
+        "Randomization"
+      ],
+      [
+        "0Tomato",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Cap Do"
+      ],
+      [
+        "Artifact Enhancement Table",
+        "Core Dust"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Artifact Enhancement System"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Cap Do"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Level Range 6-10"
+      ],
+      [
+        "Main Stat",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "Artifact",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Tank Wars"
+      ],
+      [
+        "Artifact Enhancement Table",
+        "Coin"
+      ],
+      [
+        "Enhancement Jump",
+        "Lv.5"
+      ],
+      [
+        "Artifact Meta Build",
+        "Randomization"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Sub-Stat"
+      ],
+      [
+        "Game Economy",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Phienban",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Legendary Artifact",
+        "Randomization"
+      ],
+      [
+        "Version Control Table for Artifact Enhancement Documentation (table)",
+        "Version V1.0"
+      ],
+      [
+        "Enhancement Jump",
+        "Lv.10"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Lv.5"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Table"
+      ],
+      [
+        "M6ta",
+        "Table"
+      ],
+      [
+        "Overclock Bonus Table (table)",
+        "Rarity Level"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Controlled RNG"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Lv.10"
+      ],
+      [
+        "Core Dust",
+        "Grindable Currency"
+      ],
+      [
+        "Legendary Artifact",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Controlled RNG"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Level Range 16-20"
+      ],
+      [
+        "Nguoireview",
+        "Table"
+      ],
+      [
+        "Game Development Workflow",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Game Economy",
+        "Progression Loop"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Enhancement Jumps"
+      ],
+      [
+        "Duyét",
+        "Table"
+      ],
+      [
+        "Core Dust",
+        "Level Range 1-5"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Game Development Workflow"
+      ],
+      [
+        "Lv.20",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Lv20 Overclock Bonus Activation Note (discarded)",
+        "Rarity"
+      ],
+      [
+        "Game Economy",
+        "RNG System"
+      ],
+      [
+        "Mythic Artifact",
+        "Overclock Bonus"
+      ],
+      [
+        "Lv20 Overclock Bonus Activation Note (discarded)",
+        "Overclock Bonus"
+      ],
+      [
+        "Effect Strength",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Tac Dong"
+      ],
+      [
+        "Grindable Currency",
+        "Non-Pay-To-Win Principle"
+      ],
+      [
+        "Core Dust",
+        "Level Range 6-10"
+      ],
+      [
+        "Ngay",
+        "Table"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Tac Dong"
+      ],
+      [
+        "Artifact Enhancement System",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Lv.1-2"
+      ],
+      [
+        "Artifact",
+        "Lv20 Overclock Bonus Activation Note (discarded)"
+      ],
+      [
+        "Main Stat",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Artifact Enhancement Cost Table (table)",
+        "Artifact Enhancement Table"
+      ],
+      [
+        "Artifact Enhancement Progression Table (table)",
+        "Enhancement Jump"
+      ],
+      [
+        "Game Economy",
+        "Non-Pay-To-Win Principle"
+      ],
+      [
+        "Overclock Bonus Table (table)",
+        "Table"
+      ],
+      [
+        "Core Dust",
+        "Level Range 11-15"
+      ],
+      [
+        "Epic Artifact",
+        "Overclock Bonus"
+      ],
+      [
+        "Bonus Đặc Biệt Theo Rarity",
+        "Overclock Bonus"
+      ],
+      [
+        "Overclock Bonus",
+        "Overclock Bonus Table (table)"
+      ],
+      [
+        "Ngudi Viet",
+        "Version Control Table for Artifact Enhancement Documentation (table)"
+      ],
+      [
+        "Mythic Artifact",
+        "Rarity Level"
+      ]
+    ],
+    "count": 123,
+    "create_time": 1764129940,
+    "update_time": 1764129940,
+    "_id": "progression_module_tank_wars_artifact_enhancement"
+  },
+  "progression_module_tank_wars_fusion_artifact": {
+    "relation_pairs": [
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Mini-Gacha Mechanic"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "V1.0"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Rare Artifact"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Rare Artifact"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Tomato"
+      ],
+      [
+        "Coins",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Fusion Artifact System",
+        "RNG"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Mini-Gacha Mechanic"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Gqi Y Tai Nguyén Yéu Cäu"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Gqi Y Tai Nguyén Yéu Cäu"
+      ],
+      [
+        "Coins",
+        "Fusion Artifact Progression System"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "RNG"
+      ],
+      [
+        "Tomato",
+        "V1.0"
+      ],
+      [
+        "M6ta",
+        "V1.0"
+      ],
+      [
+        "Ngay",
+        "V1.0"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "M6ta"
+      ],
+      [
+        "Kent",
+        "Ngudi Viet"
+      ],
+      [
+        "Epic Artifact",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Epic Artifact",
+        "Fusion Artifact Progression System"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Turcap"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Ngay"
+      ],
+      [
+        "F2P Players",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Common Artifact",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Fusion Data Cores"
+      ],
+      [
+        "Kent",
+        "V1.0"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Fusion Data Cores"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Turcap"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Ti Le Thanh Cong (Base)"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Ti Le Thanh Cong (Base)"
+      ],
+      [
+        "F2P Players",
+        "Fusion Artifact Progression System"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Fusion Artifact System",
+        "Tank Wars"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Player Experience"
+      ],
+      [
+        "Common Artifact",
+        "Fusion Artifact Progression System"
+      ],
+      [
+        "Nguoireview",
+        "Tomato"
+      ],
+      [
+        "Fusion Artifact System",
+        "Fusion Artifact Version Control Log (table)"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Mythic Artifact"
+      ],
+      [
+        "Duyét?",
+        "Fusion Artifact Version Control Log (table)"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Mythic Artifact"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Player Experience"
+      ],
+      [
+        "Fusion Artifact System",
+        "Version Control Log"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Version Control Log"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Ngudi Viet"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Kent"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Tank Wars"
+      ],
+      [
+        "Fusion Artifact System",
+        "Player Experience"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Legendary Artifact"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Player Experience"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Nguoireview"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Phienban"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "RNG"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Stabilizer Modules"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Legendary Artifact"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Stabilizer Modules"
+      ],
+      [
+        "Den Cap",
+        "Fusion Artifact Progression Table (table)"
+      ],
+      [
+        "Fusion Artifact Version Control Log (table)",
+        "Tank Wars"
+      ],
+      [
+        "Duyét?",
+        "V1.0"
+      ],
+      [
+        "Den Cap",
+        "Fusion Artifact Progression System"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "RNG"
+      ],
+      [
+        "Phienban",
+        "V1.0"
+      ],
+      [
+        "Fusion Artifact Progression Table (table)",
+        "Pay-To-Win Options"
+      ],
+      [
+        "Fusion Artifact Progression System",
+        "Pay-To-Win Options"
+      ]
+    ],
+    "count": 63,
+    "create_time": 1764130090,
+    "update_time": 1764130090,
+    "_id": "progression_module_tank_wars_fusion_artifact"
+  },
+  "progression_module_tank_wars_to_ng_quan_artifact_system": {
+    "relation_pairs": [
+      [
+        "Drop Rate",
+        "Mythical"
+      ],
+      [
+        "Artifact Stat Table",
+        "Main Stat"
+      ],
+      [
+        "Color",
+        "Mythical"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Common"
+      ],
+      [
+        "Drop Rate",
+        "Rare"
+      ],
+      [
+        "Artifact System",
+        "Controlled Randomness"
+      ],
+      [
+        "Armor Slot",
+        "SHIELD"
+      ],
+      [
+        "Common",
+        "Drop Rate"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Tank Wars"
+      ],
+      [
+        "Taofile",
+        "Version V1.0"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Guardian Set"
+      ],
+      [
+        "Energy Core Slot",
+        "Skill Cooldown"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Nova Set"
+      ],
+      [
+        "Artifact Slots System",
+        "CPU Slot"
+      ],
+      [
+        "Guardian Set",
+        "Hieu Ung"
+      ],
+      [
+        "Artifact System",
+        "Long-Term Player Engagement"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "FIRE RATE",
+        "Weapon Slot"
+      ],
+      [
+        "CPU",
+        "Skill Power"
+      ],
+      [
+        "Engine Slot",
+        "SPD"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Overdrive Set"
+      ],
+      [
+        "Artifact Stat Table",
+        "Sub Stats"
+      ],
+      [
+        "Armor",
+        "SHIELD"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Mythical"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Balance Preservation"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "HP Regen (Points/S)"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "FIRE RATE"
+      ],
+      [
+        "Hieu Ung",
+        "Specter Set"
+      ],
+      [
+        "Artifact Set System",
+        "Nova Set"
+      ],
+      [
+        "Energy Core Slot",
+        "SHIELD Regen"
+      ],
+      [
+        "Energy Core",
+        "SHIELD Regen"
+      ],
+      [
+        "ATK (%)",
+        "Main Stat"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Gacha Moment"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "CRIT Rate (%)"
+      ],
+      [
+        "Artifact System",
+        "Engine Slot"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Skill Power"
+      ],
+      [
+        "Artifact System",
+        "Energy Core Slot"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "SHIELD"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Skill Power"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "SHIELD"
+      ],
+      [
+        "Gacha Moment",
+        "Players"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Color"
+      ],
+      [
+        "Artifact Set System",
+        "Controlled Randomness"
+      ],
+      [
+        "FIRE RATE",
+        "Weapon"
+      ],
+      [
+        "CRIT Rate (%)",
+        "Main Stat"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Sub Stats"
+      ],
+      [
+        "Armor",
+        "Artifact Slot Main Stats Table (table)"
+      ],
+      [
+        "CRIT DMG",
+        "Engine Slot"
+      ],
+      [
+        "Energy Core Slot",
+        "HP Regen"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Version V1.0"
+      ],
+      [
+        "Fusion System",
+        "Sub Stats"
+      ],
+      [
+        "ATK",
+        "Artifact Slot Main Stats Table (table)"
+      ],
+      [
+        "Energy Core",
+        "HP Regen"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Drop Rate"
+      ],
+      [
+        "Armor Slot",
+        "Artifact Slots System"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "HP (%)"
+      ],
+      [
+        "Kent",
+        "Version V1.0"
+      ],
+      [
+        "ATK",
+        "Artifact Slots Overview Table (table)"
+      ],
+      [
+        "MOVE SPD (%)",
+        "Sub Stats"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "SHIELD (Points)"
+      ],
+      [
+        "Artifact Stat Table",
+        "Tank Wars"
+      ],
+      [
+        "Artifact Set System",
+        "Specter Set"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "MOV SPD"
+      ],
+      [
+        "Artifact System",
+        "Energy Core"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Energy Core Slot"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Kent"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "SHIELD Regen (Points/S)"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Sub-Stat"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Main Stat"
+      ],
+      [
+        "Artifact System",
+        "Tank Wars"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Skill Countdown"
+      ],
+      [
+        "CPU Slot",
+        "Skill Power"
+      ],
+      [
+        "Artifact System",
+        "Guardian Set"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "CRIT DMG"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "CRIT DMG"
+      ],
+      [
+        "Artifact System",
+        "Sub-Stat"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "FIRE RATE"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "S6 Mon De Kich Hoat"
+      ],
+      [
+        "Artifact System",
+        "Balance Preservation"
+      ],
+      [
+        "Armor Slot",
+        "Artifact Slots Overview Table (table)"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Artifact Slots System"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Artifact System"
+      ],
+      [
+        "HP Regen (Points/S)",
+        "Sub Stats"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Artifact Stat Table"
+      ],
+      [
+        "Artifact Set System",
+        "Artifact Set System Breakdown (table)"
+      ],
+      [
+        "Artifact System",
+        "Overdrive Set"
+      ],
+      [
+        "Hieu Ung",
+        "Overdrive Set"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Energy Core"
+      ],
+      [
+        "Artifact Slots System",
+        "Energy Core Slot"
+      ],
+      [
+        "Color",
+        "Epic"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Skill Cooldown"
+      ],
+      [
+        "Energy Core",
+        "Skill Cooldown Reduction"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Pulse Set"
+      ],
+      [
+        "Artifact Set System",
+        "Meta-Evolution"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Ten B"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Hieu Ung"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Guardian Set"
+      ],
+      [
+        "Artifact System",
+        "Weapon Slot"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Players"
+      ],
+      [
+        "CRIT DMG",
+        "Engine"
+      ],
+      [
+        "Armor",
+        "Artifact System"
+      ],
+      [
+        "Epic",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact System",
+        "CPU Slot"
+      ],
+      [
+        "SHIELD Regen (Points/S)",
+        "Sub Stats"
+      ],
+      [
+        "Artifact Set System",
+        "Tank Wars"
+      ],
+      [
+        "Approval Mechanism",
+        "Artifact System Version Control Table (table)"
+      ],
+      [
+        "Artifact System",
+        "Players"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Epic"
+      ],
+      [
+        "Approval Mechanism",
+        "Version V1.0"
+      ],
+      [
+        "Artifact Set System",
+        "Guardian Set"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Engine Slot"
+      ],
+      [
+        "Artifact System",
+        "CPU"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "HP"
+      ],
+      [
+        "Artifact Stat Table",
+        "Perfect Stat Roll"
+      ],
+      [
+        "CRIT DMG (%)",
+        "Main Stat"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "MOVE SPD (%)"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Artifact System"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Legendary"
+      ],
+      [
+        "ATK",
+        "Weapon Slot"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Artifact System"
+      ],
+      [
+        "CPU",
+        "CRIT Rate"
+      ],
+      [
+        "Artifact System",
+        "Epic"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "HP Regen"
+      ],
+      [
+        "Artifact System",
+        "Weapon"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Taofile"
+      ],
+      [
+        "Artifact Set System",
+        "Overdrive Set"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Nova Set"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "HP Regen"
+      ],
+      [
+        "Artifact System",
+        "Legendary"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Weapon Slot"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Tank Wars"
+      ],
+      [
+        "Artifact System",
+        "Perfect Stat Roll"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Perfect Stat Roll"
+      ],
+      [
+        "Armor Slot",
+        "HP"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Controlled Randomness"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "CPU"
+      ],
+      [
+        "Armor Slot",
+        "Artifact System"
+      ],
+      [
+        "ATK",
+        "Weapon"
+      ],
+      [
+        "Artifact Slots System",
+        "Engine Slot"
+      ],
+      [
+        "Drop Rate",
+        "Epic"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Controlled Randomness"
+      ],
+      [
+        "ATK (%)",
+        "Artifact Stat Categories Overview (table)"
+      ],
+      [
+        "Artifact System",
+        "Engine"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Weapon"
+      ],
+      [
+        "Color",
+        "Rare"
+      ],
+      [
+        "Drop Rate",
+        "Legendary"
+      ],
+      [
+        "Color",
+        "Legendary"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "Artifact System",
+        "Artifact System Version Control Table (table)"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "Tank Wars"
+      ],
+      [
+        "Artifact System",
+        "Version V1.0"
+      ],
+      [
+        "Armor",
+        "HP"
+      ],
+      [
+        "HP (%)",
+        "Main Stat"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "SHIELD Regen"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Perfect Stat Roll"
+      ],
+      [
+        "Artifact Slots System",
+        "Weapon Slot"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "CRIT DMG (%)"
+      ],
+      [
+        "Artifact System",
+        "Common"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "SHIELD Regen"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Specter Set"
+      ],
+      [
+        "Artifact System Version Control Table (table)",
+        "Long-Term Player Engagement"
+      ],
+      [
+        "Hieu Ung",
+        "Pulse Set"
+      ],
+      [
+        ".Tomato",
+        "Artifact System Version Control Table (table)"
+      ],
+      [
+        "Enhancement System",
+        "Sub Stats"
+      ],
+      [
+        ".Tomato",
+        "Version V1.0"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Overdrive Set"
+      ],
+      [
+        "Engine",
+        "MOV SPD"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "HP"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Fusion System"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Rare"
+      ],
+      [
+        "Main Stat",
+        "SHIELD (Points)"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Engine"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "Skill Cooldown Reduction"
+      ],
+      [
+        "Artifact Set System",
+        "Skill Countdown"
+      ],
+      [
+        "CPU Slot",
+        "CRIT Rate"
+      ],
+      [
+        "Artifact System",
+        "Rare"
+      ],
+      [
+        "Artifact Rarity and Enhancement Overview (table)",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact System",
+        "Mythical"
+      ],
+      [
+        "Legendary",
+        "Overclock Bonus"
+      ],
+      [
+        "Mythical",
+        "Overclock Bonus"
+      ],
+      [
+        "Artifact Slots System",
+        "Tank Wars"
+      ],
+      [
+        "Color",
+        "Common"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "SPD"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "CPU Slot"
+      ],
+      [
+        "Artifact Slot Main Stats Table (table)",
+        "CRIT Rate"
+      ],
+      [
+        "Artifact System",
+        "Nova Set"
+      ],
+      [
+        "Hieu Ung",
+        "Nova Set"
+      ],
+      [
+        "Artifact Slots Overview Table (table)",
+        "CRIT Rate"
+      ],
+      [
+        "Artifact Set System Breakdown (table)",
+        "Meta-Evolution"
+      ],
+      [
+        "Artifact Stat Categories Overview (table)",
+        "Enhancement System"
+      ],
+      [
+        "Artifact Set System",
+        "Pulse Set"
+      ]
+    ],
+    "count": 191,
+    "create_time": 1764130363,
+    "update_time": 1764130363,
+    "_id": "progression_module_tank_wars_to_ng_quan_artifact_system"
+  },
+  "tank_war_user_profile_design": {
+    "relation_pairs": [
+      [
+        "Rollid",
+        "Version V1.1"
+      ],
+      [
+        "Caption",
+        "descriptive name for this table (table)"
+      ],
+      [
+        "Changing Username",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Section 6 (Rủi Ro)",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Footnotes",
+        "descriptive name for this table (table)"
+      ],
+      [
+        "RoleID",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "P Phucth12",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Tabular Data",
+        "User Profile Interactions"
+      ],
+      [
+        "Changing Avatar",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Approval Process",
+        "Tank War User Profile Design"
+      ],
+      [
+        "Table Analysis",
+        "descriptive name for this table (table)"
+      ],
+      [
+        "Avatar",
+        "Changing Username"
+      ],
+      [
+        "PlayerName",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "RoleID",
+        "User Profile Design"
+      ],
+      [
+        "Inappropriate Language Usage",
+        "Risk Mitigation Strategies"
+      ],
+      [
+        "Tank War User Profile Design",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Avatar",
+        "User Profile Design"
+      ],
+      [
+        "User Profile Design",
+        "Visibility Rule"
+      ],
+      [
+        "Tank War User Profile Version Control Table (table)",
+        "Version V1.2"
+      ],
+      [
+        "Caption",
+        "Table Analysis"
+      ],
+      [
+        "Tank War",
+        "Tank War User Profile Design"
+      ],
+      [
+        "User Profile Components Table (table)",
+        "User Profile Design"
+      ],
+      [
+        "Footnotes",
+        "Table Analysis"
+      ],
+      [
+        "Tank War User Profile Design",
+        "Version V1.0"
+      ],
+      [
+        "System Responses",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Family",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Password Section",
+        "Version V1.1"
+      ],
+      [
+        "Risk Management",
+        "User Profile Design"
+      ],
+      [
+        "Tank War User Profile Version Control Table (table)",
+        "Version V1.0"
+      ],
+      [
+        "PlayerName",
+        "User Profile Design"
+      ],
+      [
+        "Approval Process",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Gold/Diamond",
+        "Version V1.1"
+      ],
+      [
+        "Avatar",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Limit Value",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "ELO & RANK SYSTEM DESIGN",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Tank War",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Tabular Data",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Gold",
+        "User Profile Design"
+      ],
+      [
+        "User Profile Components and Interaction Table (table)",
+        "User Profile Design"
+      ],
+      [
+        "Tank War User Profile Design",
+        "Version V1.2"
+      ],
+      [
+        "Avatar",
+        "Visibility Rule"
+      ],
+      [
+        "Player Name",
+        "User Profile Interactions"
+      ],
+      [
+        "Avatar",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Structure",
+        "descriptive name for this table (table)"
+      ],
+      [
+        "Tank War User Profile Version Control Table (table)",
+        "Version V1.1"
+      ],
+      [
+        "Inappropriate Language Usage",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Trophy",
+        "Visibility Rule"
+      ],
+      [
+        "Trophy",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Playername",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Risk Management",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "PlayerName",
+        "Visibility Rule"
+      ],
+      [
+        "Risk Mitigation Strategies",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "PlayerName",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Gold",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Road Gold/Diamond",
+        "Visibility Rule"
+      ],
+      [
+        "Road Gold/Diamond",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Tank War",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Inappropriate Language Usage",
+        "System Responses"
+      ],
+      [
+        "Road Gold/Diamond",
+        "User Profile Design"
+      ],
+      [
+        "Structure",
+        "Table Analysis"
+      ],
+      [
+        "User Profile Components and Interaction Table (table)",
+        "Visibility Rule"
+      ],
+      [
+        "Frequency Statistics",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Interaction Method",
+        "User Profile Design"
+      ],
+      [
+        "Tank War User Profile Design",
+        "Version V1.1"
+      ],
+      [
+        "Frequency Statistics",
+        "Tabular Data"
+      ],
+      [
+        "Tank War",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Image Path",
+        "descriptive name for this table (table)"
+      ],
+      [
+        "Player Experience",
+        "Trophy Road"
+      ],
+      [
+        "Player Name",
+        "User Profile Risk Analysis Table (table)"
+      ],
+      [
+        "Playername",
+        "Version V1.1"
+      ],
+      [
+        "Trophy Road",
+        "User Profile Design"
+      ],
+      [
+        "Privacy",
+        "User Profile Design"
+      ],
+      [
+        "Tank War",
+        "User Profile Design"
+      ],
+      [
+        "Section 6 (Rủi Ro)",
+        "User Profile Interactions"
+      ],
+      [
+        "Rank (ELO)",
+        "Visibility Rule"
+      ],
+      [
+        "Rank (ELO)",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Diamond",
+        "User Profile Design"
+      ],
+      [
+        "Changing Avatar",
+        "Rank (ELO)"
+      ],
+      [
+        "Password Section",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Rollid",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "Main Menu",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Trophy Road",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Risk Mitigation Strategies",
+        "Section 6 (Rủi Ro)"
+      ],
+      [
+        "Interaction Method",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Main Menu",
+        "PlayerName"
+      ],
+      [
+        "Rank(ELO)",
+        "User Profile Design"
+      ],
+      [
+        "Image Path",
+        "Table Analysis"
+      ],
+      [
+        "Gold/Diamond",
+        "Tank War User Profile Version Control Table (table)"
+      ],
+      [
+        "P Phucth12",
+        "Tank War User Profile Design"
+      ],
+      [
+        "Privacy",
+        "Trophy"
+      ],
+      [
+        "Diamond",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "Privacy",
+        "User Profile Components and Interaction Table (table)"
+      ],
+      [
+        "Diamond",
+        "Gold"
+      ],
+      [
+        "ELO & RANK SYSTEM DESIGN",
+        "Rank(ELO)"
+      ],
+      [
+        "Rank(ELO)",
+        "User Profile Components Table (table)"
+      ],
+      [
+        "User Profile Interactions",
+        "User Profile Risk Analysis Table (table)"
+      ]
+    ],
+    "count": 96,
+    "create_time": 1764130607,
+    "update_time": 1764130607,
+    "_id": "tank_war_user_profile_design"
+  },
+  "world_tank_war_camera_logic_system": {
+    "relation_pairs": [
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Camera Logic System"
+      ],
+      [
+        "Virtual Camera",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Camera Behavior",
+        "Camera and Spectator Functionality Overview (table)"
+      ],
+      [
+        "Camera Logic System",
+        "Yeu Tó"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Fade Camera Occluder"
+      ],
+      [
+        "Camera Logic System",
+        "Top-Down Tilted View"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Image Path"
+      ],
+      [
+        "Hoan Thanh File",
+        "Version V1.0"
+      ],
+      [
+        "World Tank War Camera Logic System",
+        "Y-Axis Alignment"
+      ],
+      [
+        "Auto-Rotation",
+        "Camera Behavior"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Game Modes Supported"
+      ],
+      [
+        "Spectator Mode",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Camera Height",
+        "Camera Logic Parameters for Tank War (table)"
+      ],
+      [
+        "Spectator Mode",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Occluding Object",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Occlusion Handling"
+      ],
+      [
+        "5v5 Mode",
+        "Spectator Mode"
+      ],
+      [
+        "Approval Status",
+        "Version V1.1"
+      ],
+      [
+        "Camera Logic System",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Logic System",
+        "Dynamic Camera Direction"
+      ],
+      [
+        "Camera Logic System",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Camera Behavior",
+        "Spectator Mode"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Table Analysis"
+      ],
+      [
+        "Fixed Tilt Angle",
+        "Virtual Camera"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Version V1.0"
+      ],
+      [
+        "Next/Prev Controls",
+        "Spectator Mode"
+      ],
+      [
+        "Gameplay Experience",
+        "Player"
+      ],
+      [
+        "Next/Prev Controls",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Field Of View (FOV)"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Hành Vi Camera Trong Trận"
+      ],
+      [
+        "Format Lai File",
+        "Version V1.1"
+      ],
+      [
+        "5v5 Mode",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Opacity Specification for Fade Camera Occluder (discarded)",
+        "Player"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Fade Camera Occluder"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Tank War"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Mo Ta"
+      ],
+      [
+        "Spectator Mode",
+        "Tank War Game"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Kent"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Tank"
+      ],
+      [
+        "Occluding Object",
+        "Opacity"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Player States"
+      ],
+      [
+        "Image Path",
+        "Spectator Mode"
+      ],
+      [
+        "Opacity",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Image Path",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Discarded Content",
+        "Fade Camera Occluder"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Version V1.1"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Fade Camera Occluder"
+      ],
+      [
+        "Activation Conditions",
+        "Camera and Spectator Functionality Overview (table)"
+      ],
+      [
+        "Camera Logic System",
+        "Hành Vi Camera Trong Trận"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Spectator Mode"
+      ],
+      [
+        "Damping",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Spectator Mode"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Player Experience"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Game Context"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Gameplay Experience"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Virtual Camera"
+      ],
+      [
+        "Camera Behavior",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Damping",
+        "Virtual Camera"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Spectator Mode"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "MOBA-Style Gameplay"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Góc Nhìn Chính Trong Trận Đấu"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Perspective Projection"
+      ],
+      [
+        "Camera Angles",
+        "Camera and Spectator Functionality Overview (table)"
+      ],
+      [
+        "Camera Height",
+        "Camera Logic System"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "QuocTA"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Damping"
+      ],
+      [
+        "Camera Logic System",
+        "Camera Logic System Version History (table)"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Tank War"
+      ],
+      [
+        "Camera Behavior",
+        "Camera Behavior States Table (table)"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Tactical Overhead View"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Yeu Tó"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Top-Down Tilted View"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Edge Panning"
+      ],
+      [
+        "Spectator Mode Functionality Breakdown (table)",
+        "Tank War Game"
+      ],
+      [
+        "Mo Ta",
+        "Yeu Tó"
+      ],
+      [
+        "Kent",
+        "Version V1.1"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Camera Behavior",
+        "Tank"
+      ],
+      [
+        "Camera Logic System",
+        "Field Of View (FOV)"
+      ],
+      [
+        "Phucth12",
+        "Version V1.1"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Occluding Object"
+      ],
+      [
+        "Camera Settings",
+        "Game Modes Supported"
+      ],
+      [
+        "Camera Angles",
+        "Player Experience"
+      ],
+      [
+        "Player",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Phucth12"
+      ],
+      [
+        "Camera Logic System",
+        "Tank War"
+      ],
+      [
+        "Player",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Activation Conditions",
+        "Camera Functionality"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Opacity"
+      ],
+      [
+        "Fade Camera Occluder",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Opacity Specification for Fade Camera Occluder (discarded)",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Logic Parameters for Tank War (table)",
+        "Dynamic Camera Direction"
+      ],
+      [
+        "Approval Status",
+        "Version V1.0"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Hoan Thanh File"
+      ],
+      [
+        "Gameplay Experience",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Lock-On Cameras",
+        "Spectator Mode"
+      ],
+      [
+        "Tactical Overhead View",
+        "World Tank War Camera Logic System"
+      ],
+      [
+        "Lock-On Cameras",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Camera Logic System",
+        "Fade Camera Occluder"
+      ],
+      [
+        "Camera Behavior",
+        "Gameplay Experience"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Y-Axis Alignment"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Fixed Tilt Angle"
+      ],
+      [
+        "Fade Camera Occluder",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Discarded Content",
+        "Opacity Specification for Fade Camera Occluder (discarded)"
+      ],
+      [
+        "Camera Logic Implementation Guidelines (table)",
+        "Tank War Game"
+      ],
+      [
+        "Camera and Spectator Functionality Overview (table)",
+        "Occlusion Handling"
+      ],
+      [
+        "QuocTA",
+        "Version V1.0"
+      ],
+      [
+        "Camera Behavior States Table (table)",
+        "Spectator Mode"
+      ],
+      [
+        "Image Path",
+        "Tank War"
+      ],
+      [
+        "Game Context",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Behavior",
+        "Occlusion Handling"
+      ],
+      [
+        "Camera Logic System",
+        "Góc Nhìn Chính Trong Trận Đấu"
+      ],
+      [
+        "Camera Logic System",
+        "MOBA-Style Gameplay"
+      ],
+      [
+        "Camera Behavior",
+        "Player States"
+      ],
+      [
+        "Approval Status",
+        "Camera Logic System Version History (table)"
+      ],
+      [
+        "Camera Logic System",
+        "Perspective Projection"
+      ],
+      [
+        "Free Cam",
+        "Spectator Mode"
+      ],
+      [
+        "Camera Logic System Version History (table)",
+        "Format Lai File"
+      ],
+      [
+        "Camera Behavior",
+        "Edge Panning"
+      ],
+      [
+        "Free Cam",
+        "Spectator Mode Functionality Breakdown (table)"
+      ],
+      [
+        "Auto-Rotation",
+        "Camera Behavior States Table (table)"
+      ],
+      [
+        "Camera Behavior",
+        "Table Analysis"
+      ]
+    ],
+    "count": 125,
+    "create_time": 1764130872,
+    "update_time": 1764130872,
+    "_id": "world_tank_war_camera_logic_system"
+  },
+  "world_tank_war_map_design_-_outpost_breaker": {
+    "relation_pairs": [
+      [
+        "Base Capturing Game Mode",
+        "Table"
+      ],
+      [
+        "Outpost C",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "CZ",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "Combat Frequency",
+        "Combat Frequency Analysis by Map Type (table)"
+      ],
+      [
+        "BASE",
+        "Outpost Breaker"
+      ],
+      [
+        "Gameplay Behavior",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "Base Area",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Loai Map",
+        "Note"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Yéu Tδ Anh Huäng"
+      ],
+      [
+        "Combat Zones",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Design Philosophy"
+      ],
+      [
+        "CHK",
+        "Tactical Depth"
+      ],
+      [
+        "Chokepoints",
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)"
+      ],
+      [
+        "Outpost B",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Combat Flow",
+        "Outpost Zones"
+      ],
+      [
+        "Flanking Strategy",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "Expected Kill Counts by Map Type (table)",
+        "Gameflow"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Outpost B"
+      ],
+      [
+        "Combat Flow",
+        "Map Design"
+      ],
+      [
+        "Chokepoint",
+        "Outpost A"
+      ],
+      [
+        "Desert Warfare",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Section 6.4"
+      ],
+      [
+        "Map Design Philosophy",
+        "Outpost Breaker"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Expected Combat Ratios"
+      ],
+      [
+        "Combat Zones",
+        "Discarded Map Layout Header (discarded)"
+      ],
+      [
+        "5v5 Map",
+        "Combat Frequency"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Table Analysis"
+      ],
+      [
+        "Base DEF",
+        "Outpost B"
+      ],
+      [
+        "Cover Elements",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Tank Size",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Engagement Ratios",
+        "Outpost B"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Outpost C"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Outpost C"
+      ],
+      [
+        "Khu Vực",
+        "Tỉ Lệ Phân Bổ"
+      ],
+      [
+        "Outpost Breaker Strategic Metrics Table (table)",
+        "Outpost Placement"
+      ],
+      [
+        "Outpost Combat Zone Metrics (table)",
+        "Structure"
+      ],
+      [
+        "Map Design",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Design Philosophy",
+        "Gameplay Dynamics"
+      ],
+      [
+        "1v1 Combat",
+        "Combat Engagement Analysis Table (table)"
+      ],
+      [
+        "Outpost C",
+        "Terrain Complexity"
+      ],
+      [
+        "Easy To Pick Up Hard To Master",
+        "Gameplay Phases"
+      ],
+      [
+        "Image Path",
+        "Table Analysis"
+      ],
+      [
+        "Outpost A",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Mo Ta",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Version History",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "DEF",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "3v3 Map",
+        "Expected Kill Counts by Map Type (table)"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Outpost A"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Influencing Factors"
+      ],
+      [
+        "5v5 Map",
+        "Combat Frequency Analysis by Map Type (table)"
+      ],
+      [
+        "Combat Zone Buffers",
+        "Outpost B"
+      ],
+      [
+        "Dynamic Map Elements",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Expected Kill Count",
+        "Expected Kill Counts by Map Type (table)"
+      ],
+      [
+        "Map Element Characteristics Table (table)",
+        "Outpost Breaker"
+      ],
+      [
+        "Combat Activity",
+        "Outpost C"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Outposts"
+      ],
+      [
+        "Map Objects",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Combat Dynamics",
+        "Map Design"
+      ],
+      [
+        "Base Capturing Game Mode",
+        "Time To Capture Outpost"
+      ],
+      [
+        "Desert Environment",
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)"
+      ],
+      [
+        "Map Design",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Base DEF",
+        "Outpost A"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Terrain Complexity"
+      ],
+      [
+        "Khu Vực",
+        "Map Area Distribution and Functionality (table)"
+      ],
+      [
+        "Engagement Ratios",
+        "Outpost A"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Combat Engagement Types"
+      ],
+      [
+        "Structure",
+        "Table Analysis"
+      ],
+      [
+        "CZ",
+        "Gameplay Behavior"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Outpost Zones",
+        "PATHs"
+      ],
+      [
+        "Layout của Map Desert",
+        "Visual Representation"
+      ],
+      [
+        "Combat Flow",
+        "Map Area Distribution and Functionality (table)"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Map Design"
+      ],
+      [
+        "Gameplay Phases",
+        "Yéu Tδ Anh Huäng"
+      ],
+      [
+        "Combat Zone Buffer",
+        "Outpost C"
+      ],
+      [
+        "Combat Zones",
+        "Outpost C"
+      ],
+      [
+        "Easy to Pick Up, Hard to Master",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "World Tank War Map Design - Outpost Breaker",
+        "phucth12"
+      ],
+      [
+        "Design Philosophy",
+        "Map Desert"
+      ],
+      [
+        "Combat Zone Buffers",
+        "Outpost A"
+      ],
+      [
+        "Desert Map",
+        "Outpost C"
+      ],
+      [
+        "PATH",
+        "Tactical Depth"
+      ],
+      [
+        "Loai Map",
+        "Tän Suat Giaotranh"
+      ],
+      [
+        "Ngay",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Combat Flow",
+        "Outpost Placement"
+      ],
+      [
+        "ATK",
+        "Outpost Breaker"
+      ],
+      [
+        "BASE",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "5v5 Map",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Earth Tone Palette",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Zone Buffer",
+        "Map Design"
+      ],
+      [
+        "Combat Engagement Types",
+        "Combat Frequency"
+      ],
+      [
+        "Left Lane",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Teamfight"
+      ],
+      [
+        "Phienban",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Outpost Breaker"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Right Lane"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Editorial Decision"
+      ],
+      [
+        "Gameflow",
+        "Outpost C"
+      ],
+      [
+        "Map Design Philosophy",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "ATK",
+        "Outpost C"
+      ],
+      [
+        "Outpost B",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "3v3 Map",
+        "Combat Frequency"
+      ],
+      [
+        "Map Design",
+        "Outpost C"
+      ],
+      [
+        "Base Area",
+        "Moving Forge"
+      ],
+      [
+        "Footnotes",
+        "Table Analysis"
+      ],
+      [
+        "Flanking Strategy",
+        "PATH"
+      ],
+      [
+        "Obstacles",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Visual Representation"
+      ],
+      [
+        "Outpost Distribution and Combat Zone Analysis (table)",
+        "Table"
+      ],
+      [
+        "Map Element Characteristics Table (table)",
+        "PATH"
+      ],
+      [
+        "Expected Combat Ratios",
+        "Section 6.1"
+      ],
+      [
+        "Duyet?",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Movement To Outpost Phase"
+      ],
+      [
+        "Outpost C",
+        "Teamfight"
+      ],
+      [
+        "Chokepoints",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Outpost Zones"
+      ],
+      [
+        "CHK",
+        "Outpost Breaker"
+      ],
+      [
+        "Outpost A",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "DEF Base",
+        "Outpost C"
+      ],
+      [
+        "5v5 Map",
+        "Expected Kill Count"
+      ],
+      [
+        "Table Analysis",
+        "World Tank War Map Design"
+      ],
+      [
+        "2v1 Combat",
+        "Combat Engagement Analysis Table (table)"
+      ],
+      [
+        "Version History of [World] [Tank War] Map Design Document (table)",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Outpost Breaker Strategic Metrics Table (table)",
+        "Tactical Advantage"
+      ],
+      [
+        "Expected Kill Counts by Map Type (table)",
+        "Outpost A"
+      ],
+      [
+        "Chokepoints",
+        "Discarded Map Layout Header (discarded)"
+      ],
+      [
+        "1v1 Combat",
+        "Scout Tank"
+      ],
+      [
+        "Base DEF",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Engagement Ratios",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Philosophy and Object Information",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Combat Frequency",
+        "Map Design"
+      ],
+      [
+        "Gameplay Parameters",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Chức Năng",
+        "Khu Vực"
+      ],
+      [
+        "Right Lane",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Spawn Areas",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Outpost Breaker"
+      ],
+      [
+        "Gameplay Phases",
+        "Thαi Gian Dukien"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Tỉ Lệ Phân Bổ"
+      ],
+      [
+        "Combat Engagement Types",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Combat Frequency"
+      ],
+      [
+        "3v3 Map",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Ngudi Viet",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Desert Environment",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Footnotes",
+        "Outpost Combat Zone Metrics (table)"
+      ],
+      [
+        "Combat Zone Buffers",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Outpost C",
+        "Tactical Advantage"
+      ],
+      [
+        "Base Capturing Game Mode",
+        "Map Design"
+      ],
+      [
+        "Chokepoint",
+        "Outpost C"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Gameplay Dynamics"
+      ],
+      [
+        "Movement To Outpost Phase",
+        "Tank Speed"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Moving Forge"
+      ],
+      [
+        "Combat Engagement",
+        "Outpost C"
+      ],
+      [
+        "Combat Zones",
+        "Outpost A"
+      ],
+      [
+        "Design Philosophy",
+        "Discarded Map Layout Header (discarded)"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Movement To Outpost Phase"
+      ],
+      [
+        "Outpost Distribution and Combat Zone Analysis (table)",
+        "Time To Capture Outpost"
+      ],
+      [
+        "2v1 Combat",
+        "Teamfight"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Outpost B"
+      ],
+      [
+        "Map Element Characteristics Table (table)",
+        "Tactical Depth"
+      ],
+      [
+        "Tank Size",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Map Spatial Design"
+      ],
+      [
+        "Gameplay Phases",
+        "Mota"
+      ],
+      [
+        "Caption",
+        "Table Analysis"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Tank War Map Design"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Terrain"
+      ],
+      [
+        "Combat Ratio",
+        "Map Design"
+      ],
+      [
+        "Gameplay Phases",
+        "Gameplay Phases Breakdown (table)"
+      ],
+      [
+        "Outpost Combat Zone Metrics (table)",
+        "Table Analysis"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Outpost C"
+      ],
+      [
+        "Desert Warfare",
+        "Game Design"
+      ],
+      [
+        "Cover",
+        "Discarded Map Layout Header (discarded)"
+      ],
+      [
+        "Game Design",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Outpost B",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Layout của Map Desert"
+      ],
+      [
+        "Capture Time",
+        "Design Philosophy"
+      ],
+      [
+        "Image Path",
+        "Outpost Combat Zone Metrics (table)"
+      ],
+      [
+        "Outpost",
+        "Tank War Map Design"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Thαi Gian Dukien"
+      ],
+      [
+        "3v3 Map",
+        "Expected Kill Count"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "Respawn Areas"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Outpost A"
+      ],
+      [
+        "CHK",
+        "Map Element Characteristics Table (table)"
+      ],
+      [
+        "Map Objects",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Base DEF",
+        "Outpost C"
+      ],
+      [
+        "Engagement Ratios",
+        "Outpost C"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "DEF Base"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Outpost B"
+      ],
+      [
+        "Gameplay Phases",
+        "Giai Doan"
+      ],
+      [
+        "5v5 Map",
+        "Expected Kill Counts by Map Type (table)"
+      ],
+      [
+        "Expected Kill Counts by Map Type (table)",
+        "Outpost B"
+      ],
+      [
+        "Combat Activity",
+        "Desert Map Outpost Analysis (table)"
+      ],
+      [
+        "OUT",
+        "Outpost Breaker"
+      ],
+      [
+        "Flanking Routes",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "World Tank War Map Design"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Outpost"
+      ],
+      [
+        "Chokepoints",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Outpost A",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "DEF Base",
+        "Outpost A"
+      ],
+      [
+        "Combat Zone Buffers",
+        "Outpost C"
+      ],
+      [
+        "Easy to Pick Up, Hard to Master",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Tank Combat Scenario"
+      ],
+      [
+        "Combat Activity",
+        "Outpost B"
+      ],
+      [
+        "Caption",
+        "Outpost Combat Zone Metrics (table)"
+      ],
+      [
+        "Version History of [World] [Tank War] Map Design Document (table)",
+        "phucth12"
+      ],
+      [
+        "3v3 Map",
+        "Combat Frequency Analysis by Map Type (table)"
+      ],
+      [
+        "BASE",
+        "Spawn-Camping"
+      ],
+      [
+        "Ngay",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Mota"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Outpost A"
+      ],
+      [
+        "Outpost Breaker",
+        "Outpost Zones"
+      ],
+      [
+        "Capture Time",
+        "Desert Map Outpost Analysis (table)"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Outpost A"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Flanking Routes"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Influencing Factors"
+      ],
+      [
+        "Editorial Decision",
+        "Layout của Map Desert"
+      ],
+      [
+        "Mo Ta",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Chức Năng",
+        "Tỉ Lệ Phân Bổ"
+      ],
+      [
+        "Desert Map",
+        "Desert Map Outpost Analysis (table)"
+      ],
+      [
+        "Loai Map",
+        "Outpost Breaker"
+      ],
+      [
+        "Combat Zones",
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)"
+      ],
+      [
+        "Combat Zone Buffer",
+        "Outpost B"
+      ],
+      [
+        "Combat Zones",
+        "Outpost B"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Outpost Placement"
+      ],
+      [
+        "Dynamic Map Elements",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Desert Map",
+        "Outpost B"
+      ],
+      [
+        "Combat Dynamics",
+        "Combat Engagement Analysis Table (table)"
+      ],
+      [
+        "Combat Activity",
+        "Outpost A"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Section 6.1"
+      ],
+      [
+        "Base Area",
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Note"
+      ],
+      [
+        "Outpost C",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Giai Doan"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Loai Map"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Lanes"
+      ],
+      [
+        "Combat Engagement",
+        "Outpost A"
+      ],
+      [
+        "Obstacles",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Layout của Map Desert",
+        "Map Desert"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Scout Tank"
+      ],
+      [
+        "Game Balance",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Respawn Phase"
+      ],
+      [
+        "Movement To Outpost Phase",
+        "Respawn Phase"
+      ],
+      [
+        "Combat Intensity",
+        "Terrain Complexity"
+      ],
+      [
+        "Ngu8ireview",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Duyet?",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Zone Buffer",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Chức Năng",
+        "Map Area Distribution and Functionality (table)"
+      ],
+      [
+        "Gameflow",
+        "Outpost B"
+      ],
+      [
+        "ATK",
+        "Outpost B"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Tank Speed"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Lanes"
+      ],
+      [
+        "Map Element Characteristics Table (table)",
+        "Spawn-Camping"
+      ],
+      [
+        "Outpost Breaker",
+        "PATH"
+      ],
+      [
+        "Combat Zone Buffer",
+        "Outpost A"
+      ],
+      [
+        "CZ",
+        "Outpost Breaker"
+      ],
+      [
+        "Gameplay Phases Breakdown (table)",
+        "Team Composition"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Flank Attack"
+      ],
+      [
+        "Expected Kill Counts by Map Type (table)",
+        "Outpost C"
+      ],
+      [
+        "Easy To Pick Up Hard To Master",
+        "Gameplay Phases Breakdown (table)"
+      ],
+      [
+        "Cover Elements",
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Outposts"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Gameplay Phases Breakdown (table)"
+      ],
+      [
+        "Respawn Areas",
+        "World Tank War Map Design"
+      ],
+      [
+        "Tank Combat Scenario",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Earth Tone Palette"
+      ],
+      [
+        "Desert Map",
+        "Outpost A"
+      ],
+      [
+        "Cover",
+        "Gameplay Mechanics"
+      ],
+      [
+        "Version History",
+        "phucth12"
+      ],
+      [
+        "DEF",
+        "Outpost Breaker"
+      ],
+      [
+        "Philosophy and Object Information",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Outpost C"
+      ],
+      [
+        "Outpost Breaker Strategic Metrics Table (table)",
+        "Outpost C"
+      ],
+      [
+        "Phienban",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "ATK",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Map Design",
+        "Outpost Placement"
+      ],
+      [
+        "Gameplay Mechanics",
+        "Map Desert"
+      ],
+      [
+        "DEF Base",
+        "Outpost B"
+      ],
+      [
+        "Gameflow",
+        "Outpost A"
+      ],
+      [
+        "ATK",
+        "Outpost A"
+      ],
+      [
+        "Map Area Distribution and Functionality (table)",
+        "PATHs"
+      ],
+      [
+        "Combat Strategies",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Outpost Breaker",
+        "Outpost Breaker Strategic Metrics Table (table)"
+      ],
+      [
+        "Outpost Zones",
+        "Respawn Areas"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "Map Design"
+      ],
+      [
+        "Expected Kill Counts by Map Type (table)",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Discarded Map Layout Header (discarded)",
+        "Map Desert"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Outpost B"
+      ],
+      [
+        "Base Capturing Game Mode",
+        "Outpost Distribution and Combat Zone Analysis (table)"
+      ],
+      [
+        "Combat Engagement Analysis Table (table)",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "Combat Engagement",
+        "Expected Kill Counts by Map Type (table)"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Team Composition"
+      ],
+      [
+        "Chokepoint",
+        "Desert Map Outpost Analysis (table)"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Combat Ratio"
+      ],
+      [
+        "Expected Kill Count",
+        "Gameflow"
+      ],
+      [
+        "Outpost Zones",
+        "World Tank War Map Design"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Game Balance"
+      ],
+      [
+        "Combat Frequency Analysis by Map Type (table)",
+        "Tän Suat Giaotranh"
+      ],
+      [
+        "Desert Tank Warfare Map Design - Outpost Breaker (image)",
+        "Left Lane"
+      ],
+      [
+        "Aggressive Playstyle",
+        "Desert Map Outpost Analysis (table)"
+      ],
+      [
+        "Combat For Outpost Capture Phase",
+        "Terrain"
+      ],
+      [
+        "Combat Flow",
+        "Combat Frequency Analysis by Map Type (table)"
+      ],
+      [
+        "Combat Engagement",
+        "Outpost B"
+      ],
+      [
+        "OUT",
+        "Tactical Depth"
+      ],
+      [
+        "Expected Combat Ratios",
+        "Section 6.4"
+      ],
+      [
+        "Gameplay Parameters",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Map Element Characteristics Table (table)",
+        "OUT"
+      ],
+      [
+        "Aggressive Playstyle",
+        "Outpost B"
+      ],
+      [
+        "Spawn Areas",
+        "Version History of [World] [Tank War] Map Design Document (table)"
+      ],
+      [
+        "Desert Map Outpost Analysis (table)",
+        "Outpost C"
+      ],
+      [
+        "Combat Strategies",
+        "World Tank War Map Design - Outpost Breaker"
+      ],
+      [
+        "PATHs",
+        "World Tank War Map Design"
+      ]
+    ],
+    "count": 311,
+    "create_time": 1764138004,
+    "update_time": 1764138004,
+    "_id": "world_tank_war_map_design_-_outpost_breaker"
   }
 }

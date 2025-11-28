@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Gradient1
+  m_Shader: {fileID: 4800000, guid: f22ef6b3856058d4d8f89ebab438a47c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 8108b0714a9bdb8429ccd37ffa266c89, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BlendMode: 0
+    - _InvertMainTexAlpha: 0
+    - _MainEmission: 1
+    - _MainTexFlipH: 0
+    - _MainTexFlipV: 0
+    - _MainTexScrollToggle: 0
+    - _MainWrapMode: 0
+    - _MaskEmission: 1
+    - _MaskFollowMain: 1
+    - _MaskStrength: 1
+    - _MaskTexScrollToggle: 0
+    - _MaskWrapMode: 0
+    - _NoiseScale: 1
+    - _NoiseSpeed: 1
+    - _NoiseStrength: 0.2
+    - _NoiseToggle: 0
+    - _UseMainTexAlpha: 0
+    m_Colors:
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _MainTexScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _MainTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MaskColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MaskOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskTexScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
+    - _MaskTiling: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

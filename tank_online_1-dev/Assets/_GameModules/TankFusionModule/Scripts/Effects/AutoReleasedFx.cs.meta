@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 2860325babe94ce397e09f986f73b460
+timeCreated: 1679904774
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scripts/Tanknarok/Player/Effects/AutoReleasedFx.cs
+  uploadId: 739895

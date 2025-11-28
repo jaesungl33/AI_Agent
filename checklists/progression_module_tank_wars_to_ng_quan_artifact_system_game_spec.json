@@ -1,0 +1,211 @@
+{
+  "doc_id": "progression_module_tank_wars_to_ng_quan_artifact_system",
+  "metadata": {
+    "created_at": "2025-11-26T11:13:27.787566",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "artifact_engine",
+        "name": "Engine Artifact",
+        "category": "DE",
+        "description": "Affects movement speed, reaction, and evasion capabilities.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Main stat options: SPD/CRIT DMG",
+        "source_note": "Artifact Slot System table"
+      },
+      {
+        "id": "artifact_weapon",
+        "name": "Weapon Artifact",
+        "category": "DE",
+        "description": "Related to damage output and firing rate.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Main stat options: ATK/FIRE RATE",
+        "source_note": "Artifact Slot System table"
+      },
+      {
+        "id": "artifact_armor",
+        "name": "Armor Artifact",
+        "category": "DE",
+        "description": "Provides physical defense and resistance to effects.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Main stat options: SHIELD/HP",
+        "source_note": "Artifact Slot System table"
+      },
+      {
+        "id": "artifact_cpu",
+        "name": "CPU Artifact",
+        "category": "DE",
+        "description": "Optimizes combat processing abilities.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Main stat options: CRIT Rate/Skill Power",
+        "source_note": "Artifact Slot System table"
+      },
+      {
+        "id": "artifact_energy_core",
+        "name": "Energy Core Artifact",
+        "category": "DE",
+        "description": "Primary energy source affecting global performance.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Main stat options: HP Regen/SHIELD Regen/Skill Cooldown Reduction",
+        "source_note": "Artifact Slot System table"
+      }
+    ],
+    "systems": [
+      {
+        "id": "artifact_system",
+        "name": "Artifact System",
+        "description": "A high-level progression system allowing players to customize tank power through Tech Parts.",
+        "mechanics": "Players can equip 5 artifacts across fixed slots (Engine, Weapon, Armor, CPU, Energy Core). Artifacts have main stats and randomized sub-stats. Enhancement and fusion systems allow for further customization.",
+        "objectives": "Provide long-term progression, encourage creative builds, maintain balance by contributing 20% of total power.",
+        "related_objects": [
+          "artifact_engine",
+          "artifact_weapon",
+          "artifact_armor",
+          "artifact_cpu",
+          "artifact_energy_core"
+        ],
+        "interactions": [
+          "Enhancement increases artifact level and randomizes sub-stats.",
+          "Fusion combines artifacts for higher rarity."
+        ],
+        "source_note": "Overview section of the Artifact System documentation."
+      },
+      {
+        "id": "set_system",
+        "name": "Set System",
+        "description": "Artifacts are grouped into sets with unique bonuses.",
+        "mechanics": "Equipping multiple pieces from the same set activates bonuses (e.g., 2-piece or 5-piece effects).",
+        "objectives": "Encourage strategic combinations of artifacts for tactical advantages.",
+        "related_objects": [],
+        "interactions": [
+          "Overdrive Set boosts attack after eliminating an enemy.",
+          "Guardian Set provides a shield when HP drops below 30%."
+        ],
+        "source_note": "Artifact Set System table."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "enhancement_rule",
+        "summary": "Artifact enhancement increases level and modifies sub-stats.",
+        "description": "Artifacts can be enhanced from Lv.1 to Lv.20. Each enhancement guarantees success but randomizes sub-stat growth.",
+        "trigger": "Player enhances an artifact.",
+        "effect": "Artifact gains levels and randomized sub-stat improvements.",
+        "related_objects": [
+          "artifact_engine",
+          "artifact_weapon",
+          "artifact_armor",
+          "artifact_cpu",
+          "artifact_energy_core"
+        ],
+        "related_systems": [
+          "artifact_system"
+        ],
+        "source_note": "Enhancement System section."
+      },
+      {
+        "id": "fusion_rule",
+        "summary": "Fusion combines three artifacts of the same rarity into a higher rarity artifact.",
+        "description": "Three artifacts of the same rarity and type can be fused into one artifact of higher rarity. Success rates decrease with rarity.",
+        "trigger": "Player initiates fusion process.",
+        "effect": "Produces a new artifact of higher rarity or returns a random artifact if failed.",
+        "related_objects": [
+          "artifact_engine",
+          "artifact_weapon",
+          "artifact_armor",
+          "artifact_cpu",
+          "artifact_energy_core"
+        ],
+        "related_systems": [
+          "artifact_system"
+        ],
+        "source_note": "Fusion System section."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "progression_requirement",
+        "title": "Long-Term Progression Goals",
+        "description": "Players should aim for perfect stat rolls or Mythic Overclock bonuses as part of their long-term goals.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Players achieve optimal artifact builds over time.",
+        "related_objects": [
+          "artifact_engine",
+          "artifact_weapon",
+          "artifact_armor",
+          "artifact_cpu",
+          "artifact_energy_core"
+        ],
+        "related_systems": [
+          "artifact_system"
+        ],
+        "source_note": "Player Loop & Feeling section."
+      },
+      {
+        "id": "balance_requirement",
+        "title": "Maintain Core Gameplay Balance",
+        "description": "Ensure artifacts contribute no more than 20% of total tank power to avoid overshadowing core gameplay mechanics.",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Artifact system remains balanced and does not disrupt core gameplay.",
+        "related_objects": [
+          "artifact_engine",
+          "artifact_weapon",
+          "artifact_armor",
+          "artifact_cpu",
+          "artifact_energy_core"
+        ],
+        "related_systems": [
+          "artifact_system"
+        ],
+        "source_note": "Overview section."
+      }
+    ]
+  }
+}

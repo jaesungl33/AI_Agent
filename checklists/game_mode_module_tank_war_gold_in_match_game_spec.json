@@ -1,0 +1,175 @@
+{
+  "doc_id": "game_mode_module_tank_war_gold_in_match",
+  "metadata": {
+    "created_at": "2025-11-26T10:41:04.591062",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Player",
+        "category": "OP",
+        "description": "Represents a player in the Tank War game mode. Players earn gold and spend it on stat upgrades.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Players can upgrade stats (HP, Speed, FireRate, Damage) up to Level 10. Limited to 12‒18 total upgrades per match.",
+        "source_note": "Derived from upgrade mechanics and sanity check calculations."
+      },
+      {
+        "id": "obj_002",
+        "name": "Tower",
+        "category": "DE",
+        "description": "A destructible objective that provides gold rewards when destroyed.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": "When destroyed by ATK, grants +40 gold per player. When destroyed by DEF, grants +10% GpS for 15 seconds.",
+        "source_note": "Derived from Objective Gold section."
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Gold Economy System",
+        "description": "Manages gold generation and distribution for players during a match.",
+        "mechanics": "Gold is earned through Gold-per-Second (GpS), Kill Gold, and Objective Gold. Players spend gold on stat upgrades.",
+        "objectives": "Balance ATK/DEF dynamics, prevent snowballing, and encourage strategic decision-making.",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "interactions": [
+          "Players earn GpS based on time and rubber-band mechanics.",
+          "Players earn Kill Gold for defeating enemies.",
+          "Players earn Objective Gold for destroying towers."
+        ],
+        "source_note": "Derived from Gold Sources and Upgrade Cost sections."
+      },
+      {
+        "id": "sys_002",
+        "name": "Upgrade System",
+        "description": "Allows players to enhance their stats using earned gold.",
+        "mechanics": "Each stat has 10 levels with exponentially increasing costs. Players can only afford 12‒18 upgrades per match.",
+        "objectives": "Encourage strategic choices and prevent all-max builds.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "interactions": [
+          "Players allocate gold to upgrade HP, Speed, FireRate, or Damage.",
+          "Higher-level upgrades become progressively more expensive."
+        ],
+        "source_note": "Derived from Upgrade Cost and Rule sections."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Gold-per-Second Calculation",
+        "description": "Determines the amount of gold generated per second for each player.",
+        "trigger": "Every second during the match.",
+        "effect": "Gold is added to the player's total based on G_base, ramp multiplier, and rubber-band multiplier.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Derived from GpS formula and rubber-band mechanics."
+      },
+      {
+        "id": "rule_002",
+        "summary": "Kill Event Reward",
+        "description": "Rewards players with gold for defeating enemy players.",
+        "trigger": "When a player kills an enemy.",
+        "effect": "The killer receives +80 gold. If the team reaches 20 kills, the match ends.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Derived from Kill Gold section."
+      },
+      {
+        "id": "rule_003",
+        "summary": "Tower Destruction Effects",
+        "description": "Defines the effects of destroying a tower for both ATK and DEF teams.",
+        "trigger": "When a tower is destroyed.",
+        "effect": "ATK players receive +40 gold each. DEF players gain +10% GpS for 15 seconds.",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Derived from Objective Gold section."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Balanced Gold Distribution",
+        "description": "Ensure neither ATK nor DEF gains an overwhelming gold advantage.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Players should have enough gold to purchase 12‒18 upgrades per match but not max all stats.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Derived from Mục tiêu thiết kế section."
+      },
+      {
+        "id": "req_002",
+        "title": "Prevent Snowballing",
+        "description": "Implement rubber-band mechanics to reduce snowball effects.",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Trailing teams should receive a GpS boost when behind in Kill/Death ratio.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Derived from Rubber-band mechanics section."
+      },
+      {
+        "id": "req_003",
+        "title": "Strategic Upgrade Choices",
+        "description": "Force players to prioritize specific stat upgrades due to limited resources.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Players cannot afford to max all stats within a single match.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_002"
+        ],
+        "source_note": "Derived from Chi phí nâng cấp section."
+      }
+    ]
+  }
+}

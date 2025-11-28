@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 539391cf842b1e84a9224509723d1c4b
+timeCreated: 1516795539
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Materials/FX/Particles/500 Special/mpfx_CustomOrder_DriveDust.mat
+  uploadId: 739895

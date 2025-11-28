@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bee04d4c66fedcf4cb862c0b69e17c61
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scripts/Tanknarok/Camera/CameraBounds.cs
+  uploadId: 739895

@@ -1,10 +1,17 @@
-"""High-level GDD analysis helpers."""
+"""
+High-level GDD analysis helpers.
+
+This module provides functions for generating comprehensive analysis and summaries
+of Game Design Documents using RAG-based retrieval and LLM generation.
+"""
 
 from __future__ import annotations
 
+# Standard library imports
 import asyncio
 from typing import Optional
 
+# Project imports
 from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func
 from gdd_rag_backbone.rag_backend.chunk_qa import get_top_chunks
 

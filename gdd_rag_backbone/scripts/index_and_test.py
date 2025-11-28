@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Script to index a GDD document and run test queries.
+Command-line script to index a GDD document and run test queries.
 
-This script demonstrates the basic workflow:
+This is a main entry point for command-line usage of the GDD RAG Backbone.
+It demonstrates the complete workflow:
 1. Index a document using RAG-Anything
-2. Ask questions about the document
-3. Optionally extract structured data (tanks, maps, objects)
+2. Ask questions about the document using RAG
+3. Extract structured data (tanks, maps, objects)
 
 Usage:
     python scripts/index_and_test.py [doc_path] [doc_id]
@@ -13,12 +14,28 @@ Usage:
     Or set environment variables:
     - GDD_DOC_PATH: Path to the GDD document
     - GDD_DOC_ID: Document ID (defaults to filename without extension)
+    
+    Optional flags:
+    - --parser or docling: Use docling parser instead of default mineru
+
+Examples:
+    # Index a document with auto-generated ID
+    python scripts/index_and_test.py docs/my_gdd.pdf
+    
+    # Index with custom ID
+    python scripts/index_and_test.py docs/my_gdd.pdf my_custom_id
+    
+    # Use environment variables
+    export GDD_DOC_PATH="docs/my_gdd.pdf"
+    export GDD_DOC_ID="my_gdd"
+    python scripts/index_and_test.py
 """
 import asyncio
 import sys
 from pathlib import Path
 
 # Add parent directory to path for imports
+# This allows the script to be run from any directory
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from gdd_rag_backbone.config import DEFAULT_DOCS_DIR
@@ -28,7 +45,19 @@ from gdd_rag_backbone.gdd import extract_tanks, extract_maps
 
 
 async def main():
-    """Main function to index and test a GDD document."""
+    """
+    Main async function to index and test a GDD document.
+    
+    Workflow:
+    1. Parse command-line arguments or environment variables for document path/ID
+    2. Initialize LLM provider (Qwen) or fall back to mock functions if API key missing
+    3. Index the document using RAG-Anything
+    4. Run test queries to demonstrate RAG functionality
+    5. Extract structured data (tanks, maps) to show extraction capabilities
+    
+    Raises:
+        SystemExit: If document path cannot be determined or indexing fails
+    """
     import os
     
     # Get document path and ID from args or environment
@@ -56,6 +85,7 @@ async def main():
     print("-" * 80)
     
     # Initialize LLM provider (use Qwen as default, or create a mock if API key not set)
+    # This allows the script to run even without API keys for testing structure
     try:
         provider = QwenProvider()
         llm_func = make_llm_model_func(provider)
@@ -66,12 +96,15 @@ async def main():
         print("Set QWEN_API_KEY environment variable to use real LLM.")
         
         # Create mock functions for testing structure without real API
+        # These allow the script to demonstrate the workflow even without API access
         def mock_llm_func(prompt: str, system_prompt: str = None, **kwargs) -> str:
+            """Mock LLM function that returns placeholder responses."""
             return f"[Mock LLM Response] This is a placeholder response for testing. Prompt: {prompt[:100]}..."
         
         def mock_embedding_func(text_list: list) -> list:
-            # Return dummy embeddings (1536 dimensions)
-            return [[0.0] * 1536 for _ in text_list]
+            """Mock embedding function that returns zero vectors."""
+            # Return dummy embeddings (1024 dimensions to match text-embedding-v3)
+            return [[0.0] * 1024 for _ in text_list]
         
         llm_func = mock_llm_func
         embedding_func = mock_embedding_func

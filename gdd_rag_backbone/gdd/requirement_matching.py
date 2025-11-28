@@ -1,12 +1,20 @@
-"""Requirement → code coverage matching via lightweight RAG."""
+"""
+Requirement → code coverage matching via lightweight RAG.
+
+This module evaluates how well codebase implementations match GDD requirements
+by using semantic search to find relevant code chunks and LLM-based classification
+to determine implementation status (implemented, partially_implemented, not_implemented).
+"""
 
 from __future__ import annotations
 
+# Standard library imports
 import asyncio
 import json
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence
 
+# Project imports
 from gdd_rag_backbone.gdd.schemas import GddRequirement
 from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func
 from gdd_rag_backbone.rag_backend.chunk_qa import get_top_chunks
@@ -180,4 +188,5 @@ async def evaluate_all_requirements(
     }
     report_path.write_text(json.dumps(report_payload, indent=2, ensure_ascii=False))
     return report_path
+
 

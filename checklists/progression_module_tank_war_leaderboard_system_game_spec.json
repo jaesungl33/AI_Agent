@@ -1,0 +1,243 @@
+{
+  "doc_id": "progression_module_tank_war_leaderboard_system",
+  "metadata": {
+    "created_at": "2025-11-26T10:50:52.591371",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "rank_recruit",
+        "name": "Recruit (Tan Binh)",
+        "category": "GR",
+        "description": "Beginner rank with Elo range 950-1099.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Rank table defines Recruit as the starting rank."
+      },
+      {
+        "id": "rank_warrior",
+        "name": "Warrior (Chien Binh)",
+        "category": "GR",
+        "description": "Intermediate rank with Elo range 1100-1299.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Rank table defines Warrior as an intermediate rank."
+      },
+      {
+        "id": "rank_legend",
+        "name": "Legend (Chien Than)",
+        "category": "GR",
+        "description": "Top-tier rank requiring Elo ≥ 2600.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Players in top 100 receive numbered badges.",
+        "source_note": "Rank table and context define Legend as the highest rank."
+      }
+    ],
+    "systems": [
+      {
+        "id": "leaderboard_system",
+        "name": "Leaderboard System",
+        "description": "A system for ranking players based on various metrics such as Elo, Combat Score, and Objective Score.",
+        "mechanics": "Players are ranked in leaderboards like Season Rank, Combat Board, Objective Board, and Class Boards. Rankings reset periodically.",
+        "objectives": "To provide a competitive, transparent, and fair ranking system that motivates players.",
+        "related_objects": [
+          "rank_recruit",
+          "rank_warrior",
+          "rank_legend"
+        ],
+        "interactions": [
+          "leaderboard_snapshot",
+          "matches",
+          "player_match_stats"
+        ],
+        "source_note": "Described in sections 3, 4, and 8 of the GDD."
+      },
+      {
+        "id": "season_rank_system",
+        "name": "Season Rank System",
+        "description": "Core leaderboard based on Elo/MMR.",
+        "mechanics": "Elo is updated after matches using Delta = K * (S - E) * V formula. Resets every 8-12 weeks.",
+        "objectives": "To rank players based on skill level.",
+        "related_objects": [
+          "rank_recruit",
+          "rank_warrior",
+          "rank_legend"
+        ],
+        "interactions": [
+          "leaderboard_snapshot",
+          "matches",
+          "player_match_stats"
+        ],
+        "source_note": "Detailed in section 4.1 of the GDD."
+      },
+      {
+        "id": "combat_board_system",
+        "name": "Combat Board System",
+        "description": "Leaderboard focused on combat skills.",
+        "mechanics": "Uses Combat Score (CS) calculated from KDA Impact, Damage Score, and Streak Bonus.",
+        "objectives": "To highlight players with strong combat performance.",
+        "related_objects": [],
+        "interactions": [
+          "player_match_stats"
+        ],
+        "source_note": "Detailed in section 4.2 of the GDD."
+      },
+      {
+        "id": "objective_board_system",
+        "name": "Objective Board System",
+        "description": "Leaderboard focused on team objectives.",
+        "mechanics": "Uses Objective Score (OS) calculated from Capture Score, Defense Score, and Zone Time Score.",
+        "objectives": "To reward players contributing to team objectives.",
+        "related_objects": [],
+        "interactions": [
+          "player_match_stats"
+        ],
+        "source_note": "Detailed in section 4.3 of the GDD."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "elo_calculation_rule",
+        "summary": "Elo score update rule",
+        "description": "Elo score is updated after each match based on the formula Delta = K * (S - E) * V.",
+        "trigger": "End of a match.",
+        "effect": "Player's Elo score is adjusted based on match result, expected win probability, and performance modifier.",
+        "related_objects": [
+          "rank_recruit",
+          "rank_warrior",
+          "rank_legend"
+        ],
+        "related_systems": [
+          "season_rank_system"
+        ],
+        "source_note": "Formula detailed in section 4.1 of the GDD."
+      },
+      {
+        "id": "combat_score_rule",
+        "summary": "Combat Score calculation rule",
+        "description": "Combat Score (CS) is calculated using KDA Impact, Damage Score, and Streak Bonus.",
+        "trigger": "End of a match.",
+        "effect": "Player's CS is updated and used in Combat Board rankings.",
+        "related_objects": [],
+        "related_systems": [
+          "combat_board_system"
+        ],
+        "source_note": "Formula detailed in section 4.2 of the GDD."
+      },
+      {
+        "id": "objective_score_rule",
+        "summary": "Objective Score calculation rule",
+        "description": "Objective Score (OS) is calculated using Capture Score, Defense Score, and Zone Time Score.",
+        "trigger": "End of a match.",
+        "effect": "Player's OS is updated and used in Objective Board rankings.",
+        "related_objects": [],
+        "related_systems": [
+          "objective_board_system"
+        ],
+        "source_note": "Formula detailed in section 4.3 of the GDD."
+      },
+      {
+        "id": "assist_rule",
+        "summary": "Assist scoring rule",
+        "description": "Assists are awarded if a player contributes to an enemy's death within 10 seconds.",
+        "trigger": "Enemy death.",
+        "effect": "Player receives assist points if conditions are met.",
+        "related_objects": [],
+        "related_systems": [],
+        "source_note": "Detailed in section 11 of the GDD."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_leaderboard_ui",
+        "title": "Leaderboard UI Implementation",
+        "description": "Develop a user-friendly interface for displaying leaderboards.",
+        "category": "ui",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "UI must include tabs for My Elo, Top Elo, Top Class, and Season Information. List view must display Rank, Name, Class Icon, Tier/Score, WR, Matches, and Δ.",
+        "related_objects": [],
+        "related_systems": [
+          "leaderboard_system"
+        ],
+        "source_note": "Detailed in section 8 of the GDD."
+      },
+      {
+        "id": "req_season_reset",
+        "title": "Season Reset Mechanism",
+        "description": "Implement periodic resets for Season Rank and other leaderboards.",
+        "category": "progression",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Season Rank resets every 8-12 weeks. Combat Score by Class resets monthly. Rotating boards reset weekly.",
+        "related_objects": [
+          "rank_recruit",
+          "rank_warrior",
+          "rank_legend"
+        ],
+        "related_systems": [
+          "season_rank_system"
+        ],
+        "source_note": "Detailed in section 3.2 of the GDD."
+      },
+      {
+        "id": "req_anti_cheat",
+        "title": "Anti-Cheat Measures",
+        "description": "Implement systems to detect and prevent cheating.",
+        "category": "tech",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "System must filter outliers, detect boosting heuristics, and apply decay for inactivity.",
+        "related_objects": [],
+        "related_systems": [
+          "leaderboard_system"
+        ],
+        "source_note": "Detailed in section 6 of the GDD."
+      },
+      {
+        "id": "req_reward_distribution",
+        "title": "Reward Distribution System",
+        "description": "Distribute rewards based on leaderboard rankings.",
+        "category": "monetization",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Top players receive Battle Pass Points and Currency. Avoid large reward disparities between ranks.",
+        "related_objects": [
+          "rank_recruit",
+          "rank_warrior",
+          "rank_legend"
+        ],
+        "related_systems": [
+          "leaderboard_system"
+        ],
+        "source_note": "Detailed in section 7 of the GDD."
+      }
+    ]
+  }
+}

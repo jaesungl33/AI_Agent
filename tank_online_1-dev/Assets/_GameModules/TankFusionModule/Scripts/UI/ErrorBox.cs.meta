@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: d215c63b65c54ecf892dea1711d1af54
+timeCreated: 1630406925
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scripts/Tanknarok/UI/ErrorBox.cs
+  uploadId: 739895

@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: b9340e4a81b64f79834354e558b7b2e2
+timeCreated: 1679492072
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/FusionHelpers/Pooling/LocalObjectPool.cs
+  uploadId: 739895

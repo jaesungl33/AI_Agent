@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 86bd09311ff04004d9a475344b051bae
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/Weapons/weapon_primary_main.prefab
+  uploadId: 739895

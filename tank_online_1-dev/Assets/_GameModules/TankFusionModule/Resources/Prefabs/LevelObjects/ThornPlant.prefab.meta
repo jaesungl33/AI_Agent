@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 087a6aa3d0bddef4aaa78ea565fab153
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/LevelObjects/ThornPlant.prefab
+  uploadId: 739895

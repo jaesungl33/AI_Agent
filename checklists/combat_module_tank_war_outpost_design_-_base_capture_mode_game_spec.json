@@ -1,0 +1,180 @@
+{
+  "doc_id": "combat_module_tank_war_outpost_design_-_base_capture_mode",
+  "metadata": {
+    "created_at": "2025-11-26T10:35:50.065529",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "outpost_1",
+        "name": "Outpost 1",
+        "category": "OP",
+        "description": "Trọng điểm đầu tiên, không quá khó để chiếm và khó để thủ. Đặc điểm: Đánh chậm, dam thấp.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": 2140,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": null,
+        "source_note": "Phân loại cấp của Outpost"
+      },
+      {
+        "id": "outpost_2",
+        "name": "Outpost 2",
+        "category": "OP",
+        "description": "Trọng điểm thứ hai, tương đối dễ để chiếm và tương đối dễ để thủ. Đặc điểm: Đánh nhanh, dam thấp.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": 2570,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": null,
+        "source_note": "Phân loại cấp của Outpost"
+      },
+      {
+        "id": "outpost_3",
+        "name": "Outpost 3",
+        "category": "OP",
+        "description": "Trọng điểm cuối, khó để chiếm và dễ để thủ. Đặc điểm: Đánh nhanh, dam cao.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": 3080,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": null,
+        "source_note": "Phân loại cấp của Outpost"
+      }
+    ],
+    "systems": [
+      {
+        "id": "outpost_targeting_system",
+        "name": "Outpost Targeting System",
+        "description": "Hệ thống xác định mục tiêu cho các Outpost dựa trên vị trí và tầm nhìn.",
+        "mechanics": "Khi kẻ địch (phe ATK) vào vùng bắn của outpost, nó sẽ chọn tank gần nhất làm mục tiêu nếu không bị che khuất bởi vật cản. Nếu mục tiêu hiện tại rời khỏi vùng bắn, outpost sẽ chọn tank gần nhất khác làm mục tiêu mới hoặc ngừng hoạt động nếu không có mục tiêu nào.",
+        "objectives": "Tối ưu hóa việc lựa chọn mục tiêu để tăng hiệu quả tấn công của Outpost.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "interactions": [],
+        "source_note": "Case table for target acquisition logic"
+      },
+      {
+        "id": "bullet_logic_system",
+        "name": "Bullet Logic System",
+        "description": "Hệ thống điều khiển hành vi của đạn từ Outpost.",
+        "mechanics": "Đạn được bắn từ đỉnh tháp xuống, di chuyển tới vị trí gần nhất của mục tiêu mà không có khả năng dẫn đường (homing). Đạn chỉ tác động đến một tank duy nhất.",
+        "objectives": "Đảm bảo cơ chế tấn công đơn giản và công bằng trong gameplay.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "interactions": [],
+        "source_note": "Bullet logic section"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "target_acquisition_rule",
+        "summary": "Quy tắc xác định mục tiêu khi kẻ địch vào vùng bắn.",
+        "description": "Nếu không có mục tiêu hiện tại, outpost sẽ chọn tank gần nhất làm mục tiêu nếu không bị che khuất bởi vật cản. Nếu đã có mục tiêu, outpost sẽ giữ nguyên mục tiêu đó.",
+        "trigger": "Kẻ địch (phe ATK) vào vùng bắn của outpost.",
+        "effect": "Outpost chọn mục tiêu phù hợp dựa trên quy tắc.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "related_systems": [
+          "outpost_targeting_system"
+        ],
+        "source_note": "Case table for target acquisition logic"
+      },
+      {
+        "id": "target_loss_rule",
+        "summary": "Quy tắc xử lý khi mục tiêu rời khỏi vùng bắn.",
+        "description": "Nếu mục tiêu hiện tại rời khỏi vùng bắn, outpost sẽ chọn tank gần nhất khác làm mục tiêu mới hoặc ngừng hoạt động nếu không có mục tiêu nào.",
+        "trigger": "Mục tiêu rời khỏi vùng bắn của outpost.",
+        "effect": "Outpost cập nhật mục tiêu hoặc ngừng hoạt động.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "related_systems": [
+          "outpost_targeting_system"
+        ],
+        "source_note": "Case table for target loss handling"
+      },
+      {
+        "id": "obstacle_interaction_rule",
+        "summary": "Quy tắc xử lý khi mục tiêu ẩn sau vật cản.",
+        "description": "Nếu mục tiêu ẩn sau vật cản, outpost hủy mục tiêu hiện tại và tìm kiếm mục tiêu khác.",
+        "trigger": "Mục tiêu nằm ở phía sau vật cản.",
+        "effect": "Outpost hủy mục tiêu và tìm kiếm mục tiêu mới.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "related_systems": [
+          "outpost_targeting_system"
+        ],
+        "source_note": "Case table for obstacle interaction"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "balance_requirement",
+        "title": "Yêu cầu cân bằng Outpost",
+        "description": "Cân bằng các thông số của Outpost theo công thức và đảm bảo tính mở rộng trong tương lai.",
+        "category": "combat",
+        "priority": "high",
+        "status": "in-progress",
+        "acceptance_criteria": "Các thông số HP, Damage, Fire Rate, Projectile Speed, và Range phải tuân thủ công thức và đáp ứng yêu cầu về độ khó tương ứng với từng cấp độ Outpost.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "related_systems": [
+          "outpost_targeting_system",
+          "bullet_logic_system"
+        ],
+        "source_note": "Công thức tính chỉ số và phân loại cấp của Outpost"
+      },
+      {
+        "id": "expandability_requirement",
+        "title": "Yêu cầu mở rộng Outpost",
+        "description": "Thiết kế Outpost sao cho dễ dàng tích hợp skin, nâng cấp, và tính năng mới trong tương lai.",
+        "category": "progression",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Outpost phải hỗ trợ tùy chỉnh giao diện và thêm các tính năng mới mà không ảnh hưởng đến hệ thống hiện tại.",
+        "related_objects": [
+          "outpost_1",
+          "outpost_2",
+          "outpost_3"
+        ],
+        "related_systems": [],
+        "source_note": "Mục tiêu thiết kế"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8135babfd50f94b419a8f8df36a04c32
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/TargetMarkers/pfx_TargetMarker_Grenades.prefab
+  uploadId: 739895

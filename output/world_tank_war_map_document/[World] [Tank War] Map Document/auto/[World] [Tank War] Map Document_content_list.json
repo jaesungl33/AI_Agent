@@ -35,7 +35,7 @@
     },
     {
         "type": "text",
-        "text": "Người soạn: $\\textcircled{9}$ phucth12 (phucth12) ",
+        "text": "Người soạn: $\\bullet$ phucth12 (phucth12) ",
         "bbox": [
             62,
             205,
@@ -133,7 +133,7 @@
             87,
             53,
             387,
-            553
+            552
         ],
         "page_idx": 1
     },
@@ -155,7 +155,7 @@
         "bbox": [
             48,
             628,
-            321,
+            323,
             653
         ],
         "page_idx": 1
@@ -165,9 +165,9 @@
         "text": "4.1 Vật thể Block Object (BO) ",
         "text_level": 1,
         "bbox": [
-            80,
+            89,
             671,
-            397,
+            407,
             692
         ],
         "page_idx": 1
@@ -176,9 +176,9 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            89,
             701,
-            348,
+            356,
             721
         ],
         "page_idx": 1
@@ -187,9 +187,9 @@
         "type": "text",
         "text": "◦ Player không thể đi xuyên qua BO.   \n◦ Player không có tương tác đặc biệt với BO.   \n◦ Đạn bắn từ bất kỳ nguồn nào không thể đi xuyên qua BO (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này). ",
         "bbox": [
-            79,
-            732,
-            939,
+            90,
+            730,
+            949,
             836
         ],
         "page_idx": 1
@@ -198,9 +198,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu BO_ \\*Tên tương ứng\\* ",
         "bbox": [
-            90,
+            99,
             846,
-            860,
+            872,
             867
         ],
         "page_idx": 1
@@ -210,23 +210,36 @@
         "text": "4.1.1 BO_Building ",
         "text_level": 1,
         "bbox": [
-            112,
+            129,
             913,
-            294,
+            311,
             932
         ],
         "page_idx": 1
     },
     {
+        "type": "image",
+        "img_path": "images/1ae85ae83d79a8f8475026ae3acc5405e9ddf13475627efeba8707d293817415.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            164,
+            957,
+            624,
+            971
+        ],
+        "page_idx": 1
+    },
+    {
         "type": "table",
-        "img_path": "images/d62c1baa338f029b8135b9b9e986dd67bb7a4b3067780a7c5301c13814ff4ea4.jpg",
+        "img_path": "images/5bc502b73926572e30a10d957155a7edbd1d110e1a788dcfd3cb1bd98cb93ef8.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thetich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_House_01</td><td rowspan=1 colspan=1>4x5×4</td></tr><tr><td rowspan=1 colspan=1>BO_House_02</td><td rowspan=1 colspan=1>30 x 18 x 13</td></tr><tr><td rowspan=1 colspan=1>BO_House_03_4x4x4</td><td rowspan=1 colspan=1>4x4x4</td></tr><tr><td rowspan=1 colspan=1>BO_House_04_6x6x6</td><td rowspan=1 colspan=1>6x6x6</td></tr><tr><td rowspan=1 colspan=1>BO_VanCar_01_3x2x2</td><td rowspan=1 colspan=1>3x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Workbench_01</td><td rowspan=1 colspan=1>2x2x2</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thetich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_House_01</td><td rowspan=1 colspan=1>4x5×4</td></tr><tr><td rowspan=1 colspan=1>BO_House_02</td><td rowspan=1 colspan=1>30 × 18x 13</td></tr><tr><td rowspan=1 colspan=1>BO_House_03_4x4x4</td><td rowspan=1 colspan=1>4x4x4</td></tr><tr><td rowspan=1 colspan=1>BO_House_04_6x6x6</td><td rowspan=1 colspan=1>6x6x6</td></tr><tr><td rowspan=1 colspan=1>BO_VanCar_01_3x2x2</td><td rowspan=1 colspan=1>3x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Workbench_01</td><td rowspan=1 colspan=1>2x2x2</td></tr></table>",
         "bbox": [
-            141,
+            166,
             30,
-            597,
+            622,
             311
         ],
         "page_idx": 2
@@ -236,9 +249,9 @@
         "text": "4.1.2 BO_Collider ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             372,
-            287,
+            306,
             391
         ],
         "page_idx": 2
@@ -247,23 +260,23 @@
         "type": "text",
         "text": "Note: Obj này được dùng làm biên giới map ",
         "bbox": [
-            154,
+            181,
             400,
-            570,
+            597,
             421
         ],
         "page_idx": 2
     },
     {
         "type": "table",
-        "img_path": "images/da1d00a53e77742f7ff36edd667b136c22e6bdaaaab488f79bcb4c1238690df3.jpg",
+        "img_path": "images/3f4677c603bf8f5162d146576a6690ec6d1c94ccd6282f7019e75fd44d881e19.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td>Tén</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Box_1x1x1</td><td>1x5x1</td></tr></table>",
+        "table_body": "<table><tr><td>Ten</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Box_1x1x1</td><td>1×5x1</td></tr></table>",
         "bbox": [
-            141,
+            168,
             446,
-            597,
+            622,
             551
         ],
         "page_idx": 2
@@ -273,9 +286,9 @@
         "text": "4.1.3 BO_Container ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             611,
-            308,
+            324,
             630
         ],
         "page_idx": 2
@@ -284,10 +297,10 @@
         "type": "text",
         "text": "Note: Các objs sau đều có bản Variant, bản này sẽ đảo ngược dài và rộng của obj gốc. ",
         "bbox": [
-            156,
+            181,
             640,
-            917,
-            683
+            942,
+            682
         ],
         "page_idx": 2
     },
@@ -295,23 +308,23 @@
         "type": "text",
         "text": "Note: Điểm khác nhau giữa cái container là màu của nó. ",
         "bbox": [
-            156,
-            694,
-            685,
+            181,
+            692,
+            712,
             714
         ],
         "page_idx": 2
     },
     {
         "type": "table",
-        "img_path": "images/16145b8c3f0bd3b7c1bad5ea9a4c488d5f9b4846a677ae1234e470d134923e32.jpg",
+        "img_path": "images/8669a55b958761801047ab5012e84788646bfc4e4d0eee00c5cf0f97b076e85e.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Dai x Cao x R@ng)</td></tr><tr><td rowspan=1 colspan=1>BO_Container_01</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_02</td><td rowspan=1 colspan=1>7 x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_03</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_04</td><td rowspan=1 colspan=1>7x4x3</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Container_01</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_02</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_03</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_04</td><td rowspan=1 colspan=1>7×4x3</td></tr></table>",
         "bbox": [
-            141,
+            168,
             740,
-            595,
+            622,
             954
         ],
         "page_idx": 2
@@ -321,23 +334,23 @@
         "text": "4.1.4 BO_Mountain ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             71,
-            304,
+            321,
             89
         ],
         "page_idx": 3
     },
     {
         "type": "table",
-        "img_path": "images/ae9910edf53e375a5d29d87ee0d4c1e9fbd6105e492f624b89d6124d7d4f0f7d.jpg",
+        "img_path": "images/4df1b37f01f73572a31bd3387aa9e7bf30f721fb43df0c9a868cf7d40bd9b52e.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_CaveGate_01</td><td rowspan=1 colspan=1>12 x8x7</td></tr><tr><td rowspan=1 colspan=1>BO_CaveRoof_02</td><td rowspan=1 colspan=1>36 × 14 x 42</td></tr><tr><td rowspan=1 colspan=1>BO_Mountain_03</td><td rowspan=1 colspan=1>200 x 13 x 200</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Däi x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_CaveGate_01</td><td rowspan=1 colspan=1>12x8x7</td></tr><tr><td rowspan=1 colspan=1>BO_CaveRoof_02</td><td rowspan=1 colspan=1>36×14x42</td></tr><tr><td rowspan=1 colspan=1>BO_Mountain_03</td><td rowspan=1 colspan=1>200×13 x 200</td></tr></table>",
         "bbox": [
-            141,
+            168,
             115,
-            597,
+            622,
             292
         ],
         "page_idx": 3
@@ -347,23 +360,23 @@
         "text": "4.1.5 BO_Rock ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             354,
-            260,
+            277,
             372
         ],
         "page_idx": 3
     },
     {
         "type": "table",
-        "img_path": "images/3aaff198e9d2c4bee98702645a90f242ff958446aefd3565ac07fdcdff8ef8c7.jpg",
+        "img_path": "images/07cda2fe4d76ff265861f92dfad08bd396fc84ab22e5c1b5fd7b96f29c82f6e2.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Ten</td><td colspan=\"1\" rowspan=\"1\">Thé tich(Dai x Cao x Róng)</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_1x2x1</td><td colspan=\"1\" rowspan=\"1\">1x2×1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_1x3x4</td><td colspan=\"1\" rowspan=\"1\">1x3x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x3x2</td><td colspan=\"1\" rowspan=\"1\">2x3×2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x3x4</td><td colspan=\"1\" rowspan=\"1\">2x3x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_3x3x2</td><td colspan=\"1\" rowspan=\"1\">3x3x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_3x6x5</td><td colspan=\"1\" rowspan=\"1\">3x6x5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x1</td><td colspan=\"1\" rowspan=\"1\">4x3x1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x2</td><td colspan=\"1\" rowspan=\"1\">4x3x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x3</td><td colspan=\"1\" rowspan=\"1\">4x3x3</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x5x5</td><td colspan=\"1\" rowspan=\"1\">4×5x5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x6x4</td><td colspan=\"1\" rowspan=\"1\">4x6x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_5x5x4</td><td colspan=\"1\" rowspan=\"1\">5x5×4</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td>BO_Rock_5x6x3</td><td>5x6x3</td></tr></table>",
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Tén</td><td colspan=\"1\" rowspan=\"1\">The tich(Dai x Cao x Rong)</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_1x2x1</td><td colspan=\"1\" rowspan=\"1\">1x2x1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_1x3x4</td><td colspan=\"1\" rowspan=\"1\">1x3x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x3x2</td><td colspan=\"1\" rowspan=\"1\">2x3x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_2x3x4</td><td colspan=\"1\" rowspan=\"1\">2x3x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_3x3x2</td><td colspan=\"1\" rowspan=\"1\">3x3x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_3x6x5</td><td colspan=\"1\" rowspan=\"1\">3x6x5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x1</td><td colspan=\"1\" rowspan=\"1\">4x3x1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x2</td><td colspan=\"1\" rowspan=\"1\">4x3x2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x3x3</td><td colspan=\"1\" rowspan=\"1\">4x3x3</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x5x5</td><td colspan=\"1\" rowspan=\"1\">4×5x5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_4x6x4</td><td colspan=\"1\" rowspan=\"1\">4x6x4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BO_Rock_5x5x4</td><td colspan=\"1\" rowspan=\"1\">5x5×4</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td>BO_Rock_5x6x3</td><td>5x6x3</td></tr></table>",
         "bbox": [
-            141,
+            166,
             396,
-            597,
+            622,
             970
         ],
         "page_idx": 3
@@ -374,9 +387,9 @@
         "table_caption": [],
         "table_footnote": [],
         "bbox": [
-            143,
+            168,
             29,
-            599,
+            632,
             63
         ],
         "page_idx": 4
@@ -386,23 +399,23 @@
         "text": "4.1.6 BO_Sign ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             123,
-            254,
+            272,
             142
         ],
         "page_idx": 4
     },
     {
         "type": "table",
-        "img_path": "images/10b52468e6f27590d30c8da0b8486bea32e6d90ed5fbccd2e3a49c19edbdb0a2.jpg",
+        "img_path": "images/a5557408002de81f75e32a0c87c7f56c454cca28d1996f712a452106b5d21ef2.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_01</td><td rowspan=1 colspan=1>0.9 x3 x 1.3</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_02</td><td rowspan=1 colspan=1>0.1× 2.8× 1</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_01</td><td rowspan=1 colspan=1>0.9 x3 x 1.3</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_02</td><td rowspan=1 colspan=1>0.1x 2.8×1</td></tr></table>",
         "bbox": [
-            141,
+            166,
             167,
-            597,
+            622,
             309
         ],
         "page_idx": 4
@@ -412,9 +425,9 @@
         "text": "4.2 Vật thể Breakable Object (BR) ",
         "text_level": 1,
         "bbox": [
-            79,
+            87,
             372,
-            444,
+            454,
             394
         ],
         "page_idx": 4
@@ -423,20 +436,20 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            89,
             402,
-            348,
+            356,
             422
         ],
         "page_idx": 4
     },
     {
         "type": "text",
-        "text": "Player không thể đi xuyên qua BR.   \n◦ Player không có tương tác đặc biệt với BR.   \n◦ Đạn bắn từ bất kỳ nguồn nào đều phá được BR (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này). ",
+        "text": "◦ Player không thể đi xuyên qua BR.   \n◦ Player không có tương tác đặc biệt với BR.   \n◦ Đạn bắn từ bất kỳ nguồn nào đều phá được BR (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này). ",
         "bbox": [
-            79,
+            89,
             432,
-            932,
+            941,
             536
         ],
         "page_idx": 4
@@ -445,9 +458,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu BR_ \\*Tên tương ứng\\* ",
         "bbox": [
-            87,
+            99,
             546,
-            858,
+            870,
             567
         ],
         "page_idx": 4
@@ -457,23 +470,23 @@
         "text": "4.2.1 BR_Barrel ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             613,
-            269,
+            287,
             632
         ],
         "page_idx": 4
     },
     {
         "type": "table",
-        "img_path": "images/f4565652d53aa4fa49581ecb9dfdf85a47953534afb5158796556a26dc610ac1.jpg",
+        "img_path": "images/1c41150926670082042bcfd92fdc164d73999e477503baa2fa2c7a5ce439935b.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Ten</td><td colspan=\"1\" rowspan=\"1\">Thétich(Dai x Cao x Róng)</td><td colspan=\"1\" rowspan=\"1\">HP</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_Box_01_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_Box_02_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_01</td><td colspan=\"1\" rowspan=\"1\">1x1×1</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_02_2x3x3</td><td colspan=\"1\" rowspan=\"1\">2x3x3</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_02_3x3x2</td><td colspan=\"1\" rowspan=\"1\">3x3x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_03</td><td colspan=\"1\" rowspan=\"1\">1 × 1.6× 1</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td>BR_ToxicBarrel_04</td><td>1x2.2x1</td><td>1</td></tr></table>",
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Tén</td><td colspan=\"1\" rowspan=\"1\">Thé tich(Dai x Cao x Róng)</td><td colspan=\"1\" rowspan=\"1\">HP</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_Box_01_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_Box_02_2x2x2</td><td colspan=\"1\" rowspan=\"1\">2x2x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_01</td><td colspan=\"1\" rowspan=\"1\">1x1×1</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_02_2x3x3</td><td colspan=\"1\" rowspan=\"1\">2x3x3</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_02_3x3x2</td><td colspan=\"1\" rowspan=\"1\">3x3x2</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">BR_ToxicBarrel_03</td><td colspan=\"1\" rowspan=\"1\">1 × 1.6 × 1</td><td colspan=\"1\" rowspan=\"1\">1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td>BR_ToxicBarrel_04</td><td>1 x 2.2 ×1</td><td>1</td></tr></table>",
         "bbox": [
-            139,
+            166,
             657,
-            735,
+            762,
             970
         ],
         "page_idx": 4
@@ -484,9 +497,9 @@
         "table_caption": [],
         "table_footnote": [],
         "bbox": [
-            144,
+            168,
             29,
-            734,
+            760,
             63
         ],
         "page_idx": 5
@@ -496,23 +509,23 @@
         "text": "4.2.2 BR_Cactus ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             123,
-            276,
+            294,
             141
         ],
         "page_idx": 5
     },
     {
         "type": "table",
-        "img_path": "images/d5c49dd6d3715bc7395a098e25bfe763f784aa05830ba826030d543785c91ba6.jpg",
+        "img_path": "images/685a840ae24260bb4ff8ea58cdeb570499446b8664c1a431ac9426f83fd8d746.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thétich(Däi x Cao x Rong)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x0.5x1</td><td rowspan=1 colspan=1>1 x 0.5 x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x2x1</td><td rowspan=1 colspan=1>1x2x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x3x1</td><td rowspan=1 colspan=1>1x3x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_2x2x1</td><td rowspan=1 colspan=1>2x2x1</td><td rowspan=1 colspan=1>1</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x0.5x1</td><td rowspan=1 colspan=1>1 x 0.5×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x1x1</td><td rowspan=1 colspan=1>1x1×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x2x1</td><td rowspan=1 colspan=1>1x2x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x3x1</td><td rowspan=1 colspan=1>1x3x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_2x2x1</td><td rowspan=1 colspan=1>2x2x1</td><td rowspan=1 colspan=1>1</td></tr></table>",
         "bbox": [
-            139,
+            168,
             167,
-            735,
+            762,
             419
         ],
         "page_idx": 5
@@ -522,23 +535,23 @@
         "text": "4.2.3 BR_Deco ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             479,
-            259,
+            276,
             498
         ],
         "page_idx": 5
     },
     {
         "type": "table",
-        "img_path": "images/d2539e0786af140090b8aaa3b3f4e62d6df52b66ca2782755c0f4812f09c1f55.jpg",
+        "img_path": "images/75d0a5ea2d657362382eda8137e4e3305ce5866306f55226d10f56749409d917.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Skull_01</td><td rowspan=1 colspan=1>1 x 0.6 x 1.9</td><td rowspan=1 colspan=1>1</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Skull_01</td><td rowspan=1 colspan=1>1 x 0.6 x 1.9</td><td rowspan=1 colspan=1>1</td></tr></table>",
         "bbox": [
-            141,
+            168,
             523,
-            735,
+            762,
             628
         ],
         "page_idx": 5
@@ -548,23 +561,23 @@
         "text": "4.2.4 BR_Gate ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             689,
-            255,
+            272,
             707
         ],
         "page_idx": 5
     },
     {
         "type": "table",
-        "img_path": "images/97e4639024d20d9d5dde47642c9f6275cdee8f1283caf10f72b789b5d158802a.jpg",
+        "img_path": "images/78439be330b62905345f70d2f4080acc241836c42067d39ce00b77409f3a63f1.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_4x2.5x1</td><td rowspan=1 colspan=1>4x 2.5 ×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_7x2.5x1</td><td rowspan=1 colspan=1>7 x 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_4x2.5x1</td><td rowspan=1 colspan=1>4 x 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_7x2.5x1</td><td rowspan=1 colspan=1>7 × 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr></table>",
         "bbox": [
-            141,
+            168,
             734,
-            735,
+            762,
             875
         ],
         "page_idx": 5
@@ -574,9 +587,9 @@
         "text": "4.3 Vật thể Decorations (DE) ",
         "text_level": 1,
         "bbox": [
-            80,
+            90,
             938,
-            387,
+            395,
             959
         ],
         "page_idx": 5
@@ -585,20 +598,20 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            87,
             33,
-            346,
+            356,
             54
         ],
         "page_idx": 6
     },
     {
         "type": "text",
-        "text": "◦ Player đi xuyên qua được DE.   \n◦ Player không có tương tác đặc biệt với DE.   \n◦ Nhỏ đủ để không phá thế giới quan người chơi $( < = 5 \\times 0 . 5 \\times 5 )$ ). ",
+        "text": "◦ Player đi xuyên qua được DE.   \n◦ Player không có tương tác đặc biệt với DE.   \n◦ Nhỏ đủ để không phá thế giới quan người chơi $( < = 5 \\times 0 . 5 \\times 5 )$ . ",
         "bbox": [
-            80,
+            90,
             64,
-            683,
+            691,
             146
         ],
         "page_idx": 6
@@ -607,9 +620,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu DE_ \\*Tên tương ứng\\* ",
         "bbox": [
-            85,
+            99,
             155,
-            858,
+            868,
             177
         ],
         "page_idx": 6
@@ -619,23 +632,23 @@
         "text": "4.3.1 DE_Deco ",
         "text_level": 1,
         "bbox": [
-            111,
+            127,
             222,
-            259,
+            276,
             241
         ],
         "page_idx": 6
     },
     {
         "type": "table",
-        "img_path": "images/811790d473168464ec9b5fa0b29923e0083a797e731e7f099a2c9a2030387346.jpg",
+        "img_path": "images/6960a30552b5da25bc77f79f09be82060adad05460baf760c9d322e9f7f00523.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Ten</td><td colspan=\"1\" rowspan=\"1\">The tich(Dai x Cao x Róng)</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_DrainCover_01</td><td colspan=\"1\" rowspan=\"1\">1x 0.07 x0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Grass_01_Green</td><td colspan=\"1\" rowspan=\"1\">0.4x 0.3 x 0.4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Grass_02_Green</td><td colspan=\"1\" rowspan=\"1\">0.6 x 0.37 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_01</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.1 x 2.8</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_02</td><td colspan=\"1\" rowspan=\"1\">2.1 × 0.1× 2.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_03</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.1 x 2.8</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_Gray</td><td colspan=\"1\" rowspan=\"1\">0.3 x 0.06 x 0.4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_Sand</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_SandDark</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_Gray</td><td colspan=\"1\" rowspan=\"1\">0.7 × 0.1 × 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_Sand</td><td colspan=\"1\" rowspan=\"1\">1.2 x 0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.2 x 0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_Gray</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.1 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_Sand</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 × 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 x 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_04_Sand</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.03 x 1.2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_04_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 x 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_05_Sand</td><td colspan=\"1\" rowspan=\"1\">2 x 0.05 x 1.5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_05_SandDark</td><td colspan=\"1\" rowspan=\"1\">2 x 0.05 x 1.5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_StoneGrass_01_Green</td><td colspan=\"1\" rowspan=\"1\">0.4 x 0.2 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_StoneGrass_02_Green</td><td colspan=\"1\" rowspan=\"1\">0.7 x 0.3 x 0.8</td></tr></table>",
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Tén</td><td colspan=\"1\" rowspan=\"1\">The tich(Däi x Cao x Rong)</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_DrainCover_01</td><td colspan=\"1\" rowspan=\"1\">1x 0.07 x0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Grass_01_Green</td><td colspan=\"1\" rowspan=\"1\">0.4 x 0.3 x 0.4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Grass_02_Green</td><td colspan=\"1\" rowspan=\"1\">0.6 x 0.37 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_01</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.1 x 2.8</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_02</td><td colspan=\"1\" rowspan=\"1\">2.1 x 0.1× 2.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Railway_03</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.1 x 2.8</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_Gray</td><td colspan=\"1\" rowspan=\"1\">0.3 x 0.06 x 0.4</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_Sand</td><td colspan=\"1\" rowspan=\"1\">0.7 x0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_01_SandDark</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_Gray</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.1 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_Sand</td><td colspan=\"1\" rowspan=\"1\">1.2 x 0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_02_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.2 × 0.03 x 0.7</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_Gray</td><td colspan=\"1\" rowspan=\"1\">0.7 ×0.1 x0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_Sand</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 x 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_03_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 x 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_04_Sand</td><td colspan=\"1\" rowspan=\"1\">1.4 x 0.03 x 1.2</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_04_SandDark</td><td colspan=\"1\" rowspan=\"1\">1.3 x 0.03 x 1.1</td></tr><tr><td colspan=\"1\" rowspan=\"1\"></td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_05_Sand</td><td colspan=\"1\" rowspan=\"1\">2 x 0.05 x 1.5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_Stone_05_SandDark</td><td colspan=\"1\" rowspan=\"1\">2 x 0.05 x 1.5</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_StoneGrass_01_Green</td><td colspan=\"1\" rowspan=\"1\">0.4 x 0.2 x 0.6</td></tr><tr><td colspan=\"1\" rowspan=\"1\">DE_StoneGrass_02_Green</td><td colspan=\"1\" rowspan=\"1\">0.7 x 0.3 x 0.8</td></tr></table>",
         "bbox": [
-            139,
+            166,
             266,
-            621,
+            646,
             970
         ],
         "page_idx": 6
@@ -646,9 +659,9 @@
         "table_caption": [],
         "table_footnote": [],
         "bbox": [
-            141,
+            166,
             30,
-            621,
+            646,
             173
         ],
         "page_idx": 7
@@ -658,9 +671,9 @@
         "text": "4.4 Vật thể Ground (GR) ",
         "text_level": 1,
         "bbox": [
-            80,
+            89,
             236,
-            341,
+            350,
             258
         ],
         "page_idx": 7
@@ -669,20 +682,20 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            87,
             266,
-            348,
+            356,
             286
         ],
         "page_idx": 7
     },
     {
         "type": "text",
-        "text": "◦ Player không thể đi xuyên qua GR.   \n◦ Player không có tương tác đặc biệt với GR.   \n◦ Sàn chơi.   \n◦ Mặt phẳng (Không có độ cao). ",
+        "text": "Player không thể đi xuyên qua GR. ◦ Player không có tương tác đặc biệt với GR. ◦ Sàn chơi. ◦ Mặt phẳng (Không có độ cao). ",
         "bbox": [
-            80,
+            89,
             296,
-            505,
+            515,
             409
         ],
         "page_idx": 7
@@ -691,9 +704,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu GR_ \\*Tên tương ứng\\* ",
         "bbox": [
-            87,
+            101,
             417,
-            856,
+            868,
             439
         ],
         "page_idx": 7
@@ -703,23 +716,23 @@
         "text": "4.4.1 GR_Ground ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             485,
-            284,
+            301,
             504
         ],
         "page_idx": 7
     },
     {
         "type": "table",
-        "img_path": "images/aead771f015be2c7dbb22861409c3385e82e1e1d015d5b4088b8efd65a0f0a1d.jpg",
+        "img_path": "images/456d561a66510bd5dd0b76d9b551ef7f20a97b2911de06a70cec709dfed95c86.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Dién tich (Dai x Róng)</td></tr><tr><td rowspan=1 colspan=1>GR_Grass_01</td><td rowspan=1 colspan=1>102 x 93</td></tr><tr><td rowspan=1 colspan=1>GR_Sand_01</td><td rowspan=1 colspan=1>100 ×100</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1> Dién tich (Dai x Róng)</td></tr><tr><td rowspan=1 colspan=1>GR_Grass_01</td><td rowspan=1 colspan=1>102 x 93</td></tr><tr><td rowspan=1 colspan=1>GR_Sand_01</td><td rowspan=1 colspan=1>100×100</td></tr></table>",
         "bbox": [
-            141,
+            166,
             529,
-            646,
+            671,
             642
         ],
         "page_idx": 7
@@ -729,9 +742,9 @@
         "text": "4.5 Vật thể Hiding (HI) ",
         "text_level": 1,
         "bbox": [
-            79,
+            89,
             704,
-            324,
+            333,
             726
         ],
         "page_idx": 7
@@ -740,20 +753,20 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            87,
             734,
-            348,
+            356,
             754
         ],
         "page_idx": 7
     },
     {
         "type": "text",
-        "text": "◦ Player và đạn ở bất kỳ nguồn nào đều đi xuyên qua được HI.   \n◦ Player sẽ tàng hình khi đi vào HI.   \n◦ HI không thể bị phá huỷ.   \n◦ Tham khảo thông tin của vật thể: [World] [Tank War] Grass Logic Design ",
+        "text": "Player và đạn ở bất kỳ nguồn nào đều đi xuyên qua được HI.   \n◦ Player sẽ tàng hình khi đi vào HI.   \n◦ HI không thể bị phá huỷ.   \n◦ Tham khảo thông tin của vật thể: [World] [Tank War] Grass Logic Design ",
         "bbox": [
-            79,
+            89,
             764,
-            813,
+            814,
             877
         ],
         "page_idx": 7
@@ -762,9 +775,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu HI_ \\*Tên tương ứng\\* ",
         "bbox": [
-            85,
+            97,
             885,
-            851,
+            861,
             908
         ],
         "page_idx": 7
@@ -774,23 +787,23 @@
         "text": "4.5.1 HI_Grass ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             33,
-            259,
+            276,
             51
         ],
         "page_idx": 8
     },
     {
         "type": "table",
-        "img_path": "images/d86ec7d75959a8449110bb0c0393b79ab7f7dcacea0ef8cda3266cd0bd4305fc.jpg",
+        "img_path": "images/f4fb8362b6cbdfba2d4f15f32e35e272b1142366e0d3996eacb26288605b8647.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_2x1x2</td><td rowspan=1 colspan=1>2x1x2</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_2x1x2</td><td rowspan=1 colspan=1>2x1x2</td></tr></table>",
         "bbox": [
-            141,
+            166,
             94,
-            644,
+            671,
             235
         ],
         "page_idx": 8
@@ -800,9 +813,9 @@
         "text": "4.6 Vật thể Outpost (OP) (Chế độ Outpost Breaker) ",
         "text_level": 1,
         "bbox": [
-            79,
+            89,
             297,
-            626,
+            636,
             320
         ],
         "page_idx": 8
@@ -811,9 +824,9 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            79,
+            87,
             328,
-            348,
+            356,
             348
         ],
         "page_idx": 8
@@ -822,9 +835,9 @@
         "type": "text",
         "text": "◦ Player không thể đi xuyên qua OP.   \n◦ Player không có tương tác đặc biệt với OP.   \n◦ Đạn bắn từ bất kỳ nguồn nào không thể đi xuyên qua OP (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này).   \n◦ Đạn tank team ATK có khả năng bắn phá OP.   \n◦ Tham khảo thông tin của vật thể: [Combat Module] [Tank War] Outpost Design - Base Capture Mode ",
         "bbox": [
-            79,
+            89,
             359,
-            939,
+            947,
             546
         ],
         "page_idx": 8
@@ -833,9 +846,9 @@
         "type": "text",
         "text": "Note: Trong các folders chứa cái tệp file này sẽ được kí hiệu OP_ \\*Tên tương ứng\\* ",
         "bbox": [
-            90,
+            101,
             555,
-            858,
+            872,
             578
         ],
         "page_idx": 8
@@ -845,23 +858,23 @@
         "text": "4.6.1 OP_Tower ",
         "text_level": 1,
         "bbox": [
-            111,
+            129,
             623,
-            271,
+            289,
             642
         ],
         "page_idx": 8
     },
     {
         "type": "table",
-        "img_path": "images/be18a0aa5b82fa99656dce688f0891c1c55375f6555b8078318c4526bcdfbb14.jpg",
+        "img_path": "images/16a7756c69dc3bd583ab093992c4a5eb0b85e33c7c09db874c0feba5008c094e.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td>Ten</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>OP_Tower_01_6x7x6</td><td>6x7x6</td></tr></table>",
+        "table_body": "<table><tr><td>Tén</td><td>Thétich (Dai x Cao x Róng)</td></tr><tr><td>OP_Tower_01_6x7x6</td><td>6x7x6</td></tr></table>",
         "bbox": [
-            139,
+            166,
             667,
-            644,
+            671,
             772
         ],
         "page_idx": 8
@@ -871,9 +884,9 @@
         "text": "4.7 Vật thể Tank (TA) ",
         "text_level": 1,
         "bbox": [
-            80,
+            89,
             835,
-            308,
+            318,
             857
         ],
         "page_idx": 8
@@ -882,65 +895,32 @@
         "type": "text",
         "text": "Các vật thể này có đặc điểm: ",
         "bbox": [
-            109,
+            126,
             864,
-            378,
+            395,
             885
         ],
         "page_idx": 8
     },
     {
         "type": "text",
-        "text": "TA không thể đi xuyên qua nhau.   \nTA không có tương tác đặc biệt với nhau. ",
+        "text": "TA không thể đi xuyên qua nhau.   \nTA không có tương tác đặc biệt với nhau.   \n▪ Đạn bắn từ bất kỳ nguồn nào không thể đi xuyên qua TA (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này).   \n▪ Đạn từ TA thuộc team khác nhau có khả năng bắn phá nhau.   \n▪ Size TA của các class khác nhau, scale theo: Scout < Assault < Heavy   \n▪ Tham khảo thông tin của vật thể: [Character Module] [Tank War] Tank System Detail ",
         "bbox": [
-            111,
+            129,
             895,
-            523,
+            540,
             946
         ],
         "page_idx": 8
     },
     {
         "type": "text",
-        "text": "▪ Đạn bắn từ bất kỳ nguồn nào không thể đi xuyên qua TA (trừ khi có đạn được thiết kế với chủ đích ngược lại với đặc điểm này). ",
+        "text": "",
         "bbox": [
-            116,
+            129,
             33,
-            937,
-            78
-        ],
-        "page_idx": 9
-    },
-    {
-        "type": "text",
-        "text": "▪ Đạn từ TA thuộc team khác nhau có khả năng bắn phá nhau. ",
-        "bbox": [
-            112,
-            86,
-            705,
-            108
-        ],
-        "page_idx": 9
-    },
-    {
-        "type": "text",
-        "text": "Size TA của các class khác nhau, scale theo: Scout < Assault < Heavy ",
-        "bbox": [
-            121,
-            119,
-            787,
-            139
-        ],
-        "page_idx": 9
-    },
-    {
-        "type": "text",
-        "text": "▪ Tham khảo thông tin của vật thể: [Character Module] [Tank War] Tank System Detail ",
-        "bbox": [
-            119,
-            148,
-            946,
-            169
+            949,
+            190
         ],
         "page_idx": 9
     },
@@ -948,10 +928,10 @@
         "type": "text",
         "text": "Note: Các con tank đều nằm trong _GameAssets/Models/TankWars_Models/Char ",
         "bbox": [
-            117,
-            178,
-            917,
-            200
+            136,
+            202,
+            929,
+            222
         ],
         "page_idx": 9
     },
@@ -960,24 +940,24 @@
         "text": "4.7.1 Class Scout ",
         "text_level": 1,
         "bbox": [
-            111,
-            246,
-            282,
-            264
+            129,
+            269,
+            299,
+            286
         ],
         "page_idx": 9
     },
     {
         "type": "table",
-        "img_path": "images/67d5f39ba1550b73d3c866289db12749a326aebe4b8a5e5f33ee6d60590a64f4.jpg",
+        "img_path": "images/c2fe2662db9a461c10c15e7830fc88e01c40e30e8235e393b5badf9a9d444cd5.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_01</td><td rowspan=1 colspan=1>2 x 1.8 x 2</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_02</td><td rowspan=1 colspan=1>2 x 1.8x 2</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_01</td><td rowspan=1 colspan=1>2 x 1.8 x 2</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_02</td><td rowspan=1 colspan=1>2x 1.8x2</td></tr></table>",
         "bbox": [
-            141,
-            290,
-            644,
-            432
+            166,
+            313,
+            671,
+            454
         ],
         "page_idx": 9
     },
@@ -986,24 +966,24 @@
         "text": "4.7.2 Class Assault ",
         "text_level": 1,
         "bbox": [
-            111,
-            492,
-            297,
-            510
+            129,
+            515,
+            314,
+            533
         ],
         "page_idx": 9
     },
     {
         "type": "table",
-        "img_path": "images/008cbfbe831dc4d8e7e590683c35bf8fc76e49f6dc77d5811cd8d749aca0c4a3.jpg",
+        "img_path": "images/dfdf307079735f7c3cc6e5c1ed6c07dbe25ecb59da3586292188b4f7dfdb4cae.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_01</td><td rowspan=1 colspan=1>2 x 2 x 2.5</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_02</td><td rowspan=1 colspan=1>2.3 x 2.3 x 3.3</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_01</td><td rowspan=1 colspan=1>2 x 2 x 2.5</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_02</td><td rowspan=1 colspan=1>2.3 x 2.3 x 3.3</td></tr></table>",
         "bbox": [
-            141,
-            535,
-            644,
-            677
+            166,
+            559,
+            671,
+            700
         ],
         "page_idx": 9
     },
@@ -1012,24 +992,24 @@
         "text": "4.7.3 Class Heavy ",
         "text_level": 1,
         "bbox": [
-            111,
-            738,
-            287,
-            757
+            129,
+            761,
+            304,
+            779
         ],
         "page_idx": 9
     },
     {
         "type": "table",
-        "img_path": "images/6a0aa2e41a45e77679861cdb56b58cab74524a8906e8c22e925c992dfa36c52c.jpg",
+        "img_path": "images/ccc32ad5df4ac53883f55658f78316f3bbb6bb3515ed7b0e076a4fecfe024843.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_01</td><td rowspan=1 colspan=1>3 x2.7x3</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_02</td><td rowspan=1 colspan=1>3.5 x 3 x 3.9</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_01</td><td rowspan=1 colspan=1>3 x 2.7 x3</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_02</td><td rowspan=1 colspan=1>3.5 x 3 x 3.9</td></tr></table>",
         "bbox": [
-            141,
-            783,
-            644,
-            923
+            166,
+            805,
+            671,
+            947
         ],
         "page_idx": 9
     },
@@ -1050,23 +1030,23 @@
         "text": "5.1 Mode Outpost Breaker ",
         "text_level": 1,
         "bbox": [
-            79,
+            89,
             120,
-            368,
+            377,
             141
         ],
         "page_idx": 10
     },
     {
         "type": "table",
-        "img_path": "images/b5a899b98a599cdda90b64d491e9bb3e775a10e63aaee21df8ab425f74c73ee1.jpg",
+        "img_path": "images/f4211aa1d107dc633402d2bb68df275d84c6f792718d42846f54cb462af20807.jpg",
         "table_caption": [],
         "table_footnote": [],
-        "table_body": "<table><tr><td>Tén</td><td>Tén (Scene)</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Desert</td><td>TankGamePlay-Final</td><td>100 x 100</td></tr></table>",
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Tén (Scene)</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>Desert</td><td rowspan=1 colspan=1>TankGamePlay-Final</td><td rowspan=1 colspan=1>100 x 100</td></tr></table>",
         "bbox": [
-            109,
+            126,
             166,
-            897,
+            915,
             271
         ],
         "page_idx": 10
@@ -1076,23 +1056,23 @@
         "text": "5.2 Mode Deathmatch ",
         "text_level": 1,
         "bbox": [
-            79,
+            89,
             334,
-            324,
+            333,
             354
         ],
         "page_idx": 10
     },
     {
         "type": "table",
-        "img_path": "images/7874932780006739de977d3fc2d8c83a042f74cef497b7f3d17109c1cb8d3676.jpg",
+        "img_path": "images/a31ba3f68129e9a46fda3122b4dc5e1df898f32f7df0b0f8893feef290402778.jpg",
         "table_caption": [],
         "table_footnote": [],
         "table_body": "<table><tr><td>Tén</td><td>Tén (Scene)</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Desert(?)</td><td></td><td>100 x 100</td></tr></table>",
         "bbox": [
-            109,
+            126,
             380,
-            898,
+            915,
             484
         ],
         "page_idx": 10
@@ -1124,9 +1104,9 @@
         "type": "text",
         "text": "◦ 1 mét $\\mathbf { \\lambda } = \\mathbf { 1 }$ Unit trong Unity ",
         "bbox": [
-            80,
+            87,
             615,
-            360,
+            368,
             635
         ],
         "page_idx": 10

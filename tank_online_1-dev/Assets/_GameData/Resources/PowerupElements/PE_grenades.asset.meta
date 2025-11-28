@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1e627006c5ba8b242a21e6e00649c687
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Resources/PowerupElements/PE_grenades.asset
+  uploadId: 739895

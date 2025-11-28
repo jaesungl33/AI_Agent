@@ -1,0 +1,270 @@
+{
+  "doc_id": "game_mode_module_tank_war_deathmatch",
+  "metadata": {
+    "created_at": "2025-11-26T10:40:17.999851",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Tank",
+        "category": "BR",
+        "description": "Player-controlled tank in Deathmatch mode",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": false,
+        "destructible": true,
+        "special_rules": null,
+        "source_note": "Death Mode is a PvP mode where each player controls a Tank"
+      },
+      {
+        "id": "obj_002",
+        "name": "Spawn Point",
+        "category": "OP",
+        "description": "Designated spawn locations for players",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": true,
+        "bullet_pass_through": true,
+        "destructible": false,
+        "special_rules": "Randomized spawn points avoid obstacles",
+        "source_note": "Each player spawns randomly at one of six spawn points, avoiding obstacles"
+      },
+      {
+        "id": "obj_003",
+        "name": "Chest",
+        "category": "GR",
+        "description": "In-game object containing gold rewards",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": true,
+        "destructible": true,
+        "special_rules": "Spawns every 15 seconds, not in the last 15s of the match",
+        "source_note": "Gold chests spawn randomly within the Safe Zone"
+      },
+      {
+        "id": "obj_004",
+        "name": "Obstacle",
+        "category": "OP",
+        "description": "Various map obstacles affecting movement and gameplay",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Includes water (blocks movement but not bullets), mud (reduces speed by 10%), destructible objects",
+        "source_note": "Map contains various obstacles like water, mud pits, destructible objects"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Matchmaking System",
+        "description": "System for organizing players into matches",
+        "mechanics": "Solo Free-for-All matchmaking for 6 players per match",
+        "objectives": "Create balanced and fair matches",
+        "related_objects": [
+          "obj_001"
+        ],
+        "interactions": [],
+        "source_note": "Matchmaking system uses rules defined in [Multiplayer Module] [Tank War] Matchmaking System Design"
+      },
+      {
+        "id": "sys_002",
+        "name": "Spawn & Respawn System",
+        "description": "Manages player spawning and respawning mechanics",
+        "mechanics": "Initial random spawn at one of six points, 3-second respawn timer, 2-second invincibility shield",
+        "objectives": "Ensure fair starting positions and provide temporary protection after respawning",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "interactions": [],
+        "source_note": "Players spawn randomly avoiding obstacles, with 3s respawn time and 2s invincibility"
+      },
+      {
+        "id": "sys_003",
+        "name": "In-Match Upgrade System",
+        "description": "System for upgrading tank stats during matches",
+        "mechanics": "Uses Gold to upgrade stats with increasing costs based on BaseCost, WIstat, and StepGrowthstat(k)",
+        "objectives": "Provide progression and strategic decision-making during matches",
+        "related_objects": [
+          "obj_001"
+        ],
+        "interactions": [],
+        "source_note": "Upgrade costs follow formula γ_OSt_stat(k) = BaseCost × WI_stat × StepGrowth_stat(k)"
+      },
+      {
+        "id": "sys_004",
+        "name": "Ranking System",
+        "description": "Determines player rankings at the end of matches",
+        "mechanics": "Prioritizes Kill count, then Death count, then Damage Dealt",
+        "objectives": "Establish clear winner determination and ranking criteria",
+        "related_objects": [
+          "obj_001"
+        ],
+        "interactions": [],
+        "source_note": "Ranking determined by Kills > Deaths > Damage Dealt"
+      },
+      {
+        "id": "sys_005",
+        "name": "Gold Distribution System",
+        "description": "Manages in-match gold acquisition",
+        "mechanics": "Gold from kills (80 per kill) and random chest spawns",
+        "objectives": "Provide resources for upgrades and maintain game balance",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "interactions": [],
+        "source_note": "Gold sources include 80 per kill and random chest spawns"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Respawn Protection",
+        "description": "Players receive temporary invincibility after respawning",
+        "trigger": "Player respawns",
+        "effect": "2-second invincibility shield",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_002"
+        ],
+        "source_note": "After respawning, players have 2s invincibility shield"
+      },
+      {
+        "id": "rule_002",
+        "summary": "Gold Spawn Mechanics",
+        "description": "Determines total gold spawned at any given time",
+        "trigger": "Chest spawn event",
+        "effect": "Sum of all chest values at time t",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_005"
+        ],
+        "source_note": "Gold_spawn(t) = Σ Gold_chest(t,j,Phase(t))"
+      },
+      {
+        "id": "rule_003",
+        "summary": "Upgrade Cost Scaling",
+        "description": "Defines the cost of upgrading tank stats",
+        "trigger": "Player attempts to upgrade stat",
+        "effect": "Calculated using BaseCost, WIstat, and StepGrowthstat(k)",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_003"
+        ],
+        "source_note": "Upgrade cost follows γ_OSt_stat(k) = BaseCost × WI_stat × StepGrowth_stat(k)"
+      },
+      {
+        "id": "rule_004",
+        "summary": "Ranking Tie-Breaker",
+        "description": "Determines ranking when players have equal Kill counts",
+        "trigger": "End of match ranking calculation",
+        "effect": "Checks Deaths, then Damage Dealt",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_004"
+        ],
+        "source_note": "Tie-breaking uses Kills > Deaths > Damage Dealt"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Competitive Ranking System",
+        "description": "Implement a clear ranking system based on performance metrics",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Rankings must be determined by Kills > Deaths > Damage Dealt without ties",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_004"
+        ],
+        "source_note": "Ranking system must resolve ties using multiple criteria"
+      },
+      {
+        "id": "req_002",
+        "title": "Balanced Gold Economy",
+        "description": "Ensure fair distribution of in-match gold",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Gold must come from kills (80 per kill) and randomized chest spawns",
+        "related_objects": [
+          "obj_001",
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_005"
+        ],
+        "source_note": "Gold economy includes fixed kill rewards and variable chest values"
+      },
+      {
+        "id": "req_003",
+        "title": "Progressive Upgrade Costs",
+        "description": "Implement escalating costs for stat upgrades",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Upgrade costs must increase based on BaseCost, WIstat, and StepGrowthstat(k)",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_003"
+        ],
+        "source_note": "Upgrade costs must grow exponentially to prevent overpowered builds"
+      },
+      {
+        "id": "req_004",
+        "title": "Fair Spawn System",
+        "description": "Ensure players spawn in fair and random locations",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Spawn points must avoid obstacles and be randomized",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_002"
+        ],
+        "source_note": "Spawn system must place players randomly while avoiding obstacles"
+      }
+    ]
+  }
+}

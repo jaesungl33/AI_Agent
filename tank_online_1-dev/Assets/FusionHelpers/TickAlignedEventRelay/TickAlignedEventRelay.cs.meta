@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: f3953e4d75eb4e0b8423a5e857aabeca
+timeCreated: 1684227939
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/FusionHelpers/TickAlignedEventRelay/TickAlignedEventRelay.cs
+  uploadId: 739895

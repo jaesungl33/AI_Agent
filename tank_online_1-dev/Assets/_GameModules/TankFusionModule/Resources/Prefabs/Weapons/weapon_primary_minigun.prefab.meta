@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9dddb965edb206d4ebb5d39819c59dd6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/Weapons/weapon_primary_minigun.prefab
+  uploadId: 739895

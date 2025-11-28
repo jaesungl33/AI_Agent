@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c8e8f95c091b64329b97fba535292c16
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scenes/Level1.unity
+  uploadId: 739895

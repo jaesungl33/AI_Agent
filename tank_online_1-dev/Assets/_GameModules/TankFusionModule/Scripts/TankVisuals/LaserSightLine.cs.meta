@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2377d952de0881443a585e288b1831d7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scripts/Tanknarok/Player/TankVisuals/LaserSightLine.cs
+  uploadId: 739895

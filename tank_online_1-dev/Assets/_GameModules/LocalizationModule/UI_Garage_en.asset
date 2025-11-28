@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Garage_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: dba81ee0cef676544a7de536d6193517, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 13978112000
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113026600960
+    m_Localized: Tank Collection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372230393856
+    m_Localized: Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 420829794304
+    m_Localized: Fire Rate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 447639785472
+    m_Localized: DMG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 499586240512
+    m_Localized: Set Lobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 544138137600
+    m_Localized: Modify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 570990071808
+    m_Localized: Artifact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 612765339648
+    m_Localized: Ability
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a86088d76008b884da15b9ab10f4fb2b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/Weapons/weapon_primary_gigavolt.prefab
+  uploadId: 739895

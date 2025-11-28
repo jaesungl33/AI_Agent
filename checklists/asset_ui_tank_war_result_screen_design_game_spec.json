@@ -1,0 +1,142 @@
+{
+  "doc_id": "asset_ui_tank_war_result_screen_design",
+  "metadata": {
+    "created_at": "2025-11-26T10:27:12.792532",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Collect Rewards Button",
+        "category": "UI",
+        "description": "Button that allows players to navigate to the rewards collection screen",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/91a6e0ff82d6b562482d2b67f64169f39e74dcd86c74fd3021d1ea160e47d9ab.jpg"
+      },
+      {
+        "id": "obj_002",
+        "name": "Back Button (Mobile)",
+        "category": "UI",
+        "description": "Optional button that navigates players to the reward screen when pressed",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Optional interaction",
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/48838124f47215ee109a48468e38fd1f8f8ecce840aa362687f914f866de1034.jpg"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Result Screen System",
+        "description": "System governing interactions and information display on the result screen of Tank War",
+        "mechanics": "Displays match statistics including player list, total kills for both teams, individual K/D ratios, and MVP award; includes interactive elements like Collect Rewards button",
+        "objectives": "Ensure players can read important information and understand component functions",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "interactions": [
+          "Pressing 'Collect Rewards' navigates to reward screen",
+          "Optional back button press navigates to reward screen"
+        ],
+        "source_note": "Document content and tables from multiple image paths"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Collect Rewards Button Navigation",
+        "description": "When the Collect Rewards button is pressed, players are navigated to the rewards collection screen",
+        "trigger": "Player presses 'Collect Rewards' button",
+        "effect": "Navigation to rewards collection screen",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/91a6e0ff82d6b562482d2b67f64169f39e74dcd86c74fd3021d1ea160e47d9ab.jpg"
+      },
+      {
+        "id": "rule_002",
+        "summary": "Optional Back Button Navigation",
+        "description": "When the optional back button is pressed on mobile devices, players are navigated to the reward screen",
+        "trigger": "Player presses back button on mobile device",
+        "effect": "Optional navigation to reward screen",
+        "related_objects": [
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/48838124f47215ee109a48468e38fd1f8f8ecce840aa362687f914f866de1034.jpg"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Display Match Statistics",
+        "description": "Show post-match statistics including player list, total kills for both teams, individual K/D ratios, and MVP award",
+        "category": "ui",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "All specified statistics are displayed correctly on the result screen",
+        "related_objects": [],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/7cae12c039310fab0c9fe2badd48ffb35eb1449b96dec4f5f8fcc2ee13aef5cd.jpg"
+      },
+      {
+        "id": "req_002",
+        "title": "Implement Collect Rewards Button",
+        "description": "Create a button that navigates players to the rewards collection screen",
+        "category": "ui",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "'Collect Rewards' button successfully navigates to reward screen",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/91a6e0ff82d6b562482d2b67f64169f39e74dcd86c74fd3021d1ea160e47d9ab.jpg"
+      },
+      {
+        "id": "req_003",
+        "title": "Optional Back Button Functionality",
+        "description": "Implement optional functionality for back button to navigate to reward screen",
+        "category": "ui",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Optional back button successfully navigates to reward screen",
+        "related_objects": [
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/asset_ui_tank_war_result_screen_design/[Asset, UI] [Tank War] Result Screen Design/auto/images/48838124f47215ee109a48468e38fd1f8f8ecce840aa362687f914f866de1034.jpg"
+      }
+    ]
+  }
+}

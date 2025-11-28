@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8d706a7da9499d649a0290f15bcaf1d3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Explosions/pfx_exp_GigaVolt.prefab
+  uploadId: 739895

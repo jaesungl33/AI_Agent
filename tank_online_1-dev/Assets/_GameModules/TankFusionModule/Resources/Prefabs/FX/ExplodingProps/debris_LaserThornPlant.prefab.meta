@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 05cc2d419f9041b4e8f2119243c7be81
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/ExplodingProps/debris_LaserThornPlant.prefab
+  uploadId: 739895

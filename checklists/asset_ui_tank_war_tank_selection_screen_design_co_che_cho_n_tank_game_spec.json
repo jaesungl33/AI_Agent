@@ -1,0 +1,210 @@
+{
+  "doc_id": "asset_ui_tank_war_tank_selection_screen_design_co_che_cho_n_tank",
+  "metadata": {
+    "created_at": "2025-11-26T10:29:16.783969",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Thời gian chon tank",
+        "category": "UI",
+        "description": "Hiển thị thời gian cho phép trong màn hình chọn tank và thời gian chuẩn bị vào trận. Khi hết thời gian chọn, players và những tanks họ chọn được đưa vào trong map.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "obj_002",
+        "name": "Danh sách tank",
+        "category": "UI",
+        "description": "Liệt kê các loại tank. Tank được sắp xếp theo class. Sẽ được ẩn đi sau khi hết thời gian chọn tank (15s).",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "obj_003",
+        "name": "Danh sách 2 đội chơi",
+        "category": "UI",
+        "description": "Các người chơi được chia thành 2 đội. Danh sách này cho thấy người chơi với mình sẽ là ai và sẽ chọn tank gì. Vị trí 2 team được sắp sẵn là: ATK: Trái, DEF: Phải. Hiển thị tên, avatar của player, tên tank và model 3D tank họ chọn.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "obj_004",
+        "name": "Nhiệm vụ",
+        "category": "UI",
+        "description": "Giúp người chơi (mới) hiểu mục tiêu chính của team mình. Được hiện ra sau khi mọi người hoàn thành giai đoạn chọn tank. Thời gian hiển thị nhiệm vụ là 5s.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "obj_005",
+        "name": "Nút khóa tank",
+        "category": "UI",
+        "description": "Chọn người chơi đổi tank sau khi được bắt đầu.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Tank Selection System",
+        "description": "Hệ thống quản lý việc chọn tank trong giai đoạn chuẩn bị chiến đấu.",
+        "mechanics": "Người chơi có thể chọn từ danh sách tank, hệ thống tự động gán tank mặc định nếu không chọn, và khóa lựa chọn khi cần.",
+        "objectives": "Đảm bảo công bằng giữa 2 đội chơi khi chọn tank và giúp người chơi nhanh chóng hiểu vai trò của mình.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003",
+          "obj_004",
+          "obj_005"
+        ],
+        "interactions": [
+          "Người chơi tương tác với 'Danh sách tank' để chọn tank.",
+          "'Nút khóa tank' cho phép người chơi khóa lựa chọn của mình.",
+          "'Thời gian chọn tank' điều khiển khi nào danh sách tank bị ẩn."
+        ],
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Quy tắc thời gian chọn tank",
+        "description": "Người chơi có 15 giây để chọn tank và 5 giây để chuẩn bị vào trận.",
+        "trigger": "Bắt đầu màn hình chọn tank.",
+        "effect": "Sau 15 giây, danh sách tank bị ẩn và người chơi được đưa vào trận.",
+        "related_objects": [
+          "obj_001",
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "rule_002",
+        "summary": "Quy tắc gán tank mặc định",
+        "description": "Nếu người chơi không chọn tank, hệ thống sẽ gán tank đầu tiên trong danh sách làm lựa chọn mặc định.",
+        "trigger": "Hết thời gian chọn tank mà người chơi chưa chọn.",
+        "effect": "Tank đầu tiên trong danh sách được chọn tự động.",
+        "related_objects": [
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+      },
+      {
+        "id": "rule_003",
+        "summary": "Quy tắc thoát ứng dụng",
+        "description": "Nếu người chơi thoát ứng dụng trong khi thời gian chọn tank chưa hết, họ vẫn có thể quay lại và tiếp tục.",
+        "trigger": "Người chơi thoát ứng dụng.",
+        "effect": "Người chơi có thể quay lại và tiếp tục chọn tank nếu thời gian chưa hết.",
+        "related_objects": [],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Thời gian chọn tank",
+        "description": "Người chơi cần có 15 giây để chọn tank và 5 giây để chuẩn bị vào trận.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Người chơi có thể chọn tank trong 15 giây và sau đó được đưa vào trận sau 5 giây chuẩn bị.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...c06a04af0021d7aa6c67999e988798fa48754096c4ff26dd57232f0ba51c1466.jpg"
+      },
+      {
+        "id": "req_002",
+        "title": "Gán tank mặc định",
+        "description": "Hệ thống cần tự động gán tank đầu tiên trong danh sách nếu người chơi không chọn.",
+        "category": "progression",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Nếu người chơi không chọn tank trong 15 giây, hệ thống tự động chọn tank đầu tiên trong danh sách.",
+        "related_objects": [
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+      },
+      {
+        "id": "req_003",
+        "title": "Cho phép quay lại sau khi thoát",
+        "description": "Người chơi cần có khả năng quay lại và tiếp tục chọn tank nếu họ thoát ứng dụng trước khi hết thời gian.",
+        "category": "progression",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Người chơi có thể thoát ứng dụng và quay lại để tiếp tục chọn tank nếu thời gian chưa hết.",
+        "related_objects": [],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table Analysis: Image Path ...4f1411d442a98353dcefdfe3625830700b6563058aa750fe15265b28c840d403.jpg"
+      }
+    ]
+  }
+}

@@ -1,6 +1,64 @@
+# ============================================================================
+# GDD RAG Backbone - Python Dependencies
+# ============================================================================
+# Install with: pip install -r requirements.txt
+# Python version: 3.10 or higher required
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Core RAG Framework (Required)
+# ----------------------------------------------------------------------------
+# RAG-Anything: Document processing, chunking, embedding, and indexing
+# The [all] extra includes document parsers (mineru, docling) and all RAG features
 raganything[all]
+
+# ----------------------------------------------------------------------------
+# Web UI Framework (Required for Streamlit app)
+# ----------------------------------------------------------------------------
+# Streamlit: Interactive web dashboard for document processing pipeline
+# Used by: ui/app.py
 streamlit
+
+# ----------------------------------------------------------------------------
+# LLM Provider SDKs (Required)
+# ----------------------------------------------------------------------------
+# DashScope: Alibaba's SDK for Qwen LLM and embedding models
+# Used by: gdd_rag_backbone/llm_providers/qwen_provider.py
+# Required for: LLM text generation and embedding generation
 dashscope
+
+# OpenAI SDK: Client library for OpenAI-compatible API endpoints
+# Used by: gdd_rag_backbone/llm_providers/qwen_provider.py
+# Note: Used to call Qwen/DashScope's OpenAI-compatible endpoint, NOT OpenAI's API
+# See OPENAI_USAGE.md for details
 openai
+
+# ----------------------------------------------------------------------------
+# Data Processing (Required)
+# ----------------------------------------------------------------------------
+# Pandas: Data manipulation and analysis
+# Used by: ui/app.py for displaying structured data (requirements, todos, etc.)
 pandas
 
+# ----------------------------------------------------------------------------
+# Environment Management (Recommended)
+# ----------------------------------------------------------------------------
+# Python-dotenv: Loads environment variables from .env files
+# Used by: gdd_rag_backbone/config.py
+# Allows easy API key management without hardcoding credentials
+python-dotenv
+
+# ============================================================================
+# Development Dependencies (Optional)
+# ============================================================================
+# Uncomment the following lines if you want to use development tools:
+#
+# mypy          # Static type checking
+# pylint        # Code linting and style checking
+# black         # Code formatter
+# pytest        # Testing framework
+#
+# Install development tools with:
+# pip install -r requirements.txt
+# Or install individually: pip install mypy pylint black pytest
+# ============================================================================

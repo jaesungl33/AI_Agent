@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f0fbb02d55cedbe4995a46f758a5ba86
+timeCreated: 1524135000
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Tank/DriveDust/pfx_DrivingDust Normal.prefab
+  uploadId: 739895

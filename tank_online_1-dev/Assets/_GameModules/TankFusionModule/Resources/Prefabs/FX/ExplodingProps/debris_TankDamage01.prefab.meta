@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ca9feca023c948c41b442564c3225b23
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/ExplodingProps/debris_TankDamage01.prefab
+  uploadId: 739895

@@ -1,0 +1,219 @@
+{
+  "doc_id": "character_module_tank_war_garage_design_-_main",
+  "metadata": {
+    "created_at": "2025-11-26T10:31:46.099688",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_tank_model",
+        "name": "Tank Model",
+        "category": "GR",
+        "description": "3D-rendered tank model displayed in the Tank Garage interface.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Referenced in multiple image analyses and textual descriptions, including sections 4.1 and 4.2."
+      },
+      {
+        "id": "obj_wrap",
+        "name": "Wrap",
+        "category": "DE",
+        "description": "Full skin/body wrap customization option for tanks.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Described in section 4.2 and referenced in image captions."
+      },
+      {
+        "id": "obj_decal",
+        "name": "Decal",
+        "category": "DE",
+        "description": "Large decals applied to specific parts of the tank.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Described in section 4.2 and referenced in image captions."
+      },
+      {
+        "id": "obj_sticker",
+        "name": "Sticker",
+        "category": "DE",
+        "description": "Small stickers like logos or symbols that can be layered and moved freely.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Described in section 4.2 and referenced in image captions."
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_tank_garage",
+        "name": "Tank Garage System",
+        "description": "Primary interface for managing tanks, artifacts, and customizations.",
+        "mechanics": "Players interact with UI elements to view tank stats, customize appearance, and set default tanks.",
+        "objectives": "Enable players to manage and customize their tanks efficiently.",
+        "related_objects": [
+          "obj_tank_model",
+          "obj_wrap",
+          "obj_decal",
+          "obj_sticker"
+        ],
+        "interactions": [
+          "View tank stats by holding on specific UI elements.",
+          "Customize tank appearance using Wrap, Decal, and Sticker options.",
+          "Set a default tank for use outside the garage."
+        ],
+        "source_note": "Detailed in sections 4.1, 4.2, and 5."
+      },
+      {
+        "id": "sys_tank_decor",
+        "name": "Tank Decor System",
+        "description": "Sub-system within Tank Garage for customizing tank appearance.",
+        "mechanics": "Players select from Wrap, Decal, Sticker, and Custom options to modify tank aesthetics.",
+        "objectives": "Provide tools for aesthetic customization of tanks.",
+        "related_objects": [
+          "obj_wrap",
+          "obj_decal",
+          "obj_sticker"
+        ],
+        "interactions": [
+          "Apply wraps to change overall tank appearance.",
+          "Add decals to specific parts of the tank.",
+          "Place stickers freely on the tank surface."
+        ],
+        "source_note": "Detailed in section 4.2."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_view_stats",
+        "summary": "View Tank Stats",
+        "description": "Players can view detailed tank stats by interacting with specific UI elements.",
+        "trigger": "Player holds/taps on tank stat indicators.",
+        "effect": "Exact tank stats are displayed.",
+        "related_objects": [
+          "obj_tank_model"
+        ],
+        "related_systems": [
+          "sys_tank_garage"
+        ],
+        "source_note": "Mentioned in section 5.1."
+      },
+      {
+        "id": "rule_set_default_tank",
+        "summary": "Set Default Tank",
+        "description": "Players can designate a tank as their default tank for use outside the garage.",
+        "trigger": "Player selects 'Set Default Tank' button.",
+        "effect": "Selected tank becomes the default tank.",
+        "related_objects": [
+          "obj_tank_model"
+        ],
+        "related_systems": [
+          "sys_tank_garage"
+        ],
+        "source_note": "Mentioned in section 5.2."
+      },
+      {
+        "id": "rule_customize_appearance",
+        "summary": "Customize Tank Appearance",
+        "description": "Players can modify the visual appearance of their tanks using various customization options.",
+        "trigger": "Player interacts with Wrap, Decal, or Sticker tabs.",
+        "effect": "Tank appearance is updated based on selected options.",
+        "related_objects": [
+          "obj_wrap",
+          "obj_decal",
+          "obj_sticker"
+        ],
+        "related_systems": [
+          "sys_tank_decor"
+        ],
+        "source_note": "Mentioned in sections 5.3 and 5.4."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_ui_ux_design",
+        "title": "UI/UX Design for Garage",
+        "description": "Develop a user-friendly interface for the Tank Garage system.",
+        "category": "ui",
+        "priority": "high",
+        "status": "in-progress",
+        "acceptance_criteria": "Interface allows easy navigation and interaction for all core functionalities.",
+        "related_objects": [
+          "obj_tank_model",
+          "obj_wrap",
+          "obj_decal",
+          "obj_sticker"
+        ],
+        "related_systems": [
+          "sys_tank_garage",
+          "sys_tank_decor"
+        ],
+        "source_note": "Referenced in section 3 and related documents."
+      },
+      {
+        "id": "req_artifact_integration",
+        "title": "Artifact Integration",
+        "description": "Integrate artifact functionality into the Tank Garage system.",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Artifacts can be equipped and affect tank performance.",
+        "related_objects": [],
+        "related_systems": [
+          "sys_tank_garage"
+        ],
+        "source_note": "Mentioned in section 6."
+      },
+      {
+        "id": "req_ai_customization",
+        "title": "AI-Generated Customization",
+        "description": "Implement AI-generated wraps, decals, and stickers for tank customization.",
+        "category": "tech",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "AI generates unique customization options that players can apply.",
+        "related_objects": [
+          "obj_wrap",
+          "obj_decal",
+          "obj_sticker"
+        ],
+        "related_systems": [
+          "sys_tank_decor"
+        ],
+        "source_note": "Mentioned in section 6."
+      }
+    ]
+  }
+}

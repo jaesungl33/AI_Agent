@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b4c665d0d80b23f4aa348f2b54b7bb14
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Tank/Teleport/pfx_Teleport_Discharge.prefab
+  uploadId: 739895

@@ -1,0 +1,908 @@
+[
+    {
+        "type": "text",
+        "text": "[Progression Module] [Tank Wars] Achievement Design ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            734,
+            170
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "LIỆT KÊ ACHIEVEMENTS ",
+        "bbox": [
+            45,
+            194,
+            284,
+            215
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Version: 0.1 ",
+        "bbox": [
+            62,
+            226,
+            183,
+            245
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "phucth12 ",
+        "bbox": [
+            215,
+            257,
+            311,
+            275
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "thanhdv2 ",
+        "bbox": [
+            360,
+            257,
+            457,
+            273
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ngày tạo: 09 - 09 - 2025 ",
+        "bbox": [
+            62,
+            286,
+            296,
+            305
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/4cae44c65e960a69e276602eb0f4dd97068a949d6117c39fd3108bfd67bde53e.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>Mo ta</td><td rowspan=1 colspan=1>Nguoiviet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>30-09-2025</td><td rowspan=1 colspan=1>Hoan thanh file</td><td rowspan=1 colspan=1>®phucth12O thanhdv2 linhttd</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>03-10-2025</td><td rowspan=1 colspan=1>： Define däc diém thiet ké thanh tuu vaphan thuong·  Liet ké thanh tuu va phän thuong cóthe có： G@p lai file Achievement UI/UX Design</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>",
+        "bbox": [
+            45,
+            333,
+            936,
+            680
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Tổng quan và mục tiêu thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            744,
+            493,
+            771
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Tài liệu liệt kê các achievements trong game. ",
+        "bbox": [
+            47,
+            780,
+            466,
+            800
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Đi theo các điểm sau khi thiết kế achievements: ",
+        "bbox": [
+            47,
+            810,
+            493,
+            829
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Achievements được thiết kế với ý định là mang lại sự thử thách và hứng thú cho người chơi, nhằm động viên người chơi quay lại game.   \n• Liệt kê những achievements và cách để nhận nó. Cách nhận achievements phải được giải thích rõ ràng. ",
+        "bbox": [
+            45,
+            840,
+            924,
+            938
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Người chơi cảm thấy dễ hiểu khi quan sát các thành tựu và cách đạt được thành tựu đó. ",
+        "bbox": [
+            55,
+            33,
+            895,
+            54
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Tạo cảm giác muốn săn thành tựu cho người chơi. ",
+        "bbox": [
+            48,
+            65,
+            545,
+            84
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Có phản hồi tích cực cho người chơi khi họ đạt được thành tựu mới hoặc rank mới. ",
+        "bbox": [
+            53,
+            95,
+            848,
+            115
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/d6565c6b04583debfc253f8b4cb24d69537b8df6c394bab21e1a677f39460143.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            74,
+            150,
+            925,
+            322
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2. Tổng quan tài liệu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            415,
+            321,
+            441
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. User Flow ",
+        "bbox": [
+            89,
+            480,
+            195,
+            496
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Chi tiết thiết kế ",
+        "bbox": [
+            87,
+            508,
+            242,
+            526
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4.1 Nội dung achievement ",
+        "bbox": [
+            109,
+            536,
+            329,
+            553
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4.2 Đặc điểm thiết kế achievements ",
+        "bbox": [
+            111,
+            565,
+            405,
+            582
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4.3 Cơ chế sắp xếp thành tựu trong UI ",
+        "bbox": [
+            111,
+            594,
+            420,
+            611
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4.4 Thông báo hoàn thành achievement ",
+        "bbox": [
+            109,
+            622,
+            441,
+            640
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. User Flow ",
+        "bbox": [
+            48,
+            713,
+            217,
+            735
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "image",
+        "img_path": "images/b94ab0a496e0b48346d8ebd3f48eda5eeb4f89917b4f45c6dd057df15e6ba78d.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            52,
+            33,
+            936,
+            235
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4. Chi tiết thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            333,
+            289,
+            357
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4.1 Nội dung achievement ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            377,
+            378,
+            398
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/c9507276a02a1595b63a8b79a623a9bf4a4930cecc6e947c8eb16eb0caa40a22.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Thänh phän</td><td rowspan=1 colspan=1>Mieu ta</td></tr><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Tieu de</td></tr><tr><td rowspan=1 colspan=1>Icon</td><td rowspan=1 colspan=1> Hinh änh dai dién achievement</td></tr><tr><td rowspan=1 colspan=1>Noi dung</td><td rowspan=1 colspan=1>Dieu kién hoan thanh</td></tr><tr><td rowspan=1 colspan=1>Phän thuong</td><td rowspan=1 colspan=1>Icon + S6 luongDanh sach/Loai phän thuong dien vao day</td></tr><tr><td rowspan=1 colspan=1>Achievement cha/con(Parent/Child achievement)</td><td rowspan=1 colspan=1>B achievements nay la các cót möc quan trong docquang duong.Achievement cha di truóc achievement con,nén bóachievements nhu nay có thanh tuu con hien thi saukhi hoan thanh thanh tuu cha.Note: B@ achievements nay déu theo doi 1 só dém.Va só nay khong reset sau khi dat dugc tung cot moc.</td></tr></table>",
+        "bbox": [
+            85,
+            425,
+            826,
+            816
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "4.2 Đặc điểm thiết kế achievements ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            879,
+            481,
+            901
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Nên có thành tựu cho mọi gamemodes có trong game, và tập trung vào các gamemodes phổ biến. ",
+        "bbox": [
+            90,
+            910,
+            944,
+            952
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "discarded",
+        "text": "Achievement Screen Userflow ",
+        "bbox": [
+            375,
+            258,
+            624,
+            273
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "◦ Có các thành tựu đi theo tiến trình của người chơi (progression-based).   \n◦ Thành tựu nên bao phủ nhiều mặt gameplay.   \n◦ Có thành tựu về mặt xã hội (Kết bạn, chơi với 1 party, tạo hội - nếu có, etc.).   \n◦ Nhiều thành tựu dành riêng cho người mới chơi để thu hút họ.   \n◦ Không quá đơn giản (Đó là nhiệm vụ hằng ngày) và có sự phức tạp rải đều trên toàn diện. ",
+        "bbox": [
+            89,
+            33,
+            946,
+            177
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "4 thể loại thành tựu: ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            216,
+            289,
+            236
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/0554f5b4c56c5c831366bd90b1101e3936f19fe0bbdc4150f327d997af9dd532.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Catergory</td><td rowspan=1 colspan=1>Dacdiem</td></tr><tr><td rowspan=1 colspan=1>Onboarding</td><td rowspan=1 colspan=1>：  Achievement gioi thiéu/hu&amp;ng dän game feature chongudi choi mói</td></tr><tr><td rowspan=1 colspan=1>Combat Progression</td><td rowspan=1 colspan=1>Achievement theo doi hanh trinh cua nguoi choi trong. game &amp; khia canh gameplay.：  Bao gom: Thanh thao skill, tank; só län thäng, dat MVPcua nguoi choi; só luong ngoi sao suu täm, etc.</td></tr><tr><td rowspan=1 colspan=1>Social Progression</td><td rowspan=1 colspan=1>：   Achievement theo doi hanh trinh cua nguoi choi trong game &amp; khia canh social.：  Bao gom: Só luong ban, so lan va so luong ban choi cungparty, etc.</td></tr><tr><td rowspan=1 colspan=1>Feats (bonusachievement)</td><td rowspan=1 colspan=1>：  Achievement cho thém,nhän dip nhüng su kién däc biét&amp; trong game：  Có thoi han hoan thanh, khöng hoan thanh trong thoigian dó sé bién mat</td></tr><tr><td rowspan=1 colspan=1>Challenges</td><td rowspan=1 colspan=1>：  Thu&#x27; thách ky näng, kinh nghiém nguoi choi.</td></tr></table>",
+        "bbox": [
+            85,
+            264,
+            826,
+            696
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "File config: [Progression Module] [Tank War] Achievement Listing ",
+        "text_level": 1,
+        "bbox": [
+            99,
+            719,
+            740,
+            739
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "4.3 Cơ chế sắp xếp thành tựu trong UI ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            788,
+            500,
+            810
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Độ ưu tiên loại thành tựu (Đứng trước): Onboarding $>$ Core Progression $>$ Feats > Challenges ",
+        "bbox": [
+            90,
+            819,
+            888,
+            861
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Sắp xếp trong cùng loại: ",
+        "bbox": [
+            90,
+            872,
+            345,
+            892
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "▪ Theo sheet: [Progression Module] [Tank War] Achievement Listing ▪ Dựa vào $\\%$ hoàn thành: Achievements nào gần xong được đẩy lên trước ",
+        "bbox": [
+            131,
+            902,
+            840,
+            953
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "◦ Nếu là 1 bộ thành tựu: Không thay đổi vị trí sắp xếp cho đến khi bộ thành tựu được hoàn thành hết, không hiển thị thành tựu con trước khi thành tựu cha được hoàn thành. ",
+        "bbox": [
+            90,
+            33,
+            941,
+            77
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Nếu (bộ) thành tựu được hoàn thành, đưa thành tựu đó lên đầu danh sách. ",
+        "bbox": [
+            92,
+            86,
+            819,
+            108
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Nếu (bộ) thành tựu được hoàn thành và nhận thưởng thành công, chuyển thành tựu xuống đáy danh sách. ",
+        "bbox": [
+            94,
+            117,
+            910,
+            161
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Riêng với bộ thành tựu, nếu vẫn còn thành tựu con, chuyển bộ thành tựu về vị trí cũ. ",
+        "bbox": [
+            129,
+            171,
+            941,
+            192
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4.4 Thông báo hoàn thành achievement ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            240,
+            528,
+            263
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4.4.1 Thông báo đẩy ",
+        "bbox": [
+            129,
+            276,
+            333,
+            296
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Khi player hoàn thành một achievement, sẽ hiện bảng thông báo trên màn hình. • Player nhấn vào bảng được chuyển sang giao diện Achievements. ",
+        "bbox": [
+            131,
+            304,
+            915,
+            355
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Mọi thông báo đẩy chỉ được hiển thị khi player trong Home. Nếu có thì thông báo sẽ được delay đến khi về lại ngoài Home. ",
+        "bbox": [
+            131,
+            365,
+            947,
+            409
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4.4.2 Reddot ",
+        "text_level": 1,
+        "bbox": [
+            129,
+            425,
+            260,
+            444
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Khi hoàn thành achievements mà player chưa nhận phần thưởng của achievements, sẽ hiển thị 1 dấu chấm than đỏ (❗) trên tab Achievements ở Home và ngay trong giao diện Achievements. ",
+        "bbox": [
+            129,
+            453,
+            947,
+            520
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Trong trường hợp người chơi hoàn thành nhiều nhiệm vụ, vẫn hiển thị dấu chấm thang đỏ trên tab. Khi người chơi mở tab thì sẽ có dấu chấm đỏ với số (0) phần thưởng trên tab \"Achievements\", biểu hiện số phần thưởng người chơi có thể nhận. ",
+        "bbox": [
+            131,
+            529,
+            934,
+            597
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4.5 Phần thưởng ",
+        "text_level": 1,
+        "bbox": [
+            90,
+            646,
+            276,
+            666
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Số lượng/Độ hiếm của vật phẩm nhận được tương ứng với thời gian/công sức player dành ra: ",
+        "bbox": [
+            90,
+            676,
+            907,
+            717
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Tăng sự cạnh tranh của người chơi. ",
+        "bbox": [
+            129,
+            729,
+            488,
+            750
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Khuyến khích chơi lâu. ",
+        "bbox": [
+            132,
+            760,
+            373,
+            779
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Phần thưởng nên đa dạng để: ",
+        "bbox": [
+            90,
+            790,
+            397,
+            810
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "▪ Đáp ứng cho nhiều dạng người chơi khác nhau. Tăng replayability.   \n▪ Giảm sự nhàm chán. ",
+        "bbox": [
+            129,
+            820,
+            602,
+            901
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "◦ Tăng giá trị phần thưởng cho các player mới. Tăng retention. ",
+        "bbox": [
+            90,
+            911,
+            537,
+            961
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "4.5.1 Phân loại và liệt kê phần thưởng ",
+        "text_level": 1,
+        "bbox": [
+            129,
+            123,
+            508,
+            144
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Dien mindmap& list & day ",
+        "bbox": [
+            186,
+            152,
+            439,
+            171
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/d33ef41c8d0705cc1b5d4981040cf576dfc5174af14e0e9ab072add8eff4b1f0.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            131,
+            205,
+            927,
+            498
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "4.6 Edge Cases ",
+        "text_level": 1,
+        "bbox": [
+            89,
+            576,
+            257,
+            596
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "5. Art Requirement ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            648,
+            306,
+            671
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "5.1 UI/UX ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            691,
+            198,
+            710
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "5.1.1 Wireframe ",
+        "text_level": 1,
+        "bbox": [
+            129,
+            726,
+            291,
+            745
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "discarded",
+        "text": "▪ Giữ ng chơi lại. ",
+        "bbox": [
+            131,
+            35,
+            297,
+            53
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/28e112e462380f783a73f3ace5ca7782e189ed44627aa10db31f4d692c32f814.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "bbox": [
+            279,
+            53,
+            799,
+            225
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "5.1.2 Mô tả UI ",
+        "text_level": 1,
+        "bbox": [
+            129,
+            317,
+            271,
+            336
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "table",
+        "img_path": "images/852954f2bf2f8135a0d80c3f71b3452e98ab5b301c22cef41c9fa48b3058f45d.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Tén thänh phan</td><td>Muc dich Nhän vao Achievements dé́ hién giao dién</td><td>Noi dung</td><td>Design Note</td></tr><tr><td>Achieveme nts/Rank tabs</td><td>Cho phép thay di giua giao dien achievements va rank</td><td>Achievements va tuong tu'väy voi Rank. Tén dät la \"Achievements\" &amp; \"Rank\" Tab achievements sé báo hiéu khi có thänh tuu nhän dugc (Chäm than do?)</td><td>Mac dinh chon Rank khi bat dau vao Achievement Screen C6 4 nut tuong ung voi4 loai thanh tuu, tén</td></tr><tr><td></td><td>Cho phép hién thi loai dat 4 nut: Achievements ： ：</td><td>\"Beginner\" = Onboarding \"Milestones\" = Progression \"Feats\" = Feats \"Challenges\" = Challenges Khi chon mi nut,danh sách thanh tuu cäp</td><td>C6 the can nhac dat loai thanh tuu = icon thay vi chu Khi doitab sang Achievements, danh sach</td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td>Danh sach Achieveme nts</td><td>Liet ke cac thanh tuu cung loai</td><td>Logic liet ké nhu sau: 国[Progression Module][Tank Wars] Achievement Design Noi don gian: B@ achievements nay la cac c@t möc quan trong doc quang duong. B achievements cha/con có thanh tuu con hien thi sau khi hoan thänh thanh tuu cha. Note: B@ achievements nay déu theo doi 1 só dém.Va só nay khöng reset sau khi dat dugc tung cot moc.</td><td>Thanh tuu con duoc hien thi ngay sau khi nhan thuong thanh tuu cha.</td></tr><tr><td>Achieveme nt</td><td>Thanh tuu cua ngudichoi</td><td>Chua: · Icon ·Ten Noi dung (vd: Destroy 100 tanks) Thanh progress (Néu có) ！ Khi chua dat dugc thanh tuu, icon hién mau xám.</td><td>C6 the can nhac bó tén néu khong du khong gian trinh bay thanh tuu.</td></tr><tr><td>Back</td><td>Dua player vé Home</td><td></td><td></td></tr></table>",
+        "bbox": [
+            127,
+            353,
+            932,
+            983
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            127,
+            22,
+            934,
+            652
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Ngoài Home, nếu có thành tựu nhận được: ",
+        "bbox": [
+            222,
+            686,
+            624,
+            708
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "◦ Thành tựu nhận được sẽ hiện ra trên đầu màn hình ◦ Tab \"Achievements\" sẽ báo hiệu (Chấm than đỏ?) ",
+        "bbox": [
+            230,
+            717,
+            737,
+            769
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "5.2 Asset List ",
+        "text_level": 1,
+        "bbox": [
+            87,
+            840,
+            237,
+            860
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "table",
+        "img_path": "images/6ba5336c454bbf0b1607d0ea0b3ee28157de60d7dc216c527a3ee706df46dbac.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td colspan=\"1\" rowspan=\"1\">Loai</td><td colspan=\"1\" rowspan=\"1\">Mota</td><td colspan=\"1\" rowspan=\"1\">Ref</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Icon</td><td colspan=\"1\" rowspan=\"1\">Icon dai dien cho tung nhóm thanh tuu</td><td colspan=\"1\" rowspan=\"1\"></td></tr><tr><td></td><td>Onboarding . Core Progression ： Feats (bonus achievement) ： Challenges .</td><td></td></tr><tr><td>Chest</td><td>Ruong tu@ng trung cho hóp qua player nhän dudc trong cac achievements. C6 animation cua ruong m&amp; ra khi nhän vao ruong.</td><td></td></tr><tr><td>Push notification</td><td>Voi thanh tuu có dieu kién la dat dugc 1 chi só nhät dinh, hién thi thanh chi so läp däy tu tu. (Dé täng tinh häp dän cho thanh tuu)</td><td></td></tr></table>",
+        "bbox": [
+            87,
+            885,
+            796,
+            971
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "discarded",
+        "text": "❗ ",
+        "bbox": [
+            154,
+            685,
+            170,
+            708
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            87,
+            30,
+            794,
+            307
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "6. Future additions ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            375,
+            306,
+            397
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "• Tách thành tựu theo loại và để ở các tab riêng biệt. ",
+        "bbox": [
+            50,
+            408,
+            550,
+            428
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "7. Notes ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            483,
+            161,
+            504
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Danh sách achievements sẽ được xem xét chỉ số kỹ hơn lại khi game thay đổi sau này. ",
+        "bbox": [
+            57,
+            516,
+            860,
+            535
+        ],
+        "page_idx": 8
+    }
+]

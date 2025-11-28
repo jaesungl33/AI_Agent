@@ -1,5 +1,18 @@
+"""
+Streamlit UI Application for GDD RAG Backbone
+
+This is the main entry point for the interactive web interface that provides:
+- Document indexing and management
+- GDD analysis and exploration
+- Structured requirement extraction
+- Code coverage evaluation
+
+The application uses Streamlit to create a zero-code dashboard for the entire
+GDD processing pipeline from ingestion to code coverage analysis.
+"""
 from __future__ import annotations
 
+# Standard library imports
 import asyncio
 import json
 import sys
@@ -7,9 +20,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# Third-party imports
 import pandas as pd
 import streamlit as st
 
+# Project root path setup for imports
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -37,11 +52,28 @@ except ImportError as exc:  # pragma: no cover - Streamlit guard
     st.error(f"Failed to import project modules: {exc}")
     st.stop()
 
+# Directory configuration for output files
 CHECKLIST_DIR = Path("checklists")
 REPORT_DIR = Path("reports") / "coverage_checks"
 
 
+# -----------------------------------------------------------------------------
+# Utility Functions
+# -----------------------------------------------------------------------------
+
 def _async_run(coro):
+    """
+    Execute an async coroutine, handling event loop conflicts.
+    
+    Streamlit may run in an environment with an existing event loop, so this
+    function creates a new loop if needed to avoid RuntimeError.
+    
+    Args:
+        coro: The coroutine to execute
+        
+    Returns:
+        The result of the coroutine execution
+    """
     try:
         return asyncio.run(coro)
     except RuntimeError:
@@ -55,6 +87,18 @@ def _async_run(coro):
 
 @st.cache_resource
 def _provider_bundle():
+    """
+    Initialize and cache LLM provider bundle for the session.
+    
+    Uses Streamlit's cache_resource to ensure the provider is only initialized
+    once per session, improving performance and avoiding redundant API setup.
+    
+    Returns:
+        Dictionary containing:
+            - provider: QwenProvider instance
+            - llm_func: Async LLM function wrapper
+            - embedding_func: Async embedding function wrapper
+    """
     provider = QwenProvider()
     return {
         "provider": provider,
@@ -64,10 +108,28 @@ def _provider_bundle():
 
 
 def _doc_options() -> List[dict]:
+    """
+    Retrieve list of all indexed documents.
+    
+    Returns:
+        List of dictionaries containing document metadata (doc_id, file_path, etc.)
+    """
     return list_indexed_docs()
 
 
 def _make_doc_id(file_name: str) -> str:
+    """
+    Generate a clean document ID from a file name.
+    
+    Converts file names to lowercase, replaces spaces with underscores,
+    and removes special characters to create valid identifiers.
+    
+    Args:
+        file_name: Original file name
+        
+    Returns:
+        Clean document ID suitable for use as an identifier
+    """
     base = Path(file_name).stem.lower().replace(" ", "_")
     cleaned = "".join(c if c.isalnum() or c in "_-" else "_" for c in base)
     while "__" in cleaned:
@@ -76,11 +138,29 @@ def _make_doc_id(file_name: str) -> str:
 
 
 def _requirements_path(doc_id: str) -> Path:
+    """
+    Get the file path for storing extracted requirements.
+    
+    Args:
+        doc_id: Document identifier
+        
+    Returns:
+        Path object pointing to the requirements JSON file
+    """
     CHECKLIST_DIR.mkdir(parents=True, exist_ok=True)
     return CHECKLIST_DIR / f"{doc_id}_requirements.json"
 
 
 def _todo_path(doc_id: str) -> Path:
+    """
+    Get the file path for storing todo lists.
+    
+    Args:
+        doc_id: Document identifier
+        
+    Returns:
+        Path object pointing to the todo JSON file
+    """
     CHECKLIST_DIR.mkdir(parents=True, exist_ok=True)
     return CHECKLIST_DIR / f"{doc_id}_todo.json"
 
@@ -117,7 +197,21 @@ def _load_coverage_report(doc_id: str, code_index_id: str) -> Optional[Dict[str,
     return json.loads(report_path.read_text())
 
 
+# -----------------------------------------------------------------------------
+# UI Widget Functions
+# -----------------------------------------------------------------------------
+
 def _qa_widget(provider_data: dict, doc_ids: List[str]):
+    """
+    Render a question-answering widget in the Streamlit interface.
+    
+    Allows users to ask natural language questions about indexed documents
+    and displays answers with source chunks for transparency.
+    
+    Args:
+        provider_data: Dictionary containing LLM provider and functions
+        doc_ids: List of document IDs to query across
+    """
     if not doc_ids:
         st.info("Index at least one document to enable QA.")
         return
@@ -152,6 +246,17 @@ def _qa_widget(provider_data: dict, doc_ids: List[str]):
 
 
 def _handle_indexing(mode: str, provider_data: dict):
+    """
+    Handle document indexing workflow in the UI.
+    
+    Supports two modes:
+    1. Re-indexing existing documents
+    2. Uploading and indexing new documents
+    
+    Args:
+        mode: Either "Select indexed document" or "Upload new document"
+        provider_data: Dictionary containing LLM provider and functions
+    """
     docs = _doc_options()
     doc_id: Optional[str] = None
     doc_path: Optional[Path] = None
@@ -207,6 +312,16 @@ def _handle_indexing(mode: str, provider_data: dict):
 
 
 def _analysis_page(doc_id: Optional[str], provider_data: dict):
+    """
+    Render the GDD Explorer & Analysis page.
+    
+    Provides high-level document analysis and ad-hoc question answering
+    capabilities for exploring indexed Game Design Documents.
+    
+    Args:
+        doc_id: Selected document ID (optional)
+        provider_data: Dictionary containing LLM provider and functions
+    """
     st.subheader("Document Explorer & Analysis")
     if not doc_id:
         st.info("Select a document from the sidebar first.")
@@ -227,6 +342,17 @@ def _analysis_page(doc_id: Optional[str], provider_data: dict):
 
 
 def _requirements_page(doc_id: Optional[str]):
+    """
+    Render the Requirements & To-Do extraction page.
+    
+    Allows users to:
+    - Extract structured data (objects, systems, logic rules, requirements)
+    - Generate developer todo lists from extracted requirements
+    - View extracted data in tabular and JSON formats
+    
+    Args:
+        doc_id: Selected document ID (optional)
+    """
     st.subheader("Structured Extraction & To-Do")
     docs = _doc_options()
     if not docs:
@@ -307,6 +433,16 @@ def _requirements_page(doc_id: Optional[str]):
 
 
 def _coverage_page(doc_id: Optional[str]):
+    """
+    Render the Code Coverage Check page.
+    
+    Evaluates how well the codebase implements requirements from the GDD.
+    Matches requirements against code chunks using semantic search and
+    LLM-based classification to determine implementation status.
+    
+    Args:
+        doc_id: Selected document ID (optional)
+    """
     st.subheader("Code Coverage Check")
     if not doc_id:
         st.info("Select a document first.")
@@ -367,7 +503,23 @@ def _coverage_page(doc_id: Optional[str]):
                     st.divider()
 
 
+# -----------------------------------------------------------------------------
+# Main Application Entry Point
+# -----------------------------------------------------------------------------
+
 def main() -> None:
+    """
+    Main entry point for the Streamlit application.
+    
+    Sets up the page configuration, initializes the provider bundle,
+    and routes users to different pipeline stages based on sidebar selection.
+    
+    Pipeline stages:
+    1. GDD & Indexing - Document upload and indexing
+    2. GDD Explorer & Analysis - Document exploration and QA
+    3. Requirements & To-Do - Structured extraction and task generation
+    4. Code Coverage - Requirement-to-code matching evaluation
+    """
     st.set_page_config(page_title="GDD Pipeline", layout="wide")
     st.sidebar.title("GDD → Tasks → Code")
     provider_data = _provider_bundle()

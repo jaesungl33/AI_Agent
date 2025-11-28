@@ -1,0 +1,536 @@
+[
+    {
+        "type": "text",
+        "text": "[Progression Module] [Tank Wars] Artifact Enhancement ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            82,
+            898,
+            167
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Artifact Enhancement System ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            195,
+            528,
+            225
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/2613655ae50eb75293df3a2fc7c9dfabd98d5aa883edd3ceb7ef4d03be090cc2.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Ngudi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyét？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>30-10-2025</td><td rowspan=1 colspan=1>Taofile</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1>0Tomato</td><td rowspan=1 colspan=1>☑</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>",
+        "bbox": [
+            47,
+            251,
+            937,
+            423
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục tiêu hệ thống (Purpose) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            485,
+            424,
+            509
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Hệ thống Enhancement (Cường hoá) cho phép người chơi tăng sức mạnh của Artifact thông qua việc nâng cấp từ $\\mathsf { L } \\mathsf { v } . 1 \\to \\mathsf { L } \\mathsf { v } . 2 0$ . ",
+        "bbox": [
+            48,
+            519,
+            941,
+            563
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mục tiêu: ",
+        "bbox": [
+            50,
+            573,
+            166,
+            592
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "◦ Tạo progression loop ngắn ‒ trung hạn (dễ grind hơn Fusion).   \n◦ Duy trì cảm giác RNG nhưng có kiểm soát — mỗi lần nâng cấp đều hồi hộp.   \n◦ Giữ tính giá trị cho Artifact hiếm: chỉ số và tiềm năng tăng theo độ hiếm. ",
+        "bbox": [
+            89,
+            602,
+            816,
+            685
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Core Mechanic ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            734,
+            260,
+            755
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi Artifact có thể nâng cấp tối đa Lv.20. ",
+        "bbox": [
+            50,
+            766,
+            459,
+            788
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tỉ lệ thành công: $1 0 0 \\% $ không fail. ",
+        "bbox": [
+            50,
+            796,
+            432,
+            817
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tuy nhiên, chỉ số tăng là RNG ‒ random sub-stat tăng, hoặc tăng giá trị random cho sub-stat đã có. ",
+        "bbox": [
+            53,
+            827,
+            939,
+            869
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Mỗi 5 cấp (Lv.5, 10, 15, 20) sẽ có một “Enhancement Jump” (sub-stat roll). ",
+        "bbox": [
+            53,
+            880,
+            786,
+            901
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "◦ Nếu Artifact $\\mathsf { c } \\acute { 0 } < 2$ sub-stat thêm chỉ số mới.   \n◦ Nếu đủ 2 sub-stat random 1 chỉ số tăng giá trị. ",
+        "bbox": [
+            82,
+            911,
+            574,
+            963
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Loại chỉ số có thể tăng (Stat Pool) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            102,
+            479,
+            127
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Main Stat: ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            138,
+            148,
+            155
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Không thay đổi loại thuộc tính khi nâng cấp - chỉ tăng giá trị cố định theo cấp. ",
+        "bbox": [
+            48,
+            166,
+            816,
+            188
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Sub Stat Pool: ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            198,
+            186,
+            216
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• ATK (%) / SHIELD (Points) / HP (%) / CRIT Rate (%) / CRIT DMG (%) / MOVE SPD (%) / HP Regen (point/ s) / SHIELD Regen (points/ s) ",
+        "bbox": [
+            53,
+            227,
+            946,
+            273
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Cấu trúc cấp độ & chỉ số (Level Structure) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            321,
+            575,
+            345
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/c4296dbc77485066f7a735302eaa7f8c9ecb2ffe9a16631d4d7a9749c4f3d23f.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Cap do</td><td rowspan=1 colspan=1>Tac dong</td><td rowspan=1 colspan=1>Ghi chu</td></tr><tr><td rowspan=1 colspan=1>Lv.1-2</td><td rowspan=1 colspan=1>Base stats</td><td rowspan=1 colspan=1>Khóng tang sub-stat</td></tr><tr><td rowspan=1 colspan=1>Lv.5</td><td rowspan=1 colspan=1>+1 random sub-stat hoäc täng l sub-stat có sän</td><td rowspan=1 colspan=1>Jump 1</td></tr><tr><td rowspan=1 colspan=1>Lv.10</td><td rowspan=1 colspan=1>+1 hoäc tang sub-stat</td><td rowspan=1 colspan=1>Jump 2</td></tr><tr><td rowspan=1 colspan=1>Lv.15</td><td rowspan=1 colspan=1> Tang 1 sub-stat</td><td rowspan=1 colspan=1>Jump 3</td></tr><tr><td rowspan=1 colspan=1>Lv.20</td><td rowspan=1 colspan=1>Täng 1 sub-stat</td><td rowspan=1 colspan=1>Jump 4</td></tr></table>",
+        "bbox": [
+            45,
+            373,
+            708,
+            521
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Link: Artifact Enhancement Table ",
+        "text_level": 1,
+        "bbox": [
+            45,
+            541,
+            388,
+            560
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "5. Chi phí nâng cấp (Upgrade Cost) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            609,
+            469,
+            634
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Dùng Coin và Core Dust (currency grind từ PvE / PvP / Daily Mission). • Chi phí Core Dust tăng theo cấp độ (theo dạng exponential curve). • Chi phí Coin giữ nguyên cho mỗi lần Enhancement là 1,000 Coin ",
+        "bbox": [
+            48,
+            644,
+            722,
+            725
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/b9087847d3b361bd86e7ee002aecd2a9ab607c09aace31b34c16e33a231121b7.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>cap do</td><td rowspan=1 colspan=1>Chi phi (Core Dust)</td><td rowspan=1 colspan=1>Chi phi (Coin)</td></tr><tr><td rowspan=1 colspan=1>1-5</td><td rowspan=1 colspan=1>1,000 Core Dust / lv</td><td rowspan=1 colspan=1>4000</td></tr><tr><td rowspan=1 colspan=1>6-10</td><td rowspan=1 colspan=1>2,000 Core Dust /lv</td><td rowspan=1 colspan=1>5000</td></tr><tr><td rowspan=1 colspan=1>11-15</td><td rowspan=1 colspan=1>3,000 Core Dust / lv</td><td rowspan=1 colspan=1>5000</td></tr><tr><td rowspan=1 colspan=1>16-20</td><td rowspan=1 colspan=1>5,000 Core Dust / lv</td><td rowspan=1 colspan=1>5000</td></tr></table>",
+        "bbox": [
+            47,
+            753,
+            616,
+            877
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "$\\vartriangle { \\underline { { \\mathbf { \\delta \\pi } } } } > \\mathbf { \\tilde { \\pi } }$ Tổng chi phí là 54,000 Core Dust và 19,000 Coin cho 1 Artifact từ $\\mathsf { L v } . 1 \\to \\mathsf { L v } . 2 0$ . ",
+        "bbox": [
+            47,
+            896,
+            797,
+            916
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "(Game Economy sẽ fine-tune sau theo player curve) ",
+        "bbox": [
+            48,
+            927,
+            538,
+            946
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "discarded",
+        "text": "• Khi đạt Lv.20 → mở Overclock Bonus (bonus đặc biệt theo rarity) ",
+        "bbox": [
+            50,
+            34,
+            691,
+            54
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "6. Overclock Bonus (Lv.20) (hold lại) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            60,
+            486,
+            83
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Khi đạt Lv.20 cho cả 5 Artifact cùng bộ và cùng hiệu ứng Overclock Bonus, Artifact sẽ kích hoạt bonus đặc biệt theo độ hiếm: ",
+        "bbox": [
+            45,
+            92,
+            910,
+            136
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/b13a42aa6a421d99b6f0deaad47c59ff6c92734e60ee23820cf472c008e3e861.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>D hiem</td><td rowspan=1 colspan=1>Overclock Bonus</td><td rowspan=1 colspan=1>Mota</td></tr><tr><td rowspan=1 colspan=1>Epic</td><td rowspan=1 colspan=1>+5% hieu ung bó</td><td rowspan=1 colspan=1>Tang hieu qua thuoc tinh bó</td></tr><tr><td rowspan=1 colspan=1>Legendary</td><td rowspan=1 colspan=1>+10% hiéu üng bó hoäc +5% main stat cho xe Tank dang su dung</td><td rowspan=1 colspan=1>Random 1 trong 2</td></tr><tr><td rowspan=1 colspan=1>Mythic</td><td rowspan=1 colspan=1>+15% hieu ung bó hoäc 8% main stat cho xe Tank dang su dung</td><td rowspan=1 colspan=1>Random 1trong 2</td></tr></table>",
+        "bbox": [
+            45,
+            165,
+            952,
+            265
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "7. Trải nghiệm người chơi (Player Experience) ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            323,
+            595,
+            347
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Cảm xúc khi nâng cấp: \"Roll hay hên xui?\" — người chơi hồi hộp chờ xem sub-stat nào nhảy. ",
+        "bbox": [
+            55,
+            355,
+            944,
+            377
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Cảm giác “tích lũy được tiến trình” vì $1 0 0 \\%$ thành công, nhưng mỗi jump vẫn tạo bất ngờ. ",
+        "bbox": [
+            57,
+            385,
+            939,
+            408
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Với Artifact hiếm, mỗi lần $+ 3$ cấp là một lần adrenaline hit dopamine loop cực mạnh. ",
+        "bbox": [
+            62,
+            416,
+            914,
+            438
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Người chơi có thể “đánh cược” xem roll ra SPD hay CRIT Rate để chase build hoàn hảo. ",
+        "bbox": [
+            57,
+            447,
+            910,
+            469
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "8. Định hướng cân bằng (Balance Direction) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            516,
+            575,
+            541
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• RNG có kiểm soát: $100 \\%$ thành công không frustrate, nhưng vẫn ngẫu nhiên sub-stat để duy trì replay value. ",
+        "bbox": [
+            48,
+            550,
+            934,
+            594
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Không pay-to-win: nguyên liệu có thể kiếm qua gameplay, không bị khoá premium. ",
+        "bbox": [
+            57,
+            603,
+            873,
+            625
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Khuyến khích build đa dạng: sub-stat ngẫu nhiên tạo build bất ngờ meta thay đổi liên tục. ",
+        "bbox": [
+            55,
+            634,
+            949,
+            655
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Tăng giá trị cho Legendary/Mythic: mỗi độ hiếm đều có cảm giác tăng trưởng rõ ràng. ",
+        "bbox": [
+            55,
+            664,
+            904,
+            686
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "9. Hành trình progression (Loop) ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            734,
+            447,
+            758
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Nhận Artifact (thông qua drop, craft hoặc fusion).   \n• Dùng Coin $^ +$ Core Dust để nâng cấp.   \n• Mỗi 3 cấp roll sub-stat (RNG).   \n• Tới $\\mathsf { L v } . 2 0 \\to \\mathsf { m } \\overset { \\circ } { \\partial }$ Overclock Bonus.   \n• Tiếp tục Fusion hoặc mix Artifact khác để hoàn thiện build nếu chưa nhận được Artifact có các thuộc tính sau Enhancement ưng ý. ",
+        "bbox": [
+            48,
+            766,
+            924,
+            934
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "10. UX / UI Note ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            34,
+            242,
+            55
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Hiển thị cấp độ 1‒20 ở góc phải Artifact.   \n• Hiệu ứng “stat roll” riêng cho từng mốc (animation highlight sub-stat tăng).   \n• Gợi ý nhỏ trên UI: “Enhance x3” ‒ thao tác nhanh qua từng milestone.   \n• Tooltip preview: cho phép xem pool sub-stat có thể tăng trước khi nâng cấp. ",
+        "bbox": [
+            48,
+            65,
+            804,
+            179
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "11. Key Design Intent ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            227,
+            311,
+            251
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Đảm bảo player luôn cảm thấy tiến bộ nhưng vẫn có “độ hồi hộp dễ chịu”.   \n• Tạo nền cho Artifact Meta Build ‒ nơi mỗi người chơi có thể sở hữu Artifact ngẫu nhiên nhưng độc nhất.   \n• Giữ thành công luôn $1 0 0 \\%$ , nhưng may mắn mới quyết định đỉnh cao.   \n• Là loop daily‒midgame progression cân bằng với Fusion (endgame). ",
+        "bbox": [
+            48,
+            259,
+            895,
+            396
+        ],
+        "page_idx": 3
+    }
+]

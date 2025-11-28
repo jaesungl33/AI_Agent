@@ -1,0 +1,271 @@
+{
+  "doc_id": "character_module_tank_war_elemental_class",
+  "metadata": {
+    "created_at": "2025-11-26T10:30:01.988960",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "elemental_fire",
+        "name": "Fire Elemental",
+        "category": "DE",
+        "description": "Elemental tank specializing in sustained damage through burn effects.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": "Trung binh",
+        "armor": null,
+        "speed": "Trung binh/cao",
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": [
+          "Burn (Damage over Time)",
+          "Zone control",
+          "Ep góc"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "elemental_ice",
+        "name": "Ice Elemental",
+        "category": "DE",
+        "description": "Elemental tank focusing on crowd control with slow and freeze effects.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": "Trung binh",
+        "armor": null,
+        "speed": "Trung binh/cao",
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": [
+          "Slow / Freeze",
+          "CC tot",
+          "Tao loi the cho team"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "elemental_lightning",
+        "name": "Lightning Elemental",
+        "category": "DE",
+        "description": "Elemental tank excelling in unpredictable stun and chain effects.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": "Trung binh",
+        "armor": null,
+        "speed": "Trung binh/cao",
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": [
+          "Stun / Chain Lightning",
+          "Tao dot bien",
+          "Khóa cung doi thu"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "elemental_poison",
+        "name": "Poison Elemental",
+        "category": "DE",
+        "description": "Elemental tank specializing in anti-healing and weakening enemies over time.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": "Trung binh",
+        "armor": null,
+        "speed": "Trung binh/cao",
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": [
+          "Anti-Heal/Poison DOT",
+          "Khac che heal/sustain"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "elemental_water",
+        "name": "Water Elemental",
+        "category": "DE",
+        "description": "Elemental tank focusing on positional disruption and debuffs.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": "Trung binh",
+        "armor": null,
+        "speed": "Trung binh/cao",
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": [
+          "Washback / Drench",
+          "Zone control mem",
+          "Day doi thu ra khoi vi tri"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      }
+    ],
+    "systems": [
+      {
+        "id": "elemental_combat_system",
+        "name": "Elemental Combat System",
+        "description": "System governing the use of elemental powers for battlefield control.",
+        "mechanics": "Tank uses elemental abilities to apply abnormal states and zone control.",
+        "objectives": "Create tactical depth, diversify gameplay, and provide retention hooks.",
+        "related_objects": [
+          "elemental_fire",
+          "elemental_ice",
+          "elemental_lightning",
+          "elemental_poison",
+          "elemental_water"
+        ],
+        "interactions": [
+          "Synergistic combos between elements",
+          "Trade-offs between utility and raw damage"
+        ],
+        "source_note": "General description of the Elemental class and its design goals."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "fire_dot_rule",
+        "summary": "Fire Damage Over Time",
+        "description": "Fire element applies continuous burn damage over time.",
+        "trigger": "Fire ability hits an enemy",
+        "effect": "Enemy takes damage over time (DOT)",
+        "related_objects": [
+          "elemental_fire"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "ice_slow_rule",
+        "summary": "Ice Slow Effect",
+        "description": "Ice element reduces enemy movement speed.",
+        "trigger": "Ice ability hits an enemy",
+        "effect": "Enemy movement speed is reduced",
+        "related_objects": [
+          "elemental_ice"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "lightning_stun_rule",
+        "summary": "Lightning Stun Effect",
+        "description": "Lightning element stuns enemies temporarily.",
+        "trigger": "Lightning ability hits an enemy",
+        "effect": "Enemy is stunned",
+        "related_objects": [
+          "elemental_lightning"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "poison_anti_heal_rule",
+        "summary": "Poison Anti-Heal Effect",
+        "description": "Poison element prevents enemy healing.",
+        "trigger": "Poison ability hits an enemy",
+        "effect": "Enemy healing is reduced or negated",
+        "related_objects": [
+          "elemental_poison"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      },
+      {
+        "id": "water_debuff_rule",
+        "summary": "Water Debuff Effect",
+        "description": "Water element applies debuffs to enemies.",
+        "trigger": "Water ability hits an enemy",
+        "effect": "Enemy receives debuffs (e.g., reduced speed)",
+        "related_objects": [
+          "elemental_water"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Table detailing elemental types and their characteristics."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "diversify_gameplay_requirement",
+        "title": "Diversify Gameplay",
+        "description": "Introduce a new archetype different from existing classes.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Successful implementation of Elemental class with unique mechanics.",
+        "related_objects": [
+          "elemental_fire",
+          "elemental_ice",
+          "elemental_lightning",
+          "elemental_poison",
+          "elemental_water"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Design goals for the Elemental class."
+      },
+      {
+        "id": "tactical_depth_requirement",
+        "title": "Increase Tactical Depth",
+        "description": "Enhance strategic options through elemental interactions.",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Players utilize elemental synergies effectively in combat.",
+        "related_objects": [
+          "elemental_fire",
+          "elemental_ice",
+          "elemental_lightning",
+          "elemental_poison",
+          "elemental_water"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Design goals for the Elemental class."
+      },
+      {
+        "id": "cool_fantasy_requirement",
+        "title": "Provide Cool Fantasy Experience",
+        "description": "Deliver satisfying fantasy of controlling natural forces.",
+        "category": "ui",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Players report high satisfaction with elemental manipulation mechanics.",
+        "related_objects": [
+          "elemental_fire",
+          "elemental_ice",
+          "elemental_lightning",
+          "elemental_poison",
+          "elemental_water"
+        ],
+        "related_systems": [
+          "elemental_combat_system"
+        ],
+        "source_note": "Retention hooks mentioned in the design goals."
+      }
+    ]
+  }
+}

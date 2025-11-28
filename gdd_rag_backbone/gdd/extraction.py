@@ -1,13 +1,25 @@
-"""Structured extraction utilities built on stored RAG chunks."""
+"""
+Structured extraction utilities built on stored RAG chunks.
+
+This module provides functions to extract structured data from Game Design Documents
+using RAG-based retrieval and LLM-based extraction. It supports extraction of:
+- Game objects (tanks, props, environmental elements)
+- Maps and levels
+- Gameplay systems
+- Logic rules and interactions
+- Requirements and specifications
+"""
 
 from __future__ import annotations
 
+# Standard library imports
 import asyncio
 import json
 from dataclasses import MISSING, fields
 from functools import lru_cache
 from typing import Any, Dict, List, Optional, Sequence, Tuple, Type, TypeVar
 
+# Project imports
 from gdd_rag_backbone.gdd.schemas import (
     GddInteraction,
     GddLogicRule,

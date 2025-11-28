@@ -1,0 +1,305 @@
+{
+  "doc_id": "multiplayer_module_tank_war_post-match_profile",
+  "metadata": {
+    "created_at": "2025-11-26T10:49:08.914706",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Coins",
+        "category": "OP",
+        "description": "In-game currency displayed as a natural number, showing current amount owned and received.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Diminishing returns mechanism: received coins decrease as owned coins increase until reaching zero.",
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/49725d4126fb6df840b248096efd13caf7bd5cd2eb4282ce8380096ac6222240.jpg"
+      },
+      {
+        "id": "obj_002",
+        "name": "Exp (Trophy Road)",
+        "category": "OP",
+        "description": "Experience points displayed as a natural number, showing current amount owned and received.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Diminishing returns mechanism: received exp decreases as owned exp increases until reaching zero.",
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/49725d4126fb6df840b248096efd13caf7bd5cd2eb4282ce8380096ac6222240.jpg"
+      },
+      {
+        "id": "obj_003",
+        "name": "ELO",
+        "category": "OP",
+        "description": "Ranking points displayed as a natural number, showing current amount owned and changes in it.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Diminishing returns mechanism: received ELO decreases as owned ELO increases until reaching zero.",
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/744daa8c2b8f93cf843e278a90a534819c19545a48d837c0d71ac76578a52673.jpg"
+      },
+      {
+        "id": "obj_004",
+        "name": "Team ID",
+        "category": "OP",
+        "description": "Identifier for team affiliation, using constants (0 for Team 1, 1 for Team 2).",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      },
+      {
+        "id": "obj_005",
+        "name": "Player ID",
+        "category": "OP",
+        "description": "Unique identifier for players, represented as a natural number. Multiple IDs indicate party membership.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      },
+      {
+        "id": "obj_006",
+        "name": "Player Name",
+        "category": "OP",
+        "description": "String used to differentiate players in the interface.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      },
+      {
+        "id": "obj_007",
+        "name": "Tank ID(Class)",
+        "category": "OP",
+        "description": "Identifier for tank types (Scout: 0, Assault: 1, Heavy: 2) used by players.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      },
+      {
+        "id": "obj_008",
+        "name": "Tank Skin ID",
+        "category": "OP",
+        "description": "List of natural numbers used to display tank skins.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      },
+      {
+        "id": "obj_009",
+        "name": "Match Type",
+        "category": "OP",
+        "description": "Constant indicating match type (Casual: 0, Ranked: 1).",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Rank W/L statistic only relevant in ranked matches.",
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Post-Match Profile System",
+        "description": "System designed to display user-related metrics after matches.",
+        "mechanics": "Tracks and displays parameters such as Coins, Exp, ELO, Team ID, Player ID, Player Name, Tank ID(Class), Tank Skin ID, and Match Type.",
+        "objectives": "Provide clear and consistent post-match information across different game modes.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003",
+          "obj_004",
+          "obj_005",
+          "obj_006",
+          "obj_007",
+          "obj_008",
+          "obj_009"
+        ],
+        "interactions": [
+          "Display user stats",
+          "Track match results",
+          "Differentiate between ranked and casual matches"
+        ],
+        "source_note": "Document titled '[Multiplayer Module] [Tank War] Post-Match Profile'"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "lr_001",
+        "summary": "Diminishing Returns Mechanism for Coins",
+        "description": "As the owned amount of coins increases, the received amount decreases until it reaches zero.",
+        "trigger": "Increase in owned coins",
+        "effect": "Decrease in received coins",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/49725d4126fb6df840b248096efd13caf7bd5cd2eb4282ce8380096ac6222240.jpg"
+      },
+      {
+        "id": "lr_002",
+        "summary": "Diminishing Returns Mechanism for Exp",
+        "description": "As the owned amount of exp increases, the received amount decreases until it reaches zero.",
+        "trigger": "Increase in owned exp",
+        "effect": "Decrease in received exp",
+        "related_objects": [
+          "obj_002"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/49725d4126fb6df840b248096efd13caf7bd5cd2eb4282ce8380096ac6222240.jpg"
+      },
+      {
+        "id": "lr_003",
+        "summary": "Diminishing Returns Mechanism for ELO",
+        "description": "As the owned amount of ELO increases, the received amount decreases until it reaches zero.",
+        "trigger": "Increase in owned ELO",
+        "effect": "Decrease in received ELO",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/744daa8c2b8f93cf843e278a90a534819c19545a48d837c0d71ac76578a52673.jpg"
+      },
+      {
+        "id": "lr_004",
+        "summary": "Ranked Match Specific Logic",
+        "description": "Rank W/L statistic is only relevant in ranked matches.",
+        "trigger": "Match Type set to Ranked",
+        "effect": "Enable tracking of Rank W/L statistic",
+        "related_objects": [
+          "obj_009"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/47f43de1714668ff7a8589b78d85e0a182ae38fb63bb3def504644de09289252.jpg"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Consistent Parameter Display",
+        "description": "Ensure all parameters have clear and consistent formats across different game modes.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "All parameters are displayed with standardized formats and descriptions.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003",
+          "obj_004",
+          "obj_005",
+          "obj_006",
+          "obj_007",
+          "obj_008",
+          "obj_009"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Document titled '[Multiplayer Module] [Tank War] Post-Match Profile'"
+      },
+      {
+        "id": "req_002",
+        "title": "Clear Ranking Criteria",
+        "description": "Define and display clear criteria for ranking users based on performance metrics.",
+        "category": "progression",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Ranking criteria are clearly defined and consistently applied across all matches.",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Analysis of table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/d5f858f19839916215528173458cfcd6418a6909a12f5fc341f1a00bbe76b5f5.jpg"
+      },
+      {
+        "id": "req_003",
+        "title": "Iterative Document Refinement",
+        "description": "Continuously update and refine the post-match profile document to ensure clarity and consistency.",
+        "category": "tech",
+        "priority": "medium",
+        "status": "in-progress",
+        "acceptance_criteria": "Document versions reflect iterative improvements and address feedback from reviewers.",
+        "related_objects": [],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Version history table from Image Path: /Users/madeinheaven/Documents/GitHub/AI_Agent/output/multiplayer_module_tank_war_post-match_profile/[Multiplayer Module] [Tank War] Post-Match Profile/auto/images/d5f858f19839916215528173458cfcd6418a6909a12f5fc341f1a00bbe76b5f5.jpg"
+      }
+    ]
+  }
+}

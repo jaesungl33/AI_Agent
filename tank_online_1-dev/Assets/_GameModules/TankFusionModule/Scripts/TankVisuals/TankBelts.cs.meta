@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3bbc609f2d8562d43a55c97f3ee25e47
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Scripts/Tanknarok/Player/TankVisuals/TankBelts.cs
+  uploadId: 739895

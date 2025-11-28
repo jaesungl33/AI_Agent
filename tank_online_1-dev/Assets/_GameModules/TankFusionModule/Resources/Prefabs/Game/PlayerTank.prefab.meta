@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e0684f2c29d615d4d8e7a6ddae619457
+labels:
+- FusionPrefab
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/Game/PlayerTank.prefab
+  uploadId: 739895

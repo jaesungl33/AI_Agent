@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 5d6e5920c0414294daa0a123d5bb245a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Materials/!shaders/Tanknarok_BlinkGlow.shader
+  uploadId: 739895

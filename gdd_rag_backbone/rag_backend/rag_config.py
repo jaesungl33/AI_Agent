@@ -64,11 +64,20 @@ def get_rag_instance(
     # Ensure working directory exists
     working_dir.mkdir(parents=True, exist_ok=True)
     
-    # Create RAGAnything instance
-    # raganything 0.0.1 accepts *args, **kwargs - pass only essential parameters
+    # Create RAGAnythingConfig instance with all configuration parameters
+    rag_config = RAGAnythingConfig(
+        working_dir=str(working_dir),
+        parser=parser or DEFAULT_PARSER,
+        parse_method=parse_method or DEFAULT_PARSE_METHOD,
+        enable_image_processing=enable_image_processing if enable_image_processing is not None else DEFAULT_ENABLE_IMAGE_PROCESSING,
+        enable_table_processing=enable_table_processing if enable_table_processing is not None else DEFAULT_ENABLE_TABLE_PROCESSING,
+        enable_equation_processing=enable_equation_processing if enable_equation_processing is not None else DEFAULT_ENABLE_EQUATION_PROCESSING,
+    )
+    
+    # Create RAGAnything instance with config object
     # Note: embedding_dim is now set in raganything's LightRAG call via patch
     rag = RAGAnything(
-        working_dir=str(working_dir),
+        config=rag_config,
         llm_model_func=llm_func,
         embedding_func=embedding_func,
         vision_model_func=vision_model_func,

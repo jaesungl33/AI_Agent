@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1be5a805225d53645826793b190514c4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Explosions/pfx_exp_Medium.prefab
+  uploadId: 739895

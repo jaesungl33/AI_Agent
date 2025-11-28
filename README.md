@@ -10,6 +10,22 @@ The GDD RAG Backbone provides:
 - **RAG Query Engine**: Ask natural language questions about indexed documents
 - **GDD Compiler Layer**: Extract structured JSON checklists (objects, tanks, maps, etc.) from GDDs
 - **Provider-Agnostic Design**: Works with any LLM provider (Qwen, Gemini/Vertex AI, OpenAI, etc.) via pluggable interfaces
+- **Interactive Web UI**: Streamlit-based dashboard for zero-code document processing
+- **Code Coverage Analysis**: Match GDD requirements against codebase implementation
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Streamlit UI](#streamlit-ui)
+- [Core Components](#core-components)
+- [API Reference](#api-reference)
+- [Testing](#testing)
+- [Code Review Notes](#code-review-notes)
+- [Extending the Framework](#extending-the-framework)
+- [Troubleshooting](#troubleshooting)
 
 ## Project Structure
 
@@ -44,8 +60,24 @@ gdd_rag_backbone/
 
 ### Prerequisites
 
-- Python 3.10+
-- `raganything` package (already installed)
+- Python 3.10 or higher
+- pip package manager
+- API key for at least one LLM provider (Qwen/DashScope recommended)
+
+### Dependencies
+
+The following packages are required and will be installed via `requirements.txt`:
+
+**Core Dependencies:**
+- `raganything[all]` - RAG framework for document processing and indexing
+- `streamlit` - Web UI framework for the interactive dashboard
+- `dashscope` - Alibaba DashScope SDK for Qwen LLM and embeddings
+- `openai` - OpenAI SDK (used as a client library for Qwen's OpenAI-compatible API endpoint)
+  - **Note:** This uses the OpenAI SDK to call Qwen/DashScope's API, NOT OpenAI's API. See [OPENAI_USAGE.md](OPENAI_USAGE.md) for details.
+- `pandas` - Data processing and manipulation for structured data
+- `python-dotenv` - Environment variable management from .env files
+
+**Note:** The `raganything[all]` package includes additional dependencies for document parsing (mineru, docling) and RAG functionality. These are automatically installed when you install `raganything[all]`.
 
 ### Setup
 
@@ -54,7 +86,19 @@ gdd_rag_backbone/
    cd /Users/madeinheaven/Documents/GitHub/AI_Agent
    ```
 
-2. **Set up API keys** - You have **three options**:
+2. **Install all dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   
+   This will install:
+   - Core RAG framework (raganything)
+   - Web UI (streamlit)
+   - LLM provider SDKs (dashscope, openai)
+   - Data processing (pandas)
+   - Environment management (python-dotenv)
+
+3. **Set up API keys** - You have **three options**:
 
    **Option 1: Use a .env file (Recommended)**
    
@@ -67,10 +111,7 @@ gdd_rag_backbone/
    # QWEN_API_KEY=your_actual_api_key_here
    ```
    
-   The config will automatically load `.env` if `python-dotenv` is installed:
-   ```bash
-   pip install python-dotenv  # Optional but recommended
-   ```
+   The config will automatically load `.env` if `python-dotenv` is installed (already included in requirements.txt).
 
    **Option 2: Set environment variables directly**
    ```bash
@@ -92,10 +133,18 @@ gdd_rag_backbone/
    provider = QwenProvider(api_key="your-api-key-here")
    ```
 
-3. **Install dependencies** (if needed):
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Verification
+
+After installation, verify that all dependencies are installed correctly:
+
+```bash
+python -c "import streamlit; import pandas; import dashscope; import openai; import raganything; from dotenv import load_dotenv; print('All dependencies installed successfully!')"
+```
+
+If you encounter any import errors, reinstall the missing packages:
+```bash
+pip install -r requirements.txt --upgrade
+```
 
 ## Quick Start
 
@@ -332,6 +381,25 @@ Tests cover:
 - Query function signatures and error handling
 - Extraction function structure
 
+For more detailed test coverage, see the test files in `gdd_rag_backbone/tests/`.
+
+## Code Review Notes
+
+For detailed code review observations, architectural notes, and recommendations, see [REVIEWER_NOTES.md](REVIEWER_NOTES.md).
+
+The review notes cover:
+- Architecture and design patterns
+- Code quality observations
+- Performance considerations
+- Security considerations
+- Known limitations and future enhancements
+
+This document is useful for:
+- Understanding design decisions
+- Identifying areas for improvement
+- Planning refactoring efforts
+- Onboarding new developers
+
 ## Extending the Framework
 
 ### Adding a New LLM Provider
@@ -362,19 +430,50 @@ The framework is considered successful if:
 
 2. ✅ The user can import `from gdd.extraction import extract_tanks` and call `await extract_tanks("some_doc_id")` to get a list of `TankSpec` objects, even if the underlying LLM call is currently a stub or mock.
 
+## Troubleshooting
+
+### Common Issues
+
+1. **API Key Not Found**
+   - Ensure `QWEN_API_KEY` or `DASHSCOPE_API_KEY` is set in environment or `.env` file
+   - Check that `python-dotenv` is installed if using `.env` file
+
+2. **Import Errors**
+   - Verify all dependencies are installed: `pip install -r requirements.txt`
+   - Check that you're running from the project root directory
+
+3. **Document Indexing Fails**
+   - Ensure the document file exists and is readable
+   - Check that the document format is supported (PDF, DOCX)
+   - Verify sufficient disk space for output directory
+
+4. **Streamlit App Not Starting**
+   - Check that Streamlit is installed: `pip install streamlit`
+   - Verify API keys are configured before starting the app
+   - Check for port conflicts if default port 8501 is in use
+
+5. **Embedding API Errors**
+   - Some API keys may not have access to embedding services
+   - Check your DashScope console to enable embedding access
+   - Verify the embedding model name is correct
+
+For more detailed troubleshooting, see the error messages in the application logs or check [REVIEWER_NOTES.md](REVIEWER_NOTES.md) for known limitations.
+
 ## TODO Items
 
 The following items are marked with `# TODO:` comments and need to be filled in by the user:
 
 1. **LLM Provider Implementations**:
-   - `llm_providers/qwen_provider.py`: DashScope API calls
-   - `llm_providers/vertex_provider.py`: Vertex AI API calls
+   - `llm_providers/qwen_provider.py`: DashScope API calls (partially implemented)
+   - `llm_providers/vertex_provider.py`: Vertex AI API calls (needs implementation)
 
 2. **Optional Enhancements**:
    - Add more LLM providers (OpenAI, Anthropic, etc.)
    - Add more extraction schemas (weapons, abilities, etc.)
    - Add batch processing support
    - Add progress tracking for large documents
+   - Improve error recovery mechanisms
+   - Add multi-user support for Streamlit app
 
 ## License
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "403319526655",
+    "project_id": "tankonline1-445e6",
+    "storage_bucket": "tankonline1-445e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403319526655:android:8d279ed32c84c9b85668ca",
+        "android_client_info": {
+          "package_name": "com.gdo.tankonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeU3URH_R4oMc5uy_uxfg7ZyeoK4Yeyss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

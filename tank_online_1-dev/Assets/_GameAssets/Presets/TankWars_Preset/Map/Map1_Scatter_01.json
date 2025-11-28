@@ -1,0 +1,92 @@
+{
+    "numberPerSurface": 5,
+    "useTotalCount": true,
+    "totalCount": 5,
+    "distributionMode": 2,
+    "randomizeRotationX": false,
+    "rotationXMin": -10.0,
+    "rotationXMax": 10.0,
+    "randomizeRotationY": true,
+    "rotationYMin": 0.0,
+    "rotationYMax": 360.0,
+    "randomizeRotationZ": false,
+    "rotationZMin": -10.0,
+    "rotationZMax": 10.0,
+    "randomizeScale": false,
+    "scaleRange": {
+        "x": 0.800000011920929,
+        "y": 1.2000000476837159
+    },
+    "offsetHeight": 4.139999866485596,
+    "groupUnderParent": true,
+    "parentName": "RandomPrefabs_Group",
+    "alignToSurfaceNormal": false,
+    "alignMode": 1,
+    "avoidOverlap": true,
+    "minDistance": 2.0,
+    "avoidObstacle": false,
+    "obstacleSafeRadius": 0.5,
+    "seed": -1820012048,
+    "prefabs": [
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x0.5x1_prefab.prefab",
+            "weight": 3.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x1x1_prefab.prefab",
+            "weight": 2.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x2x1_prefab.prefab",
+            "weight": 2.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x3x1_prefab.prefab",
+            "weight": 2.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_2x2x1_prefab.prefab",
+            "weight": 2.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Deco/BR_Skull_01_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_Box_01_2x2x2_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_03_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_04_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_Grass_01_Green_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_Grass_02_Green_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_Stone_02_Sand_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_Stone_02_SandDark_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_StoneGrass_02_Green_prefab.prefab",
+            "weight": 1.0
+        },
+        {
+            "path": "Assets/_GameAssets/Prefabs/TankWars_Prefab/DE_Deco/DE_StoneGrass_02_Green_prefab 1.prefab",
+            "weight": 1.0
+        }
+    ]
+}

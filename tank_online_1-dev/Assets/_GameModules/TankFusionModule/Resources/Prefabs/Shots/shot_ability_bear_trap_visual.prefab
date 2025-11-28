@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4128207005337097832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7611710913590070502}
+  m_Layer: 6
+  m_Name: shotvisual_default
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7611710913590070502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4128207005337097832}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2988422993999908892}
+  m_Father: {fileID: 5422049924759650424}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8219689177351906792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5422049924759650424}
+  - component: {fileID: 776800319733647562}
+  m_Layer: 6
+  m_Name: shot_ability_bear_trap_visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5422049924759650424
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219689177351906792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7611710913590070502}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &776800319733647562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219689177351906792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0284d0a30b95cb48ae2ff4d93850daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Fusion.TankOnlineModule.ShotTrap
+  _projectileType: 0
+  _gravity: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _radius: 0.5
+  _hitMask:
+    serializedVersion: 2
+    m_Bits: 151809
+  _range: 0
+  _areaRadius: 0
+  _areaImpulse: 0
+  _areaDamage: 
+  _timeToLive: 0
+  _isHitScan: 0
+  panelPrefab: {fileID: 7611710913590070502}
+  _detonationPrefab: {fileID: 5974986753548891422, guid: ee25e7012fa50b24ca74ed2e0bd49a5b, type: 3}
+  customHitedPrefab: {fileID: 0}
+  _targetPrefab: {fileID: 0}
+  _muzzleFxPrefab: {fileID: 0}
+  delayToHide: 1.5
+--- !u!1001 &7762242160023863875
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7611710913590070502}
+    m_Modifications:
+    - target: {fileID: 1665835163641696245, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_Name
+      value: TA_Assault_02_Skill_01_skin_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+--- !u!4 &2988422993999908892 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4809849896959070815, guid: 16a92b1fc176d8745addbbb5595208a7, type: 3}
+  m_PrefabInstance: {fileID: 7762242160023863875}
+  m_PrefabAsset: {fileID: 0}

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0278219d0dd414fa3d86496bc3a503, type: 3}
+  m_Name: NPCChatStatesData
+  m_EditorClassIdentifier: Assembly-CSharp::GDO.NPCChatStatesData
+  npcData:
+  - npcId: Tank
+    npcName: Hello
+    npcBuildingOwnerPrefab: 
+    smallAvatar: {fileID: 21300000, guid: a568c038cd0fece4ea9f929b53ec59ff, type: 3}
+    defaultAvatar: {fileID: 21300000, guid: 8e5c924a9791efe40b39f1b2b37001ec, type: 3}
+    avatars:
+    - state: 5
+      sprite: {fileID: 21300000, guid: 1c0586f21b982b24395eb7e1255893fd, type: 3}

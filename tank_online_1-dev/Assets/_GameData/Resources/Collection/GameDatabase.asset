@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34acc161f0233ec4393d637ee9f424f6, type: 3}
+  m_Name: GameDatabase
+  m_EditorClassIdentifier: 
+  tankDatabase: {fileID: 11400000, guid: 82ebbbc590c08964cb209bf77c5012d4, type: 2}
+  mapDatabase: {fileID: 11400000, guid: e1397f00abe27834faed9338d5d427a7, type: 2}
+  tankWeaponDatabase: {fileID: 11400000, guid: a9e4543a404f2469dbc6e91d9c67fafd, type: 2}
+  tankHullDatabase: {fileID: 11400000, guid: ace72489f029d473eb47264539ed8b07, type: 2}
+  tankAbilityDatabase: {fileID: 11400000, guid: 10ce59ff7a0294589a1e918cc5767a5e, type: 2}
+  soundDatabase: {fileID: 11400000, guid: 5f2e946b7ad644845ad7dd57de1cfabc, type: 2}
+  productDatabase: {fileID: 11400000, guid: 7ef736b9495f8435196d31a98a5f74a7, type: 2}
+  matchDatabase: {fileID: 11400000, guid: b25d0feb62f4e4ec987e570a128559ce, type: 2}
+  packRewardCollection: {fileID: 11400000, guid: 7c6f903d7b10926448b5fdd271a5f4ef, type: 2}
+  gameAssetDatabase: {fileID: 11400000, guid: ea3ffbbf868c74d80884822178b1b08c, type: 2}
+  soMatchDatabase: {fileID: 11400000, guid: 0b5b1108c36b185418c5b01d77dc2172, type: 2}
+  tankUpgradeCollection: {fileID: 11400000, guid: 1658a4b3c60503644bc794862a6e4c1e, type: 2}
+  playerDatabase: {fileID: 11400000, guid: 7e04573c594345b4fb3f842d3e81fa12, type: 2}
+  playerSettingsCollection: {fileID: 11400000, guid: 7f2950023fb8d1340b58c4efd71decd0, type: 2}
+  userCollection: {fileID: 11400000, guid: 0866cb8f8d874724aa2667e086033b1c, type: 2}
+  tankWrapCollection: {fileID: 11400000, guid: 40318b88b884b274da7b33b58e0819a6, type: 2}
+  tankStickerCollection: {fileID: 11400000, guid: 327785533d46e3f4fb05292c78cfef9e, type: 2}
+  deviceQualityCollection: {fileID: 11400000, guid: cfdc937131492734b9ee73d825371742, type: 2}

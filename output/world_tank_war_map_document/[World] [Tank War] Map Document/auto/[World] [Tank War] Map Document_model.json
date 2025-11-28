@@ -197,7 +197,7 @@
                     532
                 ],
                 "score": 0.31,
-                "latex": "\\textcircled{9}"
+                "latex": "\\bullet"
             },
             {
                 "category_id": 15,
@@ -436,72 +436,72 @@
             {
                 "category_id": 1,
                 "poly": [
-                    133,
-                    1709,
-                    1552,
-                    1709,
-                    1552,
+                    150,
+                    1708,
+                    1567,
+                    1708,
+                    1567,
                     1954,
-                    133,
+                    150,
                     1954
                 ],
-                "score": 0.923
+                "score": 0.924
             },
             {
                 "category_id": 1,
                 "poly": [
-                    151,
+                    165,
                     1975,
-                    1422,
+                    1440,
                     1975,
-                    1422,
+                    1440,
                     2025,
-                    151,
+                    165,
                     2025
                 ],
-                "score": 0.888
+                "score": 0.892
             },
             {
                 "category_id": 0,
                 "poly": [
                     83,
                     1468,
-                    533,
+                    534,
                     1468,
-                    533,
+                    534,
                     1525,
                     83,
                     1525
                 ],
-                "score": 0.887
+                "score": 0.879
             },
             {
                 "category_id": 1,
                 "poly": [
-                    133,
+                    148,
                     1638,
-                    576,
+                    589,
                     1638,
-                    576,
-                    1685,
-                    133,
-                    1685
+                    589,
+                    1686,
+                    148,
+                    1686
                 ],
-                "score": 0.884
+                "score": 0.879
             },
             {
                 "category_id": 0,
                 "poly": [
-                    187,
+                    215,
                     2131,
-                    487,
+                    516,
                     2131,
-                    487,
+                    516,
                     2177,
-                    187,
+                    215,
                     2177
                 ],
-                "score": 0.853
+                "score": 0.842
             },
             {
                 "category_id": 1,
@@ -511,25 +511,25 @@
                     639,
                     126,
                     639,
-                    1292,
+                    1291,
                     146,
-                    1292
+                    1291
                 ],
                 "score": 0.818
             },
             {
                 "category_id": 0,
                 "poly": [
-                    134,
+                    148,
                     1567,
-                    658,
+                    673,
                     1567,
-                    658,
+                    673,
                     1619,
-                    134,
+                    148,
                     1619
                 ],
-                "score": 0.736
+                "score": 0.728
             },
             {
                 "category_id": 1,
@@ -543,32 +543,46 @@
                     181,
                     1309
                 ],
-                "score": 0.228
+                "score": 0.234
             },
             {
                 "category_id": 1,
                 "poly": [
-                    134,
+                    148,
                     1567,
-                    658,
+                    673,
                     1567,
-                    658,
+                    673,
                     1619,
-                    134,
+                    148,
                     1619
                 ],
-                "score": 0.199
+                "score": 0.209
+            },
+            {
+                "category_id": 3,
+                "poly": [
+                    274,
+                    2236,
+                    1033,
+                    2236,
+                    1033,
+                    2268,
+                    274,
+                    2268
+                ],
+                "score": 0.1
             },
             {
                 "category_id": 15,
                 "poly": [
-                    74.0,
+                    75.0,
                     1463.0,
-                    538.0,
+                    536.0,
                     1463.0,
-                    538.0,
+                    536.0,
                     1526.0,
-                    74.0,
+                    75.0,
                     1526.0
                 ],
                 "score": 1.0,
@@ -577,13 +591,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
+                    208.0,
                     2125.0,
-                    493.0,
+                    520.0,
                     2125.0,
-                    493.0,
+                    520.0,
                     2182.0,
-                    177.0,
+                    208.0,
                     2182.0
                 ],
                 "score": 1.0,
@@ -592,13 +606,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    123.0,
+                    138.0,
                     1561.0,
-                    661.0,
+                    676.0,
                     1561.0,
-                    661.0,
+                    676.0,
                     1625.0,
-                    123.0,
+                    138.0,
                     1625.0
                 ],
                 "score": 1.0,
@@ -607,14 +621,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
-                    1724.0,
-                    156.0,
-                    1724.0,
-                    156.0,
-                    1744.0,
-                    137.0,
-                    1744.0
+                    152.0,
+                    1723.0,
+                    171.0,
+                    1723.0,
+                    171.0,
+                    1743.0,
+                    152.0,
+                    1743.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -622,13 +636,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    172.0,
-                    1708.0,
-                    716.0,
-                    1708.0,
-                    716.0,
+                    188.0,
+                    1709.0,
+                    729.0,
+                    1709.0,
+                    729.0,
                     1758.0,
-                    172.0,
+                    188.0,
                     1758.0
                 ],
                 "score": 1.0,
@@ -637,14 +651,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    140.0,
-                    1798.0,
-                    156.0,
-                    1798.0,
-                    156.0,
-                    1811.0,
-                    140.0,
-                    1811.0
+                    152.0,
+                    1795.0,
+                    171.0,
+                    1795.0,
+                    171.0,
+                    1814.0,
+                    152.0,
+                    1814.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -652,14 +666,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    170.0,
-                    1779.0,
-                    838.0,
-                    1779.0,
-                    838.0,
-                    1827.0,
-                    170.0,
-                    1827.0
+                    190.0,
+                    1780.0,
+                    851.0,
+                    1780.0,
+                    851.0,
+                    1829.0,
+                    190.0,
+                    1829.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -667,13 +681,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
+                    152.0,
                     1865.0,
-                    157.0,
+                    171.0,
                     1865.0,
-                    157.0,
+                    171.0,
                     1885.0,
-                    137.0,
+                    152.0,
                     1885.0
                 ],
                 "score": 1.0,
@@ -682,14 +696,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    172.0,
-                    1848.0,
-                    1551.0,
-                    1848.0,
-                    1551.0,
-                    1901.0,
-                    172.0,
-                    1901.0
+                    187.0,
+                    1846.0,
+                    1568.0,
+                    1846.0,
+                    1568.0,
+                    1904.0,
+                    187.0,
+                    1904.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -697,13 +711,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    178.0,
-                    1905.0,
-                    757.0,
-                    1905.0,
-                    757.0,
+                    192.0,
+                    1904.0,
+                    770.0,
+                    1904.0,
+                    770.0,
                     1955.0,
-                    178.0,
+                    192.0,
                     1955.0
                 ],
                 "score": 1.0,
@@ -712,13 +726,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    151.0,
+                    165.0,
                     1964.0,
-                    1426.0,
+                    1441.0,
                     1964.0,
-                    1426.0,
+                    1441.0,
                     2033.0,
-                    151.0,
+                    165.0,
                     2033.0
                 ],
                 "score": 1.0,
@@ -727,13 +741,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    126.0,
+                    140.0,
                     1636.0,
-                    579.0,
+                    593.0,
                     1636.0,
-                    579.0,
+                    593.0,
                     1685.0,
-                    126.0,
+                    140.0,
                     1685.0
                 ],
                 "score": 1.0,
@@ -747,9 +761,9 @@
                     439.0,
                     127.0,
                     439.0,
-                    178.0,
+                    177.0,
                     141.0,
-                    178.0
+                    177.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -757,13 +771,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
-                    191.0,
+                    178.0,
+                    195.0,
                     579.0,
-                    191.0,
+                    195.0,
                     579.0,
                     245.0,
-                    177.0,
+                    178.0,
                     245.0
                 ],
                 "score": 1.0,
@@ -773,13 +787,13 @@
                 "category_id": 15,
                 "poly": [
                     209.0,
-                    254.0,
+                    253.0,
                     476.0,
-                    254.0,
+                    253.0,
                     476.0,
-                    316.0,
+                    315.0,
                     209.0,
-                    316.0
+                    315.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -792,9 +806,9 @@
                     468.0,
                     325.0,
                     468.0,
-                    377.0,
+                    376.0,
                     211.0,
-                    377.0
+                    376.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -802,13 +816,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    210.0,
+                    212.0,
                     391.0,
-                    495.0,
+                    493.0,
                     391.0,
-                    495.0,
+                    493.0,
                     444.0,
-                    210.0,
+                    212.0,
                     444.0
                 ],
                 "score": 1.0,
@@ -837,9 +851,9 @@
                     428.0,
                     526.0,
                     428.0,
-                    576.0,
+                    574.0,
                     211.0,
-                    576.0
+                    574.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -848,13 +862,13 @@
                 "category_id": 15,
                 "poly": [
                     209.0,
-                    589.0,
+                    588.0,
                     421.0,
-                    589.0,
+                    588.0,
                     421.0,
-                    649.0,
+                    648.0,
                     209.0,
-                    649.0
+                    648.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -863,9 +877,9 @@
                 "category_id": 15,
                 "poly": [
                     178.0,
-                    659.0,
+                    660.0,
                     636.0,
-                    659.0,
+                    660.0,
                     636.0,
                     710.0,
                     178.0,
@@ -877,14 +891,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    211.0,
-                    725.0,
-                    439.0,
-                    725.0,
-                    439.0,
-                    775.0,
-                    211.0,
-                    775.0
+                    210.0,
+                    726.0,
+                    440.0,
+                    726.0,
+                    440.0,
+                    774.0,
+                    210.0,
+                    774.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -893,13 +907,13 @@
                 "category_id": 15,
                 "poly": [
                     210.0,
-                    791.0,
+                    790.0,
                     450.0,
-                    791.0,
+                    790.0,
                     450.0,
-                    844.0,
+                    843.0,
                     210.0,
-                    844.0
+                    843.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -907,14 +921,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    211.0,
-                    856.0,
-                    427.0,
-                    856.0,
-                    427.0,
-                    912.0,
-                    211.0,
-                    912.0
+                    212.0,
+                    858.0,
+                    426.0,
+                    858.0,
+                    426.0,
+                    910.0,
+                    212.0,
+                    910.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -923,13 +937,13 @@
                 "category_id": 15,
                 "poly": [
                     210.0,
-                    924.0,
-                    422.0,
-                    924.0,
-                    422.0,
-                    977.0,
+                    923.0,
+                    421.0,
+                    923.0,
+                    421.0,
+                    978.0,
                     210.0,
-                    977.0
+                    978.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -937,13 +951,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
-                    991.0,
-                    567.0,
-                    991.0,
-                    567.0,
+                    178.0,
+                    994.0,
+                    566.0,
+                    994.0,
+                    566.0,
                     1045.0,
-                    177.0,
+                    178.0,
                     1045.0
                 ],
                 "score": 1.0,
@@ -953,9 +967,9 @@
                 "category_id": 15,
                 "poly": [
                     211.0,
-                    1055.0,
+                    1056.0,
                     427.0,
-                    1055.0,
+                    1056.0,
                     427.0,
                     1112.0,
                     211.0,
@@ -967,14 +981,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    176.0,
-                    1124.0,
+                    177.0,
+                    1128.0,
                     509.0,
-                    1124.0,
+                    1128.0,
                     509.0,
-                    1180.0,
-                    176.0,
-                    1180.0
+                    1178.0,
+                    177.0,
+                    1178.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -983,13 +997,13 @@
                 "category_id": 15,
                 "poly": [
                     212.0,
-                    1194.0,
-                    460.0,
-                    1194.0,
-                    460.0,
-                    1240.0,
+                    1195.0,
+                    459.0,
+                    1195.0,
+                    459.0,
+                    1241.0,
                     212.0,
-                    1240.0
+                    1241.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -997,14 +1011,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
-                    1260.0,
-                    488.0,
-                    1260.0,
-                    488.0,
-                    1301.0,
-                    177.0,
-                    1301.0
+                    179.0,
+                    1262.0,
+                    486.0,
+                    1262.0,
+                    486.0,
+                    1300.0,
+                    179.0,
+                    1300.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1027,13 +1041,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    123.0,
+                    138.0,
                     1561.0,
-                    661.0,
+                    676.0,
                     1561.0,
-                    661.0,
+                    676.0,
                     1625.0,
-                    123.0,
+                    138.0,
                     1625.0
                 ],
                 "score": 1.0,
@@ -1051,128 +1065,128 @@
             {
                 "category_id": 5,
                 "poly": [
-                    235,
+                    278,
                     1730,
-                    986,
+                    1030,
                     1730,
-                    986,
+                    1030,
                     2228,
-                    235,
+                    278,
                     2228
                 ],
-                "score": 0.98,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Dai x Cao x R@ng)</td></tr><tr><td rowspan=1 colspan=1>BO_Container_01</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_02</td><td rowspan=1 colspan=1>7 x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_03</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_04</td><td rowspan=1 colspan=1>7x4x3</td></tr></table>"
+                "score": 0.981,
+                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Container_01</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_02</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_03</td><td rowspan=1 colspan=1>7x4x3</td></tr><tr><td rowspan=1 colspan=1>BO_Container_04</td><td rowspan=1 colspan=1>7×4x3</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    277,
                     74,
-                    987,
+                    1030,
                     74,
-                    987,
+                    1030,
                     729,
-                    234,
+                    277,
                     729
                 ],
-                "score": 0.979,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thetich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_House_01</td><td rowspan=1 colspan=1>4x5×4</td></tr><tr><td rowspan=1 colspan=1>BO_House_02</td><td rowspan=1 colspan=1>30 x 18 x 13</td></tr><tr><td rowspan=1 colspan=1>BO_House_03_4x4x4</td><td rowspan=1 colspan=1>4x4x4</td></tr><tr><td rowspan=1 colspan=1>BO_House_04_6x6x6</td><td rowspan=1 colspan=1>6x6x6</td></tr><tr><td rowspan=1 colspan=1>BO_VanCar_01_3x2x2</td><td rowspan=1 colspan=1>3x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Workbench_01</td><td rowspan=1 colspan=1>2x2x2</td></tr></table>"
+                "score": 0.98,
+                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thetich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_House_01</td><td rowspan=1 colspan=1>4x5×4</td></tr><tr><td rowspan=1 colspan=1>BO_House_02</td><td rowspan=1 colspan=1>30 × 18x 13</td></tr><tr><td rowspan=1 colspan=1>BO_House_03_4x4x4</td><td rowspan=1 colspan=1>4x4x4</td></tr><tr><td rowspan=1 colspan=1>BO_House_04_6x6x6</td><td rowspan=1 colspan=1>6x6x6</td></tr><tr><td rowspan=1 colspan=1>BO_VanCar_01_3x2x2</td><td rowspan=1 colspan=1>3x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Workbench_01</td><td rowspan=1 colspan=1>2x2x2</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    235,
+                    278,
                     1044,
-                    987,
+                    1030,
                     1044,
-                    987,
+                    1030,
                     1288,
-                    235,
+                    278,
                     1288
                 ],
-                "score": 0.978,
-                "html": "<table><tr><td>Tén</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Box_1x1x1</td><td>1x5x1</td></tr></table>"
+                "score": 0.979,
+                "html": "<table><tr><td>Ten</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Box_1x1x1</td><td>1×5x1</td></tr></table>"
             },
             {
                 "category_id": 1,
                 "poly": [
-                    259,
+                    302,
                     1495,
-                    1515,
+                    1557,
                     1495,
-                    1515,
-                    1595,
-                    259,
-                    1595
+                    1557,
+                    1594,
+                    302,
+                    1594
                 ],
-                "score": 0.951
-            },
-            {
-                "category_id": 1,
-                "poly": [
-                    259,
-                    1620,
-                    1133,
-                    1620,
-                    1133,
-                    1668,
-                    259,
-                    1668
-                ],
-                "score": 0.906
+                "score": 0.91
             },
             {
                 "category_id": 0,
                 "poly": [
-                    186,
+                    215,
                     1430,
-                    509,
+                    538,
                     1430,
-                    509,
+                    538,
                     1473,
-                    186,
+                    215,
                     1473
+                ],
+                "score": 0.908
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    301,
+                    1619,
+                    1176,
+                    1619,
+                    1176,
+                    1668,
+                    301,
+                    1668
+                ],
+                "score": 0.907
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    301,
+                    936,
+                    988,
+                    936,
+                    988,
+                    985,
+                    301,
+                    985
+                ],
+                "score": 0.905
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    214,
+                    871,
+                    506,
+                    871,
+                    506,
+                    914,
+                    214,
+                    914
                 ],
                 "score": 0.904
             },
             {
-                "category_id": 1,
-                "poly": [
-                    257,
-                    936,
-                    943,
-                    936,
-                    943,
-                    985,
-                    257,
-                    985
-                ],
-                "score": 0.902
-            },
-            {
-                "category_id": 0,
-                "poly": [
-                    185,
-                    871,
-                    477,
-                    871,
-                    477,
-                    914,
-                    185,
-                    914
-                ],
-                "score": 0.899
-            },
-            {
                 "category_id": 15,
                 "poly": [
-                    181.0,
+                    210.0,
                     1426.0,
-                    511.0,
+                    540.0,
                     1426.0,
-                    511.0,
+                    540.0,
                     1475.0,
-                    181.0,
+                    210.0,
                     1475.0
                 ],
                 "score": 1.0,
@@ -1181,13 +1195,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
+                    211.0,
                     870.0,
-                    478.0,
+                    508.0,
                     870.0,
-                    478.0,
+                    508.0,
                     916.0,
-                    182.0,
+                    211.0,
                     916.0
                 ],
                 "score": 1.0,
@@ -1196,14 +1210,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    256.0,
-                    1486.0,
-                    1516.0,
-                    1486.0,
-                    1516.0,
-                    1550.0,
-                    256.0,
-                    1550.0
+                    299.0,
+                    1485.0,
+                    1559.0,
+                    1485.0,
+                    1559.0,
+                    1549.0,
+                    299.0,
+                    1549.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1211,14 +1225,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    248.0,
-                    1544.0,
-                    342.0,
-                    1544.0,
-                    342.0,
-                    1601.0,
-                    248.0,
-                    1601.0
+                    293.0,
+                    1542.0,
+                    385.0,
+                    1542.0,
+                    385.0,
+                    1604.0,
+                    293.0,
+                    1604.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1226,14 +1240,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    259.0,
-                    1617.0,
-                    1133.0,
-                    1617.0,
-                    1133.0,
-                    1666.0,
-                    259.0,
-                    1666.0
+                    301.0,
+                    1616.0,
+                    1180.0,
+                    1616.0,
+                    1180.0,
+                    1668.0,
+                    301.0,
+                    1668.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1241,13 +1255,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    259.0,
-                    930.0,
-                    945.0,
-                    930.0,
-                    945.0,
+                    303.0,
+                    931.0,
                     989.0,
-                    259.0,
+                    931.0,
+                    989.0,
+                    989.0,
+                    303.0,
                     989.0
                 ],
                 "score": 1.0,
@@ -1265,71 +1279,71 @@
             {
                 "category_id": 5,
                 "poly": [
-                    234,
-                    926,
-                    987,
-                    926,
-                    987,
-                    2266,
-                    234,
-                    2266
+                    276,
+                    925,
+                    1030,
+                    925,
+                    1030,
+                    2265,
+                    276,
+                    2265
                 ],
-                "score": 0.979,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_1x2x1</td><td rowspan=1 colspan=1>1x2×1</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_1x3x4</td><td rowspan=1 colspan=1>1x3x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x3x2</td><td rowspan=1 colspan=1>2x3×2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x3x4</td><td rowspan=1 colspan=1>2x3x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_3x3x2</td><td rowspan=1 colspan=1>3x3x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_3x6x5</td><td rowspan=1 colspan=1>3x6x5</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x1</td><td rowspan=1 colspan=1>4x3x1</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x2</td><td rowspan=1 colspan=1>4x3x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x3</td><td rowspan=1 colspan=1>4x3x3</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x5x5</td><td rowspan=1 colspan=1>4×5x5</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x6x4</td><td rowspan=1 colspan=1>4x6x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_5x5x4</td><td rowspan=1 colspan=1>5x5×4</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
+                "score": 0.98,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Rong)</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_1x2x1</td><td rowspan=1 colspan=1>1x2x1</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_1x3x4</td><td rowspan=1 colspan=1>1x3x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x3x2</td><td rowspan=1 colspan=1>2x3x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_2x3x4</td><td rowspan=1 colspan=1>2x3x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_3x3x2</td><td rowspan=1 colspan=1>3x3x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_3x6x5</td><td rowspan=1 colspan=1>3x6x5</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x1</td><td rowspan=1 colspan=1>4x3x1</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x2</td><td rowspan=1 colspan=1>4x3x2</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x3x3</td><td rowspan=1 colspan=1>4x3x3</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x5x5</td><td rowspan=1 colspan=1>4×5x5</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_4x6x4</td><td rowspan=1 colspan=1>4x6x4</td></tr><tr><td rowspan=1 colspan=1>BO_Rock_5x5x4</td><td rowspan=1 colspan=1>5x5×4</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    235,
+                    278,
                     271,
-                    987,
+                    1030,
                     271,
-                    987,
+                    1030,
                     685,
-                    235,
+                    278,
                     685
                 ],
-                "score": 0.978,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_CaveGate_01</td><td rowspan=1 colspan=1>12 x8x7</td></tr><tr><td rowspan=1 colspan=1>BO_CaveRoof_02</td><td rowspan=1 colspan=1>36 × 14 x 42</td></tr><tr><td rowspan=1 colspan=1>BO_Mountain_03</td><td rowspan=1 colspan=1>200 x 13 x 200</td></tr></table>"
+                "score": 0.979,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Däi x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_CaveGate_01</td><td rowspan=1 colspan=1>12x8x7</td></tr><tr><td rowspan=1 colspan=1>BO_CaveRoof_02</td><td rowspan=1 colspan=1>36×14x42</td></tr><tr><td rowspan=1 colspan=1>BO_Mountain_03</td><td rowspan=1 colspan=1>200×13 x 200</td></tr></table>"
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     828,
-                    431,
+                    460,
                     828,
-                    431,
+                    460,
                     870,
-                    185,
+                    214,
                     870
                 ],
-                "score": 0.886
+                "score": 0.887
             },
             {
                 "category_id": 0,
                 "poly": [
-                    186,
+                    215,
                     168,
-                    503,
+                    532,
                     168,
-                    503,
+                    532,
                     210,
-                    186,
+                    215,
                     210
                 ],
-                "score": 0.854
+                "score": 0.844
             },
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
+                    211.0,
                     826.0,
-                    431.0,
+                    460.0,
                     826.0,
-                    431.0,
+                    460.0,
                     872.0,
-                    182.0,
+                    211.0,
                     872.0
                 ],
                 "score": 1.0,
@@ -1338,13 +1352,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
-                    166.0,
-                    503.0,
-                    166.0,
-                    503.0,
                     211.0,
-                    182.0,
+                    166.0,
+                    532.0,
+                    166.0,
+                    532.0,
+                    211.0,
+                    211.0,
                     211.0
                 ],
                 "score": 1.0,
@@ -1362,157 +1376,157 @@
             {
                 "category_id": 5,
                 "poly": [
-                    233,
+                    277,
                     1535,
-                    1216,
+                    1260,
                     1535,
-                    1216,
+                    1260,
                     2265,
-                    233,
+                    277,
                     2265
                 ],
-                "score": 0.98,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Box_01_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Box_02_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_01</td><td rowspan=1 colspan=1>1x1×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_02_2x3x3</td><td rowspan=1 colspan=1>2x3x3</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_02_3x3x2</td><td rowspan=1 colspan=1>3x3x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_03</td><td rowspan=1 colspan=1>1 × 1.6× 1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
+                "score": 0.982,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Box_01_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Box_02_2x2x2</td><td rowspan=1 colspan=1>2x2x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_01</td><td rowspan=1 colspan=1>1x1×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_02_2x3x3</td><td rowspan=1 colspan=1>2x3x3</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_02_3x3x2</td><td rowspan=1 colspan=1>3x3x2</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_ToxicBarrel_03</td><td rowspan=1 colspan=1>1 × 1.6 × 1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    277,
                     393,
-                    987,
+                    1030,
                     393,
-                    987,
+                    1030,
                     724,
-                    234,
+                    277,
                     724
                 ],
-                "score": 0.977,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_01</td><td rowspan=1 colspan=1>0.9 x3 x 1.3</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_02</td><td rowspan=1 colspan=1>0.1× 2.8× 1</td></tr></table>"
+                "score": 0.978,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_01</td><td rowspan=1 colspan=1>0.9 x3 x 1.3</td></tr><tr><td rowspan=1 colspan=1>BO_Signage_02</td><td rowspan=1 colspan=1>0.1x 2.8×1</td></tr></table>"
             },
             {
                 "category_id": 0,
                 "poly": [
-                    133,
+                    147,
                     870,
-                    735,
+                    750,
                     870,
-                    735,
+                    750,
                     921,
-                    133,
+                    147,
                     921
                 ],
-                "score": 0.917
+                "score": 0.916
             },
             {
                 "category_id": 1,
                 "poly": [
-                    133,
+                    149,
                     1010,
-                    1539,
+                    1553,
                     1010,
-                    1539,
+                    1553,
                     1255,
-                    133,
+                    149,
                     1255
                 ],
-                "score": 0.914
+                "score": 0.916
             },
             {
                 "category_id": 1,
                 "poly": [
-                    133,
+                    148,
                     940,
-                    575,
+                    590,
                     940,
-                    575,
+                    590,
                     988,
-                    133,
+                    148,
                     988
                 ],
-                "score": 0.907
+                "score": 0.905
             },
             {
                 "category_id": 1,
                 "poly": [
-                    146,
+                    164,
                     1277,
-                    1419,
+                    1438,
                     1277,
-                    1419,
+                    1438,
                     1327,
-                    146,
+                    164,
                     1327
                 ],
-                "score": 0.882
+                "score": 0.884
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
-                    1433,
-                    446,
-                    1433,
-                    446,
-                    1477,
-                    185,
-                    1477
-                ],
-                "score": 0.854
-            },
-            {
-                "category_id": 0,
-                "poly": [
-                    185,
+                    214,
                     290,
-                    422,
+                    451,
                     290,
-                    422,
+                    451,
                     334,
-                    185,
+                    214,
                     334
                 ],
-                "score": 0.854
+                "score": 0.867
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    214,
+                    1433,
+                    476,
+                    1433,
+                    476,
+                    1477,
+                    214,
+                    1477
+                ],
+                "score": 0.847
+            },
+            {
+                "category_id": 5,
+                "poly": [
+                    280,
+                    72,
+                    1046,
+                    72,
+                    1046,
+                    148,
+                    280,
+                    148
+                ],
+                "score": 0.773,
+                "html": "<table><tr><td>BO_Rock_5x6x3</td><td>5x6x3</td></tr></table>"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
+                    787,
                     2142,
-                    883,
+                    927,
                     2142,
-                    883,
+                    927,
                     2183,
-                    744,
+                    787,
                     2183
                 ],
-                "score": 0.36,
+                "score": 0.45,
                 "latex": "1 \\times 1 . 6 \\times 1"
-            },
-            {
-                "category_id": 5,
-                "poly": [
-                    237,
-                    72,
-                    991,
-                    72,
-                    991,
-                    148,
-                    237,
-                    148
-                ],
-                "score": 0.824,
-                "html": "<table><tr><td>BO_Rock_5x6x3</td><td>5x6x3</td></tr></table>"
             },
             {
                 "category_id": 15,
                 "poly": [
-                    123.0,
+                    138.0,
                     863.0,
-                    738.0,
+                    752.0,
                     863.0,
-                    738.0,
+                    752.0,
                     927.0,
-                    123.0,
+                    138.0,
                     927.0
                 ],
                 "score": 1.0,
@@ -1521,28 +1535,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
-                    1434.0,
-                    447.0,
-                    1434.0,
-                    447.0,
-                    1476.0,
-                    182.0,
-                    1476.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    178.0,
+                    208.0,
                     283.0,
-                    423.0,
+                    452.0,
                     283.0,
-                    423.0,
+                    452.0,
                     340.0,
-                    178.0,
+                    208.0,
                     340.0
                 ],
                 "score": 1.0,
@@ -1551,13 +1550,43 @@
             {
                 "category_id": 15,
                 "poly": [
+                    211.0,
+                    1434.0,
+                    477.0,
+                    1434.0,
+                    477.0,
+                    1476.0,
+                    211.0,
+                    1476.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    151.0,
+                    1025.0,
                     171.0,
+                    1025.0,
+                    171.0,
+                    1045.0,
+                    151.0,
+                    1045.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    187.0,
                     1011.0,
-                    712.0,
+                    727.0,
                     1011.0,
-                    712.0,
+                    727.0,
                     1060.0,
-                    171.0,
+                    187.0,
                     1060.0
                 ],
                 "score": 1.0,
@@ -1566,14 +1595,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    138.0,
-                    1097.0,
-                    157.0,
-                    1097.0,
-                    157.0,
-                    1116.0,
-                    138.0,
-                    1116.0
+                    155.0,
+                    1099.0,
+                    169.0,
+                    1099.0,
+                    169.0,
+                    1112.0,
+                    155.0,
+                    1112.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1581,13 +1610,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    171.0,
+                    182.0,
                     1082.0,
-                    834.0,
+                    849.0,
                     1082.0,
-                    834.0,
+                    849.0,
                     1131.0,
-                    171.0,
+                    182.0,
                     1131.0
                 ],
                 "score": 1.0,
@@ -1596,13 +1625,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    136.0,
+                    151.0,
                     1166.0,
-                    157.0,
+                    171.0,
                     1166.0,
-                    157.0,
+                    171.0,
                     1188.0,
-                    136.0,
+                    151.0,
                     1188.0
                 ],
                 "score": 1.0,
@@ -1611,13 +1640,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    172.0,
+                    185.0,
                     1149.0,
-                    1539.0,
+                    1553.0,
                     1149.0,
-                    1539.0,
+                    1553.0,
                     1202.0,
-                    172.0,
+                    185.0,
                     1202.0
                 ],
                 "score": 1.0,
@@ -1626,13 +1655,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
+                    191.0,
                     1208.0,
-                    618.0,
+                    633.0,
                     1208.0,
-                    618.0,
+                    633.0,
                     1257.0,
-                    177.0,
+                    191.0,
                     1257.0
                 ],
                 "score": 1.0,
@@ -1641,13 +1670,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    127.0,
+                    141.0,
                     939.0,
-                    577.0,
+                    592.0,
                     939.0,
-                    577.0,
+                    592.0,
                     986.0,
-                    127.0,
+                    141.0,
                     986.0
                 ],
                 "score": 1.0,
@@ -1656,14 +1685,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    150.0,
-                    1266.0,
-                    1423.0,
-                    1266.0,
-                    1423.0,
-                    1335.0,
-                    150.0,
-                    1335.0
+                    167.0,
+                    1269.0,
+                    1437.0,
+                    1269.0,
+                    1437.0,
+                    1332.0,
+                    167.0,
+                    1332.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1680,145 +1709,160 @@
             {
                 "category_id": 5,
                 "poly": [
-                    233,
+                    278,
                     392,
-                    1215,
+                    1259,
                     392,
-                    1215,
+                    1259,
                     979,
-                    233,
+                    278,
                     979
                 ],
-                "score": 0.982,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thétich(Däi x Cao x Rong)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x0.5x1</td><td rowspan=1 colspan=1>1 x 0.5 x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x2x1</td><td rowspan=1 colspan=1>1x2x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x3x1</td><td rowspan=1 colspan=1>1x3x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_2x2x1</td><td rowspan=1 colspan=1>2x2x1</td><td rowspan=1 colspan=1>1</td></tr></table>"
+                "score": 0.983,
+                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x0.5x1</td><td rowspan=1 colspan=1>1 x 0.5×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x1x1</td><td rowspan=1 colspan=1>1x1×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x2x1</td><td rowspan=1 colspan=1>1x2x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_1x3x1</td><td rowspan=1 colspan=1>1x3x1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Cactus_2x2x1</td><td rowspan=1 colspan=1>2x2x1</td><td rowspan=1 colspan=1>1</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    278,
                     1714,
-                    1215,
+                    1259,
                     1714,
-                    1215,
+                    1259,
                     2044,
-                    234,
+                    278,
                     2044
                 ],
-                "score": 0.979,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_4x2.5x1</td><td rowspan=1 colspan=1>4x 2.5 ×1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_7x2.5x1</td><td rowspan=1 colspan=1>7 x 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr></table>"
+                "score": 0.98,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_4x2.5x1</td><td rowspan=1 colspan=1>4 x 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr><tr><td rowspan=1 colspan=1>BR_Gate_7x2.5x1</td><td rowspan=1 colspan=1>7 × 2.5 x 1</td><td rowspan=1 colspan=1>1</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    278,
                     1224,
-                    1215,
+                    1259,
                     1224,
-                    1215,
+                    1259,
                     1467,
-                    234,
+                    278,
                     1467
                 ],
                 "score": 0.978,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Däi x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Skull_01</td><td rowspan=1 colspan=1>1 x 0.6 x 1.9</td><td rowspan=1 colspan=1>1</td></tr></table>"
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Róng)</td><td rowspan=1 colspan=1>HP</td></tr><tr><td rowspan=1 colspan=1>BR_Skull_01</td><td rowspan=1 colspan=1>1 x 0.6 x 1.9</td><td rowspan=1 colspan=1>1</td></tr></table>"
             },
             {
                 "category_id": 0,
                 "poly": [
-                    136,
-                    2189,
-                    640,
-                    2189,
-                    640,
-                    2240,
-                    136,
-                    2240
-                ],
-                "score": 0.909
-            },
-            {
-                "category_id": 0,
-                "poly": [
-                    186,
+                    215,
                     290,
-                    457,
+                    487,
                     290,
-                    457,
+                    487,
                     333,
-                    186,
+                    215,
                     333
                 ],
-                "score": 0.903
+                "score": 0.905
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     1122,
-                    428,
+                    457,
                     1122,
-                    428,
+                    457,
                     1164,
-                    185,
+                    214,
                     1164
                 ],
-                "score": 0.902
+                "score": 0.905
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    150,
+                    2189,
+                    654,
+                    2189,
+                    654,
+                    2240,
+                    150,
+                    2240
+                ],
+                "score": 0.904
             },
             {
                 "category_id": 5,
                 "poly": [
-                    239,
+                    279,
                     72,
-                    1213,
+                    1256,
                     72,
-                    1213,
+                    1256,
                     148,
-                    239,
+                    279,
                     148
                 ],
-                "score": 0.892,
-                "html": "<table><tr><td>BR_ToxicBarrel_04</td><td>1x2.2x1</td><td>1</td></tr></table>"
+                "score": 0.882,
+                "html": "<table><tr><td>BR_ToxicBarrel_04</td><td>1 x 2.2 ×1</td><td>1</td></tr></table>"
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     1609,
-                    423,
+                    451,
                     1609,
-                    423,
+                    451,
                     1652,
-                    185,
+                    214,
                     1652
                 ],
-                "score": 0.869
+                "score": 0.871
             },
             {
                 "category_id": 13,
                 "poly": [
-                    743,
+                    787,
+                    572,
+                    927,
+                    572,
+                    927,
+                    613,
+                    787,
+                    613
+                ],
+                "score": 0.31,
+                "latex": "1 \\times 0 . 5 \\times 1"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    787,
                     1977,
-                    883,
+                    927,
                     1977,
-                    883,
+                    927,
                     2018,
-                    743,
+                    787,
                     2018
                 ],
-                "score": 0.25,
+                "score": 0.28,
                 "latex": "7 \\times 2 . 5 \\times 1"
             },
             {
                 "category_id": 15,
                 "poly": [
-                    124.0,
-                    2183.0,
-                    646.0,
-                    2183.0,
-                    646.0,
-                    2245.0,
-                    124.0,
-                    2245.0
+                    211.0,
+                    286.0,
+                    487.0,
+                    286.0,
+                    487.0,
+                    336.0,
+                    211.0,
+                    336.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -1826,28 +1870,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
-                    287.0,
-                    458.0,
-                    287.0,
-                    458.0,
-                    335.0,
-                    182.0,
-                    335.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    179.0,
+                    209.0,
                     1116.0,
-                    428.0,
+                    457.0,
                     1116.0,
-                    428.0,
+                    457.0,
                     1169.0,
-                    179.0,
+                    209.0,
                     1169.0
                 ],
                 "score": 1.0,
@@ -1856,13 +1885,28 @@
             {
                 "category_id": 15,
                 "poly": [
-                    181.0,
+                    138.0,
+                    2183.0,
+                    660.0,
+                    2183.0,
+                    660.0,
+                    2245.0,
+                    138.0,
+                    2245.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    211.0,
                     1607.0,
-                    424.0,
+                    453.0,
                     1607.0,
-                    424.0,
+                    453.0,
                     1654.0,
-                    181.0,
+                    211.0,
                     1654.0
                 ],
                 "score": 1.0,
@@ -1880,174 +1924,234 @@
             {
                 "category_id": 5,
                 "poly": [
-                    232,
-                    624,
-                    1025,
-                    624,
-                    1025,
+                    276,
+                    623,
+                    1069,
+                    623,
+                    1069,
                     2265,
-                    232,
+                    276,
                     2265
                 ],
                 "score": 0.977,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>DE_DrainCover_01</td><td rowspan=1 colspan=1>1x 0.07 x0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Grass_01_Green</td><td rowspan=1 colspan=1>0.4x 0.3 x 0.4</td></tr><tr><td rowspan=1 colspan=1>DE_Grass_02_Green</td><td rowspan=1 colspan=1>0.6 x 0.37 x 0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_01</td><td rowspan=1 colspan=1>1.4 x 0.1 x 2.8</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_02</td><td rowspan=1 colspan=1>2.1 × 0.1× 2.1</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_03</td><td rowspan=1 colspan=1>1.4 x 0.1 x 2.8</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_Gray</td><td rowspan=1 colspan=1>0.3 x 0.06 x 0.4</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_Sand</td><td rowspan=1 colspan=1>0.7 ×0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_SandDark</td><td rowspan=1 colspan=1>0.7 ×0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_Gray</td><td rowspan=1 colspan=1>0.7 × 0.1 × 0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_Sand</td><td rowspan=1 colspan=1>1.2 x 0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_SandDark</td><td rowspan=1 colspan=1>1.2 x 0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_Gray</td><td rowspan=1 colspan=1>0.7 ×0.1 x 0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_Sand</td><td rowspan=1 colspan=1>1.3 x 0.03 × 1.1</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_SandDark</td><td rowspan=1 colspan=1>1.3 x 0.03 x 1.1</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_04_Sand</td><td rowspan=1 colspan=1>1.4 x 0.03 x 1.2</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_04_SandDark</td><td rowspan=1 colspan=1>1.3 x 0.03 x 1.1</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>The tich(Däi x Cao x Rong)</td></tr><tr><td rowspan=1 colspan=1>DE_DrainCover_01</td><td rowspan=1 colspan=1>1x 0.07 x0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Grass_01_Green</td><td rowspan=1 colspan=1>0.4 x 0.3 x 0.4</td></tr><tr><td rowspan=1 colspan=1>DE_Grass_02_Green</td><td rowspan=1 colspan=1>0.6 x 0.37 x 0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_01</td><td rowspan=1 colspan=1>1.4 x 0.1 x 2.8</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_02</td><td rowspan=1 colspan=1>2.1 x 0.1× 2.1</td></tr><tr><td rowspan=1 colspan=1>DE_Railway_03</td><td rowspan=1 colspan=1>1.4 x 0.1 x 2.8</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_Gray</td><td rowspan=1 colspan=1>0.3 x 0.06 x 0.4</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_Sand</td><td rowspan=1 colspan=1>0.7 x0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_01_SandDark</td><td rowspan=1 colspan=1>0.7 ×0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_Gray</td><td rowspan=1 colspan=1>0.7 ×0.1 x 0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_Sand</td><td rowspan=1 colspan=1>1.2 x 0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_02_SandDark</td><td rowspan=1 colspan=1>1.2 × 0.03 x 0.7</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_Gray</td><td rowspan=1 colspan=1>0.7 ×0.1 x0.6</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_Sand</td><td rowspan=1 colspan=1>1.3 x 0.03 x 1.1</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_03_SandDark</td><td rowspan=1 colspan=1>1.3 x 0.03 x 1.1</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_04_Sand</td><td rowspan=1 colspan=1>1.4 x 0.03 x 1.2</td></tr><tr><td rowspan=1 colspan=1>DE_Stone_04_SandDark</td><td rowspan=1 colspan=1>1.3 x 0.03 x 1.1</td></tr><tr><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1></td></tr></table>"
             },
             {
                 "category_id": 1,
                 "poly": [
-                    135,
+                    150,
                     152,
-                    1129,
+                    1144,
                     152,
-                    1129,
+                    1144,
                     342,
-                    135,
+                    150,
                     342
                 ],
-                "score": 0.937
+                "score": 0.935
             },
             {
                 "category_id": 1,
                 "poly": [
-                    132,
-                    80,
-                    574,
-                    80,
-                    574,
-                    129,
-                    132,
-                    129
-                ],
-                "score": 0.892
-            },
-            {
-                "category_id": 1,
-                "poly": [
-                    143,
+                    164,
                     365,
-                    1418,
+                    1434,
                     365,
-                    1418,
+                    1434,
                     414,
-                    143,
+                    164,
                     414
                 ],
-                "score": 0.891
+                "score": 0.896
+            },
+            {
+                "category_id": 1,
+                "poly": [
+                    146,
+                    80,
+                    589,
+                    80,
+                    589,
+                    129,
+                    146,
+                    129
+                ],
+                "score": 0.893
             },
             {
                 "category_id": 0,
                 "poly": [
-                    184,
+                    213,
                     521,
-                    428,
+                    457,
                     521,
-                    428,
+                    457,
                     565,
-                    184,
+                    213,
                     565
                 ],
-                "score": 0.833
+                "score": 0.819
             },
             {
                 "category_id": 13,
                 "poly": [
-                    905,
+                    918,
                     297,
-                    1110,
+                    1127,
                     297,
-                    1110,
-                    340,
-                    905,
-                    340
+                    1127,
+                    341,
+                    918,
+                    341
                 ],
-                "score": 0.85,
+                "score": 0.8,
                 "latex": "( < = 5 \\times 0 . 5 \\times 5 )"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    736,
-                    1745,
-                    936,
-                    1745,
-                    936,
+                    779,
+                    1744,
+                    981,
+                    1744,
+                    981,
                     1784,
-                    736,
+                    779,
                     1784
                 ],
-                "score": 0.58,
+                "score": 0.63,
                 "latex": "1 . 2 \\times 0 . 0 3 \\times 0 . 7"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    736,
-                    1488,
-                    936,
-                    1488,
-                    936,
-                    1528,
-                    736,
-                    1528
+                    780,
+                    1317,
+                    981,
+                    1317,
+                    981,
+                    1356,
+                    780,
+                    1356
                 ],
-                "score": 0.54,
-                "latex": "0 . 7 \\times 0 . 0 3 \\times 0 . 7"
+                "score": 0.61,
+                "latex": "0 . 3 \\times 0 . 0 6 \\times 0 . 4"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
-                    1830,
-                    928,
-                    1830,
-                    928,
-                    1869,
-                    744,
-                    1869
-                ],
-                "score": 0.5,
-                "latex": "0 . 7 \\times 0 . 1 \\times 0 . 6"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    735,
+                    779,
                     1403,
-                    937,
+                    980,
                     1403,
-                    937,
+                    980,
                     1442,
-                    735,
+                    779,
                     1442
                 ],
-                "score": 0.5,
+                "score": 0.59,
                 "latex": "0 . 7 \\times 0 . 0 3 \\times 0 . 7"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
-                    1573,
-                    928,
-                    1573,
-                    928,
-                    1613,
-                    744,
-                    1613
+                    779,
+                    1488,
+                    980,
+                    1488,
+                    980,
+                    1527,
+                    779,
+                    1527
                 ],
-                "score": 0.48,
-                "latex": "0 . 7 \\times 0 . 1 \\times 0 . 6"
+                "score": 0.58,
+                "latex": "0 . 7 \\times 0 . 0 3 \\times 0 . 7"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
-                    889,
+                    779,
+                    2001,
+                    981,
+                    2001,
+                    981,
+                    2041,
+                    779,
+                    2041
+                ],
+                "score": 0.56,
+                "latex": "1 . 3 \\times 0 . 0 3 \\times 1 . 1"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    779,
+                    1659,
+                    980,
+                    1659,
+                    980,
+                    1698,
+                    779,
+                    1698
+                ],
+                "score": 0.56,
+                "latex": "1 . 2 \\times 0 . 0 3 \\times 0 . 7"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    779,
+                    2086,
+                    981,
+                    2086,
+                    981,
+                    2126,
+                    779,
+                    2126
+                ],
+                "score": 0.53,
+                "latex": "1 . 4 \\times 0 . 0 3 \\times 1 . 2"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    779,
+                    975,
+                    981,
+                    975,
+                    981,
+                    1015,
+                    779,
+                    1015
+                ],
+                "score": 0.52,
+                "latex": "0 . 6 \\times 0 . 3 7 \\times 0 . 6"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    779,
+                    1916,
+                    980,
+                    1916,
+                    980,
+                    1955,
+                    779,
+                    1955
+                ],
+                "score": 0.5,
+                "latex": "1 . 3 \\times 0 . 0 3 \\times 1 . 1"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    787,
+                    890,
+                    974,
+                    890,
+                    974,
                     929,
-                    889,
-                    929,
-                    929,
-                    744,
+                    787,
                     929
                 ],
                 "score": 0.48,
@@ -2056,59 +2160,14 @@
             {
                 "category_id": 13,
                 "poly": [
-                    735,
-                    975,
-                    938,
-                    975,
-                    938,
-                    1015,
-                    735,
-                    1015
-                ],
-                "score": 0.48,
-                "latex": "0 . 6 \\times 0 . 3 7 \\times 0 . 6"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    735,
-                    2086,
-                    937,
-                    2086,
-                    937,
-                    2126,
-                    735,
-                    2126
-                ],
-                "score": 0.46,
-                "latex": "1 . 4 \\times 0 . 0 3 \\times 1 . 2"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    735,
-                    1317,
-                    937,
-                    1317,
-                    937,
-                    1356,
-                    735,
-                    1356
-                ],
-                "score": 0.44,
-                "latex": "0 . 3 \\times 0 . 0 6 \\times 0 . 4"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    735,
-                    1916,
-                    937,
-                    1916,
-                    937,
-                    1955,
-                    735,
-                    1955
+                    779,
+                    2172,
+                    980,
+                    2172,
+                    980,
+                    2211,
+                    779,
+                    2211
                 ],
                 "score": 0.43,
                 "latex": "1 . 3 \\times 0 . 0 3 \\times 1 . 1"
@@ -2116,103 +2175,73 @@
             {
                 "category_id": 13,
                 "poly": [
-                    735,
-                    1660,
-                    937,
-                    1660,
-                    937,
-                    1698,
-                    735,
-                    1698
+                    787,
+                    1829,
+                    973,
+                    1829,
+                    973,
+                    1869,
+                    787,
+                    1869
                 ],
                 "score": 0.43,
-                "latex": "1 . 2 \\times 0 . 0 3 \\times 0 . 7"
+                "latex": "0 . 7 \\times 0 . 1 \\times 0 . 6"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
-                    1146,
-                    928,
-                    1146,
-                    928,
-                    1186,
-                    744,
-                    1186
-                ],
-                "score": 0.39,
-                "latex": "2 . 1 \\times 0 . 1 \\times 2 . 1"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    745,
-                    1060,
-                    928,
-                    1060,
-                    928,
-                    1101,
-                    745,
-                    1101
-                ],
-                "score": 0.39,
-                "latex": "1 . 4 \\times 0 . 1 \\times 2 . 8"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    735,
-                    2001,
-                    937,
-                    2001,
-                    937,
-                    2041,
-                    735,
-                    2041
-                ],
-                "score": 0.38,
-                "latex": "1 . 3 \\times 0 . 0 3 \\times 1 . 1"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    745,
+                    788,
                     1232,
-                    928,
+                    972,
                     1232,
-                    928,
+                    972,
                     1271,
-                    745,
+                    788,
                     1271
                 ],
-                "score": 0.38,
+                "score": 0.41,
                 "latex": "1 . 4 \\times 0 . 1 \\times 2 . 8"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    735,
-                    2172,
-                    937,
-                    2172,
-                    937,
-                    2212,
-                    735,
-                    2212
+                    787,
+                    1573,
+                    973,
+                    1573,
+                    973,
+                    1613,
+                    787,
+                    1613
                 ],
-                "score": 0.35,
-                "latex": "1 . 3 \\times 0 . 0 3 \\times 1 . 1"
+                "score": 0.41,
+                "latex": "0 . 7 \\times 0 . 1 \\times 0 . 6"
             },
             {
                 "category_id": 13,
                 "poly": [
-                    746,
+                    788,
+                    1061,
+                    973,
+                    1061,
+                    973,
+                    1101,
+                    788,
+                    1101
+                ],
+                "score": 0.37,
+                "latex": "1 . 4 \\times 0 . 1 \\times 2 . 8"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    789,
                     804,
-                    925,
+                    969,
                     804,
-                    925,
+                    969,
                     844,
-                    746,
+                    789,
                     844
                 ],
                 "score": 0.25,
@@ -2221,13 +2250,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    180.0,
+                    210.0,
                     518.0,
-                    427.0,
+                    456.0,
                     518.0,
-                    427.0,
+                    456.0,
                     567.0,
-                    180.0,
+                    210.0,
                     567.0
                 ],
                 "score": 1.0,
@@ -2236,13 +2265,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
+                    151.0,
                     168.0,
-                    156.0,
+                    171.0,
                     168.0,
-                    156.0,
+                    171.0,
                     186.0,
-                    137.0,
+                    151.0,
                     186.0
                 ],
                 "score": 1.0,
@@ -2251,14 +2280,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    174.0,
-                    153.0,
-                    635.0,
-                    153.0,
-                    635.0,
-                    200.0,
-                    174.0,
-                    200.0
+                    190.0,
+                    154.0,
+                    648.0,
+                    154.0,
+                    648.0,
+                    199.0,
+                    190.0,
+                    199.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2266,13 +2295,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
+                    152.0,
                     238.0,
-                    156.0,
+                    171.0,
                     238.0,
-                    156.0,
+                    171.0,
                     256.0,
-                    137.0,
+                    152.0,
                     256.0
                 ],
                 "score": 1.0,
@@ -2281,13 +2310,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    174.0,
+                    188.0,
                     223.0,
-                    834.0,
+                    849.0,
                     223.0,
-                    834.0,
+                    849.0,
                     272.0,
-                    174.0,
+                    188.0,
                     272.0
                 ],
                 "score": 1.0,
@@ -2296,13 +2325,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
+                    151.0,
                     309.0,
-                    156.0,
+                    170.0,
                     309.0,
-                    156.0,
+                    170.0,
                     327.0,
-                    137.0,
+                    151.0,
                     327.0
                 ],
                 "score": 1.0,
@@ -2311,13 +2340,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    173.0,
+                    187.0,
                     290.0,
-                    904.0,
+                    917.0,
                     290.0,
-                    904.0,
+                    917.0,
                     346.0,
-                    173.0,
+                    187.0,
                     346.0
                 ],
                 "score": 1.0,
@@ -2326,13 +2355,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    1111.0,
+                    1128.0,
                     290.0,
-                    1132.0,
+                    1147.0,
                     290.0,
-                    1132.0,
+                    1147.0,
                     346.0,
-                    1111.0,
+                    1128.0,
                     346.0
                 ],
                 "score": 1.0,
@@ -2341,29 +2370,29 @@
             {
                 "category_id": 15,
                 "poly": [
-                    126.0,
-                    78.0,
-                    578.0,
-                    78.0,
-                    578.0,
-                    129.0,
-                    126.0,
-                    129.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    150.0,
+                    166.0,
                     354.0,
-                    1422.0,
+                    1437.0,
                     354.0,
-                    1422.0,
+                    1437.0,
                     422.0,
-                    150.0,
+                    166.0,
                     422.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    140.0,
+                    78.0,
+                    593.0,
+                    78.0,
+                    593.0,
+                    129.0,
+                    140.0,
+                    129.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2380,28 +2409,28 @@
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    277,
                     1237,
-                    1067,
+                    1111,
                     1237,
-                    1067,
+                    1111,
                     1500,
-                    234,
+                    277,
                     1500
                 ],
-                "score": 0.982,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Dién tich (Dai x Róng)</td></tr><tr><td rowspan=1 colspan=1>GR_Grass_01</td><td rowspan=1 colspan=1>102 x 93</td></tr><tr><td rowspan=1 colspan=1>GR_Sand_01</td><td rowspan=1 colspan=1>100 ×100</td></tr></table>"
+                "score": 0.981,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1> Dién tich (Dai x Róng)</td></tr><tr><td rowspan=1 colspan=1>GR_Grass_01</td><td rowspan=1 colspan=1>102 x 93</td></tr><tr><td rowspan=1 colspan=1>GR_Sand_01</td><td rowspan=1 colspan=1>100×100</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
+                    277,
                     74,
-                    1026,
+                    1069,
                     74,
-                    1026,
+                    1069,
                     406,
-                    234,
+                    277,
                     406
                 ],
                 "score": 0.975,
@@ -2410,199 +2439,184 @@
             {
                 "category_id": 1,
                 "poly": [
-                    134,
+                    149,
                     693,
-                    835,
+                    852,
                     693,
-                    835,
+                    852,
                     956,
-                    134,
+                    149,
                     956
                 ],
-                "score": 0.95
+                "score": 0.952
             },
             {
                 "category_id": 1,
                 "poly": [
-                    132,
+                    147,
                     1715,
-                    575,
+                    590,
                     1715,
-                    575,
+                    590,
                     1763,
-                    132,
+                    147,
                     1763
                 ],
-                "score": 0.907
+                "score": 0.906
             },
             {
                 "category_id": 1,
                 "poly": [
-                    146,
+                    167,
                     977,
-                    1416,
+                    1435,
                     977,
-                    1416,
+                    1435,
                     1027,
-                    146,
+                    167,
                     1027
                 ],
-                "score": 0.897
+                "score": 0.898
             },
             {
                 "category_id": 0,
                 "poly": [
-                    134,
-                    553,
-                    566,
-                    553,
-                    566,
-                    604,
-                    134,
-                    604
-                ],
-                "score": 0.895
-            },
-            {
-                "category_id": 0,
-                "poly": [
-                    133,
+                    148,
                     1645,
-                    538,
+                    552,
                     1645,
-                    538,
+                    552,
                     1697,
-                    133,
+                    148,
                     1697
                 ],
-                "score": 0.895
+                "score": 0.894
             },
             {
                 "category_id": 1,
                 "poly": [
-                    133,
+                    147,
                     623,
-                    575,
+                    590,
                     623,
-                    575,
+                    590,
                     671,
-                    133,
+                    147,
                     671
                 ],
-                "score": 0.893
+                "score": 0.891
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     1134,
-                    470,
+                    499,
                     1134,
-                    470,
+                    499,
                     1178,
-                    185,
+                    214,
                     1178
                 ],
-                "score": 0.89
+                "score": 0.889
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    149,
+                    553,
+                    580,
+                    553,
+                    580,
+                    604,
+                    149,
+                    604
+                ],
+                "score": 0.889
             },
             {
                 "category_id": 1,
                 "poly": [
-                    133,
+                    149,
                     1785,
-                    1342,
+                    1345,
                     1785,
-                    1342,
+                    1345,
                     2048,
-                    133,
+                    149,
                     2048
                 ],
-                "score": 0.839
+                "score": 0.841
             },
             {
                 "category_id": 1,
                 "poly": [
-                    143,
+                    163,
                     2069,
-                    1407,
+                    1424,
                     2069,
-                    1407,
+                    1424,
                     2120,
-                    143,
+                    163,
                     2120
                 ],
-                "score": 0.787
+                "score": 0.766
             },
             {
                 "category_id": 13,
                 "poly": [
-                    744,
-                    256,
-                    928,
-                    256,
-                    928,
-                    296,
-                    744,
-                    296
-                ],
-                "score": 0.45,
-                "latex": "0 . 4 \\times 0 . 2 \\times 0 . 6"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    747,
-                    171,
-                    924,
-                    171,
-                    924,
-                    210,
-                    747,
-                    210
-                ],
-                "score": 0.44,
-                "latex": "2 \\times 0 . 0 5 \\times 1 . 5"
-            },
-            {
-                "category_id": 13,
-                "poly": [
-                    744,
+                    787,
                     341,
-                    928,
+                    972,
                     341,
-                    928,
+                    972,
                     382,
-                    744,
+                    787,
                     382
                 ],
                 "score": 0.38,
                 "latex": "0 . 7 \\times 0 . 3 \\times 0 . 8"
             },
             {
-                "category_id": 15,
+                "category_id": 13,
                 "poly": [
-                    125.0,
-                    549.0,
-                    566.0,
-                    549.0,
-                    566.0,
-                    608.0,
-                    125.0,
-                    608.0
+                    787,
+                    256,
+                    973,
+                    256,
+                    973,
+                    296,
+                    787,
+                    296
                 ],
-                "score": 1.0,
-                "text": ""
+                "score": 0.37,
+                "latex": "0 . 4 \\times 0 . 2 \\times 0 . 6"
+            },
+            {
+                "category_id": 13,
+                "poly": [
+                    790,
+                    171,
+                    967,
+                    171,
+                    967,
+                    210,
+                    790,
+                    210
+                ],
+                "score": 0.35,
+                "latex": "2 \\times 0 . 0 5 \\times 1 . 5"
             },
             {
                 "category_id": 15,
                 "poly": [
-                    124.0,
-                    1637.0,
-                    539.0,
-                    1637.0,
-                    539.0,
+                    140.0,
+                    1638.0,
+                    552.0,
+                    1638.0,
+                    552.0,
                     1703.0,
-                    124.0,
+                    140.0,
                     1703.0
                 ],
                 "score": 1.0,
@@ -2611,13 +2625,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    182.0,
+                    212.0,
                     1132.0,
-                    470.0,
+                    499.0,
                     1132.0,
-                    470.0,
+                    499.0,
                     1178.0,
-                    182.0,
+                    212.0,
                     1178.0
                 ],
                 "score": 1.0,
@@ -2626,14 +2640,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    140.0,
-                    712.0,
-                    153.0,
-                    712.0,
-                    153.0,
-                    724.0,
-                    140.0,
-                    724.0
+                    139.0,
+                    549.0,
+                    581.0,
+                    549.0,
+                    581.0,
+                    608.0,
+                    139.0,
+                    608.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2641,13 +2655,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    176.0,
+                    190.0,
                     691.0,
-                    717.0,
+                    730.0,
                     691.0,
-                    717.0,
+                    730.0,
                     747.0,
-                    176.0,
+                    190.0,
                     747.0
                 ],
                 "score": 1.0,
@@ -2656,13 +2670,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    138.0,
+                    152.0,
                     781.0,
-                    155.0,
+                    169.0,
                     781.0,
-                    155.0,
+                    169.0,
                     798.0,
-                    138.0,
+                    152.0,
                     798.0
                 ],
                 "score": 1.0,
@@ -2671,13 +2685,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    175.0,
-                    764.0,
-                    836.0,
-                    764.0,
-                    836.0,
+                    191.0,
+                    765.0,
+                    850.0,
+                    765.0,
+                    850.0,
                     813.0,
-                    175.0,
+                    191.0,
                     813.0
                 ],
                 "score": 1.0,
@@ -2686,14 +2700,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    173.0,
-                    832.0,
-                    334.0,
-                    832.0,
-                    334.0,
-                    885.0,
-                    173.0,
-                    885.0
+                    188.0,
+                    834.0,
+                    347.0,
+                    834.0,
+                    347.0,
+                    884.0,
+                    188.0,
+                    884.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2701,14 +2715,29 @@
             {
                 "category_id": 15,
                 "poly": [
-                    139.0,
-                    852.0,
+                    156.0,
+                    854.0,
+                    169.0,
+                    854.0,
+                    169.0,
+                    867.0,
+                    156.0,
+                    867.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
                     155.0,
-                    852.0,
+                    925.0,
+                    168.0,
+                    925.0,
+                    168.0,
+                    938.0,
                     155.0,
-                    869.0,
-                    139.0,
-                    869.0
+                    938.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2716,28 +2745,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    141.0,
-                    925.0,
-                    154.0,
-                    925.0,
-                    154.0,
-                    937.0,
-                    141.0,
-                    937.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    172.0,
+                    187.0,
                     904.0,
-                    648.0,
+                    662.0,
                     904.0,
-                    648.0,
+                    662.0,
                     962.0,
-                    172.0,
+                    187.0,
                     962.0
                 ],
                 "score": 1.0,
@@ -2746,13 +2760,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    125.0,
+                    139.0,
                     1713.0,
-                    578.0,
+                    593.0,
                     1713.0,
-                    578.0,
+                    593.0,
                     1762.0,
-                    125.0,
+                    139.0,
                     1762.0
                 ],
                 "score": 1.0,
@@ -2761,13 +2775,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    150.0,
+                    166.0,
                     966.0,
-                    1423.0,
+                    1439.0,
                     966.0,
-                    1423.0,
+                    1439.0,
                     1035.0,
-                    150.0,
+                    166.0,
                     1035.0
                 ],
                 "score": 1.0,
@@ -2776,13 +2790,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    125.0,
+                    139.0,
                     621.0,
-                    578.0,
+                    593.0,
                     621.0,
-                    578.0,
+                    593.0,
                     670.0,
-                    125.0,
+                    139.0,
                     670.0
                 ],
                 "score": 1.0,
@@ -2791,28 +2805,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    139.0,
-                    1800.0,
-                    155.0,
-                    1800.0,
-                    155.0,
-                    1820.0,
-                    139.0,
-                    1820.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    176.0,
+                    191.0,
                     1786.0,
-                    1106.0,
+                    1121.0,
                     1786.0,
-                    1106.0,
+                    1121.0,
                     1836.0,
-                    176.0,
+                    191.0,
                     1836.0
                 ],
                 "score": 1.0,
@@ -2821,13 +2820,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    142.0,
+                    156.0,
                     1874.0,
-                    153.0,
+                    168.0,
                     1874.0,
-                    153.0,
+                    168.0,
                     1888.0,
-                    142.0,
+                    156.0,
                     1888.0
                 ],
                 "score": 1.0,
@@ -2836,13 +2835,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    174.0,
+                    191.0,
                     1857.0,
-                    687.0,
+                    702.0,
                     1857.0,
-                    687.0,
+                    702.0,
                     1907.0,
-                    174.0,
+                    191.0,
                     1907.0
                 ],
                 "score": 1.0,
@@ -2851,14 +2850,59 @@
             {
                 "category_id": 15,
                 "poly": [
-                    140.0,
-                    1942.0,
-                    155.0,
-                    1942.0,
-                    155.0,
-                    1960.0,
-                    140.0,
-                    1960.0
+                    156.0,
+                    1945.0,
+                    168.0,
+                    1945.0,
+                    168.0,
+                    1959.0,
+                    156.0,
+                    1959.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    185.0,
+                    1928.0,
+                    577.0,
+                    1928.0,
+                    577.0,
+                    1977.0,
+                    185.0,
+                    1977.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    158.0,
+                    2016.0,
+                    168.0,
+                    2016.0,
+                    168.0,
+                    2029.0,
+                    158.0,
+                    2029.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    176.0,
+                    1993.0,
+                    1345.0,
+                    1993.0,
+                    1345.0,
+                    2053.0,
+                    176.0,
+                    2053.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -2867,42 +2911,12 @@
                 "category_id": 15,
                 "poly": [
                     166.0,
-                    1923.0,
-                    564.0,
-                    1923.0,
-                    564.0,
-                    1980.0,
-                    166.0,
-                    1980.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    143.0,
-                    1989.0,
-                    1333.0,
-                    1989.0,
-                    1333.0,
-                    2057.0,
-                    143.0,
-                    2057.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    151.0,
                     2058.0,
-                    1414.0,
+                    1429.0,
                     2058.0,
-                    1414.0,
+                    1429.0,
                     2128.0,
-                    151.0,
+                    166.0,
                     2128.0
                 ],
                 "score": 1.0,
@@ -2920,198 +2934,198 @@
             {
                 "category_id": 5,
                 "poly": [
-                    234,
-                    221,
-                    1066,
-                    221,
-                    1066,
+                    277,
+                    222,
+                    1111,
+                    222,
+                    1111,
                     551,
-                    234,
+                    277,
                     551
                 ],
                 "score": 0.98,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_2x1x2</td><td rowspan=1 colspan=1>2x1x2</td></tr></table>"
+                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thétich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_1x1x1</td><td rowspan=1 colspan=1>1x1x1</td></tr><tr><td rowspan=1 colspan=1>HI_Grass_2x1x2</td><td rowspan=1 colspan=1>2x1x2</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    233,
+                    277,
                     1559,
-                    1066,
+                    1110,
                     1559,
-                    1066,
+                    1110,
                     1804,
-                    233,
+                    277,
                     1804
                 ],
                 "score": 0.977,
-                "html": "<table><tr><td>Ten</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>OP_Tower_01_6x7x6</td><td>6x7x6</td></tr></table>"
+                "html": "<table><tr><td>Tén</td><td>Thétich (Dai x Cao x Róng)</td></tr><tr><td>OP_Tower_01_6x7x6</td><td>6x7x6</td></tr></table>"
             },
             {
                 "category_id": 1,
                 "poly": [
-                    132,
+                    148,
                     839,
-                    1552,
+                    1566,
                     839,
-                    1552,
+                    1566,
                     1276,
-                    132,
+                    148,
                     1276
                 ],
-                "score": 0.908
+                "score": 0.92
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     1457,
-                    449,
+                    479,
                     1457,
-                    449,
+                    479,
                     1500,
-                    185,
+                    214,
                     1500
                 ],
-                "score": 0.901
+                "score": 0.899
             },
             {
                 "category_id": 0,
                 "poly": [
-                    135,
+                    148,
                     1950,
-                    511,
+                    525,
                     1950,
-                    511,
+                    525,
                     2000,
-                    135,
+                    148,
                     2000
                 ],
-                "score": 0.896
+                "score": 0.892
             },
             {
                 "category_id": 1,
                 "poly": [
-                    183,
+                    211,
                     2019,
-                    627,
+                    655,
                     2019,
-                    627,
+                    655,
                     2067,
-                    183,
+                    211,
                     2067
                 ],
-                "score": 0.893
+                "score": 0.89
             },
             {
                 "category_id": 1,
                 "poly": [
-                    150,
+                    168,
                     1299,
-                    1419,
+                    1439,
                     1299,
-                    1419,
+                    1439,
                     1350,
-                    150,
+                    168,
                     1350
                 ],
-                "score": 0.861
+                "score": 0.854
             },
             {
                 "category_id": 1,
                 "poly": [
-                    132,
+                    147,
                     767,
-                    575,
+                    590,
                     767,
-                    575,
+                    590,
                     814,
-                    132,
+                    147,
                     814
                 ],
-                "score": 0.848
+                "score": 0.845
             },
             {
                 "category_id": 0,
                 "poly": [
-                    185,
+                    214,
                     80,
-                    428,
+                    457,
                     80,
-                    428,
+                    457,
                     122,
-                    185,
+                    214,
                     122
                 ],
-                "score": 0.775
+                "score": 0.773
             },
             {
                 "category_id": 0,
                 "poly": [
-                    132,
+                    148,
                     696,
-                    1035,
+                    1051,
                     696,
-                    1035,
+                    1051,
                     749,
-                    132,
+                    148,
                     749
                 ],
-                "score": 0.759
+                "score": 0.753
             },
             {
                 "category_id": 1,
                 "poly": [
-                    185,
+                    215,
                     2091,
-                    864,
+                    893,
                     2091,
-                    864,
+                    893,
                     2210,
-                    185,
+                    215,
                     2210
                 ],
-                "score": 0.737
+                "score": 0.743
             },
             {
                 "category_id": 1,
                 "poly": [
-                    132,
+                    148,
                     696,
-                    1035,
+                    1051,
                     696,
-                    1035,
+                    1051,
                     749,
-                    132,
+                    148,
                     749
                 ],
-                "score": 0.147
+                "score": 0.159
             },
             {
                 "category_id": 1,
                 "poly": [
-                    185,
+                    214,
                     80,
-                    428,
+                    457,
                     80,
-                    428,
+                    457,
                     122,
-                    185,
+                    214,
                     122
                 ],
-                "score": 0.138
+                "score": 0.137
             },
             {
                 "category_id": 15,
                 "poly": [
-                    181.0,
+                    210.0,
                     1454.0,
-                    453.0,
+                    481.0,
                     1454.0,
-                    453.0,
-                    1502.0,
-                    181.0,
-                    1502.0
+                    481.0,
+                    1503.0,
+                    210.0,
+                    1503.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3119,13 +3133,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    125.0,
-                    1946.0,
-                    513.0,
-                    1946.0,
-                    513.0,
+                    139.0,
+                    1944.0,
+                    527.0,
+                    1944.0,
+                    527.0,
                     2004.0,
-                    125.0,
+                    139.0,
                     2004.0
                 ],
                 "score": 1.0,
@@ -3134,13 +3148,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    181.0,
+                    210.0,
                     76.0,
-                    428.0,
+                    457.0,
                     76.0,
-                    428.0,
+                    457.0,
                     124.0,
-                    181.0,
+                    210.0,
                     124.0
                 ],
                 "score": 1.0,
@@ -3149,14 +3163,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    124.0,
-                    691.0,
-                    1040.0,
-                    691.0,
-                    1040.0,
-                    753.0,
-                    124.0,
-                    753.0
+                    140.0,
+                    694.0,
+                    1054.0,
+                    694.0,
+                    1054.0,
+                    751.0,
+                    140.0,
+                    751.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3164,14 +3178,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
+                    152.0,
                     853.0,
-                    156.0,
+                    171.0,
                     853.0,
-                    156.0,
-                    871.0,
-                    137.0,
-                    871.0
+                    171.0,
+                    873.0,
+                    152.0,
+                    873.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3179,13 +3193,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    166.0,
+                    187.0,
                     838.0,
-                    712.0,
+                    726.0,
                     838.0,
-                    712.0,
+                    726.0,
                     887.0,
-                    166.0,
+                    187.0,
                     887.0
                 ],
                 "score": 1.0,
@@ -3194,14 +3208,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
-                    925.0,
-                    156.0,
-                    925.0,
-                    156.0,
-                    943.0,
-                    137.0,
-                    943.0
+                    155.0,
+                    926.0,
+                    171.0,
+                    926.0,
+                    171.0,
+                    940.0,
+                    155.0,
+                    940.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3209,14 +3223,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    171.0,
+                    187.0,
                     908.0,
-                    832.0,
+                    848.0,
                     908.0,
-                    832.0,
-                    955.0,
-                    171.0,
-                    955.0
+                    848.0,
+                    957.0,
+                    187.0,
+                    957.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3224,13 +3238,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    136.0,
+                    152.0,
                     993.0,
-                    156.0,
+                    172.0,
                     993.0,
-                    156.0,
+                    172.0,
                     1015.0,
-                    136.0,
+                    152.0,
                     1015.0
                 ],
                 "score": 1.0,
@@ -3239,14 +3253,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    174.0,
-                    977.0,
-                    1551.0,
-                    977.0,
-                    1551.0,
-                    1028.0,
-                    174.0,
-                    1028.0
+                    187.0,
+                    978.0,
+                    1565.0,
+                    978.0,
+                    1565.0,
+                    1030.0,
+                    187.0,
+                    1030.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3254,13 +3268,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
+                    191.0,
                     1032.0,
-                    757.0,
+                    770.0,
                     1032.0,
-                    757.0,
+                    770.0,
                     1082.0,
-                    177.0,
+                    191.0,
                     1082.0
                 ],
                 "score": 1.0,
@@ -3269,14 +3283,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    136.0,
+                    152.0,
                     1119.0,
-                    156.0,
+                    172.0,
                     1119.0,
-                    156.0,
-                    1138.0,
-                    136.0,
-                    1138.0
+                    172.0,
+                    1140.0,
+                    152.0,
+                    1140.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3284,13 +3298,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    175.0,
+                    185.0,
                     1105.0,
-                    869.0,
+                    882.0,
                     1105.0,
-                    869.0,
+                    882.0,
                     1152.0,
-                    175.0,
+                    185.0,
                     1152.0
                 ],
                 "score": 1.0,
@@ -3299,13 +3313,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    137.0,
-                    1190.0,
-                    156.0,
-                    1190.0,
-                    156.0,
+                    152.0,
+                    1189.0,
+                    172.0,
+                    1189.0,
+                    172.0,
                     1210.0,
-                    137.0,
+                    152.0,
                     1210.0
                 ],
                 "score": 1.0,
@@ -3314,13 +3328,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    169.0,
+                    183.0,
                     1172.0,
-                    1539.0,
+                    1553.0,
                     1172.0,
-                    1539.0,
+                    1553.0,
                     1227.0,
-                    169.0,
+                    183.0,
                     1227.0
                 ],
                 "score": 1.0,
@@ -3329,14 +3343,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    175.0,
-                    1231.0,
-                    405.0,
-                    1231.0,
-                    405.0,
-                    1276.0,
-                    175.0,
-                    1276.0
+                    188.0,
+                    1228.0,
+                    421.0,
+                    1228.0,
+                    421.0,
+                    1277.0,
+                    188.0,
+                    1277.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3344,14 +3358,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    177.0,
+                    208.0,
                     2017.0,
-                    630.0,
+                    660.0,
                     2017.0,
-                    630.0,
-                    2066.0,
-                    177.0,
-                    2066.0
+                    660.0,
+                    2067.0,
+                    208.0,
+                    2067.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3359,13 +3373,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    150.0,
+                    165.0,
                     1290.0,
-                    1426.0,
+                    1440.0,
                     1290.0,
-                    1426.0,
+                    1440.0,
                     1358.0,
-                    150.0,
+                    165.0,
                     1358.0
                 ],
                 "score": 1.0,
@@ -3374,14 +3388,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    125.0,
+                    140.0,
                     765.0,
-                    578.0,
+                    593.0,
                     765.0,
-                    578.0,
-                    813.0,
-                    125.0,
-                    813.0
+                    593.0,
+                    814.0,
+                    140.0,
+                    814.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3389,13 +3403,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    226.0,
+                    255.0,
                     2087.0,
-                    745.0,
+                    774.0,
                     2087.0,
-                    745.0,
+                    774.0,
                     2142.0,
-                    226.0,
+                    255.0,
                     2142.0
                 ],
                 "score": 1.0,
@@ -3404,13 +3418,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    222.0,
+                    251.0,
                     2158.0,
-                    864.0,
+                    893.0,
                     2158.0,
-                    864.0,
+                    893.0,
                     2214.0,
-                    222.0,
+                    251.0,
                     2214.0
                 ],
                 "score": 1.0,
@@ -3419,14 +3433,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    124.0,
-                    691.0,
-                    1040.0,
-                    691.0,
-                    1040.0,
-                    753.0,
-                    124.0,
-                    753.0
+                    140.0,
+                    694.0,
+                    1054.0,
+                    694.0,
+                    1054.0,
+                    751.0,
+                    140.0,
+                    751.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3434,13 +3448,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    181.0,
+                    210.0,
                     76.0,
-                    428.0,
+                    457.0,
                     76.0,
-                    428.0,
+                    457.0,
                     124.0,
-                    181.0,
+                    210.0,
                     124.0
                 ],
                 "score": 1.0,
@@ -3458,186 +3472,129 @@
             {
                 "category_id": 5,
                 "poly": [
-                    234,
-                    679,
-                    1066,
-                    679,
-                    1066,
-                    1009,
-                    234,
-                    1009
+                    277,
+                    733,
+                    1110,
+                    733,
+                    1110,
+                    1063,
+                    277,
+                    1063
                 ],
                 "score": 0.981,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_01</td><td rowspan=1 colspan=1>2 x 1.8 x 2</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_02</td><td rowspan=1 colspan=1>2 x 1.8x 2</td></tr></table>"
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_01</td><td rowspan=1 colspan=1>2 x 1.8 x 2</td></tr><tr><td rowspan=1 colspan=1>TA_Scout_02</td><td rowspan=1 colspan=1>2x 1.8x2</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
-                    1252,
-                    1065,
-                    1252,
-                    1065,
-                    1582,
-                    234,
-                    1582
+                    277,
+                    1883,
+                    1109,
+                    1883,
+                    1109,
+                    2212,
+                    277,
+                    2212
                 ],
-                "score": 0.98,
-                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_01</td><td rowspan=1 colspan=1>2 x 2 x 2.5</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_02</td><td rowspan=1 colspan=1>2.3 x 2.3 x 3.3</td></tr></table>"
+                "score": 0.981,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_01</td><td rowspan=1 colspan=1>3 x 2.7 x3</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_02</td><td rowspan=1 colspan=1>3.5 x 3 x 3.9</td></tr></table>"
             },
             {
                 "category_id": 5,
                 "poly": [
-                    234,
-                    1829,
-                    1066,
-                    1829,
-                    1066,
-                    2157,
-                    234,
-                    2157
+                    277,
+                    1307,
+                    1110,
+                    1307,
+                    1110,
+                    1636,
+                    277,
+                    1636
                 ],
                 "score": 0.98,
-                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>The tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_01</td><td rowspan=1 colspan=1>3 x2.7x3</td></tr><tr><td rowspan=1 colspan=1>TA_Heavy_02</td><td rowspan=1 colspan=1>3.5 x 3 x 3.9</td></tr></table>"
+                "html": "<table><tr><td rowspan=1 colspan=1>Ten</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_01</td><td rowspan=1 colspan=1>2 x 2 x 2.5</td></tr><tr><td rowspan=1 colspan=1>TA_Assault_02</td><td rowspan=1 colspan=1>2.3 x 2.3 x 3.3</td></tr></table>"
             },
             {
                 "category_id": 0,
                 "poly": [
-                    186,
-                    576,
-                    468,
-                    576,
-                    468,
-                    618,
-                    186,
-                    618
+                    215,
+                    1779,
+                    504,
+                    1779,
+                    504,
+                    1821,
+                    215,
+                    1821
                 ],
-                "score": 0.911
+                "score": 0.912
             },
             {
                 "category_id": 0,
                 "poly": [
-                    186,
-                    1151,
-                    493,
-                    1151,
-                    493,
-                    1193,
-                    186,
-                    1193
+                    215,
+                    1205,
+                    522,
+                    1205,
+                    522,
+                    1247,
+                    215,
+                    1247
                 ],
-                "score": 0.906
+                "score": 0.907
             },
             {
                 "category_id": 0,
                 "poly": [
-                    186,
-                    1724,
-                    475,
-                    1724,
-                    475,
-                    1767,
-                    186,
-                    1767
+                    215,
+                    630,
+                    497,
+                    630,
+                    497,
+                    672,
+                    215,
+                    672
                 ],
-                "score": 0.904
+                "score": 0.907
             },
             {
                 "category_id": 1,
                 "poly": [
-                    197,
-                    419,
-                    1514,
-                    419,
-                    1514,
-                    467,
-                    197,
-                    467
+                    227,
+                    473,
+                    1535,
+                    473,
+                    1535,
+                    521,
+                    227,
+                    521
                 ],
-                "score": 0.735
+                "score": 0.878
             },
             {
                 "category_id": 1,
                 "poly": [
-                    198,
-                    348,
-                    1562,
-                    348,
-                    1562,
-                    395,
-                    198,
-                    395
-                ],
-                "score": 0.663
-            },
-            {
-                "category_id": 1,
-                "poly": [
-                    200,
-                    278,
-                    1301,
-                    278,
-                    1301,
-                    325,
-                    200,
-                    325
-                ],
-                "score": 0.536
-            },
-            {
-                "category_id": 1,
-                "poly": [
-                    188,
-                    205,
-                    1165,
-                    205,
-                    1165,
-                    255,
-                    188,
-                    255
-                ],
-                "score": 0.456
-            },
-            {
-                "category_id": 1,
-                "poly": [
-                    192,
+                    216,
                     79,
-                    1549,
+                    1569,
                     79,
-                    1549,
-                    184,
-                    192,
-                    184
+                    1569,
+                    446,
+                    216,
+                    446
                 ],
-                "score": 0.404
+                "score": 0.707
             },
             {
                 "category_id": 15,
                 "poly": [
-                    180.0,
-                    569.0,
-                    470.0,
-                    569.0,
-                    470.0,
-                    622.0,
-                    180.0,
-                    622.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    181.0,
-                    1146.0,
-                    494.0,
-                    1146.0,
-                    494.0,
-                    1194.0,
-                    181.0,
-                    1194.0
+                    209.0,
+                    1772.0,
+                    506.0,
+                    1772.0,
+                    506.0,
+                    1828.0,
+                    209.0,
+                    1828.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3645,14 +3602,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    180.0,
-                    1717.0,
-                    477.0,
-                    1717.0,
-                    477.0,
-                    1774.0,
-                    180.0,
-                    1774.0
+                    211.0,
+                    1201.0,
+                    523.0,
+                    1201.0,
+                    523.0,
+                    1249.0,
+                    211.0,
+                    1249.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3660,14 +3617,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    206.0,
-                    415.0,
-                    1504.0,
-                    415.0,
-                    1504.0,
-                    469.0,
-                    206.0,
-                    469.0
+                    210.0,
+                    625.0,
+                    498.0,
+                    625.0,
+                    498.0,
+                    674.0,
+                    210.0,
+                    674.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3675,14 +3632,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    195.0,
-                    345.0,
-                    1569.0,
-                    345.0,
-                    1569.0,
-                    396.0,
-                    195.0,
-                    396.0
+                    236.0,
+                    471.0,
+                    1535.0,
+                    471.0,
+                    1535.0,
+                    523.0,
+                    236.0,
+                    523.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3691,13 +3648,13 @@
                 "category_id": 15,
                 "poly": [
                     220.0,
-                    272.0,
-                    1304.0,
-                    272.0,
-                    1304.0,
-                    329.0,
+                    99.0,
+                    234.0,
+                    99.0,
+                    234.0,
+                    114.0,
                     220.0,
-                    329.0
+                    114.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3705,58 +3662,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    192.0,
-                    224.0,
-                    206.0,
-                    224.0,
-                    206.0,
-                    239.0,
-                    192.0,
-                    239.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    226.0,
-                    203.0,
-                    1168.0,
-                    203.0,
-                    1168.0,
-                    257.0,
-                    226.0,
-                    257.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    189.0,
-                    96.0,
-                    207.0,
-                    96.0,
-                    207.0,
-                    117.0,
-                    189.0,
-                    117.0
-                ],
-                "score": 1.0,
-                "text": ""
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    224.0,
-                    77.0,
-                    1544.0,
-                    77.0,
-                    1544.0,
+                    254.0,
+                    80.0,
+                    1572.0,
+                    80.0,
+                    1572.0,
                     130.0,
-                    224.0,
+                    254.0,
                     130.0
                 ],
                 "score": 1.0,
@@ -3765,14 +3677,119 @@
             {
                 "category_id": 15,
                 "poly": [
-                    227.0,
-                    131.0,
-                    861.0,
-                    131.0,
-                    861.0,
-                    186.0,
-                    227.0,
-                    186.0
+                    257.0,
+                    133.0,
+                    891.0,
+                    133.0,
+                    891.0,
+                    187.0,
+                    257.0,
+                    187.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    219.0,
+                    222.0,
+                    236.0,
+                    222.0,
+                    236.0,
+                    241.0,
+                    219.0,
+                    241.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    255.0,
+                    204.0,
+                    1197.0,
+                    204.0,
+                    1197.0,
+                    258.0,
+                    255.0,
+                    258.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    220.0,
+                    295.0,
+                    234.0,
+                    295.0,
+                    234.0,
+                    306.0,
+                    220.0,
+                    306.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    252.0,
+                    271.0,
+                    1336.0,
+                    271.0,
+                    1336.0,
+                    333.0,
+                    252.0,
+                    333.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    222.0,
+                    366.0,
+                    234.0,
+                    366.0,
+                    234.0,
+                    379.0,
+                    222.0,
+                    379.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    254.0,
+                    346.0,
+                    1504.0,
+                    346.0,
+                    1504.0,
+                    398.0,
+                    254.0,
+                    398.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    254.0,
+                    401.0,
+                    364.0,
+                    401.0,
+                    364.0,
+                    451.0,
+                    254.0,
+                    451.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -3789,13 +3806,13 @@
             {
                 "category_id": 5,
                 "poly": [
-                    182,
+                    211,
                     889,
-                    1484,
+                    1513,
                     889,
-                    1484,
+                    1513,
                     1133,
-                    182,
+                    211,
                     1133
                 ],
                 "score": 0.979,
@@ -3804,31 +3821,17 @@
             {
                 "category_id": 5,
                 "poly": [
-                    183,
+                    211,
                     391,
-                    1483,
+                    1512,
                     391,
-                    1483,
+                    1512,
                     635,
-                    183,
+                    211,
                     635
                 ],
-                "score": 0.979,
-                "html": "<table><tr><td>Tén</td><td>Tén (Scene)</td><td>Thé tich (Dai x Cao x Róng)</td></tr><tr><td>Desert</td><td>TankGamePlay-Final</td><td>100 x 100</td></tr></table>"
-            },
-            {
-                "category_id": 0,
-                "poly": [
-                    81,
-                    181,
-                    481,
-                    181,
-                    481,
-                    237,
-                    81,
-                    237
-                ],
-                "score": 0.911
+                "score": 0.978,
+                "html": "<table><tr><td rowspan=1 colspan=1>Tén</td><td rowspan=1 colspan=1>Tén (Scene)</td><td rowspan=1 colspan=1>Thé tich(Dai x Cao x Róng)</td></tr><tr><td rowspan=1 colspan=1>Desert</td><td rowspan=1 colspan=1>TankGamePlay-Final</td><td rowspan=1 colspan=1>100 x 100</td></tr></table>"
             },
             {
                 "category_id": 0,
@@ -3842,35 +3845,49 @@
                     81,
                     1341
                 ],
-                "score": 0.908
+                "score": 0.909
             },
             {
                 "category_id": 0,
                 "poly": [
-                    133,
+                    148,
                     783,
-                    537,
+                    552,
                     783,
-                    537,
+                    552,
                     829,
-                    133,
+                    148,
                     829
                 ],
-                "score": 0.906
+                "score": 0.909
             },
             {
                 "category_id": 0,
                 "poly": [
-                    133,
+                    81,
+                    181,
+                    481,
+                    181,
+                    481,
+                    237,
+                    81,
+                    237
+                ],
+                "score": 0.904
+            },
+            {
+                "category_id": 0,
+                "poly": [
+                    148,
                     282,
-                    609,
+                    623,
                     282,
-                    609,
+                    623,
                     331,
-                    133,
+                    148,
                     331
                 ],
-                "score": 0.875
+                "score": 0.863
             },
             {
                 "category_id": 1,
@@ -3884,79 +3901,64 @@
                     101,
                     1628
                 ],
-                "score": 0.776
+                "score": 0.73
             },
             {
                 "category_id": 1,
                 "poly": [
-                    86,
+                    85,
                     1367,
                     1223,
                     1367,
                     1223,
                     1416,
-                    86,
+                    85,
                     1416
                 ],
-                "score": 0.395
+                "score": 0.414
             },
             {
                 "category_id": 1,
                 "poly": [
-                    86,
+                    85,
                     1509,
                     647,
                     1509,
                     647,
                     1556,
-                    86,
+                    85,
                     1556
                 ],
-                "score": 0.206
+                "score": 0.22
             },
             {
                 "category_id": 1,
                 "poly": [
-                    134,
+                    146,
                     1438,
-                    595,
+                    609,
                     1438,
-                    595,
+                    609,
                     1486,
-                    134,
+                    146,
                     1486
                 ],
-                "score": 0.14
+                "score": 0.168
             },
             {
                 "category_id": 13,
                 "poly": [
-                    276,
-                    1441,
-                    331,
-                    1441,
-                    331,
+                    291,
+                    1442,
+                    346,
+                    1442,
+                    346,
                     1479,
-                    276,
+                    291,
                     1479
                 ],
-                "score": 0.7,
+                "score": 0.69,
                 "latex": "\\mathbf { \\lambda } = \\mathbf { 1 }"
-            },
-            {
-                "category_id": 15,
-                "poly": [
-                    74.0,
-                    173.0,
-                    485.0,
-                    173.0,
-                    485.0,
-                    245.0,
-                    74.0,
-                    245.0
-                ],
-                "score": 1.0,
-                "text": ""
             },
             {
                 "category_id": 15,
@@ -3976,13 +3978,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    127.0,
+                    142.0,
                     780.0,
-                    539.0,
+                    553.0,
                     780.0,
-                    539.0,
+                    553.0,
                     830.0,
-                    127.0,
+                    142.0,
                     830.0
                 ],
                 "score": 1.0,
@@ -3991,14 +3993,29 @@
             {
                 "category_id": 15,
                 "poly": [
-                    129.0,
-                    281.0,
-                    614.0,
-                    281.0,
-                    614.0,
-                    329.0,
-                    129.0,
-                    329.0
+                    74.0,
+                    173.0,
+                    485.0,
+                    173.0,
+                    485.0,
+                    245.0,
+                    74.0,
+                    245.0
+                ],
+                "score": 1.0,
+                "text": ""
+            },
+            {
+                "category_id": 15,
+                "poly": [
+                    142.0,
+                    279.0,
+                    629.0,
+                    279.0,
+                    629.0,
+                    330.0,
+                    142.0,
+                    330.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -4021,14 +4038,14 @@
             {
                 "category_id": 15,
                 "poly": [
-                    86.0,
-                    1383.0,
-                    102.0,
-                    1383.0,
-                    102.0,
-                    1398.0,
-                    86.0,
-                    1398.0
+                    89.0,
+                    1386.0,
+                    99.0,
+                    1386.0,
+                    99.0,
+                    1397.0,
+                    89.0,
+                    1397.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -4036,13 +4053,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    117.0,
+                    120.0,
                     1363.0,
                     1225.0,
                     1363.0,
                     1225.0,
                     1418.0,
-                    117.0,
+                    120.0,
                     1418.0
                 ],
                 "score": 1.0,
@@ -4056,9 +4073,9 @@
                     101.0,
                     1527.0,
                     101.0,
-                    1538.0,
+                    1539.0,
                     87.0,
-                    1538.0
+                    1539.0
                 ],
                 "score": 1.0,
                 "text": ""
@@ -4081,13 +4098,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    139.0,
-                    1455.0,
-                    155.0,
-                    1455.0,
-                    155.0,
+                    153.0,
+                    1454.0,
+                    169.0,
+                    1454.0,
+                    169.0,
                     1470.0,
-                    139.0,
+                    153.0,
                     1470.0
                 ],
                 "score": 1.0,
@@ -4096,13 +4113,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    173.0,
+                    189.0,
                     1433.0,
-                    275.0,
+                    290.0,
                     1433.0,
-                    275.0,
+                    290.0,
                     1490.0,
-                    173.0,
+                    189.0,
                     1490.0
                 ],
                 "score": 1.0,
@@ -4111,13 +4128,13 @@
             {
                 "category_id": 15,
                 "poly": [
-                    332.0,
+                    347.0,
                     1433.0,
-                    596.0,
+                    611.0,
                     1433.0,
-                    596.0,
+                    611.0,
                     1490.0,
-                    332.0,
+                    347.0,
                     1490.0
                 ],
                 "score": 1.0,

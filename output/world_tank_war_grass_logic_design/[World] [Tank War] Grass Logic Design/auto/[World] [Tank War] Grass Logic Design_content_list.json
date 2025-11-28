@@ -175,16 +175,16 @@
         "type": "text",
         "text": "a. Ảnh hưởng tới đối tượng khác ",
         "bbox": [
-            75,
-            398,
-            425,
+            84,
+            400,
+            434,
             422
         ],
         "page_idx": 1
     },
     {
         "type": "table",
-        "img_path": "images/2b398fc53b4989886c3add1f114485bb58aeee89887b5ef4593837ad70e8f064.jpg",
+        "img_path": "images/9b49907440e084d1fe35ac66153f13bb07cb345b047e41bc23fe64d4ddab0ce9.jpg",
         "table_caption": [],
         "table_footnote": [],
         "table_body": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1> Két qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Tank</td><td rowspan=1 colspan=1>Tank sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Dan</td><td rowspan=1 colspan=1>Dan se tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>VFX</td><td rowspan=1 colspan=1>：  Sat thuong c6 hien thiEffect ban dan khong hien thi：：  Khói xe khong hien thiEffect Bear Trap c6 hien thi·： Effect Kamikaze có hien thi： Effect Hook</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Moitruong</td><td rowspan=1 colspan=1>Có có shadow</td><td rowspan=1 colspan=1></td></tr></table>",
@@ -210,7 +210,7 @@
     },
     {
         "type": "table",
-        "img_path": "images/8702ced17d45c80aef246d79a771f9b94c17454a3816fa134acce2c306748e38.jpg",
+        "img_path": "images/31e233e7f502a610633a1837de919622cacf126d4259529e23ac18383ce3a0d2.jpg",
         "table_caption": [],
         "table_footnote": [],
         "table_body": "<table><tr><td rowspan=1 colspan=1>Doi tuong</td><td rowspan=1 colspan=1>Ket qua mong muon</td><td rowspan=1 colspan=1>Note</td></tr><tr><td rowspan=1 colspan=1>Bear Trap</td><td rowspan=1 colspan=1>Bay sé tang hinh</td><td rowspan=1 colspan=1></td></tr><tr><td rowspan=1 colspan=1>Hook</td><td rowspan=1 colspan=1>Hook khong tang hinh</td><td rowspan=1 colspan=1></td></tr></table>",
@@ -301,7 +301,7 @@
         "type": "text",
         "text": "• Kích thước đối tượng được đo bằng đơn vị mặc định trong Unity (Unit): ◦ 1 mét $\\mathbf { \\lambda } = \\mathbf { 1 }$ Unit trong Unity   \n• Trường hợp liệt kê áp dụng cho cả 2 đội. ",
         "bbox": [
-            47,
+            45,
             140,
             740,
             223

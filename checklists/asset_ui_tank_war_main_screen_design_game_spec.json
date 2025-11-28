@@ -1,0 +1,281 @@
+{
+  "doc_id": "asset_ui_tank_war_main_screen_design",
+  "metadata": {
+    "created_at": "2025-11-26T10:26:01.471503",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_player_info",
+        "name": "Player Info",
+        "category": "UI",
+        "description": "Displays general player information including username, avatar, ELO icon, and ELO bar.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_find_match",
+        "name": "Find Match",
+        "category": "UI",
+        "description": "Allows the player to find and start a match.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_tank_showcase",
+        "name": "Tank Showcase",
+        "category": "UI",
+        "description": "Showcases the 3D tank model selected by the player.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Question raised about whether the tank can be changed or upgraded based on usage.",
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_mode",
+        "name": "Mode",
+        "category": "UI",
+        "description": "Displays the mode selection interface.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_garage",
+        "name": "Garage",
+        "category": "UI",
+        "description": "Transitions the player to the garage interface for tank customization.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Links to external Garage Document file.",
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_currency",
+        "name": "Currency",
+        "category": "UI",
+        "description": "Lists important in-game currencies.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_settings",
+        "name": "Settings",
+        "category": "UI",
+        "description": "Displays the settings interface.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_daily",
+        "name": "Daily",
+        "category": "UI",
+        "description": "Displays the daily mission interface.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "obj_add_player",
+        "name": "Add Player",
+        "category": "UI",
+        "description": "Allows adding other players to the user's party.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_main_screen",
+        "name": "Main Screen System",
+        "description": "The main screen system of Tank War that allows players to interact with various game functions.",
+        "mechanics": "Players interact with UI components to access different game features such as profile, matchmaking, tank customization, etc.",
+        "objectives": "Ensure clear communication of available functions without overwhelming the player with information.",
+        "related_objects": [
+          "obj_player_info",
+          "obj_find_match",
+          "obj_tank_showcase",
+          "obj_mode",
+          "obj_garage",
+          "obj_currency",
+          "obj_settings",
+          "obj_daily",
+          "obj_add_player"
+        ],
+        "interactions": [
+          "Clicking 'Player Info' opens User Profile.",
+          "Clicking 'Find Match' initiates matchmaking.",
+          "Clicking 'Garage' opens the garage interface.",
+          "Clicking 'Mode' displays mode selection."
+        ],
+        "source_note": "Table and context in [Asset, UI] [Tank War] Main Screen Design"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_player_info",
+        "summary": "Player Info Interaction",
+        "description": "When the Player Info component is clicked, the User Profile interface is displayed.",
+        "trigger": "Player clicks on Player Info.",
+        "effect": "User Profile interface is shown.",
+        "related_objects": [
+          "obj_player_info"
+        ],
+        "related_systems": [
+          "sys_main_screen"
+        ],
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "rule_find_match",
+        "summary": "Find Match Interaction",
+        "description": "When the Find Match button is clicked, the system transitions to the 'Finding' state and shows the number of participants joining the room. Once enough players are found, the match begins.",
+        "trigger": "Player clicks on Find Match.",
+        "effect": "System enters 'Finding' state and starts match when ready.",
+        "related_objects": [
+          "obj_find_match"
+        ],
+        "related_systems": [
+          "sys_main_screen"
+        ],
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "rule_garage",
+        "summary": "Garage Interaction",
+        "description": "When the Garage button is clicked, the garage interface is displayed.",
+        "trigger": "Player clicks on Garage.",
+        "effect": "Garage interface is shown.",
+        "related_objects": [
+          "obj_garage"
+        ],
+        "related_systems": [
+          "sys_main_screen"
+        ],
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_clear_ui",
+        "title": "Clear UI Communication",
+        "description": "Ensure that all functions on the main screen are clearly communicated to the player without overwhelming them with information.",
+        "category": "ui",
+        "priority": "high",
+        "status": "in-progress",
+        "acceptance_criteria": "Players understand all available functions on the main screen without feeling overwhelmed.",
+        "related_objects": [
+          "obj_player_info",
+          "obj_find_match",
+          "obj_tank_showcase",
+          "obj_mode",
+          "obj_garage",
+          "obj_currency",
+          "obj_settings",
+          "obj_daily",
+          "obj_add_player"
+        ],
+        "related_systems": [
+          "sys_main_screen"
+        ],
+        "source_note": "Context in [Asset, UI] [Tank War] Main Screen Design"
+      },
+      {
+        "id": "req_complete_components",
+        "title": "Complete Pending Components",
+        "description": "Finalize development of incomplete components like Garage, Currency, Settings, and Daily interfaces.",
+        "category": "progression",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "All listed components are fully functional and visible.",
+        "related_objects": [
+          "obj_garage",
+          "obj_currency",
+          "obj_settings",
+          "obj_daily"
+        ],
+        "related_systems": [
+          "sys_main_screen"
+        ],
+        "source_note": "Table in [Asset, UI] [Tank War] Main Screen Design"
+      }
+    ]
+  }
+}

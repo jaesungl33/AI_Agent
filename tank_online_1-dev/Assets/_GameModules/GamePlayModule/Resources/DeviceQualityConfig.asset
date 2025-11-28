@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26a5ad2031619c47954167cdc8bf488, type: 3}
+  m_Name: DeviceQualityConfig
+  m_EditorClassIdentifier: Assembly-CSharp::DeviceQualityConfig
+  qualityLevel: 0
+  volumeProfile: {fileID: 11400000, guid: 839ebf456c9c61946b1714d014bb2668, type: 2}
+  profiles:
+  - name: 
+    qualityLevel: 0
+    targetFrameRate: 30
+    shadows: 1
+    shadowResolution: 0
+    shadowDistance: 20
+    shadowCascades: 0
+    antiAliasing: 0
+    anisotropicFiltering: 0
+    softParticles: 0
+    realtimeReflectionProbes: 0
+    lodBias: 0.7
+    particleRaycastBudget: 16
+    maximumLODLevel: 1
+  - name: 
+    qualityLevel: 0
+    targetFrameRate: 30
+    shadows: 1
+    shadowResolution: 0
+    shadowDistance: 20
+    shadowCascades: 0
+    antiAliasing: 0
+    anisotropicFiltering: 0
+    softParticles: 0
+    realtimeReflectionProbes: 0
+    lodBias: 0.7
+    particleRaycastBudget: 16
+    maximumLODLevel: 1
+  - name: 
+    qualityLevel: 0
+    targetFrameRate: 30
+    shadows: 1
+    shadowResolution: 0
+    shadowDistance: 20
+    shadowCascades: 0
+    antiAliasing: 0
+    anisotropicFiltering: 0
+    softParticles: 0
+    realtimeReflectionProbes: 0
+    lodBias: 0.7
+    particleRaycastBudget: 16
+    maximumLODLevel: 1

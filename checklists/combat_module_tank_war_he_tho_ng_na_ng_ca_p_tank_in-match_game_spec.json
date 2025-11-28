@@ -1,0 +1,172 @@
+{
+  "doc_id": "combat_module_tank_war_he_tho_ng_na_ng_ca_p_tank_in-match",
+  "metadata": {
+    "created_at": "2025-11-26T10:34:10.072504",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "tank_scout",
+        "name": "Scout Tank",
+        "category": "TA",
+        "description": "A tank class optimized for mobility and rapid firing capability, designed for hit-and-run tactics.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "High DPS multiplier (×1.472 when maxed), prioritizes Fire Rate and Speed upgrades.",
+        "source_note": "CONTEXT: Scout (cơ động ‒ dồn nhịp bắn) section."
+      },
+      {
+        "id": "tank_assault",
+        "name": "Assault Tank",
+        "category": "TA",
+        "description": "A balanced tank class designed for mid-game carry roles with moderate survivability and damage output.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "DPS multiplier ×1.459 when maxed, higher HP compared to Scout for sustained combat.",
+        "source_note": "CONTEXT: Assault (toàn diện ‒ nhịp giao tranh chính) section."
+      },
+      {
+        "id": "tank_heavy",
+        "name": "Heavy Tank",
+        "category": "TA",
+        "description": "A tank class focused on durability and frontline control, with lower DPS but the highest EHP.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "DPS multiplier ×1.379 when maxed, EHP increased by 29.4%.",
+        "source_note": "CONTEXT: Heavy (chống chịu ‒ giữ tuyến) section."
+      }
+    ],
+    "systems": [
+      {
+        "id": "in_match_upgrade_system",
+        "name": "In-Match Tank Upgrade System",
+        "description": "A system allowing players to upgrade tank stats during a match to adapt to evolving combat scenarios.",
+        "mechanics": "Players can upgrade four stats (HP, SPD, DMG, FR) up to three levels each, with diminishing returns applied.",
+        "objectives": "Enhance tactical depth and adaptability in matches by enabling stat optimization based on player strategy.",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "interactions": [
+          "Players spend in-match rewards (gold, XP) to unlock upgrades.",
+          "Upgrades reset after the match ends."
+        ],
+        "source_note": "CONTEXT: Tổng quan hệ thống and related sections."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "diminishing_returns_rule",
+        "summary": "Diminishing Returns for Stat Upgrades",
+        "description": "Each subsequent upgrade level provides a smaller percentage increase than the previous one.",
+        "trigger": "Player selects an upgrade for a specific stat.",
+        "effect": "The cumulative bonus is calculated using a multiplicative stacking formula, resulting in reduced effectiveness per level.",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "related_systems": [
+          "in_match_upgrade_system"
+        ],
+        "source_note": "CONTEXT: Quy tắc stack and related examples."
+      },
+      {
+        "id": "class_specific_upgrade_rule",
+        "summary": "Class-Specific Upgrade Benefits",
+        "description": "Different tank classes receive varying benefits from stat upgrades based on their roles.",
+        "trigger": "Player selects an upgrade for a specific stat.",
+        "effect": "Stats are weighted differently for each class to align with their intended playstyle (e.g., Scouts prioritize FR, Heavies prioritize HP).",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "related_systems": [
+          "in_match_upgrade_system"
+        ],
+        "source_note": "CONTEXT: Nguyên tắc thiết kế section."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_upgrade_balance",
+        "title": "Balanced Upgrade System",
+        "description": "Ensure that the in-match upgrade system provides meaningful choices without making any single stat overpowered.",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "All tank classes must maintain balanced performance across different upgrade paths.",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "related_systems": [
+          "in_match_upgrade_system"
+        ],
+        "source_note": "CONTEXT: Nguyên tắc thiết kế and related sections."
+      },
+      {
+        "id": "req_diminishing_returns_implementation",
+        "title": "Implement Diminishing Returns",
+        "description": "Apply diminishing returns to stat upgrades to prevent excessive power scaling.",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Cumulative bonuses must follow the multiplicative stacking formula and reflect diminishing returns.",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "related_systems": [
+          "in_match_upgrade_system"
+        ],
+        "source_note": "CONTEXT: Quy tắc stack and related examples."
+      },
+      {
+        "id": "req_class_role_alignment",
+        "title": "Align Upgrades with Class Roles",
+        "description": "Ensure that stat upgrades complement the intended roles of each tank class.",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Scouts emphasize FR and SPD, Assaults balance all stats, and Heavies focus on HP.",
+        "related_objects": [
+          "tank_scout",
+          "tank_assault",
+          "tank_heavy"
+        ],
+        "related_systems": [
+          "in_match_upgrade_system"
+        ],
+        "source_note": "CONTEXT: Các thuộc tính được phép nâng cấp and related sections."
+      }
+    ]
+  }
+}

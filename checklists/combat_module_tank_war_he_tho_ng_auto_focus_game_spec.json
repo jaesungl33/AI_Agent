@@ -1,0 +1,189 @@
+{
+  "doc_id": "combat_module_tank_war_he_tho_ng_auto_focus",
+  "metadata": {
+    "created_at": "2025-11-26T10:33:28.292844",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "enemy-tank",
+        "name": "Enemy Tank",
+        "category": "TA",
+        "description": "Đối tượng xe tăng địch trong hệ thống Auto Focus",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": "Có thể bị khóa mục tiêu tự động khi đáp ứng các điều kiện ưu tiên",
+        "source_note": "Từ các quy tắc ưu tiên mục tiêu trong tài liệu"
+      },
+      {
+        "id": "scout-tank",
+        "name": "Scout Tank",
+        "category": "TA",
+        "description": "Loại xe tăng trinh sát, ưu tiên cao nhất trong hệ thống Auto Focus",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": "Ưu tiên cao nhất trong tầng 2 của hệ thống ưu tiên",
+        "source_note": "Phần 3.2 Tầng 2 - Ưu tiên theo vai trò"
+      },
+      {
+        "id": "assault-tank",
+        "name": "Assault Tank",
+        "category": "TA",
+        "description": "Loại xe tăng tấn công, ưu tiên thứ hai trong hệ thống Auto Focus",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": "Ưu tiên thứ hai trong tầng 2 của hệ thống ưu tiên",
+        "source_note": "Phần 3.2 Tầng 2 - Ưu tiên theo vai trò"
+      },
+      {
+        "id": "heavy-tank",
+        "name": "Heavy Tank",
+        "category": "TA",
+        "description": "Loại xe tăng hạng nặng, ưu tiên thấp nhất trong hệ thống Auto Focus",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": true,
+        "special_rules": "Ưu tiên khi gần hoặc không có Scout/Assault trong phạm vi",
+        "source_note": "Phần 3.2 Tầng 2 - Ưu tiên theo vai trò"
+      }
+    ],
+    "systems": [
+      {
+        "id": "auto-focus-system",
+        "name": "Hệ Thống Auto Focus",
+        "description": "Hệ thống hỗ trợ ngắm bắn tự động cho người chơi",
+        "mechanics": "Quét mục tiêu trong phạm vi, áp dụng các tầng rules ưu tiên, khóa mục tiêu và tự động bắn",
+        "objectives": "Đơn giản hóa trải nghiệm gameplay, tăng tính chiến thuật, giảm tải thao tác",
+        "related_objects": [
+          "enemy-tank",
+          "scout-tank",
+          "assault-tank",
+          "heavy-tank"
+        ],
+        "interactions": [
+          "Chuyển đổi mục tiêu dựa trên khoảng cách và ưu tiên",
+          "Manual override khi người chơi giữ nút bắn",
+          "Tự động chọn lại mục tiêu khi mục tiêu hiện tại chết hoặc ra khỏi tầm quét"
+        ],
+        "source_note": "Toàn bộ tài liệu về Hệ Thống Auto Focus"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "survival-priority-rule",
+        "summary": "Ưu tiên mục tiêu dựa trên tình huống sinh tồn",
+        "description": "Ưu tiên kẻ địch có HP thấp nhất, đang tấn công trực tiếp, hoặc ở phạm vi gần nhất",
+        "trigger": "Khi có nhiều mục tiêu trong tầm quét",
+        "effect": "Khóa mục tiêu theo thứ tự ưu tiên sinh tồn",
+        "related_objects": [
+          "enemy-tank"
+        ],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 3.1 Tầng 1 - Ưu tiên dựa trên tình huống cá nhân"
+      },
+      {
+        "id": "class-priority-rule",
+        "summary": "Ưu tiên mục tiêu theo vai trò",
+        "description": "Ưu tiên Scout > Assault > Heavy dựa trên vai trò của xe tăng",
+        "trigger": "Khi không có mục tiêu ưu tiên sinh tồn",
+        "effect": "Khóa mục tiêu theo thứ tự ưu tiên vai trò",
+        "related_objects": [
+          "scout-tank",
+          "assault-tank",
+          "heavy-tank"
+        ],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 3.2 Tầng 2 - Ưu tiên theo vai trò"
+      },
+      {
+        "id": "manual-override-rule",
+        "summary": "Chế độ ngắm bắn thủ công",
+        "description": "Cho phép người chơi ghi đè hệ thống Auto Focus bằng cách giữ nút bắn",
+        "trigger": "Khi người chơi giữ nút bắn",
+        "effect": "Chuyển sang chế độ ngắm bắn thủ công",
+        "related_objects": [],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 2.3 Manual Override"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req-001",
+        "title": "Đơn giản hóa trải nghiệm gameplay",
+        "description": "Người chơi không cần liên tục thao tác ngắm bắn thủ công",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Hệ thống Auto Focus hoạt động ổn định và hiệu quả",
+        "related_objects": [],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 1.1 Mục tiêu thiết kế"
+      },
+      {
+        "id": "req-002",
+        "title": "Tăng tính chiến thuật",
+        "description": "Hệ thống Auto Focus phải hỗ trợ quyết định ưu tiên mục tiêu hợp lý",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Các tầng rules ưu tiên được triển khai đầy đủ và cân bằng",
+        "related_objects": [],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 1.1 Mục tiêu thiết kế"
+      },
+      {
+        "id": "req-003",
+        "title": "Giảm tải thao tác",
+        "description": "Giữ sự tập trung của người chơi vào di chuyển, chọn vị trí, kỹ năng, và phối hợp đồng đội",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Người chơi cảm thấy thoải mái và ít bị phân tâm bởi thao tác ngắm bắn",
+        "related_objects": [],
+        "related_systems": [
+          "auto-focus-system"
+        ],
+        "source_note": "Phần 1.1 Mục tiêu thiết kế"
+      }
+    ]
+  }
+}

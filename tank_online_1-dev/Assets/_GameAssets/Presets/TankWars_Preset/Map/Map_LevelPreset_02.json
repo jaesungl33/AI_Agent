@@ -1,0 +1,906 @@
+{
+    "inputMapPath": "Assets/_GameAssets/Textures/TankWars_Texture/Maps/Map_DM_02.png",
+    "mapWidth": 100,
+    "mapHeight": 100,
+    "randomSeed": -1788056454,
+    "rootGroupName": "Map",
+    "maxColorsLimit": 20,
+    "colorLegends": [
+        {
+            "color": {
+                "r": 192,
+                "g": 103,
+                "b": 97,
+                "a": 255
+            },
+            "legend": "BO_Collider",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Collider/Box_1x1x1_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true
+            ],
+            "prefabWeights": [
+                1.0
+            ],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 117,
+                "g": 168,
+                "b": 180,
+                "a": 255
+            },
+            "legend": "",
+            "prefabPaths": [],
+            "prefabOffsetEnabled": [],
+            "prefabWeights": [],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 181,
+                "g": 181,
+                "b": 181,
+                "a": 255
+            },
+            "legend": "",
+            "prefabPaths": [],
+            "prefabOffsetEnabled": [],
+            "prefabWeights": [],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 91,
+                "g": 141,
+                "b": 53,
+                "a": 255
+            },
+            "legend": "BR_Cactus",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x0.5x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x1x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x2x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_1x3x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Cactus/BR_Cactus_2x2x1_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "prefabWeights": [
+                2.0,
+                2.0,
+                2.0,
+                1.0,
+                1.0
+            ],
+            "sizeBias": 0.30000007152557375,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 5,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 0.8999999761581421,
+                    "y": 0.8999999761581421,
+                    "z": 0.8999999761581421
+                },
+                "scaleMax": {
+                    "x": 1.2999999523162842,
+                    "y": 1.2999999523162842,
+                    "z": 1.2999999523162842
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 122,
+                "g": 122,
+                "b": 122,
+                "a": 255
+            },
+            "legend": "BO_Building",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Building/BO_House_01_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Building/BO_Workbench_01_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Building/BO_House_03_4x4x4_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Building/BO_House_04_6x6x6_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Building/BO_VanCar_01_3x2x2_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "prefabWeights": [
+                2.0,
+                0.10000000149011612,
+                20.0,
+                50.0,
+                0.20000000298023225
+            ],
+            "sizeBias": 1.0,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 71,
+                "g": 149,
+                "b": 218,
+                "a": 255
+            },
+            "legend": "BO_Container",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_01_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_02_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_03_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_04_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_01_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_02_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_03_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Container/BO_Container_04_prefab Variant.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "prefabWeights": [
+                1.0,
+                1.0,
+                3.0,
+                3.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "sizeBias": 0.5026615858078003,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 180,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 255,
+                "g": 122,
+                "b": 57,
+                "a": 255
+            },
+            "legend": "BR_Box",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_Box_01_2x2x2_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_Box_02_2x2x2_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true
+            ],
+            "prefabWeights": [
+                1.0,
+                1.0
+            ],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 255,
+                "g": 207,
+                "b": 98,
+                "a": 255
+            },
+            "legend": "BO_Rock",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_1x2x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_2x3x2_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_2x3x3_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_2x3x4_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_3x3x2_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_3x6x5_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_4x3x2_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_4x5x5_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_4x6x4_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_5x5x4_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_5x6x3_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_4x3x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_1x3x4_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_2x2x2_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BO_Rock/BO_Rock_4x3x3_prefab Variant.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+            ],
+            "prefabWeights": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                2.0,
+                2.0,
+                2.0,
+                3.0,
+                3.0,
+                4.0,
+                4.0,
+                2.0,
+                1.0,
+                2.0,
+                2.0
+            ],
+            "sizeBias": 1.0,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 180,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": false,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.2000000476837159,
+                    "y": 1.0,
+                    "z": 1.2000000476837159
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 106,
+                "g": 255,
+                "b": 98,
+                "a": 255
+            },
+            "legend": "HI_Grass",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/HI_Grass/HI_Grass_1x1x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/HI_Grass/HI_Grass_2x1x2_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true
+            ],
+            "prefabWeights": [
+                1.0,
+                1.0
+            ],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.2000000476837159,
+                    "y": 1.2000000476837159,
+                    "z": 1.2000000476837159
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 255,
+                "g": 59,
+                "b": 34,
+                "a": 255
+            },
+            "legend": "BR_Gate",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Gate/BR_Gate_4x2.5x1_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Gate/BR_Gate_7x2.5x1_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                true
+            ],
+            "prefabWeights": [
+                0.10000000149011612,
+                5.0
+            ],
+            "sizeBias": 1.0,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 0,
+                "g": 255,
+                "b": 247,
+                "a": 255
+            },
+            "legend": "",
+            "prefabPaths": [],
+            "prefabOffsetEnabled": [],
+            "prefabWeights": [],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 0,
+                "g": 255,
+                "b": 174,
+                "a": 255
+            },
+            "legend": "BR_Barrel",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_01_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_02_3x3x2_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_02_2x3x3_prefab Variant.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_03_prefab.prefab",
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Barrel/BR_ToxicBarrel_04_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true,
+                false,
+                false,
+                true,
+                true
+            ],
+            "prefabWeights": [
+                1.0,
+                5.0,
+                5.0,
+                1.0,
+                1.0
+            ],
+            "sizeBias": 1.0,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": -45.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 45.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 255,
+                "g": 0,
+                "b": 252,
+                "a": 255
+            },
+            "legend": "BR_Deco",
+            "prefabPaths": [
+                "Assets/_GameAssets/Prefabs/TankWars_Prefab/BR_Deco/BR_Skull_01_prefab.prefab"
+            ],
+            "prefabOffsetEnabled": [
+                true
+            ],
+            "prefabWeights": [
+                1.0
+            ],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": true,
+                "snapStep": 5,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 360.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        },
+        {
+            "color": {
+                "r": 255,
+                "g": 180,
+                "b": 180,
+                "a": 255
+            },
+            "legend": "",
+            "prefabPaths": [],
+            "prefabOffsetEnabled": [],
+            "prefabWeights": [],
+            "sizeBias": 0.5,
+            "offsetSetting": {
+                "snapRotation": false,
+                "snapStep": 90,
+                "rotationMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "rotationMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "uniformScale": true,
+                "scaleSnapEnabled": false,
+                "scaleSnapUnit": 0.10000000149011612,
+                "scaleMin": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "scaleMax": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "positionMin": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionMax": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "positionSnapEnabled": false,
+                "positionSnapUnit": 1
+            }
+        }
+    ]
+}

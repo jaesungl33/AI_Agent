@@ -1,0 +1,106 @@
+{
+  "doc_id": "multiplayer_module_tank_war_matchmaking_system_design",
+  "metadata": {
+    "created_at": "2025-11-26T10:47:13.086240",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [],
+    "systems": [
+      {
+        "id": "sys-tankwar-matchmaking",
+        "name": "Tank War Matchmaking System",
+        "description": "Hệ thống ghép trận cho Tank War, đảm bảo tính công bằng, nhanh chóng và trải nghiệm người chơi tốt nhất.",
+        "mechanics": "Ghép người chơi dựa trên Elo points, thời gian chờ, và các quy tắc cân bằng đội hình. Hỗ trợ Solo Match (5v5) và có kế hoạch mở rộng Team Match, Custom Room.",
+        "objectives": "Tạo trận đấu cân bằng giữa người chơi, tối ưu hóa thời gian ghép trận, và duy trì trải nghiệm người chơi.",
+        "related_objects": [],
+        "interactions": [
+          "Quy trình ghép trận: Tạo nhóm -> Nạp pool -> Tạo phòng -> Fill phòng -> Thông báo Match Success.",
+          "Xử lý đặc biệt: Người chơi disconnect trong quá trình chọn Tank sẽ bị xử thua và trừ Elo."
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule-elo-calculation",
+        "summary": "Quy tắc tính điểm Elo",
+        "description": "Điểm Elo mặc định là 1000. Thắng +20, thua -15. Disconnect bị xử thua và trừ 15 Elo ngay lập tức.",
+        "trigger": "Kết quả trận đấu hoặc hành động disconnect của người chơi.",
+        "effect": "Cập nhật điểm Elo của người chơi dựa trên kết quả trận đấu hoặc hành động disconnect.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      },
+      {
+        "id": "rule-matchmaking-pool",
+        "summary": "Quy tắc nạp pool ghép trận",
+        "description": "Pool ghép trận được nạp trong X giây hoặc khi đủ Y nhóm. Ghép theo thứ tự thời gian và độ chênh lệch Elo points.",
+        "trigger": "Thời gian chờ hoặc số lượng nhóm đạt yêu cầu.",
+        "effect": "Tạo pool ghép trận để bắt đầu quá trình ghép người chơi.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      },
+      {
+        "id": "rule-team-balance",
+        "summary": "Quy tắc cân bằng đội hình",
+        "description": "Elo point các thành viên trong đội không chênh lệch > 10%. Cho phép tối đa 10-30% chênh lệch tùy thời gian chờ.",
+        "trigger": "Quá trình fill phòng trong hệ thống ghép trận.",
+        "effect": "Đảm bảo đội hình cân bằng hoặc chấp nhận chênh lệch nếu không tìm được người chơi phù hợp.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      },
+      {
+        "id": "rule-bot-substitution",
+        "summary": "Quy tắc thay thế bot",
+        "description": "Sau 120s, nếu không tìm thấy đối thủ tương đương, hệ thống sẽ ghép với bot.",
+        "trigger": "Thời gian chờ vượt quá 120s.",
+        "effect": "Thêm bot vào trận đấu để đảm bảo trận đấu diễn ra.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req-client-side-cancel",
+        "title": "Yêu cầu triển khai cơ chế Cancel trên client-side",
+        "description": "Người chơi cần có khả năng hủy ghép trận từ giao diện người dùng.",
+        "category": "ui",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "Người chơi có thể nhấn nút Cancel để thoát khỏi hàng chờ ghép trận.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      },
+      {
+        "id": "req-auto-confirm",
+        "title": "Yêu cầu triển khai cơ chế Auto-confirm trên client-side",
+        "description": "Hệ thống cần tự động xác nhận khi thông báo ghép trận thành công.",
+        "category": "ui",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Người chơi được tự động đưa vào màn hình Chọn Tank sau khi ghép trận thành công.",
+        "related_objects": [],
+        "related_systems": [
+          "sys-tankwar-matchmaking"
+        ],
+        "source_note": "CONTEXT: [Multiplayer Module] [Tank War] Matchmaking System Design"
+      }
+    ]
+  }
+}

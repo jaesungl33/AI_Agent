@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1576827889c5f044282f9dc4d7d56b7c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Tank/Damage/pfx_exp_Tank Damage 03.prefab
+  uploadId: 739895

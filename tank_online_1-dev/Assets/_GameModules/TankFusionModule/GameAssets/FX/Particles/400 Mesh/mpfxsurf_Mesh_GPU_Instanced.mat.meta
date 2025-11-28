@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f9e79650e5d54dc49992a19e43e45ece
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Materials/FX/Particles/400 Mesh/mpfxsurf_Mesh_GPU_Instanced.mat
+  uploadId: 739895

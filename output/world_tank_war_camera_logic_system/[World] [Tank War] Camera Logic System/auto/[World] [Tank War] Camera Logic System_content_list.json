@@ -1,0 +1,347 @@
+[
+    {
+        "type": "text",
+        "text": "[World] [Tank War] Camera Logic System ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            83,
+            873,
+            120
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "HỆ THỐNG CAMERA LOGIC ",
+        "bbox": [
+            45,
+            144,
+            308,
+            166
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Phiên bản: v1.1 Người tạo file: Kent Ngày cập nhật: 22 - 07 - 2025 ",
+        "bbox": [
+            60,
+            176,
+            338,
+            258
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "table",
+        "img_path": "images/e6f97a1420c2ddfd507da0a406e03d5c99162f4e52945e55e6aa012977d610ee.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Phienban</td><td rowspan=1 colspan=1>Ngay</td><td rowspan=1 colspan=1>M6ta</td><td rowspan=1 colspan=1>Nguoi viet</td><td rowspan=1 colspan=1>Nguoireview</td><td rowspan=1 colspan=1>Duyet？</td></tr><tr><td rowspan=1 colspan=1>v1.0</td><td rowspan=1 colspan=1>22-07-2025</td><td rowspan=1 colspan=1> Hoan thanh file</td><td rowspan=1 colspan=1>QuocTA</td><td rowspan=1 colspan=1></td><td rowspan=1 colspan=1>□</td></tr><tr><td rowspan=1 colspan=1>v1.1</td><td rowspan=1 colspan=1>17-09-2025</td><td rowspan=1 colspan=1>Format lai file</td><td rowspan=1 colspan=1>® phucth12</td><td rowspan=1 colspan=1> Kent</td><td rowspan=1 colspan=1>□</td></tr></table>",
+        "bbox": [
+            47,
+            284,
+            936,
+            477
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. Mục tiêu thiết kế ",
+        "text_level": 1,
+        "bbox": [
+            50,
+            571,
+            306,
+            596
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Tái hiện phong cách camera tương tự \\*\\*Liên Quân Mobile (MOBA view)\\*\\*. ",
+        "bbox": [
+            53,
+            607,
+            759,
+            627
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Giữ góc nhìn nghiêng chiến thuật $( \\sim 4 5 ^ { \\circ } )$ , vừa bao quát vừa gần nhân vật. ",
+        "bbox": [
+            52,
+            635,
+            750,
+            658
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Camera tự động \\*\\*xoay theo hướng chiến đấu của phe\\*\\*. ",
+        "bbox": [
+            48,
+            667,
+            609,
+            688
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "• Hỗ trợ chế độ \\*\\*Spectator sau khi chết\\*\\*, chuyển qua view đồng đội còn sống. ",
+        "bbox": [
+            52,
+            697,
+            804,
+            719
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2. Mục lục ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            770,
+            188,
+            795
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3. Góc nhìn chính trong trận đấu   \n4. Hành vi camera trong trận   \n5. Spectator Mode (Chế Độ Quan Sát)   \n6. Chức năng làm mờ vật cản chắn tầm nhìn camera - Fade Camera Occluder   \n7. Gợi Ý Triển Khai Cho Dev   \n8. Mở rộng ",
+        "bbox": [
+            87,
+            55,
+            730,
+            219
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "3. Góc nhìn chính trong trận đấu ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            328,
+            481,
+            354
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/0610afb567b4d1910085781e32ca4acd8c4ad506a97c26c098fbb5d2719454a4.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Yeu tó</td><td rowspan=1 colspan=1>Mo ta</td></tr><tr><td rowspan=1 colspan=1>Góc nhin tong thé</td><td rowspan=1 colspan=1>Top-down nghieng xuong (45°)</td></tr><tr><td rowspan=1 colspan=1>Chieu cao camera</td><td rowspan=1 colspan=1>15-20 units (tuy theo scale bändo/tank)</td></tr><tr><td rowspan=1 colspan=1>Khoäng cách dén tank</td><td rowspan=1 colspan=1>15 units</td></tr><tr><td rowspan=1 colspan=1>Field of View (FOV)</td><td rowspan=1 colspan=1>60</td></tr><tr><td rowspan=1 colspan=1>Projection</td><td rowspan=1 colspan=1>Perspective</td></tr><tr><td rowspan=1 colspan=1> Huóng camera</td><td rowspan=1 colspan=1>Tuy theo phe, luon huóng véphia doi thu</td></tr></table>",
+        "bbox": [
+            45,
+            380,
+            597,
+            675
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Định hướng camera theo phe: ",
+        "bbox": [
+            47,
+            698,
+            341,
+            719
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "• Phe A (Xanh) Camera từ dưới lên.   \n• Phe B $( { \\bf \\delta \\vec { \\bf { \\delta } } } ( { \\bf \\vec { \\bf { \\delta } } } ( { \\bf \\vec { \\bf { \\delta } } } |  0 )$ Camera từ trên xuống. ",
+        "bbox": [
+            48,
+            729,
+            422,
+            779
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "4. Hành vi camera trong trận ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            861,
+            432,
+            886
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/b7b0f66d7e0bb581a522b565e205a24fc36dceba47281670cce88de841a20b13.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Trang thai</td><td>Hänh vi camera</td></tr><tr><td></td><td></td></tr><tr><td colspan=\"1\" rowspan=\"1\">Khi con song</td><td colspan=\"1\" rowspan=\"1\">Camera lock theo tank, giugóc nghiéng&amp; chieu cao</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Khi di chuyén</td><td colspan=\"1\" rowspan=\"1\">Camera truot muot theotank,khóng lac, khóng xoay theo huóng</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Khong edge pan</td><td colspan=\"1\" rowspan=\"1\">Khóng cho thao tac kéocamera bäng cam ung</td></tr><tr><td colspan=\"1\" rowspan=\"1\">Khóng auto xoay</td><td colspan=\"1\" rowspan=\"1\">Camera khong xoay theohu&amp;ng di chuyén cua tank</td></tr></table>",
+        "bbox": [
+            47,
+            911,
+            552,
+            970
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "",
+        "table_caption": [],
+        "table_footnote": [],
+        "bbox": [
+            45,
+            30,
+            552,
+            271
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "5. Spectator Mode (Chế Độ Quan Sát) ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            366,
+            542,
+            392
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "table",
+        "img_path": "images/30e5c61351cdefedb28f3d90240127d9c88ca785f7fb1045b7b8fe10772628ef.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Tinh näng</td><td rowspan=1 colspan=1>Mo ta</td></tr><tr><td rowspan=1 colspan=1>Kich hoat</td><td rowspan=1 colspan=1>Ngay khi nguoi choi bi haguc</td></tr><tr><td rowspan=1 colspan=1>Chuyen dong doi</td><td rowspan=1 colspan=1>Có thé nhän Next/Prev détheo doi nguoi khac</td></tr><tr><td rowspan=1 colspan=1>Góc nhin</td><td rowspan=1 colspan=1>Giu nguyén thong socamera nhu luc diéu khien</td></tr><tr><td rowspan=1 colspan=1>Thoat ché do</td><td rowspan=1 colspan=1>Tu dong khi player hoi sinh</td></tr><tr><td rowspan=1 colspan=1>Free cam (tuy chon)</td><td rowspan=1 colspan=1>Có thé bö sungα phase sau</td></tr></table>",
+        "bbox": [
+            45,
+            419,
+            552,
+            697
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "6. Chức năng làm mờ vật cản chắn tầm nhìn camera - Fade Camera Occluder ",
+        "text_level": 1,
+        "bbox": [
+            47,
+            791,
+            934,
+            844
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Mô tả: Khi tầm nhìn người chơi tới tank bị hạn chế bởi các vật thể, các vật thể đó sẽ được làm mờ đi. ",
+        "bbox": [
+            47,
+            854,
+            939,
+            896
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Công dụng: Hiện rõ vị trí tank, hạn chế làm nhiễu thông tin người chơi. ",
+        "bbox": [
+            50,
+            908,
+            739,
+            929
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "• Điều kiện kích hoạt: Khi model của tank bị che $> 5 0 \\%$ ",
+        "bbox": [
+            53,
+            939,
+            589,
+            959
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "7. Gợi Ý Triển Khai Cho Dev ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            134,
+            409,
+            161
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/70e0e29cf99fdb3b70b0c625c354ad57528946c93b8343b0383015c70d189d16.jpg",
+        "table_caption": [],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=1 colspan=1>Yéu cäu</td><td rowspan=1 colspan=1>Goi y trién khai</td></tr><tr><td rowspan=1 colspan=1>Góc nghieng co dinh</td><td rowspan=1 colspan=1>Virtual Camera nghiéng 45°</td></tr><tr><td rowspan=1 colspan=1>Xoay theo huóng cua phe</td><td rowspan=1 colspan=1>Y-axis O° hoäc 180° theo team</td></tr><tr><td rowspan=1 colspan=1>Mugt khi bäm tank</td><td rowspan=1 colspan=1>Dung damping (0.2-0.3s)</td></tr><tr><td rowspan=1 colspan=1>Spectator Mode</td><td rowspan=1 colspan=1>Chuyén camera follow sangdong doi con song</td></tr></table>",
+        "bbox": [
+            47,
+            188,
+            553,
+            410
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "8. Mở rộng ",
+        "text_level": 1,
+        "bbox": [
+            48,
+            505,
+            195,
+            532
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "• Áp dụng cho các mode 5v5 (Solo / Team / Custom) • Không có zoom / freecam tùy chỉnh trong giai đoạn đầu • Spectator chỉ dạng \"lock-on\", chưa hỗ trợ camera bay tự do ",
+        "bbox": [
+            48,
+            540,
+            634,
+            622
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "discarded",
+        "text": "• Độ mờ vật thể: Làm mờ đi $70 \\% \\cdot >$ Vật thể chỉ hiện $30 \\%$ ",
+        "bbox": [
+            50,
+            33,
+            594,
+            54
+        ],
+        "page_idx": 3
+    }
+]

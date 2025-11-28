@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 279dd1919a9ce534488c9d2808112736
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Materials/Weapons/mfx_GrenadeBlink.mat
+  uploadId: 739895

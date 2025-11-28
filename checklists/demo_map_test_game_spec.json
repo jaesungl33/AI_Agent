@@ -1,0 +1,167 @@
+{
+  "doc_id": "demo_map_test",
+  "metadata": {
+    "created_at": "2025-11-26T10:38:09.383211",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Outpost",
+        "category": "OP",
+        "description": "Strategic points on the map that teams must capture and control.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Capture radius ~5-6 units. Each Outpost should have a combat zone buffer of ~12-15 units with cover, flank routes, and obstacles.",
+        "source_note": "Section 4: Distribution of Outposts & Combat Zone"
+      },
+      {
+        "id": "obj_002",
+        "name": "Container",
+        "category": "DE",
+        "description": "Prefab object used as environmental obstacles or cover.",
+        "size_x": 2,
+        "size_y": 4,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Section 7: Technical Notes (Unity Setup)"
+      },
+      {
+        "id": "obj_003",
+        "name": "Bunker",
+        "category": "DE",
+        "description": "Prefab object used as environmental obstacles or cover.",
+        "size_x": 6,
+        "size_y": 6,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Section 7: Technical Notes (Unity Setup)"
+      },
+      {
+        "id": "obj_004",
+        "name": "Wall",
+        "category": "DE",
+        "description": "Prefab object used as environmental obstacles or cover.",
+        "size_x": 2,
+        "size_y": 1,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": false,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": null,
+        "source_note": "Section 7: Technical Notes (Unity Setup)"
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Map Control System",
+        "description": "System governing the capture and control of Outposts and strategic areas.",
+        "mechanics": "Teams must capture and hold Outposts to gain advantages. Outposts provide buffs or resources.",
+        "objectives": "Control majority of Outposts to gain strategic advantage.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "interactions": [
+          "Capture mechanics for Outposts",
+          "Defensive advantages at specific Outposts"
+        ],
+        "source_note": "Section 4: Distribution of Outposts & Combat Zone"
+      },
+      {
+        "id": "sys_002",
+        "name": "Terrain Buff System",
+        "description": "System providing buffs based on terrain elevation.",
+        "mechanics": "Higher terrain provides increased vision range.",
+        "objectives": "Utilize elevated positions for better tactical advantage.",
+        "related_objects": [],
+        "interactions": [
+          "Vision buff mechanic tied to terrain height"
+        ],
+        "source_note": "Section 6: Gameplay Notes"
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Outpost Capture Rule",
+        "description": "Defines how Outposts are captured and their effects on gameplay.",
+        "trigger": "Team enters capture radius of an Outpost.",
+        "effect": "Outpost changes ownership after capture duration. Provides buffs or resources to controlling team.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Section 4: Distribution of Outposts & Combat Zone"
+      },
+      {
+        "id": "rule_002",
+        "summary": "Terrain Buff Activation",
+        "description": "Defines how terrain elevation affects vision range.",
+        "trigger": "Tank occupies elevated terrain position.",
+        "effect": "Increased vision range for tanks on higher ground.",
+        "related_objects": [],
+        "related_systems": [
+          "sys_002"
+        ],
+        "source_note": "Section 6: Gameplay Notes"
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Outpost Accessibility",
+        "description": "Ensure all tanks can reach the first Outpost within 75 seconds.",
+        "category": "combat",
+        "priority": "high",
+        "status": "proposed",
+        "acceptance_criteria": "All tanks from both teams must be able to reach the first Outpost within 75 seconds without feeling left behind.",
+        "related_objects": [
+          "obj_001"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Section 4: Distribution of Outposts & Combat Zone"
+      },
+      {
+        "id": "req_002",
+        "title": "Choke Point Design",
+        "description": "Design 2-3 choke points to naturally direct combat flow.",
+        "category": "combat",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "Map must include 2-3 choke points that naturally guide combat engagements.",
+        "related_objects": [],
+        "related_systems": [],
+        "source_note": "Section 1: Expected Combat Ratios"
+      }
+    ]
+  }
+}

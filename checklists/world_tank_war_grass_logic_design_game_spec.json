@@ -1,0 +1,219 @@
+{
+  "doc_id": "world_tank_war_grass_logic_design",
+  "metadata": {
+    "created_at": "2025-11-26T11:26:43.012955",
+    "version": "1.0",
+    "auto_extracted": true
+  },
+  "spec": {
+    "objects": [
+      {
+        "id": "obj_001",
+        "name": "Bear Trap",
+        "category": "BR",
+        "description": "A trap that increases visibility when interacting with grass logic.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Increases visibility in grass.",
+        "source_note": "Table: Doi tuong - Bear Trap, Ket qua mong muon - Bay sé tang hinh."
+      },
+      {
+        "id": "obj_002",
+        "name": "Hook",
+        "category": "OP",
+        "description": "A hook that does not increase visibility when interacting with grass logic.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Does not increase visibility in grass.",
+        "source_note": "Table: Doi tuong - Hook, Ket qua mong muon - Hook khong tang hinh."
+      },
+      {
+        "id": "obj_003",
+        "name": "Tank",
+        "category": "VE",
+        "description": "A vehicle that camouflages within grass and displays full VFX when conditions are met.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Camouflages in grass; displays full VFX under specific conditions.",
+        "source_note": "Table: Doi tuong - Tank, Ket qua mong muon - Tank sé tang hinh."
+      },
+      {
+        "id": "obj_004",
+        "name": "Bullet",
+        "category": "GR",
+        "description": "Projectiles that camouflage within grass.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Camouflages in grass.",
+        "source_note": "Table: Doi tuong - Dan, Ket qua mong muon - Dan se tang hinh."
+      },
+      {
+        "id": "obj_005",
+        "name": "VFX",
+        "category": "HI",
+        "description": "Visual effects with selective visibility rules in grass.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Damage effects visible; bullet impact, smoke, and certain trap effects selectively hidden or displayed.",
+        "source_note": "Table: Doi tuong - VFX, Ket qua mong muon - Sat thuong c6 hien thiEffect ban dan khong hien thi..."
+      },
+      {
+        "id": "obj_006",
+        "name": "Environment",
+        "category": "DE",
+        "description": "Game environment with persistent shadows in grass areas.",
+        "size_x": null,
+        "size_y": null,
+        "size_z": null,
+        "hp": null,
+        "armor": null,
+        "speed": null,
+        "player_pass_through": null,
+        "bullet_pass_through": null,
+        "destructible": null,
+        "special_rules": "Shadows remain visible in grass.",
+        "source_note": "Table: Doi tuong - Moitruong, Ket qua mong muon - Có có shadow."
+      }
+    ],
+    "systems": [
+      {
+        "id": "sys_001",
+        "name": "Grass Logic System",
+        "description": "A system governing interactions between game objects and grass areas to provide tactical depth.",
+        "mechanics": "Objects interact with grass to alter visibility, camouflage, or display specific visual effects.",
+        "objectives": "Enhance tactical gameplay by selectively revealing or concealing objects based on type and conditions.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003",
+          "obj_004",
+          "obj_005",
+          "obj_006"
+        ],
+        "interactions": [
+          "Bear Trap increases visibility in grass.",
+          "Hook does not increase visibility in grass.",
+          "Tank camouflages in grass under specific conditions.",
+          "Bullets camouflage in grass.",
+          "VFX selectively displays effects in grass.",
+          "Environment retains shadows in grass."
+        ],
+        "source_note": "Various tables detailing object interactions with grass logic."
+      }
+    ],
+    "logic_rules": [
+      {
+        "id": "rule_001",
+        "summary": "Allied tanks maintain visibility in grass.",
+        "description": "When allied tanks enter grass, they do not camouflage and display full VFX.",
+        "trigger": "Allied tank enters grass area.",
+        "effect": "Tank remains visible and displays full VFX.",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table: Truong hop - Tank dongdoidivaotham co, Ket qua mong muon - Tank dong doi khong tang hinh."
+      },
+      {
+        "id": "rule_002",
+        "summary": "Enemy tanks camouflage in grass under specific conditions.",
+        "description": "Enemy tanks entering grass may camouflage depending on player location.",
+        "trigger": "Enemy tank enters grass area.",
+        "effect": "Tank camouflages if player is outside or in different grass; remains visible if in the same grass.",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table: Truong hop - Tank dich divao tham co, Ket qua mong muon - Tank dich tang hinh."
+      },
+      {
+        "id": "rule_003",
+        "summary": "Damage indicators display regardless of grass interaction.",
+        "description": "Damage indicators appear when tanks are hit, irrespective of their position relative to grass.",
+        "trigger": "Tank is hit by an attack.",
+        "effect": "Damage indicator appears.",
+        "related_objects": [
+          "obj_003"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Table: Truong hop - Tank dich bän trung, Ket qua mong muon - Hien thichi sö sat thuong."
+      }
+    ],
+    "requirements": [
+      {
+        "id": "req_001",
+        "title": "Implement Grass Logic for Tactical Depth",
+        "description": "Design grass functionality to influence gameplay strategy by altering object visibility.",
+        "category": "combat",
+        "priority": "high",
+        "status": "in-progress",
+        "acceptance_criteria": "Grass logic alters visibility of specified objects as per design document.",
+        "related_objects": [
+          "obj_001",
+          "obj_002",
+          "obj_003",
+          "obj_004",
+          "obj_005",
+          "obj_006"
+        ],
+        "related_systems": [
+          "sys_001"
+        ],
+        "source_note": "Mục đích thiết kế - Cung cấp chiều sâu về mặt chiến thuật cho game."
+      },
+      {
+        "id": "req_002",
+        "title": "Ensure Consistent Object Behavior in Unity Units",
+        "description": "Measure object sizes and interactions using Unity's default unit scale.",
+        "category": "tech",
+        "priority": "medium",
+        "status": "proposed",
+        "acceptance_criteria": "All object dimensions and interactions align with Unity's 1 Unit = 1 meter scale.",
+        "related_objects": [],
+        "related_systems": [],
+        "source_note": "Notes - Kích thước đối tượng được đo bằng đơn vị mặc định trong Unity (Unit)."
+      }
+    ]
+  }
+}

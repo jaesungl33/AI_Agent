@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e68cc0bdd8fda4c49ad9e22247c67275
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 202468
+  packageName: Tanknarok Multiplayer - Photon Fusion
+  packageVersion: 2.0.5
+  assetPath: Assets/Tank_Ragnarok/Prefabs/FX/Explosions/pfx_exp_Minigun.prefab
+  uploadId: 739895

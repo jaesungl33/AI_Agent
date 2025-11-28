@@ -1,10 +1,18 @@
-"""Developer to-do generation from structured requirements."""
+"""
+Developer to-do generation from structured requirements.
+
+This module converts extracted GDD requirements into actionable developer tasks
+using LLM-based generation. Tasks include implementation details, priorities,
+and related objects.
+"""
 
 from __future__ import annotations
 
+# Standard library imports
 import json
 from typing import Any, Dict, List
 
+# Project imports
 from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func
 
 SYSTEM_PROMPT = (
