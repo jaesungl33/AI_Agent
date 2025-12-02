@@ -36,7 +36,10 @@ import {
   mockCoverageAPI,
 } from "./mock-client"
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
+// Base URL for backend API.
+// Default points to local FastAPI server without '/api' suffix,
+// because our FastAPI routes are mounted at the root (e.g. /health, /documents/gdd).
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 // Use mock client in development if backend is not available
 const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "true" || 
