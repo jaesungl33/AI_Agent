@@ -644,8 +644,45 @@ Return ONLY JSON:
     return payload
 
 
-async def _evaluate_all_spec_items(doc_id: str, code_index_id: str, top_k: int) -> Dict[str, Any]:
-    """Evaluate coverage for all items in the Game Spec (objects, systems, logic rules, requirements)."""
+async def _evaluate_single_item(
+    item_dict: dict,
+    item_type: str,
+    item_id: str,
+    item_name: str,
+    code_index_id: str,
+    provider,
+    llm_func,
+    top_k: int,
+) -> Dict[str, Any]:
+    """Evaluate coverage for a single spec item. Helper for parallel processing."""
+    queries = await _generate_item_queries(item_dict, item_type)
+    if not queries:
+        return {
+            "item_id": item_id,
+            "item_type": item_type,
+            "item_name": item_name,
+            "status": "skipped",
+            "evidence": [],
+            "retrieved_chunks": [],
+        }
+    
+    chunks = await search_code_chunks(queries, code_index_id, provider=provider, top_k=top_k)
+    result = await _classify_item_coverage(item_dict, item_type, item_id, chunks, llm_func)
+    result["retrieved_chunks"] = chunks
+    result["item_name"] = item_name
+    return result
+
+
+async def _evaluate_all_spec_items(doc_id: str, code_index_id: str, top_k: int, max_concurrent: int = 5) -> Dict[str, Any]:
+    """Evaluate coverage for all items in the Game Spec (objects, systems, logic rules, requirements).
+    
+    Args:
+        doc_id: Document ID containing the Game Spec
+        code_index_id: Code index ID to search
+        top_k: Number of chunks to retrieve per query
+        max_concurrent: Maximum number of items to process in parallel (default: 5)
+                      Lower values reduce API rate limit issues but are slower.
+    """
     from gdd_rag_backbone.llm_providers import make_llm_model_func
     
     spec = _load_game_spec(doc_id)
@@ -658,55 +695,84 @@ async def _evaluate_all_spec_items(doc_id: str, code_index_id: str, top_k: int) 
     provider = provider_data["provider"]
     llm_func = make_llm_model_func(provider)
     
-    all_results = []
+    # Collect all items to evaluate
+    all_items = []
     
-    # Evaluate Objects
+    # Collect Objects
     objects = spec_data.get("objects", [])
     for obj_dict in objects:
         obj = GddObject(**obj_dict)
-        queries = await _generate_item_queries(obj_dict, "object")
-        if queries:
-            chunks = await search_code_chunks(queries, code_index_id, provider=provider, top_k=top_k)
-            result = await _classify_item_coverage(obj_dict, "object", obj.id, chunks, llm_func)
-            result["retrieved_chunks"] = chunks
-            result["item_name"] = obj.name
-            all_results.append(result)
+        all_items.append(("object", obj_dict, obj.id, obj.name))
     
-    # Evaluate Systems
+    # Collect Systems
     systems = spec_data.get("systems", [])
     for sys_dict in systems:
         sys_obj = GddSystem(**sys_dict)
-        queries = await _generate_item_queries(sys_dict, "system")
-        if queries:
-            chunks = await search_code_chunks(queries, code_index_id, provider=provider, top_k=top_k)
-            result = await _classify_item_coverage(sys_dict, "system", sys_obj.id, chunks, llm_func)
-            result["retrieved_chunks"] = chunks
-            result["item_name"] = sys_obj.name
-            all_results.append(result)
+        all_items.append(("system", sys_dict, sys_obj.id, sys_obj.name))
     
-    # Evaluate Logic Rules
+    # Collect Logic Rules
     logic_rules = spec_data.get("logic_rules", [])
     for rule_dict in logic_rules:
         rule = GddInteraction(**rule_dict)
-        queries = await _generate_item_queries(rule_dict, "logic_rule")
-        if queries:
-            chunks = await search_code_chunks(queries, code_index_id, provider=provider, top_k=top_k)
-            result = await _classify_item_coverage(rule_dict, "logic_rule", rule.id, chunks, llm_func)
-            result["retrieved_chunks"] = chunks
-            result["item_name"] = rule.summary
-            all_results.append(result)
+        all_items.append(("logic_rule", rule_dict, rule.id, rule.summary))
     
-    # Evaluate Requirements
+    # Collect Requirements
     requirements = spec_data.get("requirements", [])
     for req_dict in requirements:
         req = GddRequirement(**req_dict)
-        queries = await _generate_item_queries(req_dict, "requirement")
-        if queries:
-            chunks = await search_code_chunks(queries, code_index_id, provider=provider, top_k=top_k)
-            result = await _classify_item_coverage(req_dict, "requirement", req.id, chunks, llm_func)
-            result["retrieved_chunks"] = chunks
-            result["item_name"] = req.title
-            all_results.append(result)
+        all_items.append(("requirement", req_dict, req.id, req.title))
+    
+    if not all_items:
+        return {
+            "doc_id": doc_id,
+            "code_index_id": code_index_id,
+            "results": [],
+            "summary": {
+                "total_items": 0,
+                "implemented": 0,
+                "not_implemented": 0,
+                "errors": 0,
+            }
+        }
+    
+    # Process items in parallel batches to avoid overwhelming the API
+    all_results = []
+    total_items = len(all_items)
+    
+    for batch_start in range(0, total_items, max_concurrent):
+        batch_end = min(batch_start + max_concurrent, total_items)
+        batch = all_items[batch_start:batch_end]
+        
+        # Process batch in parallel
+        tasks = [
+            _evaluate_single_item(
+                item_dict=item_dict,
+                item_type=item_type,
+                item_id=item_id,
+                item_name=item_name,
+                code_index_id=code_index_id,
+                provider=provider,
+                llm_func=llm_func,
+                top_k=top_k,
+            )
+            for item_type, item_dict, item_id, item_name in batch
+        ]
+        
+        batch_results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # Handle results and exceptions
+        for result in batch_results:
+            if isinstance(result, Exception):
+                all_results.append({
+                    "item_id": "unknown",
+                    "item_type": "unknown",
+                    "item_name": "error",
+                    "status": "error",
+                    "evidence": [{"file": None, "reason": str(result)}],
+                    "retrieved_chunks": [],
+                })
+            else:
+                all_results.append(result)
     
     return {
         "doc_id": doc_id,
@@ -721,7 +787,7 @@ async def _evaluate_all_spec_items(doc_id: str, code_index_id: str, top_k: int) 
     }
 
 
-def evaluate_coverage(doc_id, code_index_id, top_k):
+def evaluate_coverage(doc_id, code_index_id, top_k, max_concurrent=5):
     """Evaluate code coverage for all Game Spec items (objects, systems, logic rules, requirements)."""
     if not doc_id:
         return "❌ Please select a document first.", None, None
@@ -736,8 +802,8 @@ def evaluate_coverage(doc_id, code_index_id, top_k):
     try:
         REPORT_DIR.mkdir(parents=True, exist_ok=True)
         
-        # Evaluate all spec items
-        report_payload = _async_run(_evaluate_all_spec_items(doc_id, code_index_id.strip(), top_k))
+        # Evaluate all spec items with configurable concurrency
+        report_payload = _async_run(_evaluate_all_spec_items(doc_id, code_index_id.strip(), top_k, max_concurrent=max_concurrent))
         
         # Save report
         report_path = REPORT_DIR / f"{doc_id}_{code_index_id.strip()}_coverage.json"
@@ -945,7 +1011,6 @@ def create_interface():
                             analysis_output = gr.Markdown(
                                 label="📋 Analysis Results",
                                 value="*Click 'Analyze GDD' to generate analysis...*",
-                                show_copy_button=True
                             )
                     
                     with gr.Column(scale=1, min_width=420):
@@ -983,8 +1048,6 @@ def create_interface():
                             qa_chatbot = gr.Chatbot(
                                 label="Conversation",
                                 height=620,
-                                show_copy_button=True,
-                                type="tuples"
                             )
                 
                 # Update dropdown visibility based on checkbox
@@ -1147,6 +1210,14 @@ def create_interface():
                 )
                 code_index_id = gr.Textbox(label="Code Index ID", placeholder="e.g., codebase", value="codebase")
                 coverage_top_k = gr.Slider(minimum=4, maximum=12, value=8, step=1, label="Chunks per Query")
+                coverage_max_concurrent = gr.Slider(
+                    minimum=1, 
+                    maximum=20, 
+                    value=5, 
+                    step=1, 
+                    label="Max Concurrent Items",
+                    info="Higher = faster but may hit API rate limits. Lower = slower but more reliable."
+                )
                 coverage_btn = gr.Button("Run Coverage Evaluation", variant="primary", elem_classes=["compact-btn"])
                 coverage_status = gr.Textbox(
                     label="📊 Status",
@@ -1197,12 +1268,12 @@ def create_interface():
                     return selected_choice
                 
                 coverage_btn.click(
-                    fn=lambda *args: ("⏳ Evaluating code coverage for all Game Spec items... This may take several minutes.", pd.DataFrame(), None),
-                    inputs=[coverage_doc, code_index_id, coverage_top_k],
+                    fn=lambda *args: ("⏳ Evaluating code coverage for all Game Spec items... This may take several minutes (faster with parallel processing enabled).", pd.DataFrame(), None),
+                    inputs=[coverage_doc, code_index_id, coverage_top_k, coverage_max_concurrent],
                     outputs=[coverage_status, coverage_df, coverage_results_store],
                 ).then(
                     fn=evaluate_coverage,
-                    inputs=[coverage_doc, code_index_id, coverage_top_k],
+                    inputs=[coverage_doc, code_index_id, coverage_top_k, coverage_max_concurrent],
                     outputs=[coverage_status, coverage_df, coverage_results_store],
                 ).then(
                     fn=update_item_dropdown,

@@ -50,9 +50,13 @@ async def search_code_chunks(
 
         return await asyncio.to_thread(_load)
 
+    # Run all queries in parallel instead of sequentially
+    query_tasks = [_run_query(query) for query in queries]
+    all_query_results = await asyncio.gather(*query_tasks)
+    
+    # Merge results, keeping best score per chunk
     seen: Dict[str, Dict[str, Any]] = {}
-    for query in queries:
-        chunks = await _run_query(query)
+    for query, chunks in zip(queries, all_query_results):
         for chunk in chunks:
             chunk_id = chunk["chunk_id"]
             existing = seen.get(chunk_id)

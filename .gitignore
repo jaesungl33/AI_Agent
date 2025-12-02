@@ -1,0 +1,106 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+ENV/
+env/
+
+# Node.js / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+.next/
+out/
+build/
+.vercel
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env*.local
+.env.production
+.env.development
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Large Unity Project (1.9GB+)
+# DO NOT COMMIT - Too large for GitHub
+tank_online_1-dev/
+
+# RAG Storage (large JSON files - can be regenerated)
+rag_storage/*.json
+rag_storage/*.graphml
+# Keep directory structure but ignore contents
+!rag_storage/.gitkeep
+
+# Output files (generated content)
+output/
+
+# Large code snapshot files
+docs/*_codebase*.txt
+docs/*_batch*.txt
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Large binary files
+*.so
+*.bundle
+*.dylib
+*.dll
+
+# Firebase plugins (large binaries)
+**/Firebase/Plugins/**/*.so
+**/Firebase/Plugins/**/*.bundle
+
+# Large model files
+*.bin
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives (unless specifically needed)
+*.zip
+*.tar
+*.tar.gz
+*.rar
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
