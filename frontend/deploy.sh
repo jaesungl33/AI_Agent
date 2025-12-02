@@ -43,3 +43,4 @@ echo "   1. Set environment variables in Vercel dashboard"
 echo "   2. Add NEXT_PUBLIC_API_URL with your backend URL"
 echo "   3. Visit your deployment URL"
 
+

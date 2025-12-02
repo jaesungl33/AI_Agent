@@ -10,83 +10,70 @@ import { cn } from "@/lib/utils"
 interface FileUploadProps {
   accept?: Record<string, string[]>
   maxSize?: number
-  onFileSelect: (file: File) => void
-  onRemove?: () => void
-  selectedFile?: File | null
+  onFilesSelect: (files: File[]) => void
+  onRemoveFile?: (file: File) => void
+  selectedFiles?: File[]
   isUploading?: boolean
   label?: string
   description?: string
+  allowMultiple?: boolean
+  maxFiles?: number
 }
 
 export function FileUpload({
   accept,
   maxSize = 100 * 1024 * 1024, // 100MB default
-  onFileSelect,
-  onRemove,
-  selectedFile,
+  onFilesSelect,
+  onRemoveFile,
+  selectedFiles = [],
   isUploading = false,
   label = "Upload file",
   description = "Drag and drop a file here, or click to select",
+  allowMultiple = false,
+  maxFiles = allowMultiple ? 5 : 1,
 }: FileUploadProps) {
   const [error, setError] = useState<string | null>(null)
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       setError(null)
-      if (acceptedFiles.length > 0) {
-        const file = acceptedFiles[0]
+      if (acceptedFiles.length === 0) return
+
+      const validFiles = acceptedFiles.filter((file) => {
         if (file.size > maxSize) {
-          setError(`File size exceeds ${Math.round(maxSize / 1024 / 1024)}MB limit`)
-          return
+          setError(`File "${file.name}" exceeds ${Math.round(maxSize / 1024 / 1024)}MB limit`)
+          return false
         }
-        onFileSelect(file)
+        return true
+      })
+
+      if (validFiles.length > 0) {
+        onFilesSelect(validFiles)
       }
     },
-    [maxSize, onFileSelect]
+    [maxSize, onFilesSelect]
   )
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept,
-    maxFiles: 1,
-    disabled: isUploading || !!selectedFile,
+    maxFiles,
+    multiple: allowMultiple,
+    disabled: isUploading || (!allowMultiple && selectedFiles.length > 0),
   })
 
-  const handleRemove = () => {
+  const handleRemove = (file: File) => {
     setError(null)
-    onRemove?.()
+    onRemoveFile?.(file)
   }
+
+  const hasFiles = selectedFiles.length > 0
 
   return (
     <div className="space-y-2">
       <Card>
         <CardContent className="p-6">
-          {selectedFile ? (
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <File className="h-5 w-5 text-muted-foreground" />
-                <div>
-                  <p className="text-sm font-medium">{selectedFile.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
-                  </p>
-                </div>
-              </div>
-              {!isUploading && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleRemove}
-                  className="h-8 w-8"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-              {isUploading && (
-                <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
-              )}
-            </div>
-          ) : (
+          {!hasFiles ? (
             <div
               {...getRootProps()}
               className={cn(
@@ -116,6 +103,48 @@ export function FileUpload({
                   </Button>
                 )}
               </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {selectedFiles.map((file) => (
+                <div
+                  key={file.name + file.lastModified}
+                  className="flex items-center justify-between rounded-lg border px-3 py-2"
+                >
+                  <div className="flex items-center gap-3">
+                    <File className="h-5 w-5 text-muted-foreground" />
+                    <div>
+                      <p className="text-sm font-medium">{file.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {(file.size / 1024 / 1024).toFixed(2)} MB
+                      </p>
+                    </div>
+                  </div>
+                  {!isUploading && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => handleRemove(file)}
+                      className="h-8 w-8"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  )}
+                  {isUploading && (
+                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                  )}
+                </div>
+              ))}
+              {allowMultiple && !isUploading && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  {...getRootProps()}
+                  className="w-full"
+                >
+                  Add More Files
+                </Button>
+              )}
             </div>
           )}
           {error && (

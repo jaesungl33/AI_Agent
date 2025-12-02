@@ -22,29 +22,46 @@ export function WorkspaceSetup({
   onGDDUploaded,
   onCodeUploaded,
 }: WorkspaceSetupProps) {
-  const [gddFile, setGddFile] = useState<File | null>(null)
+  const [gddFiles, setGddFiles] = useState<File[]>([])
   const [codeFile, setCodeFile] = useState<File | null>(null)
   const [gddDocId, setGddDocId] = useState<string>("")
   const [codeIndexId, setCodeIndexId] = useState<string>("")
   const [isUploadingGDD, setIsUploadingGDD] = useState(false)
   const [isUploadingCode, setIsUploadingCode] = useState(false)
-  const [gddStatus, setGddStatus] = useState<Document["status"] | null>(null)
+  const [gddStatuses, setGddStatuses] = useState<Record<string, Document["status"] | null>>({})
   const [codeStatus, setCodeStatus] = useState<Document["status"] | null>(null)
 
   const handleGDDUpload = async () => {
-    if (!gddFile) return
+    if (gddFiles.length === 0) return
 
     setIsUploadingGDD(true)
     try {
-      const response = await documentAPI.uploadGDD({
-        file: gddFile,
-        docId: gddDocId || undefined,
-      })
-      setGddStatus(response.status)
-      onGDDUploaded?.(response.docId)
+      const statuses: Record<string, Document["status"] | null> = {}
+
+      for (let i = 0; i < gddFiles.length; i++) {
+        const file = gddFiles[i]
+        const docId = gddDocId
+          ? gddFiles.length > 1
+            ? `${gddDocId}_${i + 1}`
+            : gddDocId
+          : file.name.replace(/\.[^/.]+$/, "")
+
+        const response = await documentAPI.uploadGDD({
+          file,
+          docId,
+        })
+        statuses[file.name] = response.status
+        onGDDUploaded?.(response.docId)
+      }
+
+      setGddStatuses(statuses)
     } catch (error) {
       console.error("Failed to upload GDD:", error)
-      setGddStatus("error")
+      const errorStatuses: Record<string, Document["status"] | null> = {}
+      gddFiles.forEach((file) => {
+        errorStatuses[file.name] = "error"
+      })
+      setGddStatuses(errorStatuses)
     } finally {
       setIsUploadingGDD(false)
     }
@@ -98,13 +115,13 @@ export function WorkspaceSetup({
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="gdd-doc-id">Document ID (optional)</Label>
+              <Label htmlFor="gdd-doc-id">Document ID (optional)</Label>
             <Input
               id="gdd-doc-id"
-              placeholder="e.g., my_game_design"
+                placeholder="e.g., my_game_design (will auto-number for multiple files)"
               value={gddDocId}
               onChange={(e) => setGddDocId(e.target.value)}
-              disabled={isUploadingGDD || !!gddFile}
+                disabled={isUploadingGDD}
             />
           </div>
           <FileUpload
@@ -112,20 +129,42 @@ export function WorkspaceSetup({
               "application/pdf": [".pdf"],
               "application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
               "text/plain": [".txt"],
+                "text/csv": [".csv"],
+                "application/xml": [".mm", ".xml"],
+                "application/json": [".json"],
             }}
             label="Upload GDD"
-            description="PDF, DOCX, or TXT files up to 100MB"
-            selectedFile={gddFile}
+              description="PDF, DOCX, TXT, CSV, MM, or JSON files up to 100MB"
+              selectedFiles={gddFiles}
             isUploading={isUploadingGDD}
-            onFileSelect={setGddFile}
-            onRemove={() => {
-              setGddFile(null)
-              setGddStatus(null)
+              allowMultiple
+              maxFiles={10}
+              onFilesSelect={(files) => {
+                setGddFiles((prev) => [...prev, ...files])
+                setGddStatuses({})
+              }}
+              onRemoveFile={(file) => {
+                setGddFiles((prev) => prev.filter((f) => f !== file))
+                setGddStatuses((prev) => {
+                  const next = { ...prev }
+                  delete next[file.name]
+                  return next
+                })
             }}
           />
-          {gddFile && (
-            <div className="flex items-center justify-between">
-              {getStatusBadge(gddStatus)}
+            {gddFiles.length > 0 && (
+              <div className="space-y-3">
+                {gddFiles.map((file) => (
+                  <div key={file.name} className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium">{file.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {(file.size / 1024 / 1024).toFixed(2)} MB
+                      </p>
+                    </div>
+                    {getStatusBadge(gddStatuses[file.name] || null)}
+                  </div>
+                ))}
               <Button
                 onClick={handleGDDUpload}
                 disabled={isUploadingGDD}
@@ -174,10 +213,13 @@ export function WorkspaceSetup({
             maxSize={500 * 1024 * 1024} // 500MB for code
             label="Upload Code"
             description="ZIP file containing your game code (up to 500MB)"
-            selectedFile={codeFile}
+            selectedFiles={codeFile ? [codeFile] : []}
             isUploading={isUploadingCode}
-            onFileSelect={setCodeFile}
-            onRemove={() => {
+            onFilesSelect={(files) => {
+              setCodeFile(files[0])
+              setCodeStatus(null)
+            }}
+            onRemoveFile={() => {
               setCodeFile(null)
               setCodeStatus(null)
             }}

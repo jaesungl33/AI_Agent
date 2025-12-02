@@ -247,3 +247,4 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
   )
 }
 
+
