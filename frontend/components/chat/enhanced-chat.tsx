@@ -61,7 +61,7 @@ export function EnhancedChat({
         message: currentInput,
         useAllDocs,
         docIds: useAllDocs ? undefined : docIds,
-        topK: 6,
+        topK: 4,
       })
 
       setMessages((prev) => [...prev, response.message])

@@ -169,17 +169,73 @@ export const mockChatAPI = {
 export const mockCoverageAPI = {
   evaluate: async (docId: string, codeIndexId: string): Promise<CoverageReport> => {
     await delay(2000)
+    const results = [
+      {
+        itemId: "req_1",
+        itemType: "requirement" as const,
+        itemName: "Core combat loop implemented",
+        status: "implemented" as const,
+        evidence: [
+          {
+            file: "Assets/Scripts/Combat/WeaponSystem.cs",
+            reason: "Implements basic shooting and damage handling for tanks.",
+          },
+        ],
+        retrievedChunks: [],
+      },
+      {
+        itemId: "req_2",
+        itemType: "requirement" as const,
+        itemName: "Outpost capture overtime mechanic",
+        status: "partially_implemented" as const,
+        evidence: [
+          {
+            file: "Assets/Scripts/GameModes/OutpostCapture.cs",
+            reason: "Has basic capture logic but missing overtime handling when timer is low.",
+          },
+        ],
+        retrievedChunks: [],
+      },
+      {
+        itemId: "req_3",
+        itemType: "requirement" as const,
+        itemName: "Spectator free-cam after death",
+        status: "not_implemented" as const,
+        evidence: [
+          {
+            file: undefined,
+            reason: "No references to free camera or spectator controls were found in the codebase.",
+          },
+        ],
+        retrievedChunks: [],
+      },
+      {
+        itemId: "req_4",
+        itemType: "requirement" as const,
+        itemName: "Matchmaking ladder protection",
+        status: "error" as const,
+        evidence: [
+          {
+            file: undefined,
+            reason: "The evaluation model could not determine coverage due to inconsistent spec data.",
+          },
+        ],
+        retrievedChunks: [],
+      },
+    ]
+
     return {
       docId,
       codeIndexId,
       generatedAt: new Date().toISOString(),
       summary: {
-        totalItems: 10,
-        implemented: 7,
-        notImplemented: 2,
-        errors: 1,
+        totalItems: results.length,
+        implemented: results.filter(r => r.status === "implemented").length,
+        partiallyImplemented: results.filter(r => r.status === "partially_implemented").length,
+        notImplemented: results.filter(r => r.status === "not_implemented").length,
+        errors: results.filter(r => r.status === "error").length,
       },
-      results: [],
+      results,
     }
   },
 

@@ -103,6 +103,7 @@ export interface CoverageReport {
 export interface CoverageSummary {
   totalItems: number
   implemented: number
+  partiallyImplemented?: number
   notImplemented: number
   errors: number
 }
@@ -111,7 +112,7 @@ export interface CoverageResult {
   itemId: string
   itemType: "object" | "system" | "logic_rule" | "requirement"
   itemName: string
-  status: "implemented" | "not_implemented" | "error"
+  status: "implemented" | "partially_implemented" | "not_implemented" | "error"
   evidence: Evidence[]
   retrievedChunks: CodeChunk[]
 }

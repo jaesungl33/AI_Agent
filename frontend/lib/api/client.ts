@@ -41,9 +41,10 @@ import {
 // because our FastAPI routes are mounted at the root (e.g. /health, /documents/gdd).
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
-// Use mock client in development if backend is not available
-const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "true" || 
-                 (typeof window !== "undefined" && localStorage.getItem("useMockAPI") === "true")
+// Use mock client only when explicitly enabled via env var.
+// We intentionally ignore localStorage here to avoid accidentally
+// forcing mock mode when a real backend is available.
+const USE_MOCK = process.env.NEXT_PUBLIC_USE_MOCK === "true"
 
 async function fetchAPI<T>(
   endpoint: string,
@@ -260,7 +261,8 @@ export const gddAPI = {
     if (USE_MOCK || !backendAvailable) {
       return mockGDDAPI.getSpec(docId)
     }
-    return fetchAPI(`/gdd/${docId}/spec`)
+    const response = await fetchAPI<GameSpec>(`/gdd/${docId}/spec`)
+    return response
   },
 
   analyze: async (docId: string): Promise<GDDSummary> => {
@@ -276,19 +278,37 @@ export const gddAPI = {
 // Coverage API
 export const coverageAPI = {
   evaluate: async (
-    docId: string,
-    codeIndexId: string,
+    docId: string | string[],
+    codeIndexId: string | string[],
     topK?: number
   ): Promise<CoverageReport> => {
-    const backendAvailable = await checkBackendAvailable()
-    
-    if (USE_MOCK || !backendAvailable) {
-      return mockCoverageAPI.evaluate(docId, codeIndexId)
+    // Call Next.js API route, which proxies to the Python backend.
+    // This avoids CORS issues between :3000 and :8000.
+    const payload = { docId, codeIndexId, topK }
+
+    try {
+      const res = await fetch("/api/coverage/evaluate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        console.error("[CoverageAPI] Backend error:", data)
+        throw new Error(data?.message || `Coverage evaluate failed with status ${res.status}`)
+      }
+
+      return (data.report as CoverageReport) || (data as CoverageReport)
+    } catch (error) {
+      console.error("[CoverageAPI] Error calling /api/coverage/evaluate, falling back to mock:", error)
+      const docIdStr = Array.isArray(docId) ? docId[0] : docId
+      const codeIdStr = Array.isArray(codeIndexId) ? codeIndexId[0] : codeIndexId
+      return mockCoverageAPI.evaluate(docIdStr, codeIdStr)
     }
-    return fetchAPI(`/coverage/evaluate`, {
-      method: "POST",
-      body: JSON.stringify({ docId, codeIndexId, topK }),
-    })
   },
 
   getReport: async (
@@ -307,18 +327,87 @@ export const coverageAPI = {
 // Chat API
 export const chatAPI = {
   send: async (data: ChatRequest): Promise<ChatResponse> => {
-    const backendAvailable = await checkBackendAvailable()
-    
-    if (USE_MOCK || !backendAvailable) {
-      return mockChatAPI.send({
-        message: data.message,
-        workspaceId: data.workspaceId,
+    // For chat we always prefer the real backend when configured.
+    // If NEXT_PUBLIC_API_URL is set correctly and the backend is running,
+    // this will hit FastAPI's /chat endpoint.
+    // Never use mock for chat - always try the real backend first.
+    try {
+      return await fetchAPI("/chat", {
+        method: "POST",
+        body: JSON.stringify(data),
       })
+    } catch (error) {
+      // If backend fails, throw the error instead of falling back to mock
+      // This ensures users know the backend isn't working
+      console.error("Chat API error:", error)
+      throw error
     }
-    return fetchAPI("/chat", {
+  },
+
+  sendStream: async (
+    data: ChatRequest,
+    onToken: (token: string) => void,
+    onContext?: (context: { docIds: string[]; chunks: any[] }) => void,
+    onDone?: (timestamp: string) => void,
+    onError?: (error: string) => void
+  ): Promise<void> => {
+    const url = `${API_BASE_URL}/chat/stream`
+    const response = await fetch(url, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(data),
     })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({
+        error: "Unknown error",
+        message: `HTTP ${response.status}: ${response.statusText}`,
+      }))
+      if (onError) onError(error.message || "Stream failed")
+      throw error
+    }
+
+    const reader = response.body?.getReader()
+    const decoder = new TextDecoder()
+
+    if (!reader) {
+      if (onError) onError("No response body")
+      return
+    }
+
+    let buffer = ""
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      buffer += decoder.decode(value, { stream: true })
+      const lines = buffer.split("\n")
+      buffer = lines.pop() || ""
+
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          try {
+            const jsonStr = line.slice(6)
+            const event = JSON.parse(jsonStr)
+
+            if (event.type === "token" && event.content) {
+              onToken(event.content)
+            } else if (event.type === "context" && onContext) {
+              onContext(event)
+            } else if (event.type === "done" && onDone) {
+              onDone(event.timestamp)
+            } else if (event.type === "error" && onError) {
+              onError(event.content)
+            }
+          } catch (e) {
+            console.error("Failed to parse SSE event:", e)
+          }
+        }
+      }
+    }
   },
 
   getHistory: async (workspaceId: string): Promise<ChatMessage[]> => {

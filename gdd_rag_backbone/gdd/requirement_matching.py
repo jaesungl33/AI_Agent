@@ -34,7 +34,7 @@ def generate_code_queries(requirement: GddRequirement) -> List[str]:
 
 async def search_code_chunks(
     queries: Sequence[str],
-    code_index_id: str,
+    code_index_id: str | Sequence[str],  # Support single or multiple code indices
     *,
     provider: Optional[QwenProvider] = None,
     top_k: int = 8,
@@ -43,10 +43,17 @@ async def search_code_chunks(
         return []
 
     active_provider = provider or QwenProvider()
+    
+    # Normalize to list of code indices
+    if isinstance(code_index_id, str):
+        code_indices = [code_index_id]
+    else:
+        code_indices = list(code_index_id)
 
     async def _run_query(query: str) -> List[Dict[str, Any]]:
         def _load():
-            return get_top_chunks([code_index_id], query, provider=active_provider, top_k=top_k)
+            # Search across all code indices
+            return get_top_chunks(code_indices, query, provider=active_provider, top_k=top_k)
 
         return await asyncio.to_thread(_load)
 
@@ -136,7 +143,7 @@ Return ONLY JSON:
 
 async def evaluate_requirement(
     requirement: GddRequirement,
-    code_index_id: str,
+    code_index_id: str | Sequence[str],  # Support single or multiple code indices
     *,
     provider: Optional[QwenProvider] = None,
     llm_func=None,
@@ -157,7 +164,7 @@ async def evaluate_requirement(
 
 async def evaluate_all_requirements(
     doc_id: str,
-    code_index_id: str,
+    code_index_id: str | Sequence[str],  # Support single or multiple code indices
     requirements: Sequence[GddRequirement],
     *,
     output_dir: Optional[Path] = None,
@@ -169,7 +176,12 @@ async def evaluate_all_requirements(
 
     out_dir = output_dir or DEFAULT_REPORT_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
-    report_path = out_dir / f"{doc_id}_{code_index_id}_coverage.json"
+    # Create a safe filename from code_index_id (handle both str and list)
+    if isinstance(code_index_id, str):
+        code_id_str = code_index_id
+    else:
+        code_id_str = "_".join(code_index_id[:3])  # Use first 3 indices for filename
+    report_path = out_dir / f"{doc_id}_{code_id_str}_coverage.json"
 
     active_provider = provider or QwenProvider()
     llm = make_llm_model_func(active_provider)

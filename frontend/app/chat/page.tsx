@@ -20,7 +20,7 @@ export default function ChatPage() {
         <EnhancedChat
           workspaceId={workspaceId}
           docIds={docIds}
-          useAllDocs={false}
+          useAllDocs={true}
         />
       </div>
     </LayoutWithSidebar>
