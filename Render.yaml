@@ -8,6 +8,12 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.9"
+      - key: DASHSCOPE_API_KEY
+        value: sk-9b096748c425441fa9531e44d4e2b51c
+      - key: QWEN_BASE_URL
+        value: https://dashscope.aliyuncs.com/compatible-mode/v1
+      - key: QWEN_API_KEY
+        value: sk-9b096748c425441fa9531e44d4e2b51c 
       # Add your LLM provider keys if needed, e.g.:
       # - key: QWEN_API_KEY
       #   sync: false
