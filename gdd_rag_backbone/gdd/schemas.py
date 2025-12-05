@@ -118,6 +118,7 @@ class GddRequirement:
     id: str
     title: str
     description: str
+    summary: Optional[str] = None
     category: Optional[str] = None
     priority: Optional[str] = None
     status: Optional[str] = None
@@ -125,6 +126,11 @@ class GddRequirement:
     related_objects: List[str] = field(default_factory=list)
     related_systems: List[str] = field(default_factory=list)
     source_note: Optional[str] = None
+    # Extended structured fields
+    triggers: List[str] = field(default_factory=list)
+    effects: List[str] = field(default_factory=list)
+    entities_involved: List[str] = field(default_factory=list)
+    expected_code_anchors: List[str] = field(default_factory=list)  # e.g., ["Class.Method", "OtherClass.fn"]
 
     def to_dict(self) -> dict:
         return asdict(self)

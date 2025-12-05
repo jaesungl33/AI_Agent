@@ -1,0 +1,303 @@
+{
+  "workspace": "tank_war",
+  "total_documents": 49,
+  "gdd_documents": [
+    {
+      "id": "demo_map",
+      "file_path": "Demo Map Design file.pdf",
+      "status": "processed",
+      "chunks": 2
+    },
+    {
+      "id": "demo_map_design_file",
+      "file_path": "Demo Map Design file.pdf",
+      "status": "processed",
+      "chunks": 2
+    },
+    {
+      "id": "design_db_schema",
+      "file_path": "Design DB schema.pdf",
+      "status": "processed",
+      "chunks": 13
+    },
+    {
+      "id": "world_tank_war_grass_logic_design",
+      "file_path": "[World] [Tank War] Grass Logic Design.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "world_tank_war_map_document",
+      "file_path": "[World] [Tank War] Map Document.pdf",
+      "status": "processed",
+      "chunks": 26
+    },
+    {
+      "id": "demo_map_test",
+      "file_path": "Demo Map Design file.pdf",
+      "status": "processed",
+      "chunks": 2
+    },
+    {
+      "id": "weighted_index_formular",
+      "file_path": "Weighted Index Formular.pdf",
+      "status": "processed",
+      "chunks": 4
+    },
+    {
+      "id": "asset_ui_tank_war_garage_design_-_ui_ux",
+      "file_path": "[Asset, UI] [Tank War] Garage Design - UI_UX.pdf",
+      "status": "processed",
+      "chunks": 14
+    },
+    {
+      "id": "asset_ui_tank_war_in-game_gui_design",
+      "file_path": "[Asset, UI] [Tank War] In-game GUI Design.pdf",
+      "status": "processed",
+      "chunks": 8
+    },
+    {
+      "id": "asset_ui_tank_war_main_screen_design",
+      "file_path": "[Asset, UI] [Tank War] Main Screen Design.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "asset_ui_tank_war_mode_selection_design",
+      "file_path": "[Asset, UI] [Tank War] Mode Selection Design.pdf",
+      "status": "processed",
+      "chunks": 4
+    },
+    {
+      "id": "asset_ui_tank_war_result_screen_design",
+      "file_path": "[Asset, UI] [Tank War] Result Screen Design.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "asset_ui_tank_war_reward_screen_design",
+      "file_path": "[Asset, UI] [Tank War] Reward Screen Design.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "asset_ui_tank_war_tank_selection_screen_design_co_che_cho_n_tank",
+      "file_path": "[Asset, UI] [Tank War] Tank Selection Screen Design (Co\u031b che\u0302\u0301 cho\u0323n tank).pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "character_module_tank_war_garage_design_-_functions",
+      "file_path": "[Character Module] [Tank War] Garage Design - Functions.pdf",
+      "status": "processed",
+      "chunks": 13
+    },
+    {
+      "id": "character_module_tank_war_garage_design_-_main",
+      "file_path": "[Character Module] [Tank War] Garage Design - Main.pdf",
+      "status": "processed",
+      "chunks": 8
+    },
+    {
+      "id": "character_module_tank_war_tank_system_detail",
+      "file_path": "[Character Module] [Tank War] Tank System Detail.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "character_module_tank_war_elemental_class",
+      "file_path": "[Character Module] [Tank War] [Elemental Class].pdf",
+      "status": "processed",
+      "chunks": 4
+    },
+    {
+      "id": "combat_module_tank_war_he_tho_ng_auto_focus",
+      "file_path": "[Combat Module] [Tank War] He\u0323\u0302 Tho\u0302\u0301ng Auto Focus.pdf",
+      "status": "processed",
+      "chunks": 3
+    },
+    {
+      "id": "combat_module_tank_war_he_tho_ng_na_ng_ca_p_tank_in-match",
+      "file_path": "[Combat Module] [Tank War] He\u0323\u0302 Tho\u0302\u0301ng Na\u0302ng Ca\u0302\u0301p Tank In-Match.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "combat_module_tank_war_mobile_skill_control_system",
+      "file_path": "[Combat Module] [Tank War] Mobile Skill Control System.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "combat_module_tank_war_outpost_design_-_base_capture_mode",
+      "file_path": "[Combat Module] [Tank War] Outpost Design - Base Capture Mode.pdf",
+      "status": "processed",
+      "chunks": 7
+    },
+    {
+      "id": "combat_module_tank_war_shooting_logic",
+      "file_path": "[Combat Module] [Tank War] Shooting Logic.pdf",
+      "status": "processed",
+      "chunks": 11
+    },
+    {
+      "id": "combat_module_tank_war_skill_design_document",
+      "file_path": "[Combat Module] [Tank War] Skill Design Document.pdf",
+      "status": "processed",
+      "chunks": 2
+    },
+    {
+      "id": "game_mode_module_tank_war_deathmatch",
+      "file_path": "[Game Mode Module] [Tank War] Deathmatch.pdf",
+      "status": "processed",
+      "chunks": 29
+    },
+    {
+      "id": "game_mode_module_tank_war_gold_in_match",
+      "file_path": "[Game Mode Module] [Tank War] Gold in Match.pdf",
+      "status": "processed",
+      "chunks": 12
+    },
+    {
+      "id": "game_mode_module_tank_war_outpost_breaker",
+      "file_path": "[Game Mode Module] [Tank War] Outpost Breaker.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "monetization_module_tank_war_economy_monetization_system",
+      "file_path": "[Monetization Module] [Tank War] Economy & Monetization System.pdf",
+      "status": "processed",
+      "chunks": 13
+    },
+    {
+      "id": "monetization_module_tank_war_garage_system",
+      "file_path": "[Monetization Module] [Tank War] Garage System.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "monetization_module_tank_war_monetization_localization_latam",
+      "file_path": "[Monetization Module] [Tank War] Monetization Localization (LATAM).pdf",
+      "status": "processed",
+      "chunks": 11
+    },
+    {
+      "id": "multiplayer_module_tank_war_match_profile_design",
+      "file_path": "[Multiplayer Module] [Tank War] Match Profile Design.pdf",
+      "status": "processed",
+      "chunks": 9
+    },
+    {
+      "id": "multiplayer_module_tank_war_matchmaking_system_design",
+      "file_path": "[Multiplayer Module] [Tank War] Matchmaking System Design.pdf",
+      "status": "processed",
+      "chunks": 3
+    },
+    {
+      "id": "multiplayer_module_tank_war_post-match_profile",
+      "file_path": "[Multiplayer Module] [Tank War] Post-Match Profile.pdf",
+      "status": "processed",
+      "chunks": 7
+    },
+    {
+      "id": "progression_module_tank_war_elo_rank_system_-_old_not_use",
+      "file_path": "[Progression Module] [Tank War] ELO & RANK System - OLD (not use).pdf",
+      "status": "processed",
+      "chunks": 3
+    },
+    {
+      "id": "progression_module_tank_war_leaderboard_system",
+      "file_path": "[Progression Module] [Tank War] Leaderboard System.pdf",
+      "status": "processed",
+      "chunks": 10
+    },
+    {
+      "id": "progression_module_tank_wars_achievement_design",
+      "file_path": "[Progression Module] [Tank Wars] Achievement Design.pdf",
+      "status": "processed",
+      "chunks": 14
+    },
+    {
+      "id": "progression_module_tank_war_onboarding_design_chu_a_xong",
+      "file_path": "[Progression Module] [Tank War] Onboarding Design (Chu\u031ba xong).pdf",
+      "status": "processed",
+      "chunks": 1
+    },
+    {
+      "id": "progression_module_tank_war_onboarding_tutorial_mode_design",
+      "file_path": "[Progression Module] [Tank War] Onboarding Tutorial Mode Design.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "progression_module_tank_wars_artifact_enhancement",
+      "file_path": "[Progression Module] [Tank Wars] Artifact Enhancement.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "progression_module_tank_wars_fusion_artifact",
+      "file_path": "[Progression Module] [Tank Wars] Fusion Artifact.pdf",
+      "status": "processed",
+      "chunks": 2
+    },
+    {
+      "id": "progression_module_tank_wars_to_ng_quan_artifact_system",
+      "file_path": "[Progression Module] [Tank Wars] To\u0302\u0309ng Quan Artifact System.pdf",
+      "status": "processed",
+      "chunks": 6
+    },
+    {
+      "id": "tank_war_user_profile_design",
+      "file_path": "[Tank War] User Profile Design.pdf",
+      "status": "processed",
+      "chunks": 5
+    },
+    {
+      "id": "world_tank_war_camera_logic_system",
+      "file_path": "[World] [Tank War] Camera Logic System.pdf",
+      "status": "processed",
+      "chunks": 7
+    },
+    {
+      "id": "world_tank_war_map_design_-_outpost_breaker",
+      "file_path": "[World] [Tank War] Map Design - Outpost Breaker.pdf",
+      "status": "processed",
+      "chunks": 13
+    }
+  ],
+  "code_documents": [
+    {
+      "id": "tank_online_codebase_batch001",
+      "file_path": "tank_online_codebase_codebase_batch001.txt",
+      "status": "processed",
+      "chunks": 118
+    },
+    {
+      "id": "tank_online_codebase_batch002",
+      "file_path": "tank_online_codebase_codebase_batch002.txt",
+      "status": "processed",
+      "chunks": 166
+    },
+    {
+      "id": "tank_online_codebase_batch003",
+      "file_path": "tank_online_codebase_codebase_batch003.txt",
+      "status": "processed",
+      "chunks": 110
+    },
+    {
+      "id": "tank_online_codebase_batch004",
+      "file_path": "tank_online_codebase_codebase_batch004.txt",
+      "status": "processed",
+      "chunks": 97
+    },
+    {
+      "id": "tank_online_codebase_batch005",
+      "file_path": "tank_online_codebase_codebase_batch005.txt",
+      "status": "processed",
+      "chunks": 81
+    }
+  ],
+  "source": "rag_storage/kv_store_doc_status.json"
+}

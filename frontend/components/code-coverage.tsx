@@ -27,9 +27,13 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
   const [selectedItem, setSelectedItem] = useState<CoverageResult | null>(null)
   const [statusFilter, setStatusFilter] = useState<"all" | "implemented" | "partially_implemented" | "not_implemented" | "error">("all")
 
+  const [error, setError] = useState<string | null>(null)
+  const [statusMessage, setStatusMessage] = useState<string>("")
+  const [startTime, setStartTime] = useState<number | null>(null)
+
   const handleEvaluate = async () => {
     if (codeIds.length === 0) {
-      console.warn("[Coverage] No code batches selected, aborting evaluation")
+      setError("Please select at least one code batch to evaluate")
       return
     }
 
@@ -39,17 +43,49 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
       topK,
     })
     setIsLoading(true)
+    setError(null)
+    setReport(null)
+    const start = Date.now()
+    setStartTime(start)
+    setStatusMessage("Initializing evaluation...")
+    
+    // Update status messages periodically while loading
+    let statusInterval: NodeJS.Timeout | null = null
+    const updateStatus = () => {
+      const elapsed = Math.floor((Date.now() - start) / 1000)
+      setStatusMessage(`Evaluating requirements... (${elapsed}s elapsed)`)
+    }
+    statusInterval = setInterval(updateStatus, 2000)
+    
     try {
       // Pass arrays to API (or single strings if only one)
       const docIdForAPI = docIds.length === 1 ? docIds[0] : docIds
       const codeIdForAPI = codeIds.length === 1 ? codeIds[0] : codeIds
+      
+      setStatusMessage("Extracting requirements from GDD(s)...")
       const report = await coverageAPI.evaluate(docIdForAPI, codeIdForAPI, topK)
-      console.log("[Coverage] Evaluation finished, report:", report)
+      
+      if (statusInterval) clearInterval(statusInterval)
+      
+      const elapsed = Math.floor((Date.now() - start) / 1000)
+      console.log(`[Coverage] Evaluation finished in ${elapsed}s, report:`, report)
       setReport(report)
-    } catch (error) {
-      console.error("Coverage evaluation error:", error)
+      setError(null)
+      setStatusMessage(`✅ Evaluation complete! (took ${elapsed}s)`)
+      
+      // Clear status message after 3 seconds
+      setTimeout(() => setStatusMessage(""), 3000)
+    } catch (error: any) {
+      if (statusInterval) clearInterval(statusInterval)
+      console.error("[Coverage] Evaluation error:", error)
+      const errorMessage = error?.message || "Failed to evaluate coverage. Please check the console for details."
+      setError(errorMessage)
+      setStatusMessage("❌ Evaluation failed")
+      // Show error to user
+      alert(`Coverage Evaluation Error:\n\n${errorMessage}`)
     } finally {
       setIsLoading(false)
+      if (statusInterval) clearInterval(statusInterval)
     }
   }
 
@@ -129,7 +165,7 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Evaluating...
+                Evaluating... (this may take a few minutes)
               </>
             ) : (
               <>
@@ -138,6 +174,34 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
               </>
             )}
           </Button>
+          
+          {/* Status Message */}
+          {statusMessage && (
+            <div className={`mt-4 p-3 rounded-lg border ${
+              statusMessage.includes("✅") 
+                ? "bg-green-50 border-green-200 text-green-800" 
+                : statusMessage.includes("❌")
+                ? "bg-red-50 border-red-200 text-red-800"
+                : "bg-blue-50 border-blue-200 text-blue-800"
+            }`}>
+              <div className="flex items-center gap-2">
+                {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+                <p className="text-sm font-medium">{statusMessage}</p>
+              </div>
+              {isLoading && (
+                <p className="text-xs mt-2 opacity-75">
+                  💡 Check browser console (F12) and backend logs for detailed progress
+                </p>
+              )}
+            </div>
+          )}
+          
+          {error && (
+            <div className="mt-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+              <p className="text-sm text-destructive font-medium">Error:</p>
+              <p className="text-sm text-destructive/80 mt-1">{error}</p>
+            </div>
+          )}
         </CardContent>
       </Card>
 

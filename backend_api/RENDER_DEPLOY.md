@@ -92,3 +92,5 @@ In your Vercel project settings for the frontend:
 Now your Vercel-hosted Next.js app will talk to the Render-hosted FastAPI backend.
 
 
+
+

@@ -25,6 +25,7 @@ export default function CoveragePage() {
   const [spec, setSpec] = useState<GameSpec | null>(null)
   const [isLoadingSpec, setIsLoadingSpec] = useState(false)
   const [isLoadingDocs, setIsLoadingDocs] = useState(true)
+  const [loadError, setLoadError] = useState<string | null>(null)
 
   useEffect(() => {
     loadDocuments()
@@ -33,12 +34,17 @@ export default function CoveragePage() {
   const loadDocuments = async () => {
     try {
       setIsLoadingDocs(true)
+      setLoadError(null)
+      console.log("[CoveragePage] Loading documents from backend...")
       const docs = await documentAPI.list()
+      console.log("[CoveragePage] Loaded documents:", docs.length)
       setDocuments(docs)
       
       // Auto-select ALL GDDs and ALL code batches by default
       const gddDocs = docs.filter(d => d.type === "gdd" && d.status === "indexed")
       const codeDocs = docs.filter(d => d.type === "code" && d.status === "indexed")
+      
+      console.log("[CoveragePage] Found GDDs:", gddDocs.length, "Code batches:", codeDocs.length)
       
       // Select all GDDs and all code batches for whole-codebase comparison
       if (gddDocs.length > 0 && selectedGddIds.length === 0) {
@@ -47,8 +53,9 @@ export default function CoveragePage() {
       if (codeDocs.length > 0 && selectedCodeIds.length === 0) {
         setSelectedCodeIds(codeDocs.map(d => d.id))
       }
-    } catch (error) {
-      console.error("Failed to load documents:", error)
+    } catch (error: any) {
+      console.error("[CoveragePage] Failed to load documents:", error)
+      setLoadError(error?.message || "Failed to load documents. Check if backend is running at http://localhost:8000")
     } finally {
       setIsLoadingDocs(false)
     }
@@ -92,6 +99,26 @@ export default function CoveragePage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            {isLoadingDocs && (
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Loading documents from backend...
+              </div>
+            )}
+            {loadError && (
+              <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                <p className="text-sm text-destructive font-medium">Error loading documents:</p>
+                <p className="text-sm text-destructive/80 mt-1">{loadError}</p>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={loadDocuments}
+                  className="mt-2"
+                >
+                  Retry
+                </Button>
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>

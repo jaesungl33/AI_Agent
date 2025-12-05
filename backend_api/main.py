@@ -20,12 +20,22 @@ from pathlib import Path
 from datetime import datetime
 from typing import Optional, List, Union
 import asyncio
+import logging
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel
 import json
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+    ]
+)
 
 # Ensure project root is on PYTHONPATH so we can import existing modules later
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -292,174 +302,256 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
     - Multiple GDDs: Extract requirements from all selected GDDs
     - Multiple code batches: Search across entire codebase
     """
-    status = load_doc_status()
+    import logging
+    logger = logging.getLogger(__name__)
     
-    # Normalize to lists
-    gdd_ids = payload.docId if isinstance(payload.docId, list) else [payload.docId]
-    code_indices = payload.codeIndexId if isinstance(payload.codeIndexId, list) else [payload.codeIndexId]
-    
-    # Verify all GDD documents exist
-    for gdd_id in gdd_ids:
-        if gdd_id not in status:
-            raise HTTPException(status_code=404, detail=f"GDD document {gdd_id} not found")
-    
-    # Verify all code indices exist
-    for code_id in code_indices:
-        if code_id not in status:
-            raise HTTPException(status_code=404, detail=f"Code index {code_id} not found")
-    
-    provider = QwenProvider()
-    llm_func = make_llm_model_func(provider)
-    
-    # Step 1: Extract requirements from ALL GDDs and merge them
-    all_requirements_data: List[dict] = []
-    skipped_gdds: List[str] = []
-    for gdd_id in gdd_ids:
-        gdd_meta = status.get(gdd_id, {})
-        gdd_chunks = gdd_meta.get("chunks_list") or gdd_meta.get("chunks") or []
-        if not gdd_chunks:
-            skipped_gdds.append(f"{gdd_id}: document has not been indexed yet")
-            continue
-        try:
-            spec_data = await extract_all_requirements(gdd_id, llm_func=llm_func)
-        except ValueError as exc:  # e.g. no context found
-            skipped_gdds.append(f"{gdd_id}: {exc}")
-            continue
-
-        requirements_data = spec_data.get("requirements", [])
-        # Tag each requirement with its source GDD
-        for req in requirements_data:
-            req["source_gdd"] = gdd_id
-        all_requirements_data.extend(requirements_data)
-    
-    # Convert dicts to GddRequirement objects (from all GDDs)
-    requirements = []
-    seen_ids = set()  # Deduplicate requirements with same ID
-    for req_dict in all_requirements_data:
-        try:
-            req_id = req_dict.get("id", "")
-            # Skip duplicates (same requirement from multiple GDDs)
-            if req_id in seen_ids:
-                continue
-            seen_ids.add(req_id)
-            
-            req = GddRequirement(
-                id=req_id,
-                title=req_dict.get("title", req_dict.get("summary", "")),
-                description=req_dict.get("description", req_dict.get("details", "")),
-                category=req_dict.get("category"),
-                priority=req_dict.get("priority"),
-                status=req_dict.get("status"),
-                acceptance_criteria=req_dict.get("acceptance_criteria"),
-                related_objects=req_dict.get("related_objects", []),
-                related_systems=req_dict.get("related_systems", []),
-                source_note=req_dict.get("source_note"),
+    try:
+        logger.info(f"[Coverage] Starting evaluation: docId={payload.docId}, codeIndexId={payload.codeIndexId}, topK={payload.topK}")
+        
+        status = load_doc_status()
+        
+        # Normalize to lists
+        gdd_ids = payload.docId if isinstance(payload.docId, list) else [payload.docId]
+        code_indices = payload.codeIndexId if isinstance(payload.codeIndexId, list) else [payload.codeIndexId]
+        
+        # Validate inputs
+        if not gdd_ids or not gdd_ids[0]:
+            raise HTTPException(status_code=400, detail="At least one GDD document ID is required")
+        if not code_indices or not code_indices[0]:
+            raise HTTPException(status_code=400, detail="At least one code index ID is required")
+        
+        # Verify all GDD documents exist
+        missing_gdds = [gdd_id for gdd_id in gdd_ids if gdd_id not in status]
+        if missing_gdds:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"GDD document(s) not found: {', '.join(missing_gdds)}. Available documents: {', '.join(list(status.keys())[:10])}"
             )
-            requirements.append(req)
+        
+        # Verify all code indices exist
+        missing_codes = [code_id for code_id in code_indices if code_id not in status]
+        if missing_codes:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Code index(es) not found: {', '.join(missing_codes)}. Available documents: {', '.join(list(status.keys())[:10])}"
+            )
+        
+        logger.info(f"[Coverage] Validated {len(gdd_ids)} GDD(s) and {len(code_indices)} code batch(es)")
+        
+        # Initialize provider with error handling
+        try:
+            provider = QwenProvider()
+            llm_func = make_llm_model_func(provider)
         except Exception as e:
-            # Skip invalid requirements
-            continue
-    
-    # ------------------------------------------------------------------
-    # TEMP: Limit number of requirements for faster demo runs
-    # ------------------------------------------------------------------
-    # To keep evaluation responsive on a laptop, we cap the number of
-    # requirements we evaluate per request. This still gives a realistic
-    # coverage sample without waiting many minutes.
-    MAX_REQUIREMENTS_FOR_DEMO = 20
-    if len(requirements) > MAX_REQUIREMENTS_FOR_DEMO:
-        requirements = requirements[:MAX_REQUIREMENTS_FOR_DEMO]
+            logger.error(f"[Coverage] Failed to initialize LLM provider: {e}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to initialize LLM provider: {str(e)}. Check your API keys."
+            )
+        
+        # Step 1: Extract requirements from ALL GDDs and merge them
+        all_requirements_data: List[dict] = []
+        skipped_gdds: List[str] = []
+        for gdd_id in gdd_ids:
+            try:
+                gdd_meta = status.get(gdd_id, {})
+                gdd_chunks = gdd_meta.get("chunks_list") or gdd_meta.get("chunks") or []
+                if not gdd_chunks:
+                    skipped_gdds.append(f"{gdd_id}: document has not been indexed yet")
+                    logger.warning(f"[Coverage] GDD {gdd_id} has no chunks, skipping")
+                    continue
+                
+                logger.info(f"[Coverage] Extracting requirements from GDD: {gdd_id}")
+                spec_data = await extract_all_requirements(gdd_id, llm_func=llm_func)
+                
+                requirements_data = spec_data.get("requirements", [])
+                logger.info(f"[Coverage] Extracted {len(requirements_data)} requirements from {gdd_id}")
+                
+                # Tag each requirement with its source GDD
+                for req in requirements_data:
+                    req["source_gdd"] = gdd_id
+                all_requirements_data.extend(requirements_data)
+            except ValueError as exc:
+                skipped_gdds.append(f"{gdd_id}: {str(exc)}")
+                logger.warning(f"[Coverage] Failed to extract from {gdd_id}: {exc}")
+                continue
+            except Exception as e:
+                skipped_gdds.append(f"{gdd_id}: unexpected error - {str(e)}")
+                logger.error(f"[Coverage] Unexpected error extracting from {gdd_id}: {e}", exc_info=True)
+                continue
+        
+        # Convert dicts to GddRequirement objects (from all GDDs)
+        requirements = []
+        seen_ids = set()  # Deduplicate requirements with same ID
+        for req_dict in all_requirements_data:
+            try:
+                req_id = req_dict.get("id", "")
+                if not req_id:
+                    continue
+                # Skip duplicates (same requirement from multiple GDDs)
+                if req_id in seen_ids:
+                    continue
+                seen_ids.add(req_id)
+                
+                req = GddRequirement(
+                    id=req_id,
+                    title=req_dict.get("title", req_dict.get("summary", "")),
+                    description=req_dict.get("description", req_dict.get("details", "")),
+                    category=req_dict.get("category"),
+                    priority=req_dict.get("priority"),
+                    status=req_dict.get("status"),
+                    acceptance_criteria=req_dict.get("acceptance_criteria"),
+                    related_objects=req_dict.get("related_objects", []),
+                    related_systems=req_dict.get("related_systems", []),
+                    source_note=req_dict.get("source_note"),
+                )
+                requirements.append(req)
+            except Exception as e:
+                logger.warning(f"[Coverage] Skipping invalid requirement: {e}")
+                continue
+        
+        # ------------------------------------------------------------------
+        # TEMP: Limit number of requirements for faster demo runs
+        # ------------------------------------------------------------------
+        # To keep evaluation responsive on a laptop, we cap the number of
+        # requirements we evaluate per request. This still gives a realistic
+        # coverage sample without waiting many minutes.
+        # 
+        # Performance: ~30-35 seconds per requirement
+        # - 5 requirements = ~2.5-3 minutes (safe)
+        # - 10 requirements = ~5-6 minutes (may timeout)
+        # - 20 requirements = ~10-12 minutes (will timeout!)
+        MAX_REQUIREMENTS_FOR_DEMO = 5  # Reduced from 20 to avoid timeout
+        original_count = len(requirements)
+        if len(requirements) > MAX_REQUIREMENTS_FOR_DEMO:
+            requirements = requirements[:MAX_REQUIREMENTS_FOR_DEMO]
+            logger.info(f"[Coverage] Limited requirements from {original_count} to {len(requirements)} for demo (to avoid timeout)")
 
-    if not requirements:
-        gdd_list_str = ", ".join(skipped_gdds) if skipped_gdds else ", ".join(gdd_ids)
+        if not requirements:
+            gdd_list_str = ", ".join(skipped_gdds) if skipped_gdds else ", ".join(gdd_ids)
+            raise HTTPException(
+                status_code=400,
+                detail=f"No requirements found in GDD(s): {gdd_list_str}. Make sure the documents have been indexed and contain extractable requirements."
+            )
+        
+        logger.info(f"[Coverage] Evaluating {len(requirements)} requirements against {len(code_indices)} code batch(es)")
+        
+        # Step 2: Evaluate each requirement against the ENTIRE codebase (all batches)
+        # Use the first GDD ID for report naming, but search across all code batches
+        primary_gdd_id = gdd_ids[0]
+        try:
+            report_path = await evaluate_all_requirements(
+                primary_gdd_id,
+                code_indices,  # Pass all code batches
+                requirements,
+                provider=provider,
+                top_k=payload.topK or 8,
+            )
+            logger.info(f"[Coverage] Evaluation complete, report saved to: {report_path}")
+        except Exception as e:
+            logger.error(f"[Coverage] Evaluation failed: {e}", exc_info=True)
+            raise HTTPException(
+                status_code=500,
+                detail=f"Evaluation failed: {str(e)}. Check logs for details."
+            )
+        
+        # Step 3: Load and format the report
+        try:
+            report_data = json.loads(report_path.read_text())
+            results = report_data.get("results", [])
+            if not results:
+                logger.warning(f"[Coverage] Report file exists but contains no results")
+        except Exception as e:
+            logger.error(f"[Coverage] Failed to load report: {e}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to load evaluation report: {str(e)}"
+            )
+        
+        # Convert to frontend format
+        coverage_results = []
+        implemented_count = 0
+        partially_implemented_count = 0
+        not_implemented_count = 0
+        error_count = 0
+        
+        for result in results:
+            try:
+                req_id = result.get("requirement_id", "")
+                status_val = result.get("status", "error")
+                
+                # Find the original requirement for name/type
+                req = next((r for r in requirements if r.id == req_id), None)
+                item_name = req.title if req else req_id or "Unknown"
+                item_type = "requirement"
+                
+                if status_val == "implemented":
+                    implemented_count += 1
+                elif status_val == "partially_implemented":
+                    partially_implemented_count += 1
+                elif status_val == "not_implemented":
+                    not_implemented_count += 1
+                else:
+                    error_count += 1
+                
+                evidence = result.get("evidence", [])
+                retrieved_chunks = result.get("retrieved_chunks", [])
+                
+                coverage_results.append({
+                    "itemId": req_id or f"unknown_{len(coverage_results)}",
+                    "itemType": item_type,
+                    "itemName": item_name,
+                    "status": status_val,
+                    "evidence": evidence if isinstance(evidence, list) else [],
+                    "retrievedChunks": [
+                        {
+                            "chunkId": str(chunk.get("chunk_id", "")),
+                            "content": str(chunk.get("content", "")),
+                            "score": float(chunk.get("score", 0.0)),
+                            "filePath": chunk.get("file_path"),
+                        }
+                        for chunk in (retrieved_chunks if isinstance(retrieved_chunks, list) else [])
+                    ],
+                })
+            except Exception as e:
+                logger.warning(f"[Coverage] Error processing result: {e}")
+                error_count += 1
+                continue
+        
+        now = datetime.utcnow().isoformat() + "Z"
+        # Format IDs for display
+        gdd_id_display = ", ".join(gdd_ids) if len(gdd_ids) > 1 else gdd_ids[0]
+        code_id_display = ", ".join(code_indices) if len(code_indices) > 1 else code_indices[0]
+        report = {
+            "docId": gdd_id_display,
+            "codeIndexId": code_id_display,
+            "generatedAt": now,
+            "summary": {
+                "totalItems": len(coverage_results),
+                "implemented": implemented_count,
+                "partiallyImplemented": partially_implemented_count,
+                "notImplemented": not_implemented_count,
+                "errors": error_count,
+            },
+            "results": coverage_results,
+        }
+        
+        response_payload = {"report": report}
+        if skipped_gdds:
+            response_payload["warnings"] = skipped_gdds
+        
+        logger.info(f"[Coverage] Evaluation complete: {implemented_count} implemented, {partially_implemented_count} partial, {not_implemented_count} not implemented")
+        return JSONResponse(response_payload)
+        
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        logger.error(f"[Coverage] Unexpected error in evaluate_coverage: {e}", exc_info=True)
         raise HTTPException(
-            status_code=400,
-            detail=f"No requirements found in GDD(s): {gdd_list_str}. Make sure the documents have been indexed."
+            status_code=500,
+            detail=f"Unexpected error during coverage evaluation: {str(e)}"
         )
-    
-    # Step 2: Evaluate each requirement against the ENTIRE codebase (all batches)
-    # Use the first GDD ID for report naming, but search across all code batches
-    primary_gdd_id = gdd_ids[0]
-    report_path = await evaluate_all_requirements(
-        primary_gdd_id,
-        code_indices,  # Pass all code batches
-        requirements,
-        provider=provider,
-        top_k=payload.topK or 8,
-    )
-    
-    # Step 3: Load and format the report
-    report_data = json.loads(report_path.read_text())
-    results = report_data.get("results", [])
-    
-    # Convert to frontend format
-    coverage_results = []
-    implemented_count = 0
-    partially_implemented_count = 0
-    not_implemented_count = 0
-    error_count = 0
-    
-    for result in results:
-        req_id = result.get("requirement_id", "")
-        status = result.get("status", "error")
-        
-        # Find the original requirement for name/type
-        req = next((r for r in requirements if r.id == req_id), None)
-        item_name = req.title if req else req_id
-        item_type = "requirement"
-        
-        if status == "implemented":
-            implemented_count += 1
-        elif status == "partially_implemented":
-            partially_implemented_count += 1
-        elif status == "not_implemented":
-            not_implemented_count += 1
-        else:
-            error_count += 1
-        
-        evidence = result.get("evidence", [])
-        retrieved_chunks = result.get("retrieved_chunks", [])
-        
-        coverage_results.append({
-            "itemId": req_id,
-            "itemType": item_type,
-            "itemName": item_name,
-            "status": status,
-            "evidence": evidence,
-            "retrievedChunks": [
-                {
-                    "chunkId": str(chunk.get("chunk_id", "")),
-                    "content": chunk.get("content", ""),
-                    "score": float(chunk.get("score", 0.0)),
-                    "filePath": chunk.get("file_path"),
-                }
-                for chunk in retrieved_chunks
-            ],
-        })
-    
-    now = datetime.utcnow().isoformat() + "Z"
-    # Format IDs for display
-    gdd_id_display = ", ".join(gdd_ids) if len(gdd_ids) > 1 else gdd_ids[0]
-    code_id_display = ", ".join(code_indices) if len(code_indices) > 1 else code_indices[0]
-    report = {
-        "docId": gdd_id_display,
-        "codeIndexId": code_id_display,
-        "generatedAt": now,
-        "summary": {
-            "totalItems": len(coverage_results),
-            "implemented": implemented_count,
-            "partiallyImplemented": partially_implemented_count,
-            "notImplemented": not_implemented_count,
-            "errors": error_count,
-        },
-        "results": coverage_results,
-    }
-    
-    response_payload = {"report": report}
-    if skipped_gdds:
-        response_payload["warnings"] = skipped_gdds
-
-    return JSONResponse(response_payload)
 
 
 class ChatRequestModel(BaseModel):

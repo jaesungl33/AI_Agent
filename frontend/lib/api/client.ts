@@ -56,23 +56,34 @@ async function fetchAPI<T>(
   }
 
   const url = `${API_BASE_URL}${endpoint}`
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
-  })
+  console.log(`[fetchAPI] Calling: ${url}`, options)
+  
+  try {
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        ...options?.headers,
+      },
+    })
 
-  if (!response.ok) {
-    const error: APIError = await response.json().catch(() => ({
-      error: "Unknown error",
-      message: `HTTP ${response.status}: ${response.statusText}`,
-    }))
+    if (!response.ok) {
+      const error: APIError = await response.json().catch(() => ({
+        error: "Unknown error",
+        message: `HTTP ${response.status}: ${response.statusText}`,
+      }))
+      console.error(`[fetchAPI] Error response from ${url}:`, error)
+      throw error
+    }
+
+    return response.json()
+  } catch (error: any) {
+    console.error(`[fetchAPI] Fetch failed for ${url}:`, error)
+    if (error.message?.includes("Failed to fetch") || error.message?.includes("NetworkError")) {
+      throw new Error(`Cannot connect to backend at ${API_BASE_URL}. Make sure the backend is running on port 8000.`)
+    }
     throw error
   }
-
-  return response.json()
 }
 
 async function uploadFile<T>(
@@ -217,12 +228,25 @@ export const documentAPI = {
   },
 
   list: async (): Promise<Document[]> => {
-    const backendAvailable = await checkBackendAvailable()
-    
-    if (USE_MOCK || !backendAvailable) {
+    // Always try real backend first - don't fallback to mock
+    if (USE_MOCK) {
       return mockDocumentAPI.list()
     }
-    return fetchAPI("/documents")
+    try {
+      // Use Next.js proxy to avoid direct :8000 fetch issues
+      const res = await fetch("/api/documents", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+      if (!res.ok) {
+        const msg = await res.text().catch(() => res.statusText)
+        throw new Error(msg || "Failed to fetch documents")
+      }
+      return (await res.json()) as Document[]
+    } catch (error) {
+      console.error("[DocumentAPI] Failed to fetch documents:", error)
+      throw error // Don't fallback to mock, show the error
+    }
   },
 
   get: async (id: string): Promise<Document> => {
@@ -282,32 +306,74 @@ export const coverageAPI = {
     codeIndexId: string | string[],
     topK?: number
   ): Promise<CoverageReport> => {
+    // Always use real backend - never fallback to mock for coverage
+    if (USE_MOCK) {
+      console.warn("[CoverageAPI] Mock mode enabled, but coverage evaluation requires real backend")
+    }
+    
     // Call Next.js API route, which proxies to the Python backend.
     // This avoids CORS issues between :3000 and :8000.
     const payload = { docId, codeIndexId, topK }
 
+    console.log("[CoverageAPI] Starting evaluation request:", payload)
+
     try {
+      // Use AbortController for timeout (10 minutes for long evaluations)
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10 * 60 * 1000) // 10 minutes
+
       const res = await fetch("/api/coverage/evaluate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       })
 
-      const data = await res.json()
+      clearTimeout(timeoutId)
 
       if (!res.ok) {
-        console.error("[CoverageAPI] Backend error:", data)
-        throw new Error(data?.message || `Coverage evaluate failed with status ${res.status}`)
+        let errorMessage = `HTTP ${res.status}: ${res.statusText}`
+        try {
+          const errorData = await res.json()
+          errorMessage = errorData?.message || errorData?.detail || errorMessage
+          console.error("[CoverageAPI] Backend error response:", errorData)
+        } catch {
+          // If response isn't JSON, use status text
+          const text = await res.text().catch(() => "")
+          errorMessage = text || errorMessage
+        }
+        throw new Error(errorMessage)
       }
 
-      return (data.report as CoverageReport) || (data as CoverageReport)
-    } catch (error) {
-      console.error("[CoverageAPI] Error calling /api/coverage/evaluate, falling back to mock:", error)
-      const docIdStr = Array.isArray(docId) ? docId[0] : docId
-      const codeIdStr = Array.isArray(codeIndexId) ? codeIndexId[0] : codeIndexId
-      return mockCoverageAPI.evaluate(docIdStr, codeIdStr)
+      const data = await res.json()
+      console.log("[CoverageAPI] Evaluation response received:", {
+        hasReport: !!data.report,
+        warnings: data.warnings?.length || 0,
+      })
+
+      if (!data.report) {
+        throw new Error("Invalid response: missing report data")
+      }
+
+      return data.report as CoverageReport
+    } catch (error: any) {
+      if (error.name === "AbortError") {
+        console.error("[CoverageAPI] Request timeout after 5 minutes")
+        throw new Error("Evaluation timed out after 5 minutes. The evaluation may still be running on the server.")
+      }
+      
+      console.error("[CoverageAPI] Error calling /api/coverage/evaluate:", error)
+      
+      // Provide helpful error messages
+      if (error.message) {
+        throw error
+      }
+      
+      // Don't fallback to mock - show the real error
+      console.error("[CoverageAPI] Evaluation failed, not using mock:", error)
+      throw new Error(`Coverage evaluation failed: ${error.message || "Unknown error"}`)
     }
   },
 
@@ -411,19 +477,17 @@ export const chatAPI = {
   },
 
   getHistory: async (workspaceId: string): Promise<ChatMessage[]> => {
-    const backendAvailable = await checkBackendAvailable()
-    
-    if (USE_MOCK || !backendAvailable) {
-      return mockChatAPI.getHistory(workspaceId)
+    // Always call real backend; do not fallback to mock
+    if (USE_MOCK) {
+      console.warn("[chatAPI] Mock mode enabled, but chat history will call real backend")
     }
     return fetchAPI(`/chat/${workspaceId}/history`)
   },
 
   clearHistory: async (workspaceId: string): Promise<void> => {
-    const backendAvailable = await checkBackendAvailable()
-    
-    if (USE_MOCK || !backendAvailable) {
-      return mockChatAPI.clearHistory(workspaceId)
+    // Always call real backend; do not fallback to mock
+    if (USE_MOCK) {
+      console.warn("[chatAPI] Mock mode enabled, but clearHistory will call real backend")
     }
     return fetchAPI(`/chat/${workspaceId}/history`, { method: "DELETE" })
   },
