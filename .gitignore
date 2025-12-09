@@ -95,6 +95,8 @@ logs/
 *.tar
 *.tar.gz
 *.rar
+# Exception: Allow the RAG data backup archive (tracked with Git LFS)
+!rag_data_backup.tar.gz
 
 # macOS
 .DS_Store
