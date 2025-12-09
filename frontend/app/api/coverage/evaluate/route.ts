@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+// Use 127.0.0.1 instead of localhost for more reliable server-side connections
+// Next.js server-side fetch sometimes has issues with localhost resolution
+const getBackendUrl = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL
+  if (envUrl) {
+    // Replace localhost with 127.0.0.1 for server-side reliability
+    return envUrl.replace(/localhost/g, "127.0.0.1")
+  }
+  return "http://127.0.0.1:8000"
+}
+
+const BACKEND_URL = getBackendUrl()
 const EVALUATION_TIMEOUT = 10 * 60 * 1000 // 10 minutes (increased from 5 to handle more requirements)
 
 export async function POST(req: NextRequest) {
@@ -13,25 +24,23 @@ export async function POST(req: NextRequest) {
       backendUrl: BACKEND_URL,
     })
 
-    // Test backend connection first
+    // Optional health check - don't block if it fails, just try the actual request
+    // Sometimes health check can timeout but the main endpoint works fine
     try {
-      const healthCheck = await fetch(`${BACKEND_URL}/health`, {
-        method: "GET",
-        signal: AbortSignal.timeout(2000),
-      })
-      if (!healthCheck.ok) {
-        throw new Error(`Backend health check failed: ${healthCheck.status}`)
+      const healthCheck = await Promise.race([
+        fetch(`${BACKEND_URL}/health`, {
+          method: "GET",
+          signal: AbortSignal.timeout(2000), // Quick 2s check
+        }),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Health check timeout")), 2000))
+      ]) as Response
+      
+      if (healthCheck.ok) {
+        console.log("[API] Backend health check passed")
       }
-      console.log("[API] Backend health check passed")
     } catch (healthError: any) {
-      console.error("[API] Backend health check failed:", healthError)
-      return NextResponse.json(
-        {
-          error: "Backend connection failed",
-          message: `Cannot connect to backend at ${BACKEND_URL}. Make sure the backend is running on port 8000. Error: ${healthError.message}`,
-        },
-        { status: 503 },
-      )
+      // Health check failed, but continue anyway - the actual request might work
+      console.warn("[API] Health check failed or timed out, proceeding with evaluation request anyway:", healthError.message)
     }
 
     // Create AbortController for timeout
@@ -45,6 +54,8 @@ export async function POST(req: NextRequest) {
       const targetUrl = `${BACKEND_URL}/coverage/evaluate`
       console.log("[API] Calling backend:", targetUrl)
       
+      // Use fetch with extended timeout and keep-alive
+      // Note: Node.js fetch doesn't support keep-alive directly, but we can increase timeout
       const res = await fetch(targetUrl, {
         method: "POST",
         headers: {
@@ -52,6 +63,8 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify(body),
         signal: controller.signal,
+        // Add keep-alive hint (though Node.js fetch may not fully support this)
+        keepalive: true,
       })
 
       clearTimeout(timeoutId)

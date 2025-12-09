@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
+// Use 127.0.0.1 instead of localhost for more reliable server-side connections
+const getBackendUrl = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL
+  if (envUrl) {
+    return envUrl.replace(/localhost/g, "127.0.0.1")
+  }
+  return "http://127.0.0.1:8000"
+}
+
+const BACKEND_URL = getBackendUrl()
 
 export async function GET() {
   try {

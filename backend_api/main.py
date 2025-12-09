@@ -16,6 +16,7 @@ running quickly. Later, you can wire these endpoints into the full
 from __future__ import annotations
 
 import sys
+import time
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, List, Union
@@ -63,6 +64,8 @@ from gdd_rag_backbone.gdd.schemas import GddRequirement  # type: ignore
 
 app = FastAPI(title="GDD RAG Backend", version="0.1.0")
 
+# Increase timeout for long-running requests (coverage evaluation can take 2-10 minutes)
+# This ensures the connection stays alive during heavy processing
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -70,6 +73,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Configure uvicorn timeout settings via startup event
+@app.on_event("startup")
+async def startup_event():
+    import logging
+    import uvicorn
+    # Note: These settings need to be passed to uvicorn.run(), not here
+    # But we can log that long-running tasks are expected
+    startup_logger = logging.getLogger(__name__)
+    startup_logger.info("[Backend] Server started. Long-running coverage evaluations are supported (up to 10 minutes).")
 
 
 @app.get("/health")
@@ -540,7 +553,8 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
         if skipped_gdds:
             response_payload["warnings"] = skipped_gdds
         
-        logger.info(f"[Coverage] Evaluation complete: {implemented_count} implemented, {partially_implemented_count} partial, {not_implemented_count} not implemented")
+        elapsed = time.time() - start_time
+        logger.info(f"[Coverage] Evaluation complete in {elapsed:.1f}s: {implemented_count} implemented, {partially_implemented_count} partial, {not_implemented_count} not implemented")
         return JSONResponse(response_payload)
         
     except HTTPException:

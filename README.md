@@ -2,16 +2,27 @@
 
 A clean, extensible Python framework for ingesting, indexing, and extracting structured data from Game Design Documents (GDDs) using RAG-Anything.
 
+## 🚀 Quick Start
+
+**New to this tool? Start here:**
+1. **[QUICK_START.md](QUICK_START.md)** - Get running in 5 minutes
+2. **[USER_GUIDE.md](USER_GUIDE.md)** - Complete step-by-step guide
+
+**Already set up?** Launch the app:
+```bash
+streamlit run ui/app.py
+```
+
 ## Overview
 
 The GDD RAG Backbone provides:
 
 - **Document Ingestion & Indexing**: Parse, chunk, embed, and index GDDs (PDFs, DOCX, etc.) using RAG-Anything
 - **RAG Query Engine**: Ask natural language questions about indexed documents
-- **GDD Compiler Layer**: Extract structured JSON checklists (objects, tanks, maps, etc.) from GDDs
+- **GDD Compiler Layer**: Extract structured JSON checklists (objects, systems, requirements, etc.) from GDDs
 - **Provider-Agnostic Design**: Works with any LLM provider (Qwen, Gemini/Vertex AI, OpenAI, etc.) via pluggable interfaces
 - **Interactive Web UI**: Streamlit-based dashboard for zero-code document processing
-- **Code Coverage Analysis**: Match GDD requirements against codebase implementation
+- **Code Coverage Analysis**: Match GDD requirements against codebase implementation (with parallel processing for speed)
 
 ## Table of Contents
 
@@ -19,7 +30,8 @@ The GDD RAG Backbone provides:
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
-- [Streamlit UI](#streamlit-ui)
+- [Collaboration](#collaboration)
+- [Web UI](#web-ui)
 - [Core Components](#core-components)
 - [API Reference](#api-reference)
 - [Testing](#testing)
@@ -148,6 +160,8 @@ pip install -r requirements.txt --upgrade
 
 ## Quick Start
 
+**👉 New users should start with [USER_GUIDE.md](USER_GUIDE.md) for step-by-step instructions!**
+
 ### Basic Usage
 
 1. **Index a document**:
@@ -221,52 +235,76 @@ export GDD_DOC_ID="my_gdd"
 python gdd_rag_backbone/scripts/index_and_test.py
 ```
 
-## Streamlit UI
+## Web UI
 
-A zero-code dashboard lives in `ui/app.py` and bundles indexing, extraction, and requirement coverage workflows into one place.
+The **Streamlit UI** (`ui/app.py`) provides a zero-code dashboard for the entire GDD processing pipeline.
 
-### Features
+**Features**:
+- ✅ **Document indexing and management**
+- ✅ **Automatic Game Spec extraction**
+- ✅ **Interactive Q&A interface**
+- ✅ **Structured requirement extraction**
+- ✅ **Code coverage analysis**
 
-1. **GDD & Indexing**
-   - Upload a new PDF or pick an indexed doc_id
-   - Trigger (re)indexing through RAG-Anything
-   - Preview the first few chunks and run ad-hoc QA with chunk-level retrieval (no LightRAG instance required)
-
-2. **Extraction & Requirements**
-   - Run the existing extraction functions (objects, tanks, maps, requirements)
-   - Results are saved under `checklists/<doc_id>_{objects|tanks|maps|requirements}.json`
-   - Inspect the extracted data using interactive tables and filters
-
-3. **Code Coverage Check**
-   - Point the evaluator at a document + a code index (`code_indexes/<code_index_id>.json`)
-   - Run requirement → code heuristic matching and review implemented / partial / missing requirements
-   - Coverage artifacts are stored under `results/<doc_id>_<code_index_id>_coverage.json`
-
-### Running the UI
-
+**Running the Streamlit UI**:
 ```bash
 streamlit run ui/app.py
 ```
 
-Make sure your LLM keys (e.g., `QWEN_API_KEY` / `DASHSCOPE_API_KEY`) are set in the environment or `.env` before launching Streamlit.
+The app will:
+- Start on `http://localhost:8501` (default Streamlit port)
+- Provide a sidebar navigation with 4 main sections
+- Auto-reload on file changes during development
+
+**📖 For detailed instructions, see [USER_GUIDE.md](USER_GUIDE.md)**
+
+### UI Features
+
+1. **GDD & Indexing**
+   - Upload new PDF/DOCX or select existing documents
+   - Trigger (re)indexing through RAG-Anything
+   - Preview indexed chunks
+
+2. **GDD Explorer & Analysis**
+   - High-level document analysis
+   - Natural language Q&A interface
+   - Chunk-level retrieval and inspection
+
+3. **Requirements & To-Do**
+   - View extracted objects, systems, logic rules, and requirements
+   - Generate developer to-do lists
+   - Interactive data tables with filters
+
+4. **Code Coverage Check**
+   - Compare GDD requirements against codebase
+   - Identify implemented vs missing features
+   - Detailed evidence and code chunk references
+
+Make sure your LLM keys (e.g., `QWEN_API_KEY` / `DASHSCOPE_API_KEY`) are set in the environment or `.env` before launching the UI.
 
 ### File Locations & Formats
 
 - **Indexed docs** live under `docs/`
 - **RAG storage** is under `rag_storage/`
-- **Extraction outputs** are placed in `checklists/`
-- **Coverage outputs** are placed in `results/`
-- **Code indexes** should live in `code_indexes/` and follow:
-
-  ```json
-  {
-    "files": [
-      {"path": "path/to/file.py", "content": "full file content as text"}
-    ]
-  }
-  ```
+- **Game Spec outputs** are placed in `checklists/<doc_id>_game_spec.json`
+- **To-do lists** are placed in `checklists/<doc_id>_todo.json`
+- **Coverage outputs** are placed in `reports/coverage_checks/`
+- **Code indexes** are created via the indexing script and stored in the RAG system
 
 > Tip: The UI will create missing folders automatically the first time you run each workflow.
+
+### Indexing Codebases
+
+To check code coverage, you need to index your codebase first:
+
+```bash
+python index_tank_online_codebase.py \
+    --source ./your_code_directory \
+    --doc-id your_codebase_id \
+    --batch-size 50
+```
+
+This creates indexed documents you can reference in the Code Coverage tab. See [USER_GUIDE.md](USER_GUIDE.md) for detailed instructions.
 
 ## Core Components
 

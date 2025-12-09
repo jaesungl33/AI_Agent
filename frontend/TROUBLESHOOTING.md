@@ -44,16 +44,16 @@ To disable: `localStorage.removeItem("useMockAPI")`
 
 To use the real backend API, you need to start a Python FastAPI server. 
 
-### Option 1: Use Existing Gradio UI
+### Option 1: Use Existing Streamlit UI
 
-The Gradio UI is already set up:
+The Streamlit UI is already set up:
 
 ```bash
 cd /Users/madeinheaven/Documents/GitHub/AI_Agent
-NPY_SKIP_MAC_OS_CHECK=1 python3 ui/app_gradio.py
+streamlit run ui/app.py
 ```
 
-This runs on port 7860 (Gradio), not 8000 (REST API).
+This runs on port 8501 (Streamlit), not 8000 (REST API).
 
 ### Option 2: Create FastAPI Backend (Recommended)
 
@@ -92,7 +92,7 @@ We need to create a FastAPI wrapper. See `backend-api/README.md` for instruction
 
 1. **For UI Testing**: Use mock mode (automatic)
 2. **For Real Processing**: Create FastAPI backend wrapper
-3. **For Quick Testing**: Use existing Gradio UI at port 7860
+3. **For Quick Testing**: Use existing Streamlit UI at port 8501
 
 
 

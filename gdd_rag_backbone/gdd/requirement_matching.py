@@ -11,8 +11,11 @@ from __future__ import annotations
 # Standard library imports
 import asyncio
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence
+
+logger = logging.getLogger(__name__)
 
 # Project imports
 from gdd_rag_backbone.gdd.schemas import GddRequirement
@@ -230,9 +233,10 @@ def semantic_retrieve_candidates(
         return []
 
 
-async def llm_semantic_judgement(requirement: GddRequirement, candidate: Dict[str, Any], llm_model, timeout: float = 30.0) -> Dict[str, Any]:
+async def llm_semantic_judgement(requirement: GddRequirement, candidate: Dict[str, Any], llm_model, timeout: float = 25.0) -> Dict[str, Any]:
     """
     Use LLM to classify how well a code chunk implements the requirement.
+    Reduced timeout from 30s to 25s to prevent hanging.
     """
     system_prompt = (
         "You are a senior gameplay engineer. "
@@ -240,12 +244,17 @@ async def llm_semantic_judgement(requirement: GddRequirement, candidate: Dict[st
         "Classify as 'implemented', 'partially_implemented', or 'not_related'. "
         "Keep reasoning to one short sentence."
     )
+    # Truncate code content to prevent overly long prompts
+    code_content = candidate.get('content', '')
+    if len(code_content) > 2000:
+        code_content = code_content[:2000] + "... [truncated]"
+    
     user_prompt = f"""
 Requirement:
 {requirement.description or requirement.title}
 
 Code:
-{candidate.get('content', '')}
+{code_content}
 
 Respond ONLY JSON:
 {{
@@ -262,7 +271,14 @@ Respond ONLY JSON:
         return {
             "candidate": candidate,
             "classification": "not_related",
-            "reason": "LLM timeout",
+            "reason": "LLM timeout (exceeded 25s)",
+        }
+    except Exception as e:
+        # Catch any other LLM errors and continue
+        return {
+            "candidate": candidate,
+            "classification": "not_related",
+            "reason": f"LLM error: {str(e)[:50]}",
         }
     text = resp_text.strip()
     if text.startswith("```"):
@@ -306,11 +322,26 @@ async def semantic_coverage(
         _SEMANTIC_CACHE[cache_key] = result
         return result
 
-    # Evaluate candidates sequentially (could batch/parallelize if provider allows)
+    # Evaluate candidates sequentially with early exit optimization
+    # If we find an "implemented" match, we can stop early
     judgements: List[Dict[str, Any]] = []
-    for cand in candidates:
-        judgement = await llm_semantic_judgement(requirement, cand, llm_model)
-        judgements.append(judgement)
+    for idx, cand in enumerate(candidates):
+        try:
+            judgement = await llm_semantic_judgement(requirement, cand, llm_model)
+            judgements.append(judgement)
+            
+            # Early exit: if we found a clear "implemented" match, stop evaluating
+            if judgement.get("classification") == "implemented":
+                logger.info(f"[Semantic] Found implemented match for requirement {requirement.id} at candidate {idx+1}/{len(candidates)}")
+                break
+        except Exception as e:
+            # Log but continue with next candidate
+            logger.warning(f"[Semantic] Error evaluating candidate {idx+1} for requirement {requirement.id}: {e}")
+            judgements.append({
+                "candidate": cand,
+                "classification": "not_related",
+                "reason": f"Evaluation error: {str(e)[:50]}",
+            })
 
     status = "not_implemented"
     best_match = None
@@ -431,16 +462,30 @@ async def evaluate_all_requirements(
     symbol_index = symbol_index or build_symbol_index(code_index_id)
 
     results: List[Dict[str, Any]] = []
-    for requirement in requirements:
-        result = await evaluate_requirement(
-            requirement,
-            code_index_id,
-            provider=active_provider,
-            llm_func=llm,
-            top_k=top_k,
-            symbol_index=symbol_index,
-        )
-        results.append(result)
+    total = len(requirements)
+    for idx, requirement in enumerate(requirements, 1):
+        try:
+            logger.info(f"[Coverage] Evaluating requirement {idx}/{total}: {requirement.id} - {requirement.title[:50]}")
+            result = await evaluate_requirement(
+                requirement,
+                code_index_id,
+                provider=active_provider,
+                llm_func=llm,
+                top_k=top_k,
+                symbol_index=symbol_index,
+            )
+            results.append(result)
+            status = result.get("status", "unknown")
+            logger.info(f"[Coverage] Requirement {idx}/{total} completed: {status}")
+        except Exception as e:
+            logger.error(f"[Coverage] Error evaluating requirement {idx}/{total} ({requirement.id}): {e}", exc_info=True)
+            # Add error result so evaluation can continue
+            results.append({
+                "requirement_id": requirement.id,
+                "status": "error",
+                "coverage_type": "error",
+                "reason": f"Evaluation error: {str(e)[:100]}",
+            })
 
     report_payload = {
         "doc_id": doc_id,
