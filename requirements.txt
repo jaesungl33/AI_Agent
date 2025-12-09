@@ -12,12 +12,6 @@
 # The [all] extra includes document parsers (mineru, docling) and all RAG features
 raganything[all]
 
-# ----------------------------------------------------------------------------
-# Web UI Framework (Required for Streamlit app)
-# ----------------------------------------------------------------------------
-# Streamlit: Interactive web dashboard for document processing pipeline
-# Used by: ui/app.py
-streamlit
 
 # ----------------------------------------------------------------------------
 # LLM Provider SDKs (Required)
@@ -37,7 +31,6 @@ openai
 # Data Processing (Required)
 # ----------------------------------------------------------------------------
 # Pandas: Data manipulation and analysis
-# Used by: ui/app.py for displaying structured data (requirements, todos, etc.)
 pandas
 
 # ----------------------------------------------------------------------------

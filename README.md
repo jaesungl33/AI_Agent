@@ -1,522 +1,144 @@
 # GDD RAG Backbone
 
-A clean, extensible Python framework for ingesting, indexing, and extracting structured data from Game Design Documents (GDDs) using RAG-Anything.
+AI-powered framework for processing Game Design Documents (GDDs) with RAG-based analysis, requirement extraction, and code coverage checking.
 
-## 🚀 Quick Start
+## Features
 
-**New to this tool? Start here:**
-1. **[QUICK_START.md](QUICK_START.md)** - Get running in 5 minutes
-2. **[USER_GUIDE.md](USER_GUIDE.md)** - Complete step-by-step guide
+- 📄 **Document Processing**: Index and query PDF/DOCX game design documents
+- 🤖 **AI-Powered Analysis**: Ask natural language questions about your GDDs
+- 📊 **Structured Extraction**: Automatically extract objects, systems, requirements
+- ✅ **Code Coverage**: Compare GDD requirements against your codebase
+- 🚀 **Multiple Interfaces**: Web UI (Vercel), REST API (Render)
 
-**Already set up?** Launch the app:
+## Quick Start
+
+### Installation
+
 ```bash
-streamlit run ui/app.py
+# Clone the repository
+git clone https://github.com/yourusername/AI_Agent.git
+cd AI_Agent
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Install frontend dependencies
+cd frontend && npm install && cd ..
+
+# Setup environment
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
-## Overview
+### Local Development
 
-The GDD RAG Backbone provides:
+**Backend API:**
+```bash
+cd backend_api
+uvicorn main:app --reload
+# Runs on http://localhost:8000
+```
 
-- **Document Ingestion & Indexing**: Parse, chunk, embed, and index GDDs (PDFs, DOCX, etc.) using RAG-Anything
-- **RAG Query Engine**: Ask natural language questions about indexed documents
-- **GDD Compiler Layer**: Extract structured JSON checklists (objects, systems, requirements, etc.) from GDDs
-- **Provider-Agnostic Design**: Works with any LLM provider (Qwen, Gemini/Vertex AI, OpenAI, etc.) via pluggable interfaces
-- **Interactive Web UI**: Streamlit-based dashboard for zero-code document processing
-- **Code Coverage Analysis**: Match GDD requirements against codebase implementation (with parallel processing for speed)
+**Frontend (Next.js):**
+```bash
+cd frontend
+npm run dev
+# Runs on http://localhost:3000
+```
 
-## Table of Contents
+## Deployment
 
-- [Overview](#overview)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Collaboration](#collaboration)
-- [Web UI](#web-ui)
-- [Core Components](#core-components)
-- [API Reference](#api-reference)
-- [Testing](#testing)
-- [Code Review Notes](#code-review-notes)
-- [Extending the Framework](#extending-the-framework)
-- [Troubleshooting](#troubleshooting)
+### Frontend (Vercel)
+
+1. Push code to GitHub
+2. Connect repository to [Vercel](https://vercel.com)
+3. Set root directory to `frontend`
+4. Add environment variable: `NEXT_PUBLIC_API_URL`
+5. Deploy automatically on push to `main`
+
+### Backend (Render)
+
+1. Push code to GitHub
+2. Connect repository to [Render](https://render.com)
+3. Render auto-detects `Render.yaml` configuration
+4. Add environment variables in Render dashboard
+5. Deploy automatically on push to `main`
 
 ## Project Structure
 
 ```
-gdd_rag_backbone/
-├── __init__.py
-├── config.py                    # Global configuration
-├── llm_providers/               # LLM provider abstractions and implementations
-│   ├── __init__.py
-│   ├── base.py                  # Abstract interfaces (Protocols)
-│   ├── qwen_provider.py         # Qwen/DashScope implementation
-│   └── vertex_provider.py       # Vertex AI/Gemini implementation
-├── rag_backend/                 # RAG-Anything integration
-│   ├── __init__.py
-│   ├── rag_config.py            # RAGAnything instance factory
-│   ├── indexing.py              # Document indexing logic
-│   └── query_engine.py          # Query and debug functions
-├── gdd/                         # Game Design Document logic
-│   ├── __init__.py
-│   ├── schemas.py               # Pydantic models (GddObject, TankSpec, MapSpec)
-│   └── extraction.py            # Structured data extraction functions
-├── scripts/                     # Manual entry points
-│   └── index_and_test.py        # Index document and run test queries
-└── tests/                       # Test suite
-    ├── test_schemas.py
-    ├── test_parsing.py
-    ├── test_retrieval.py
-    └── test_extraction.py
+AI_Agent/
+├── backend_api/          # FastAPI REST backend
+│   ├── main.py          # API endpoints
+│   └── requirements.txt # Backend dependencies
+├── frontend/            # Next.js frontend (Vercel)
+│   ├── app/            # Next.js app router
+│   ├── components/     # React components
+│   └── lib/            # Utilities and API client
+├── gdd_rag_backbone/   # Core Python library
+│   ├── rag_backend/    # RAG indexing and querying
+│   ├── gdd/           # GDD extraction logic
+│   └── llm_providers/ # LLM provider abstractions
+├── docs/               # Document storage
+├── rag_storage/        # RAG data (indexed documents)
+├── scripts/            # Utility scripts
+└── Render.yaml         # Render deployment config
 ```
 
-## Installation
+## Usage
 
-### Prerequisites
-
-- Python 3.10 or higher
-- pip package manager
-- API key for at least one LLM provider (Qwen/DashScope recommended)
-
-### Dependencies
-
-The following packages are required and will be installed via `requirements.txt`:
-
-**Core Dependencies:**
-- `raganything[all]` - RAG framework for document processing and indexing
-- `streamlit` - Web UI framework for the interactive dashboard
-- `dashscope` - Alibaba DashScope SDK for Qwen LLM and embeddings
-- `openai` - OpenAI SDK (used as a client library for Qwen's OpenAI-compatible API endpoint)
-  - **Note:** This uses the OpenAI SDK to call Qwen/DashScope's API, NOT OpenAI's API. See [OPENAI_USAGE.md](OPENAI_USAGE.md) for details.
-- `pandas` - Data processing and manipulation for structured data
-- `python-dotenv` - Environment variable management from .env files
-
-**Note:** The `raganything[all]` package includes additional dependencies for document parsing (mineru, docling) and RAG functionality. These are automatically installed when you install `raganything[all]`.
-
-### Setup
-
-1. **Clone or navigate to the project**:
-   ```bash
-   cd /Users/madeinheaven/Documents/GitHub/AI_Agent
-   ```
-
-2. **Install all dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   
-   This will install:
-   - Core RAG framework (raganything)
-   - Web UI (streamlit)
-   - LLM provider SDKs (dashscope, openai)
-   - Data processing (pandas)
-   - Environment management (python-dotenv)
-
-3. **Set up API keys** - You have **three options**:
-
-   **Option 1: Use a .env file (Recommended)**
-   
-   Create a `.env` file in the project root:
-   ```bash
-   # Copy the template
-   cp env.template .env
-   
-   # Edit .env and add your API key
-   # QWEN_API_KEY=your_actual_api_key_here
-   ```
-   
-   The config will automatically load `.env` if `python-dotenv` is installed (already included in requirements.txt).
-
-   **Option 2: Set environment variables directly**
-   ```bash
-   # For Qwen/DashScope (required for Qwen provider)
-   export QWEN_API_KEY="your-api-key"
-   
-   # For Vertex AI (optional)
-   export VERTEX_PROJECT_ID="your-project-id"
-   export VERTEX_LOCATION="us-central1"
-   
-   # For OpenAI (optional, if adding support)
-   export OPENAI_API_KEY="your-api-key"
-   ```
-
-   **Option 3: Pass API key directly to provider**
-   ```python
-   from gdd_rag_backbone.llm_providers import QwenProvider
-   
-   provider = QwenProvider(api_key="your-api-key-here")
-   ```
-
-### Verification
-
-After installation, verify that all dependencies are installed correctly:
-
-```bash
-python -c "import streamlit; import pandas; import dashscope; import openai; import raganything; from dotenv import load_dotenv; print('All dependencies installed successfully!')"
-```
-
-If you encounter any import errors, reinstall the missing packages:
-```bash
-pip install -r requirements.txt --upgrade
-```
-
-## Quick Start
-
-**👉 New users should start with [USER_GUIDE.md](USER_GUIDE.md) for step-by-step instructions!**
-
-### Basic Usage
-
-1. **Index a document**:
-   ```python
-   import asyncio
-   from gdd_rag_backbone.rag_backend import index_document
-   from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func, make_embedding_func
-   
-   async def main():
-       # Initialize provider
-       provider = QwenProvider()
-       llm_func = make_llm_model_func(provider)
-       embedding_func = make_embedding_func(provider)
-       
-       # Index document
-       await index_document(
-           doc_path="docs/sample_gdd.pdf",
-           doc_id="my_gdd",
-           llm_func=llm_func,
-           embedding_func=embedding_func,
-       )
-   
-   asyncio.run(main())
-   ```
-
-2. **Ask questions**:
-   ```python
-   from gdd_rag_backbone.rag_backend import ask_question
-   
-   async def main():
-       answer = await ask_question(
-           doc_id="my_gdd",
-           query="What tanks are mentioned in the document?",
-       )
-       print(answer)
-   
-   asyncio.run(main())
-   ```
-
-3. **Extract structured data**:
-   ```python
-   from gdd_rag_backbone.gdd import extract_tanks, extract_maps
-   
-   async def main():
-       # Extract tanks
-       tanks = await extract_tanks("my_gdd")
-       for tank in tanks:
-           print(f"{tank.name}: {tank.class_name}, HP: {tank.hp}")
-       
-       # Extract maps
-       maps = await extract_maps("my_gdd")
-       for map_spec in maps:
-           print(f"{map_spec.name}: {map_spec.mode}")
-   
-   asyncio.run(main())
-   ```
-
-### Using the Script
-
-Run the test script to index and query a document:
-
-```bash
-python gdd_rag_backbone/scripts/index_and_test.py [doc_path] [doc_id]
-```
-
-Or with environment variables:
-
-```bash
-export GDD_DOC_PATH="docs/sample_gdd.pdf"
-export GDD_DOC_ID="my_gdd"
-python gdd_rag_backbone/scripts/index_and_test.py
-```
-
-## Web UI
-
-The **Streamlit UI** (`ui/app.py`) provides a zero-code dashboard for the entire GDD processing pipeline.
-
-**Features**:
-- ✅ **Document indexing and management**
-- ✅ **Automatic Game Spec extraction**
-- ✅ **Interactive Q&A interface**
-- ✅ **Structured requirement extraction**
-- ✅ **Code coverage analysis**
-
-**Running the Streamlit UI**:
-```bash
-streamlit run ui/app.py
-```
-
-The app will:
-- Start on `http://localhost:8501` (default Streamlit port)
-- Provide a sidebar navigation with 4 main sections
-- Auto-reload on file changes during development
-
-**📖 For detailed instructions, see [USER_GUIDE.md](USER_GUIDE.md)**
-
-### UI Features
-
-1. **GDD & Indexing**
-   - Upload new PDF/DOCX or select existing documents
-   - Trigger (re)indexing through RAG-Anything
-   - Preview indexed chunks
-
-2. **GDD Explorer & Analysis**
-   - High-level document analysis
-   - Natural language Q&A interface
-   - Chunk-level retrieval and inspection
-
-3. **Requirements & To-Do**
-   - View extracted objects, systems, logic rules, and requirements
-   - Generate developer to-do lists
-   - Interactive data tables with filters
-
-4. **Code Coverage Check**
-   - Compare GDD requirements against codebase
-   - Identify implemented vs missing features
-   - Detailed evidence and code chunk references
-
-Make sure your LLM keys (e.g., `QWEN_API_KEY` / `DASHSCOPE_API_KEY`) are set in the environment or `.env` before launching the UI.
-
-### File Locations & Formats
-
-- **Indexed docs** live under `docs/`
-- **RAG storage** is under `rag_storage/`
-- **Game Spec outputs** are placed in `checklists/<doc_id>_game_spec.json`
-- **To-do lists** are placed in `checklists/<doc_id>_todo.json`
-- **Coverage outputs** are placed in `reports/coverage_checks/`
-- **Code indexes** are created via the indexing script and stored in the RAG system
-
-> Tip: The UI will create missing folders automatically the first time you run each workflow.
-
-### Indexing Codebases
-
-To check code coverage, you need to index your codebase first:
-
-```bash
-python index_tank_online_codebase.py \
-    --source ./your_code_directory \
-    --doc-id your_codebase_id \
-    --batch-size 50
-```
-
-This creates indexed documents you can reference in the Code Coverage tab. See [USER_GUIDE.md](USER_GUIDE.md) for detailed instructions.
-
-## Core Components
-
-### 1. Configuration (`config.py`)
-
-Global configuration for paths, parser settings, and LLM provider credentials.
-
-Key settings:
-- `DEFAULT_WORKING_DIR`: RAG storage directory (default: `./rag_storage`)
-- `DEFAULT_OUTPUT_DIR`: Parsed content output directory (default: `./output`)
-- `DEFAULT_PARSER`: Parser choice - "mineru" or "docling" (default: "mineru")
-- Environment variables for API keys (see Installation)
-
-### 2. LLM Providers (`llm_providers/`)
-
-**Base Interfaces** (`base.py`):
-- `LlmProvider`: Protocol for LLM text generation
-- `EmbeddingProvider`: Protocol for text embedding generation
-- Helper functions: `make_llm_model_func()`, `make_embedding_func()`
-
-**Implementations**:
-- `QwenProvider`: Alibaba DashScope/Qwen implementation
-- `VertexProvider`: Google Vertex AI/Gemini implementation
-
-Both implementations include TODO markers where actual API calls need to be filled in.
-
-### 3. RAG Backend (`rag_backend/`)
-
-**RAG Configuration** (`rag_config.py`):
-- `get_rag_instance()`: Factory function to create RAGAnything instances
-
-**Indexing** (`indexing.py`):
-- `index_document()`: Async function to parse, chunk, embed, and index documents
-- Stores RAG instances in a global registry for querying
-
-**Query Engine** (`query_engine.py`):
-- `ask_question()`: Query indexed documents with natural language
-- `debug_query()`: Debug query retrieval by showing retrieved chunks
-
-### 4. GDD Extraction (`gdd/`)
-
-**Schemas** (`schemas.py`):
-- `GddObject`: Dataclass for game objects (BR, HI, TA, etc.)
-- `TankSpec`: Pydantic model for tank specifications
-- `MapSpec`: Pydantic model for map specifications
-
-**Extraction** (`extraction.py`):
-- `extract_tanks()`: Extract tank specifications from GDD
-- `extract_maps()`: Extract map specifications from GDD
-- `extract_objects()`: Extract game objects (all categories or filtered)
-- `extract_breakable_objects()`: Extract BR category objects
-- `extract_hiding_objects()`: Extract HI category objects
-
-Each extraction function:
-1. Uses RAG to retrieve relevant context
-2. Calls LLM with structured prompt to generate JSON
-3. Parses JSON into model instances and returns them
-
-## API Reference
-
-### Indexing
+### Index a Document
 
 ```python
-async def index_document(
-    doc_path: str | Path,
-    doc_id: str,
-    *,
-    llm_func: Optional[Callable] = None,
-    embedding_func: Optional[Callable] = None,
-    working_dir: Optional[Path | str] = None,
-    output_dir: Optional[Path | str] = None,
-    parser: Optional[str] = None,
-    parse_method: Optional[str] = None,
-    **parser_kwargs
-) -> None
+from gdd_rag_backbone.rag_backend import index_document
+from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func, make_embedding_func
+
+provider = QwenProvider()
+await index_document(
+    doc_path="docs/game_design.pdf",
+    doc_id="my_gdd",
+    llm_func=make_llm_model_func(provider),
+    embedding_func=make_embedding_func(provider),
+)
 ```
 
-### Querying
+### Query Documents
 
 ```python
-async def ask_question(
-    doc_id: str,
-    query: str,
-    *,
-    mode: str = "mix",
-    debug: bool = False,
-    **query_kwargs
-) -> str
+from gdd_rag_backbone.rag_backend.chunk_qa import ask_across_docs
+
+result = ask_across_docs(
+    doc_ids=["my_gdd"],
+    question="What are the main game systems?",
+    provider=provider,
+)
+print(result["answer"])
 ```
 
-### Extraction
+## Documentation
 
-```python
-async def extract_tanks(doc_id: str, *, llm_func=None) -> List[TankSpec]
-async def extract_maps(doc_id: str, *, llm_func=None) -> List[MapSpec]
-async def extract_objects(doc_id: str, category: Optional[str] = None, *, llm_func=None) -> List[GddObject]
-async def extract_breakable_objects(doc_id: str, *, llm_func=None) -> List[GddObject]
-async def extract_hiding_objects(doc_id: str, *, llm_func=None) -> List[GddObject]
-```
+- **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide
+- **[OPENAI_USAGE.md](OPENAI_USAGE.md)** - API usage notes
+- **[TEST_COVERAGE.md](TEST_COVERAGE.md)** - Code coverage testing
 
-## Testing
+## Environment Variables
 
-Run the test suite:
-
+**Local Development:**
 ```bash
-pytest gdd_rag_backbone/tests/
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
-Tests cover:
-- Schema creation and validation
-- Document parsing and indexing error handling
-- Query function signatures and error handling
-- Extraction function structure
+**Deployment:**
+- **Vercel**: Set `NEXT_PUBLIC_API_URL` in dashboard
+- **Render**: Set `QWEN_API_KEY`, `DASHSCOPE_API_KEY` in dashboard
 
-For more detailed test coverage, see the test files in `gdd_rag_backbone/tests/`.
+## Requirements
 
-## Code Review Notes
-
-For detailed code review observations, architectural notes, and recommendations, see [REVIEWER_NOTES.md](REVIEWER_NOTES.md).
-
-The review notes cover:
-- Architecture and design patterns
-- Code quality observations
-- Performance considerations
-- Security considerations
-- Known limitations and future enhancements
-
-This document is useful for:
-- Understanding design decisions
-- Identifying areas for improvement
-- Planning refactoring efforts
-- Onboarding new developers
-
-## Extending the Framework
-
-### Adding a New LLM Provider
-
-1. Implement the `LlmProvider` and/or `EmbeddingProvider` protocols in `llm_providers/`
-2. Add concrete implementation (e.g., `openai_provider.py`)
-3. Update `llm_providers/__init__.py` to export the new provider
-
-### Adding New Extraction Schemas
-
-1. Define new Pydantic models in `gdd/schemas.py`
-2. Create extraction function in `gdd/extraction.py` following the pattern:
-   - Query RAG for relevant context
-   - Call LLM with structured prompt
-   - Parse JSON into model instances
-
-### Customizing RAG Configuration
-
-Modify `rag_backend/rag_config.py` to change default parser settings, working directories, etc.
-
-## Success Criteria
-
-The framework is considered successful if:
-
-1. ✅ The user can run `python scripts/index_and_test.py` and see:
-   - The document indexed
-   - At least one RAG-driven answer printed
-
-2. ✅ The user can import `from gdd.extraction import extract_tanks` and call `await extract_tanks("some_doc_id")` to get a list of `TankSpec` objects, even if the underlying LLM call is currently a stub or mock.
-
-## Troubleshooting
-
-### Common Issues
-
-1. **API Key Not Found**
-   - Ensure `QWEN_API_KEY` or `DASHSCOPE_API_KEY` is set in environment or `.env` file
-   - Check that `python-dotenv` is installed if using `.env` file
-
-2. **Import Errors**
-   - Verify all dependencies are installed: `pip install -r requirements.txt`
-   - Check that you're running from the project root directory
-
-3. **Document Indexing Fails**
-   - Ensure the document file exists and is readable
-   - Check that the document format is supported (PDF, DOCX)
-   - Verify sufficient disk space for output directory
-
-4. **Streamlit App Not Starting**
-   - Check that Streamlit is installed: `pip install streamlit`
-   - Verify API keys are configured before starting the app
-   - Check for port conflicts if default port 8501 is in use
-
-5. **Embedding API Errors**
-   - Some API keys may not have access to embedding services
-   - Check your DashScope console to enable embedding access
-   - Verify the embedding model name is correct
-
-For more detailed troubleshooting, see the error messages in the application logs or check [REVIEWER_NOTES.md](REVIEWER_NOTES.md) for known limitations.
-
-## TODO Items
-
-The following items are marked with `# TODO:` comments and need to be filled in by the user:
-
-1. **LLM Provider Implementations**:
-   - `llm_providers/qwen_provider.py`: DashScope API calls (partially implemented)
-   - `llm_providers/vertex_provider.py`: Vertex AI API calls (needs implementation)
-
-2. **Optional Enhancements**:
-   - Add more LLM providers (OpenAI, Anthropic, etc.)
-   - Add more extraction schemas (weapons, abilities, etc.)
-   - Add batch processing support
-   - Add progress tracking for large documents
-   - Improve error recovery mechanisms
-   - Add multi-user support for Streamlit app
+- Python 3.10+
+- Node.js 18+
+- API key for Qwen/DashScope
 
 ## License
 
-[Add your license here]
-
-## Contributing
-
-[Add contribution guidelines here]
+[Your License]

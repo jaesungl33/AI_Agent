@@ -1,4 +1,4 @@
-"""Chunk-level QA helpers shared between CLIs and the Streamlit UI."""
+"""Chunk-level QA helpers for document querying and retrieval."""
 
 from __future__ import annotations
 

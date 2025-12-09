@@ -12,7 +12,7 @@
 
 1. [Installation](#installation)
 2. [Quick Start](#quick-start)
-3. [Using the Streamlit Web Interface](#using-the-streamlit-web-interface)
+3. [Using the Web Interface](#using-the-web-interface)
 4. [Indexing Your Codebase](#indexing-your-codebase)
 5. [Complete Workflow Example](#complete-workflow-example)
 6. [Troubleshooting](#troubleshooting)
@@ -41,7 +41,6 @@ pip install -r requirements.txt
 
 This installs:
 - RAG framework for document processing
-- Streamlit web UI framework
 - LLM provider SDKs
 - Data processing tools
 
@@ -72,7 +71,7 @@ $env:QWEN_API_KEY="your-api-key-here"
 ### Step 5: Verify Installation
 
 ```bash
-python -c "import streamlit; import dashscope; print('✅ All dependencies installed!')"
+python -c "import dashscope; print('✅ All dependencies installed!')"
 ```
 
 ---
@@ -81,23 +80,21 @@ python -c "import streamlit; import dashscope; print('✅ All dependencies insta
 
 ### Launch the Web Interface
 
+**Local Development:**
 ```bash
-streamlit run ui/app.py
+cd frontend
+npm run dev
 ```
 
-You should see output like:
-```
-You can now view your Streamlit app in your browser.
-Local URL: http://localhost:8501
-```
-
-**Open your browser** to the local URL (usually `http://localhost:8501`)
+**Or access deployed version:**
+- Frontend: `https://your-project.vercel.app`
+- Backend API: `https://your-backend.onrender.com`
 
 ---
 
-## 💻 Using the Streamlit Web Interface
+## 💻 Using the Web Interface
 
-The interface has **4 main sections** accessible from the sidebar that guide you through the workflow:
+The interface has multiple pages accessible via navigation that guide you through the workflow:
 
 ### 1. GDD & Indexing
 
@@ -225,7 +222,7 @@ To check code coverage, you first need to index your codebase.
 For Unity/C# projects:
 
 ```bash
-python index_tank_online_codebase.py \
+python scripts/index_tank_online_codebase.py \
     --source ./tank_online_1-dev \
     --doc-id tank_online_codebase \
     --batch-size 50
@@ -251,9 +248,9 @@ The script will:
 - Single batch: `tank_online_codebase_batch001`
 - Or query all batches by selecting multiple (if supported) or indexing them separately
 
-### Option 2: Using the Streamlit UI (Future)
+### Option 2: Using the Web UI (Future)
 
-The UI may support codebase indexing in the future. For now, use the command-line script.
+The web UI may support codebase indexing in the future. For now, use the command-line script.
 
 ---
 
@@ -263,8 +260,8 @@ Here's a typical workflow from start to finish:
 
 ### Step 1: Index Your GDD
 
-1. Launch the app: `streamlit run ui/app.py`
-2. Go to **Section 1: GDD & Indexing** (in sidebar)
+1. Launch the frontend: `cd frontend && npm run dev` (or use deployed version)
+2. Go to the **Upload** page
 3. Select "Upload new document"
 4. Upload your GDD PDF/DOCX
 5. Enter document ID: `my_game_gdd`

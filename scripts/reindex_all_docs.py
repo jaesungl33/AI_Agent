@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Script to continue re-indexing from where it left off.
+Script to re-index all currently indexed documents.
 
 This script will:
 1. Get the list of all indexed documents
-2. Skip documents that already have Game Spec files
-3. Re-index and extract remaining documents
+2. Re-index each document
+3. Automatically extract the Game Spec for each document after indexing
 """
 import asyncio
 import sys
@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).parent
+PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from gdd_rag_backbone.config import DEFAULT_DOCS_DIR
@@ -51,11 +51,6 @@ def _save_game_spec(doc_id: str, payload: dict, metadata: dict = None) -> Path:
     return path
 
 
-def _game_spec_exists(doc_id: str) -> bool:
-    """Check if Game Spec already exists for this doc_id."""
-    return _game_spec_path(doc_id).exists()
-
-
 async def reindex_and_extract(doc_id: str, file_path: str, llm_func, embedding_func):
     """Re-index a document and automatically extract Game Spec."""
     doc_path = DEFAULT_DOCS_DIR / file_path
@@ -90,9 +85,9 @@ async def reindex_and_extract(doc_id: str, file_path: str, llm_func, embedding_f
 
 
 async def main():
-    """Main function to continue re-indexing remaining documents."""
+    """Main function to re-index all documents."""
     print("=" * 80)
-    print("🔄 CONTINUING RE-INDEXING FROM WHERE IT LEFT OFF")
+    print("🔄 RE-INDEXING ALL DOCUMENTS")
     print("=" * 80)
     print()
     
@@ -111,38 +106,17 @@ async def main():
         print("❌ No indexed documents found.")
         return
     
-    # Filter out documents that already have Game Spec
-    remaining_docs = []
-    skipped = 0
-    for doc in docs:
-        doc_id = doc["doc_id"]
-        if _game_spec_exists(doc_id):
-            skipped += 1
-            print(f"⏭️  Skipping {doc_id} (Game Spec already exists)")
-        else:
-            remaining_docs.append(doc)
+    print(f"Found {total_docs} indexed document(s) to re-index\n")
     
-    print(f"\n📊 Status:")
-    print(f"  Total documents: {total_docs}")
-    print(f"  Already completed: {skipped}")
-    print(f"  Remaining: {len(remaining_docs)}\n")
-    
-    if len(remaining_docs) == 0:
-        print("✅ All documents already have Game Specs! Nothing to do.")
-        return
-    
-    print("=" * 80)
-    print(f"🔄 Processing {len(remaining_docs)} remaining document(s)\n")
-    
-    # Process each remaining document
+    # Process each document
     successful = 0
     failed = 0
     
-    for idx, doc in enumerate(remaining_docs, 1):
+    for idx, doc in enumerate(docs, 1):
         doc_id = doc["doc_id"]
         file_path = doc.get("file_path", "")
         
-        print(f"[{idx}/{len(remaining_docs)}] Processing: {doc_id}")
+        print(f"[{idx}/{total_docs}] Processing: {doc_id}")
         print(f"  File: {file_path}")
         
         success = await reindex_and_extract(doc_id, file_path, llm_func, embedding_func)
@@ -158,9 +132,8 @@ async def main():
     print("=" * 80)
     print("📊 SUMMARY")
     print("=" * 80)
-    print(f"✅ Successful: {successful}/{len(remaining_docs)}")
-    print(f"❌ Failed: {failed}/{len(remaining_docs)}")
-    print(f"⏭️  Skipped (already completed): {skipped}/{total_docs}")
+    print(f"✅ Successful: {successful}/{total_docs}")
+    print(f"❌ Failed: {failed}/{total_docs}")
     print("=" * 80)
 
 

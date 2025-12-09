@@ -24,6 +24,7 @@ yarn-error.log*
 out/
 build/
 .vercel
+.gradio
 *.tsbuildinfo
 
 # Environment variables
