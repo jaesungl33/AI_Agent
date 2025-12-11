@@ -11,9 +11,16 @@ const getBackendUrl = () => {
 
 const BACKEND_URL = getBackendUrl()
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const res = await fetch(`${BACKEND_URL}/documents`, {
+    const { searchParams } = new URL(request.url)
+    const workspaceId = searchParams.get("workspaceId")
+    
+    const url = workspaceId 
+      ? `${BACKEND_URL}/documents?workspaceId=${encodeURIComponent(workspaceId)}`
+      : `${BACKEND_URL}/documents`
+    
+    const res = await fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       signal: AbortSignal.timeout(5000), // short timeout for healthiness

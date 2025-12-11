@@ -1,0 +1,3651 @@
+# Code Snapshot for tank_online_1-dev - Batch 14/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 32
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 651/682: Assets/_GameUI/GamePlayScreen/Scripts/HPLineComp.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HPLineComp : MonoBehaviour
+{
+    [SerializeField] int hpPerLine = 50;
+    [SerializeField] int minLine = 3;
+    [SerializeField] int maxLine = 20;
+    [SerializeField] private List<GameObject> hpLines = new List<GameObject>();
+
+    public void SetByHP(int hp)
+    {
+        if (hpLines == null || hpLines.Count == 0 || hpPerLine <= 0) return;
+
+        // Tính số vạch dựa trên tổng HP và hpPerLine
+        int lineCount = Mathf.CeilToInt((float)hp / hpPerLine);
+        lineCount = Mathf.Clamp(lineCount, minLine, Mathf.Min(maxLine, hpLines.Count));
+
+        for (int i = 0; i < hpLines.Count; i++)
+        {
+            hpLines[i].SetActive(i < lineCount);
+        }
+    }
+}
+
+
+================================================================================
+FILE 652/682: Assets/_GameUI/GamePlayScreen/Scripts/PlayerStatsUI.cs
+================================================================================
+
+﻿using System.Collections;
+using System.Linq;
+using DG.Tweening;
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerStatsUI : MonoBehaviour
+{
+    [SerializeField] private TMP_Text txtName;
+    [SerializeField] private Image imgAvatar;
+    [SerializeField] private Sprite defaultAvatar;
+    [SerializeField] private Sprite[] avatarSprites;
+
+    [SerializeField] private Image classIcon;
+    [SerializeField] private Image classBackground;
+    [SerializeField] private Image dimIcon;
+    [SerializeField] private TMP_Text txtCountdown;
+
+    [SerializeField] private TMP_Text txtKills;
+    [SerializeField] private TMP_Text txtDeaths;
+    [SerializeField] private TMP_Text txtHp;
+    [SerializeField] private TankIconUI tankIcon;
+    [SerializeField] private GameObject goMvp;
+    [SerializeField] private Slider sliderHp;
+
+    [SerializeField] private AssetContainer assetContainer;
+
+    private MatchPlayerData _player;
+    private bool _isMine = false;
+    private float respawnTime = 0f;
+    public void Init(MatchPlayerData player, bool isMine)
+    {
+        _player = player;
+        _isMine = isMine;
+
+        //UpdateAvatar(player.AvatarId);
+        UpdateTankInfo(player.TankId);
+        dimIcon?.gameObject.SetActive(false);
+        respawnTime = player.RespawnInSeconds;
+        
+        // // Set kills
+        // if (txtKills != null)
+        //     txtKills.text = player.Kill.ToString();
+
+        // // Set deaths
+        // if (txtDeaths != null)
+        //     txtDeaths.text = player.Death.ToString();
+
+        // // Set HP text
+        // if (txtHp != null)
+        //     txtHp.text = player.HP.ToString();
+
+        // // Set HP slider
+        // if (sliderHp != null)
+        // {
+        //     sliderHp.value = player.HP;
+        //     sliderHp.maxValue = player.MaxHitpoints;
+        //     // If maxValue is not initialized, wait and re-init (uncomment if needed)
+        //     // if (sliderHp.maxValue < 1f)
+        //     // {
+        //     //     StartCoroutine(DoWaitInit());
+        //     // }
+        // }
+
+        // // Hide MVP by default
+        // if (goMvp != null)
+        //     goMvp.SetActive(false);
+    }
+    public void UpdateAvatar(string avatarId)
+    {
+        if (imgAvatar == null)
+            return;
+
+        int avatarIndex;
+        bool hasValidIndex = int.TryParse(avatarId, out avatarIndex) && avatarSprites != null && avatarSprites.Length > 0 && avatarIndex >= 0 && avatarIndex < avatarSprites.Length;
+        if (hasValidIndex)
+        {
+            imgAvatar.sprite = avatarSprites[avatarIndex];
+        }
+        else
+        {
+            imgAvatar.sprite = defaultAvatar; // TODO: Add avatar player
+        }
+    }
+    
+    public void UpdateTankInfo(string tankId)
+    {
+        if (string.IsNullOrEmpty(tankId))
+            return;
+
+        DatabaseManager.GetDB<GameAssetCollection>(result =>
+        {
+            if (result == null)
+                return;
+
+            var doc = result.GetGameAssetDocumentById(tankId);
+            if (doc == null || doc.sprites == null)
+                return;
+
+            // Use LINQ to find the first class icon
+            var classIconSprite = doc.sprites.FirstOrDefault(s => s.type == AssetType.ClassIcon)?.asset as Sprite;
+            if (classIcon && classIconSprite)
+            {
+                classIcon.sprite = classIconSprite;
+            }
+
+            var tankIconSprite = doc.sprites.FirstOrDefault(s => s.type == AssetType.PreviewIcon)?.asset as Sprite;
+            if (imgAvatar && tankIconSprite)
+            {
+                imgAvatar.sprite = tankIconSprite;
+            }
+        });
+
+        var tankCollection = DatabaseManager.GetDB<TankCollection>();
+        var tank = tankCollection.GetTankByID(tankId);
+        assetContainer.TryGet<Sprite>(tank.tankType.ToString(), out Sprite tankClassData);
+        if (classBackground && tankClassData)
+        {
+            classBackground.sprite = tankClassData;
+        }
+    }
+
+    private void Update()
+    {
+        // if (respawnTime <= 0) return;
+        // if (respawnTime > 0)
+        //     respawnTime -= Time.deltaTime;
+        // txtCountdown.text = respawnTime > 0 ? respawnTime.ToString("F1") : "";
+        // if (respawnTime > 0 && dimIcon != null && !dimIcon.gameObject.activeSelf)
+        //     dimIcon?.gameObject.SetActive(true);
+        // if (respawnTime <= 0 && dimIcon != null && dimIcon.gameObject.activeSelf)
+        //     dimIcon?.gameObject.SetActive(false);
+    }
+    private void OnEnable()
+    {
+        EventManager.Register<MatchPlayerData>(OnPlayerStatsUpdate);
+    }
+
+    private void OnDisable()
+    {
+        if (!GameManager.IsApplicationQuitting)
+            EventManager.Unregister<MatchPlayerData>(OnPlayerStatsUpdate);
+    }
+
+    // private IEnumerator DoWaitInit()
+    // {
+    //     yield return new WaitUntil(() => CoreGamePlay.Instance.GetPlayerByIndex<Player>(_player.NetPlayerIndex).NetMaxHP >= 1f);
+    //     Init(_player, _isMine);
+    // }
+
+    private void OnPlayerStatsUpdate(MatchPlayerData stats)
+    {
+        if (_player == null || stats == null) return;
+        if (_player.IndexInTeam < 0 && _player.IndexInTeam != stats.IndexInTeam)
+            return;
+        respawnTime = stats.RespawnInSeconds;
+        //if (txtKills != null) txtKills.text = stats.Kill.ToString();
+        //if (txtDeaths != null) txtDeaths.text = stats.Death.ToString();
+        //if (txtHp != null) txtHp.text = stats.HP.ToString();
+        //if (sliderHp != null) sliderHp.value = stats.HP;
+        //if (goMvp != null) goMvp.SetActive(false);  ///TODO: Add MVP
+    }
+}
+
+
+================================================================================
+FILE 653/682: Assets/_GameUI/GarageDecoScreen/Scripts/GarageDecoScreen.cs
+================================================================================
+
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageDecoScreen : UIScreenBase
+{
+    [SerializeField] private TMPro.TextMeshProUGUI tankNameText;
+    [SerializeField] private TankPreviewComp tankPreviewComp;
+    [SerializeField] private Transform decoListParent;
+    [SerializeField] private GarageDecoTankItem garageDecoTankItemPrefab;
+    [SerializeField] private GarageDecoTankItem[] garageDecoItems;
+    [SerializeField] private CurrencyUI[] currencyUIs;
+    private GameAssetCollection gameAssetCollection;
+    private GarageDecoScreenParam param;
+
+    TankCollection tankCollection;
+    int curWrapId;
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        this.param = param as GarageDecoScreenParam;
+
+        tankCollection = DatabaseManager.GetDB<TankCollection>();
+
+        UpdateCurrencyUI();
+        ShowDecoGroup(InventoryItemType.Wrap);
+
+        if (this.param?.tankId != null)
+        {
+            string tankID = this.param.tankId;
+
+            tankPreviewComp.ShowTankPreview(tankID);
+
+            var tankDoc = tankCollection.GetTankByID(tankID);
+            tankNameText.text = LocalizationHelper.GetString(nameof(LocKeys.Tank), tankID + ".name");
+
+            int wrapId = PlayerDocument.GetMineWrapId(tankID);
+            tankPreviewComp.ChangeWrap(wrapId, tankID);
+        }
+        else
+        {
+            tankPreviewComp.HideTankPreview();
+            tankNameText.text = string.Empty;
+        }
+    }
+    public override void Hide()
+    {
+        tankPreviewComp.HideTankPreview();
+        base.Hide();
+    }
+
+    public void ShowGroupByInt(int inventoryItemTypeInt)
+    {
+        if (IsVisible == false) return;
+
+        InventoryItemType inventoryItemType = (InventoryItemType)inventoryItemTypeInt;
+        ShowDecoGroup(inventoryItemType);
+    }
+
+    public void ShowDecoGroup(InventoryItemType inventoryItemType)
+    {
+        var decorations = DatabaseManager.GetDB<TankWrapCollection>();
+
+        // Lọc các decor hợp lệ
+        var validDecors = decorations.documents
+            .Where(decor => decor.itemType.ToString() == inventoryItemType.ToString())
+            .Select(decor => new
+            {
+                decor,
+                wrapDecal = decorations.GetByCatalogId(decor.itemCatalogId)?
+                    .wrapDecalStickerData?.FirstOrDefault(w => w.tankId == this.param?.tankId)
+            })
+            .Where(x => x.wrapDecal != null)
+            .ToList();
+
+        // Clear các item cũ
+        for (int j = 0; j < garageDecoItems.Length; j++)
+        {
+            if (garageDecoItems[j] != null)
+                Destroy(garageDecoItems[j].gameObject);
+        }
+
+        // Khởi tạo mảng đúng số lượng
+        garageDecoItems = new GarageDecoTankItem[validDecors.Count];
+
+        // Khởi tạo các item mới
+        for (int i = 0; i < validDecors.Count; i++)
+        {
+            var decor = validDecors[i].decor;
+            Debug.Log($"ShowDecoList Showing decoration in garage: {decor}");
+            garageDecoItems[i] = Instantiate(garageDecoTankItemPrefab, decoListParent);
+            garageDecoItems[i].Init(decor.itemCatalogId, null, GarageTankState.Unlocked);
+            garageDecoItems[i].SetCallback(ApplyDecoration);
+            garageDecoItems[i].decorationType = inventoryItemType;
+            garageDecoItems[i].gameObject.SetActive(true);
+        }
+
+        SetDefaultSelectedTank();
+        garageDecoTankItemPrefab.gameObject.SetActive(false);
+    }
+
+    public void ApplyDecoration(GarageDecoTankItem item)
+    {
+        Debug.Log($"ApplyDecoration selected decoration: {item.DecoID}");
+
+        //show highlight on selected tank
+        foreach (var decoItem in garageDecoItems)
+        {
+            Debug.Log($"ApplyDecoration checking decoItem: {decoItem.DecoID} against selected decoID: {item.DecoID}");
+            decoItem.Highlight(decoItem == item);
+        }
+
+        switch (item.decorationType)
+        {
+            case InventoryItemType.Wrap:
+                curWrapId = PlayerDocument.GetMineWrapId(this.param.tankId);
+                var docs = DatabaseManager.GetDB<TankWrapCollection>().GetByCatalogId(item.DecoID);
+                //add docs.itemId to wrapDecalStickerIds if not existing
+                if (docs != null)
+                {
+                    curWrapId = docs.itemId;
+                }
+                Debug.Log(string.Format("ApplyDecoration {0}", curWrapId));
+                tankPreviewComp.ChangeWrap(curWrapId, this.param.tankId);
+                break;
+            //case InventoryItemType.Decal:
+            //    ApplyDecalDecoration(item);
+            //    break;
+            default:
+                Debug.LogWarning($"ApplyDecoration unknown decoration type: {item.decorationType}");
+                break;
+        }
+    }
+
+    private void SetDefaultSelectedTank()
+    {
+        // string selectedDecoID = InventoryHelper.GetSelectedDecoration();
+        // foreach (var decoItem in garageDecoItems)
+        // {
+        //     Debug.Log($"SetDefaultSelectedTank checking decoItem: {decoItem.DecoID} against selectedDecoID: {selectedDecoID}");
+        //     if (decoItem.DecoID == selectedDecoID)
+        //     {
+        //         ApplyDecoration(decoItem);
+        //         break;
+        //     }
+        // }
+    }
+
+    private void UpdateCurrencyUI()
+    {
+        foreach (CurrencyUI currencyUI in currencyUIs)
+        {
+            switch (currencyUI.currencyType)
+            {
+                case InventoryItemType.Gold:
+                    currencyUI.UpdateCurrencyAmount(InventoryHelper.GetGold());
+                    break;
+                case InventoryItemType.Diamond:
+                    currencyUI.UpdateCurrencyAmount(InventoryHelper.GetDiamond());
+                    break;
+            }
+        }
+    }
+
+    public void SaveDecor()
+    {
+        var playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        var tankId = this.param.tankId;
+        bool updated = false;
+
+        // Tìm và cập nhật nếu đã có formationTank cho tankId
+        for (int i = 0; i < playerDocument.formationTanks.Count; i++)
+        {
+            var tank = Newtonsoft.Json.JsonConvert.DeserializeObject<PlayerDocument.FormationTanks>(playerDocument.formationTanks[i]);
+            if (tank != null && tank.tankID == tankId)
+            {
+                tank.wrapId = curWrapId;
+                playerDocument.formationTanks[i] = Newtonsoft.Json.JsonConvert.SerializeObject(tank);
+                updated = true;
+                Debug.Log($"[SaveDecor] Updated wrap for tankId: {tankId}, wrapIds: {string.Join(",", curWrapId)}");
+                break;
+            }
+        }
+
+        // Nếu chưa có thì thêm mới
+        if (!updated)
+        {
+            var newFormationTank = new PlayerDocument.FormationTanks(tankId, curWrapId);
+            playerDocument.formationTanks.Add(newFormationTank.ToJson());
+            Debug.Log($"[SaveDecor] Added new formationTank for tankId: {tankId}, wrapIds: {string.Join(",", curWrapId)}");
+        }
+
+        _ = DatabaseManager.GetDB<PlayerCollection>().UpdateDocumentAsync(playerDocument);
+    }
+}
+
+public class GarageDecoScreenParam : ScreenParam
+{
+    public string tankId;
+    // Có thể thêm các thuộc tính khác nếu cần
+    //contructor
+    public GarageDecoScreenParam(string tankId = null)
+    {
+        this.tankId = tankId;
+    }
+}
+
+
+================================================================================
+FILE 654/682: Assets/_GameUI/GarageDecoScreen/Scripts/GarageDecoTankItem.cs
+================================================================================
+
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageDecoTankItem : MonoBehaviour
+{
+    public InventoryItemType decorationType;
+    [SerializeField] private Image textureImage, priceImage;
+    [SerializeField] private TextMeshProUGUI titleText, priceText;
+    [SerializeField] private GameObject selectedImage;
+    [SerializeField] private Button button;
+
+    [SerializeField] private string decoID;
+    [SerializeField] private GarageTankState state;
+    private UnityEngine.Events.UnityAction<GarageDecoTankItem> onSelectTank;
+    public string DecoID => decoID;
+
+    private void Awake()
+    {
+        button.onClick.AddListener(OnButtonSelect);
+    }
+
+    private void OnButtonSelect()
+    {
+        Debug.Log($"OnButtonSelect clicked decoration: {decoID} with state: {state}");
+        if (state != GarageTankState.Unlocked)
+        {
+            //show dialog to inform tank is locked
+            return;
+        }
+
+        onSelectTank?.Invoke(this);
+    }
+
+    public void Highlight(bool highlight)
+    {
+        selectedImage.SetActive(highlight);
+    }
+
+    public void EnableSelection(GarageTankState garageTankState)
+    {
+        this.state = garageTankState;
+        button.interactable = this.state == GarageTankState.Unlocked;
+    }
+
+    public void Init(string decoID, Sprite sprite, GarageTankState curState)
+    {
+        state = curState;
+        this.decoID = decoID;
+        //textureImage.sprite = sprite;
+        if (textureImage) textureImage.sprite = null;
+
+        var tankWrapDecalStickerCollection = DatabaseManager.GetDB<TankWrapCollection>();
+        var doc = tankWrapDecalStickerCollection.GetByCatalogId(decoID);
+        if (doc == null)
+        {
+            Debug.LogError($"[GarageDecoTankItem] Không tìm thấy decoID: {decoID} trong database TankWrapCollection");
+            if (textureImage)
+                textureImage.sprite = null;
+            return;
+        }
+        titleText.text = doc.itemTitle;
+        TextureDownloader.Instance.LoadImage(doc.iconPath, textureImage.gameObject, onComplete: (downloadedIconTexture) =>
+        {
+            if (downloadedIconTexture != null)
+            {
+                textureImage.sprite = Sprite.Create((Texture2D)downloadedIconTexture, new Rect(0, 0, downloadedIconTexture.width, downloadedIconTexture.height), new Vector2(0.5f, 0.5f));
+            }
+            else
+            {
+                TextureDownloader.Instance.LoadImage(doc.texturePath, textureImage.gameObject, onComplete: (downloadedTexture) =>
+                {
+                    if (downloadedTexture != null)
+                    {
+                        textureImage.sprite = Sprite.Create((Texture2D)downloadedTexture, new Rect(0, 0, downloadedTexture.width, downloadedTexture.height), new Vector2(0.5f, 0.5f));
+                    }
+                });
+            }
+        });
+    }
+    public void SetCallback(UnityEngine.Events.UnityAction<GarageDecoTankItem> callback)
+    {
+        onSelectTank = callback;
+    }
+}
+
+
+================================================================================
+FILE 655/682: Assets/_GameUI/GarageScreen/Scripts/GarageAbilityItem.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageAbilityItem: MonoBehaviour
+{
+    [SerializeField] private Image imageIcon;
+    [SerializeField] private TMPro.TextMeshProUGUI textDescription;
+    public void Init(string description, Sprite icon)
+    {
+        textDescription.text = description;
+        imageIcon.sprite = icon;
+    }
+}
+
+
+================================================================================
+FILE 656/682: Assets/_GameUI/GarageScreen/Scripts/GarageArtifactItem.cs
+================================================================================
+
+using UnityEngine;
+
+public class GarageArtifactItem: MonoBehaviour
+{
+    
+}
+
+
+================================================================================
+FILE 657/682: Assets/_GameUI/GarageScreen/Scripts/GarageScreen.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageScreen : UIScreenBase
+{
+    [SerializeField] private GarageTankItem garageTankItemPrefab;
+    [SerializeField] private Transform tankListParent;
+    [SerializeField] private GarageTankItem[] garageTankItems;
+    [SerializeField] private GarageArtifactItem[] garageArtifactItems;
+    [SerializeField] private GarageAbilityItem[] garageAbilityItems;
+    [SerializeField] private GarageStatItem[] garageStatItems;
+    [SerializeField] private CurrencyUI[] currencyUIs;
+    [SerializeField] private TMPro.TextMeshProUGUI tankNameText, classNameText;
+    [SerializeField] private Image tankImage, tankClassImage;
+    [SerializeField] private TankPreviewComp tankPreviewComp;
+    [SerializeField] private Button setLobbyButton, modifyDecoButton;
+    [SerializeField] private Button buyTankButton;
+    private GarageTankItem currentSelectedTankItem;
+    private int amountDemoToBuy = 15000;
+
+    TankCollection tankCollection;
+    GameAssetCollection gameAssetCollection;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        setLobbyButton.onClick.AddListener(OnSetLobby);
+        buyTankButton.onClick.AddListener(OnBuyTank);
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        tankCollection = DatabaseManager.GetDB<TankCollection>();
+        gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+
+        UpdateCurrencyUI();
+        ShowTankList();
+    }
+    public override void Hide()
+    {
+        base.Hide();
+        tankPreviewComp.HideTankPreview();
+    }
+    public void ShowTankList()
+    {
+        PlayerDocument playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        garageTankItemPrefab.gameObject.SetActive(true);
+
+        // Show the list of tanks
+        var tanks = InventoryHelper.GetAllTanksInGame();
+        Debug.Log($"ShowTankList Owned tanks count: {tanks.Count}");
+        // clear existing items
+        for (int j = 0; j < garageTankItems.Length; j++)
+        {
+            Destroy(garageTankItems[j].gameObject);
+        }
+
+        garageTankItems = new GarageTankItem[tanks.Count];
+        int i = 0;
+        foreach (var tankID in tanks)
+        {
+            Debug.Log($"ShowTankList Showing tank in garage: {tankID}");
+            gameAssetCollection.GetAssets(tankID, out Sprite tankIcon, out Sprite previewIcon, out Sprite tankClassIcon);
+            var tankDoc = tankCollection.GetTankByID(tankID);
+            garageTankItems[i] = Instantiate(garageTankItemPrefab, tankListParent);
+            garageTankItems[i].Init(tankID, tankDoc.tankType, previewIcon, GarageTankState.Unlocked);
+            garageTankItems[i].SetCallback(ShowSelectedTank);
+            garageTankItems[i].EnableSelection(InventoryHelper.IsTankOwned(tankID) ? GarageTankState.Unlocked : GarageTankState.Locked);
+            i++;
+        }
+        SetDefaultSelectedTank();
+        garageTankItemPrefab.gameObject.SetActive(false);
+    }
+
+    public void ShowSelectedTank(GarageTankItem item)
+    {
+        setLobbyButton.interactable = item.TankId != InventoryHelper.GetSelectedTank();
+        currentSelectedTankItem = item;
+        TankDocument tankDocument = tankCollection.GetTankByID(item.TankId);
+        // Show the selected tank's details
+        gameAssetCollection.GetAssets(item.TankId, out Sprite tankIcon, out Sprite previewIcon, out Sprite tankClassIcon);
+        ShowBuyButton(item.TankId);
+        ShowBaseInfo(item.TankId, tankDocument.tankName, tankDocument.tankType.ToString(), tankIcon, tankClassIcon);
+        ShowStats(item.TankId);
+        ShowAbilities(tankDocument.abilityIDs[0]);
+        ShowArtifacts();
+        //show highlight on selected tank
+        foreach (var tankItem in garageTankItems)
+        {
+            tankItem.Highlight(tankItem == item);
+        }
+    }
+
+    private void SetDefaultSelectedTank()
+    {
+        string selectedTankID = InventoryHelper.GetSelectedTank();
+        foreach (var tankItem in garageTankItems)
+        {
+            Debug.Log($"SetDefaultSelectedTank checking tankItem: {tankItem.TankId} against selectedTankID: {selectedTankID}");
+            if (tankItem.TankId == selectedTankID)
+            {
+                ShowSelectedTank(tankItem);
+                break;
+            }
+        }
+    }
+
+    private void ShowTank(string tankId)
+    {
+        foreach (var tankItem in garageTankItems)
+        {
+            Debug.Log($"ShowTank checking tankItem: {tankItem.TankId} against tankId: {tankId}");
+            if (tankItem.TankId == tankId)
+            {
+                ShowSelectedTank(tankItem);
+                break;
+            }
+        }
+    }
+
+    private void ShowBuyButton(string tankId)
+    {
+        bool isOwned = InventoryHelper.IsTankOwned(tankId);
+        buyTankButton.gameObject.SetActive(!isOwned);
+        setLobbyButton.gameObject.SetActive(isOwned);
+        modifyDecoButton.gameObject.SetActive(isOwned);
+    }
+
+    private void ShowArtifacts()
+    {
+        // later
+    }
+
+    private void ShowAbilities(string abilityID)
+    {
+        TankAbilityDocument tankAbilityDocument = DatabaseManager.GetDB<TankAbilityCollection>().GetByAbilityId(abilityID);
+        gameAssetCollection.GetAssets(abilityID, out Sprite mainAsset, out Sprite previewAsset, out Sprite classAsset);
+        // Show the tank's abilities
+        foreach (var ability in garageAbilityItems)
+        {
+            ability.gameObject.SetActive(true);
+            string des = LocalizationHelper.GetString(nameof(LocKeys.Tank), tankAbilityDocument.abilityID + ".description");
+            ability.Init(des, mainAsset);
+        }
+    }
+
+    private void ShowStats(string tankId)
+    {
+        MatchPlayerData matchPlayer = DatabaseManager.CreateMatchPlayer(tankId);
+        Debug.Log($"ShowStats for tankId: {tankId} with data: {JsonUtility.ToJson(matchPlayer)}");
+        foreach (var statItem in garageStatItems)
+        {
+            // Update each stat item with the corresponding value from the player document
+            switch (statItem.statType)
+            {
+                case StatType.MovementSpeed:
+                    statItem.Init(matchPlayer.MaxSpeed / 10, matchPlayer.MaxSpeed);
+                    break;
+
+                case StatType.FireRate:
+                    statItem.Init(matchPlayer.FireRate / 3, matchPlayer.FireRate);
+                    break;
+
+                case StatType.Damage:
+                    statItem.InitDmg((float) matchPlayer.Damage[1]/200, matchPlayer.Damage);
+                    break;
+            }
+        }
+    }
+
+    private void ShowBaseInfo(string tankId, string tankName, string className, Sprite tankIcon, Sprite tankClassIcon)
+    {
+        tankNameText.text = LocalizationHelper.GetString(nameof(LocKeys.Tank), tankId + ".name");
+        classNameText.text = LocalizationHelper.GetString(nameof(LocKeys.Tank), className.ToLower());
+        //tankImage.sprite = tankIcon;
+        tankClassImage.sprite = tankClassIcon;
+        currentSelectedTankItem.EnableSelection(InventoryHelper.IsTankOwned(currentSelectedTankItem.TankId) ? GarageTankState.Unlocked : GarageTankState.Locked);
+        tankPreviewComp.HideTankPreview();
+        tankPreviewComp.ShowTankPreview(tankId);
+
+        int wrapId = PlayerDocument.GetMineWrapId(tankId);
+        tankPreviewComp.ChangeWrap(wrapId, tankId);
+    }
+
+    private void UpdateCurrencyUI()
+    {
+        foreach (CurrencyUI currencyUI in currencyUIs)
+        {
+            switch (currencyUI.currencyType)
+            {
+                case InventoryItemType.Gold:
+                    currencyUI.UpdateCurrencyAmount(InventoryHelper.GetGold());
+                    break;
+                case InventoryItemType.Diamond:
+                    currencyUI.UpdateCurrencyAmount(InventoryHelper.GetDiamond());
+                    break;
+            }
+        }
+    }
+
+    private void RefreshUIAfterPurchase()
+    {
+        UpdateCurrencyUI();
+        ShowTank(currentSelectedTankItem.TankId);
+    }
+
+    private void OnBuyTank()
+    {
+        InventoryHelper.BuyTank(InventoryItemType.Gold, amountDemoToBuy, currentSelectedTankItem.TankId);
+        // Refresh UI
+        RefreshUIAfterPurchase();
+    }
+
+    public void OnSetLobby()
+    {
+        InventoryHelper.SetSelectedTank(currentSelectedTankItem.TankId);
+        setLobbyButton.interactable = false;
+    }
+    public void ShowGarageDecoScreen()
+    {
+        EventManager.Instance.Invoke<UIEvent>(new UIEvent(UIIDs.GarageDeco, new GarageDecoScreenParam(currentSelectedTankItem.TankId)));
+    }
+
+    private string GetStringByKey(string key)
+    {
+        return LocalizationHelper.GetString(nameof(LocKeys.UI_Garage), key);
+    }
+
+}
+
+
+================================================================================
+FILE 658/682: Assets/_GameUI/GarageScreen/Scripts/GarageStatItem.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageStatItem : MonoBehaviour
+{
+    public StatType statType;
+    public Image image;
+    public TextMeshProUGUI textMeshProUGUI;
+
+    public void Init(float ratio, float currentValue)
+    {
+        image.fillAmount = ratio;
+        textMeshProUGUI.text = currentValue.ToString();
+    }
+
+    public void InitDmg(float ratio, int[] damages)
+    {
+        image.fillAmount = ratio;
+        textMeshProUGUI.text = $"{damages[0]} - {damages[1]}";
+    }
+}
+
+
+================================================================================
+FILE 659/682: Assets/_GameUI/GarageScreen/Scripts/GarageTankItem.cs
+================================================================================
+
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GarageTankItem : MonoBehaviour
+{
+    [SerializeField] private Image tankImage, tankClassImage, bgImage;
+    [SerializeField] private GameObject selectedImage;
+    [SerializeField] private Sprite[] tankStateSprites; // 0=locked, 1=unlocked
+    [SerializeField] private Sprite[] tankClassSprites; // 0=scout, 1=assault, 2=heavy
+    [SerializeField] private Button button;
+
+    [SerializeField] private string tankId;
+    [SerializeField] private GarageTankState state;
+    private UnityEngine.Events.UnityAction<GarageTankItem> onSelectTank;
+    public string TankId => tankId;
+
+    private void Awake()
+    {
+        button.onClick.AddListener(OnButtonSelect);
+    }
+
+    private void OnButtonSelect()
+    {
+        // if (state != GarageTankState.Unlocked)
+        // {
+        //     //show dialog to inform tank is locked
+        //     return;
+        // }
+        onSelectTank?.Invoke(this);
+    }
+
+    public void Highlight(bool highlight)
+    {
+        selectedImage.SetActive(highlight);
+    }
+
+    public void EnableSelection(GarageTankState garageTankState)
+    {
+        this.state = garageTankState;
+        // button.interactable = this.state == GarageTankState.Unlocked;
+        bgImage.sprite = tankStateSprites[(int)this.state];
+    }
+
+    public void Init(string tankId, TankType tankType, Sprite tankIcon, GarageTankState curState)
+    {
+        state = curState;
+        this.tankId = tankId;
+        tankImage.sprite = tankIcon;
+        tankClassImage.sprite = tankClassSprites[(int)tankType - 1];
+    }
+
+    public void SetCallback(UnityEngine.Events.UnityAction<GarageTankItem> callback)
+    {
+        onSelectTank = callback;
+    }
+}
+
+
+================================================================================
+FILE 660/682: Assets/_GameUI/GarageScreen/Scripts/GarageTankState.cs
+================================================================================
+
+public enum GarageTankState
+{
+    Locked,
+    Unlocked,
+    Selected
+}
+
+
+================================================================================
+FILE 661/682: Assets/_GameUI/InformPopup/Scripts/InformPopup.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+
+public class InformPopup : PopupBase
+{
+    public TextMeshProUGUI textMeshProUGUI;
+
+    public override void Show(int additionalSortingOrder, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        if (param is InformPopupParam informParam)
+        {
+            textMeshProUGUI.text = informParam.message;
+        }
+    }
+}
+
+public class InformPopupParam : ScreenParam
+{
+    public string message;
+}
+
+
+================================================================================
+FILE 662/682: Assets/_GameUI/LoadingScreen/Scripts/LoadingScreen.cs
+================================================================================
+
+using Firebase.Firestore;
+using Firebase.RemoteConfig;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+public class LoadingScreen : UIScreenBase
+{
+    [SerializeField] private GameObject loadingIndicator;
+    [SerializeField] private TMPro.TextMeshProUGUI loadingText, tipText;
+    [SerializeField] private Slider progressBar;
+    [SerializeField] private float loadingProgress = 0f;
+    private LoadingScreenParam loadingScreenParam;
+    private float speed = 50;
+
+    public override void Initialize()
+    {
+        EventManager.Register<LoadingScreenParam>(UpdateProgress);
+        base.Initialize();
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        loadingIndicator.SetActive(true);
+        loadingText.text = "Loading...";
+        progressBar.value = 0f;
+    }
+
+    public override void Hide()
+    {
+        loadingIndicator.SetActive(false);
+        base.Hide();
+    }
+
+    private void FixedUpdate()
+    {
+        if (loadingIndicator.activeSelf && loadingScreenParam != null)
+        {
+            float targetProgress = loadingScreenParam.currentStep / (float)loadingScreenParam.totalSteps * 100f;
+            if (loadingProgress < targetProgress)
+            {
+                loadingProgress += Time.deltaTime * speed;
+                if (loadingProgress > targetProgress)
+                {
+                    loadingProgress = targetProgress;
+                }
+            }
+
+            loadingText.text = $"{loadingProgress:0}%";
+            progressBar.value = loadingProgress / 100f;
+
+            if (loadingProgress >= 100f)
+            {
+                EventManager.TriggerEvent<UIEvent>(new UIEvent(UIIDs.Auth));
+                EventManager.TriggerEvent(GamePhase.Auth);
+                loadingProgress = 100f;
+                Hide();
+            }
+        }
+    }
+
+    private void UpdateProgress(LoadingScreenParam param)
+    {
+        if (IsVisible == false) return;
+        loadingScreenParam = param;
+    }
+}
+
+
+================================================================================
+FILE 663/682: Assets/_GameUI/LoadingScreen/Scripts/LoadingScreenParam.cs
+================================================================================
+
+public class LoadingScreenParam : ScreenParam
+{
+    public int currentStep = 0;
+    public int totalSteps;
+}
+
+
+================================================================================
+FILE 664/682: Assets/_GameUI/LobbyScreen/Scripts/ChooseTankItem.cs
+================================================================================
+
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ChooseTankItem : MonoBehaviour
+{
+    [SerializeField] private Image tankImage, bgImage, tankClassImage, tankBgClassImage;
+    [SerializeField] private Sprite[] buttonSprites; // 0=normal, 1=highlight
+    [SerializeField] private Sprite[] tankClassSprites; // 0=scout, 1=assault, 2=heavy
+    [SerializeField] private Button button;
+
+    [SerializeField] private string tankId;
+    [SerializeField] private ServerState serverState;
+    private UnityEngine.Events.UnityAction<string> onSelectTank;
+    public string TankId => tankId;
+
+    private void Awake()
+    {
+        button.onClick.AddListener(OnButtonSelect);
+    }
+
+    public void OnButtonSelect()
+    {
+        if (serverState != ServerState.PICKING) return;
+
+        InventoryHelper.SetSelectedTank(tankId);
+        PlayerDocument playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        int wrapId = playerDocument.GetWrapId(tankId);
+        GameServer.Instance.MyTank.RPC_ChooseTank(tankId, wrapId);
+        onSelectTank?.Invoke(tankId);
+    }
+
+    public void Highlight(bool highlight)
+    {
+        bgImage.sprite = highlight ? buttonSprites[1] : buttonSprites[0];
+    }
+
+    public void EnableSelection(ServerState serverState)
+    {
+        Debug.Log($"[ChooseTankItem] EnableSelection: {serverState}");
+        this.serverState = serverState;
+        button.interactable = this.serverState == ServerState.PICKING;
+    }
+
+    public void Init(string tankId, TankType tankType, Sprite tankIcon, Sprite classIcon, ServerState curState)
+    {
+        serverState = curState;
+        this.tankId = tankId;
+        tankImage.sprite = tankIcon;
+        bgImage.sprite = buttonSprites[0];
+        tankClassImage.sprite = classIcon;
+        tankBgClassImage.sprite = tankClassSprites[(int)tankType - 1];
+        gameObject.SetActive(true);
+        gameObject.name = $"{tankId}";
+    }
+
+    public void SetCallback(UnityEngine.Events.UnityAction<string> callback)
+    {
+        onSelectTank = callback;
+    }
+}
+
+
+================================================================================
+FILE 665/682: Assets/_GameUI/LobbyScreen/Scripts/ChooseTankPlayerCard.cs
+================================================================================
+
+using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+using System.Linq;
+using Fusion;
+
+public class ChooseTankPlayerCard : MonoBehaviour
+{
+    public bool isEmpty = false;
+    [SerializeField] private TextMeshProUGUI playerNameText, tankNameText;
+    [SerializeField] private Image tankClassIcon, tankBgClassIcon;
+    [SerializeField] private Image tankIcon;
+    [SerializeField] private TankPreviewComp tankPreviewComp;
+    [SerializeField] private Sprite[] tankClassSprites; // 0=scout, 1=assault, 2=heavy, 3=outpost
+    [SerializeField] private Sprite defaultTankSprite;
+    public ChooseTankBaseInfo tankInfo { get; private set; }
+
+    public void UpdateSelectedTank(string tankId)
+    {
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        gameAssetCollection.GetAssets(tankId, out Sprite mainIcon, out Sprite previewIcon, out Sprite classIcon);
+        TankDocument tankDocument = DatabaseManager.GetDB<TankCollection>().GetTankByID(tankId);
+        SetPlayerInfo(playerNameText.text, tankNameText.text, mainIcon, classIcon, tankClassSprites[(int)tankDocument.tankType - 1]);
+    }
+
+    public void SetPlayerInfo(string playerName = "", string tankName = "", Sprite tankIcon = null, Sprite classIcon = null, Sprite bgClassIcon = null)
+    {
+        // if (this.tankIcon != null)
+        // {
+        //     this.tankIcon.gameObject.SetActive(tankIcon != null);
+        //     this.tankIcon.sprite = tankIcon == null ? defaultTankSprite : tankIcon;
+        //     this.tankIcon.preserveAspect = true;
+        // }
+
+        if (playerNameText != null)
+        {
+            playerNameText.text = playerName;
+        }
+
+        if (tankNameText != null)
+        {
+            tankNameText.text = tankName ?? "Unknown";
+        }
+
+        // if (tankClassIcon != null)
+        // {
+        //     tankClassIcon.sprite = classIcon == null ? defaultTankSprite : classIcon;
+        // }
+
+        if (tankBgClassIcon != null)
+        {
+            tankBgClassIcon.gameObject.SetActive(bgClassIcon != null);
+            tankBgClassIcon.sprite = bgClassIcon == null ? defaultTankSprite : bgClassIcon;
+        }
+    }
+
+    public void SetTankPreviewActive(bool isActive, string tankId = null, int wrapId = 0)
+    {
+        if (tankPreviewComp != null)
+        {
+            tankPreviewComp.gameObject.SetActive(isActive);
+        }
+        if (isActive && tankPreviewComp != null)
+        {
+            tankPreviewComp.ShowTankPreview(tankId);
+            tankPreviewComp.ChangeWrap(wrapId, tankId);
+        }
+    }
+
+    public void SetInfo(ChooseTankBaseInfo info)
+    {
+        Debug.Log($"[SetInfo] PlayerName: {info.PlayerName}, TankId: {info.TankId}, PlayerIndex: {info.PlayerIndex}");
+        tankInfo = info;
+
+        TankDocument tankDocument = DatabaseManager.GetDB<TankCollection>().GetTankByID(tankInfo.TankId.ToString());
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        var gameAssetDocument = gameAssetCollection.GetGameAssetDocumentById(tankDocument.tankId);
+        Sprite tankIcon = null, classIcon = null;
+        if (gameAssetDocument?.sprites != null)
+        {
+            var iconAsset = gameAssetDocument.sprites.FirstOrDefault(asset =>
+            asset.type == AssetType.MainIcon);
+            tankIcon = iconAsset?.asset as Sprite;
+
+            classIcon = gameAssetDocument.sprites.FirstOrDefault(asset =>
+                asset.type == AssetType.ClassIcon)?.asset as Sprite;
+        }
+        string tankName = LocalizationHelper.GetString(nameof(LocKeys.Tank), tankDocument.tankId + ".name");
+        SetPlayerInfo(tankInfo.PlayerName.ToString(), tankName, tankIcon, classIcon, tankClassSprites[(int)tankDocument.tankType - 1]);
+
+        SOMatchData sOMatchData = DatabaseManager.GetDB<SOMatchData>(); ;
+        var matchPlayer = sOMatchData.MatchDataArray.FirstOrDefault(p => p.PlayerId == info.PlayerId);
+        if (matchPlayer != null)
+            SetTankPreviewActive(true, info.TankId.ToString(), wrapId: matchPlayer.WrapId);
+    }
+
+    public void ClearInfo()
+    {
+        SetPlayerInfo();
+
+        // Hide the card or make it inactive
+        // if (tankIcon != null)
+        //     tankIcon.gameObject.SetActive(false);
+        if (tankPreviewComp != null)
+            tankPreviewComp.HideTankPreview();
+    }
+}
+
+
+================================================================================
+FILE 666/682: Assets/_GameUI/LobbyScreen/Scripts/ChooseTankScreen.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Fusion;
+using Fusion.TankOnlineModule;
+using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+public class ChooseTankScreen : UIScreenBase
+{
+    [SerializeField] private Transform tankItemParent;
+    [SerializeField] private TextMeshProUGUI countdownText, stateText, teamText, targetText, killText;
+    [SerializeField] private Image targetIcon, killIcon;
+    [SerializeField] private Sprite[] targetSprites, killSprites; // 0=defender, 1=attacker
+    [SerializeField] private ChooseTankPlayerCard[] playerCards; // my team, my position is index=0
+    [SerializeField] private ChooseTankItem[] tankItems;
+    [SerializeField] private ChooseTankItem chooseTankItemPrefab, selectedTankItem;
+    private UnityAction<string> onSelectTank;
+    private int localPlayerTeamIndex = -1, slotIndex = -1; // Store local player's team index and player index
+    private ServerState serverState;
+
+    public override void Initialize()
+    {
+        RegisterEvents();
+        ClearAllPlayerCards();
+        onSelectTank = OnTankSelected;
+        base.Initialize();
+    }
+
+    public override void RegisterEvents()
+    {
+        EventManager.Register<ChooseTankBaseInfo>(DisplayExistingPlayers);
+        EventManager.Register<ChooseTankTimeEvent>(OnUpdateCountdown);
+        //EventManager.Register<ServerStateEvent>(OnChooseTankState);
+        EventManager.Register<ChooseTankEvent>(OnAllowChooseTank);
+    }
+
+    private void OnAllowChooseTank(ChooseTankEvent chooseTankEvent)
+    {
+        Debug.Log($"[OnAllowChooseTank] ChangeState to {chooseTankEvent.State}");
+        serverState = chooseTankEvent.State;
+        switch (chooseTankEvent.State)
+        {
+            case ServerState.PICKING:
+                DisplayExistingPlayers(new ChooseTankBaseInfo());
+                break;
+        }
+    }
+
+    private void OnChooseTankState(ServerStateEvent stateEvent)
+    {
+        Debug.Log($"[OnChooseTankState] ChangeState to {stateEvent.NewState}");
+        //if (IsVisible == false) return;
+        serverState = stateEvent.NewState;
+        switch (stateEvent.NewState)
+        {
+            case ServerState.PICKING:
+                DisplayExistingPlayers(new ChooseTankBaseInfo());
+                break;
+        }
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        CreateTankItems();
+        for (int i = 0; i < playerCards.Length; i++)
+        {
+            playerCards[i].gameObject.SetActive(false);
+        }
+    }
+
+    public override void Hide()
+    {
+        localPlayerTeamIndex = -1;
+        ClearAllPlayerCards();
+        base.Hide();
+    }
+
+    private void DisplayExistingPlayers(ChooseTankBaseInfo info)
+    {
+        ClearAllPlayerCards();
+        //if (IsVisible == false) return;
+        MatchPlayerData[] allPlayers = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        // foreach (var p in allPlayers)
+        // {
+        //     Debug.Log($"[DisplayExistingPlayers] -- PlayerID:{p.PlayerId} PlayerName:{p.PlayerName} TeamIndex:{p.TeamIndex} IsLocalPlayer:{p.IsLocalPlayer} TankId:{p.TankId}");
+        // }
+
+        // find the local player's team index
+        localPlayerTeamIndex = allPlayers.FirstOrDefault(p => p.IsLocalPlayer).TeamIndex;
+        MatchPlayerData[] myteamPlayers = allPlayers.Where(p => p.TeamIndex == localPlayerTeamIndex).ToArray();
+        Debug.Log($"[DisplayExistingPlayers] local team index: {localPlayerTeamIndex}, players in team: {myteamPlayers.Length}, PlayerIDs: {string.Join(", ", myteamPlayers.Select(p => p.IndexInTeam))}");
+        slotIndex = 1;
+        
+        for (int i = 0; i < myteamPlayers.Length; i++)
+        {
+            UpdatePlayerCard(new ChooseTankBaseInfo
+            {
+                IsLocalPlayer = myteamPlayers[i].IsLocalPlayer,
+                PlayerIndex = myteamPlayers[i].IndexInTeam,
+                PlayerName = myteamPlayers[i].PlayerName,
+                TankId = myteamPlayers[i].TankId,
+                TeammateIndex = myteamPlayers[i].TeamIndex,
+                PlayerId = myteamPlayers[i].PlayerId
+            });
+        }
+    }
+
+    // private IEnumerator DelayedDisplayExistingPlayers()
+    // {
+    //     while (true)
+    //     {
+    //         MatchPlayerData[] allPlayers = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+    //         // nếu tất cả đều Joined = true 
+    //         if (allPlayers.All(p => p.IsJoined))
+    //         {
+    //             break;
+    //         }
+    //         yield return null;
+    //     }
+
+    //     yield return null;
+    //     DisplayExistingPlayers(new ChooseTankBaseInfo());
+    //     yield return null;
+    //     SelectDefaultTank();
+    // }
+    
+    private void SelectDefaultTank()
+    {
+        // Select the default tank for the local player
+        PlayerDocument playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        string selectedTankId = playerDocument.selectedTank;
+
+        selectedTankItem = tankItems.FirstOrDefault(item => item.TankId.Equals(selectedTankId));
+        if (selectedTankItem != null)
+        {
+            InventoryHelper.SetSelectedTank(selectedTankId);
+            int wrapId = playerDocument.GetWrapId(selectedTankId);
+            GameServer.Instance.MyTank.RPC_ChooseTank(selectedTankId, wrapId);
+            selectedTankItem.Highlight(true);
+        }
+        else Debug.LogWarning($"[SelectDefaultTank] Tank ID {selectedTankId} not found in tank items.");
+    }
+
+    private void ClearAllPlayerCards()
+    {
+        // Clear all player cards except the local player card
+        for (int i = 0; i < playerCards.Length; i++)
+        {
+            if (playerCards[i] != null)
+            {
+                playerCards[i].ClearInfo();
+            }
+        }
+    }
+
+    private void UpdateRule(int teamIndex = -1)
+    {
+        MatchmakingDocument matchmakingDocument = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        string defenderLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_Defender);
+        string attackerLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_Attacker);
+        string protectOutpostLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_ProtectOutpost);
+        string destroyOutpostLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_DestroyOutpost);
+        string killEnemiesLabel = GetSmartStringByKey( matchmakingDocument.killsNeededToWin == 1 ? LocKeys.UI_ChooseTank.UI_ChooseTank_KillOne : LocKeys.UI_ChooseTank.UI_ChooseTank_KillEnemies,
+        new Dictionary<string, object>
+        {
+            { "Count", matchmakingDocument.KillsNeededToWin }
+        });
+
+        teamText.text = teamIndex == 0 ? defenderLabel : attackerLabel;
+        targetText.text = teamIndex == 0 ? protectOutpostLabel : destroyOutpostLabel;
+        killText.text = killEnemiesLabel;
+        targetIcon.sprite = teamIndex == 0 ? targetSprites[0] : targetSprites[1];
+        killIcon.sprite = teamIndex == 0 ? killSprites[0] : killSprites[1];
+    }
+
+    private void UpdatePlayerCard(ChooseTankBaseInfo playerData)
+    {
+        Debug.Log($"[UpdatePlayerCard]  IsLocalPlayer:{playerData.IsLocalPlayer}/ PlayerName:{playerData.PlayerName}/ TeammateIndex:{playerData.TeammateIndex}");
+        if (playerData.IsLocalPlayer)
+        {
+            OnTankSelected(playerData.TankId.ToString());
+            UpdateRule(localPlayerTeamIndex);
+            playerCards[0].gameObject.SetActive(true);
+            playerCards[0].SetInfo(playerData);
+        }
+        else
+        {
+            if (slotIndex >= playerCards.Length)
+                return;
+
+            Debug.Log($"[UpdatePlayerCard] slotIndex:{slotIndex} TeammateIndex:{playerData.TeammateIndex} localPlayerTeamIndex:{localPlayerTeamIndex}, PlayerIndex:{playerData.PlayerIndex}");
+            // Slot 0 is reserved for local player, teammates are 1..4
+            playerCards[slotIndex].gameObject.SetActive(true);
+            playerCards[slotIndex].SetInfo(playerData);
+            slotIndex++;
+        }
+    }
+
+    private void OnTankSelected(string tankId)
+    {
+        if (selectedTankItem != null)
+        {
+            selectedTankItem.Highlight(false);
+        }
+
+        selectedTankItem = tankItems.FirstOrDefault(item => item.TankId.Equals(tankId));
+        if (selectedTankItem != null)
+        {
+            selectedTankItem.Highlight(true);
+        }
+    }
+
+    private void OnUpdateCountdown(ChooseTankTimeEvent @event)
+    {
+         if (IsVisible == false) return;
+
+        countdownText.text = TimeSpan.FromSeconds(@event.Seconds).ToString(@"ss");
+    }
+
+    private void CreateTankItems()
+    {
+        TankCollection tankCollection = DatabaseManager.GetDB<TankCollection>();
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        var allTankDatas = tankCollection.CloneDocumentsByProperty(doc => doc.tankType != TankType.Outpost, true);
+        string mySelectedTankId = tankCollection.GetActiveTank().tankId;
+        foreach (var item in tankItems)
+        {
+            Destroy(item.gameObject);
+        }
+
+        tankItems = new ChooseTankItem[allTankDatas.Length];
+        for (int i = 0; i < allTankDatas.Length; i++)
+        {
+            var tankDocument = allTankDatas[i];
+            var tankItem = Instantiate(chooseTankItemPrefab, tankItemParent);
+            tankItem.gameObject.SetActive(true);
+            gameAssetCollection.GetAssets(tankDocument.tankId, out Sprite mainIcon, out Sprite previewIcon, out Sprite classIcon);
+            tankItem.Init(tankDocument.tankId, tankDocument.tankType, previewIcon, classIcon, ServerState.PICKING);
+            tankItem.SetCallback(onSelectTank);
+            tankItems[i] = tankItem;
+
+            if (selectedTankItem == null && tankDocument.tankId == mySelectedTankId)
+            {
+                selectedTankItem = tankItem;
+            }
+        }
+
+        chooseTankItemPrefab.gameObject.SetActive(false);
+    }
+
+    private string GetStringByKey(string key)
+    {
+        return LocalizationHelper.GetString(nameof(LocKeys.UI_ChooseTank), key);
+    }
+
+    private string GetSmartStringByKey(string key, Dictionary<string, object> variables)
+    {
+        return LocalizationHelper.GetSmartString(nameof(LocKeys.UI_ChooseTank), key, variables);
+    }
+}
+
+[Serializable]
+public struct ChooseTankBaseInfo : INetworkStruct
+{
+    public int TeammateIndex { get; set; }
+    public int PlayerIndex { get; set; }
+    public NetworkString<_32> PlayerName { get; set; }
+    public NetworkString<_32> TankId { get; set; }
+    public int PlayerId { get; set; }
+    public bool IsLocalPlayer { get; set; }
+}
+
+public struct ChooseTankTimeEvent
+{
+    public int Seconds { get; set; }
+}
+
+public struct PlayerUpdate
+{
+    public Player Player { get; set; }
+}
+
+public struct ChooseTankEvent{
+    public ServerState State { get; set; }
+}
+
+
+================================================================================
+FILE 667/682: Assets/_GameUI/LoginScreen/Scripts/LoginScreen.cs
+================================================================================
+
+using System;
+using UnityEngine;
+using System.Collections;
+using System.Threading.Tasks;
+using TMPro;
+using Fusion.GameSystems;
+using UnityEditor;
+using System.Collections.Generic;
+
+public class LoginScreen : UIScreenBase
+{
+    public GameObject panelLoginMethods;
+    public GameObject[] methodLoginButtons;
+    public bool isDebug = true;
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        bool hasKey = PlayerPrefs.HasKey(Constants.Key_UserID);
+        panelLoginMethods.SetActive(!hasKey);
+        if (hasKey)//has logged in before
+        {
+            foreach (var button in methodLoginButtons)
+            {
+                button.SetActive(false);
+            }
+            ChooseGuestLogin();
+        }
+        else
+        {
+            foreach (var button in methodLoginButtons)
+            {
+                button.SetActive(true);
+            }
+        }
+    }
+
+    public void ResetData()
+    {
+        PlayerPrefs.DeleteKey(Constants.Key_UserID);
+        PlayerPrefs.DeleteKey(Constants.Key_PlayerName);
+        PlayerPrefs.DeleteKey(Constants.Key_RoleID);
+        PlayerPrefs.Save();
+        
+        Debug.Log("Account data deleted.");
+    }
+
+    public void ChooseLoginMethod(int index)
+    {
+        if (index == 0)
+        {
+            LoginWithGooglePlayGames();
+        }
+        else if (index == 1)
+        {
+            LoginWithGameCenter();
+        }
+        else if (index == 2)
+        {
+            ChooseGuestLogin();
+        }
+        else
+        {
+            Debug.LogError("Invalid login method selected.");
+        }
+    }
+
+    public void LoginWithGooglePlayGames()
+    {
+        Debug.Log("Login with Google Play Games is not implemented yet.");
+        // Implement Google Play Games login logic here
+    }
+
+    public void LoginWithGameCenter()
+    {
+        Debug.Log("Login with Game Center is not implemented yet.");
+        // Implement Game Center login logic here
+    }
+
+    public async void ChooseGuestLogin()
+    {
+        Debug.Log("Guest login selected.");
+        string savedName;
+        if (PlayerPrefs.HasKey(Constants.Key_PlayerName))
+        {
+            savedName = PlayerPrefs.GetString(Constants.Key_PlayerName);
+        }
+        else
+        {
+            savedName = RandomNameGenerator.GetRandomEnglishName();
+        }
+        await DoLogin(savedName);
+    }
+
+    public void HideCanvasGuestLogin()
+    {
+        // Hide the guest login UI
+    }
+
+    private async Task DoLogin(string playerName)
+    {
+        await Task.Yield();
+        PlayerPrefs.SetString(Constants.Key_PlayerName, playerName);
+
+        if (!PlayerPrefs.HasKey(Constants.Key_UserID))
+        {
+            PlayerPrefs.SetString(Constants.Key_UserID, SystemInfo.deviceUniqueIdentifier);
+        }
+
+        var userId = PlayerPrefs.GetString(Constants.Key_UserID);
+
+        var userCollection = DatabaseManager.GetDB<UserCollection>();
+        userCollection.Initialize(userId);
+        await userCollection.ReadAsync();
+
+        var userDocument = userCollection.GetMine();
+        if (userDocument == null)
+        {
+            userDocument = new UserDocument
+            {
+                roleID = $"{userId}_{0}",
+                userID = userId,
+                inactiveRoleIDs = new()
+            };
+            userCollection.AddDocumentAsync(userDocument);
+        }
+        else if (string.IsNullOrWhiteSpace(userDocument.roleID))
+        {
+            userDocument.roleID = $"{userId}_{userDocument.inactiveRoleIDs.Count}";
+            await userCollection.WriteAsync();
+        }
+        PlayerPrefs.SetString(Constants.Key_RoleID, userDocument.roleID);
+        PlayerPrefs.Save();
+        var roleId = userDocument.roleID;
+        var playerCollection = DatabaseManager.GetDB<PlayerCollection>();
+        playerCollection.Initialize(roleId);
+        await playerCollection.ReadAsync();
+
+        var playerDocument = playerCollection.GetMine();
+        if (playerDocument == null)
+        {
+            var allWraps = DatabaseManager.GetDB<TankWrapCollection>().GetAllWraps();
+            playerDocument = new PlayerDocument
+            {
+                roleID = roleId,
+                playerName = playerName,
+                gold = 100000,
+                diamond = 1000,
+                elo = 1000,
+                level = 1,
+                tanks = new List<string> { "tank.scout2", "tank.assault2", "tank.heavy2" },
+                selectedTank = "tank.scout2",
+                ownedAIStickers = new List<string> { "deco.aisticker1", "deco.aisticker2" },
+                ownedDecals = new List<string> { "deco.decal1", "deco.decal2" },
+                ownedStickers = new List<string> { "deco.sticker1", "deco.sticker2" },
+                ownedWraps = allWraps?.ConvertAll(item => item.itemCatalogId),
+                formationTanks = new List<string> { }
+                //formationTanks = new List<string> { JsonUtility.ToJson(new PlayerDocument.FormationTanks("tank.scout3", new int[] { 1 })) }
+            };
+            playerCollection.AddDocumentAsync(playerDocument);
+        }
+        // else // closed for bug, maybe not update name every login
+        // {
+        //     playerDocument.playerName = playerName;
+        //     await playerCollection.WriteAsync();
+        // }
+
+        HideCanvasGuestLogin();
+        CheckOnboarding(playerDocument);
+    }
+    
+    private void CheckOnboarding(PlayerDocument playerDocument)
+    {
+        if (isDebug)
+        {
+            EventManager.TriggerEvent<GamePhase>(GamePhase.MatchIdling);
+            return;
+        }
+        if (playerDocument.tutorialCompleted == false)
+        {
+            // First step of onboarding: Find match with onboarding mode
+            EventManager.TriggerEvent<GamePhase>(GamePhase.OnboardingMatchIdling);
+        }
+        else
+        {
+            EventManager.TriggerEvent<GamePhase>(GamePhase.MatchIdling);
+        }
+    }
+}
+
+
+================================================================================
+FILE 668/682: Assets/_GameUI/MainScreen/Scripts/GameModeItemComp.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using System;
+public class GameModeItemComp : MonoBehaviour
+{
+    [SerializeField] private TMP_Text txtModeName;
+    [SerializeField] private TMP_Text txtModeDesc;
+    [SerializeField] private TMP_Text txtComingSoon;
+
+    [SerializeField] private Image imgModeIcon;
+    [SerializeField] private Image selectedFrame;
+    [SerializeField] private Image selectedIcon;
+    [SerializeField] private Image nonSelectedFrame;
+    [SerializeField] private Button btnSelectMode;
+    [SerializeField] private Sprite[] modeIcons; // Assume we have different icons for different modes
+
+    private GameModeItemData modeData;
+    public GameModeItemData ModeData => modeData;
+    public MatchMode GetMatchMode()
+    {
+        return modeData.MatchMode;
+    }
+
+    public MatchType GetMatchType()
+    {
+        // For simplicity, we assume all modes here are of type Normal
+        return modeData.MatchType;
+    }
+    
+    public void Init(GameModeItemData data, Action<bool> onSelectMode)
+    {
+        this.gameObject.SetActive(true);
+        modeData = data;
+        txtModeName.text = modeData.ModeName;
+        txtModeDesc.text = modeData.ModeDesc;
+        Sprite iconSprite = null;
+        switch (modeData.MatchMode)
+        {
+            case MatchMode.CaptureBase:
+                iconSprite = modeIcons[1];
+                break;
+            default:
+            case MatchMode.TeamDeathmatch:
+                iconSprite = modeIcons[2];
+                break;
+        }
+        if (!data.IsActiveMode)
+            iconSprite = modeIcons[0];
+        if (iconSprite)
+            imgModeIcon.sprite = iconSprite;
+        selectedFrame.gameObject.SetActive(modeData.IsSelected);
+        selectedIcon.gameObject.SetActive(modeData.IsSelected);
+        nonSelectedFrame.gameObject.SetActive(!modeData.IsSelected && modeData.IsActiveMode);
+        txtComingSoon.gameObject.SetActive(!modeData.IsActiveMode);
+        btnSelectMode.interactable = !modeData.IsSelected;
+
+        btnSelectMode.onClick.RemoveAllListeners();
+        btnSelectMode.onClick.AddListener(() =>
+        {
+            if (!modeData.IsSelected && modeData.IsActiveMode)
+                onSelectMode?.Invoke(true);
+        });
+        gameObject.name = modeData.ModeId;
+        btnSelectMode.gameObject.name = modeData.ModeId;
+    }
+
+    public void SetSelected(bool isSelected)
+    {
+        modeData.IsSelected = isSelected;
+        selectedFrame.gameObject.SetActive(modeData.IsSelected);
+        selectedIcon.gameObject.SetActive(modeData.IsSelected);
+        nonSelectedFrame.gameObject.SetActive(!modeData.IsSelected && modeData.IsActiveMode);
+        btnSelectMode.interactable = !modeData.IsSelected;
+    }
+}
+public class GameModeItemData
+{
+    public string Region;
+    public string ModeId;
+    public string ModeName;
+    public string ModeDesc;
+    public MatchMode MatchMode;
+    public MatchType MatchType;
+    public bool IsActiveMode;
+    public bool IsSelected;
+}
+
+
+================================================================================
+FILE 669/682: Assets/_GameUI/MainScreen/Scripts/HomeScreen.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.GameSystems;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HomeScreen : UIScreenBase
+{
+    [SerializeField] private Sprite[] playerCountSprites; // 0=empty, 1=joined
+    [SerializeField] private Image[] playerCountImages;
+    [SerializeField] private Button findMatchButton, cancelMatchButton;
+    [SerializeField] private TMP_Dropdown dropdown;
+
+    [SerializeField] private TMP_Text txtPlayerName, txtGold, txtDiamond, txtElo, txtCurModeName;
+    [SerializeField] private Image playerAvatarImage;
+    [SerializeField] private Sprite defaultAvatar;
+    [SerializeField] private TankPreviewComp myTankPreview;
+
+    [Header("Popup Change Mode")]
+    [SerializeField] private Transform popupChangeMode;
+    [SerializeField] private Transform scrollviewModeContent;
+    [SerializeField] private GameObject gameModeItemPrefab;
+    [SerializeField] private Toggle multiplayerToggle;
+
+    private MatchmakingCollection matchmakingCollection;
+    private bool IsFinding { get; set; }
+    private List<GameModeItemComp> gameModeItemComps = new List<GameModeItemComp>();
+
+    private void OnDestroy()
+    {
+        UnregisterEvents();
+    }
+
+    public override void RegisterEvents()
+    {
+        EventManager.Register<MainMenuEvent>(DisplayFindMatchButton);
+    }
+
+    private void UnregisterEvents()
+    {
+        EventManager.Unregister<MainMenuEvent>(DisplayFindMatchButton);
+    }
+
+    public override void Initialize()
+    {
+        findMatchButton.onClick.AddListener(OnFindMatchClicked);
+        cancelMatchButton.onClick.AddListener(OnCancelMatchClicked);
+        RegisterEvents();
+        base.Initialize();
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        RegisterEvents();
+
+        matchmakingCollection = DatabaseManager.GetDB<MatchmakingCollection>();
+        dropdown.value = matchmakingCollection.GetSelectedMatchIndex();
+        IsFinding = MatchmakingManager.IsFinding;
+        if (!IsFinding)
+        {
+            findMatchButton.gameObject.SetActive(true);
+            cancelMatchButton.gameObject.SetActive(false);
+            DisplayFindMatchButton(MainMenuEvent.StopFindMatch());
+        }
+        UpdatePlayerInfo();
+        UpdateMatchMode();
+    }
+
+    public override void Hide()
+    {
+        //UnregisterEvents();
+        // remove tank preview
+        myTankPreview.HideTankPreview();
+
+        base.Hide();
+    }
+
+    public void ShowChooseModePopup()
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        multiplayerToggle.isOn = true;
+        ShowMatchModesByType(new MatchType[] { MatchType.Ranked });
+    }
+
+    public void ToggleChangeModePopup(int index) // index = 0 is multiplayer, 1 is solo
+    {
+        if (index == 0)
+        {
+            ShowMatchModesByType(new MatchType[] { MatchType.Ranked });
+        }
+        else
+        {
+            ShowMatchModesByType(new MatchType[] { MatchType.Normal });
+        }
+    }
+    
+    private void ShowMatchModesByType(MatchType[] types)
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        // Hide all items first
+        for (int i = 0; i < scrollviewModeContent.childCount; i++)
+        {
+            scrollviewModeContent.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // Show only items matching the selected mode type
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            if (itemComp.ModeData.Region.ToLower() != GameManager.fixedRegion.ToLower())
+            {
+                continue; // skip items not in the fixed region
+            }
+            
+            if (itemComp != null && System.Array.Exists(types, type => type == itemComp.GetMatchType()))
+            {
+                itemComp.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void ShowMatchModesByType(MatchMode[] modeType)
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        // Hide all items first
+        for (int i = 0; i < scrollviewModeContent.childCount; i++)
+        {
+            scrollviewModeContent.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // Show only items matching the selected mode type
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            if (itemComp.ModeData.Region.ToLower() != GameManager.fixedRegion.ToLower())
+            {
+                continue; // skip items not in the fixed region
+            }
+            
+            if (itemComp != null && System.Array.Exists(modeType, mode => mode == itemComp.GetMatchMode()))
+            {
+                itemComp.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void UpdateMatchMode()
+    {
+        List<MatchmakingDocument> documents = DatabaseManager.GetDB<MatchmakingCollection>().GetAllDocuments();
+        // filter follow GameManager.fixedRegion
+        Debug.Log("Fixed Region: " + GameManager.fixedRegion);
+
+        txtCurModeName.text = documents.Find(doc => doc.IsSelected)?.matchName ?? string.Empty;
+        //scrollviewModeContent add scroll items
+        // Only destroy redundant items for better performance
+        int childCount = scrollviewModeContent.childCount;
+        int docCount = documents.Count;
+
+        // Destroy extra items if there are more children than needed
+        for (int i = docCount; i < childCount; i++)
+        {
+            Destroy(scrollviewModeContent.GetChild(i).gameObject);
+        }
+        gameModeItemComps = new List<GameModeItemComp>();
+        // Reuse or create items as needed
+        for (int i = 0; i < docCount; i++)
+        {
+            int index = i;
+            GameObject item;
+            if (i < scrollviewModeContent.childCount)
+            {
+                // Reuse existing item
+                item = scrollviewModeContent.GetChild(i).gameObject;
+                item.SetActive(true);
+            }
+            else
+            {
+                // Instantiate new item if not enough
+                item = Instantiate(gameModeItemPrefab, scrollviewModeContent);
+            }
+            string modeKey = "match." + Enum.GetName(typeof(MatchMode), documents[i].MatchMode).ToLower();
+            string matchName = LocalizationHelper.GetSmartString(nameof(LocKeys.UI_Common),  modeKey + ".name", new Dictionary<string, object>
+                {
+                    { "Total", documents[i].maxPlayers }
+                });
+
+            string matchDes = LocalizationHelper.GetSmartString(nameof(LocKeys.UI_Common), modeKey + ".description", new Dictionary<string, object>
+                {
+                    { "Second", documents[i].MatchDuration}
+                });
+
+            GameModeItemData itemData = new GameModeItemData
+            {
+                Region = documents[i].FixedRegion,
+                ModeId = documents[i].matchID,
+                ModeName = matchName,
+                ModeDesc = matchDes,
+                MatchMode = documents[i].matchMode,
+                MatchType = documents[i].matchType,
+                IsActiveMode = documents[i].IsActive,
+                IsSelected = documents[i].IsSelected
+            };
+            var itemComp = item.GetComponent<GameModeItemComp>();
+            itemComp.Init(itemData, (isSelected) =>
+            {
+                if (isSelected)
+                {
+                    matchmakingCollection.SetMatchIndex(index);
+                    foreach (var comp in gameModeItemComps)
+                    {
+                        if (comp != itemComp)
+                            comp.SetSelected(false);
+                        else
+                        {
+                            itemComp.SetSelected(true);
+                            txtCurModeName.text = itemData.ModeName;
+                        }
+                    }
+                }
+            });
+            gameModeItemComps.Add(itemComp);
+        }
+        
+        // hide all matches not match the fixed region
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            Debug.Log("Match Region: " + itemComp.ModeData.Region + " vs Fixed Region: " + GameManager.fixedRegion);
+            itemComp.gameObject.SetActive(itemComp.ModeData.Region.ToLower() == GameManager.fixedRegion.ToLower());
+        }
+    }
+
+    private void UpdatePlayerInfo()
+    {
+        var playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+
+        if (playerDocument != null)
+        {
+            txtGold.text = playerDocument.gold.ToString();
+            txtDiamond.text = playerDocument.diamond.ToString();
+            txtElo.text = playerDocument.elo.ToString();
+            txtPlayerName.text = playerDocument.playerName;
+
+            if (playerAvatarImage != null)
+            {
+                var playerAvatar = !string.IsNullOrWhiteSpace(playerDocument.playerAvatar) ? DatabaseManager.GetDB<GameAssetCollection>()
+                    .GetGameAssetDocumentById(playerDocument.playerAvatar).icon : null;
+                playerAvatarImage.sprite = playerAvatar != null ? playerAvatar : defaultAvatar;
+            }
+        }
+
+        // remove tank preview
+        myTankPreview.HideTankPreview();
+
+        // show preview of selected tank
+        myTankPreview.ShowTankPreview(playerDocument.selectedTank);
+        int wrapId = PlayerDocument.GetMineWrapId(playerDocument.selectedTank);
+        myTankPreview.ChangeWrap(wrapId, playerDocument.selectedTank);
+    }
+
+    public void OnChangeMode(int index)
+    {
+        matchmakingCollection.SetMatchIndex(index);
+    }
+
+
+    private void EnableFinding(bool status)
+    {
+        if (status == IsFinding) return;
+
+        if (status)
+        {
+            EventManager.TriggerEvent(GamePhase.MatchSearching);
+        }
+        else
+            EventManager.TriggerEvent(GamePhase.MatchIdling);
+
+        IsFinding = status;
+
+        findMatchButton.gameObject.SetActive(!IsFinding);
+        cancelMatchButton.gameObject.SetActive(IsFinding);
+    }
+
+    private IEnumerator DelayChangeFindMatchStatus(Button button, int playerCount, int maxPlayers, string buttonLabel, float delayTime, bool isCanTouch, bool isCanChangeMode, bool isCanSeePlayerCount = true)
+    {
+        yield return new WaitForSeconds(delayTime);
+        dropdown.interactable = isCanChangeMode;
+
+        for (int i = 0; i < playerCountImages.Length; i++)
+        {
+            if (i + 1 > maxPlayers)
+            {
+                playerCountImages[i].gameObject.SetActive(false);
+                continue;
+            }
+            else
+            {
+                playerCountImages[i].gameObject.SetActive(true);
+                if (i < playerCount)
+                    playerCountImages[i].sprite = playerCountSprites[1];
+                else
+                    playerCountImages[i].sprite = playerCountSprites[0];
+            }
+        }
+    }
+
+    private void DisplayFindMatchButton(MainMenuEvent args)
+    {
+        //if (IsVisible == false) return;
+
+        Debug.Log($"Matchmaking Status: {args.status}, Player Count: {args.playerCount}/{args.maxPlayers}");
+        if (args.status == MatchmakingStatus.Found || args.status == MatchmakingStatus.Updating)
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(cancelMatchButton, args.playerCount, args.maxPlayers, "Matching...", 0.1f, isCanTouch: true, false));
+        }
+        else if (args.status == MatchmakingStatus.Finding)
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(cancelMatchButton, args.playerCount, args.maxPlayers, "Matching...", 0, isCanTouch: false, false, false));
+        }
+        else
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(findMatchButton, args.playerCount, args.maxPlayers, "Find Match", 1, isCanTouch: true, true, false));
+        }
+    }
+
+    public void OnFindMatchClicked()
+    {
+        EnableFinding(true);
+    }
+
+    public void OnCancelMatchClicked()
+    {
+        EnableFinding(false);
+    }
+
+    public void DeleteAccount()
+    {
+        // Delete account on firebase (if applicable)
+        DatabaseManager.GetDB<PlayerCollection>().DeleteAccountFromFirebase();
+
+        // Clear local player preferences
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        Debug.Log("All player preferences have been deleted.");
+        EventManager.TriggerEvent(GamePhase.Auth);
+    }
+
+    private void OnValidate()
+    {
+        if (findMatchButton == null)
+        {
+            Debug.LogError("[MainMenuScreen] findMatchButton is not assigned.");
+        }
+
+        if (cancelMatchButton == null)
+        {
+            Debug.LogError("[MainMenuScreen] cancelMatchButton is not assigned.");
+        }
+    }
+}
+
+
+================================================================================
+FILE 670/682: Assets/_GameUI/MatchLoadingScreen/Scripts/MatchLoadingCard.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MatchLoadingCard : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private Image tankImage;
+    [SerializeField] private TextMeshProUGUI tankNameText;
+    //[SerializeField] private Image tankClassImage;
+    
+
+    public void SetInfo(string playerName, Sprite tankSprite, string tankName, Sprite tankClassSprite)
+    {
+        playerNameText.text = playerName;
+        tankImage.sprite = tankSprite;
+        tankNameText.text = tankName;
+        //tankClassImage.sprite = tankClassSprite;
+    }
+}
+
+
+================================================================================
+FILE 671/682: Assets/_GameUI/MatchLoadingScreen/Scripts/MatchLoadingScreen.cs
+================================================================================
+
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class MatchLoadingScreen : UIScreenBase
+{
+    [SerializeField] private MatchLoadingCard[] team1, team2;
+
+    private SOMatchData soMatchPlayerData;
+    public SOMatchData GameMatchData
+    {
+        get => soMatchPlayerData;
+        set => soMatchPlayerData = value;
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        ClearPlayerCards();
+        StartCoroutine(UpdatePlayerCards());
+    }
+
+    private void ClearPlayerCards()
+    {
+        for (int i = 0; i < team1.Length; i++)
+        {
+            team1[i].SetInfo("", null, "", null);
+            team1[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < team2.Length; i++)
+        {
+            team2[i].SetInfo("", null, "", null);
+            team2[i].gameObject.SetActive(false);
+        }
+    }
+    
+    private IEnumerator UpdatePlayerCards()
+    {
+        yield return null;
+        GameMatchData = DatabaseManager.GetDB<SOMatchData>();
+        var players = GameMatchData.MatchDataArray;
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        TankCollection tankCollection = DatabaseManager.GetDB<TankCollection>();
+        yield return null;
+        int team1Count = 0, team2Count = 0;
+        for (int i = 0; i < players.Length; i++)
+        {
+            var player = players[i];
+            var tankData = tankCollection.GetTankByID(player?.TankId);
+            var tankClassData = gameAssetCollection.GetClassIcon(player?.TankId);
+            var tankImage = gameAssetCollection.GetMainIcon(player?.TankId);
+
+            if (player.TeamIndex == 0)
+            {
+                team1[team1Count].gameObject.SetActive(true);
+                team1[team1Count].SetInfo(player.PlayerName, tankImage as Sprite, tankData?.tankName, tankClassData as Sprite);
+                team1Count++;
+            }
+            else if (player.TeamIndex == 1)
+            {
+                team2[team2Count].gameObject.SetActive(true);
+                team2[team2Count].SetInfo(player.PlayerName, tankImage as Sprite, tankData?.tankName, tankClassData as Sprite);
+                team2Count++;
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 672/682: Assets/_GameUI/RewardPopup/Scripts/RewardPopup.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class RewardPopup : PopupBase
+{
+    [SerializeField] private List<RewardUIItem> rewardUIItems = new List<RewardUIItem>();
+    [SerializeField] private Button collectButton;
+    [SerializeField] private Transform rewardContainer;
+
+    private RewardPopupParam currentParam;
+
+    private void Start()
+    {
+        if (collectButton != null)
+        {
+            collectButton.onClick.AddListener(OnCollectButtonClicked);
+        }
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder);
+
+        currentParam = param as RewardPopupParam;
+        if (currentParam?.packReward?.rewards != null)
+        {
+            SetupRewardItems(currentParam.packReward.rewards);
+        }
+
+        // Auto collect after 3 seconds
+        StartCoroutine(AutoCollectAfterDelay(3f));
+    }
+    
+    private IEnumerator AutoCollectAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnCollectButtonClicked();
+    }
+
+    private void SetupRewardItems(RewardData[] rewards)
+    {
+        // Ensure we have at least one preset RewardUIItem
+        if (rewardUIItems.Count == 0)
+        {
+            Debug.LogError("RewardPopup: No preset RewardUIItem found in serialized list!");
+            return;
+        }
+
+        // Show the first item and hide others initially
+        for (int i = 0; i < rewardUIItems.Count; i++)
+        {
+            rewardUIItems[i].gameObject.SetActive(i == 0);
+        }
+
+        // Create additional items if needed by duplicating the first one
+        while (rewardUIItems.Count < rewards.Length)
+        {
+            GameObject newRewardItem = Instantiate(rewardUIItems[0].gameObject, rewardContainer);
+            RewardUIItem newRewardUIItem = newRewardItem.GetComponent<RewardUIItem>();
+            rewardUIItems.Add(newRewardUIItem);
+        }
+
+        // Setup each reward item with data
+        for (int i = 0; i < rewards.Length; i++)
+        {
+            rewardUIItems[i].gameObject.SetActive(true);
+            rewardUIItems[i].SetRewardData(rewards[i]);
+        }
+
+        // Hide unused items
+        for (int i = rewards.Length; i < rewardUIItems.Count; i++)
+        {
+            rewardUIItems[i].gameObject.SetActive(false);
+        }
+
+        // claim all rewards
+        foreach (var reward in currentParam.packReward.rewards)
+        {
+            AddRewardToPlayer(reward);
+        }
+    }
+
+    private void OnCollectButtonClicked()
+    {
+        if (currentParam?.packReward?.rewards == null) return;
+
+        var playerCollection = DatabaseManager.GetDB<PlayerCollection>();
+        var playerDocument = playerCollection.GetMine();
+
+        if (playerDocument == null)
+        {
+            Debug.LogError("RewardPopup: Player document not found!");
+            return;
+        }
+       
+        // Pop this popup
+        EventManager.TriggerEvent(new PopPopupEvent());
+        currentParam.onClose?.Invoke();
+
+        StopAllCoroutines();
+    }
+
+    private void AddRewardToPlayer(RewardData reward)
+    {
+        switch (reward.type)
+        {
+            case "Gold":
+                InventoryHelper.RewardItem(InventoryItemType.Gold, reward.amount);
+                break;
+
+            case "Diamond":
+                InventoryHelper.RewardItem(InventoryItemType.Diamond, reward.amount);
+                break;
+
+            case "Exp":
+                InventoryHelper.RewardItem(InventoryItemType.EXP, reward.amount);
+                break;
+
+            default:
+                Debug.LogWarning($"RewardPopup: Unknown reward type: {reward.type}");
+                break;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (collectButton != null)
+        {
+            collectButton.onClick.RemoveListener(OnCollectButtonClicked);
+        }
+    }
+}
+
+public class RewardPopupParam : ScreenParam
+{
+    public PackRewardDocument packReward;
+    public Action onClose;
+}
+
+
+================================================================================
+FILE 673/682: Assets/_GameUI/RewardPopup/Scripts/RewardUIItem.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class RewardUIItem : MonoBehaviour
+{
+    [SerializeField] private Image rewardIcon;
+    [SerializeField] private TextMeshProUGUI rewardAmountText;
+    
+    public void SetRewardData(RewardData rewardData)
+    {
+        if (rewardData == null) return;
+        
+        // Set the reward amount
+        if (rewardAmountText != null)
+        {
+            rewardAmountText.text = rewardData.amount.ToString();
+        }
+        
+        // Get and set the icon from GameAssetCollection
+        if (rewardIcon != null)
+        {
+            var gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+            var assetDocument = gameAssetCollection?.GetGameAssetDocumentById(rewardData.type);
+            
+            if (assetDocument?.icon != null)
+            {
+                rewardIcon.sprite = assetDocument.icon;
+            }
+            else
+            {
+                Debug.LogWarning($"No icon found for reward type: {rewardData.type}");
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 674/682: Assets/google-services.json
+================================================================================
+
+{
+  "project_info": {
+    "project_number": "403319526655",
+    "project_id": "tankonline1-445e6",
+    "storage_bucket": "tankonline1-445e6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403319526655:android:8d279ed32c84c9b85668ca",
+        "android_client_info": {
+          "package_name": "com.gdo.tankonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeU3URH_R4oMc5uy_uxfg7ZyeoK4Yeyss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
+
+
+================================================================================
+FILE 675/682: Packages/manifest.json
+================================================================================
+
+{
+  "dependencies": {
+    "com.coffee.softmask-for-ugui": "https://github.com/mob-sakai/SoftMaskForUGUI.git?path=Packages/src#3.3.4",
+    "com.neuecc.unirx": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+    "com.unity.2d.animation": "12.0.2",
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.tilemap": "1.0.0",
+    "com.unity.2d.tilemap.extras": "5.0.1",
+    "com.unity.behavior": "1.0.13",
+    "com.unity.cinemachine": "3.1.4",
+    "com.unity.collab-proxy": "2.9.3",
+    "com.unity.feature.characters-animation": "1.0.0",
+    "com.unity.feature.development": "1.0.2",
+    "com.unity.inputsystem": "1.14.2",
+    "com.unity.localization": "1.5.8",
+    "com.unity.multiplayer.center": "1.0.0",
+    "com.unity.nuget.mono-cecil": "1.11.5",
+    "com.unity.postprocessing": "3.5.0",
+    "com.unity.probuilder": "6.0.7",
+    "com.unity.purchasing": "4.13.0",
+    "com.unity.recorder": "5.1.3",
+    "com.unity.render-pipelines.universal": "17.2.0",
+    "com.unity.timeline": "1.8.9",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.visualscripting": "1.9.8",
+    "com.unity.modules.accessibility": "1.0.0",
+    "com.unity.modules.ai": "1.0.0",
+    "com.unity.modules.androidjni": "1.0.0",
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.assetbundle": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.cloth": "1.0.0",
+    "com.unity.modules.director": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.physics2d": "1.0.0",
+    "com.unity.modules.screencapture": "1.0.0",
+    "com.unity.modules.terrain": "1.0.0",
+    "com.unity.modules.terrainphysics": "1.0.0",
+    "com.unity.modules.tilemap": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.umbra": "1.0.0",
+    "com.unity.modules.unityanalytics": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.modules.unitywebrequestassetbundle": "1.0.0",
+    "com.unity.modules.unitywebrequestaudio": "1.0.0",
+    "com.unity.modules.unitywebrequesttexture": "1.0.0",
+    "com.unity.modules.unitywebrequestwww": "1.0.0",
+    "com.unity.modules.vehicles": "1.0.0",
+    "com.unity.modules.video": "1.0.0",
+    "com.unity.modules.vr": "1.0.0",
+    "com.unity.modules.wind": "1.0.0",
+    "com.unity.modules.xr": "1.0.0"
+  }
+}
+
+
+================================================================================
+FILE 676/682: Packages/packages-lock.json
+================================================================================
+
+{
+  "dependencies": {
+    "com.autodesk.fbx": {
+      "version": "5.1.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.coffee.softmask-for-ugui": {
+      "version": "https://github.com/mob-sakai/SoftMaskForUGUI.git?path=Packages/src#3.3.4",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "hash": "f9868197c056b3d178852c7fc78baf8720bf29c8"
+    },
+    "com.neuecc.unirx": {
+      "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6baeccf6c544c155497164327cca72f28163a578"
+    },
+    "com.unity.2d.animation": {
+      "version": "12.0.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.2d.common": "11.0.1",
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.collections": "1.2.4",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.2d.common": {
+      "version": "11.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.8.4",
+        "com.unity.2d.sprite": "1.0.0",
+        "com.unity.mathematics": "1.1.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.2d.sprite": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.2d.tilemap": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.tilemap": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0"
+      }
+    },
+    "com.unity.2d.tilemap.extras": {
+      "version": "5.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.2d.tilemap": "1.0.0",
+        "com.unity.modules.tilemap": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.addressables": {
+      "version": "2.7.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.profiling.core": "1.0.2",
+        "com.unity.test-framework": "1.4.5",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.scriptablebuildpipeline": "2.4.2",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.animation.rigging": {
+      "version": "1.3.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.4.1",
+        "com.unity.test-framework": "1.1.24"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.behavior": {
+      "version": "1.0.13",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.7.2",
+        "com.unity.dt.app-ui": "2.0.0",
+        "com.unity.modules.ai": "1.0.0",
+        "com.unity.collections": "2.1.4",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.particlesystem": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.bindings.openimageio": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.collections": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.burst": {
+      "version": "1.8.25",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.cinemachine": {
+      "version": "3.1.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.splines": "2.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.collab-proxy": {
+      "version": "2.9.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.collections": {
+      "version": "2.5.7",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.burst": "1.8.19",
+        "com.unity.mathematics": "1.3.2",
+        "com.unity.test-framework": "1.4.6",
+        "com.unity.nuget.mono-cecil": "1.11.5",
+        "com.unity.test-framework.performance": "3.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.dt.app-ui": {
+      "version": "2.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.uielements": "1.0.0",
+        "com.unity.modules.screencapture": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.editorcoroutines": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ext.nunit": {
+      "version": "2.0.5",
+      "depth": 2,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.feature.characters-animation": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.animation.rigging": "1.3.0",
+        "com.unity.timeline": "1.8.9",
+        "com.unity.cinemachine": "3.1.4",
+        "com.unity.formats.fbx": "5.1.4"
+      }
+    },
+    "com.unity.feature.development": {
+      "version": "1.0.2",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ide.visualstudio": "2.0.23",
+        "com.unity.ide.rider": "3.0.38",
+        "com.unity.editorcoroutines": "1.0.0",
+        "com.unity.performance.profile-analyzer": "1.2.3",
+        "com.unity.test-framework": "1.6.0",
+        "com.unity.testtools.codecoverage": "1.2.6"
+      }
+    },
+    "com.unity.formats.fbx": {
+      "version": "5.1.4",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.autodesk.fbx": "5.1.1",
+        "com.unity.timeline": "1.7.1"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ide.rider": {
+      "version": "3.0.38",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ext.nunit": "1.0.6"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ide.visualstudio": {
+      "version": "2.0.23",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.9"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.inputsystem": {
+      "version": "1.14.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.localization": {
+      "version": "1.5.8",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.addressables": "1.25.0",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mathematics": {
+      "version": "1.3.2",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.multiplayer.center": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      }
+    },
+    "com.unity.nuget.mono-cecil": {
+      "version": "1.11.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.performance.profile-analyzer": {
+      "version": "1.2.3",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.postprocessing": {
+      "version": "3.5.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.probuilder": {
+      "version": "6.0.7",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.shadergraph": "17.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.profiling.core": {
+      "version": "1.0.2",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.purchasing": {
+      "version": "4.13.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.services.core": "1.12.5",
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "5.1.3",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.8.7",
+        "com.unity.collections": "1.2.4",
+        "com.unity.bindings.openimageio": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.render-pipelines.core": {
+      "version": "17.2.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.burst": "1.8.14",
+        "com.unity.mathematics": "1.3.2",
+        "com.unity.ugui": "2.0.0",
+        "com.unity.collections": "2.4.3",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.terrain": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.rendering.light-transport": "1.0.1"
+      }
+    },
+    "com.unity.render-pipelines.universal": {
+      "version": "17.2.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.2.0",
+        "com.unity.shadergraph": "17.2.0",
+        "com.unity.render-pipelines.universal-config": "17.0.3"
+      }
+    },
+    "com.unity.render-pipelines.universal-config": {
+      "version": "17.0.3",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.0.3"
+      }
+    },
+    "com.unity.rendering.light-transport": {
+      "version": "1.0.1",
+      "depth": 2,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.collections": "2.2.0",
+        "com.unity.mathematics": "1.2.4",
+        "com.unity.modules.terrain": "1.0.0"
+      }
+    },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "2.4.2",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.4.5",
+        "com.unity.modules.assetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.searcher": {
+      "version": "4.9.3",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.services.core": {
+      "version": "1.14.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.androidjni": "1.0.0",
+        "com.unity.nuget.newtonsoft-json": "3.2.1",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.settings-manager": {
+      "version": "2.1.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.shadergraph": {
+      "version": "17.2.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.render-pipelines.core": "17.2.0",
+        "com.unity.searcher": "4.9.3"
+      }
+    },
+    "com.unity.splines": {
+      "version": "2.8.2",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.settings-manager": "1.0.3"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.test-framework": {
+      "version": "1.6.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ext.nunit": "2.0.3",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      }
+    },
+    "com.unity.test-framework.performance": {
+      "version": "3.2.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.33",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.testtools.codecoverage": {
+      "version": "1.2.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.test-framework": "1.0.16",
+        "com.unity.settings-manager": "1.0.1"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.timeline": {
+      "version": "1.8.9",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.director": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.particlesystem": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ugui": {
+      "version": "2.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      }
+    },
+    "com.unity.visualscripting": {
+      "version": "1.9.8",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.modules.accessibility": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.ai": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.androidjni": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.animation": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.assetbundle": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.audio": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.cloth": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.unity.modules.director": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.animation": "1.0.0"
+      }
+    },
+    "com.unity.modules.hierarchycore": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.imageconversion": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.imgui": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.jsonserialize": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.particlesystem": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.physics": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.physics2d": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.screencapture": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.imageconversion": "1.0.0"
+      }
+    },
+    "com.unity.modules.subsystems": {
+      "version": "1.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.jsonserialize": "1.0.0"
+      }
+    },
+    "com.unity.modules.terrain": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.terrainphysics": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.terrain": "1.0.0"
+      }
+    },
+    "com.unity.modules.tilemap": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.physics2d": "1.0.0"
+      }
+    },
+    "com.unity.modules.ui": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.uielements": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.hierarchycore": "1.0.0",
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.unity.modules.umbra": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.unityanalytics": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0"
+      }
+    },
+    "com.unity.modules.unitywebrequest": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.unitywebrequestassetbundle": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      }
+    },
+    "com.unity.modules.unitywebrequestaudio": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.audio": "1.0.0"
+      }
+    },
+    "com.unity.modules.unitywebrequesttexture": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
+      }
+    },
+    "com.unity.modules.unitywebrequestwww": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0",
+        "com.unity.modules.unitywebrequestaudio": "1.0.0",
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
+      }
+    },
+    "com.unity.modules.vehicles": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0"
+      }
+    },
+    "com.unity.modules.video": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.audio": "1.0.0",
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0"
+      }
+    },
+    "com.unity.modules.vr": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.xr": "1.0.0"
+      }
+    },
+    "com.unity.modules.wind": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {}
+    },
+    "com.unity.modules.xr": {
+      "version": "1.0.0",
+      "depth": 0,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.subsystems": "1.0.0"
+      }
+    }
+  }
+}
+
+
+================================================================================
+FILE 677/682: ProjectSettings/Packages/com.unity.probuilder/Settings.json
+================================================================================
+
+{
+    "m_Dictionary": {
+        "m_DictionaryValues": [
+            {
+                "type": "UnityEngine.ProBuilder.SemVer, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "about.identifier",
+                "value": "{\"m_Value\":{\"m_Major\":6,\"m_Minor\":0,\"m_Patch\":7,\"m_Build\":-1,\"m_Type\":\"\",\"m_Metadata\":\"\",\"m_Date\":\"\"}}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.SemVer, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "preferences.version",
+                "value": "{\"m_Value\":{\"m_Major\":6,\"m_Minor\":0,\"m_Patch\":7,\"m_Build\":-1,\"m_Type\":\"\",\"m_Metadata\":\"\",\"m_Date\":\"\"}}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.LogLevel, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "log.level",
+                "value": "{\"m_Value\":3}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.LogOutput, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "log.output",
+                "value": "{\"m_Value\":1}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "log.path",
+                "value": "{\"m_Value\":\"ProBuilderLog.txt\"}"
+            },
+            {
+                "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "VertexColorPalette.previousColorPalette",
+                "value": "{\"m_Value\":\"Assets/ProBuilder Data/Default Color Palette.asset\"}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.PivotLocation, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "mesh.newShapePivotLocation",
+                "value": "{\"m_Value\":1}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "mesh.newShapesSnapToGrid",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "mesh.meshColliderIsConvex",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "lightmapping.autoUnwrapLightmapUV",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "editor.autoRecalculateCollisions",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "experimental.enabled",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "UnityEngine.ProBuilder.ProBuilderEditor-isUtilityWindow",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "editor.backFaceSelectEnabled",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "editor.toolbarIconGUI",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "editor.showSceneInfo",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "GrowSelection.useAngle",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "GrowSelection.iterativeGrow",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "editor.stripProBuilderScriptsOnBuild",
+                "value": "{\"m_Value\":true}"
+            },
+            {
+                "type": "System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "ShapeComponent.ResetSettings",
+                "value": "{\"m_Value\":false}"
+            },
+            {
+                "type": "UnityEngine.Rendering.ShadowCastingMode, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "mesh.shadowCastingMode",
+                "value": "{\"m_Value\":1}"
+            },
+            {
+                "type": "UnityEngine.Material, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "mesh.userMaterial",
+                "value": "{\"m_Value\":{\"instanceID\":0}}"
+            },
+            {
+                "type": "UnityEditor.StaticEditorFlags, UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "mesh.defaultStaticEditorFlags",
+                "value": "{\"m_Value\":0}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.ColliderType, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "mesh.newShapeColliderType",
+                "value": "{\"m_Value\":2}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.UnwrapParameters, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "lightmapping.defaultLightmapUnwrapParameters",
+                "value": "{\"m_Value\":{\"m_HardAngle\":88.0,\"m_PackMargin\":20.0,\"m_AngleError\":8.0,\"m_AreaError\":15.0}}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "editor.selectMode",
+                "value": "{\"m_Value\":1}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "editor.lastMeshSelectMode",
+                "value": "{\"m_Value\":8}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.SelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "s_SelectMode",
+                "value": "{\"m_Value\":4}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.SelectionModifierBehavior, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "editor.rectSelectModifier",
+                "value": "{\"m_Value\":2}"
+            },
+            {
+                "type": "UnityEngine.ProBuilder.RectSelectMode, Unity.ProBuilder, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                "key": "editor.dragSelectRectMode",
+                "value": "{\"m_Value\":0}"
+            },
+            {
+                "type": "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                "key": "GrowSelection.angleValue",
+                "value": "{\"m_Value\":15.0}"
+            }
+        ]
+    }
+}
+
+
+================================================================================
+FILE 678/682: ProjectSettings/Packages/com.unity.services.core/Settings.json
+================================================================================
+
+{
+  "EnvironmentName": "",
+  "EnvironmentId": "00000000-0000-0000-0000-000000000000"
+}
+
+
+================================================================================
+FILE 679/682: ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+================================================================================
+
+{
+    "m_Dictionary": {
+        "m_DictionaryValues": []
+    }
+}
+
+
+================================================================================
+FILE 680/682: ProjectSettings/ProjectVersion.txt
+================================================================================
+
+m_EditorVersion: 6000.2.7f2
+m_EditorVersionWithRevision: 6000.2.7f2 (2b518236b676)
+
+
+================================================================================
+FILE 681/682: ProjectSettings/SceneTemplateSettings.json
+================================================================================
+
+{
+    "templatePinStates": [],
+    "dependencyTypeInfos": [
+        {
+            "userAdded": false,
+            "type": "UnityEngine.AnimationClip",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEditor.Animations.AnimatorController",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.AnimatorOverrideController",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEditor.Audio.AudioMixerController",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.ComputeShader",
+            "defaultInstantiationMode": 1
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Cubemap",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.GameObject",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEditor.LightingDataAsset",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.LightingSettings",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Material",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEditor.MonoScript",
+            "defaultInstantiationMode": 1
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.PhysicMaterial",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.PhysicsMaterial",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.PhysicsMaterial2D",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Rendering.PostProcessing.PostProcessProfile",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Rendering.PostProcessing.PostProcessResources",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Rendering.VolumeProfile",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEditor.SceneAsset",
+            "defaultInstantiationMode": 1
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Shader",
+            "defaultInstantiationMode": 1
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.ShaderVariantCollection",
+            "defaultInstantiationMode": 1
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Texture",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Texture2D",
+            "defaultInstantiationMode": 0
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Timeline.TimelineAsset",
+            "defaultInstantiationMode": 0
+        }
+    ],
+    "defaultDependencyTypeInfo": {
+        "userAdded": false,
+        "type": "<default_scene_template_dependencies>",
+        "defaultInstantiationMode": 1
+    },
+    "newSceneOverride": 0
+}
+
+
+================================================================================
+FILE 682/682: ProjectSettings/ScriptableBuildPipeline.json
+================================================================================
+
+{
+    "useBuildCacheServer": false,
+    "cacheServerHost": "",
+    "cacheServerPort": 8126,
+    "threadedArchiving": true,
+    "logCacheMiss": false,
+    "logAssetWarnings": true,
+    "slimWriteResults": true,
+    "maximumCacheSize": 20,
+    "useDetailedBuildLog": false,
+    "useV2Hasher": true,
+    "fileIDHashSeed": 0,
+    "prefabPackedHeaderSize": 2
+}

@@ -12,11 +12,14 @@ const getBackendUrl = () => {
 }
 
 const BACKEND_URL = getBackendUrl()
-const EVALUATION_TIMEOUT = 10 * 60 * 1000 // 10 minutes (increased from 5 to handle more requirements)
+const EVALUATION_TIMEOUT = 30 * 60 * 1000 // 30 minutes for large evaluations
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
+    if (!body.workspaceId) {
+      body.workspaceId = "tank_war"
+    }
     console.log("[API] Proxying coverage evaluation request:", {
       docId: body.docId,
       codeIndexId: body.codeIndexId,

@@ -1,0 +1,14 @@
+{
+  "tank_war": {
+    "name": "Tank War",
+    "description": "Main workspace for Tank War game project",
+    "created_at": "2025-12-10T06:18:20.416076Z",
+    "updated_at": "2025-12-10T06:18:20.416076Z"
+  },
+  "tank_sample": {
+    "name": "tank_sample",
+    "description": "",
+    "created_at": "2025-12-10T07:25:18.957328Z",
+    "updated_at": "2025-12-10T07:25:18.957328Z"
+  }
+}

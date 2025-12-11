@@ -80,14 +80,16 @@ export function DocumentList({
           onClick={() => onSelect?.(doc)}
         >
           <CardHeader>
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-2">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2 min-w-0">
                 {doc.type === "gdd" ? (
                   <FileText className="h-5 w-5 text-primary" />
                 ) : (
                   <Code className="h-5 w-5 text-primary" />
                 )}
-                <CardTitle className="text-base">{doc.name}</CardTitle>
+                <CardTitle className="text-base truncate max-w-[12rem]" title={doc.name}>
+                  {doc.name}
+                </CardTitle>
               </div>
               {onDelete && (
                 <Button

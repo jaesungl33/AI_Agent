@@ -13,9 +13,10 @@ import type { CoverageReport, CoverageResult } from "@/lib/api/types"
 interface CodeCoverageProps {
   docId: string | string[]  // Support single or multiple GDDs
   codeIndexId?: string | string[]  // Support single or multiple code batches
+  workspaceId?: string  // Workspace ID for scoped operations
 }
 
-export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCoverageProps) {
+export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspaceId }: CodeCoverageProps) {
   // Normalize to arrays for API calls
   const docIds = Array.isArray(docId) ? docId : [docId]
   const codeIds = initialCodeIndexId 
@@ -63,7 +64,7 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
       const codeIdForAPI = codeIds.length === 1 ? codeIds[0] : codeIds
       
       setStatusMessage("Extracting requirements from GDD(s)...")
-      const report = await coverageAPI.evaluate(docIdForAPI, codeIdForAPI, topK)
+      const report = await coverageAPI.evaluate(docIdForAPI, codeIdForAPI, topK, workspaceId)
       
       if (statusInterval) clearInterval(statusInterval)
       
@@ -126,12 +127,20 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
       {/* Evaluation Controls */}
       <Card>
         <CardHeader>
-          <CardTitle>Code Coverage Evaluation</CardTitle>
+          <CardTitle>Behavior-Based Coverage Evaluation</CardTitle>
           <CardDescription>
-            Compare GDD requirements against your codebase
+            Fast symbol check → behavior-to-behavior match → LLM verification on top candidates.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="rounded-lg border bg-muted/40 p-3 text-sm text-muted-foreground">
+            <div className="font-medium text-foreground">How this runs</div>
+            <ul className="list-disc list-inside space-y-1 mt-1">
+              <li>Extracts behavior requirements from the selected GDDs.</li>
+              <li>Builds/uses a behavior index of your methods (one-time, cached).</li>
+              <li>Embeds behaviors, then LLM verifies only the top matches.</li>
+            </ul>
+          </div>
           <div className="space-y-2">
             <Label>Code Batches</Label>
             <div className="p-3 rounded-lg bg-muted border border-border">
@@ -150,7 +159,7 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="top-k">Chunks per Query</Label>
+            <Label htmlFor="top-k">Top behavior matches (LLM will check these)</Label>
             <Input
               id="top-k"
               type="number"
@@ -160,6 +169,9 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
               onChange={(e) => setTopK(parseInt(e.target.value) || 8)}
               disabled={isLoading}
             />
+            <p className="text-xs text-muted-foreground">
+              Higher = broader recall, lower = faster LLM pass. Recommended: 5–8.
+            </p>
           </div>
           <Button onClick={handleEvaluate} disabled={isLoading || codeIds.length === 0}>
             {isLoading ? (
@@ -210,6 +222,9 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
         <Card>
           <CardHeader>
             <CardTitle>Coverage Summary</CardTitle>
+            <CardDescription>
+              {Array.isArray(docId) ? `${docIds.length} GDDs` : docIds[0]} → {codeIds.length} code batch(es) | Behavior-based
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-5 gap-4">
@@ -252,7 +267,7 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
           <CardHeader>
             <CardTitle>Requirements & Implementation Status</CardTitle>
             <CardDescription>
-              Filter to quickly see what’s missing or needs attention.
+              Behavior-based results. Filter to quickly see what’s missing or needs attention.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -334,6 +349,51 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId }: CodeCov
               <p className="text-sm font-medium mb-2">Status</p>
               {getStatusBadge(selectedItem.status)}
             </div>
+
+            {(selectedItem.topMatches?.length || 0) > 0 && (
+              <div>
+                <p className="text-sm font-medium mb-2">Top Behavior Matches</p>
+                <div className="space-y-2">
+                  {selectedItem.topMatches!.slice(0, 5).map((match, idx) => (
+                    <div key={idx} className="p-3 rounded-lg bg-muted">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-mono text-foreground">{match.symbol}</p>
+                        <Badge variant="outline" className="text-xs">
+                          Sim: {match.similarity.toFixed(3)}
+                        </Badge>
+                      </div>
+                      {match.description && (
+                        <p className="text-xs text-muted-foreground mt-1">{match.description}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {((selectedItem.missingTriggers?.length || 0) > 0 || (selectedItem.missingEffects?.length || 0) > 0) && (
+              <div>
+                <p className="text-sm font-medium mb-2">Gaps</p>
+                <div className="space-y-2">
+                  {(selectedItem.missingTriggers || []).length > 0 && (
+                    <div className="p-3 rounded-lg bg-muted">
+                      <p className="text-xs font-semibold text-foreground">Missing triggers</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {selectedItem.missingTriggers!.join(", ")}
+                      </p>
+                    </div>
+                  )}
+                  {(selectedItem.missingEffects || []).length > 0 && (
+                    <div className="p-3 rounded-lg bg-muted">
+                      <p className="text-xs font-semibold text-foreground">Missing effects</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {selectedItem.missingEffects!.join(", ")}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
             {selectedItem.evidence.length > 0 && (
               <div>

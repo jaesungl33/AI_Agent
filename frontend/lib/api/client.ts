@@ -137,16 +137,13 @@ async function checkBackendAvailable(): Promise<boolean> {
 
 // Workspace API
 export const workspaceAPI = {
-  create: async (data: CreateWorkspaceRequest): Promise<CreateWorkspaceResponse> => {
+  create: async (data: CreateWorkspaceRequest): Promise<Workspace> => {
     if (USE_MOCK) {
       return {
-        workspace: {
-          id: `workspace_${Date.now()}`,
-          name: data.name,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-          status: "ready",
-        },
+        id: `workspace_${Date.now()}`,
+        name: data.name,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       }
     }
     return fetchAPI("/workspaces", {
@@ -169,21 +166,47 @@ export const workspaceAPI = {
         name: "Mock Workspace",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
-        status: "ready",
       }
     }
     return fetchAPI(`/workspaces/${id}`)
+  },
+
+  update: async (id: string, data: { name?: string; description?: string }): Promise<Workspace> => {
+    if (USE_MOCK) {
+      return {
+        id,
+        name: data.name || "Mock Workspace",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      }
+    }
+    return fetchAPI(`/workspaces/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    })
   },
 
   delete: async (id: string): Promise<void> => {
     if (USE_MOCK) return
     return fetchAPI(`/workspaces/${id}`, { method: "DELETE" })
   },
+
+  setDefault: async (id: string): Promise<void> => {
+    if (USE_MOCK) return
+    return fetchAPI(`/workspaces/${id}/set-default`, { method: "POST" })
+  },
+
+  getDefault: async (): Promise<{ default_workspace: string | null; name?: string }> => {
+    if (USE_MOCK) {
+      return { default_workspace: null }
+    }
+    return fetchAPI("/workspaces/default")
+  },
 }
 
 // Document API
 export const documentAPI = {
-  uploadGDD: async (data: UploadGDDRequest): Promise<UploadGDDResponse> => {
+  uploadGDD: async (data: UploadGDDRequest & { workspaceId?: string }): Promise<UploadGDDResponse> => {
     // Check if backend is available, fallback to mock
     const backendAvailable = await checkBackendAvailable()
     
@@ -196,6 +219,9 @@ export const documentAPI = {
     formData.append("file", data.file)
     if (data.docId) {
       formData.append("docId", data.docId)
+    }
+    if (data.workspaceId) {
+      formData.append("workspaceId", data.workspaceId)
     }
 
     const url = `${API_BASE_URL}/documents/gdd`
@@ -215,7 +241,7 @@ export const documentAPI = {
     return response.json()
   },
 
-  uploadCode: async (data: UploadCodeRequest): Promise<UploadCodeResponse> => {
+  uploadCode: async (data: UploadCodeRequest & { workspaceId?: string }): Promise<UploadCodeResponse> => {
     // Check if backend is available, fallback to mock
     const backendAvailable = await checkBackendAvailable()
     
@@ -224,17 +250,24 @@ export const documentAPI = {
       return mockDocumentAPI.uploadCode(data)
     }
 
-    return uploadFile("/documents/code", data.file, data.indexId ? { indexId: data.indexId } : undefined)
+    const additional: Record<string, string> = {}
+    if (data.indexId) additional.indexId = data.indexId
+    if (data.rebuildBehaviorIndex) additional.rebuildBehaviorIndex = "true"
+    if (data.workspaceId) additional.workspaceId = data.workspaceId
+    return uploadFile("/documents/code", data.file, Object.keys(additional).length ? additional : undefined)
   },
 
-  list: async (): Promise<Document[]> => {
+  list: async (workspaceId?: string): Promise<Document[]> => {
     // Always try real backend first - don't fallback to mock
     if (USE_MOCK) {
       return mockDocumentAPI.list()
     }
     try {
       // Use Next.js proxy to avoid direct :8000 fetch issues
-      const res = await fetch("/api/documents", {
+      const url = workspaceId 
+        ? `/api/documents?workspaceId=${encodeURIComponent(workspaceId)}`
+        : "/api/documents"
+      const res = await fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       })
@@ -266,6 +299,85 @@ export const documentAPI = {
     }
     return fetchAPI(`/documents/${id}/status`)
   },
+
+  uploadGDDBatch: async (files: File[]): Promise<any> => {
+    const backendAvailable = await checkBackendAvailable()
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Batch upload requires backend; mock mode not supported.")
+    }
+    const formData = new FormData()
+    files.forEach((file) => formData.append("files", file))
+    const url = `${API_BASE_URL}/documents/gdd/batch`
+    const res = await fetch(url, { method: "POST", body: formData })
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(text || `Upload failed (HTTP ${res.status})`)
+    }
+    return res.json()
+  },
+
+  uploadCodeBatch: async (files: File[], options?: { rebuildBehaviorIndex?: boolean; workspaceId?: string }): Promise<any> => {
+    const backendAvailable = await checkBackendAvailable()
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Batch upload requires backend; mock mode not supported.")
+    }
+    const formData = new FormData()
+    files.forEach((file) => formData.append("files", file))
+    if (options?.rebuildBehaviorIndex) {
+      formData.append("rebuildBehaviorIndex", "true")
+    }
+    if (options?.workspaceId) {
+      formData.append("workspaceId", options.workspaceId)
+    }
+    const url = `${API_BASE_URL}/documents/code/batch`
+    const res = await fetch(url, { method: "POST", body: formData })
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(text || `Upload failed (HTTP ${res.status})`)
+    }
+    return res.json()
+  },
+
+  uploadGDDArchive: async (file: File, options?: { workspaceId?: string }): Promise<any> => {
+    const backendAvailable = await checkBackendAvailable()
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Archive upload requires backend; mock mode not supported.")
+    }
+    const formData = new FormData()
+    formData.append("file", file)
+    if (options?.workspaceId) {
+      formData.append("workspaceId", options.workspaceId)
+    }
+    const url = `${API_BASE_URL}/documents/gdd/archive`
+    const res = await fetch(url, { method: "POST", body: formData })
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(text || `Upload failed (HTTP ${res.status})`)
+    }
+    return res.json()
+  },
+
+  uploadCodeArchive: async (file: File, opts?: { rebuildBehaviorIndex?: boolean; workspaceId?: string }): Promise<any> => {
+    const backendAvailable = await checkBackendAvailable()
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Archive upload requires backend; mock mode not supported.")
+    }
+    const formData = new FormData()
+    formData.append("file", file)
+    if (opts?.rebuildBehaviorIndex) {
+      formData.append("rebuildBehaviorIndex", "true")
+    }
+    if (opts?.workspaceId) {
+      formData.append("workspaceId", opts.workspaceId)
+    }
+    const url = `${API_BASE_URL}/documents/code/archive`
+    const res = await fetch(url, { method: "POST", body: formData })
+    if (!res.ok) {
+      const text = await res.text()
+      throw new Error(text || `Upload failed (HTTP ${res.status})`)
+    }
+    return res.json()
+  },
 }
 
 // GDD API
@@ -285,8 +397,12 @@ export const gddAPI = {
     if (USE_MOCK || !backendAvailable) {
       return mockGDDAPI.getSpec(docId)
     }
-    const response = await fetchAPI<GameSpec>(`/gdd/${docId}/spec`)
-    return response
+    const response = await fetchAPI<any>(`/gdd/${docId}/spec`)
+    // Backend may return either the spec directly or { spec, savedTo }
+    if (response?.spec) {
+      return response.spec as GameSpec
+    }
+    return response as GameSpec
   },
 
   analyze: async (docId: string): Promise<GDDSummary> => {
@@ -304,7 +420,8 @@ export const coverageAPI = {
   evaluate: async (
     docId: string | string[],
     codeIndexId: string | string[],
-    topK?: number
+    topK?: number,
+    workspaceId?: string
   ): Promise<CoverageReport> => {
     // Always use real backend - never fallback to mock for coverage
     if (USE_MOCK) {
@@ -313,14 +430,15 @@ export const coverageAPI = {
     
     // Call Next.js API route, which proxies to the Python backend.
     // This avoids CORS issues between :3000 and :8000.
-    const payload = { docId, codeIndexId, topK }
+    const payload: any = { docId, codeIndexId, topK }
+    payload.workspaceId = workspaceId || "tank_war"
 
     console.log("[CoverageAPI] Starting evaluation request:", payload)
 
     try {
-      // Use AbortController for timeout (10 minutes for long evaluations)
+      // Use AbortController for timeout (30 minutes for large evaluations)
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10 * 60 * 1000) // 10 minutes
+      const timeoutId = setTimeout(() => controller.abort(), 30 * 60 * 1000) // 30 minutes
 
       const res = await fetch("/api/coverage/evaluate", {
         method: "POST",
@@ -398,9 +516,10 @@ export const chatAPI = {
     // this will hit FastAPI's /chat endpoint.
     // Never use mock for chat - always try the real backend first.
     try {
+      const payload = { ...data, workspaceId: data.workspaceId || "tank_war" }
       return await fetchAPI("/chat", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       })
     } catch (error) {
       // If backend fails, throw the error instead of falling back to mock
@@ -417,13 +536,14 @@ export const chatAPI = {
     onDone?: (timestamp: string) => void,
     onError?: (error: string) => void
   ): Promise<void> => {
+    const payload = { ...data, workspaceId: data.workspaceId || "tank_war" }
     const url = `${API_BASE_URL}/chat/stream`
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     })
 
     if (!response.ok) {

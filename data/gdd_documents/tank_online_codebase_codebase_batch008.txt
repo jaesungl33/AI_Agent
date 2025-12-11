@@ -1,0 +1,5316 @@
+# Code Snapshot for tank_online_1-dev - Batch 8/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 50
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 351/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/Actions/WaitingObjectDeactiveOrDestroyActionByRef.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using UnityEngine;
+using Action = Unity.Behavior.Action;
+using Unity.Properties;
+using UniRx;
+using GDOLib.UI;
+
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "Waiting Object hide", story: "Wait [ObjectRef] hide", category: "Action", id: "e5a1f12112178ac2a1e1a6b37144716d")]
+public partial class WaitingObjectDeactiveOrDestroyActionByRef : Action
+{
+    [SerializeReference] public BlackboardVariable<GameObject> ObjectRef;
+    [SerializeReference] public BlackboardVariable<float> Interval = new BlackboardVariable<float>(1f);
+    private bool isHide = false;
+    private GameObject targetObject;
+    protected override Status OnStart()
+    {
+        if (ObjectRef == null || ObjectRef.Value == null)
+        {
+            isHide = true;
+            return Status.Running;
+        }
+        else
+        {
+            targetObject = ObjectRef.Value;
+            Observable.Timer(TimeSpan.FromSeconds(Interval.Value)).Subscribe(_ =>
+            {
+                if(targetObject == null || !targetObject.activeSelf)
+                {
+                    isHide = true;
+                }
+            });
+        }
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+        if (!isHide)
+        {
+            return Status.Running;
+        }
+        return Status.Success;
+    }
+
+    protected override void OnEnd()
+    {
+    }
+}
+
+
+================================================================================
+FILE 352/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/Actions/WaitingObjectMoveToAction.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using UnityEngine;
+using Action = Unity.Behavior.Action;
+using Unity.Properties;
+using GDOLib.UI;
+
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "WaitingObjectMoveTo (id)", story: "Wait [Object] MoveTo [Position]", category: "Action", id: "44f7bf21805fe9d35426d41679997e41")]
+public partial class WaitingObjectMoveToAction : Action
+{
+    [SerializeReference] public BlackboardVariable<string> Object;
+    [SerializeReference] public BlackboardVariable<string> Position;
+    [SerializeField] public BlackboardVariable<float> ThresholdDistance;
+    private bool isReached = false;
+    private Transform objectTransform;
+    private Transform targetPositionTransform;
+    protected override Status OnStart()
+    {
+        isReached = false;
+        // find object presenter by id
+        ObjectPresenter[] allPresenters = UnityEngine.Object.FindObjectsByType<ObjectPresenter>(FindObjectsSortMode.None);
+        ObjectPresenter targetObject = Array.Find(allPresenters, presenter => presenter.ID == Object.Value);
+        if (targetObject == null)
+        {
+            LogFailure($"Object with ID '{Object.Value}' not found!");
+            return Status.Failure;
+        }
+        // find position presenter by id position
+        ObjectPresenter targetPosition = Array.Find(allPresenters, presenter => presenter.ID == Position.Value);
+        if (targetPosition == null)
+        {
+            LogFailure($"Position with ID '{Position.Value}' not found!");
+            return Status.Failure;
+        }
+        objectTransform = targetObject.transform;
+        targetPositionTransform = targetPosition.transform;
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+         float distance = Vector3.Distance(objectTransform.position, targetPositionTransform.position);
+        if (distance < ThresholdDistance.Value) // threshold to consider as reached
+        {
+            isReached = true;
+            return Status.Success;
+        }
+        return Status.Running;
+    }
+
+    protected override void OnEnd()
+    {
+    }
+}
+
+
+================================================================================
+FILE 353/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/Actions/WaitingObjectMoveToActionByVector.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using UnityEngine;
+using Action = Unity.Behavior.Action;
+using Unity.Properties;
+using GDOLib.UI;
+
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "WaitingObjectMoveTo (vector)", story: "Wait [Object] MoveTo [Position]", category: "Action", id: "44f7bf21805fe9d35426d41679997e42")]
+public partial class WaitingObjectMoveToActionByVector : Action
+{
+    [SerializeReference] public BlackboardVariable<string> Object;
+    [SerializeReference] public BlackboardVariable<Vector3> Position;
+    [SerializeField] public BlackboardVariable<float> ThresholdDistance;
+    private bool isReached = false;
+    private Transform objectTransform;
+    protected override Status OnStart()
+    {
+        isReached = false;
+        // find object presenter by id
+        ObjectPresenter[] allPresenters = UnityEngine.Object.FindObjectsByType<ObjectPresenter>(FindObjectsSortMode.None);
+        ObjectPresenter targetObject = Array.Find(allPresenters, presenter => presenter.ID == Object.Value);
+        if (targetObject == null)
+        {
+            LogFailure($"Object with ID '{Object.Value}' not found!");
+            return Status.Failure;
+        }
+        objectTransform = targetObject.transform;
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+         float distance = Vector3.Distance(objectTransform.position, Position.Value);
+        if (distance < ThresholdDistance.Value) // threshold to consider as reached
+        {
+            isReached = true;
+            return Status.Success;
+        }
+        return Status.Running;
+    }
+
+    protected override void OnEnd()
+    {
+    }
+}
+
+
+================================================================================
+FILE 354/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/Actions/WaitingObjectSpawnAction.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using UnityEngine;
+using Action = Unity.Behavior.Action;
+using Unity.Properties;
+using UniRx;
+using GDOLib.UI;
+
+[Serializable, GeneratePropertyBag]
+[NodeDescription(name: "WaitingObjectSpawn", story: "Wait [ObjectId] Spawn [Interval]", category: "Action", id: "e5a1f12112178ac2a1e1a6b37144715d")]
+public partial class WaitingObjectSpawnAction : Action
+{
+    [SerializeReference] public BlackboardVariable<string> ObjectId;
+    [SerializeReference] public BlackboardVariable<float> Interval = new BlackboardVariable<float>(1f);
+    private bool isSpawned = false;
+    protected override Status OnStart()
+    {
+        isSpawned = false;
+        // use observarble to wait for interval seconds to find object with objectId
+        Observable.Timer(TimeSpan.FromSeconds(Interval.Value)).Subscribe(_ =>
+        {
+            // find object presenter by id
+            ObjectPresenter[] allPresenters = UnityEngine.Object.FindObjectsByType<ObjectPresenter>(FindObjectsSortMode.None);
+            ObjectPresenter targetObject = Array.Find(allPresenters, presenter => presenter.ID == ObjectId.Value);
+            if (targetObject != null)
+            {
+                isSpawned = true;
+            }
+        });
+        return Status.Running;
+    }
+
+    protected override Status OnUpdate()
+    {
+        if (!isSpawned)
+        {
+            return Status.Running;
+        }
+        return Status.Success;
+    }
+
+    protected override void OnEnd()
+    {
+    }
+}
+
+
+================================================================================
+FILE 355/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/ButtonHandler.cs
+================================================================================
+
+﻿using System;
+using DG.Tweening;
+using GDO.Audio;
+using GDOLib.Components;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
+public enum BtnAnim
+{
+    None = 0,
+    Zoom = 1,
+    MoveY = 2,
+}
+
+public sealed class ButtonHandler : VibrateButton, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler,
+    IPointerExitHandler, IHoldButtonTarget
+{
+    [SerializeField] private float _default_TimePlaySound = 0.1f;
+    [SerializeField] private RectTransform _root;
+    [SerializeField] private float _activeScale = 1f;
+    [SerializeField] private float _normalScale = 1;
+    [SerializeField] private bool usePointerEnter = false;
+    [SerializeField] private bool useHold = false;
+    [SerializeField] private bool useHold_Sound = false;
+    [SerializeField] private bool useGrayscale = false;
+
+    [SerializeField] private SoundType clickSoundType = SoundType.SoundEffect;
+    [SerializeField] private string clickSoundID = "button_click";
+    [SerializeField] private AudioClip soundClickAC;
+    [SerializeField] private GameObject[] disableGOs;
+    [SerializeField] private GameObject disableGO;
+    
+    public float moveYOfsset = 5;
+    public BtnAnim btnAnim = BtnAnim.Zoom;
+
+    public UnityEvent<PointerEventData> OnButtonDownEvent = new UnityEvent<PointerEventData>();
+    public UnityEvent<PointerEventData> OnButtonUpEvent = new UnityEvent<PointerEventData>();
+
+    TouchData _touchData = null;
+
+    private Action<bool> _touch;
+    private Action<bool> _callbackEnter;
+    private Action _onClick;
+
+    private bool _in = false;
+    private Sequence sequence = null;
+
+    private Vector2 _scaleDefault;
+    private bool _interactable = true;
+    float defaultY;
+
+    public void PlaySoundBySelected()
+    {
+        if (soundClickAC != null)
+        {
+            AudioManager.Instance.PlaySFX(soundClickAC);
+            return;
+        }
+        AudioHelper.PlaySFX(clickSoundID);
+    }
+
+    public void PlayAnim()
+    {
+        _root.localScale = _normalScale * _scaleDefault;
+        _root.DOScale(_activeScale * _scaleDefault, 0.1f);
+    }
+
+    private void ActiveUi()
+    {
+        if (btnAnim == BtnAnim.Zoom)
+        {
+            sequence = DOTween.Sequence();
+            sequence.Append(_root.DOScale(_activeScale * _scaleDefault, 0.1f));
+        }
+        else if (btnAnim == BtnAnim.MoveY)
+        {
+            sequence = DOTween.Sequence();
+            sequence.Append(_root.DOAnchorPosY(defaultY - moveYOfsset, 0.1f));
+        }
+    }
+
+    private void DeactiveUi()
+    {
+        sequence = DOTween.Sequence();
+        if (btnAnim == BtnAnim.Zoom)
+        {
+            sequence.Append(_root.DOScale(_normalScale * _scaleDefault, 0.1f));
+        }
+        else if (btnAnim == BtnAnim.MoveY)
+        {
+            sequence.Append(_root.DOAnchorPosY(defaultY, 0.1f));
+        }
+    }
+
+    private void Awake()
+    {
+        Button.onClick.AddListener(() =>
+        {
+            DoLightFeedback();
+
+            PlaySoundBySelected();
+        });
+        if (useHold && GetComponent<HoldButton>() == null)
+        {
+            gameObject.AddComponent<HoldButton>();
+        }
+
+        if (_root == null)
+        {
+            _root = GetComponent<RectTransform>();
+        }
+
+        if (btnAnim == BtnAnim.MoveY)
+        {
+            defaultY = _root.anchoredPosition.y;
+        }
+
+        _scaleDefault = _root.transform.localScale;
+        _touch = (r) =>
+        {
+            //Debug.Log("_touch: " + r);
+            if (sequence != null)
+            {
+                sequence.Kill();
+            }
+
+            if (r)
+            {
+                ActiveUi();
+            }
+            else
+            {
+                DeactiveUi();
+            }
+        };
+        _callbackEnter = (r) =>
+        {
+            if (!usePointerEnter) return;
+            //Debug.Log("_callbackEnter: " + r);
+            if (sequence != null)
+            {
+                sequence.Kill();
+            }
+
+            if (r)
+            {
+                ActiveUi();
+            }
+            else
+            {
+                DeactiveUi();
+            }
+        };
+        _onClick = () =>
+        {
+            if (sequence != null)
+            {
+                sequence.Kill();
+            }
+
+            DeactiveUi();
+        };
+    }
+
+    GrayScaleImage[] cacheGrayscale;
+
+    private void Update()
+    {
+        if (_interactable != Button.interactable)
+        {
+            _interactable = Button.interactable;
+            if (btnAnim == BtnAnim.MoveY)
+            {
+                if (sequence == null || !sequence.IsActive())
+                {
+                    sequence = DOTween.Sequence();
+                }
+            }
+
+            UpdateGrayscale();
+        }
+
+        if (disableGO != null)
+            disableGO.SetActive(!_interactable);
+
+        foreach (var item in disableGOs)
+        {
+            item.SetActive(!_interactable);
+        }
+    }
+
+    private void UpdateGrayscale()
+    {
+        if (useGrayscale)
+        {
+            if (cacheGrayscale == null)
+                cacheGrayscale = GetComponentsInChildren<GrayScaleImage>();
+
+            foreach (var grayScaleImage in cacheGrayscale)
+            {
+                grayScaleImage.enabled = !_interactable;
+                grayScaleImage.UpdateGrayScale();
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        Clear();
+    }
+
+    private void OnDestroy()
+    {
+        Clear();
+    }
+
+    private void OnEnable()
+    {
+        if (btnAnim == BtnAnim.MoveY)
+        {
+            _root.anchoredPosition = new Vector2(_root.anchoredPosition.x, defaultY);
+        }
+
+        UpdateGrayscale();
+    }
+
+    private void Clear()
+    {
+        if (sequence != null)
+        {
+            sequence.Kill();
+        }
+
+        sequence = null;
+        _touchData = null;
+        _in = false;
+
+        if (btnAnim == BtnAnim.Zoom)
+        {
+            _root.transform.localScale = Vector3.one * _scaleDefault;
+        }
+        else if (btnAnim == BtnAnim.MoveY)
+        {
+            var tmp = new Vector3(_root.anchoredPosition.x, defaultY, 0);
+            _root.anchoredPosition = tmp;
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnButtonDownEvent?.Invoke(eventData);
+        if (!Button.enabled)
+        {
+            _touchData = null;
+            return;
+        }
+
+        _touchData = new TouchData { PointerEventData = eventData, PrePosition = eventData.pressPosition };
+        _in = true;
+        _touch(true);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        OnButtonUpEvent?.Invoke(eventData);
+        if (_touchData != null)
+        {
+            if (_in)
+            {
+                if (_onClick != null)
+                {
+                    _onClick();
+                }
+            }
+
+            if (_touch != null)
+            {
+                _touch(false);
+            }
+
+            _in = false;
+            _touchData = null;
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_touchData != null)
+        {
+            _in = true;
+            _callbackEnter(_in);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_touchData != null)
+        {
+            _in = false;
+            _callbackEnter(_in);
+        }
+    }
+
+    public void OnClick()
+    {
+    }
+
+    public void OnHoldClick()
+    {
+        if (useHold)
+        {
+            Button.onClick?.Invoke();
+        }
+    }
+}
+
+
+================================================================================
+FILE 356/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/ChildCanvasUtility.cs
+================================================================================
+
+﻿using System.Linq;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace GDOLib.UI
+{
+    [RequireComponent(typeof(Canvas))]
+    public class ChildCanvasUtility : MonoBehaviour
+    {
+        [FormerlySerializedAs("sortOrderOffset")] public int sortingOrderOffset;
+        
+        private Canvas parentCanvas;
+        private Canvas canvas;
+
+        private void Awake()
+        {
+            canvas = GetComponent<Canvas>();
+            parentCanvas = GetComponentsInParent<Canvas>(true).FirstOrDefault(c => c != canvas);
+        }
+
+        private void OnEnable()
+        {
+            UpdateSortingOrder();
+        }
+
+        public void UpdateSortingOrder()
+        {
+            if (parentCanvas == null)
+            {
+                parentCanvas = GetComponentsInParent<Canvas>(true).FirstOrDefault(c => c != canvas);
+                if (parentCanvas == null)
+                    return;
+            }
+
+            if (canvas != null)
+            {
+                canvas.overrideSorting = true;
+                canvas.sortingOrder = parentCanvas.sortingOrder + sortingOrderOffset;
+            }
+            else
+            {
+                Debug.LogWarning("[Warning] Canvas not found]");
+            }
+        }
+
+        private void Start()
+        {
+            OnEnable();
+        }
+    }
+}
+
+
+================================================================================
+FILE 357/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/GrayScaleImage.cs
+================================================================================
+
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace GDOLib.Components
+{
+    public class GrayScaleImage : MonoBehaviour
+    {
+        [SerializeField] private Image _image;
+
+        [SerializeField] Image[] images;
+
+        private Material _material;
+        private Material _grayScaleMaterial;
+        private Dictionary<Image, Color> _originalColor = new Dictionary<Image, Color>();
+        private bool isApplicationQuitting;
+
+        private void Awake()
+        {
+            if (images == null)
+            {
+                images = GetComponentsInChildren<Image>();
+            }
+            else
+            {
+                images = images.Where(i => i != null).ToArray();
+            }
+
+            if (images != null)
+            {
+                //foreach (Image image in images)
+                //{
+                //    if(image != null)
+                //    {
+                //        _originalColor.Add(image, image.color); 
+                //    }
+                //}
+                _originalColor = images.Where(i => i != null).ToDictionary(i => i, i => i.color);
+            }
+        }
+
+        private void OnValidate()
+        {
+            _image = GetComponent<Image>();
+
+            if (images == null)
+            {
+                images = GetComponentsInChildren<Image>();
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (_image == null)
+                return;
+
+            SetGrayScale(true);
+        }
+
+        private void OnDisable()
+        {
+            if (_image == null)
+                return;
+
+            if (!isApplicationQuitting)
+                SetGrayScale(false);
+        }
+
+        private void OnApplicationQuit()
+        {
+            isApplicationQuitting = true;
+        }
+
+        public void UpdateGrayScale()
+        {
+            SetGrayScale(enabled);
+        }
+
+        public void SetGrayScale(bool isGrayScale)
+        {
+            //Debug.Log($"SetGrayScale {transform.parent.name}/{name}: {isGrayScale}");
+            if (_material == null)
+            {
+                _material = new Material(_image.material);
+                _grayScaleMaterial = new Material(_material);
+                _grayScaleMaterial.name += _grayScaleMaterial.GetHashCode();
+                _material.SetFloat("_GrayscaleAmount", 0f);
+                _grayScaleMaterial.SetFloat("_GrayscaleAmount", 1f);
+
+                if (_originalColor.Count != images.Length)
+                {
+                    _originalColor = images.Where(i => i != null).ToDictionary(i => i, i => i.color);
+                }
+
+                _image.material = _grayScaleMaterial;
+                if (images != null)
+                {
+                    for (int i = 0; i < images.Length; i++)
+                    {
+                        var image = images[i];
+                        image.material = _grayScaleMaterial;
+                    }
+                }
+            }
+
+            var targetMaterial = isGrayScale ? _grayScaleMaterial : _material;
+            _image.material = targetMaterial;
+            if (images != null)
+            {
+                for (int i = 0; i < images.Length; i++)
+                {
+                    var image = images[i];
+                    image.material = targetMaterial;
+                }
+            }
+
+            for (int i = 0; i < images.Length; i++)
+            {
+                var image = images[i];
+                var grayScaleColor = _originalColor[image];
+                var avgColor = (grayScaleColor.r + grayScaleColor.g + grayScaleColor.b) / 3f;
+                grayScaleColor = new Color(avgColor, avgColor, avgColor, grayScaleColor.a);
+                image.color = isGrayScale ? grayScaleColor : _originalColor[image];
+                image.SetAllDirty();
+                _image.SetMaterialDirty();
+            }
+        }
+        
+        public void SetGrayScale(float value)
+        {
+            var targetMaterial = new Material(_grayScaleMaterial);
+            targetMaterial.SetFloat("_GrayscaleAmount", value);
+            _image.material = targetMaterial;
+            if (images != null)
+            {
+                for (int i = 0; i < images.Length; i++)
+                {
+                    var image = images[i];
+                    image.material = targetMaterial;
+                }
+            }
+
+            for (int i = 0; i < images.Length; i++)
+            {
+                var image = images[i];
+                var grayScaleColor = _originalColor[image];
+                var avgColor = (grayScaleColor.r + grayScaleColor.g + grayScaleColor.b) / 3f;
+                grayScaleColor = new Color(avgColor, avgColor, avgColor, grayScaleColor.a);
+                image.color = Color.Lerp(_originalColor[image], grayScaleColor, value);
+                image.SetAllDirty();
+                _image.SetMaterialDirty();
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 358/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/HoldButton.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+
+namespace GDOLib.Components
+{
+    public interface IHoldButtonTarget 
+    {
+        void OnClick();
+
+        void OnHoldClick();
+    }
+
+    
+    [RequireComponent(typeof(UnityEngine.UI.Button))]
+//[RequireComponent(typeof(IHoldButtonTarget))]
+    public class HoldButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IPointerEnterHandler,
+        IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+    {
+        private const float HoldIntervalMin = 0.0001f;
+        private const float HoldThreshold = 0.5f;
+        [SerializeField] private float HoldInterval = 0.25f;
+        private const float HoldSpeedAccelerate = 0.0015f;
+
+        private float _holdTime;
+        private float _holdInterval;
+        private bool _isHolding = false;
+        private bool _enter = false;
+        bool _isDraging = false;
+
+
+        private IHoldButtonTarget _target;
+
+        void Start()
+        {
+            _target = GetComponentInParent<IHoldButtonTarget>();
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            _isHolding = false;
+
+            if (_holdTime < HoldThreshold && !_isDraging)
+            {
+                DispatchClickEvent(eventData);
+            }
+
+            _holdTime = 0;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            _isHolding = true;
+            _holdTime = HoldThreshold;
+            _holdInterval = HoldInterval;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (_isHolding && _holdTime > 0)
+            {
+                _holdTime -= Time.deltaTime;
+                if (_holdTime < 0)
+                {
+                    DispatchHoldEvent();
+                    _holdInterval -= HoldSpeedAccelerate;
+                    _holdInterval = Mathf.Max(_holdInterval, HoldIntervalMin);
+                    _holdTime = _holdInterval;
+                }
+            }
+        }
+
+        protected void DispatchClickEvent(PointerEventData eventData)
+        {
+            _target.OnClick();
+        }
+
+        protected void DispatchHoldEvent()
+        {
+            _target.OnHoldClick();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _enter = true;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _enter = false;
+            _isHolding = false;
+        }
+
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _isDraging = true;
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _isDraging = false;
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            _isDraging = true;
+        }
+
+        private void OnDisable()
+        {
+            _enter = false;
+            _isDraging = false;
+            _isHolding = false;
+        }
+    }
+}
+
+
+================================================================================
+FILE 359/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/IPresenter.cs
+================================================================================
+
+﻿namespace GDOLib.UI
+{
+    public interface IPresenter
+    {
+        public string ID { get; set; }
+    }
+}
+
+
+================================================================================
+FILE 360/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/NPCChatStatesData.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+namespace GDO
+{
+
+    public enum NPCChatStates
+    {
+        Default = 0,
+        Presenting1 = 1,
+        Awkward = 2,
+        Determined1 = 3,
+        Determined2 = 4,
+        Panic = 5,
+        Startled = 6,
+        Happy1 = 7,
+        Happy2 = 8,
+        Presenting2 = 9,
+        Idea1 = 10,
+        Bye1 = 11,
+    }
+
+    [Serializable]
+    public class NPCAvatar
+    {
+        public NPCChatStates state;
+        public Sprite sprite;
+    }
+    [Serializable]
+    public class NpcData
+    {
+        public string npcId;
+        public string npcName;
+        public string npcBuildingOwnerPrefab;
+        public Sprite smallAvatar;
+        public Sprite defaultAvatar;
+        public List<NPCAvatar> avatars;
+    }
+    [CreateAssetMenu(fileName = "NPCChatStatesData", menuName = "GDO/NPCChatStatesData", order = 1)]
+    public class NPCChatStatesData : ScriptableObject
+    {
+        [SerializeField] private NpcData[] npcData;
+        [SerializeField] public NpcData[] Data => npcData;
+    }
+}
+
+
+================================================================================
+FILE 361/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/ObjectPresenter.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace GDOLib.UI
+{
+    public class ObjectPresenter : MonoBehaviour, IPresenter
+    {
+        [SerializeField, FormerlySerializedAs("ID")] private string id;
+        private string _idCache;
+        public string ID
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(id))
+                {
+                    if(_idCache != gameObject.name.ToLowerInvariant())
+                    {
+                        _idCache = gameObject.name.ToLowerInvariant();
+                    }
+                    return _idCache;
+                }
+                return id;
+            }
+            set => id = value;
+        }
+    }
+}
+
+
+================================================================================
+FILE 362/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/PopupAnimation.cs
+================================================================================
+
+﻿using UnityEngine;
+using System;
+
+namespace GDOLib.UI
+{
+    public class PopupAnimation : MonoBehaviour
+    {
+        public virtual void OnShowAnim(Action callback)
+        {
+            callback?.Invoke();
+        }
+
+        public virtual void OnHideAnim(Action callback)
+        {
+            callback?.Invoke();
+        }
+    }
+}
+
+
+================================================================================
+FILE 363/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/SpawnObjectDataSO.cs
+================================================================================
+
+
+using UnityEngine;
+namespace GDO
+{
+    [CreateAssetMenu(fileName = "SpawnObjectData", menuName = "GDO/SpawnObjectData", order = 1)]
+    public class SpawnObjectDataSO : ScriptableObject
+    {
+        
+    }
+}
+
+
+================================================================================
+FILE 364/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/SpawnObjectDataSO1.cs
+================================================================================
+
+
+using UnityEngine;
+namespace GDO
+{
+    [CreateAssetMenu(fileName = "SpawnObjectData", menuName = "GDO/SpawnObjectData1", order = 1)]
+    public class SpawnObjectDataSO1: SpawnObjectDataSO
+    {
+        
+    }
+}
+
+
+================================================================================
+FILE 365/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TouchHandler.cs
+================================================================================
+
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+namespace GDOLib.Components
+{
+    public class TouchData
+    {
+        public PointerEventData PointerEventData;
+        public Vector2 PrePosition;
+    }
+
+    public sealed class TouchHandler : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    {
+        List<TouchData> _touches = new List<TouchData>();
+
+        private Action<Vector2, Vector2> _callbackPreAndCurrentPosition;
+        private Action<Vector2, Vector2> _callbackStartAndCurrentPosition;
+        private Action<float, float> _callbackForZoom;
+        private Action<bool> _touch;
+        private Action<Vector2> _onClick;
+        private float _limitDistanceToBecomeDrag = 0;
+        private bool _isDraging = false;
+        private bool _canUseOnClick = false;
+
+        public bool IsDraging
+        {
+            get { return _isDraging; }
+        }
+
+        public void InitTouchHandler(Action<Vector2, Vector2> callbackPreAndCurrentPosition, Action<bool> touch = null,
+            Action<Vector2> onClick = null, Action<float, float> callbackForZoom = null)
+        {
+            _callbackPreAndCurrentPosition = callbackPreAndCurrentPosition;
+            _callbackStartAndCurrentPosition = null;
+            _callbackForZoom = callbackForZoom;
+            _touch = touch;
+            _onClick = onClick;
+            _limitDistanceToBecomeDrag = 10f;
+        }
+
+        public void InitTouchHandler(Action<Vector2, Vector2> callbackPreAndCurrentPosition,
+            float limitDistanceToBecomeDrag, Action<bool> touch = null, Action<Vector2> onClick = null)
+        {
+            _callbackPreAndCurrentPosition = callbackPreAndCurrentPosition;
+            _callbackStartAndCurrentPosition = null;
+            _callbackForZoom = null;
+            _touch = touch;
+            _onClick = onClick;
+            limitDistanceToBecomeDrag = limitDistanceToBecomeDrag <= 0 ? 0 : limitDistanceToBecomeDrag;
+            _limitDistanceToBecomeDrag = limitDistanceToBecomeDrag;
+        }
+
+        public void InitTouchHandlerCallbackStartAndCurrent(Action<Vector2, Vector2> callbackStartAndCurrentPosition,
+            Action<bool> touch = null, Action<Vector2> onClick = null)
+        {
+            _callbackForZoom = null;
+            _callbackPreAndCurrentPosition = null;
+            _callbackStartAndCurrentPosition = callbackStartAndCurrentPosition;
+            _touch = touch;
+            _onClick = onClick;
+            _limitDistanceToBecomeDrag = 10f;
+        }
+
+        void Update()
+        {
+            if (_touches.Count == 1)
+            {
+                var touch = _touches[0];
+                if (!_isDraging &&
+                    Vector2.Distance(touch.PointerEventData.position, touch.PointerEventData.pressPosition) >
+                    _limitDistanceToBecomeDrag)
+                {
+                    _canUseOnClick = false;
+                    _isDraging = true;
+                }
+
+                if (_isDraging)
+                {
+                    if (_callbackPreAndCurrentPosition != null)
+                    {
+                        _callbackPreAndCurrentPosition(touch.PrePosition, touch.PointerEventData.position);
+                    }
+                    else if (_callbackStartAndCurrentPosition != null)
+                    {
+                        _callbackStartAndCurrentPosition(touch.PrePosition, touch.PointerEventData.position);
+                    }
+                }
+
+                if (_callbackPreAndCurrentPosition != null)
+                {
+                    touch.PrePosition = touch.PointerEventData.position;
+                }
+            }
+            else if (_touches.Count > 1)
+            {
+                if (_callbackForZoom != null)
+                {
+                    var touch1 = _touches[_touches.Count - 2];
+                    var touch2 = _touches[_touches.Count - 1];
+                    var d1 = Vector2.Distance(touch1.PrePosition, touch2.PrePosition);
+                    var d2 = Vector2.Distance(touch1.PointerEventData.position, touch2.PointerEventData.position);
+                    if (Mathf.Abs(d2 - d1) > 1)
+                    {
+                        _callbackForZoom(d1, d2);
+                    }
+
+                    for (int i = 0; i < _touches.Count; i++)
+                    {
+                        _touches[i].PrePosition = _touches[i].PointerEventData.position;
+                    }
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            _touches.Clear();
+            _isDraging = false;
+            _canUseOnClick = false;
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            if (!_touches.Any(x => x.PointerEventData == eventData))
+            {
+                TouchData touchData = new TouchData();
+                _touches.Add(new TouchData { PointerEventData = eventData, PrePosition = eventData.pressPosition });
+                if (_touches.Count == 1)
+                {
+                    _canUseOnClick = true;
+                    if (_touch != null)
+                    {
+                        _touch(true);
+                    }
+                }
+                else
+                {
+                    _canUseOnClick = false;
+                }
+            }
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            var touch = _touches.FirstOrDefault(x => x.PointerEventData == eventData);
+            _touches.Remove(touch);
+            if (_touches.Count == 0)
+            {
+                if (_canUseOnClick)
+                {
+                    if (_onClick != null)
+                    {
+                        _onClick(eventData.position);
+                    }
+                }
+
+                if (_touch != null)
+                {
+                    _touch(false);
+                }
+
+                _isDraging = false;
+                _canUseOnClick = false;
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 366/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TutorialInitModifier.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using UnityEngine;
+using Modifier = Unity.Behavior.Modifier;
+using Unity.Properties;
+namespace BehaviorTree.Tutorials
+{
+    [Serializable, GeneratePropertyBag]
+    [NodeDescription(name: "TutorialInit", category: "Flow", id: "113288f317dc0ae4c2dbbc7110df0f3b")]
+    public partial class TutorialInitModifier : Modifier
+    {
+        [SerializeReference] public BlackboardVariable<string> stepName;
+        protected override Status OnStart()
+        {
+            if (Child == null)
+            {
+                return Status.Failure;
+            }
+            Status childStatus = StartNode(Child);
+            return SucceedIfChildIsComplete(childStatus);
+        }
+
+        /// <inheritdoc cref="OnUpdate" />
+        protected override Status OnUpdate()
+        {
+            return SucceedIfChildIsComplete(Child.CurrentStatus);
+        }
+
+        private Status SucceedIfChildIsComplete(Status childStatus)
+        {
+            if (childStatus is Status.Success or Status.Failure)
+            {
+                return Status.Success;
+            }
+            return Status.Waiting; // Parent waits for child to complete
+        }
+    }
+
+}
+
+
+================================================================================
+FILE 367/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TutorialSelector.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.Behavior;
+using Unity.Properties;
+using UnityEngine;
+
+namespace BehaviorTree.Tutorials
+{
+    /// <summary>
+    /// Modifier (Decorator) that checks tutorial step condition.
+    /// Executes child node only when the current checkpoint matches the step name.
+    /// Supports skip tutorial functionality.
+    /// </summary>
+    [Serializable, GeneratePropertyBag]
+    [NodeDescription(
+        name: "Tutorial Selector",
+        story: "Current step name: [currentStepName] . Executes child nodes [tutorialStepsRef] only when the current checkpoint matches the step name. Supports skip [skipTutorialRef] tutorial.",
+        description: "Executes child nodes only when the current checkpoint matches the step name. Supports skip tutorial.",
+        category: "Tutorial/Composite",
+        id: "d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9"
+    )]
+    public partial class TutorialSelector : Composite
+    {
+        private bool isFailed = false;
+        [SerializeReference] public BlackboardVariable<string> currentStepName;
+        [SerializeReference] public BlackboardVariable<List<string>> tutorialStepsRef;
+        [SerializeReference] public BlackboardVariable<bool> skipTutorialRef;
+        [CreateProperty] int m_CurrentChild;
+        protected override Status OnStart()
+        {
+            if (tutorialStepsRef == null)
+            {
+                Debug.LogError("tutorialStepKeySharedList is null");
+            }
+            else
+            {
+                var tutorialStepTasks = Children
+                    .Where(i => i is TutorialStepModifier)
+                    .Select(i => ((TutorialStepModifier)i).stepName).ToList();
+                tutorialStepsRef.Value = tutorialStepTasks.Select(i => i.Value).ToList();
+                Debug.Log("selection tutorialStepTasks:" + tutorialStepTasks.Count);
+            }
+            isFailed = false;
+            Debug.Log("checkPointName.Value 1: " + currentStepName.Value);
+            if (string.IsNullOrEmpty(currentStepName.Value))
+            {
+                currentStepName.Value = tutorialStepsRef.Value[0];
+            }
+            else if (currentStepName.Value == TutorialsManager.TUTORIAL_FINISH_VALUE)
+            {
+                isFailed = true;
+            }
+            Debug.Log("checkPointName.Value 2: " + currentStepName.Value);
+            if (!isFailed)
+            {
+                skipTutorialRef.Value = false;
+                m_CurrentChild = 0;
+                Status childStatus;
+                for (int i = 0; i < tutorialStepsRef.Value.Count; i++)
+                {
+                    childStatus = StartChild(m_CurrentChild);
+                    if (childStatus== Status.Running || childStatus == Status.Waiting)
+                    {
+                        return Status.Waiting;
+                    }
+                    else
+                    {
+                        m_CurrentChild++;
+                    }
+                }
+            }
+            return Status.Failure;
+        }
+        protected override Status OnUpdate()
+        {
+            if (isFailed) return Status.Failure;
+            
+            var currentChild = Children[m_CurrentChild];
+            Status childStatus = currentChild.CurrentStatus;
+            if (childStatus == Status.Success || childStatus == Status.Failure)
+            {
+                return StartChild(++m_CurrentChild);
+            }
+            return childStatus == Status.Running ? Status.Waiting : childStatus;
+        }
+        protected Status StartChild(int childIndex)
+        {
+            if (m_CurrentChild >= Children.Count)
+            {
+                return Status.Success;
+            }
+            var childStatus = StartNode(Children[childIndex]);
+            return childStatus switch
+            {
+                Status.Success => childIndex + 1 >= Children.Count ? Status.Success : Status.Running,
+                Status.Running => Status.Waiting,
+                _ => childStatus
+            };
+        }
+    }
+}
+
+
+================================================================================
+FILE 368/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TutorialStepModifier.cs
+================================================================================
+
+using System;
+using Unity.Behavior;
+using Unity.Properties;
+using UnityEngine;
+
+namespace BehaviorTree.Tutorials
+{
+    /// <summary>
+    /// Modifier (Decorator) that checks tutorial step condition.
+    /// Executes child node only when the current checkpoint matches the step name.
+    /// Supports skip tutorial functionality.
+    /// </summary>
+    [Serializable, GeneratePropertyBag]
+    [NodeDescription(
+        name: "Tutorial Step Modifier",
+        story:"Step: [stepName]",
+        description: "Executes child nodes only when the current checkpoint matches the step name. Supports skip tutorial.",
+        category: "Tutorial/Modifiers",
+        id: "d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s10"
+    )]
+    public partial class TutorialStepModifier : Modifier
+    {
+        [SerializeReference] 
+        [Tooltip("The name of this tutorial step")]
+        public BlackboardVariable<string> stepName;
+        
+        [SerializeReference] 
+        [Tooltip("Reference to current step name variable (REQUIRED)")]
+        public BlackboardVariable<string> currentStepNameRef;
+        
+        [SerializeReference] 
+        [Tooltip("Reference to skip tutorial flag variable (REQUIRED)")]
+        public BlackboardVariable<bool> skipTutorialRef;
+        
+
+        protected override Status OnStart()
+        {
+            // Validate required references
+            if (currentStepNameRef == null)
+            {
+                Debug.LogError("TutorialStepModifier: currentStepNameRef is not assigned!", GameObject);
+                return Status.Failure;
+            }
+            
+            if (skipTutorialRef == null)
+            {
+                Debug.LogError("TutorialStepModifier: skipTutorialRef is not assigned!", GameObject);
+                return Status.Failure;
+            }
+            
+            // Register skip tutorial event
+            EventManager.Register<SkipTutorialEventData>(SkipTutorialEventHandle);
+            
+            // Check if current step matches this step
+            if (currentStepNameRef.Value != stepName.Value)
+            {
+                return Status.Failure; // Not this step's turn yet
+            }
+            
+            // Check skip tutorial flag
+            if (skipTutorialRef.Value)
+            {
+                return Status.Success; // Skip this step
+            }
+            
+            // Start the child node
+            if (Child == null)
+            {
+                Debug.LogError("TutorialStepModifier: Child node is null!", GameObject);
+                return Status.Failure;
+            }
+            
+            Status childStatus = StartNode(Child);
+            
+            // If child completes immediately, return its status
+            if (childStatus == Status.Success || childStatus == Status.Failure)
+            {
+                return childStatus;
+            }
+            
+            // Otherwise, wait for child to complete
+            return Status.Waiting;
+        }
+
+        
+
+        private void SkipTutorialEventHandle(SkipTutorialEventData data)
+        {
+            skipTutorialRef.Value = true;
+        }
+
+        protected override Status OnUpdate()
+        {
+            if (string.IsNullOrEmpty(stepName.Value)) return Status.Failure;
+            if(currentStepNameRef.Value != stepName.Value)
+            {
+                return Status.Failure;
+            }
+
+            // Check skip tutorial flag
+            if (skipTutorialRef != null && skipTutorialRef.Value)
+            {
+                return Status.Success; // Skip this step
+            }
+
+            // Get child's current status (DON'T call StartNode here!)
+            Status childStatus = Child.CurrentStatus;
+
+            // Handle child result
+            if (childStatus == Status.Success || childStatus == Status.Failure)
+            {
+                return childStatus;
+            }
+
+            return Status.Waiting;
+        }
+
+        protected override void OnEnd()
+        {
+            // Always unregister event
+            EventManager.Unregister<SkipTutorialEventData>(SkipTutorialEventHandle);
+            
+            // Reset skip tutorial flag if needed
+            if (skipTutorialRef != null)
+            {
+                skipTutorialRef.Value = false;
+            }
+        }
+
+    }
+}
+
+
+================================================================================
+FILE 369/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TutorialsEventData.cs
+================================================================================
+
+namespace BehaviorTree.Tutorials
+{   
+    public struct DoneTutorialEventData { public string tutorialID; }
+    public struct SkipTutorialEventData { public string tutorialID; }
+    public struct TutorialStepCompletedEventData
+    {
+        public string tutorialID;
+        public string stepName;
+        public TutorialStepCompletedEventData(string tutorialID, string stepName)
+        {
+            this.tutorialID = tutorialID;
+            this.stepName = stepName;
+        }
+    }
+}
+
+
+================================================================================
+FILE 370/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/TutorialsManager.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using UniRx;
+using Unity.Behavior;
+using UnityEngine;
+namespace BehaviorTree.Tutorials
+{
+
+    public class TutorialUserData
+    {
+        public Dictionary<string, string> flowCheckpoints = new Dictionary<string, string>();
+    }
+    /// <summary>
+    /// Each tutorial must have a unique tutorialID. In blackboard, there are variables to track current step name and whether to skip tutorial.
+    /// "tutorialID" (string): Unique identifier for the tutorial.
+    /// "currentStepName" (string): The name of the current step in the tutorial.
+    /// "stepsName" (List<string>): List of step names in the tutorial.
+    /// "skipTutorial" (bool): Flag to indicate if the tutorial should be skipped.
+    /// When tutorial is completed, "currentStepName" is set to "tutorial_finish".
+    /// </summary>
+    public class TutorialsManager : Singleton<TutorialsManager>
+    {
+        private const string TUTORIALS_DATA_KEY = "tutorials_data";
+        public const string TUTORIAL_FINISH_VALUE = "tutorial_finish";
+
+
+        public const string CURRENT_STEP_NAME_REF = "currentStepName";
+        public const string TUTORIALID_REF = "tutorialID";
+        public const string STEPS_NAME_REF = "stepsName";
+        public const string SKIP_TUTORIAL_SHAREDBOOL_KEY = "skipTutorial";
+
+        [SerializeField] private GameObject _tutorialObj;
+        [SerializeField] private string tutorialID;
+        private BehaviorGraphAgent currentBT;
+
+        private List<string> stepsName = new List<string>();
+        void Start()
+        {
+            Init(null);
+        }
+        public void Init(System.Action callback)
+        {
+            EventManager.Register<TutorialStepCompletedEventData>(TutorialStepCompleletedEventHandle);
+            EventManager.Register<DoneTutorialEventData>(DoneTutorialEventHandle);
+            if (IsTutorialFinished())
+            {
+
+            }
+            else
+            {
+                StartTutorial();
+            }
+            callback?.Invoke();
+        }
+
+        private void DoneTutorialEventHandle(DoneTutorialEventData data)
+        {
+            SaveCheckPoint(TUTORIAL_FINISH_VALUE, true);
+            currentBT.gameObject.SetActive(false);
+        }
+
+        private void TutorialStepCompleletedEventHandle(TutorialStepCompletedEventData data)
+        {
+            if(tutorialID == data.tutorialID)
+            {
+                SaveCheckPoint(data.stepName);
+            }
+        }
+        private void StartTutorial()
+        {
+            currentBT = _tutorialObj.GetComponent<BehaviorGraphAgent>();
+            currentBT.SetVariableValue(TUTORIALID_REF, tutorialID);
+            var tutorialUserData = GetTutorialUserDataFromLocal();
+            if (tutorialUserData.flowCheckpoints.ContainsKey(tutorialID))
+            {
+                var checkpoint = tutorialUserData.flowCheckpoints[tutorialID];
+                currentBT.SetVariableValue(CURRENT_STEP_NAME_REF, checkpoint);
+            }
+            else
+            {
+                currentBT.SetVariableValue(CURRENT_STEP_NAME_REF, string.Empty);
+            }
+            _tutorialObj.SetActive(true);
+            stepsName = new List<string>();
+        }
+
+        public bool IsTutorialFinished()
+        {
+            var tutorialUserData = GetTutorialUserDataFromLocal();
+            if (tutorialUserData != null && tutorialUserData.flowCheckpoints.TryGetValue(tutorialID, out var checkpoint))
+            {
+                if (checkpoint == TUTORIAL_FINISH_VALUE)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private void SaveCheckPoint(string stepName, bool forceSave = false)
+        {
+            TutorialUserData tutorialUserData = GetTutorialUserDataFromLocal();
+            if(!forceSave)
+            {
+                Debug.Log("SaveCheckPoint: " + stepName);
+                if (stepsName.Count == 0)
+                {
+                    currentBT.GetVariable(STEPS_NAME_REF, out BlackboardVariable<List<string>> stepsNameBlackboardVar);
+                    if (stepsNameBlackboardVar != null)
+                    {
+                        stepsName = stepsNameBlackboardVar.Value;
+                    }
+                }
+
+                if (!stepsName.Contains(stepName))
+                {
+                    return;
+                }
+                string nextCheckpoint;
+                var stepNameIndex = stepsName.IndexOf(stepName);
+                if (stepNameIndex >= stepsName.Count - 1)
+                {
+                    nextCheckpoint = TUTORIAL_FINISH_VALUE;
+                    currentBT.gameObject.SetActive(false);
+                }
+                else
+                {
+                    nextCheckpoint = stepsName[stepNameIndex + 1];
+                }
+                currentBT.SetVariableValue(CURRENT_STEP_NAME_REF, nextCheckpoint);
+                tutorialUserData.flowCheckpoints[tutorialID] = nextCheckpoint;
+            }
+            else
+            {
+                currentBT.SetVariableValue(CURRENT_STEP_NAME_REF, stepName);
+                tutorialUserData.flowCheckpoints[tutorialID] = stepName;
+            }
+            SaveTutorialUserDataToLocal(tutorialUserData);
+        }
+        private TutorialUserData GetTutorialUserDataFromLocal()
+        {
+            TutorialUserData tutorialUserData = null;
+            if (PlayerPrefs.HasKey(TUTORIALS_DATA_KEY))
+            {
+                var jsonData = PlayerPrefs.GetString(TUTORIALS_DATA_KEY);
+                tutorialUserData = JsonConvert.DeserializeObject<TutorialUserData>(jsonData);
+            }
+            if (tutorialUserData == null)
+            {
+                tutorialUserData = new TutorialUserData();
+                SaveTutorialUserDataToLocal(tutorialUserData);
+            }
+
+            return tutorialUserData;
+        }
+        private void SaveTutorialUserDataToLocal(TutorialUserData tutorialUserData)
+        {
+            PlayerPrefs.SetString(TUTORIALS_DATA_KEY, JsonConvert.SerializeObject(tutorialUserData));
+        }
+    }
+}
+
+
+================================================================================
+FILE 371/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/UIButton.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace GDOLib.UI
+{
+    [RequireComponent(typeof(Button))]
+    public class UIButton : UIPresenter
+    {
+        private Button _button;
+
+        public Button Button
+        {
+            get
+            {
+                if (_button == null){
+                    _button = GetComponent<Button>();
+                    if (_button == null)
+                    {
+                        Debug.LogError("UIButton requires a Button component.");
+                    }
+                }
+                return _button;
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 372/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/UIPresenter.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace GDOLib.UI
+{
+    public class UIPresenter : ObjectPresenter
+    {
+    }
+}
+
+
+================================================================================
+FILE 373/682: Assets/_GameModules/BehaviorTree/Tutorials/Scripts/VibrateButton.cs
+================================================================================
+
+﻿using GDOLib.UI;
+using UnityEngine;
+
+namespace GDOLib.Components
+{
+    public class VibrateButton : UIButton
+    {
+        [Tooltip("Enable or disable vibration feedback on button press [todo: can use usersetting to set this value].")]
+        [SerializeField] private bool enableVibrate = true;
+        public void DoLightFeedback()
+        {
+            if (!enableVibrate) return;
+            Debug.Log("HapticFeedback.LightFeedback");
+            //HapticFeedback.LightFeedback();
+        }
+        public void DoMediumFeedback()
+        {
+            if (!enableVibrate) return;
+            Debug.Log("HapticFeedback.MediumFeedback");
+            //HapticFeedback.MediumFeedback();
+        }
+        public void DoHeavyFeedback()
+        {
+            if (!enableVibrate) return;
+            Debug.Log("HapticFeedback.HeavyFeedback");
+            //HapticFeedback.HeavyFeedback();
+        }
+    }
+}
+
+
+================================================================================
+FILE 374/682: Assets/_GameModules/CameraModule/Scripts/CameraBounds.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class CameraBounds : MonoBehaviour
+	{
+		[Header("Boundaries")] [SerializeField] private Vector3 bounds = Vector3.one;
+
+		[SerializeField] private Vector3 boundsOffset = Vector3.zero;
+		[SerializeField] private float boundsMovementMax = 2f;
+		private float boundsMovementMultiplier = 0;
+
+		private Camera mainCamera;
+
+		private float boundsDiagonal;
+
+		public Vector3 Bounds
+		{
+			get { return bounds; }
+		}
+
+		public float Diagonal
+		{
+			get { return boundsDiagonal; }
+		}
+
+		public float SetBoundsMovementMultiplier
+		{
+			set { boundsMovementMultiplier = value; }
+		}
+
+
+		private bool initialized = false;
+
+		// Start is called before the first frame update
+		private void Awake()
+		{
+			Initialize();
+		}
+
+		public void Initialize()
+		{
+			bounds.y = 0;
+			boundsDiagonal = Vector3.Distance(bounds, -bounds) * 2;
+
+			mainCamera = Camera.main;
+		}
+
+		private void OnDrawGizmos()
+		{
+			Vector3 boundsOffset = this.boundsOffset + (new Vector3(0, 0, boundsMovementMax * boundsMovementMultiplier));
+			Gizmos.DrawWireCube(boundsOffset, bounds * 2);
+		}
+
+		public Vector3 StayWithinBounds(Vector3 position, Vector3 offset, float cameraTiltAngle, float distance, Transform cameraTrans)
+		{
+			if (!initialized)
+				Initialize();
+
+			//Limit camera within boundries
+			Vector3 cameraNoZ = new Vector3(offset.x, offset.y, 0) + new Vector3(position.x, position.y, 0);
+			Vector3 cameraNoX = new Vector3(0, offset.y, offset.z) + new Vector3(0, position.y, position.z);
+
+			Vector3 boundsOffset = this.boundsOffset + (new Vector3(0, 0, boundsMovementMax * boundsMovementMultiplier));
+
+			//Find direction vectors to the camera from the boundry edges
+			Vector3 leftBoundDir = cameraNoZ - new Vector3(-Bounds.x + boundsOffset.x, 0, 0);
+			Vector3 rightBoundDir = cameraNoZ - new Vector3(Bounds.x + boundsOffset.x, 0, 0);
+			Vector3 upperBoundDir = cameraNoX - new Vector3(0, 0, Bounds.z + boundsOffset.z);
+			Vector3 lowerBoundDir = cameraNoX - new Vector3(0, 0, -Bounds.z + boundsOffset.z);
+
+			float horizontalFOV = mainCamera.fieldOfView;
+			float verticalFOV = 2 * Mathf.Atan(Mathf.Tan((horizontalFOV * Mathf.Deg2Rad) / 2) * mainCamera.pixelHeight / mainCamera.pixelWidth) * Mathf.Rad2Deg;
+
+			float allowedXAngle = 90 - (horizontalFOV / 2);
+			float allowedZAngleLower = cameraTiltAngle + (verticalFOV / 2);
+			float allowedZAngleUpper = cameraTiltAngle - (verticalFOV / 2);
+
+			//Limit the x-left movement
+			float xLeftLimit = (-Bounds.x + boundsOffset.x) + Mathf.Cos(allowedXAngle * Mathf.Deg2Rad) * distance;
+			if (position.x < xLeftLimit)
+				position.x = xLeftLimit;
+
+			//Limit the x-right movement
+			float xRightLimit = (Bounds.x + boundsOffset.x) - Mathf.Cos(allowedXAngle * Mathf.Deg2Rad) * distance;
+			if (position.x > xRightLimit)
+				position.x = xRightLimit;
+
+			float zUpperLimit = (Bounds.z + boundsOffset.z) - Mathf.Cos(allowedZAngleUpper * Mathf.Deg2Rad) * distance - cameraTrans.localPosition.z;
+			if (position.z > zUpperLimit)
+				position.z = zUpperLimit;
+
+
+			float zLowerLimit = (-Bounds.z + boundsOffset.z) - Mathf.Cos(allowedZAngleLower * Mathf.Deg2Rad) * distance - cameraTrans.localPosition.z;
+			if (position.z < zLowerLimit)
+				position.z = zLowerLimit;
+
+			//Left side
+			//Debug.DrawRay(new Vector3((-Bounds.x + boundsOffset.x), 0, 0), leftBoundDir);
+			//Debug.DrawRay(new Vector3((-Bounds.x + boundsOffset.x), 0, 0), new Vector3(Mathf.Cos(allowedXAngle * Mathf.Deg2Rad), Mathf.Sin(allowedXAngle * Mathf.Deg2Rad), 0) * 10, Color.red);
+
+			////Right side
+			//Debug.DrawRay(new Vector3((Bounds.x + boundsOffset.x), 0, 0), rightBoundDir);
+			//Debug.DrawRay(new Vector3((Bounds.x + boundsOffset.x), 0, 0), new Vector3(-Mathf.Cos(allowedXAngle * Mathf.Deg2Rad), Mathf.Sin(allowedXAngle * Mathf.Deg2Rad), 0) * 10, Color.red);
+
+			////Top side
+			//Debug.DrawRay(new Vector3(0, 0, (Bounds.z + boundsOffset.z)), upperBoundDir);
+			//Debug.DrawRay(new Vector3(0, 0, (Bounds.z + boundsOffset.z)), new Vector3(0, Mathf.Sin(allowedZAngleUpper * Mathf.Deg2Rad), -Mathf.Cos(allowedZAngleUpper * Mathf.Deg2Rad)) * 10, Color.red);
+
+			////Bottom side
+			//Debug.DrawRay(new Vector3(0, 0, (-Bounds.z + boundsOffset.z)), lowerBoundDir);
+			//Debug.DrawRay(new Vector3(0, 0, (-Bounds.z + boundsOffset.z)), new Vector3(0, Mathf.Sin(allowedZAngleLower * Mathf.Deg2Rad), -Mathf.Cos(allowedZAngleLower * Mathf.Deg2Rad)) * 10, Color.red);
+
+			boundsMovementMultiplier = 0;
+			return position;
+		}
+	}
+}
+
+
+================================================================================
+FILE 375/682: Assets/_GameModules/CameraModule/Scripts/CameraFollowIsometric.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using UnityEngine;
+
+public class CameraFollowIsometric : MonoBehaviour
+{
+    [Header("Target")]
+    public Player target;
+    public Vector3 worldOffset = Vector3.zero;   // Dịch chuyển target trong world (nếu muốn lệch khung)
+
+    [Header("Isometric Settings")]
+    public Vector3 isoEuler = new Vector3(35f, 135f, 0f); // Góc cố định
+    public float distance = 12f;                          // Khoảng cách từ camera tới target dọc theo hướng nhìn
+
+    [Header("Smoothing")]
+    [Tooltip("= 0 để bám cứng, >0 để mượt hơn")]
+    public float smoothTime = 0.15f;
+
+    private Vector3 _vel;
+
+    public void Initialize(Player target)
+    {
+        this.target = target;
+        if (target == null) return;
+
+        // Đặt vị trí ngay lập tức khi khởi tạo
+        Quaternion rot = Quaternion.Euler(isoEuler);
+        Vector3 fwd = rot * Vector3.forward;
+        Vector3 focus = target.transform.position + worldOffset;
+        transform.position = focus - fwd * distance;
+        transform.rotation = rot;
+        isoEuler = new Vector3(35f, target.Direction == 1 ? 315 : 135, 0f);
+    }
+
+    void LateUpdate()
+    {
+        if (target == null) return;
+        isoEuler = new Vector3(35f, target.Direction == 1 ? 315 : 135, 0f);
+        // Góc quay cố định cho isometric
+        Quaternion rot = Quaternion.Euler(isoEuler);
+        transform.rotation = rot;
+
+        // Hướng nhìn (forward) theo góc trên
+        Vector3 fwd = rot * Vector3.forward;
+
+        // Đặt vị trí sao cho target nằm trên trục nhìn của camera ở khoảng cách 'distance'
+        Vector3 focus = target.transform.position + worldOffset;
+        Vector3 desiredPos = focus - fwd * distance;
+
+        if (smoothTime <= 0f)
+            transform.position = desiredPos;
+        else
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPos, ref _vel, smoothTime);
+    }
+
+#if UNITY_EDITOR
+    // Gizmo nhỏ để nhìn thấy điểm focus trong Scene view
+    void OnDrawGizmosSelected()
+    {
+        if (target == null) return;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(target.transform.position + worldOffset, 0.2f);
+    }
+#endif
+}
+
+
+================================================================================
+FILE 376/682: Assets/_GameModules/CameraModule/Scripts/CameraManager.cs
+================================================================================
+
+using UnityEngine;
+
+public class CameraManager : MonoBehaviour
+{
+
+    public Transform target;
+    public float smoothSpeed = 5f;
+
+    private float fixedX;
+    private float fixedY;
+    private float zOffset;
+    private Quaternion baseRotation;
+    private bool isFlipped = false;
+    private Vector3 currentVelocity;
+
+
+    void Start()
+    {
+         if (target == null)
+        {
+            Debug.LogWarning("[CameraManager] target chưa được gán, chờ gán động từ TankSpawnTrigger.");
+            return;
+        }
+        fixedX = transform.position.x;
+        fixedY = transform.position.y;
+        zOffset = transform.position.z - target.position.z;
+        baseRotation = transform.rotation;
+    }
+
+    void LateUpdate()
+    {
+        if (target == null) return;
+
+        transform.rotation = isFlipped ? Quaternion.Euler(baseRotation.eulerAngles + new Vector3(0, 180, 0)) : baseRotation;
+
+        float targetZ = target.position.z + zOffset;
+        Vector3 desiredPosition = new Vector3(fixedX, fixedY, targetZ);
+
+        transform.position = Vector3.MoveTowards(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+    }
+
+    public void FlipDirection()
+    {
+        isFlipped = !isFlipped;
+        zOffset = -zOffset;
+    }
+}
+
+
+================================================================================
+FILE 377/682: Assets/_GameModules/CameraModule/Scripts/CameraScreenFXBehaviour.cs
+================================================================================
+
+﻿using System;
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+
+namespace Fusion.TankOnlineModule
+{
+	public class CameraScreenFXBehaviour : MonoBehaviour
+	{
+		Kino.DigitalGlitch glitchEffect;
+		[SerializeField] private float durationToTarget = 0.3f;
+		float timer = 0;
+
+		bool active = false;
+		private float maxGlitch = 1;
+
+		private void Awake()
+		{
+			GetComponent<PostProcessLayer>().enabled = !Application.isMobilePlatform;
+			GetComponent<PostProcessVolume>().enabled = !Application.isMobilePlatform;
+		}
+
+		void Start()
+		{
+			glitchEffect = GetComponent<Kino.DigitalGlitch>();
+			glitchEffect.enabled = false;
+		}
+
+		public void ToggleGlitch(bool value)
+		{
+			active = value;
+		}
+
+		// Update is called once per frame
+		void Update()
+		{
+			float direction = active ? 1 : -1;
+			if ((timer > 0 && direction == -1) || (timer < durationToTarget && direction == 1))
+			{
+				timer = Mathf.Clamp(timer + Time.deltaTime * direction, 0, durationToTarget);
+				float t = timer / durationToTarget;
+				glitchEffect.intensity = Mathf.Lerp(0, maxGlitch, t);
+
+				if (timer == 0 && direction == -1 && glitchEffect.enabled)
+				{
+					glitchEffect.enabled = false;
+				}
+				else if (direction == 1 && !glitchEffect.enabled)
+				{
+					glitchEffect.enabled = true;
+				}
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 378/682: Assets/_GameModules/CameraModule/Scripts/CameraStrategy.cs
+================================================================================
+
+﻿using System.Collections.Generic;
+using Fusion;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class CameraStrategy : MonoBehaviour
+	{
+		[Header("Base Settings")] [SerializeField]
+		protected float _moveSpeed;
+
+		private float _initialMoveSpeed;
+		protected Transform _myCamera;
+
+		[Header("-- Targets")] protected List<GameObject> _targets = new List<GameObject>();
+		protected List<GameObject> _activeTargets = new List<GameObject>();
+
+		private bool _usingPlaceholderTarget = false;
+		private GameObject _placeholderTarget = null;
+
+		private bool _setPlaceholder = true;
+
+		public virtual void Initialize()
+		{
+			_myCamera = Camera.main.transform;
+
+			_initialMoveSpeed = _moveSpeed;
+		}
+
+		public void AddTarget(GameObject target)
+		{
+			if (_usingPlaceholderTarget)
+			{
+				_targets.Clear();
+				_usingPlaceholderTarget = false;
+			}
+
+			_targets.Add(target);
+		}
+
+		public void RemoveTarget(GameObject target)
+		{
+			_targets.Remove(target);
+			if (_targets.Count == 0)
+				UsePlaceholderTarget();
+		}
+
+		public virtual void ClearTargets()
+		{
+			_targets.Clear();
+			_activeTargets.Clear();
+		}
+
+		// Workaround for when all tanks are removed and there is no target left
+		private void UsePlaceholderTarget()
+		{
+			_setPlaceholder = true;
+		}
+
+		private void Update()
+		{
+			if (_setPlaceholder)
+			{
+				_setPlaceholder = false;
+				if (_placeholderTarget == null)
+				{
+					_placeholderTarget = new GameObject("Camera Placeholder Target");
+				}
+
+				_usingPlaceholderTarget = true;
+				_placeholderTarget.transform.position = transform.position;
+				_targets.Add(_placeholderTarget.gameObject);
+			}
+		}
+
+		public void RemoveAll()
+		{
+			_targets.Clear();
+		}
+	}
+}
+
+
+================================================================================
+FILE 379/682: Assets/_GameModules/CameraModule/Scripts/CameraStrategy_MultipleTargets.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class CameraStrategy_MultipleTargets : CameraStrategy
+	{
+		// Defining the size of the arena, easily accessable by anyone who needs it
+		public const float ARENA_X = 26.35f;
+		public const float ARENA_Y = 17.7f;
+		
+		private Vector3 _offset;
+		private Vector3 _averageTarget;
+
+		[Header("Camera Settings")] private float cameraTiltAngle = 55f;
+
+		private float _longestDistance;
+		private float _maxDist = 64f;
+		private float _minDist = 50f;
+
+		private float _distanceMultiplier = 1f;
+		private float _maxDistanceMultiplier = 1.4f;
+
+		private float _furtestTargetWeightMultiplier = 2.08f;
+
+		[Header("Boundries")] [SerializeField] private CameraBounds _cameraBounds;
+
+		private ScreenShaker _screenShaker;
+
+		private float _initialLongestDistance;
+
+		private Vector3 _averageTargetGizmoPosition;
+		private Vector3 _weightedTargetGizmoPosition;
+
+
+		private void Awake()
+		{
+			Initialize();
+		}
+
+		// Use this for initialization
+		public override void Initialize()
+		{
+			base.Initialize();
+
+			_screenShaker = GetComponent<ScreenShaker>();
+			UpdateCamera();
+			ForceUpdatePositionAndRotation();
+		}
+
+		public void ResetCameraPosition()
+		{
+			transform.position = Vector3.zero;
+			_myCamera.transform.localPosition = _offset + _screenShaker.finalPositionalShake;
+			_myCamera.transform.rotation = Quaternion.Euler(cameraTiltAngle, 0, 0);
+		}
+
+		[SerializeField] private float singleTargetYadditionalOffset = 2f;
+
+		void UpdateCamera()
+		{
+			CalculateAverages();
+			CalculateOffset();
+
+			_averageTarget = _cameraBounds.StayWithinBounds(_averageTarget, _offset, cameraTiltAngle, _longestDistance, _myCamera.transform);
+			if (_targets.Count == 1 && _targets[0] != null)
+			{
+				float arenaYMultiplier = Mathf.Clamp01(_targets[0].transform.position.z / ARENA_Y);
+				float additionalZOffsetForOnlineTeleporter = arenaYMultiplier * singleTargetYadditionalOffset;
+				_averageTarget += Vector3.forward * additionalZOffsetForOnlineTeleporter;
+			}
+
+			UpdatePositionAndRotation();
+		}
+
+		// Update is called once per frame
+		public void LateUpdate()
+		{
+			UpdateCamera();
+		}
+
+		void CalculateAverages()
+		{
+			//Reset the distance
+			_longestDistance = 0f;
+			float yDifference = 0f;
+
+			//Reset the average target variable
+			_averageTarget = Vector3.zero;
+			Vector3 weightedAverageTarget = Vector3.zero;
+
+			//If there are no targets in the target list, then set the distance to 10
+			if (_targets.Count == 0)
+			{
+				_longestDistance = _maxDist;
+				return;
+			}
+
+			Vector3 furtestAwayPosition = Vector3.zero;
+
+			_activeTargets.Clear();
+
+			float minY = Mathf.Infinity;
+			float maxZ = -Mathf.Infinity;
+			float averageZ = 0;
+
+			//Go through each target and calculate its distance to the targets average position and add it to the distance variable
+			int count = 0;
+			for (int i = 0; i < _targets.Count; i++)
+			{
+				GameObject targetGameObject = _targets[i];
+
+				if (targetGameObject != null)
+				{
+					//Get current target
+					Transform targetTransform = _targets[i].transform;
+
+					_activeTargets.Add(targetTransform.gameObject);
+
+					//Add target position to average target - gets divided later
+					_averageTarget += targetTransform.position;
+
+					//Loop through the target list again and check distances and y differences
+					for (int j = i; j < _targets.Count; j++)
+					{
+						GameObject subTargetGameObject = _targets[j];
+						if (subTargetGameObject != targetGameObject)
+						{
+							//Find the tanks with the longest distance between them
+							float targetDistance = Vector3.Distance(targetTransform.position, _targets[j].transform.position);
+							if (targetDistance > _longestDistance)
+							{
+								_longestDistance = targetDistance;
+							}
+
+							//Compensate for Y Difference between all tanks
+							float yDiff = Mathf.Abs((targetTransform.position.z - _targets[j].transform.position.z));
+							if (yDifference < yDiff)
+							{
+								yDifference = yDiff;
+							}
+
+							//Keep track of max and min positions on the z-axis 
+							//for moving the boundsCenter around
+							float zPos = targetTransform.position.z;
+							if (zPos > maxZ)
+								maxZ = zPos;
+							if (zPos < minY)
+								minY = zPos;
+							averageZ += zPos;
+
+							count++;
+						}
+					}
+				}
+			}
+
+			// Compensate the camera position when driving above the center of the arena
+			_distanceMultiplier = Mathf.Clamp(yDifference / (_cameraBounds.Bounds.z * 2), 0, 1f);
+			if (averageZ >= 0)
+			{
+				float clampedAverage = Mathf.Clamp(averageZ / _cameraBounds.Bounds.z, 0, 1);
+
+				_cameraBounds.SetBoundsMovementMultiplier = Mathf.Clamp((averageZ) / (_cameraBounds.Bounds.z), 0, 1);
+			}
+
+			_distanceMultiplier = Remap(_distanceMultiplier, 0, 1, 1, _maxDistanceMultiplier);
+
+			if (_targets.Count == 1)
+			{
+				_longestDistance = _maxDist;
+			}
+			else
+				_longestDistance += _minDist;
+
+			float addOnDistance = (_longestDistance / _cameraBounds.Diagonal) * ((_maxDist * _distanceMultiplier) - _minDist);
+			_longestDistance += (addOnDistance);
+
+			//If target count is greater 3 or more, then we need to use a weighted target position to try to keep all players on the screen 
+			if (_activeTargets.Count > 2)
+			{
+				//Reset weightedAverageTarget
+				weightedAverageTarget = Vector3.zero;
+
+				//Calculate the average of all the positions
+				_averageTarget = _averageTarget / _activeTargets.Count;
+
+				//Save position for gizmo drawing
+				_averageTargetGizmoPosition = _averageTarget;
+
+				float[] distances = new float[_activeTargets.Count];
+				Vector3[] directions = new Vector3[_activeTargets.Count];
+				float longestDistance = 0;
+
+				//Find distances to average point
+				for (int i = 0; i < _activeTargets.Count; i++)
+				{
+					Vector3 direction = _activeTargets[i].transform.position - _averageTarget;
+					Debug.DrawRay(_activeTargets[i].transform.position, direction, Color.green);
+					directions[i] = direction;
+
+					float distanceToAverage = direction.magnitude;
+					distances[i] = distanceToAverage;
+					if (distanceToAverage > longestDistance)
+						longestDistance = distanceToAverage;
+				}
+
+				//Calculate a average target offset with weights between 0-1 based on longestDistance
+				//The longer a tank is from the average target, the more impact it will have on the weighted offset
+				for (int i = 0; i < _activeTargets.Count; i++)
+				{
+					float multiplier = Remap(distances[i], 0, longestDistance, 0, 1);
+					//weightedAverageTarget += (directions[i] * Mathf.Pow(multiplier, furtestTargetWeightMultiplier));
+					weightedAverageTarget += (directions[i] * multiplier * _furtestTargetWeightMultiplier);
+				}
+
+				weightedAverageTarget /= _activeTargets.Count;
+				_averageTarget += weightedAverageTarget; //Offset the average target with the weightes 
+
+				//Save weighted target for gizmo drawing
+				_weightedTargetGizmoPosition = _averageTarget;
+			}
+			//If there is only 1-2 players, we just use straight up average positioning
+			else if (_activeTargets.Count > 0)
+			{
+				_averageTarget = _averageTarget / _activeTargets.Count;
+			}
+			else
+			{
+				_averageTarget = transform.position;
+			}
+		}
+
+		public float Remap(float value, float oldFrom, float oldTo, float newFrom, float newTo)
+		{
+			return (value - oldFrom) / (oldTo - oldFrom) * (newTo - newFrom) + newFrom;
+		}
+
+		//Use trigonomerty to calculate the distance and height of the camera given a distance and a camera tilt angle
+		void CalculateOffset()
+		{
+			float modifiedAngle = cameraTiltAngle - 90;
+			float zOffset = (Mathf.Sin(modifiedAngle * Mathf.Deg2Rad) * _longestDistance);
+			float yOffset = (Mathf.Cos(modifiedAngle * Mathf.Deg2Rad) * _longestDistance);
+			_offset = new Vector3(0, yOffset, zOffset);
+		}
+
+		//Update the position and rotation of both the camera and the camera parent
+		void UpdatePositionAndRotation()
+		{
+			//Camera local position and rotation
+			_myCamera.transform.localPosition = Vector3.Lerp(_myCamera.transform.localPosition, _offset, Time.deltaTime * 10f) + _screenShaker.finalPositionalShake;
+			_myCamera.transform.rotation = Quaternion.Lerp(_myCamera.transform.rotation, Quaternion.Euler(cameraTiltAngle, 0, 0), Time.deltaTime * 10f) * _screenShaker.finalRotationShake;
+
+			//Camera parent position
+			transform.position = Vector3.Lerp(transform.position, _averageTarget, Time.deltaTime * _moveSpeed);
+		}
+
+		void ForceUpdatePositionAndRotation()
+		{
+			//Camera local position and rotation
+			_myCamera.transform.localPosition = _offset + _screenShaker.finalPositionalShake;
+			_myCamera.transform.rotation = Quaternion.Euler(cameraTiltAngle, 0, 0) * _screenShaker.finalRotationShake;
+		}
+
+		public void CameraShake(float impact = 1f)
+		{
+			ScreenShaker.AddTrauma(impact);
+		}
+
+		public Vector3 GetAverageTarget()
+		{
+			return _averageTarget;
+		}
+
+		private void OnDrawGizmos()
+		{
+			Gizmos.DrawSphere(_averageTarget, 0.4f);
+
+			Gizmos.color = Color.yellow;
+			Gizmos.DrawSphere(_weightedTargetGizmoPosition, 0.4f);
+
+			Gizmos.color = Color.blue;
+			Gizmos.DrawSphere(_averageTargetGizmoPosition, 0.4f);
+		}
+	}
+}
+
+
+================================================================================
+FILE 380/682: Assets/_GameModules/CameraModule/Scripts/MinimapCameraFollow.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using UnityEngine;
+
+public class MinimapCameraFollow : MonoBehaviour
+{
+    [Header("Target (nhân vật chính)")]
+    public Transform target;
+
+    [Header("Độ cao của camera")]
+    public float height = 50f;
+
+    [Header("Độ mượt khi theo dõi")]
+    public float smoothSpeed = 5f;
+
+    public void Initialize(Player target)
+    {
+        this.target = target.transform;
+    }
+
+    private void LateUpdate()
+    {
+        if (target == null) return;
+
+        // Camera chỉ follow theo X, Z, giữ Y = height
+        Vector3 desiredPosition = new Vector3(target.position.x, height, target.position.z);
+
+        // Nội suy để mượt
+        Vector3 smoothed = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+        transform.position = smoothed;
+
+        // Hướng camera thẳng xuống dưới
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    }
+}
+
+
+================================================================================
+FILE 381/682: Assets/_GameModules/CameraModule/Scripts/ScreenShaker.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ScreenShaker : MonoBehaviour
+	{
+		[Header("Rotational")] [SerializeField]
+		private float _maxYaw = 40f;
+
+		[SerializeField] private float _maxPitch = 20f;
+		[SerializeField] private float _maxRoll = 10f;
+
+		[Header("Positional")] [SerializeField]
+		private float _maxOfs = 2f;
+
+		[Header("Settings")] [SerializeField] private float _speed = 5f;
+		[SerializeField] private float _gravity = 1f;
+		[SerializeField] private int _shakeStrength;
+
+		//-----------------------------------//
+
+		private static float _trauma = 0;
+
+		private float _shake = 0;
+		private float _modifiedTime = 0;
+
+		private Quaternion _finalRotationShake = Quaternion.identity;
+		private Vector3 _finalPositionalShake = Vector3.zero;
+
+		public Quaternion finalRotationShake
+		{
+			get { return _finalRotationShake; }
+		}
+
+		public Vector3 finalPositionalShake
+		{
+			get { return _finalPositionalShake; }
+		}
+
+
+		void Update()
+		{
+			_modifiedTime = Time.time * _speed;
+			if (_trauma > 0)
+				_trauma -= Time.deltaTime * _gravity;
+			else
+				_trauma = 0f;
+
+			Shake();
+		}
+
+		// Stack some trauma to build up a nice shake
+		public static void AddTrauma(float newTrauma)
+		{
+			_trauma += newTrauma;
+			_trauma = Mathf.Clamp01(_trauma);
+		}
+
+		// Reset trauma to 0 to stop screen shake
+		public void ResetTrauma()
+		{
+			_trauma = 0;
+		}
+
+		//Calculate the shaking
+		void Shake()
+		{
+			_shake = Mathf.Pow(_trauma, 2);
+			_finalRotationShake = CalculateRotationalShake();
+			_finalPositionalShake = CalculatePotitionalShake() * _shakeStrength;
+		}
+
+		//Calculate the rotational shake amount
+		Quaternion CalculateRotationalShake()
+		{
+			float yaw = (_maxYaw * _shake * GetPerlinNoise(0)) * _shakeStrength;
+			float pitch = (_maxPitch * _shake * GetPerlinNoise(1)) * _shakeStrength;
+			float roll = (_maxRoll * _shake * GetPerlinNoise(2)) * _shakeStrength;
+
+			return Quaternion.Euler(yaw, pitch, roll);
+		}
+
+		//Calculate the positional shake amount
+		Vector3 CalculatePotitionalShake()
+		{
+			float offsetX = _maxOfs * _shake * GetPerlinNoise(3);
+			float offsetY = _maxOfs * _shake * GetPerlinNoise(4);
+			float offsetZ = _maxOfs * _shake * GetPerlinNoise(5);
+
+			return new Vector3(offsetX, offsetY, offsetZ);
+		}
+
+		float GetPerlinNoise(int seedOffset)
+		{
+			float noise = Mathf.PerlinNoise(seedOffset, _modifiedTime);
+			noise = (noise - 0.5f) * 2f; //Map it from (0-1) to (-1-1) to get negative values aswell;
+			return noise;
+		}
+	}
+}
+
+
+================================================================================
+FILE 382/682: Assets/_GameModules/Editor/AutoAnchorWindow.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+public class AutoAnchorWindow : EditorWindow
+{
+    [MenuItem("Tools/Auto Anchor")]
+    public static void ShowWindow()
+    {
+        GetWindow<AutoAnchorWindow>("Auto Anchor");
+    }
+
+    private void OnGUI()
+    {
+        if (GUILayout.Button("Set Anchor To Corners (Selection)"))
+        {
+            foreach (GameObject obj in Selection.gameObjects)
+            {
+                RectTransform t = obj.GetComponent<RectTransform>();
+                if (t != null)
+                {
+                    SetAnchorToCorners(t);
+                }
+            }
+        }
+    }
+
+    private void SetAnchorToCorners(RectTransform t)
+    {
+        if (t == null || t.parent == null) return;
+
+        RectTransform pt = t.parent as RectTransform;
+
+        Vector2 newAnchorsMin = new Vector2(
+            t.anchorMin.x + t.offsetMin.x / pt.rect.width,
+            t.anchorMin.y + t.offsetMin.y / pt.rect.height);
+        Vector2 newAnchorsMax = new Vector2(
+            t.anchorMax.x + t.offsetMax.x / pt.rect.width,
+            t.anchorMax.y + t.offsetMax.y / pt.rect.height);
+
+        t.anchorMin = newAnchorsMin;
+        t.anchorMax = newAnchorsMax;
+
+        t.offsetMin = Vector2.zero;
+        t.offsetMax = Vector2.zero;
+
+        Debug.Log("Anchors set to corners for " + t.name);
+    }
+   
+}
+
+
+================================================================================
+FILE 383/682: Assets/_GameModules/Editor/FunctionGrammarChecker.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEditor;
+
+namespace GameModules.Utilities
+{
+    /// <summary>
+    /// Script kiểm tra grammar và ngữ pháp của tên functions/properties/methods
+    /// </summary>
+    public class FunctionGrammarChecker : EditorWindow
+    {
+        [MenuItem("Tools/Code Quality/Function Grammar Checker")]
+        public static void ShowWindow()
+        {
+            GetWindow<FunctionGrammarChecker>("Function Grammar Checker");
+        }
+
+        #region GUI Variables
+        private Vector2 scrollPosition;
+        private bool checkMethods = true;
+        private bool checkProperties = true;
+        private bool checkEvents = true;
+        private bool checkEnglishGrammar = true;
+        private bool checkVerbNounOrder = true;
+        private bool checkPluralSingular = true;
+        private bool checkCommonTypos = true;
+        private string searchPath = "Assets/_GameModules";
+        #endregion
+
+        #region Data Structures
+        [Serializable]
+        public class GrammarIssue
+        {
+            public string filePath;
+            public int lineNumber;
+            public string issueType;
+            public string problemText;
+            public string suggestedFix;
+            public string description;
+            public GrammarSeverity severity;
+        }
+
+        public enum GrammarSeverity
+        {
+            Info,
+            Warning,
+            Error
+        }
+
+        private List<GrammarIssue> foundIssues = new List<GrammarIssue>();
+        #endregion
+
+        #region Grammar Rules and Dictionaries
+
+        // Common English verbs for methods
+        private static readonly HashSet<string> CommonVerbs = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            // Action verbs
+            "Get", "Set", "Add", "Remove", "Delete", "Create", "Update", "Refresh", "Reset", "Clear",
+            "Load", "Save", "Open", "Close", "Start", "Stop", "Pause", "Resume", "Play", "Initialize",
+            "Destroy", "Spawn", "Enable", "Disable", "Activate", "Deactivate", "Toggle", "Switch",
+            "Move", "Rotate", "Scale", "Transform", "Translate", "Convert", "Parse", "Validate",
+            "Check", "Verify", "Confirm", "Cancel", "Apply", "Execute", "Invoke", "Trigger", "Fire",
+            "Calculate", "Compute", "Process", "Handle", "Manage", "Control", "Monitor", "Watch",
+            "Show", "Hide", "Display", "Render", "Draw", "Paint", "Fill", "Empty", "Connect", "Disconnect",
+            "Send", "Receive", "Push", "Pull", "Fetch", "Submit", "Post", "Upload", "Download",
+            "Search", "Find", "Filter", "Sort", "Order", "Group", "Select", "Choose", "Pick"
+        };
+
+        // Common nouns for properties and return values
+        private static readonly HashSet<string> CommonNouns = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Health", "Damage", "Position", "Rotation", "Scale", "Size", "Count", "Length", "Width", "Height",
+            "Speed", "Velocity", "Acceleration", "Force", "Power", "Energy", "Level", "Score", "Point",
+            "Player", "Enemy", "Target", "Object", "Component", "Transform", "Renderer", "Collider",
+            "Color", "Material", "Texture", "Sprite", "Animation", "Sound", "Audio", "Music", "Effect",
+            "Name", "ID", "Index", "Key", "Value", "Data", "Info", "State", "Status", "Type", "Mode",
+            "Time", "Duration", "Delay", "Interval", "Range", "Distance", "Angle", "Direction",
+            "List", "Array", "Collection", "Set", "Dictionary", "Map", "Queue", "Stack", "Pool"
+        };
+
+        // Adjectives that should come before nouns
+        private static readonly HashSet<string> CommonAdjectives = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Current", "Previous", "Next", "Last", "First", "Initial", "Final", "Default", "Custom",
+            "Active", "Inactive", "Enabled", "Disabled", "Visible", "Hidden", "Selected", "Available",
+            "Valid", "Invalid", "Empty", "Full", "New", "Old", "Recent", "Latest", "Original",
+            "Maximum", "Minimum", "Total", "Average", "Random", "Local", "Global", "Static", "Dynamic",
+            "Public", "Private", "Protected", "Internal", "Readonly", "Const", "Temp", "Temporary"
+        };
+
+        // Common typos and incorrect spellings
+        private static readonly Dictionary<string, string> CommonTypos = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+        {
+            // Common programming typos
+            {"Lenght", "Length"}, {"Widht", "Width"}, {"Heigth", "Height"}, {"Strenght", "Strength"},
+            {"Recieve", "Receive"}, {"Seperate", "Separate"}, {"Definately", "Definitely"},
+            {"Occurence", "Occurrence"}, {"Recomend", "Recommend"}, {"Independant", "Independent"},
+            {"Transfered", "Transferred"}, {"Prefered", "Preferred"}, {"Refered", "Referred"},
+            {"Begining", "Beginning"}, {"Writting", "Writing"}, {"Runing", "Running"},
+            {"Stoping", "Stopping"}, {"Geting", "Getting"}, {"Seting", "Setting"},
+            {"Colision", "Collision"}, {"Posision", "Position"}, {"Rotacion", "Rotation"},
+            {"Direccion", "Direction"}, {"Conection", "Connection"}, {"Inicialization", "Initialization"},
+            {"Syncronize", "Synchronize"}, {"Aply", "Apply"}, {"Procces", "Process"},
+            {"Acces", "Access"}, {"Adress", "Address"}, {"Sucess", "Success"}, {"Progres", "Progress"},
+            {"Complet", "Complete"}, {"Creat", "Create"}, {"Updat", "Update"}, {"Delet", "Delete"},
+            
+            // Game-specific typos
+            {"Playr", "Player"}, {"Enemie", "Enemy"}, {"Weapn", "Weapon"}, {"Ammuniton", "Ammunition"},
+            {"Expirience", "Experience"}, {"Charactr", "Character"}, {"Levl", "Level"}, {"Scor", "Score"},
+            {"Helth", "Health"}, {"Invenory", "Inventory"},
+            {"Upgrd", "Upgrade"}, {"Equipmnt", "Equipment"}, {"Skil", "Skill"}, {"Abilty", "Ability"},
+            
+            // Unity-specific
+            {"Instaniate", "Instantiate"}, {"Destory", "Destroy"}, {"Awak", "Awake"},
+            {"FixedUpdat", "FixedUpdate"}, {"LateUpdat", "LateUpdate"}, {"Colider", "Collider"},
+            {"Rigidbdy", "Rigidbody"}, {"Transfom", "Transform"}, {"Camra", "Camera"}, {"Canva", "Canvas"}
+        };
+
+        // Words that should be plural
+        private static readonly HashSet<string> ShouldBePlural = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Child", "Item", "Element", "Component", "Object", "Player", "Enemy", "Weapon", "Tool",
+            "Resource", "Asset", "File", "Data", "Point", "Vector", "Vertex", "Triangle", "Polygon"
+        };
+
+        // Invalid method name patterns
+        private static readonly Regex[] InvalidMethodPatterns = new Regex[]
+        {
+            new Regex(@"^get[A-Z].*s$"), // GetItems should be GetItemList or GetAllItems
+            new Regex(@"^set[A-Z].*s$"), // SetItems should be SetItemList
+            new Regex(@"^[a-z]"), // Should start with uppercase
+            new Regex(@"^\d"), // Should not start with number
+            new Regex(@"[_]"), // Should not contain underscore (except for Unity messages)
+            new Regex(@"^(do|make|go|run)$", RegexOptions.IgnoreCase), // Too vague
+        };
+
+        #endregion
+
+        #region GUI
+        void OnGUI()
+        {
+            GUILayout.Label("Function Grammar Checker", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+
+            // Configuration
+            GUILayout.Label("Configuration", EditorStyles.boldLabel);
+            searchPath = EditorGUILayout.TextField("Search Path:", searchPath);
+
+            EditorGUILayout.Space();
+
+            // Check Types
+            GUILayout.Label("Check Types:", EditorStyles.boldLabel);
+            checkMethods = EditorGUILayout.Toggle("Methods/Functions", checkMethods);
+            checkProperties = EditorGUILayout.Toggle("Properties", checkProperties);
+            checkEvents = EditorGUILayout.Toggle("Events", checkEvents);
+
+            EditorGUILayout.Space();
+
+            // Grammar Options
+            GUILayout.Label("Grammar Checks:", EditorStyles.boldLabel);
+            checkEnglishGrammar = EditorGUILayout.Toggle("English Grammar", checkEnglishGrammar);
+            checkVerbNounOrder = EditorGUILayout.Toggle("Verb-Noun Order", checkVerbNounOrder);
+            checkPluralSingular = EditorGUILayout.Toggle("Plural/Singular", checkPluralSingular);
+            checkCommonTypos = EditorGUILayout.Toggle("Common Typos", checkCommonTypos);
+
+            EditorGUILayout.Space();
+
+            // Scan Button
+            if (GUILayout.Button("Scan Grammar Issues", GUILayout.Height(30)))
+            {
+                ScanGrammarIssues();
+            }
+
+            EditorGUILayout.Space();
+
+            // Results
+            if (foundIssues.Count > 0)
+            {
+                GUILayout.Label($"Found {foundIssues.Count} Grammar Issues:", EditorStyles.boldLabel);
+
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
+                foreach (var issue in foundIssues)
+                {
+                    DrawIssue(issue);
+                }
+
+                EditorGUILayout.EndScrollView();
+
+                EditorGUILayout.Space();
+
+                if (GUILayout.Button("Export Grammar Report"))
+                {
+                    ExportReport();
+                }
+            }
+        }
+
+        private void DrawIssue(GrammarIssue issue)
+        {
+            Color originalColor = GUI.color;
+
+            // Set color based on severity
+            switch (issue.severity)
+            {
+                case GrammarSeverity.Error:
+                    GUI.color = new Color(1f, 0.7f, 0.7f);
+                    break;
+                case GrammarSeverity.Warning:
+                    GUI.color = new Color(1f, 1f, 0.7f);
+                    break;
+                case GrammarSeverity.Info:
+                    GUI.color = new Color(0.7f, 0.7f, 1f);
+                    break;
+            }
+
+            EditorGUILayout.BeginVertical("box");
+
+            EditorGUILayout.LabelField($"[{issue.severity}] {issue.issueType}", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"File: {issue.filePath}:{issue.lineNumber}");
+            EditorGUILayout.LabelField($"Problem: {issue.problemText}");
+
+            if (!string.IsNullOrEmpty(issue.suggestedFix))
+            {
+                EditorGUILayout.LabelField($"Suggested: {issue.suggestedFix}", EditorStyles.miniLabel);
+            }
+
+            if (!string.IsNullOrEmpty(issue.description))
+            {
+                EditorGUILayout.LabelField($"Description: {issue.description}", EditorStyles.miniLabel);
+            }
+
+            // Open file button
+            if (GUILayout.Button("Open File", GUILayout.Width(100)))
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(issue.filePath);
+                AssetDatabase.OpenAsset(asset, issue.lineNumber);
+            }
+
+            EditorGUILayout.EndVertical();
+
+            GUI.color = originalColor;
+        }
+        #endregion
+
+        #region Scanning Logic
+        private void ScanGrammarIssues()
+        {
+            foundIssues.Clear();
+
+            if (!Directory.Exists(searchPath))
+            {
+                Debug.LogError($"Search path does not exist: {searchPath}");
+                return;
+            }
+
+            var csFiles = Directory.GetFiles(searchPath, "*.cs", SearchOption.AllDirectories);
+
+            EditorUtility.DisplayProgressBar("Scanning", "Analyzing grammar...", 0f);
+
+            try
+            {
+                for (int i = 0; i < csFiles.Length; i++)
+                {
+                    var filePath = csFiles[i].Replace('\\', '/');
+                    EditorUtility.DisplayProgressBar("Scanning", $"Analyzing {Path.GetFileName(filePath)}", (float)i / csFiles.Length);
+
+                    ScanFileForGrammar(filePath);
+                }
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+
+            // Sort issues by severity and file
+            foundIssues = foundIssues.OrderBy(i => i.severity)
+                                   .ThenBy(i => i.filePath)
+                                   .ThenBy(i => i.lineNumber)
+                                   .ToList();
+
+            Debug.Log($"Grammar Check Complete. Found {foundIssues.Count} issues.");
+        }
+
+        private void ScanFileForGrammar(string filePath)
+        {
+            try
+            {
+                var lines = File.ReadAllLines(filePath);
+
+                for (int lineIndex = 0; lineIndex < lines.Length; lineIndex++)
+                {
+                    var line = lines[lineIndex].Trim();
+                    var lineNumber = lineIndex + 1;
+
+                    if (ShouldSkipLine(line))
+                        continue;
+
+                    // Check methods
+                    if (checkMethods)
+                    {
+                        CheckMethodGrammar(filePath, lineNumber, line);
+                    }
+
+                    // Check properties
+                    if (checkProperties)
+                    {
+                        CheckPropertyGrammar(filePath, lineNumber, line);
+                    }
+
+                    // Check events
+                    if (checkEvents)
+                    {
+                        CheckEventGrammar(filePath, lineNumber, line);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error scanning file {filePath}: {ex.Message}");
+            }
+        }
+
+        private bool ShouldSkipLine(string line)
+        {
+            if (string.IsNullOrWhiteSpace(line))
+                return true;
+
+            // Skip comments, using statements, etc.
+            var skipPatterns = new[] { "//", "/*", "using ", "namespace ", "#region", "#endregion", "[" };
+            return skipPatterns.Any(pattern => line.StartsWith(pattern));
+        }
+
+        #endregion
+
+        #region Grammar Checking Methods
+
+        private void CheckMethodGrammar(string filePath, int lineNumber, string line)
+        {
+            // Match method declarations
+            var methodMatch = Regex.Match(line, @"(?:public|private|protected|internal)?\s*(?:static|virtual|override|abstract)?\s*(?:\w+\s+)?(\w+)\s*\([^)]*\)\s*(?:{|;)");
+
+            if (methodMatch.Success && !line.Contains("="))
+            {
+                var methodName = methodMatch.Groups[1].Value;
+
+                // Skip constructors, Unity messages, and operators
+                if (IsUnityMessage(methodName) || methodName.Contains("operator") || char.IsLower(methodName[0]))
+                    return;
+
+                CheckMethodNaming(filePath, lineNumber, methodName);
+            }
+        }
+
+        private void CheckPropertyGrammar(string filePath, int lineNumber, string line)
+        {
+            // Match property declarations
+            var propertyMatch = Regex.Match(line, @"(?:public|private|protected|internal)?\s*(?:static|virtual|override)?\s*\w+\s+(\w+)\s*{");
+
+            if (propertyMatch.Success)
+            {
+                var propertyName = propertyMatch.Groups[1].Value;
+                CheckPropertyNaming(filePath, lineNumber, propertyName);
+            }
+        }
+
+        private void CheckEventGrammar(string filePath, int lineNumber, string line)
+        {
+            // Match event declarations
+            var eventMatch = Regex.Match(line, @"event\s+\w+\s+(\w+)");
+
+            if (eventMatch.Success)
+            {
+                var eventName = eventMatch.Groups[1].Value;
+                CheckEventNaming(filePath, lineNumber, eventName);
+            }
+        }
+
+        private void CheckMethodNaming(string filePath, int lineNumber, string methodName)
+        {
+            // Check for typos
+            if (checkCommonTypos)
+            {
+                var typoCheck = CheckForTypos(methodName);
+                if (typoCheck.hasTypo)
+                {
+                    AddIssue(filePath, lineNumber, "Method Typo",
+                        $"Method '{methodName}' contains typo: '{typoCheck.typoWord}'",
+                        $"Rename to '{typoCheck.correctedName}'",
+                        "Common spelling mistake detected", GrammarSeverity.Warning);
+                }
+            }
+
+            // Check verb-noun order for methods
+            if (checkVerbNounOrder)
+            {
+                CheckMethodVerbNounOrder(filePath, lineNumber, methodName);
+            }
+
+            // Check for vague method names
+            CheckForVagueNames(filePath, lineNumber, methodName, "Method");
+
+            // Check method should start with verb
+            if (checkEnglishGrammar && !StartsWithVerb(methodName) && !IsPropertyLikeMethod(methodName))
+            {
+                var suggestion = SuggestVerbForMethod(methodName);
+                AddIssue(filePath, lineNumber, "Method Grammar",
+                    $"Method '{methodName}' should start with a verb",
+                    suggestion,
+                    "Methods typically represent actions and should start with verbs like Get, Set, Add, etc.",
+                    GrammarSeverity.Warning);
+            }
+        }
+
+        private void CheckPropertyNaming(string filePath, int lineNumber, string propertyName)
+        {
+            // Check for typos
+            if (checkCommonTypos)
+            {
+                var typoCheck = CheckForTypos(propertyName);
+                if (typoCheck.hasTypo)
+                {
+                    AddIssue(filePath, lineNumber, "Property Typo",
+                        $"Property '{propertyName}' contains typo: '{typoCheck.typoWord}'",
+                        $"Rename to '{typoCheck.correctedName}'",
+                        "Common spelling mistake detected", GrammarSeverity.Warning);
+                }
+            }
+
+            // Properties should be nouns or adjective+noun
+            if (checkEnglishGrammar && StartsWithVerb(propertyName))
+            {
+                var suggestion = ConvertVerbToNoun(propertyName);
+                AddIssue(filePath, lineNumber, "Property Grammar",
+                    $"Property '{propertyName}' should be a noun, not a verb",
+                    $"Consider renaming to '{suggestion}'",
+                    "Properties represent state/data and should be nouns, not actions",
+                    GrammarSeverity.Warning);
+            }
+
+            // Check plural/singular for collections
+            if (checkPluralSingular)
+            {
+                CheckPluralSingular(filePath, lineNumber, propertyName, "Property");
+            }
+        }
+
+        private void CheckEventNaming(string filePath, int lineNumber, string eventName)
+        {
+            // Events should start with "On" typically
+            if (!eventName.StartsWith("On") && checkEnglishGrammar)
+            {
+                AddIssue(filePath, lineNumber, "Event Grammar",
+                    $"Event '{eventName}' should typically start with 'On'",
+                    $"Consider renaming to 'On{eventName}'",
+                    "Events typically follow the pattern OnSomethingHappened",
+                    GrammarSeverity.Info);
+            }
+
+            // Check for typos
+            if (checkCommonTypos)
+            {
+                var typoCheck = CheckForTypos(eventName);
+                if (typoCheck.hasTypo)
+                {
+                    AddIssue(filePath, lineNumber, "Event Typo",
+                        $"Event '{eventName}' contains typo: '{typoCheck.typoWord}'",
+                        $"Rename to '{typoCheck.correctedName}'",
+                        "Common spelling mistake detected", GrammarSeverity.Warning);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        private bool IsUnityMessage(string methodName)
+        {
+            var unityMessages = new[] {
+                "Awake", "Start", "Update", "FixedUpdate", "LateUpdate", "OnEnable", "OnDisable",
+                "OnDestroy", "OnApplicationPause", "OnApplicationFocus", "OnApplicationQuit",
+                "OnTriggerEnter", "OnTriggerExit", "OnTriggerStay", "OnCollisionEnter",
+                "OnCollisionExit", "OnCollisionStay", "OnGUI", "OnDrawGizmos", "OnValidate"
+            };
+            return unityMessages.Contains(methodName);
+        }
+
+        private bool StartsWithVerb(string name)
+        {
+            // Split camelCase and check first word
+            var words = SplitCamelCase(name);
+            if (words.Length == 0) return false;
+
+            return CommonVerbs.Contains(words[0]);
+        }
+
+        private bool IsPropertyLikeMethod(string methodName)
+        {
+            // Methods that act like properties (getters/setters)
+            return methodName.StartsWith("Is") || methodName.StartsWith("Has") || methodName.StartsWith("Can");
+        }
+
+        private string SuggestVerbForMethod(string methodName)
+        {
+            // Suggest appropriate verbs based on method name
+            if (methodName.Contains("Health") || methodName.Contains("Value") || methodName.Contains("Count"))
+                return $"Get{methodName}";
+            if (methodName.Contains("List") || methodName.Contains("Array") || methodName.Contains("Collection"))
+                return $"Get{methodName}";
+
+            return $"Process{methodName}";
+        }
+
+        private string ConvertVerbToNoun(string verbName)
+        {
+            var words = SplitCamelCase(verbName);
+            if (words.Length == 0) return verbName;
+
+            // Convert common verbs to nouns
+            var verbToNoun = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                {"Get", ""}, {"Set", ""}, {"Add", "Addition"}, {"Remove", "Removal"},
+                {"Create", "Creation"}, {"Update", "UpdateData"}, {"Delete", "Deletion"},
+                {"Move", "Position"}, {"Rotate", "Rotation"}, {"Scale", "ScaleValue"},
+                {"Start", "StartTime"}, {"Stop", "StopTime"}, {"Play", "PlayState"},
+                {"Calculate", "Calculation"}, {"Process", "ProcessData"}
+            };
+
+            if (verbToNoun.TryGetValue(words[0], out string nounReplacement))
+            {
+                if (string.IsNullOrEmpty(nounReplacement))
+                {
+                    // Remove the verb (like Get, Set)
+                    return string.Join("", words.Skip(1));
+                }
+                else
+                {
+                    // Replace verb with noun
+                    words[0] = nounReplacement;
+                    return string.Join("", words);
+                }
+            }
+
+            return verbName;
+        }
+
+        private void CheckMethodVerbNounOrder(string filePath, int lineNumber, string methodName)
+        {
+            var words = SplitCamelCase(methodName);
+            if (words.Length < 2) return;
+
+            // Check if it follows Verb + Noun pattern
+            string firstWord = words[0];
+            string secondWord = words[1];
+
+            if (CommonNouns.Contains(firstWord) && CommonVerbs.Contains(secondWord))
+            {
+                // Wrong order: Noun + Verb instead of Verb + Noun
+                string suggested = $"{secondWord}{firstWord}" + string.Join("", words.Skip(2));
+                AddIssue(filePath, lineNumber, "Method Order",
+                    $"Method '{methodName}' has wrong word order (Noun + Verb)",
+                    $"Consider '{suggested}' (Verb + Noun)",
+                    "Methods should follow Verb + Noun pattern (e.g., GetHealth, not HealthGet)",
+                    GrammarSeverity.Warning);
+            }
+        }
+
+        private void CheckPluralSingular(string filePath, int lineNumber, string name, string type)
+        {
+            if (name.EndsWith("List") || name.EndsWith("Array") || name.EndsWith("Collection") ||
+                name.EndsWith("Set") || name.EndsWith("Queue") || name.EndsWith("Stack"))
+            {
+                // Should use plural form before collection type
+                var words = SplitCamelCase(name);
+                for (int i = 0; i < words.Length - 1; i++)
+                {
+                    if (ShouldBePlural.Contains(words[i]) && !words[i].EndsWith("s"))
+                    {
+                        var suggestion = name.Replace(words[i], words[i] + "s");
+                        AddIssue(filePath, lineNumber, $"{type} Plural",
+                            $"{type} '{name}' should use plural form for collections",
+                            $"Consider '{suggestion}'",
+                            "Collection properties/variables should use plural nouns",
+                            GrammarSeverity.Info);
+                    }
+                }
+            }
+        }
+
+        private void CheckForVagueNames(string filePath, int lineNumber, string name, string type)
+        {
+            var vagueNames = new[] { "Do", "Make", "Go", "Run", "Handle", "Process", "Execute", "Perform", "Work" };
+
+            var words = SplitCamelCase(name);
+            if (words.Length > 0 && vagueNames.Contains(words[0], StringComparer.OrdinalIgnoreCase))
+            {
+                AddIssue(filePath, lineNumber, $"{type} Clarity",
+                    $"{type} '{name}' uses vague verb '{words[0]}'",
+                    "Use more specific verbs like Get, Set, Add, Remove, Update, etc.",
+                    "Avoid vague verbs. Be specific about what the method does",
+                    GrammarSeverity.Info);
+            }
+        }
+
+        private (bool hasTypo, string typoWord, string correctedName) CheckForTypos(string name)
+        {
+            var words = SplitCamelCase(name);
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (CommonTypos.TryGetValue(words[i], out string correction))
+                {
+                    words[i] = correction;
+                    return (true, words[i], string.Join("", words));
+                }
+            }
+
+            return (false, "", name);
+        }
+
+        private string[] SplitCamelCase(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return new string[0];
+
+            // Split on uppercase letters, keeping the uppercase letter with the following text
+            var words = Regex.Split(input, @"(?<!^)(?=[A-Z])")
+                              .Where(w => !string.IsNullOrEmpty(w))
+                              .ToArray();
+
+            return words;
+        }
+
+        private void AddIssue(string filePath, int lineNumber, string issueType, string problemText,
+                             string suggestedFix, string description, GrammarSeverity severity)
+        {
+            foundIssues.Add(new GrammarIssue
+            {
+                filePath = filePath,
+                lineNumber = lineNumber,
+                issueType = issueType,
+                problemText = problemText,
+                suggestedFix = suggestedFix,
+                description = description,
+                severity = severity
+            });
+        }
+
+        #endregion
+
+        #region Export
+        private void ExportReport()
+        {
+            var reportPath = EditorUtility.SaveFilePanel("Export Grammar Report", "", "FunctionGrammarReport", "txt");
+
+            if (!string.IsNullOrEmpty(reportPath))
+            {
+                var report = GenerateReport();
+                File.WriteAllText(reportPath, report);
+                Debug.Log($"Grammar report exported to: {reportPath}");
+            }
+        }
+
+        private string GenerateReport()
+        {
+            var report = $"Function Grammar Report\nGenerated: {DateTime.Now}\n";
+            report += $"Total Issues Found: {foundIssues.Count}\n\n";
+
+            var groupedIssues = foundIssues.GroupBy(i => i.issueType);
+
+            foreach (var group in groupedIssues)
+            {
+                report += $"{group.Key} Issues ({group.Count()}):\n";
+                report += new string('-', 40) + "\n";
+
+                foreach (var issue in group)
+                {
+                    report += $"[{issue.severity}] {issue.filePath}:{issue.lineNumber}\n";
+                    report += $"  Problem: {issue.problemText}\n";
+                    if (!string.IsNullOrEmpty(issue.suggestedFix))
+                        report += $"  Suggested: {issue.suggestedFix}\n";
+                    report += "\n";
+                }
+                report += "\n";
+            }
+
+            return report;
+        }
+        #endregion
+    }
+}
+
+
+================================================================================
+FILE 384/682: Assets/_GameModules/Editor/NamingConventionScanner.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEditor;
+
+namespace GameModules.Utilities
+{
+    /// <summary>
+    /// Script để quét và cảnh báo về các lỗi Naming Convention trong project
+    /// </summary>
+    public class NamingConventionScanner : EditorWindow
+    {
+        [MenuItem("Tools/Code Quality/Naming Convention Scanner")]
+        public static void ShowWindow()
+        {
+            GetWindow<NamingConventionScanner>("Naming Convention Scanner");
+        }
+
+        #region GUI Variables
+        private Vector2 scrollPosition;
+        private bool showClassIssues = true;
+        private bool showMethodIssues = true;
+        private bool showFieldIssues = true;
+        private bool showPropertyIssues = true;
+        private bool showVariableIssues = true;
+        private bool showParameterIssues = true;
+        private bool showConstantIssues = true;
+        private bool showFileIssues = true;
+        private bool autoFix = false;
+        private bool strictMode = false; // More strict checking, include Unity patterns
+        private string searchPath = "Assets/_GameModules";
+        #endregion
+
+        #region Data Structures
+        [Serializable]
+        public class NamingIssue
+        {
+            public string filePath;
+            public int lineNumber;
+            public string issueType;
+            public string problemText;
+            public string suggestedFix;
+            public string description;
+            public NamingSeverity severity;
+        }
+
+        public enum NamingSeverity
+        {
+            Warning,
+            Error,
+            Info
+        }
+
+        private List<NamingIssue> foundIssues = new List<NamingIssue>();
+        #endregion
+
+        #region Naming Rules Configuration
+        private static readonly Dictionary<string, Regex> NamingRules = new Dictionary<string, Regex>
+        {
+            // Classes, Interfaces, Structs, Enums - PascalCase
+            ["Class"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            ["Interface"] = new Regex(@"^I[A-Z][a-zA-Z0-9]*$"),
+            ["Struct"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            ["Enum"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            
+            // Methods, Properties - PascalCase
+            ["Method"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            ["Property"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            
+            // Fields - camelCase with underscore prefix for private
+            ["PrivateField"] = new Regex(@"^_[a-z][a-zA-Z0-9]*$"),
+            ["PublicField"] = new Regex(@"^[A-Z][a-zA-Z0-9]*$"),
+            ["ProtectedField"] = new Regex(@"^[a-z][a-zA-Z0-9]*$"),
+            
+            // Local Variables, Parameters - camelCase
+            ["LocalVariable"] = new Regex(@"^[a-z][a-zA-Z0-9]*$"),
+            ["Parameter"] = new Regex(@"^[a-z][a-zA-Z0-9]*$"),
+            
+            // Constants - UPPER_CASE
+            ["Constant"] = new Regex(@"^[A-Z][A-Z0-9_]*$"),
+            
+            // Events - PascalCase starting with "On"
+            ["Event"] = new Regex(@"^On[A-Z][a-zA-Z0-9]*$"),
+        };
+
+        private static readonly HashSet<string> CommonPrefixes = new HashSet<string>
+        {
+            "btn", "lbl", "txt", "img", "pnl", "scr", "obj", "go", "tr", "rb", "col"
+        };
+
+        #region Exclusion Patterns
+        private static readonly HashSet<string> ExclusionPatterns = new HashSet<string>
+        {
+            "using ", "namespace ", "#region", "#endregion", "#if", "#endif", "#else",
+            "//", "/*", "*/", "///", "[SerializeField]", "[Header(", "[Tooltip(",
+            "[System.Serializable]", "[Serializable]", "[ContextMenu(", "[MenuItem(",
+            "[Rpc(", "[Networked", "[Capacity(", "=>", "get;", "set;", "get =>", "set =>"
+        };
+
+        private static readonly HashSet<string> CommonUnityNamespaces = new HashSet<string>
+        {
+            "UnityEngine", "UnityEditor", "Unity.Collections", "Unity.Mathematics",
+            "Unity.Jobs", "Unity.Burst", "Unity.Entities", "Unity.Physics",
+            "Unity.Rendering", "Unity.Transforms", "Unity.Networking",
+            "System", "System.Collections", "System.Linq", "System.Threading",
+            "Fusion", "TMPro", "Cinemachine", "DG.Tweening"
+        };
+
+        private static readonly HashSet<string> ReservedKeywords = new HashSet<string>
+        {
+            "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked",
+            "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else",
+            "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for",
+            "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock",
+            "long", "namespace", "new", "null", "object", "operator", "out", "override", "params",
+            "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
+            "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true",
+            "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual",
+            "void", "volatile", "while"
+        };
+        #endregion
+        #endregion
+
+        #region GUI
+        void OnGUI()
+        {
+            GUILayout.Label("Naming Convention Scanner", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+
+            // Configuration
+            GUILayout.Label("Configuration", EditorStyles.boldLabel);
+            searchPath = EditorGUILayout.TextField("Search Path:", searchPath);
+            autoFix = EditorGUILayout.Toggle("Auto Fix (Experimental):", autoFix);
+            strictMode = EditorGUILayout.Toggle("Strict Mode (Check Unity patterns):", strictMode);
+            
+            EditorGUILayout.Space();
+            
+            // Issue Type Filters
+            GUILayout.Label("Issue Types to Check:", EditorStyles.boldLabel);
+            showClassIssues = EditorGUILayout.Toggle("Classes & Types", showClassIssues);
+            showMethodIssues = EditorGUILayout.Toggle("Methods", showMethodIssues);
+            showFieldIssues = EditorGUILayout.Toggle("Fields", showFieldIssues);
+            showPropertyIssues = EditorGUILayout.Toggle("Properties", showPropertyIssues);
+            showVariableIssues = EditorGUILayout.Toggle("Local Variables", showVariableIssues);
+            showParameterIssues = EditorGUILayout.Toggle("Method Parameters", showParameterIssues);
+            showConstantIssues = EditorGUILayout.Toggle("Constants", showConstantIssues);
+            showFileIssues = EditorGUILayout.Toggle("File Names", showFileIssues);
+
+            EditorGUILayout.Space();
+
+            // Scan Button
+            if (GUILayout.Button("Scan Project", GUILayout.Height(30)))
+            {
+                ScanProject();
+            }
+
+            EditorGUILayout.Space();
+
+            // Results
+            if (foundIssues.Count > 0)
+            {
+                GUILayout.Label($"Found {foundIssues.Count} Naming Issues:", EditorStyles.boldLabel);
+                
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+                
+                foreach (var issue in foundIssues)
+                {
+                    DrawIssue(issue);
+                }
+                
+                EditorGUILayout.EndScrollView();
+
+                EditorGUILayout.Space();
+                
+                if (GUILayout.Button("Export Report"))
+                {
+                    ExportReport();
+                }
+                
+                if (autoFix && GUILayout.Button("Apply Auto Fixes"))
+                {
+                    ApplyAutoFixes();
+                }
+            }
+        }
+
+        private void DrawIssue(NamingIssue issue)
+        {
+            Color originalColor = GUI.color;
+            
+            // Set color based on severity
+            switch (issue.severity)
+            {
+                case NamingSeverity.Error:
+                    GUI.color = new Color(1f, 0.7f, 0.7f);
+                    break;
+                case NamingSeverity.Warning:
+                    GUI.color = new Color(1f, 1f, 0.7f);
+                    break;
+                case NamingSeverity.Info:
+                    GUI.color = new Color(0.7f, 0.7f, 1f);
+                    break;
+            }
+
+            EditorGUILayout.BeginVertical("box");
+            
+            EditorGUILayout.LabelField($"[{issue.severity}] {issue.issueType}", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"File: {issue.filePath}:{issue.lineNumber}");
+            EditorGUILayout.LabelField($"Problem: {issue.problemText}");
+            
+            if (!string.IsNullOrEmpty(issue.suggestedFix))
+            {
+                EditorGUILayout.LabelField($"Suggested: {issue.suggestedFix}", EditorStyles.miniLabel);
+            }
+            
+            if (!string.IsNullOrEmpty(issue.description))
+            {
+                EditorGUILayout.LabelField($"Description: {issue.description}", EditorStyles.miniLabel);
+            }
+
+            // Open file button
+            if (GUILayout.Button("Open File", GUILayout.Width(100)))
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(issue.filePath);
+                AssetDatabase.OpenAsset(asset, issue.lineNumber);
+            }
+
+            EditorGUILayout.EndVertical();
+            
+            GUI.color = originalColor;
+        }
+        #endregion
+
+        #region Scanning Logic
+        private void ScanProject()
+        {
+            foundIssues.Clear();
+            
+            if (!Directory.Exists(searchPath))
+            {
+                Debug.LogError($"Search path does not exist: {searchPath}");
+                return;
+            }
+
+            var csFiles = Directory.GetFiles(searchPath, "*.cs", SearchOption.AllDirectories);
+            
+            EditorUtility.DisplayProgressBar("Scanning", "Analyzing files...", 0f);
+            
+            try
+            {
+                for (int i = 0; i < csFiles.Length; i++)
+                {
+                    var filePath = csFiles[i].Replace('\\', '/');
+                    EditorUtility.DisplayProgressBar("Scanning", $"Analyzing {Path.GetFileName(filePath)}", (float)i / csFiles.Length);
+                    
+                    ScanFile(filePath);
+                }
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+
+            // Sort issues by severity and file
+            foundIssues = foundIssues.OrderBy(i => i.severity)
+                                   .ThenBy(i => i.filePath)
+                                   .ThenBy(i => i.lineNumber)
+                                   .ToList();
+
+            Debug.Log($"Naming Convention Scan Complete. Found {foundIssues.Count} issues.");
+        }
+
+        private void ScanFile(string filePath)
+        {
+            try
+            {
+                var lines = File.ReadAllLines(filePath);
+                var content = File.ReadAllText(filePath);
+
+                // Check file name
+                if (showFileIssues)
+                {
+                    CheckFileName(filePath);
+                }
+
+                // Analyze each line
+                for (int lineIndex = 0; lineIndex < lines.Length; lineIndex++)
+                {
+                    var line = lines[lineIndex].Trim();
+                    var lineNumber = lineIndex + 1;
+
+                    // Skip lines that should be excluded from naming convention checks
+                    if (ShouldExcludeLine(line))
+                        continue;
+
+                    // Check different code elements
+                    CheckClassDeclaration(filePath, lineNumber, line);
+                    CheckMethodDeclaration(filePath, lineNumber, line);
+                    CheckFieldDeclaration(filePath, lineNumber, line);
+                    CheckPropertyDeclaration(filePath, lineNumber, line);
+                    CheckVariableDeclaration(filePath, lineNumber, line);
+                    CheckConstantDeclaration(filePath, lineNumber, line);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Error scanning file {filePath}: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Check if a line should be excluded from naming convention analysis
+        /// </summary>
+        private bool ShouldExcludeLine(string line)
+        {
+            if (string.IsNullOrWhiteSpace(line))
+                return true;
+
+            // Always exclude these patterns regardless of strict mode
+            var alwaysExclude = new[] { "//", "/*", "*/", "///", "#region", "#endregion", "#if", "#endif", "#else" };
+            if (alwaysExclude.Any(pattern => line.StartsWith(pattern)))
+                return true;
+
+            // In non-strict mode, exclude more Unity patterns
+            if (!strictMode)
+            {
+                // Check against exclusion patterns
+                foreach (var pattern in ExclusionPatterns)
+                {
+                    if (line.StartsWith(pattern) || line.Contains(pattern))
+                        return true;
+                }
+
+                // Check for Unity/System namespace imports
+                if (line.StartsWith("using "))
+                {
+                    foreach (var ns in CommonUnityNamespaces)
+                    {
+                        if (line.Contains(ns))
+                            return true;
+                    }
+                }
+
+                // Exclude attribute lines
+                if (line.StartsWith("[") && line.EndsWith("]"))
+                    return true;
+
+                // Exclude property accessors and lambda expressions
+                if (line.Contains("=>") || line.Equals("get;") || line.Equals("set;") || 
+                    line.Contains("get =>") || line.Contains("set =>"))
+                    return true;
+            }
+
+            return false;
+        }
+
+        #region Specific Checks
+        private void CheckFileName(string filePath)
+        {
+            var fileName = Path.GetFileNameWithoutExtension(filePath);
+            
+            if (!NamingRules["Class"].IsMatch(fileName))
+            {
+                var suggestedName = ToPascalCase(fileName);
+                
+                foundIssues.Add(new NamingIssue
+                {
+                    filePath = filePath,
+                    lineNumber = 1,
+                    issueType = "File Name",
+                    problemText = $"File name '{fileName}' should be PascalCase",
+                    suggestedFix = $"Rename to '{suggestedName}.cs'",
+                    description = "File names should match their main class name and use PascalCase",
+                    severity = NamingSeverity.Warning
+                });
+            }
+        }
+
+        private void CheckClassDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showClassIssues) return;
+
+            var classMatch = Regex.Match(line, @"(?:public|private|protected|internal)?\s*(?:abstract|sealed|static)?\s*(class|interface|struct|enum)\s+(\w+)");
+            
+            if (classMatch.Success)
+            {
+                var type = classMatch.Groups[1].Value;
+                var name = classMatch.Groups[2].Value;
+                
+                // Skip Unity-generated or common generic names
+                if (IsUnityGeneratedOrCommonName(name))
+                    return;
+                
+                var expectedRule = type == "interface" ? "Interface" : "Class";
+                
+                if (!NamingRules[expectedRule].IsMatch(name))
+                {
+                    var suggestedName = type == "interface" ? "I" + ToPascalCase(name.TrimStart('I')) : ToPascalCase(name);
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = $"{char.ToUpper(type[0]) + type.Substring(1)} Name",
+                        problemText = $"{type} '{name}' doesn't follow naming convention",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = GetNamingRuleDescription(expectedRule),
+                        severity = NamingSeverity.Error
+                    });
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check if name is Unity-generated or common pattern that should be ignored
+        /// </summary>
+        private bool IsUnityGeneratedOrCommonName(string name)
+        {
+            // Unity Editor classes
+            if (name.EndsWith("Editor") || name.EndsWith("Inspector") || name.EndsWith("Drawer"))
+                return false; // These should still follow naming convention
+
+            // Unity common patterns
+            var unityPatterns = new[] { 
+                "MonoBehaviour", "ScriptableObject", "NetworkBehaviour", 
+                "INetworkStruct", "INetworkEvent", "IDisposable"
+            };
+            
+            return unityPatterns.Any(pattern => name.Contains(pattern));
+        }
+
+        private void CheckMethodDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showMethodIssues) return;
+
+            var methodMatch = Regex.Match(line, @"(?:public|private|protected|internal)?\s*(?:static|virtual|override|abstract)?\s*(?:\w+\s+)?(\w+)\s*\(([^)]*)\)\s*(?:{|;)");
+            
+            if (methodMatch.Success && !line.Contains("="))
+            {
+                var name = methodMatch.Groups[1].Value;
+                var parameters = methodMatch.Groups[2].Value;
+                
+                // Skip constructors and operators
+                if (char.IsLower(name[0]) || name.Contains("operator") || name.Contains("Main"))
+                    return;
+
+                // Check method name
+                if (!NamingRules["Method"].IsMatch(name))
+                {
+                    var suggestedName = ToPascalCase(name);
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Method Name",
+                        problemText = $"Method '{name}' should be PascalCase",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = "Method names should use PascalCase",
+                        severity = NamingSeverity.Warning
+                    });
+                }
+
+                // Check parameters
+                CheckMethodParameters(filePath, lineNumber, parameters);
+            }
+        }
+
+        private void CheckMethodParameters(string filePath, int lineNumber, string parameters)
+        {
+            if (!showParameterIssues || string.IsNullOrWhiteSpace(parameters)) return;
+
+            // Match parameter patterns: type paramName, out type paramName, ref type paramName, etc.
+            var paramMatches = Regex.Matches(parameters, @"(?:out|ref|in|params)?\s*\w+(?:\[\])?\s+(\w+)");
+            
+            foreach (Match match in paramMatches)
+            {
+                var paramName = match.Groups[1].Value;
+                
+                // Skip if it's a type or keyword
+                if (ReservedKeywords.Contains(paramName) || char.IsUpper(paramName[0]))
+                    continue;
+
+                if (!NamingRules["Parameter"].IsMatch(paramName))
+                {
+                    var suggestedName = ToCamelCase(paramName.TrimStart('_')); // Remove underscore if present
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Parameter Name",
+                        problemText = $"Parameter '{paramName}' should be camelCase (no underscore)",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = "Parameter names should use camelCase without underscore prefix",
+                        severity = NamingSeverity.Info
+                    });
+                }
+            }
+        }
+
+        private void CheckFieldDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showFieldIssues) return;
+
+            var fieldMatch = Regex.Match(line, @"(public|private|protected|internal)?\s*(?:static|readonly)?\s*\w+\s+(\w+)\s*[;=]");
+            
+            if (fieldMatch.Success)
+            {
+                var visibility = fieldMatch.Groups[1].Value;
+                var name = fieldMatch.Groups[2].Value;
+                
+                // Skip constants and properties
+                if (line.Contains("const") || line.Contains("{") || char.IsUpper(name[0]) && name == name.ToUpper())
+                    return;
+
+                string expectedRule;
+                if (visibility == "private" || string.IsNullOrEmpty(visibility))
+                    expectedRule = "PrivateField";
+                else if (visibility == "public")
+                    expectedRule = "PublicField";
+                else
+                    expectedRule = "ProtectedField";
+
+                if (!NamingRules[expectedRule].IsMatch(name))
+                {
+                    string suggestedName;
+                    if (expectedRule == "PrivateField")
+                        suggestedName = "_" + ToCamelCase(name.TrimStart('_'));
+                    else if (expectedRule == "PublicField")
+                        suggestedName = ToPascalCase(name);
+                    else
+                        suggestedName = ToCamelCase(name);
+
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Field Name",
+                        problemText = $"Field '{name}' doesn't follow naming convention",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = GetNamingRuleDescription(expectedRule),
+                        severity = NamingSeverity.Warning
+                    });
+                }
+            }
+        }
+
+        private void CheckPropertyDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showPropertyIssues) return;
+
+            var propertyMatch = Regex.Match(line, @"(?:public|private|protected|internal)?\s*(?:static|virtual|override)?\s*\w+\s+(\w+)\s*{");
+            
+            if (propertyMatch.Success)
+            {
+                var name = propertyMatch.Groups[1].Value;
+                
+                if (!NamingRules["Property"].IsMatch(name))
+                {
+                    var suggestedName = ToPascalCase(name);
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Property Name",
+                        problemText = $"Property '{name}' should be PascalCase",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = "Property names should use PascalCase",
+                        severity = NamingSeverity.Warning
+                    });
+                }
+            }
+        }
+
+        private void CheckVariableDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showVariableIssues) return;
+
+            // Local variables (inside methods)
+            var localVarMatch = Regex.Match(line, @"^\s*(?:var|\w+)\s+(\w+)\s*[=;]");
+            
+            if (localVarMatch.Success && !line.Contains("public") && !line.Contains("private") && !line.Contains("protected"))
+            {
+                var name = localVarMatch.Groups[1].Value;
+                
+                if (!NamingRules["LocalVariable"].IsMatch(name) && !char.IsUpper(name[0]))
+                {
+                    var suggestedName = ToCamelCase(name);
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Variable Name",
+                        problemText = $"Variable '{name}' should be camelCase",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = "Local variable names should use camelCase",
+                        severity = NamingSeverity.Info
+                    });
+                }
+            }
+        }
+
+        private void CheckConstantDeclaration(string filePath, int lineNumber, string line)
+        {
+            if (!showConstantIssues) return;
+
+            var constMatch = Regex.Match(line, @"const\s+\w+\s+(\w+)\s*=");
+            
+            if (constMatch.Success)
+            {
+                var name = constMatch.Groups[1].Value;
+                
+                if (!NamingRules["Constant"].IsMatch(name))
+                {
+                    var suggestedName = ToConstantCase(name);
+                    
+                    foundIssues.Add(new NamingIssue
+                    {
+                        filePath = filePath,
+                        lineNumber = lineNumber,
+                        issueType = "Constant Name",
+                        problemText = $"Constant '{name}' should be UPPER_CASE",
+                        suggestedFix = $"Rename to '{suggestedName}'",
+                        description = "Constant names should use UPPER_CASE with underscores",
+                        severity = NamingSeverity.Warning
+                    });
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Helper Methods
+        private string GetNamingRuleDescription(string ruleType)
+        {
+            return ruleType switch
+            {
+                "Class" => "Class names should use PascalCase (e.g., PlayerController)",
+                "Interface" => "Interface names should start with 'I' and use PascalCase (e.g., IMovable)",
+                "Method" => "Method names should use PascalCase (e.g., UpdatePlayer)",
+                "PrivateField" => "Private fields should start with underscore and use camelCase (e.g., _playerHealth)",
+                "PublicField" => "Public fields should use PascalCase (e.g., PlayerName)",
+                "ProtectedField" => "Protected fields should use camelCase (e.g., playerData)",
+                "Property" => "Property names should use PascalCase (e.g., PlayerHealth)",
+                "LocalVariable" => "Local variables should use camelCase (e.g., currentHealth)",
+                "Parameter" => "Parameter names should use camelCase WITHOUT underscore (e.g., newValue, not _newValue)",
+                "Constant" => "Constants should use UPPER_CASE with underscores (e.g., MAX_HEALTH)",
+                _ => "Unknown naming rule"
+            };
+        }
+
+        private string ToPascalCase(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            
+            var words = Regex.Split(input, @"[_\s]+").Where(w => !string.IsNullOrEmpty(w));
+            return string.Concat(words.Select(word => char.ToUpper(word[0]) + word.Substring(1).ToLower()));
+        }
+
+        private string ToCamelCase(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            
+            var pascalCase = ToPascalCase(input);
+            return char.ToLower(pascalCase[0]) + pascalCase.Substring(1);
+        }
+
+        private string ToConstantCase(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            
+            return Regex.Replace(input, @"([a-z])([A-Z])", "$1_$2").ToUpper();
+        }
+        #endregion
+
+        #region Export and Auto Fix
+        private void ExportReport()
+        {
+            var reportPath = EditorUtility.SaveFilePanel("Export Naming Report", "", "NamingConventionReport", "txt");
+            
+            if (!string.IsNullOrEmpty(reportPath))
+            {
+                var report = GenerateReport();
+                File.WriteAllText(reportPath, report);
+                Debug.Log($"Report exported to: {reportPath}");
+            }
+        }
+
+        private string GenerateReport()
+        {
+            var report = $"Naming Convention Report\nGenerated: {DateTime.Now}\n";
+            report += $"Total Issues Found: {foundIssues.Count}\n\n";
+
+            var groupedIssues = foundIssues.GroupBy(i => i.issueType);
+            
+            foreach (var group in groupedIssues)
+            {
+                report += $"{group.Key} Issues ({group.Count()}):\n";
+                report += new string('-', 40) + "\n";
+                
+                foreach (var issue in group)
+                {
+                    report += $"[{issue.severity}] {issue.filePath}:{issue.lineNumber}\n";
+                    report += $"  Problem: {issue.problemText}\n";
+                    if (!string.IsNullOrEmpty(issue.suggestedFix))
+                        report += $"  Suggested: {issue.suggestedFix}\n";
+                    report += "\n";
+                }
+                report += "\n";
+            }
+
+            return report;
+        }
+
+        private void ApplyAutoFixes()
+        {
+            Debug.LogWarning("Auto-fix is experimental and may cause issues. Please backup your project first!");
+            
+            if (!EditorUtility.DisplayDialog("Apply Auto Fixes", 
+                "This will automatically rename variables, methods, and classes to match naming conventions. " +
+                "This is experimental and may break your code. Do you want to continue?", 
+                "Yes", "No"))
+            {
+                return;
+            }
+
+            int fixedCount = 0;
+            var processedFiles = new HashSet<string>();
+
+            foreach (var issue in foundIssues.Where(i => !string.IsNullOrEmpty(i.suggestedFix)))
+            {
+                // For now, just log what would be fixed
+                Debug.Log($"Would fix: {issue.problemText} -> {issue.suggestedFix}");
+                fixedCount++;
+            }
+
+            Debug.Log($"Auto-fix simulation complete. {fixedCount} issues would be fixed.");
+            EditorUtility.DisplayDialog("Auto Fix Complete", $"Simulated fixing {fixedCount} issues. Check console for details.", "OK");
+        }
+        #endregion
+    }
+}
+
+
+================================================================================
+FILE 385/682: Assets/_GameModules/Editor/RenderTextureContextMenu.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+
+public class RenderTextureContextMenu
+{
+    [MenuItem("Assets/Save RenderTexture as PNG", true)]
+    private static bool ValidateSave()
+    {
+        // Chỉ hiện menu khi chọn đúng RenderTexture
+        return Selection.activeObject is RenderTexture;
+    }
+
+    [MenuItem("Assets/Save RenderTexture as PNG")]
+    private static void SaveSelectedRenderTexture()
+    {
+        var rt = Selection.activeObject as RenderTexture;
+        if (rt == null)
+        {
+            Debug.LogError("Bạn phải chọn một RenderTexture!");
+            return;
+        }
+
+        // Chọn chỗ lưu file
+        string path = EditorUtility.SaveFilePanel(
+            "Save RenderTexture as PNG",
+            Application.dataPath,
+            rt.name + ".png",
+            "png");
+
+        if (string.IsNullOrEmpty(path))
+            return;
+
+        SaveRenderTextureToPNG(rt, path);
+        AssetDatabase.Refresh();
+    }
+
+    private static void SaveRenderTextureToPNG(RenderTexture rt, string path)
+    {
+        RenderTexture prev = RenderTexture.active;
+
+        try
+        {
+            RenderTexture.active = rt;
+            Texture2D tex = new Texture2D(rt.width, rt.height, TextureFormat.RGBA32, false, true);
+            tex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+            tex.Apply();
+
+            byte[] bytes = tex.EncodeToPNG();
+            File.WriteAllBytes(path, bytes);
+
+            Object.DestroyImmediate(tex);
+            Debug.Log($"[RenderTextureContextMenu] Saved: {path}");
+        }
+        finally
+        {
+            RenderTexture.active = prev;
+        }
+    }
+}
+
+
+================================================================================
+FILE 386/682: Assets/_GameModules/EventsModule/Scripts/EnemyDiedEvent.cs
+================================================================================
+
+/// <summary>
+/// EnemyDiedEvent is an event that is triggered when an enemy dies in the game.
+/// It contains the ID of the enemy that died.
+/// </summary>
+public struct EnemyDiedEvent
+{
+    public int enemyId;
+
+    public EnemyDiedEvent(int id)
+    {
+        enemyId = id;
+    }
+}
+
+
+================================================================================
+FILE 387/682: Assets/_GameModules/EventsModule/Scripts/EventManager.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+/// <summary>
+/// EventManager is a singleton class that manages game events.
+/// It allows for the creation and retrieval of events of specific types.
+/// </summary>
+public class EventManager : Singleton<EventManager>, IEventManager, IInitializableManager
+{
+    private readonly Dictionary<Type, object> events = new();
+    private readonly object lockObj = new();
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    public void Initialize()
+    {
+        OnInitialized?.Invoke(true);
+    }
+
+    /// <summary>
+    /// Get or create an event of type T
+    /// </summary>
+    private GameEvent<T> GetEvent<T>()
+    {
+        lock (lockObj)
+        {
+            var type = typeof(T);
+            if (!events.TryGetValue(type, out var existingEvent))
+            {
+                var newEvent = new GameEvent<T>();
+                events[type] = newEvent;
+                return newEvent;
+            }
+
+            return (GameEvent<T>)existingEvent;
+        }
+    }
+
+    /// <summary>
+    /// Clear all events and dispose of them if they implement IDisposable  
+    /// </summary>
+    public void ClearEvents()
+    {
+        lock (lockObj)
+        {
+            foreach (var eventPair in events)
+            {
+                if (eventPair.Value is IDisposable disposableEvent)
+                {
+                    disposableEvent.Dispose();
+                }
+            }
+            events.Clear();
+        }
+    }
+
+    /// <summary>
+    /// Subscribe to an event of type T
+    /// </summary>
+    /// param name="listener">The listener to subscribe</param>
+    /// <typeparam name="T">The type of the event</typeparam>   
+    public void Subscribe<T>(Action<T> listener)
+    {
+        GetEvent<T>().Subscribe(listener);
+    }
+
+    /// <summary>
+    /// Unsubscribe from an event of type T.
+    /// Remember to unsubscribe when no longer needed.
+    /// Noted: Do not this for OnDestroy (it will unsubscribe automatically).
+    /// </summary>
+    /// <param name="listener">The listener to unsubscribe</param>  
+    public void Unsubscribe<T>(Action<T> listener)
+    {
+        GetEvent<T>().Unsubscribe(listener);
+    }
+
+    /// <summary>
+    /// Invoke an event of type T with the provided event data
+    /// </summary>
+    /// <param name="eventData">The data to pass to the event listeners</param>
+    public void Invoke<T>(T eventData)
+    {
+        GetEvent<T>().Invoke(eventData);
+    }
+
+    protected override void OnDestroy()
+    {
+        ClearEvents();
+    }
+
+    public static void Register<T>(Action<T> listener)
+    {
+        Debug.Log($"[EventManager] Registering listener for event type: {typeof(T)}");
+        Instance?.Subscribe(listener);
+    }
+
+    public static void Unregister<T>(Action<T> listener)
+    {
+        Instance?.Unsubscribe(listener);
+    }
+
+    public static void TriggerEvent<T>(T eventData)
+    {
+        Instance?.Invoke(eventData);
+    }
+
+}
+
+
+================================================================================
+FILE 388/682: Assets/_GameModules/EventsModule/Scripts/GameEvent.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// GameEvent is a generic event class that allows subscribing, unsubscribing, and invoking events with a specific type.
+/// </summary>
+/// <typeparam name="T"></typeparam>
+public class GameEvent<T>: IDisposable
+{
+    private readonly List<Action<T>> listeners = new();
+    private readonly object lockObj = new();
+
+    public void Subscribe(Action<T> listener)
+    {
+        lock (lockObj)
+        {
+            if (!listeners.Contains(listener))
+                listeners.Add(listener);
+        }
+    }
+
+    public void Unsubscribe(Action<T> listener)
+    {
+        lock (lockObj)
+        {
+            if (listeners.Contains(listener))
+                listeners.Remove(listener);
+        }
+    }
+
+    public void Invoke(T value)
+    {
+        List<Action<T>> listenersCopy;
+
+        // Copy danh sách để tránh deadlock hoặc exception khi listener unsubscribe trong quá trình invoke
+        lock (lockObj)
+        {
+            listenersCopy = new List<Action<T>>(listeners);
+        }
+
+        foreach (var listener in listenersCopy)
+        {
+            listener.Invoke(value);
+        }
+    }
+
+    public void Dispose()
+    {
+        lock (lockObj)
+        {
+            Debug.Log("Disposing GameEvent: " + typeof(T).Name);
+            listeners.Clear();
+        }
+    }
+}
+
+
+================================================================================
+FILE 389/682: Assets/_GameModules/EventsModule/Scripts/IEventManager.cs
+================================================================================
+
+public interface IEventManager
+{
+    void Subscribe<T>(System.Action<T> listener);
+    void Unsubscribe<T>(System.Action<T> listener);
+    void Invoke<T>(T eventData);
+}
+
+
+================================================================================
+FILE 390/682: Assets/_GameModules/EventsModule/Scripts/PlayerScoredEvent.cs
+================================================================================
+
+/// <summary>
+/// PlayerScoredEvent is an event that is triggered when a player scores in the game.
+/// It contains the score value associated with the event.
+/// </summary>
+public struct PlayerScoredEvent
+{
+    public int score;
+
+    public PlayerScoredEvent(int s)
+    {
+        score = s;
+    }
+}
+
+
+================================================================================
+FILE 391/682: Assets/_GameModules/EventsModule/Scripts/TankSelectedEvent.cs
+================================================================================
+
+/// <summary>
+/// TankSelectedEvent is an event that is triggered when a tank is selected in the game.
+/// It contains the index of the selected tank.
+/// </summary>
+public struct TankSelectedEvent
+{
+    public int playerIndex;
+    public string tankId;
+
+    public TankSelectedEvent(int playerIndex, string tankId)
+    {
+        this.playerIndex = playerIndex;
+        this.tankId = tankId;
+    }
+}
+
+
+================================================================================
+FILE 392/682: Assets/_GameModules/FirebaseModule/Scripts/AnalyticsManager.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+using Firebase.Analytics;
+
+public class AnalyticsManager : MonoBehaviour
+{
+    public static AnalyticsManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // User login tracking
+    public void LogUserLogin(string userId)
+    {
+        FirebaseAnalytics.LogEvent("user_login", new Parameter("user_id", userId));
+        Debug.Log($"Logged user_login: {userId}");
+    }
+
+    // Start match tracking
+    public void LogMatchStart(string mode, string tankId)
+    {
+        FirebaseAnalytics.LogEvent("match_start",
+            new Parameter("mode", mode),
+            new Parameter("tank_id", tankId));
+        Debug.Log($"Logged match_start: mode={mode}, tankId={tankId}");
+    }
+
+    // End match tracking
+    public void LogMatchEnd(string result, int score)
+    {
+        FirebaseAnalytics.LogEvent("match_end",
+            new Parameter("result", result),
+            new Parameter("score", score));
+        Debug.Log($"Logged match_end: result={result}, score={score}");
+    }
+
+    // Purchase tank tracking
+    public void LogPurchaseTank(string tankId, int price)
+    {
+        FirebaseAnalytics.LogEvent("purchase_tank",
+            new Parameter("tank_id", tankId),
+            new Parameter("price", price));
+        Debug.Log($"Logged purchase_tank: tankId={tankId}, price={price}");
+    }
+
+    // Upgrade tank tracking
+    public void LogUpgradeTank(string tankId, string upgradeType, int cost)
+    {
+        FirebaseAnalytics.LogEvent("upgrade_tank",
+            new Parameter("tank_id", tankId),
+            new Parameter("upgrade_type", upgradeType),
+            new Parameter("cost", cost));
+        Debug.Log($"Logged upgrade_tank: tankId={tankId}, upgradeType={upgradeType}, cost={cost}");
+    }
+}
+
+
+================================================================================
+FILE 393/682: Assets/_GameModules/FirebaseModule/Scripts/FirestoreManager.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+using Firebase;
+using Firebase.Firestore;
+using Firebase.RemoteConfig;
+using UnityEngine.Events;
+
+public class FirestoreManager : Singleton<FirestoreManager>, IInitializableManager
+{
+    public FirebaseFirestore db;
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    protected async override void Awake()
+    {
+        base.Awake();
+    }
+    
+    public async void Initialize()
+    {
+        var dep = await FirebaseApp.CheckAndFixDependenciesAsync();
+
+        if (dep == DependencyStatus.Available)
+        {
+            db = FirebaseFirestore.DefaultInstance;
+            db.Settings.PersistenceEnabled = false;
+            Debug.Log("Firestore Initialized");
+            await FirebaseRemoteConfig.DefaultInstance.FetchAndActivateAsync();
+            OnInitialized?.Invoke(true);
+        }
+        else
+        {
+            Debug.LogError($"Firebase deps not available: {dep}");
+            OnInitialized?.Invoke(false);
+        }
+    }
+}
+
+
+================================================================================
+FILE 394/682: Assets/_GameModules/FirebaseModule/Scripts/FirestoreTankShopController.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Firebase.Firestore;
+using UnityEngine;
+
+public class FirestoreTankShopController : MonoBehaviour
+{
+    // FirebaseFirestore db;
+
+    // void Start()
+    // {
+    //     db = FirestoreManager.Instance.db;
+    // }
+
+    // public async Task<List<TankShopItem>> GetAllTanks()
+    // {
+    //     QuerySnapshot snapshot = await db.Collection("tankShop").GetSnapshotAsync();
+    //     List<TankShopItem> tanks = new List<TankShopItem>();
+
+    //     foreach (DocumentSnapshot doc in snapshot.Documents)
+    //     {
+    //         TankShopItem tank = doc.ConvertTo<TankShopItem>();
+    //         tanks.Add(tank);
+    //     }
+
+    //     Debug.Log("Retrieved all tanks in shop");
+    //     return tanks;
+    // }
+}
+
+
+================================================================================
+FILE 395/682: Assets/_GameModules/FirebaseModule/Scripts/FirestoreUserController.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Firebase.Firestore;
+using UnityEngine;
+
+public class FirestoreUserController : MonoBehaviour
+{
+    FirebaseFirestore db => FirestoreManager.Instance.db;
+
+    public async Task CreateUserData(string userId, TankDocument data)
+    {
+        DocumentReference docRef = db.Collection("users").Document(userId);
+        await docRef.SetAsync(data);
+        Debug.Log("User data created in Firestore");
+    }
+
+    public async Task<TankDocument> GetUserData(string userId)
+    {
+        DocumentReference docRef = db.Collection("users").Document(userId);
+        DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+        if (snapshot.Exists)
+        {
+            TankDocument userData = snapshot.ConvertTo<TankDocument>();
+            Debug.Log("User data retrieved");
+            return userData;
+        }
+        else
+        {
+            Debug.LogWarning("User data does not exist");
+            return default(TankDocument);
+        }
+    }
+
+    public async Task UpdateUserGold(string userId, int newGold)
+    {
+        DocumentReference docRef = db.Collection("users").Document(userId);
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "gold", newGold }
+        };
+        await docRef.UpdateAsync(updates);
+        Debug.Log("User gold updated");
+    }
+}
+
+
+================================================================================
+FILE 396/682: Assets/_GameModules/FirebaseModule/Scripts/MasterDataManager.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+using System.Threading.Tasks;
+using UnityEngine;
+using Firebase.Firestore;
+using System.Collections.Generic;
+
+public class MasterDataManager : MonoBehaviour
+{
+    FirebaseFirestore db => FirestoreManager.Instance.db;
+
+    void Start()
+    {
+        CheckAndLoadMasterData();
+    }
+
+    async void CheckAndLoadMasterData()
+    {
+        DocumentReference docRef = db.Collection("masterData").Document("gameData");
+        DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+
+        if (snapshot.Exists)
+        {
+            int serverVersionCode = snapshot.GetValue<int>("versionCode");
+            int localVersionCode = PlayerPrefs.GetInt("masterDataVersionCode", 0);
+
+            Debug.Log($"Server version: {serverVersionCode}, Local version: {localVersionCode}");
+
+            if (serverVersionCode > localVersionCode)
+            {
+                Debug.Log("Master data outdated. Downloading new data...");
+                DownloadAndCacheMasterData(snapshot);
+                PlayerPrefs.SetInt("masterDataVersionCode", serverVersionCode);
+
+                long lastUpdated = snapshot.GetValue<long>("lastUpdated");
+                PlayerPrefs.SetString("masterDataLastUpdated", lastUpdated.ToString());
+            }
+            else
+            {
+                Debug.Log("Master data is up to date. Loading from cache.");
+                LoadMasterDataFromCache();
+            }
+        }
+        else
+        {
+            Debug.LogError("Master data document does not exist!");
+        }
+    }
+
+    void DownloadAndCacheMasterData(DocumentSnapshot snapshot)
+    {
+        // Example: parse tank data from Firestore document
+        Dictionary<string, object> tanksDict = snapshot.GetValue<Dictionary<string, object>>("tanks");
+
+        // Convert to JSON string and save to PlayerPrefs as cache (or save to file in production)
+        string json = JsonUtility.ToJson(new Serialization<string, object>(tanksDict));
+        PlayerPrefs.SetString("masterDataCache", json);
+        PlayerPrefs.Save();
+
+        Debug.Log("Downloaded and cached new master data.");
+    }
+
+    void LoadMasterDataFromCache()
+    {
+        string json = PlayerPrefs.GetString("masterDataCache", "{}");
+        if (json != "{}")
+        {
+            // Example deserialize
+            var tanks = JsonUtility.FromJson<Serialization<string, object>>(json);
+            Debug.Log($"Loaded {tanks.dictionary.Count} tanks from cache.");
+        }
+        else
+        {
+            Debug.LogWarning("No master data cache found.");
+        }
+    }
+}
+
+
+================================================================================
+FILE 397/682: Assets/_GameModules/FirebaseModule/Scripts/RemoteConfigManager.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+using Firebase;
+using Firebase.RemoteConfig;
+using Firebase.Extensions;
+using UnityEngine.Events;
+
+public class RemoteConfigManager : MonoBehaviour, IInitializableManager
+{
+    // Đảm bảo bạn đã thêm các file cấu hình GoogleService-Info.plist và google-services.json vào thư mục Assets
+    // và đã cài đặt Firebase Remote Config package (FirebaseRemoteConfig.unitypackage).
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    public void Initialize()
+    {
+        // Kiểm tra và sửa các phụ thuộc của Firebase
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == DependencyStatus.Available)
+            {
+                // Firebase đã sẵn sàng để sử dụng
+                FirebaseApp app = FirebaseApp.DefaultInstance;
+                Debug.Log("Firebase initialized successfully!");
+
+                // Lấy instance của Remote Config
+                FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.DefaultInstance;
+
+                // Cấu hình cài đặt cho Remote Config
+                // MinimumFetchInternalInMilliseconds đặt thời gian tối thiểu giữa các lần fetch
+                // Trong môi trường phát triển, bạn có thể đặt giá trị nhỏ hơn để test nhanh
+                var configSettings = new ConfigSettings
+                {
+                    MinimumFetchIntervalInMilliseconds = 3600000 // 1 giờ (1 * 60 * 60 * 1000)
+                    // Hoặc 0 trong quá trình phát triển để luôn fetch mới: MinimumFetchInternalInMilliseconds = 0
+                };
+                remoteConfig.SetConfigSettingsAsync(configSettings).ContinueWithOnMainThread(task =>
+                {
+                    Debug.Log("Remote Config settings configured.");
+                    // Sau khi cấu hình, thiết lập các giá trị mặc định trong ứng dụng
+                    SetRemoteConfigDefaults();
+                });
+            }
+            else
+            {
+                // Firebase không sẵn sàng, xử lý lỗi tại đây
+                Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}\n" +
+                               "Firebase Unity SDK is not safe to use here");
+                OnInitialized?.Invoke(false);
+            }
+        });
+    }
+
+    // Đặt các giá trị mặc định trong ứng dụng
+    private void SetRemoteConfigDefaults()
+    {
+        Dictionary<string, object> defaults = new Dictionary<string, object>();
+
+        // Thêm các key-value pairs mặc định của bạn
+        // Ví dụ:
+        defaults.Add("welcome_message", "Welcome to Tank Online!");
+        defaults.Add("feature_enabled", true);
+        defaults.Add("player_health_initial", 100);
+
+        FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaults).ContinueWithOnMainThread(task => {
+            if (task.IsCompleted)
+            {
+                Debug.Log("Remote Config defaults set.");
+                // Sau khi đặt giá trị mặc định, tiến hành fetch và kích hoạt cấu hình từ server
+                FetchAndActivateRemoteConfig();
+            }
+            else if (task.IsFaulted)
+            {
+                Debug.LogError("Failed to set Remote Config defaults: " + task.Exception);
+                OnInitialized?.Invoke(false);
+            }
+        });
+    }
+
+    // Thực hiện fetch và kích hoạt các giá trị Remote Config
+    private async void FetchAndActivateRemoteConfig()
+    {
+        try
+        {
+            await FirebaseRemoteConfig.DefaultInstance.FetchAsync(System.TimeSpan.Zero).ContinueWithOnMainThread(task =>
+            {
+                if (task.IsCompleted)
+                {
+                    Debug.Log("Fetch completed.");
+                    // Kích hoạt các giá trị đã fetch
+                    FirebaseRemoteConfig.DefaultInstance.ActivateAsync().ContinueWithOnMainThread(activateTask =>
+                    {
+                        if (activateTask.IsCompleted)
+                        {
+                            Debug.Log("Remote Config values activated.");
+                            // Bây giờ bạn có thể truy cập các giá trị
+                            ApplyConfig();
+                        }
+                        else if (activateTask.IsFaulted)
+                        {
+                            Debug.LogError("Failed to activate Remote Config: " + activateTask.Exception);
+                            OnInitialized?.Invoke(false);
+                        }
+                    });
+                }
+                else if (task.IsFaulted)
+                {
+                    Debug.LogError("Failed to fetch Remote Config: " + task.Exception);
+                    OnInitialized?.Invoke(false);
+                }
+                else if (task.IsCanceled)
+                {
+                    Debug.LogWarning("Fetch cancelled.");
+                    OnInitialized?.Invoke(false);
+                }
+            });
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Exception during FetchAndActivateRemoteConfig: " + e);
+            OnInitialized?.Invoke(false);
+        }
+    }
+
+    private void UpdateCollection<TDocument, TCollection>(string  keyName)
+        where TCollection : CollectionBase<TDocument>
+        where TDocument : class
+    {
+        string json = FirebaseRemoteConfig.DefaultInstance
+                     .GetValue(keyName).StringValue;
+        Debug.Log($"Fetched Remote Config for {keyName}: {json}");
+        if (!string.IsNullOrEmpty(json))
+        {
+            Debug.Log($"Updating collection {typeof(TCollection)}");
+            DatabaseManager.UpdateRuntimeData<TDocument, TCollection>(json);
+        }
+    }
+
+    // Hàm để hiển thị hoặc sử dụng các giá trị đã được cấu hình
+    private void ApplyConfig()
+    {
+        OnInitialized?.Invoke(true);
+        UpdateCollection<TankHullDocument, TankHullCollection>(nameof(TankHullCollection));
+        UpdateCollection<TankWeaponDocument, TankWeaponCollection>(nameof(TankWeaponCollection));
+        UpdateCollection<SOUpgradeDefinition, TankUpgradeCollection>(nameof(TankUpgradeCollection));
+        UpdateCollection<TankAbilityDocument, TankAbilityCollection>(nameof(TankAbilityCollection));
+        UpdateCollection<MatchmakingDocument, MatchmakingCollection>(nameof(MatchmakingCollection));
+        UpdateCollection<TankDocument, TankCollection>(nameof(TankCollection));
+        UpdateCollection<TankWrapDocument, TankWrapCollection>(nameof(TankWrapCollection));
+        UpdateCollection<TankStickerDocument, TankStickerCollection>(nameof(TankStickerCollection));
+    }
+}
+
+
+================================================================================
+FILE 398/682: Assets/_GameModules/FirebaseModule/Scripts/RuntimeCollection.cs
+================================================================================
+
+using UnityEngine;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+public class RuntimeCollection<T>
+{
+    private Dictionary<string, T> _runtimeData = new();
+    private CollectionBase<T> _originalCollection;
+
+    public RuntimeCollection(CollectionBase<T> originalCollection)
+    {
+        _originalCollection = originalCollection;
+        // Clone original data 
+        foreach (var doc in originalCollection.GetAllDocuments())
+        {
+            string id = GetDocumentId(doc);
+            //Debug.Log($"Cloning document with ID: {id}");
+            if (!string.IsNullOrEmpty(id))
+            {
+                _runtimeData[id] = JsonUtility.FromJson<T>(JsonUtility.ToJson(doc));
+            }
+        }
+    }
+
+    private string GetDocumentId(T document)
+    {
+        // Try to get ID field through reflection
+        var idField = typeof(T).GetField("tankId") ??
+                        typeof(T).GetField("hullID") ??
+                        typeof(T).GetField("weaponID") ??
+                        typeof(T).GetField("abilityID") ??
+                        typeof(T).GetField("projectileID") ??
+                        typeof(T).GetField("matchID") ??
+                        typeof(T).GetField("itemId") ??
+                        typeof(T).GetField("$id");
+
+        return idField?.GetValue(document)?.ToString();
+    }
+
+    [System.Serializable]
+    private class CollectionWrapper<TDoc>
+    {
+        public int versionCode;
+        public string versionName;
+        public int lastUpdated;
+        public List<TDoc> documents = new();
+    }
+
+    public void UpdateFromJson(string json)
+    {
+        try
+        {
+            Debug.Log($"1. UpdateFromJson: {json}");
+
+            // Configure Newtonsoft.Json settings
+            var settings = new Newtonsoft.Json.JsonSerializerSettings
+            {
+                Converters = new List<JsonConverter> { new Vector2Converter() },
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+                ObjectCreationHandling = Newtonsoft.Json.ObjectCreationHandling.Replace,
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
+                PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects,
+                ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+                {
+                    NamingStrategy = new Newtonsoft.Json.Serialization.DefaultNamingStrategy()
+                },
+            };
+
+            // Try parsing as collection first
+            var collection = Newtonsoft.Json.JsonConvert.DeserializeObject<CollectionWrapper<T>>(json, settings);
+            if (collection?.documents != null)
+            {
+                for (int i = 0; i < collection.documents.Count; i++)
+                {
+                    //Debug.Log($"1. Document {i}");
+                    //Debug.Log($"2. Document {Newtonsoft.Json.JsonConvert.SerializeObject(collection.documents[i])}");
+                }
+                Debug.Log($"3. Collection Version: {collection.versionCode}");
+                UpdateDocuments(collection.documents, settings);
+                // Update collection metadata
+                if (_originalCollection != null)
+                {
+                    _originalCollection.versionCode = collection.versionCode;
+                    _originalCollection.versionName = collection.versionName;
+                    _originalCollection.lastUpdated = collection.lastUpdated;
+                }
+                return;
+            }
+
+            // ...existing fallback code...
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"Error parsing JSON: {e.Message}\nJSON: {json}");
+        }
+    }
+
+    private void UpdateDocuments(List<T> updates, Newtonsoft.Json.JsonSerializerSettings settings)
+    {
+        if (updates == null || updates.Count == 0)
+        {
+            Debug.LogWarning("No documents to update");
+            return;
+        }
+        _originalCollection.Delete();
+        foreach (var doc in updates)
+        {
+            // Deep clone the document using Newtonsoft.Json
+            string docJson = Newtonsoft.Json.JsonConvert.SerializeObject(doc, settings);
+            var clonedDoc = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(docJson, settings);
+
+            string id = GetDocumentId(clonedDoc);
+            if (!string.IsNullOrEmpty(id))
+            {
+                _runtimeData[id] = clonedDoc;
+
+                // Update original collection if needed
+                if (_originalCollection != null)
+                {
+                    _originalCollection.AddDocument(clonedDoc);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Skipping document with empty ID: {docJson}");
+            }
+        }
+    }
+
+    // public void UpdateFromJson(string json)
+    // {
+    //     try
+    //     {
+    //         Debug.Log($"1. UpdateFromJson: {json}");
+
+    //         // Configure Newtonsoft.Json settings
+    //         var settings = new Newtonsoft.Json.JsonSerializerSettings
+    //         {
+    //             NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+    //             MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+    //             ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+    //             {
+    //                 NamingStrategy = new Newtonsoft.Json.Serialization.DefaultNamingStrategy()
+    //             }
+    //         };
+
+    //         // Try parsing as collection first
+    //         var collection = Newtonsoft.Json.JsonConvert.DeserializeObject<CollectionWrapper<T>>(json, settings);
+    //         if (collection?.documents != null)
+    //         {
+    //             Debug.Log($"2. UpdateFromJson: {collection.documents.Count} documents");
+    //             for(int i=0; i < collection.documents.Count; i++)
+    //             {
+    //                 Debug.Log($"3. Document {i}");
+    //                 Debug.Log($"4. Document {Newtonsoft.Json.JsonConvert.SerializeObject(collection.documents[i])}");
+    //             }
+    //             UpdateDocuments(collection.documents);
+    //             // Update collection metadata if needed
+    //             if (_originalCollection != null)
+    //             {
+    //                 _originalCollection.versionCode = collection.versionCode;
+    //                 _originalCollection.versionName = collection.versionName;
+    //                 _originalCollection.lastUpdated = collection.lastUpdated;
+    //                 _originalCollection.Delete();
+    //                 foreach (var id in _runtimeData.Keys)
+    //                 {
+    //                     _originalCollection.AddDocument(_runtimeData[id]);
+    //                 }
+    //             }
+    //             return;
+    //         }
+
+    //         // Fallback to direct array parsing
+    //         if (json.StartsWith("["))
+    //         {
+    //             var updates = Newtonsoft.Json.JsonConvert.DeserializeObject<List<T>>(json, settings);
+    //             UpdateDocuments(updates);
+    //             return;
+    //         }
+
+    //         Debug.LogError("Failed to parse JSON - invalid format");
+    //     }
+    //     catch (System.Exception e)
+    //     {
+    //         Debug.LogError($"Error parsing JSON: {e.Message}\nJSON: {json}");
+    //     }
+    // }
+
+    // private void UpdateDocuments(List<T> updates)
+    // {
+    //     if (updates == null || updates.Count == 0)
+    //     {
+    //         Debug.LogWarning("No documents to update");
+    //         return;
+    //     }
+
+    //     Debug.Log($"Updating {updates.Count} documents in runtime collection");
+    //     Debug.Log($"{JsonUtility.ToJson(updates[0])}...");
+
+    //     foreach (var doc in updates)
+    //     {
+    //         Debug.Log($"Processing document: {JsonUtility.ToJson(doc)}");
+    //         string id = GetDocumentId(doc);
+    //         Debug.Log($"Updating/Adding doc: {id} -> {JsonUtility.ToJson(doc)}");
+    //         if (!string.IsNullOrEmpty(id))
+    //         {
+    //             _runtimeData[id] = doc;
+    //         }
+    //         else
+    //         {
+    //             Debug.LogWarning($"Skipping document with empty ID: {doc}");
+    //         }
+    //     }
+    // }
+
+    public T GetDocument(string id)
+    {
+        return _runtimeData.TryGetValue(id, out T doc) ? doc : default;
+    }
+
+    public List<T> GetAllDocuments()
+    {
+        return new List<T>(_runtimeData.Values);
+    }
+
+}
+
+public class Vector2Converter : JsonConverter
+{
+    public override bool CanConvert(System.Type objectType)
+    {
+        return objectType == typeof(Vector2);
+    }
+
+    public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue, JsonSerializer serializer)
+    {
+        JObject obj = JObject.Load(reader);
+        float x = obj["x"] != null ? obj["x"].ToObject<float>() : 0f;
+        float y = obj["y"] != null ? obj["y"].ToObject<float>() : 0f;
+        return new Vector2(x, y);
+    }
+
+    public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+    {
+        Vector2 v2 = (Vector2)value;
+        writer.WriteStartObject();
+        writer.WritePropertyName("x");
+        writer.WriteValue(v2.x);
+        writer.WritePropertyName("y");
+        writer.WriteValue(v2.y);
+        writer.WriteEndObject();
+    }
+}
+
+
+================================================================================
+FILE 399/682: Assets/_GameModules/GameAssetModule/Scripts/GameAssetCollection.cs
+================================================================================
+
+using System.Linq;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = nameof(GameAssetCollection), menuName = "ScriptableObjects/" + nameof(GameAssetCollection), order = 1)]
+public class GameAssetCollection : CollectionBase<GameAssetDocument>
+{
+    public GameAssetDocument GetGameAssetDocumentById(string assetID)
+    {
+        if (string.IsNullOrEmpty(assetID))
+        {
+            Debug.LogWarning("Asset ID is null or empty.");
+            return null;
+        }
+        return documents.Find(doc => doc.id == assetID);
+        // foreach (var assetDoc in documents)
+        // {
+        //     if (assetDoc.id == assetID)
+        //     {
+        //         return assetDoc;
+        //     }
+        // }
+
+        // Debug.LogWarning($"Game asset document with ID {assetID} not found in collection.");
+        // return null;
+    }
+
+    public Sprite GetClassIcon(string assetID, AssetType assetType = AssetType.ClassIcon)
+    {
+        var assetDoc = GetGameAssetDocumentById(assetID);
+        if (assetDoc != null)
+        {
+            return assetDoc.sprites.FirstOrDefault(s => s.type == assetType)?.asset as Sprite;
+        }
+        Debug.LogWarning($"Sprite for asset ID {assetID} not found.");
+        return null;
+    }
+
+    public Sprite GetMainIcon(string assetID)
+    {
+        var assetDoc = GetGameAssetDocumentById(assetID);
+        if (assetDoc != null)
+        {
+            return assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.MainIcon)?.asset as Sprite;
+        }
+        Debug.LogWarning($"Main icon for asset ID {assetID} not found.");
+        return null;
+    }
+
+    public void GetAssets(string assetID, out Sprite mainIcon, out Sprite previewIcon, out Sprite classIcon)
+    {
+        mainIcon = null;
+        previewIcon = null;
+        classIcon = null;
+        var assetDoc = GetGameAssetDocumentById(assetID);
+        if (assetDoc != null)
+        {
+            mainIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.MainIcon)?.asset as Sprite;
+            classIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.ClassIcon)?.asset as Sprite;
+            previewIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.PreviewIcon)?.asset as Sprite;
+            return;
+        }
+        Debug.LogWarning($"Main icon for asset ID {assetID} not found.");
+    }
+
+    public Sprite GetPreviewIcon(string assetID)
+    {
+        var assetDoc = GetGameAssetDocumentById(assetID);
+        if (assetDoc != null)
+        {
+            return assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.PreviewIcon)?.asset as Sprite;
+        }
+        Debug.LogWarning($"Preview icon for asset ID {assetID} not found.");
+        return null;
+    }
+}
+
+
+================================================================================
+FILE 400/682: Assets/_GameModules/GameAssetModule/Scripts/GameAssetCollection2.cs
+================================================================================
+
+using System.Linq;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = nameof(GameAssetCollection2), menuName = "ScriptableObjects/" + nameof(GameAssetCollection2), order = 1)]
+public class GameAssetCollection2 : CollectionBase<GameAssetGroup>
+{
+    public GameAssetDocument GetGameAssetDocumentById(string groupID, string assetID)
+    {
+        if (string.IsNullOrEmpty(assetID))
+        {
+            Debug.LogWarning("Asset ID is null or empty.");
+            return null;
+        }
+        var group = documents.FirstOrDefault(g => g.groupID == groupID);
+        if (group != null)
+        {
+            return group.assetDocuments.Find(doc => doc.id == assetID);
+        }
+        Debug.LogWarning($"Asset with ID {assetID} not found in group {groupID}.");
+        return null;
+    }
+
+    // public Sprite GetClassIcon(string assetID, AssetType assetType = AssetType.ClassIcon)
+    // {
+    //     var assetDoc = GetGameAssetDocumentById(assetID);
+    //     if (assetDoc != null)
+    //     {
+    //         return assetDoc.sprites.FirstOrDefault(s => s.type == assetType)?.asset as Sprite;
+    //     }
+    //     Debug.LogWarning($"Sprite for asset ID {assetID} not found.");
+    //     return null;
+    // }
+
+    // public Sprite GetMainIcon(string assetID)
+    // {
+    //     var assetDoc = GetGameAssetDocumentById(assetID);
+    //     if (assetDoc != null)
+    //     {
+    //         return assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.MainIcon)?.asset as Sprite;
+    //     }
+    //     Debug.LogWarning($"Main icon for asset ID {assetID} not found.");
+    //     return null;
+    // }
+
+    // public void GetAssets(string assetID, out Sprite mainIcon, out Sprite previewIcon, out Sprite classIcon)
+    // {
+    //     mainIcon = null;
+    //     previewIcon = null;
+    //     classIcon = null;
+    //     var assetDoc = GetGameAssetDocumentById(assetID);
+    //     if (assetDoc != null)
+    //     {
+    //         mainIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.MainIcon)?.asset as Sprite;
+    //         classIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.ClassIcon)?.asset as Sprite;
+    //         previewIcon = assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.PreviewIcon)?.asset as Sprite;
+    //         return;
+    //     }
+    //     Debug.LogWarning($"Main icon for asset ID {assetID} not found.");
+    // }
+
+    // public Sprite GetPreviewIcon(string assetID)
+    // {
+    //     var assetDoc = GetGameAssetDocumentById(assetID);
+    //     if (assetDoc != null)
+    //     {
+    //         return assetDoc.sprites.FirstOrDefault(s => s.type == AssetType.PreviewIcon)?.asset as Sprite;
+    //     }
+    //     Debug.LogWarning($"Preview icon for asset ID {assetID} not found.");
+    //     return null;
+    // }
+}

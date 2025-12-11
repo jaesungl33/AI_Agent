@@ -1,0 +1,4768 @@
+# Code Snapshot for tank_online_1-dev - Batch 11/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 50
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 501/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_TankColor.shader
+================================================================================
+
+﻿Shader "Tanknarok/TankColor" {
+	Properties {
+		_Transition("Transition", Range(0, 1)) = 0  // The transition between 0 = normal and 1 = flashing (taking damage)
+		_TransitionColor("Transition Color", Color) = (1,1,1,1)
+		_MainTex("Palette", 2D) = "white" {}
+		_RimColor("RimColor", Color) = (1,1,1,1)
+		_SilhouetteColor("Silhouette Color", Color) = (1,1,1,1)
+		
+		
+		_TextColor("Text Color", Color) = (1,1,1,1)
+		[HDR] _EnergyColor("Energy Color", Color) = (1,1,1,1)
+		[HideInInspector] _FlashEmissionMultiplier("EmissionMultiplier", Float) = 1.2
+		[HideInInspector] _RimStrength("RimStrength", Float) = 3.0
+	}
+
+	CGINCLUDE
+
+	float4 _SilhouetteColor;
+	float _FlashEmissionMultiplier;
+	float _Transition;
+	float4 _TransitionColor;
+
+	ENDCG
+
+	SubShader {
+		Tags { 
+			"Queue" = "Geometry+1"
+			"RenderType"="Opaque" 
+		}
+		LOD 200
+
+		// outline pass
+		Pass {
+			Name "OUTLINE"
+			Tags { 
+				"LightMode" = "Always" 
+			}
+
+			Cull Off
+			ZWrite Off
+			ZTest Always
+			ColorMask RGB
+
+			Blend One OneMinusSrcAlpha
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			struct appdata {
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
+			struct v2f {
+				float4 vertex : SV_POSITION;
+				float4 color : COLOR;
+			};
+
+			v2f vert(appdata v) {
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				return o;
+			}
+			half4 frag(v2f i) :COLOR {
+				i.color = lerp(_SilhouetteColor, _TransitionColor, _Transition);
+				return i.color;
+			}
+
+			ENDCG
+		}
+
+		// standard unity surface shader
+		CGPROGRAM
+		#pragma surface surf Standard fullforwardshadows
+		#pragma target 3.0
+
+		
+		sampler2D _MainTex;
+		float4 _RimColor;
+		float _RimStrength;
+
+		struct Input {
+			float2 uv_MainTex;
+			float3 worldNormal;
+			float3 viewDir;
+		};
+
+		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+		// #pragma instancing_options assumeuniformscaling
+		UNITY_INSTANCING_BUFFER_START(Props)
+			// put more per-instance properties here
+		UNITY_INSTANCING_BUFFER_END(Props)
+
+		void surf (Input IN, inout SurfaceOutputStandard o) {
+			o.Metallic = 0;
+			o.Smoothness = 0;
+			o.Alpha = 1;
+
+			fixed4 damageColor = _TransitionColor * _FlashEmissionMultiplier;
+			fixed4 c = lerp(tex2D(_MainTex, IN.uv_MainTex), damageColor, _Transition);
+
+			//get the dot product between the normal and the view direction
+			float fresnel = dot(IN.worldNormal, IN.viewDir);
+			//invert the fresnel so the big values are on the outside
+			fresnel = saturate(1 - fresnel);
+			//raise the fresnel value to the exponents power to be able to adjust it
+			fresnel = pow(fresnel, _RimStrength);
+
+			// this is the old fresnel which produces visual glitches
+			//fresnel = pow(1.0 - max(0, dot(normalize(IN.viewDir), o.Normal)), _RimStrength);
+			float3 fresnelColor = fresnel * _RimColor.rgb;
+
+			o.Albedo = c.rgb + fresnelColor;
+		}
+		ENDCG
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 502/682: Assets/_GameModules/TankFusionModule/Resources/Collection/TankCollection.json
+================================================================================
+
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "lastUpdated": 1755505870,
+    "documents": [
+        {
+            "tankName": "Scout 1",
+            "tankId": "tank.scout1",
+            "isSelected": false,
+            "tankType": 1,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.scout1",
+            "primaryWeaponID": "weapon.scout1",
+            "secondaryWeaponID": "0"
+        },
+        {
+            "tankName": "Assault 1",
+            "tankId": "tank.assault1",
+            "isSelected": true,
+            "tankType": 2,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.assault1",
+            "primaryWeaponID": "weapon.assault1",
+            "secondaryWeaponID": ""
+        },
+        {
+            "tankName": "Heavy 1",
+            "tankId": "tank.heavy1",
+            "isSelected": false,
+            "tankType": 3,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.heavy1",
+            "primaryWeaponID": "weapon.heavy1",
+            "secondaryWeaponID": ""
+        },
+        {
+            "tankName": "A",
+            "tankId": "tank.outpost1",
+            "isSelected": false,
+            "tankType": 4,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.outpost1",
+            "primaryWeaponID": "weapon.outpost1",
+            "secondaryWeaponID": "0"
+        },
+        {
+            "tankName": "B",
+            "tankId": "tank.outpost2",
+            "isSelected": false,
+            "tankType": 4,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.outpost2",
+            "primaryWeaponID": "weapon.outpost2",
+            "secondaryWeaponID": "0"
+        },
+        {
+            "tankName": "C",
+            "tankId": "tank.outpost3",
+            "isSelected": false,
+            "tankType": 4,
+            "description": "",
+            "abilityIDs": [],
+            "hullID": "hull.outpost3",
+            "primaryWeaponID": "weapon.outpost3",
+            "secondaryWeaponID": "0"
+        }
+    ]
+}
+
+
+================================================================================
+FILE 503/682: Assets/_GameModules/TankFusionModule/Resources/Collection/TankHullCollection.json
+================================================================================
+
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "lastUpdated": 1751443200,
+    "documents": [
+        {
+            "hullName": "Scout's Hull",
+            "hullID": "hull.scout1",
+            "tankType": 1,
+            "hpMultiplier": 100,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 100,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Assault's Hull",
+            "hullID": "hull.assault1",
+            "tankType": 2,
+            "hpMultiplier": 120,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 95,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Heavy's Hull",
+            "hullID": "hull.heavy1",
+            "tankType": 3,
+            "hpMultiplier": 145,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 60,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 1",
+            "hullID": "hull.outpost1",
+            "tankType": 4,
+            "hpMultiplier": 214,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 2",
+            "hullID": "hull.outpost2",
+            "tankType": 4,
+            "hpMultiplier": 214,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 3",
+            "hullID": "hull.outpost3",
+            "tankType": 4,
+            "hpMultiplier": 257,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        }
+    ]
+}
+
+
+================================================================================
+FILE 504/682: Assets/_GameModules/TankFusionModule/Resources/Collection/TankHullCollection_v1.1.5.json
+================================================================================
+
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "lastUpdated": 1755570580,
+    "documents": [
+        {
+            "hullName": "Scout's Hull",
+            "hullID": "hull.scout1",
+            "tankType": 1,
+            "hpMultiplier": 100,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 100,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Assault's Hull",
+            "hullID": "hull.assault1",
+            "tankType": 2,
+            "hpMultiplier": 120,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 95,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Heavy's Hull",
+            "hullID": "hull.heavy1",
+            "tankType": 3,
+            "hpMultiplier": 145,
+            "brakingMultiplier": 100,
+            "speedMultiplier": 60,
+            "accelerationMultiplier": 100,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 1",
+            "hullID": "hull.outpost1",
+            "tankType": 4,
+            "hpMultiplier": 214,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 2",
+            "hullID": "hull.outpost2",
+            "tankType": 4,
+            "hpMultiplier": 257,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        },
+        {
+            "hullName": "Hull of outpost 3",
+            "hullID": "hull.outpost3",
+            "tankType": 4,
+            "hpMultiplier": 308,
+            "brakingMultiplier": 0,
+            "speedMultiplier": 0,
+            "accelerationMultiplier": 0,
+            "rotationSpeedMultiplier": 100,
+            "description": ""
+        }
+    ]
+}
+
+
+================================================================================
+FILE 505/682: Assets/_GameModules/TankFusionModule/Resources/Collection/TankWeaponCollection.json
+================================================================================
+
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "lastUpdated": 1755503213,
+    "documents": [
+        {
+            "weaponName": "Scout's Weapon",
+            "weaponID": "weapon.scout1",
+            "tankType": 1,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 100,
+            "rangeMultiplier": 100,
+            "fireRateMultiplier": 100,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 100,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Assault's Weapon",
+            "weaponID": "weapon.assault1",
+            "tankType": 2,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 143,
+            "rangeMultiplier": 120,
+            "fireRateMultiplier": 70,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 100,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Heavy's Weapon",
+            "weaponID": "weapon.heavy1",
+            "tankType": 3,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 290,
+            "rangeMultiplier": 150,
+            "fireRateMultiplier": 50,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 100,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 1",
+            "weaponID": "weapon.outpost1",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 500,
+            "rangeMultiplier": 100,
+            "fireRateMultiplier": 25,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 200,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 2",
+            "weaponID": "weapon.outpost2",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 500,
+            "rangeMultiplier": 100,
+            "fireRateMultiplier": 25,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 200,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 3",
+            "weaponID": "weapon.outpost3",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 300,
+            "rangeMultiplier": 120,
+            "fireRateMultiplier": 100,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 200,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        }
+    ]
+}
+
+
+================================================================================
+FILE 506/682: Assets/_GameModules/TankFusionModule/Resources/Collection/TankWeaponCollection_v1.15.json
+================================================================================
+
+{
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "lastUpdated": 1755578036,
+    "documents": [
+        {
+            "weaponName": "Scout's Weapon",
+            "weaponID": "weapon.scout1",
+            "tankType": 1,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 100,
+            "rangeMultiplier": 100,
+            "fireRateMultiplier": 100,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 160,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Assault's Weapon",
+            "weaponID": "weapon.assault1",
+            "tankType": 2,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 143,
+            "rangeMultiplier": 120,
+            "fireRateMultiplier": 70,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 160,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Heavy's Weapon",
+            "weaponID": "weapon.heavy1",
+            "tankType": 3,
+            "weaponType": 0,
+            "powerupType": 0,
+            "damageAreaType": 0,
+            "damageMultiplier": 290,
+            "rangeMultiplier": 150,
+            "fireRateMultiplier": 50,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 160,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 1",
+            "weaponID": "weapon.outpost1",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 160,
+            "rangeMultiplier": 134,
+            "fireRateMultiplier": 50,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 225,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 2",
+            "weaponID": "weapon.outpost2",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 171,
+            "rangeMultiplier": 134,
+            "fireRateMultiplier": 75,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 225,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        },
+        {
+            "weaponName": "Weapon of Outpost 3",
+            "weaponID": "weapon.outpost3",
+            "tankType": 4,
+            "weaponType": 0,
+            "powerupType": 1,
+            "damageAreaType": 0,
+            "damageMultiplier": 192,
+            "rangeMultiplier": 134,
+            "fireRateMultiplier": 100,
+            "reloadTimeMultiplier": 100,
+            "projectileSpeedMultiplier": 225,
+            "magazineSizeMultiplier": 100,
+            "projectileCountMultiplier": 100
+        }
+    ]
+}
+
+
+================================================================================
+FILE 507/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityBase.cs
+================================================================================
+
+using System.Linq;
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+using System.Collections.Generic;
+namespace Fusion.TankOnlineModule
+{
+    public enum AbilityUseType
+    {
+        Weapon,
+        Instant,
+        Direction,
+        Ground,
+        ChannelingDirection,
+    }
+    public class AbilityBase : NetworkBehaviourWithState<AbilityBase.NetworkState>
+    {
+        [Networked] public override ref NetworkState State => ref MakeRef<NetworkState>();
+        public struct NetworkState : INetworkStruct
+        {
+            [Networked, Capacity(12)]
+            public NetworkArray<ShotState> bulletStates => default;
+        }
+        #region Fields
+        [Header("Fixed Ability Info")]
+        [SerializeField] public string abilityID;
+        public virtual AbilityPropertyBase AbilityPropsBase { get; } = new AbilityPropertyBase();
+        // Ability metadata
+        // [SerializeField] public string abilityID;
+        // [SerializeField] public string abilityName;
+        // [SerializeField] public string description;
+
+        // // Ability timing
+        // [SerializeField] public float castTime = 1f;
+        // [SerializeField] public float duration = 2f;
+        // [SerializeField] public float cooldown = 1f;
+
+        [SerializeField] public AbilityUseType abilityUseType = AbilityUseType.Instant;
+        [SerializeField] public bool IsBlockAutoAim { get; set; }
+        // Projectile and firing
+        [SerializeField] protected Shot _bulletPrefab;
+        [SerializeField] protected Transform[] _gunExits;
+        protected SparseCollection<ShotState, Shot> _bullets;
+
+        // Area damage
+        protected readonly Collider[] _areaHits = new Collider[16];
+
+        // Owner
+        protected Player player;
+        protected NetworkRunner runner;
+        protected PlayerRef owner;
+        protected Vector3 ownerVelocity;
+        // State
+        protected float timeElapsed = 0f;
+        protected float countingDown = 0f; //--> special param, don't reset on init becase tank dead not reset cooldown
+        private float visible;
+        private bool active;
+        protected bool trigged;
+        #endregion
+
+        #region Properties
+
+        public bool Visible => visible >= 1.0f;
+        public virtual bool AvailableActive => Visible && countingDown <= 0f && timeElapsed <= 0f && !IsActive;
+        public bool IsActive => active;
+        public float CooldownRemaining => countingDown;
+        public float TimeElapsed => timeElapsed;
+        public bool IsTrigged => trigged;
+        public Collider[] AreaHits => _areaHits;
+        #endregion
+
+        #region Unity & Fusion Methods
+        public void Awake()
+        {
+            visible = 1.0f;
+            timeElapsed = 0f;
+            countingDown = 0f;
+            active = false;
+            trigged = false;
+
+        }
+        public virtual void Initialize(Player player)
+        {
+            this.player = player;
+            visible = 1.0f;
+            timeElapsed = 0f;
+            active = false;
+            trigged = false;
+            //countingDown = 0f;// don't reset cooldown on init (dead)
+
+            AbilityPropsBase.LoadProperties(abilityID);
+        }
+        //----------------
+        public override void Spawned()
+        {
+            base.Spawned();
+            _bullets = new SparseCollection<ShotState, Shot>(State.bulletStates, _bulletPrefab);
+        }
+        public override void FixedUpdateNetwork()
+        {
+            base.FixedUpdateNetwork();
+
+            if (!Visible)
+                return;
+            AbilityAllTimeUpdateHandler(Runner.DeltaTime);
+
+            countingDown = countingDown < 0 ? 0 : countingDown - Runner.DeltaTime;
+            if (countingDown > 0)
+                return;
+
+            if (!IsActive)
+                return;
+
+            timeElapsed += Runner.DeltaTime;
+
+            AbilityUpdateHandler(Runner.DeltaTime);
+            if (timeElapsed >= AbilityPropsBase.duration)
+            {
+                Exit();
+                return;
+            }
+        }
+
+
+        public override void Render()
+        {
+            base.Render();
+            if (TryGetStateChanges(out var from, out var to))
+            {
+            }
+            else
+                TryGetStateSnapshots(out from, out _, out _, out _, out _);
+            //Debug.Log($"AbilityBase Render: {abilityName} for player: {_player.name}, timeElapsed: {timeElapsed}");
+            _bullets.Render(this, from.bulletStates);
+        }
+        //---------------
+        #endregion
+
+        #region Ability Lifecycle
+
+        public virtual void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+        {
+            if (!AvailableActive)
+                return;
+            timeElapsed = 0f; // Start timer
+            active = true;
+            trigged = false;
+            countingDown = 0f; // Reset cooldown, will start after ability ends
+
+            //Debug.LogError($"====== Ability {abilityName} On Active");
+            // Optionally spawn projectile or trigger effect here
+            this.runner = runner;
+            this.owner = owner;
+            this.ownerVelocity = ownerVelocity;
+            IsBlockAutoAim = true;
+        }
+        protected virtual void OnAbilityTrigged()
+        {
+            // Optionally handle ability triggered logic here
+        }
+
+        public virtual void Exit()
+        {
+            timeElapsed = 0f;
+            active = false;
+            trigged = false;
+            countingDown = AbilityPropsBase.cooldown;
+            IsBlockAutoAim = false;
+            //Debug.LogError($"====== Ability {abilityName} On Exit, cooldown: {countingDown}");
+            // Optionally: cleanup or end effect logic
+        }
+        public void ForceExit()
+        {
+            timeElapsed = AbilityPropsBase.duration;
+        }
+
+        public virtual void OnPlayerDestroyed()
+        {
+            Exit();
+        }
+
+        public virtual void Clear()
+        {
+            Exit();
+            countingDown = 0f;
+            if (_bullets != null)
+                _bullets.Process(this, (ref ShotState bullet, int tick) =>
+                {
+                    bullet.EndTick = Runner.Tick;
+                    return true;
+                });
+        }
+        #endregion
+
+        #region Projectile Logic
+
+        protected virtual void SpawnNetworkShot(NetworkRunner runner, PlayerRef owner, Transform exit, Vector3 ownerVelocity)
+        {
+            _bullets.Add(runner, new ShotState(player.transform.position, exit.position, exit.forward), _bulletPrefab.TimeToLive);
+        }
+
+        protected virtual void AbilityUpdateHandler(float deltaTime)
+        {
+            if (timeElapsed >= AbilityPropsBase.castTime && !trigged)
+            {
+                trigged = true; // ensure only add once
+                OnAbilityTrigged();
+            }
+            if (!trigged)
+                return;
+        }
+
+        // Called every frame, regardless of ability state
+        // Useful for projectile updates after ability ends
+        protected virtual void AbilityAllTimeUpdateHandler(float deltaTime)
+        {
+
+        }
+
+        protected virtual Transform GetExitPoint(int tick)
+        {
+            return _gunExits[tick % _gunExits.Length];
+        }
+
+        #endregion
+
+        #region Damage Logic
+
+        protected virtual void ApplySingleDamage(IFusionObject target, float modifyRatio = 1.0f)
+        {
+            if (target != null && target.PlayerTeamIndex != player.PlayerTeamIndex)
+            {
+                int damage = Random.Range(player.PlayerData.Damage[0], player.PlayerData.Damage[1]);
+                damage = Mathf.FloorToInt(damage * modifyRatio);
+                Debug.Log($"Applying single damage to target: {target.PlayerName} with damage: {damage}");
+                target.RaiseEvent(new DamageEvent { targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+            }
+        }
+
+        protected virtual void ApplySingleDamage(Turret target, float modifyRatio = 1.0f)
+        {
+            if (target != null && target.TurretTeamIndex != player.PlayerTeamIndex)
+            {
+                int damage = Random.Range(player.PlayerData.Damage[0], player.PlayerData.Damage[1]);
+                damage = Mathf.FloorToInt(damage * modifyRatio);
+                Debug.Log($"Damaged turret: {target.name} with damage: {damage}");
+                target.RPC_DealDamage(new DamageEvent { playerId = player.PlayerId.AsIndex, teamIndex = player.PlayerTeamIndex, targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+            }
+        }
+
+        protected virtual int ApplyAreaDamage(Vector3 hitPoint, float radius, int damage, float areaImpulse, LayerMask hitMask)
+        {
+            int cnt = Physics.OverlapSphereNonAlloc(hitPoint, radius, _areaHits, hitMask.value, QueryTriggerInteraction.Ignore);
+
+            // Dùng HashSet để tránh gây damage lặp cho cùng 1 Player/Turret (do nhiều collider con)
+            var damagedPlayers = new HashSet<Player>();
+            var damagedTurrets = new HashSet<Turret>();
+
+            for (int i = 0; i < cnt; i++)
+            {
+                GameObject other = _areaHits[i].gameObject;
+                if (other)
+                {
+                    Player target = other.GetComponent<Player>();
+                    if (target != null && target != player && target.PlayerTeamIndex != player.PlayerTeamIndex && !damagedPlayers.Contains(target))
+                    {
+                        damagedPlayers.Add(target);
+                        Vector3 impulse = other.transform.position - hitPoint;
+                        float l = Mathf.Clamp(radius - impulse.magnitude, 0, radius);
+                        impulse = areaImpulse * l * impulse.normalized;
+                        target.RaiseEvent(new DamageEvent { targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+                    }
+
+                    Turret turret = other.GetComponent<Turret>();
+                    if (turret != null && turret.TurretTeamIndex != player.PlayerTeamIndex && !damagedTurrets.Contains(turret))
+                    {
+                        damagedTurrets.Add(turret);
+                        turret.RPC_DealDamage(new DamageEvent { playerId = player.PlayerId.AsIndex, teamIndex = player.PlayerTeamIndex, targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+                    }
+                }
+            }
+            return cnt;
+        }
+
+
+        protected virtual GameObject FindClosestEnemy(Vector3 position, float maxDistance, LayerMask hitMask)
+        {
+            GameObject closest = null;
+            float closestDistSqr = maxDistance * maxDistance;
+            int cnt = Physics.OverlapSphereNonAlloc(position, maxDistance, _areaHits, hitMask.value, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < cnt; i++)
+            {
+                GameObject other = _areaHits[i].gameObject;
+                if (other)
+                {
+                    Player target = other.GetComponent<Player>();
+                    if (target != null && target != player && target.PlayerTeamIndex != player.PlayerTeamIndex)
+                    {
+                        float distSqr = (other.transform.position - position).sqrMagnitude;
+                        if (distSqr < closestDistSqr)
+                        {
+                            closestDistSqr = distSqr;
+                            closest = other;
+                        }
+                    }
+                }
+            }
+            return closest;
+        }
+
+        #endregion
+
+        #region  Helpers
+        // return CooldownRemaining, abilityUseType
+        public virtual CustomProperty[] GetCustomPropertiesRuntime()
+        {
+            return new CustomProperty[]
+            {
+                new CustomProperty
+                {
+                    propertyName = "CooldownRemaining",
+                    propertyValue = CooldownRemaining
+                },
+                new CustomProperty
+                {
+                    propertyName = "Cooldown",
+                    propertyValue = AbilityPropsBase.cooldown
+                },
+                new CustomProperty
+                {
+                    propertyName = "AbilityUseType",
+                    propertyValue = (int)abilityUseType
+                }
+            };
+        }
+        public ushort GetRandomUshortWithPlayer()
+        {
+            ushort randomId = (ushort)(((byte)player.PlayerId.AsIndex << 8) | UnityEngine.Random.Range(0, 256));
+            return randomId;
+        }
+        public ushort GetAbilityIdUshort()
+        {
+            ushort randomId = (ushort)(((byte)player.PlayerId.AsIndex << 8) | UnityEngine.Random.Range(0, 256));
+            return randomId;
+        }
+        #endregion
+    }
+
+    public class AbilityPropertyBase
+    {
+        public string abilityID;
+        public string abilityName;
+        public string description;
+        public float castTime = 0f;
+        public float duration = 2f;
+        public float cooldown = 1f;
+
+        public virtual void LoadProperties(string _abilityID)
+        {
+            DatabaseManager.GetDB<TankAbilityCollection>(result =>
+            {
+                if (result != null)
+                {
+                    var propDoc = result.GetTankAbilityDocumentById(_abilityID);
+                    if (propDoc != null)
+                    {
+                        //gán các giá trị từ propDoc vào các trường tương ứng
+                        abilityID = propDoc.abilityID;
+                        abilityName = propDoc.abilityName;
+                        description = propDoc.description;
+                        castTime = propDoc.castTime;
+                        duration = propDoc.duration;
+                        cooldown = propDoc.cooldown;
+                        // các properties khác khai báo ở lớp con sẽ được load từ propDoc.customProperties
+                        foreach (var customProp in propDoc.customProperties)
+                        {
+                            var field = this.GetType().GetField(customProp.propertyName);
+                            if (field != null)
+                            {
+                                if (field.FieldType == typeof(float))
+                                {
+                                    field.SetValue(this, customProp.propertyValue);
+                                }
+                                else if (field.FieldType == typeof(int))
+                                {
+                                    field.SetValue(this, (int)customProp.propertyValue);
+                                }
+                                // Thêm các kiểu dữ liệu khác nếu cần
+                            }
+                        }
+                        Debug.LogWarning("ability load Done: " + abilityID);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"AbilityPropertyBase: No TankAbilityDocument found for abilityID: {abilityID}");
+                    }
+                }
+            });
+        }
+    }
+}
+
+
+================================================================================
+FILE 508/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityBearTrap.cs
+================================================================================
+
+using System.Linq;
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using Unity.VisualScripting;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityBearTrap : AbilityBase
+	{
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new BearTrapAbilityProperty();
+		public BearTrapAbilityProperty BearTrapProps => AbilityPropsBase as BearTrapAbilityProperty;
+
+		// Ability config
+		private int trapStack = 0;
+		private float trapStackTimer;
+
+		const float TRAP_STACK_RECOVERY_TIME = 10f; // seconds
+
+		public override bool AvailableActive
+		{
+			get
+			{
+				if (!player)
+					return false;
+
+				// Kiểm tra số lượng trap hiện tại trên bản đồ và khoảng cách tối thiểu
+				Vector3 playerPos = player.transform.position;
+				//int trapsCount = 0;
+				bool tooClose = false;
+				foreach (var item in State.bulletStates)
+				{
+					if (item.EndTick > Runner.Tick)
+					{
+						//trapsCount++;
+						if (Vector3.Distance(playerPos, item.Position) < BearTrapProps.minTrapDistance)
+						{
+							tooClose = true;
+							break;
+						}
+					}
+				}
+				return base.AvailableActive
+					&& trapStack > 0
+					&& !tooClose
+					&& countingDown <= 0f;
+			}
+		}
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+			trapStack = BearTrapProps.maxTrapsStack;
+			trapStackTimer = TRAP_STACK_RECOVERY_TIME;
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			if (!AvailableActive)
+			{
+				Debug.LogWarning("Cannot place trap: not available (stack, max traps, or too close).");
+				return;
+			}
+			base.Active(runner, owner, ownerVelocity);
+
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+			// Không dùng OnAbilityTrigged để xử lý trap, vì trap cần luôn update để phát hiện mục tiêu
+			Vector3 playerPos = player.transform.position;
+
+			// Lấy StartTick cũ nhất từ activeTraps
+			var activeTraps = State.bulletStates
+				.Where(item => item.EndTick > Runner.Tick)
+				.ToList();
+
+			if (activeTraps.Count >= BearTrapProps.maxTrapExits)
+			{
+				// Tìm trap có EndTick nhỏ nhất (cũ nhất)
+				int oldestEndTick = int.MaxValue;
+				foreach (var trap in activeTraps)
+				{
+					if (trap.EndTick < oldestEndTick)
+						oldestEndTick = trap.EndTick;
+				}
+				// Dùng _bullets.Process để end tick trap cũ nhất
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					if (bullet.EndTick == oldestEndTick && bullet.EndTick > Runner.Tick)
+					{
+						bullet.IsCancel = true;
+						bullet.EndTick = Runner.Tick;
+						//Debug.LogErrorFormat("Cancel oldest trap at {0}", bullet.Position);
+						return true;
+					}
+					return false; // Dừng khi đã hủy trap cũ nhất
+				});
+			}
+			// Tạo trap mới
+			Transform exit = GetExitPoint(Runner.Tick);
+			_bullets.Add(runner, new ShotState(playerPos, exit.position, Vector3.zero, teamIndex: player.PlayerTeamIndex), BearTrapProps.trapDuration);
+			if (trapStack >= BearTrapProps.maxTrapsStack)
+				trapStackTimer = 0f;
+			trapStack--;
+		}
+		// Luôn được gọi, dùng để hồi trap stack và xử lý trap phát hiện mục tiêu.
+		protected override void AbilityAllTimeUpdateHandler(float deltaTime)
+		{
+			// Hồi lại trap stack theo thời gian, chỉ khi chưa đầy
+			if (trapStack < BearTrapProps.maxTrapsStack)
+			{
+				trapStackTimer += deltaTime;
+				if (trapStackTimer >= BearTrapProps.coolDownStack)
+				{
+					trapStack++;
+					// Nếu vừa đầy thì giữ timer, không reset về 0
+					if (trapStack < BearTrapProps.maxTrapsStack)
+						trapStackTimer = 0f;
+				}
+			}
+
+			// Xử lý trap phát hiện mục tiêu
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				if (!_bulletPrefab.IsHitScan && bullet.EndTick > Runner.Tick)
+				{
+					var trapDelayTicks = bullet.StartTick + (int)(BearTrapProps.trapDelay / Runner.DeltaTime);
+					if (Runner.Tick < trapDelayTicks)
+					{
+						// Trap is still in delay period, do not activate
+						return false;
+					}
+
+					var target = FindClosestEnemy(bullet.Position, BearTrapProps.radius, _bulletPrefab.HitMask);
+					if (target != null)
+					{
+						var playerTarget = target.GetComponent<Player>();
+						if (playerTarget != null)
+						{
+							// Apply root effect and damage
+							playerTarget.RaiseEvent(new Player.EffectEvent
+							{
+								effectId = (int)EffectData.EffectType.Root,
+								duration = BearTrapProps.rootEffectDuration,
+								value = 1,
+								srcPlayerId = (byte)player.PlayerId.AsIndex
+							});
+							ApplySingleDamage(playerTarget, BearTrapProps.damageRatio);
+							bullet.EndTick = Runner.Tick;
+							return true;
+						}
+					}
+				}
+				return false;
+			});
+		}
+
+		public override void Exit()
+		{
+			base.Exit();
+			// Không xóa trap ngay lập tức khi thoát ability
+		}
+
+		public override void Clear()
+		{
+			base.Clear();
+			trapStack = BearTrapProps.maxTrapsStack;
+			trapStackTimer = TRAP_STACK_RECOVERY_TIME;
+		}
+		// Hàm lấy số lượng trap stack hiện tại (nếu cần cho UI)
+		public int GetTrapStack()
+		{
+			return trapStack;
+		}
+
+		#region  Helpers
+		// return base GetCustomPropertiesRuntime, and add more param GetTrapStack(), and add more _trapStackTimer	
+		public override CustomProperty[] GetCustomPropertiesRuntime()
+		{
+			var baseProps = base.GetCustomPropertiesRuntime();
+			//Debug.LogWarningFormat("GetCustomPropertiesRuntime: trapStack={0}, trapStackTimer={1}, coolDownStack={2}", trapStack, trapStackTimer, coolDownStack);
+			var extraProps = new[]
+			{
+				new CustomProperty { propertyName = "Stack", propertyValue = GetTrapStack() },
+				new CustomProperty { propertyName = "StackTimer", propertyValue = BearTrapProps.coolDownStack - trapStackTimer },
+				new CustomProperty { propertyName = "CoolDownStack", propertyValue = BearTrapProps.coolDownStack }
+			};
+			return baseProps.Concat(extraProps).ToArray();
+		}
+		#endregion
+	}
+
+	public class BearTrapAbilityProperty : AbilityPropertyBase
+	{
+		// Trap config
+		public float trapDuration = 10f;
+		public float trapDelay = 0.5f;
+		public float radius = 2f;
+		public float damageRatio = 1f;
+		public float rootEffectDuration = 3f;
+		public float minTrapDistance = 2f;
+
+		// Trap stack & limits
+		public int maxTrapExits = 3;
+		public int maxTrapsStack = 3;
+		public int coolDownStack = 10; // seconds
+	}
+}
+
+
+================================================================================
+FILE 509/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityFireDash.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityFireDash : AbilityBase
+	{
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new FireDashAbilityProperty();
+		public FireDashAbilityProperty FireDashProps => AbilityPropsBase as FireDashAbilityProperty;
+
+		private Transform exit;
+		Vector3 aimDir;
+		EffectData subEffect_1;
+		EffectData subEffect_2;
+
+		private Vector3 startPos;
+		private bool isDashing = false;
+		private Vector3 startFlameFieldPos;
+		private Vector3 lastFlameFieldPos;
+		private float flameFieldDurationRemain = 0f;
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+			//_bullets.Add(player.Runner, new ShotState(Vector3.zero, Vector3.zero, Vector3.zero, scale: Vector3.one * radius), 0.1f);
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			base.Active(runner, owner, ownerVelocity);
+			aimDir = ownerVelocity.normalized;
+			exit = GetExitPoint(Runner.Tick);
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+
+			//Self effect
+			// Root + ImmuneCC
+			subEffect_1 = player.EffectApplier?.ApplyEffect(new EffectData
+			{
+				effectId = (int)EffectData.EffectType.Root,
+				duration = FireDashProps.duration,
+				lifeTime = FireDashProps.duration,
+				value = 1,
+				forceCC = true,
+				srcPlayerId = (byte)player.PlayerId.AsIndex
+			});
+			subEffect_2 = player.EffectApplier?.ApplyEffect(new EffectData
+			{
+				effectId = (int)EffectData.EffectType.ImmuneCC,
+				duration = FireDashProps.duration,
+				lifeTime = FireDashProps.duration,
+				value = 1,
+				forceCC = true,
+				srcPlayerId = (byte)player.PlayerId.AsIndex
+			});
+			//-----------------------------
+			//start dash
+			_bullets.Add(runner, new ShotState(player.transform.position, exit.position, Vector3.zero, scale: Vector3.one * FireDashProps.radius), FireDashProps.flameFieldDuration);
+			startPos = player.transform.position;
+			isDashing = true;
+
+			startFlameFieldPos = player.transform.position;
+			lastFlameFieldPos = player.transform.position;
+			flameFieldDurationRemain = FireDashProps.flameFieldDuration;
+		}
+		protected override void AbilityUpdateHandler(float deltaTime)
+		{
+			base.AbilityUpdateHandler(deltaTime);
+			if (!trigged) return;
+			if (HasStateAuthority && isDashing)
+			{
+				DashUpdate(aimDir, deltaTime);
+				DamageTrigger();
+
+				// Cập nhật lastFlameFieldPos chỉ khi đang dash
+				if (isDashing)
+					lastFlameFieldPos = player.transform.position;
+			}
+		}
+
+		protected override void AbilityAllTimeUpdateHandler(float deltaTime)
+		{
+			base.AbilityAllTimeUpdateHandler(deltaTime);
+			flameFieldDurationRemain -= deltaTime;
+			if (flameFieldDurationRemain <= 0f)
+			{
+				flameFieldDurationRemain = 0f;
+			}
+			else
+			{
+				FireDashProps.flameFieldTick -= deltaTime;
+				if (FireDashProps.flameFieldTick <= 0f)
+				{
+					FireDashProps.flameFieldTick = 0.25f;
+					// Sử dụng aimDir làm hướng flame field
+					// nếu lastFlameFieldPos!= startFlameFieldPos thì không tạo flame field
+					if ((lastFlameFieldPos - startFlameFieldPos).sqrMagnitude <= 0.001f)
+					{
+						_bullets.Process(this, (ref ShotState bullet, int tick) =>
+						{
+							bullet.EndTick = Runner.Tick;
+							return true;
+						});
+						return;
+					}
+
+					// //nếu lastFlameFieldPos!= startFlameFieldPos thì lastFlameFieldPos lùi lại 1 chút về phía startFlameFieldPos
+					// if ((lastFlameFieldPos - startFlameFieldPos).sqrMagnitude > 0.01f)
+					// {
+					// 	Vector3 toStart = (startFlameFieldPos - lastFlameFieldPos).normalized;
+					// 	lastFlameFieldPos += toStart * 0.5f; //lùi lại 0.5f
+					// }
+
+					Vector3 dir = aimDir.sqrMagnitude > 0.01f ? aimDir.normalized : Vector3.forward;
+					Vector3 center = (lastFlameFieldPos + startFlameFieldPos) / 2 + dir;
+					Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
+
+					Collider[] colliders = Physics.OverlapBox(center, new Vector3(FireDashProps.flameFieldWidth / 2, 0.5f, FireDashProps.flameFieldRange / 2), rot, _bulletPrefab.HitMask.value);
+					foreach (var hit in colliders)
+					{
+						if (hit == null) continue;
+						float yDelta = Mathf.Abs(hit.transform.position.y - center.y);
+						if (yDelta > 1.0f) continue;
+
+						if (hit.transform.root.TryGetComponent<Player>(out Player target))
+						{
+							ApplySingleDamage(target, FireDashProps.flameFieldDamageRatio);
+						}
+					}
+				}
+			}
+		}
+		public override void Exit()
+		{
+			base.Exit();
+			if (_bullets != null)
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					//bullet.EndTick = Runner.Tick;
+					return true;
+				});
+			player?.EffectApplier?.RemoveEffect(subEffect_1);
+			player?.EffectApplier?.RemoveEffect(subEffect_2);
+		}
+		public override void Clear()
+		{
+			base.Clear();
+			flameFieldDurationRemain = 0f;
+			isDashing = false;
+		}
+
+		public void DashUpdate(Vector3 direction, float deltaTime)
+		{
+			if (player == null || player.visuals == null) return;
+			if (!isDashing) return;
+			// Chuẩn hóa hướng dash trên mặt phẳng XZ
+			direction.y = 0;
+			direction = direction.normalized;
+
+			// Tính phần trăm thời gian đã dash
+			float elapsed = Mathf.Clamp01(timeElapsed / FireDashProps.duration);
+
+			// Hàm ease out quad: tốc độ lớn lúc đầu, nhỏ dần về cuối
+			float ease = 1 - (1 - elapsed) * (1 - elapsed);
+
+			// Tính vị trí mới theo tỷ lệ quãng đường
+			Vector3 start = startPos;
+			Vector3 target = start + direction * FireDashProps.range;
+			Vector3 nextPos = Vector3.Lerp(start, target, ease);
+
+			// Di chuyển bằng ForceMove để đảm bảo đồng bộ vật lý và mạng
+			player.NCC.ForceMoveInstant(nextPos);
+
+			// Xoay hull theo hướng dash (xoay nhanh nhưng vẫn mượt)
+			if (player.visuals.Hull != null && direction.sqrMagnitude > 0.001f)
+			{
+				float maxDegrees = 1000f * deltaTime;
+				player.visuals.Hull.rotation = Quaternion.RotateTowards(
+					player.visuals.Hull.rotation,
+					Quaternion.LookRotation(-direction, Vector3.up),
+					maxDegrees
+				);
+				player.HullDirection = player.visuals.Hull.rotation.eulerAngles.y;
+			}
+		}
+
+		public void DamageTrigger()
+		{
+			// Kiểm tra va chạm, nếu có thì ApplyAreaDamage, không cần xử lý damage thủ công
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				if (!isDashing)
+					return false;
+				//bullet.IsCustomHited = false;
+				bullet.Position = exit.position;
+				bullet.Direction = exit.forward.normalized;
+				bullet.IsCancel = false;
+				Collider[] colliders = new Collider[16];
+				int cnt = Physics.OverlapSphereNonAlloc(
+					bullet.Position,
+					FireDashProps.radius,
+					colliders,
+					_bulletPrefab.HitMask.value,
+					QueryTriggerInteraction.Ignore
+				);
+				// if (cnt > 0)
+				// 	bullet.IsCustomHited = true;
+				for (int i = 0; i < cnt; i++)
+				{
+					var hit = colliders[i];
+					if (hit == null) continue;
+					// Loại bỏ va chạm với chính bản thân player
+					if (hit.transform == player.transform) continue;
+					//nếu hit.mask có layer là Breakable thì continue
+
+					if (hit.gameObject.layer == LayerMask.NameToLayer("Breakable"))
+					{
+						// bullet.IsCustomHited = true;
+						continue;
+					}
+					if (hit.gameObject.layer == LayerMask.NameToLayer("Wall"))
+					{
+						bullet.IsCustomHited = true;
+					}
+					if (hit.transform.root.TryGetComponent<Player>(out Player target))
+					{
+						// target.RaiseEvent(new Player.EffectEvent
+						// {
+						// 	effectId = (int)EffectData.EffectType.Stun,
+						// 	duration = knockDuration,
+						// 	value = 1,
+						// 	forceCC = false,
+						// 	srcPlayerIndex = player.PlayerIndex
+						// });
+						// Vector3 knockPos là knockback 1 unit về phía sau target so với vị trí player
+						Vector3 knockDir = (target.transform.position - player.transform.position).normalized;
+						//Vector3 knockPos = target.transform.position + knockDir * 1f;
+
+						target.RaiseEvent(new Player.EffectEvent
+						{
+							effectId = (int)EffectData.EffectType.Knockback,
+							duration = FireDashProps.knockDuration,
+							value = FireDashProps.knockRange,
+							angle = Player.EffectEvent.ConvertToAngle(knockDir),
+							srcPlayerId = (byte)player.PlayerId.AsIndex
+						});
+						ApplySingleDamage(target, FireDashProps.damageRatio);
+						bullet.IsCustomHited = true;
+						//isDashing = false;
+						//ForceExit();
+					}
+					if (hit.transform.root.TryGetComponent<Turret>(out Turret turret))
+					{
+						ApplySingleDamage(turret, FireDashProps.damageRatio);
+						bullet.IsCustomHited = true;
+						//isDashing = false;
+						//ForceExit();
+					}
+					isDashing = false;
+					ForceExit();
+					break;
+				}
+				return true;
+			});
+		}
+		protected override Transform GetExitPoint(int tick)
+		{
+			var mainWeapon = player.visuals.WeaponManager.GetMainWeapon();
+			if (mainWeapon != null)
+			{
+				return mainWeapon.GetExitPoint(tick);
+			}
+			else
+			{
+				Debug.LogWarning("Main weapon not found on player " + player.name);
+				return null;
+			}
+		}
+		#region  Helpers
+		public override CustomProperty[] GetCustomPropertiesRuntime()
+		{
+			var baseProps = base.GetCustomPropertiesRuntime();
+			var props = new CustomProperty[baseProps.Length + 1];
+			baseProps.CopyTo(props, 0);
+			props[baseProps.Length] = new CustomProperty
+			{
+				propertyName = "Range",
+				propertyValue = FireDashProps.range
+			};
+			return props;
+		}
+		#endregion
+	}
+
+	public class FireDashAbilityProperty : AbilityPropertyBase
+	{
+		public float range = 10f;
+		public float damageRatio = 1f;
+		public float radius = 1f;
+		public float knockDuration = 0.5f;
+		public float knockRange = 2f;
+
+		//Flame Field
+		public float flameFieldDuration = 3f;
+		public float flameFieldDamageRatio = 0.25f;
+		public float flameFieldRange = 7f;
+		public float flameFieldWidth = 1.5f;
+		public float flameFieldTick = 0.25f; //0.25 seconds/ tick
+	}
+}
+
+
+================================================================================
+FILE 510/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityHook.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityHook : AbilityBase
+	{
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new HookAbilityProperty();
+		public HookAbilityProperty HookProps => AbilityPropsBase as HookAbilityProperty;
+
+		private Transform exit;
+
+		EffectData subEffect_1;
+		EffectData subEffect_2;
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+
+			// foreach (var prop in AbilityPropsBase.GetType().GetFields())
+			// {
+			// 	Debug.LogWarning($"AbilityPropsBase - {prop.Name}: {prop.GetValue(HookProps)}");
+			// }
+			// //foreach HookProps và show giá trị props
+			// foreach (var prop in HookProps.GetType().GetFields())
+			// {
+			// 	Debug.Log($"HookProps - {prop.Name}: {prop.GetValue(HookProps)}");
+			// }
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			base.Active(runner, owner, ownerVelocity);
+			_isReturning = false;
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+			exit = GetExitPoint(Runner.Tick);
+			//Self effect
+			// Root + ImmuneCC
+			subEffect_1 = player.EffectApplier?.ApplyEffect(new EffectData
+			{
+				effectId = (int)EffectData.EffectType.Root,
+				duration = HookProps.duration,
+				lifeTime = HookProps.duration,
+				value = 1,
+				forceCC = true,
+				srcPlayerId = (byte)player.PlayerId.AsIndex
+			});
+			subEffect_2 = player.EffectApplier?.ApplyEffect(new EffectData
+			{
+				effectId = (int)EffectData.EffectType.ImmuneCC,
+				duration = HookProps.duration,
+				lifeTime = HookProps.duration,
+				value = 1,
+				forceCC = true,
+				srcPlayerId = (byte)player.PlayerId.AsIndex
+			});
+			//-----------------------------
+
+			_bullets.Add(Runner, new ShotState(player.transform.position, exit.position, exit.forward, ownerId: (byte)player.PlayerId.AsIndex), HookProps.duration);
+		}
+
+
+		bool _isReturning = false;
+		protected override void AbilityUpdateHandler(float deltaTime)
+		{
+			base.AbilityUpdateHandler(deltaTime);
+			if (!trigged) return;
+
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				// Nếu đạn vượt quá tầm, cho quay về player
+				if (bullet.IsOutOfRange(HookProps.range))
+				{
+					SetBulletReturnToPlayer(ref bullet);
+					bullet.IsCustomHited = true;
+					bullet.IsCancel = true;
+					return true;
+				}
+
+				// Nếu đạn đang đi ra, kiểm tra va chạm
+				if (!_bulletPrefab.IsHitScan && bullet.EndTick > Runner.Tick && !_isReturning)
+				{
+					Vector3 dir = bullet.Direction.normalized;
+					float length = Mathf.Max(_bulletPrefab.Radius, player.PlayerData.ProjectileSpeed * Runner.DeltaTime);
+					Vector3 rayOrigin = bullet.Position - length * dir;
+
+					if (Physics.Raycast(rayOrigin, dir, out var hitinfo, length, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore))
+					{
+						bullet.Position = hitinfo.point;
+						bool handled = false;
+
+						// Va chạm với Player
+						if (hitinfo.collider.transform.root.TryGetComponent<Player>(out Player target))
+						{
+							ApplySingleDamage(target, HookProps.damageRatio);
+							float distance = Vector3.Distance(target.transform.position, player.transform.position);
+							float hookDuration = distance * HookProps.hookDurationPerUnit;
+							Vector3 hookDir = (player.transform.position - target.transform.position).normalized;
+
+							target.RaiseEvent(new Player.EffectEvent
+							{
+								effectId = (int)EffectData.EffectType.Hook,
+								duration = hookDuration,
+								value = distance,
+								angle = Player.EffectEvent.ConvertToAngle(hookDir),
+								srcPlayerId = (byte)player.PlayerId.AsIndex
+							});
+
+							SetHookEnemy(ref bullet, hookDuration);
+							handled = true;
+						}
+						// Va chạm với Turret
+						else if (hitinfo.collider.TryGetComponent<Turret>(out Turret turret))
+						{
+							ApplySingleDamage(turret, HookProps.damageRatio);
+							SetBulletReturnToPlayer(ref bullet);
+							handled = true;
+						}
+						// Va chạm với vật thể khác
+						else
+						{
+							SetBulletReturnToPlayer(ref bullet);
+							handled = true;
+						}
+
+						if (handled)
+						{
+							bullet.IsCustomHited = true;
+							return true;
+						}
+					}
+				}
+				return false;
+			});
+		}
+		private void SetHookEnemy(ref ShotState bullet, float? customHookDuration = null)
+		{
+			// Dừng đạn lại, chờ kéo về
+			float EXTEND_DURATION = 1f;
+			float returnDuration = customHookDuration ?? (Vector3.Distance(bullet.Position, player.transform.position) * HookProps.hookDurationPerUnit);
+			returnDuration += EXTEND_DURATION;
+			bullet.Direction = Vector3.zero;
+			bullet.EndTick = Runner.Tick + (int)(returnDuration / Runner.DeltaTime);
+			_isReturning = true;
+			//duration = returnDuration;
+			//dựa vào returnDuration để set lại timeElapsed kết thúc ability
+			timeElapsed = HookProps.duration - (returnDuration + 0.5f);
+		}
+
+		private void SetBulletReturnToPlayer(ref ShotState bullet)
+		{
+			// Kéo đạn về player
+			float distance = Vector3.Distance(bullet.Position, player.transform.position);
+			float returnDuration = distance * HookProps.hookDurationPerUnit;
+			Vector3 moveDir = (player.transform.position - bullet.Position).normalized;
+			float moveStep = distance * (Runner.DeltaTime / Mathf.Max(returnDuration, 0.01f));
+			bullet.Direction = moveDir * moveStep;
+			bullet.EndTick = Runner.Tick + (int)(returnDuration / Runner.DeltaTime);
+			_isReturning = true;
+			//duration = returnDuration + 0.5f;
+			//dựa vào returnDuration để set lại timeElapsed kết thúc ability nới ra 0.5f
+			timeElapsed = HookProps.duration - (returnDuration + 0.5f);
+		}
+		public override void Exit()
+		{
+			base.Exit();
+			if (_bullets != null)
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				});
+			player?.EffectApplier?.RemoveEffect(subEffect_1);
+			player?.EffectApplier?.RemoveEffect(subEffect_2);
+		}
+		protected override Transform GetExitPoint(int tick)
+		{
+			var mainWeapon = player.visuals.WeaponManager.GetMainWeapon();
+			if (mainWeapon != null)
+			{
+				return mainWeapon.GetExitPoint(tick);
+			}
+			else
+			{
+				Debug.LogWarning("Main weapon not found on player " + player.name);
+				return null;
+			}
+		}
+
+		#region  Helpers
+		public override CustomProperty[] GetCustomPropertiesRuntime()
+		{
+			var baseProps = base.GetCustomPropertiesRuntime();
+			var props = new CustomProperty[baseProps.Length + 1];
+			baseProps.CopyTo(props, 0);
+			props[baseProps.Length] = new CustomProperty
+			{
+				propertyName = "Range",
+				propertyValue = HookProps.range
+			};
+			return props;
+		}
+		#endregion
+	}
+
+	public class HookAbilityProperty : AbilityPropertyBase
+	{
+		public float range = 20f;
+		public float damageRatio = 1f;
+		public float hookDurationPerUnit = 0.02f;
+	}
+}
+
+
+================================================================================
+FILE 511/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityKamikaze.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityKamikaze : AbilityBase
+	{
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new KamikazeAbilityProperty();
+		public KamikazeAbilityProperty KamikazeProps => AbilityPropsBase as KamikazeAbilityProperty;
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			base.Active(runner, owner, ownerVelocity);
+			Transform exit = GetExitPoint(Runner.Tick);
+			_bullets.Add(runner, new ShotState(player.transform.position, exit.position, Vector3.zero, scale: Vector3.one * KamikazeProps.radius), KamikazeProps.castTime);
+
+			if (player) player.TankAnimState = 1;
+			IsBlockAutoAim = false;
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				bullet.Position = this.transform.position;
+				ApplyDamage();
+				bullet.EndTick = Runner.Tick;
+				return true;
+			});
+		}
+		protected override void AbilityUpdateHandler(float deltaTime)
+		{
+			base.AbilityUpdateHandler(deltaTime);
+
+			//follow player position
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				bullet.Position = this.transform.position;
+				return true;
+			});
+		}
+		public override void Exit()
+		{
+			base.Exit();
+			if (_bullets != null)
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				});
+			if (player) player.TankAnimState = 0;
+		}
+
+		private void ApplyDamage()
+		{
+			Vector3 pos = this.transform.position;
+			int maxhp = player.PlayerData.MaxHitpoints;
+			int damage = (int)(maxhp * KamikazeProps.damageByHpRatio);
+			ApplyAreaDamage(pos, KamikazeProps.radius, damage, 0, _bulletPrefab.HitMask);
+			this.player.ExplosionOnDeath = false;
+			//this.player.RaiseEvent(new DamageEvent { targetPlayerRef = this.player.PlayerId.AsIndex, damage = maxhp });
+			this.player.TakeDamage(new DamageEvent { targetPlayerRef = this.player.PlayerId.AsIndex, damage = int.MaxValue });
+		}
+	}
+
+	public class KamikazeAbilityProperty: AbilityPropertyBase
+    {
+		public float radius = 5f;
+		public float damageByHpRatio = 0.75f;
+    }
+}
+
+
+================================================================================
+FILE 512/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityManager.cs
+================================================================================
+
+using UnityEngine;
+using Fusion;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// Manages all abilities for a player, including initialization, reset, and visibility.
+	/// </summary>
+	public class AbilityManager : NetworkBehaviour
+	{
+		[SerializeField] private AbilityBase[] _abilities;
+		[SerializeField] private List<AbilityBase> activeAbilities;
+		private Player player;
+		public bool IsAbilityHandling
+		{
+			get
+			{
+				// Kiểm tra nếu có ability đang hoạt động (duration > 0)
+				if (activeAbilities == null) return false;
+				foreach (var ability in activeAbilities)
+				{
+					if (ability != null && ability.TimeElapsed > 0f && ability.IsBlockAutoAim)// && ability.IsTrigged)
+						return true;
+				}
+				return false;
+			}
+		}
+		public bool IsAbilityBlockAutoAim
+		{
+			get
+			{
+				// Kiểm tra nếu có ability đang hoạt động (duration > 0)
+				if (activeAbilities == null) return false;
+				foreach (var ability in activeAbilities)
+				{
+					if (ability != null && ability.IsBlockAutoAim)
+						return true;
+				}
+				return false;
+			}
+		}
+
+		#region Fusion Methods
+		public override void Render()
+		{
+		}
+		#endregion
+
+		private void OnValidate()
+		{
+			// Ensure all abilities are assigned and valid
+			if (_abilities == null || _abilities.Length == 0)
+			{
+				_abilities = GetComponentsInChildren<AbilityBase>(true);
+			}
+		}
+
+		/// <summary>
+		/// Initializes all abilities for the given player.
+		/// </summary>
+		public void Initialize(Player player)
+		{
+			foreach (var ability in _abilities)
+				ability.gameObject.SetActive(false);
+
+			this.player = player;
+			activeAbilities = new List<AbilityBase>();
+			var playerData = player.PlayerData;
+			var _fakeAbilityIDs = new string[] { };
+
+			// //Fake Data for test----------------------------------------------
+			// if (playerData.TankId.Contains("scout"))
+			// {
+			// 	_fakeAbilityIDs = new string[] { "ability.kamikaze" };
+			// }
+			// else if (playerData.TankId.Contains("assault"))
+			// {
+			// 	_fakeAbilityIDs = new string[] { "ability.beartrap" };
+			// }
+			// else if (playerData.TankId.Contains("heavy"))
+			// {
+			// 	_fakeAbilityIDs = new string[] { "ability.hook" };
+			// }
+			// Debug.LogFormat("Ability Init TankId: {0}, ability count: {1}", playerData.TankId, playerData.AbilityIDs.Length);
+			//---------------------------------------------------------------------------
+
+			var activeAbilityIDs = playerData.AbilityIDs != null && playerData.AbilityIDs.Length > 0 ? playerData.AbilityIDs : _fakeAbilityIDs;
+			//activeAbilityIDs = new string[] { "ability.whirlwindchains" };
+			if (activeAbilityIDs != null && activeAbilityIDs.Length > 0)
+			{
+				foreach (var ability in _abilities)
+				{
+					bool active = activeAbilityIDs.Contains(ability.abilityID);
+					// Initialize only active abilities
+					if (active)
+					{
+						ability.gameObject.SetActive(active);
+						ability.Initialize(this.player);
+						activeAbilities.Add(ability);
+					}
+				}
+			}
+
+			//Load All active ability
+			// foreach (var ability in _abilities)
+			// {
+			// 	if (ability.gameObject.activeSelf)
+			// 	{
+			// 		ability.Initialize(_player);
+			// 		_activeAbilities.Add(ability);
+			// 	}
+			// }
+			ClearAllAbility();
+		}
+
+		public void ExitAllAbility()
+		{
+			foreach (var ability in _abilities)
+			{
+				ability.Exit();
+			}
+		}
+		public void ClearAllAbility()
+		{
+			foreach (var ability in _abilities)
+			{
+				ability.Clear();
+			}
+		}
+
+		/// <summary>
+		/// call active ability by abilityId.
+		/// </summary>
+		/// <param name="abilityId">The unique identifier of the ability to activate.</param>
+		/// <param name="ownerVelocity">The velocity of the owner when activating the ability.</param>
+		public void ActivateAbility(string abilityId, Vector3 ownerVelocity)
+		{
+			if (!player)
+				return;
+			var ability = System.Array.Find(_abilities, a => a != null && a.abilityID == abilityId);
+			if (ability == null || !ability.AvailableActive)
+				return;
+			ability.Active(Runner, Object.InputAuthority, ownerVelocity);
+		}
+
+		public void ActivateAbilityBySlot(int slotIndex, Vector3 ownerVelocity)
+		{
+			if (!player)
+				return;
+			if (activeAbilities == null || activeAbilities.Count == 0)
+				return;
+			if (slotIndex < 0)
+				return;
+			var ability = activeAbilities.Count > slotIndex ? activeAbilities[slotIndex] : null;
+			if (ability == null || !ability.AvailableActive)
+				return;
+			ability.Active(Runner, Object.InputAuthority, ownerVelocity);
+		}
+
+		public float GetAbilityCooldown(int slotIndex)
+		{
+			if (activeAbilities == null || activeAbilities.Count == 0)
+				return 0f;
+			if (slotIndex < 0)
+				return 0f;
+			var ability = activeAbilities.Count > slotIndex ? activeAbilities[slotIndex] : null;
+			if (ability == null)
+				return 0f;
+			return ability.CooldownRemaining;
+		}
+
+		public AbilityBase GetAbilityBySlot(int slotIndex)
+		{
+			if (activeAbilities == null || activeAbilities.Count == 0)
+				return null;
+			if (slotIndex < 0)
+				return null;
+			var ability = activeAbilities.Count > slotIndex ? activeAbilities[slotIndex] : null;
+			return ability;
+		}
+	}
+}
+
+
+================================================================================
+FILE 513/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityStorm.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+using System.Collections.Generic;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityStorm : AbilityBase
+	{
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new StormAbilityProperty();
+		public StormAbilityProperty StormProps => AbilityPropsBase as StormAbilityProperty;
+
+		private Transform exit;
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			base.Active(runner, owner, ownerVelocity);
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+			exit = GetExitPoint(Runner.Tick);
+			//-----------------------------
+
+			_bullets.Add(Runner, new ShotState(player.transform.position, exit.position, exit.forward, ownerId: (byte)player.PlayerId.AsIndex), StormProps.duration);
+		}
+
+		protected override void AbilityUpdateHandler(float deltaTime)
+		{
+			base.AbilityUpdateHandler(deltaTime);
+			if (!trigged) return;
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				if (bullet.IsOutOfRange(StormProps.range))
+				{
+					// Set direction về phía player và thời gian tồn tại (đồng bộ với ForceMove)
+					//bullet.IsCustomHited = true;
+					//bullet.IsCancel = true;
+					ApplyDamage(bullet.Position);
+					bullet.EndTick = Runner.Tick;
+					return true;
+				}
+
+				if (!_bulletPrefab.IsHitScan && bullet.EndTick > Runner.Tick)
+				{
+					Vector3 dir = bullet.Direction.normalized;
+					float length = Mathf.Max(_bulletPrefab.Radius, player.PlayerData.ProjectileSpeed * Runner.DeltaTime);
+					if (Physics.Raycast(bullet.Position - length * dir, dir, out var hitinfo, length, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore))
+					{
+						bullet.Position = hitinfo.point;
+						ApplyDamage(bullet.Position);
+						//--------------------------
+						bullet.EndTick = Runner.Tick;
+						return true;
+					}
+				}
+				return false;
+			});
+		}
+		public void ApplyDamage(Vector3 position)
+		{
+			int playerDamage = Random.Range(player.PlayerData.Damage[0], player.PlayerData.Damage[1]);
+			int damage = (int)(StormProps.damageRatio * playerDamage);
+			int cnt = ApplyAreaDamage(position, StormProps.radiusExplosion, damage, 0, _bulletPrefab.HitMask);
+			var affectedPlayers = new HashSet<Player>();
+			for (int i = 0; i < cnt; i++)
+			{
+				GameObject other = AreaHits[i].gameObject;
+				if (other == null || other == this.player.gameObject)
+					continue;
+				Player targetPlayer = other.GetComponent<Player>();
+				if (targetPlayer != null && targetPlayer.PlayerTeamIndex != player.PlayerTeamIndex && !affectedPlayers.Contains(targetPlayer))
+				{
+					affectedPlayers.Add(targetPlayer);
+					targetPlayer.RaiseEvent(new Player.EffectEvent
+					{
+						effectId = (int)EffectData.EffectType.SlowStorm,
+						duration = StormProps.slowDuration,
+						value = StormProps.slowValue,
+						srcPlayerId = (byte)player.PlayerId.AsIndex
+					});
+				}
+			}
+		}
+
+		public override void Exit()
+		{
+			base.Exit();
+			if (_bullets != null)
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				});
+		}
+		protected override Transform GetExitPoint(int tick)
+		{
+			var mainWeapon = player.visuals.WeaponManager.GetMainWeapon();
+			if (mainWeapon != null)
+			{
+				return mainWeapon.GetExitPoint(tick);
+			}
+			else
+			{
+				Debug.LogWarning("Main weapon not found on player " + player.name);
+				return null;
+			}
+		}
+
+		#region  Helpers
+		public override CustomProperty[] GetCustomPropertiesRuntime()
+		{
+			var baseProps = base.GetCustomPropertiesRuntime();
+			var props = new CustomProperty[baseProps.Length + 1];
+			baseProps.CopyTo(props, 0);
+			props[baseProps.Length] = new CustomProperty
+			{
+				propertyName = "Range",
+				propertyValue = StormProps.range
+			};
+			return props;
+		}
+		#endregion
+	}
+
+	public class StormAbilityProperty : AbilityPropertyBase
+	{
+		public float range = 15f;
+		public float radiusExplosion = 2f;
+		public float damageRatio = 0.5f;
+
+		public float slowValue = 0.4f;
+		public float slowDuration = 3f;
+	}
+}
+
+
+================================================================================
+FILE 514/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/AbilityWhirlwindChains.cs
+================================================================================
+
+using System.Linq;
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using Unity.VisualScripting;
+using UnityEngine;
+using System.Collections.Generic;
+
+namespace Fusion.TankOnlineModule
+{
+	public class AbilityWhirlwindChains : AbilityBase
+	{
+        // public float castTime = 0f;
+        // public float duration = 5f;
+        // public float cooldown = 1f;
+
+		public override AbilityPropertyBase AbilityPropsBase { get; } = new WhirlwindAbilityProperty();
+		public WhirlwindAbilityProperty WhirlwindProps => AbilityPropsBase as WhirlwindAbilityProperty;
+		private Dictionary<Player, float> nextPlayerDamageTime = new();
+		private Dictionary<Turret, float> nextTurretDamageTime = new();
+		public override void Initialize(Player player)
+		{
+			base.Initialize(player);
+
+			// WhirlwindProps.castTime = castTime;
+			// WhirlwindProps.duration = duration;
+			// WhirlwindProps.cooldown = cooldown;
+		}
+		public override void Active(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			base.Active(runner, owner, ownerVelocity);
+			IsBlockAutoAim = false;
+		}
+		protected override void OnAbilityTrigged()
+		{
+			base.OnAbilityTrigged();
+			Transform exit = GetExitPoint(Runner.Tick);
+			_bullets.Add(runner, new ShotState(player.transform.position, exit.position, Vector3.zero, scale: Vector3.one), WhirlwindProps.duration);
+			if (player) player.TankAnimState = 1;
+		}
+		protected override void AbilityUpdateHandler(float deltaTime)
+		{
+			base.AbilityUpdateHandler(deltaTime);
+			//follow player position
+			_bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				bullet.Direction = Vector3.zero;
+				bullet.IsAnimActive = (timeElapsed < WhirlwindProps.duration - 0.2f);
+				bullet.Position = this.transform.position;
+				int playerDamage = Random.Range(player.PlayerData.Damage[0], player.PlayerData.Damage[1]);
+				int damage = (int)(WhirlwindProps.damageRatio * playerDamage);
+				int cnt = ApplyAreaDamage(bullet.Position, WhirlwindProps.radius, damage, 0, _bulletPrefab.HitMask);
+				return true;
+			});
+		}
+		public override void Exit()
+		{
+			base.Exit();
+			if (_bullets != null)
+				_bullets.Process(this, (ref ShotState bullet, int tick) =>
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				});
+			if (player) player.TankAnimState = 0;
+			nextPlayerDamageTime.Clear();
+			nextTurretDamageTime.Clear();
+		}
+
+		protected override int ApplyAreaDamage(Vector3 hitPoint, float radius, int damage, float areaImpulse, LayerMask hitMask)
+		{
+			int cnt = Physics.OverlapSphereNonAlloc(hitPoint, radius, _areaHits, hitMask.value, QueryTriggerInteraction.Ignore);
+			var damagedPlayers = new HashSet<Player>();
+			var damagedTurrets = new HashSet<Turret>();
+			float now = Time.time;
+
+			for (int i = 0; i < cnt; i++)
+			{
+				GameObject other = _areaHits[i].gameObject;
+				if (other)
+				{
+					Player target = other.GetComponent<Player>();
+					if (target != null && target != player && target.PlayerTeamIndex != player.PlayerTeamIndex && !damagedPlayers.Contains(target))
+					{
+						// Kiểm tra delay
+						if (!nextPlayerDamageTime.TryGetValue(target, out float nextTime) || now >= nextTime)
+						{
+							damagedPlayers.Add(target);
+							nextPlayerDamageTime[target] = now + WhirlwindProps.delayTicks;
+
+							Vector3 impulse = other.transform.position - hitPoint;
+							float l = Mathf.Clamp(radius - impulse.magnitude, 0, radius);
+							impulse = areaImpulse * l * impulse.normalized;
+							target.RaiseEvent(new DamageEvent { targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+
+							Vector3 knockDir = (target.transform.position - player.transform.position).normalized;
+							target.RaiseEvent(new Player.EffectEvent
+							{
+								effectId = (int)EffectData.EffectType.Knockback,
+								duration = WhirlwindProps.knockDuration,
+								value = WhirlwindProps.knockRange,
+								angle = Player.EffectEvent.ConvertToAngle(knockDir),
+								srcPlayerId = (byte)player.PlayerId.AsIndex
+							});
+						}
+					}
+
+					Turret turret = other.GetComponent<Turret>();
+					if (turret != null && turret.TurretTeamIndex != player.PlayerTeamIndex && !damagedTurrets.Contains(turret))
+					{
+						if (!nextTurretDamageTime.TryGetValue(turret, out float nextTime) || now >= nextTime)
+						{
+							damagedTurrets.Add(turret);
+							nextTurretDamageTime[turret] = now + WhirlwindProps.delayTicks;
+
+							turret.RPC_DealDamage(new DamageEvent { playerId = player.PlayerId.AsIndex, teamIndex = player.PlayerTeamIndex, targetPlayerRef = player.PlayerId.AsIndex, damage = damage });
+						}
+					}
+				}
+			}
+			return cnt;
+		}
+
+		public class WhirlwindAbilityProperty : AbilityPropertyBase
+		{
+			public float radius = 4f;
+			public float damageRatio = 0.3f;
+			public float knockDuration = 0.1f;
+			public float knockRange = 1f;
+			public float delayTicks = 0.5f; //0.5seconds
+		}
+	}
+}
+
+
+================================================================================
+FILE 515/682: Assets/_GameModules/TankFusionModule/Scripts/Ability/EffectApplier.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+using Fusion;
+using Fusion.TankOnlineModule;
+
+public class EffectApplier : NetworkBehaviour
+{
+    private Player player;
+    private bool initialized = false;
+
+    // Track active effects
+    private readonly List<EffectData> _activeEffects = new();
+
+    public void Initialize(Player player)
+    {
+        if (initialized) return;
+        this.player = player;
+        initialized = true;
+
+        ClearEffects();
+    }
+
+    /// <summary>
+    /// Apply a new effect to the player (networked).
+    /// </summary>
+    public EffectData ApplyEffect(EffectData effect)
+    {
+        if (effect == null) return null;
+
+        // Non-stackable effect logic
+        if (EffectData.IsNonStackable(effect.effectId))
+        {
+            var existing = _activeEffects.Find(e => e.effectId == effect.effectId);
+            if (existing != null)
+            {
+                existing.duration = effect.duration;
+                existing.lifeTime = effect.lifeTime;
+                existing.value = effect.value;
+                existing.dir = effect.dir;
+                return existing;
+            }
+        }
+
+        _activeEffects.Add(effect);
+        OnEffectApplied(effect);
+        return effect;
+    }
+
+    /// <summary>
+    /// Remove a specific effect instance.
+    /// </summary>
+    public void RemoveEffect(EffectData effect)
+    {
+        if (effect == null) return;
+        if (_activeEffects.Remove(effect))
+        {
+            OnEffectRemoved(effect);
+        }
+    }
+
+    /// <summary>
+    /// Update all active effects (call in FixedUpdateNetwork).
+    /// </summary>
+    public void UpdateEffects(float deltaTime)
+    {
+        //Debug.LogErrorFormat("UpdateEffects: {0} active effects", _activeEffects.Count);
+        for (int i = _activeEffects.Count - 1; i >= 0; i--)
+        {
+            var effect = _activeEffects[i];
+            effect.duration -= deltaTime;
+            if (effect.duration <= 0)
+            {
+                OnEffectRemoved(effect);
+                _activeEffects.RemoveAt(i);
+            }
+            else
+            {
+                OnEffectTick(effect, deltaTime);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Remove all effects.
+    /// </summary>
+    public void ClearEffects()
+    {
+        foreach (var effect in _activeEffects)
+        {
+            OnEffectRemoved(effect);
+        }
+        _activeEffects.Clear();
+    }
+
+    protected virtual void OnEffectApplied(EffectData effect)
+    {
+        switch (effect.effectId)
+        {
+            // Debuffs
+            case (int)EffectData.EffectType.Slow:
+                player.MoveSpeedModifyRatio -= effect.value;
+                break;
+            case (int)EffectData.EffectType.DecreaseFireRate:
+                player.FireRateModifyRatio -= effect.value;
+                break;
+
+            //Effect custom by Ability
+            case (int)EffectData.EffectType.SlowStorm:
+                player.MoveSpeedModifyRatio -= effect.value;
+                player.FireRateModifyRatio -= effect.value;
+                player.TankVisualsVfx.SetVfx(TankVisualsVfx.VfxType.SlowStorm, true, effect.duration);
+                break;
+        }
+    }
+    protected virtual void OnEffectRemoved(EffectData effect)
+    {
+        switch (effect.effectId)
+        {
+            case (int)EffectData.EffectType.Slow:
+                player.MoveSpeedModifyRatio += effect.value;
+                break;
+            case (int)EffectData.EffectType.DecreaseFireRate:
+                player.FireRateModifyRatio += effect.value;
+                break;
+
+            //Effect custom by Ability
+            case (int)EffectData.EffectType.SlowStorm:
+                player.MoveSpeedModifyRatio += effect.value;
+                player.FireRateModifyRatio += effect.value;
+                player.TankVisualsVfx.SetVfx(TankVisualsVfx.VfxType.SlowStorm, false);
+                break;
+        }
+    }
+
+    protected virtual void OnEffectTick(EffectData effect, float deltaTime)
+    {
+        // Damage over time: Burn (stackable)
+        switch (effect.effectId)
+        {
+            case (int)EffectData.EffectType.Burn:
+                if (player.IsDead)
+                {
+                    //player is not found, remove the effect
+                    RemoveEffect(effect);
+                    break;
+                }
+                float damageThisTick = effect.value * deltaTime;
+                player.RaiseEvent(new DamageEvent { targetPlayerRef = effect.srcPlayerId, damage = (int)damageThisTick });
+                //_player.TakeDamage(damageThisTick);
+                //// Optionally: show burn visual effect here
+                break;
+            // Add other periodic logic here
+            case (int)EffectData.EffectType.Hook:
+                {
+                    Player srcPlayer = GameServer.Instance.GetPlayer<Player>(effect.srcPlayerId);
+                    //Debug.LogErrorFormat("srcPlayer: {0}, {1}, {2}, {3}", srcPlayer.PlayerName, srcPlayer == null, srcPlayer.IsDead, player.IsDead);
+                    if (srcPlayer == null || srcPlayer.IsDead || player.IsDead)
+                    {
+                        RemoveEffect(effect);
+                        break;
+                    }
+
+                    // Vector3 hookDir = effect.dir;
+                    // float hookDistance = effect.value;
+                    // // Gán posStart ở tick đầu tiên
+                    // if (effect.posStart == default)
+                    //     effect.posStart = _player.transform.position;
+                    // Vector3 start = effect.posStart;
+                    // Vector3 end = start + hookDir * hookDistance;
+                    // float step = 1f - (effect.duration / Mathf.Max(effect.lifeTime, 0.01f));
+                    // step = Mathf.Clamp01(step);
+                    // Vector3 nextPos = Vector3.Lerp(start, end, step);
+                    // _player.NCC.ForceMove(nextPos);
+
+                    if (effect.posEnd == default)
+                        effect.posEnd = srcPlayer.transform.position;
+                    Vector3 hookTo = effect.posEnd;
+                    float duration = effect.duration;
+                    //Debug.LogErrorFormat("hookTo: {0}, {1}, {2}", hookTo, duration, deltaTime);
+                    player.NCC.ForceMovePhysic(hookTo, duration, deltaTime);
+
+                    break;
+                }
+
+            case (int)EffectData.EffectType.Knockback:
+                {
+                    Player srcPlayer = GameServer.Instance.GetPlayer<Player>(effect.srcPlayerId);
+                    if (srcPlayer == null || srcPlayer.IsDead || player.IsDead)
+                    {
+                        RemoveEffect(effect);
+                        break;
+                    }
+
+                    Vector3 knockDir = effect.dir.normalized;
+
+                    // Chỉ gán posStart ở tick đầu tiên
+                    if (effect.posStart == default)
+                        effect.posStart = player.transform.position;
+
+                    Vector3 start = effect.posStart;
+                    Vector3 end = start + knockDir * effect.value;
+
+                    float step = 1f - (effect.duration / Mathf.Max(effect.lifeTime, 0.01f));
+                    step = Mathf.Clamp01(step);
+
+                    Vector3 nextPos = Vector3.Lerp(start, end, step);
+                    player.NCC.ForceMoveInstant(nextPos);
+
+                    break;
+                }
+        }
+    }
+
+    public override void FixedUpdateNetwork()
+    {
+        UpdateEffects(Runner.DeltaTime);
+    }
+
+    public bool HasEffect(int effectId)
+    {
+        //Debug.LogWarningFormat("HasEffect check for {0}: {1}", effectId, _activeEffects.Exists(e => e.effectId == effectId));
+        return _activeEffects.Exists(e => e.effectId == effectId);
+    }
+}
+
+public class EffectData
+{
+    public enum EffectType
+    {
+        //Buff Effect stackable
+        SpeedBoost,
+        DamageBoost,
+        //buff Effect non-stackable
+        Shield,
+        ImmuneDamage,
+        ImmuneCC,
+
+        //Debuff Effect stackable
+        Slow,
+        DecreaseFireRate,
+
+        //CC Effect non-stackable
+        Stun,
+        Root,
+        Silence,
+        Hook,
+        Knockback,
+
+        //effect damage over time, stackable
+        Burn,
+
+        //effect custom by Ability
+        SlowStorm,
+    }
+    public byte effectId;
+    public byte srcPlayerId;
+    public float duration;
+    public float value;
+
+    //special properties  convert from angle
+    public Vector3 dir = default;
+
+    //handle properties not sync with raise event
+    public bool forceCC;
+    public float lifeTime;
+    public Vector3 posStart = default;
+    public Vector3 posEnd = default;
+
+    public static bool IsCCEffect(int effectId)
+    {
+        return effectId == (int)EffectType.Stun ||
+               effectId == (int)EffectType.Root ||
+               effectId == (int)EffectType.Silence ||
+               effectId == (int)EffectType.Hook ||
+               effectId == (int)EffectType.Knockback;
+    }
+    public static bool IsBuffEffect(int effectId)
+    {
+        return effectId == (int)EffectType.SpeedBoost ||
+               effectId == (int)EffectType.DamageBoost ||
+               effectId == (int)EffectType.Shield ||
+               effectId == (int)EffectType.ImmuneDamage ||
+               effectId == (int)EffectType.ImmuneCC;
+    }
+    public static bool IsDebuffEffect(int effectId)
+    {
+        return effectId == (int)EffectType.Slow ||
+               effectId == (int)EffectType.DecreaseFireRate ||
+               effectId == (int)EffectType.SlowStorm;
+    }
+    public static bool IsNonStackable(int effectId)
+    {
+        return effectId == (int)EffectData.EffectType.Shield ||
+               effectId == (int)EffectData.EffectType.Stun ||
+               effectId == (int)EffectData.EffectType.Root ||
+               effectId == (int)EffectData.EffectType.Silence ||
+               effectId == (int)EffectData.EffectType.Hook ||
+               effectId == (int)EffectData.EffectType.Knockback;
+    }
+}
+
+
+================================================================================
+FILE 516/682: Assets/_GameModules/TankFusionModule/Scripts/AssetContainer.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+[Serializable]
+public class AssetEntry
+{
+    public string key;
+    public UnityEngine.Object asset;
+}
+
+[DisallowMultipleComponent]
+public class AssetContainer : MonoBehaviour, ISerializationCallbackReceiver
+{
+    [SerializeField] private List<AssetEntry> entries = new List<AssetEntry>();
+
+    private Dictionary<string, UnityEngine.Object> lookup = new Dictionary<string, UnityEngine.Object>();
+
+    public T Get<T>(string key) where T : UnityEngine.Object
+    {
+        if (lookup.TryGetValue(key, out var obj))
+            return obj as T;
+
+        Debug.LogWarning($"[AssetContainer] Key not found: {key}", this);
+        return null;
+    }
+
+    public bool TryGet<T>(string key, out T result) where T : UnityEngine.Object
+    {
+        if (lookup.TryGetValue(key, out var obj))
+        {
+            result = obj as T;
+            return result != null;
+        }
+        result = null;
+        return false;
+    }
+
+    // Build dictionary when loaded
+    public void OnAfterDeserialize()
+    {
+        lookup.Clear();
+        foreach (var e in entries)
+        {
+            if (string.IsNullOrEmpty(e.key) || e.asset == null)
+                continue;
+            if (!lookup.ContainsKey(e.key))
+                lookup.Add(e.key, e.asset);
+        }
+    }
+
+    public void OnBeforeSerialize() { }
+}
+
+
+================================================================================
+FILE 517/682: Assets/_GameModules/TankFusionModule/Scripts/ClientDataEvent.cs
+================================================================================
+
+using System.Linq;
+using Fusion;
+
+/// <summary>
+/// Use this struct to send player-related data during matchmaking and choose tank phase.
+/// </summary>
+[System.Serializable]
+public struct ClientDataEvent : INetworkStruct
+{
+    public PlayerRef playerRef;
+    public int playerIndex;
+    public int playerEloPoint;
+    public byte matchType;
+    public byte matchMode;
+    public byte maxPlayers;
+    public byte teamIndex;
+    public NetworkString<_16> region;
+    public NetworkString<_16> fixedEloName;
+    public NetworkString<_32> sessionName;
+    public NetworkString<_16> playerName;
+    public NetworkString<_16> playerSelectedAvatar;
+    public NetworkString<_16> playerSelectedTankId;
+    public int wrapId;
+    public static ClientDataEvent CancelSearching()
+    {
+        return default;
+    }
+
+    public static ClientDataEvent StartSearching(PlayerDocument playerDoc, MatchmakingDocument matchDoc, TankDocument tankDoc)
+    {
+        return new ClientDataEvent
+        {
+            playerRef = PlayerRef.None,
+            region = "asia",
+            fixedEloName = GetEloTier(),
+            playerEloPoint = playerDoc.elo,
+            matchType = (byte)matchDoc.MatchType,
+            matchMode = (byte)matchDoc.MatchMode,
+            maxPlayers = matchDoc.MaxPlayers,
+            sessionName = new NetworkString<_32>(string.Empty),
+            playerName = playerDoc.playerName,
+            playerSelectedAvatar = playerDoc.playerAvatar,
+            playerSelectedTankId = tankDoc.tankId,
+            wrapId = playerDoc.GetWrapId(tankDoc.tankId)
+        };
+    }
+
+    private static string GetEloTier()
+    {
+        PlayerDocument playerDoc = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        MatchmakingDocument matchDoc = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        foreach (var tier in matchDoc.PlayerElos.OrderByDescending(x => x.eloPoint))
+        {
+            if (playerDoc.elo >= tier.eloPoint)
+                return tier.eloName;
+        }
+        return "Unknown";
+    }
+}
+
+
+================================================================================
+FILE 518/682: Assets/_GameModules/TankFusionModule/Scripts/DamageEvent.cs
+================================================================================
+
+using Fusion;
+using FusionHelpers;
+using UnityEngine;
+
+public struct DamageEvent : INetworkEvent
+{
+    public int playerId;
+    public int teamIndex;
+    public int damage;
+    public int targetPlayerRef;
+}
+
+
+================================================================================
+FILE 519/682: Assets/_GameModules/TankFusionModule/Scripts/DamageVisual.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using DG.Tweening;
+using System.Collections.Generic;
+
+public class DamageVisual : MonoBehaviour
+{
+    [SerializeField] private TextMeshPro damageText;
+    [SerializeField] private List<DamageText> pools;
+    [SerializeField] private float scaleDuration = 0.2f, moveDuration = 1f;
+    [SerializeField] private float minY = 5f, maxY=10f;
+    [SerializeField] private float mixX = -5f, maxX = 5f;
+    [SerializeField] private float minScale = 1.2f, maxScale = 1.8f;
+
+    private void Awake()
+    {
+        pools = new List<DamageText>();
+        damageText.gameObject.SetActive(false);
+    }
+
+    public void ShowText(string text, Color color)
+    {
+        if (damageText == null)
+        {
+            Debug.LogError("Damage text is not assigned.");
+            return;
+        }
+        DamageText dt = null;
+        dt = pools.Find(dt => !dt.isActive);
+        if (dt == null)
+        {
+            dt = new DamageText();
+            dt.TextMeshPro = Instantiate(damageText, transform);
+            pools.Add(dt);
+        }
+
+        dt.Active(text, color);
+
+        // Apply movement and scale effects using Sequence
+        dt.TextMeshPro.transform.DOKill();
+
+        float randomScale = Random.Range(minScale, maxScale);
+
+        Sequence sequence = DOTween.Sequence();
+        float randomX = Random.Range(mixX, maxX);
+        sequence.Append(dt.TextMeshPro.transform.DOScale(Vector3.one * randomScale, scaleDuration).SetEase(Ease.OutQuad));
+        sequence.Join(dt.TextMeshPro.transform.DOLocalMove(new Vector3(transform.localPosition.x + randomX, transform.localPosition.y + Random.Range(minY, maxY), 0), moveDuration).SetEase(Ease.OutQuad));
+        sequence.Append(dt.TextMeshPro.transform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.InQuad));
+        sequence.OnComplete(() =>
+        {
+            dt.Hide();
+        });
+    }
+
+    [System.Serializable]
+    private class DamageText
+    {
+        public bool isActive;
+        public TextMeshPro TextMeshPro;
+
+        public void Hide()
+        {
+            isActive = false;
+            TextMeshPro.gameObject.SetActive(false);
+        }
+
+        public void Active(string text, Color color)
+        {
+            isActive = true;
+            TextMeshPro.gameObject.SetActive(true);
+            TextMeshPro.text = text;
+            TextMeshPro.color = color;// Reset position
+            TextMeshPro.transform.localPosition = Vector3.zero;
+            TextMeshPro.transform.localScale = Vector3.one;
+        }
+    }
+}
+
+
+================================================================================
+FILE 520/682: Assets/_GameModules/TankFusionModule/Scripts/Data/MatchIndexs.cs
+================================================================================
+
+using UnityEngine;
+
+public class MatchIndexs
+{
+    public const int Defender = 0;
+    public const int Attacker = 1;
+    public const int Turret = 100;
+    public const int TurretWeapon = Turret + 1;
+}
+
+
+================================================================================
+FILE 521/682: Assets/_GameModules/TankFusionModule/Scripts/Data/ProjectileCollection.cs
+================================================================================
+
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "ProjectileCollection", menuName = "ScriptableObjects/ProjectileCollection", order = 1)]
+public class ProjectileCollection : CollectionBase<ProjectileDocument>
+{
+    
+}
+
+
+================================================================================
+FILE 522/682: Assets/_GameModules/TankFusionModule/Scripts/Data/ProjectileDocument.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using UnityEngine;
+
+[System.Serializable]
+public class ProjectileDocument
+{
+    public string projectileName; // Name of the projectile
+    public int projectileID; // Unique identifier for the projectile
+    public ProjectileType projectileType; // Type of the projectile (e.g., standard, explosive, laser)
+    public int gravity; // Gravity affecting the projectile
+    [SerializeField] float speed;
+    [SerializeField] float radius;
+    [SerializeField] float range;
+    [SerializeField] LayerMask hitMask; // Layer mask for detecting hits
+    [SerializeField] float areaRadius; // Radius for area of effect damage
+    [SerializeField] float areaImpulse; // Impulse applied to objects in the area of effect
+    [SerializeField] int[] areaDamage; // Damage values for area of effect, can be a range
+    [SerializeField] float timeToLive; // Time before the projectile is destroyed
+    [SerializeField] bool isHitScan;
+    [SerializeField] private ExplosionFX _detonationPrefab;
+    [SerializeField] private TargetMarker _targetPrefab;
+    [SerializeField] private MuzzleFlash _muzzleFxPrefab;
+
+
+    public Vector3 Gravity => new Vector3(0, gravity, 0); // Gravity vector for the projectile
+    public float Speed => speed;
+    public float Radius => radius;
+    public float Range => range;
+    public LayerMask HitMask => hitMask;
+    public float AOERadius => areaRadius;
+    public float AreaImpulse => areaImpulse;
+    public int[] AreaDamage => areaDamage;
+    public float TimeToLive => timeToLive;
+    public bool IsHitScan => isHitScan;
+    public ProjectileType ProjectileType => projectileType;
+}
+public enum ProjectileType
+{
+    None = -1,
+    Single, // Standard projectile with basic properties
+    AOE
+}
+
+
+================================================================================
+FILE 523/682: Assets/_GameModules/TankFusionModule/Scripts/Data/SOMatchData.cs
+================================================================================
+
+using System.Collections.Generic;
+using Fusion;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "SOMatchData", menuName = "Game/SOMatchData", order = 1)]
+public class SOMatchData : ScriptableObject
+{
+    public int winningTeam = -1;
+    public int defenderKill = 0;
+    public int attackerKill = 0;
+    /// <summary>
+    /// The array of match player data.
+    /// Max of 10 players
+    /// </summary>
+    [SerializeField] private List<MatchPlayerData> matchDataList = new List<MatchPlayerData>();
+
+    public MatchPlayerData[] MatchDataArray => matchDataList.ToArray();
+    /// <summary>
+    /// Update specific fields of player data
+    /// </summary>
+    public void UpdatePlayerData(PlayerRef playerRef, MatchPlayerData newData)
+    {
+        if (matchDataList == null)
+            matchDataList = new List<MatchPlayerData>();
+
+        int index = matchDataList.FindIndex(p => p.PlayerId == playerRef.AsIndex);
+
+        if (index >= 0)
+        {
+            // ===== UPDATE EXISTING PLAYER =====
+            MatchPlayerData existingPlayer = matchDataList[index];
+
+            // Preserve immutable fields
+            newData.PlayerId = existingPlayer.PlayerId;
+            newData.TeamIndex = existingPlayer.TeamIndex;
+            newData.IndexInTeam = existingPlayer.IndexInTeam;
+            newData.PlayerName = existingPlayer.PlayerName;
+            newData.IsLocalPlayer = existingPlayer.IsLocalPlayer;
+            newData.IsJoined = existingPlayer.IsJoined;
+
+            //WrapDecalStickers Fixme
+            newData.WrapId = existingPlayer.WrapId;
+            
+            // Update lại vào list
+            matchDataList[index] = newData;
+
+            Debug.Log($"[SOMatchData] Updated player {newData.PlayerName}: Joined={newData.IsJoined}, Tank={newData.TankId}, Wrap = {newData.WrapId}");
+        }
+        else
+        {
+            // ===== ADD NEW PLAYER =====
+            Debug.LogWarning($"[SOMatchData] Player {playerRef.AsIndex} not found, adding new player");
+            newData.PlayerId = playerRef.AsIndex;
+            matchDataList.Add(newData);
+        }
+    }
+
+    // public void UpdatePlayerData(PlayerRef playerRef, MatchPlayerData playerData)
+    // {
+    //     if (matchDataList == null) matchDataList = new List<MatchPlayerData>();
+    //     int index = matchDataList.FindIndex(p => p.PlayerId == playerRef.AsIndex);
+    //     MatchPlayerData existingPlayer = matchDataList[index];
+
+    //     bool isLocalPlayer =  MatchDataArray[index].IsLocalPlayer;
+    //     string playerName = MatchDataArray[index].PlayerName;
+    //     int teamIndex = MatchDataArray[index].TeamIndex;
+    //     int playerIndex = MatchDataArray[index].IndexInTeam;
+    //     // Ensure consistency
+    //     playerData.TeamIndex = teamIndex; // keep the original team index
+    //     playerData.PlayerId = playerRef.AsIndex;
+    //     playerData.IndexInTeam = playerIndex; // keep the original index in team
+    //     //playerData.IsJoined = true;
+    //     playerData.PlayerName = playerName; // keep the original name
+    //     playerData.IsLocalPlayer = isLocalPlayer; // keep the original local player status
+
+    //     if (index >= 0)
+    //     {
+    //         matchDataList[index] = playerData;
+    //     }
+    //     else
+    //     {
+    //         matchDataList.Add(playerData);
+    //     }
+
+    //    // Debug.Log($"SOMatchData UpdatePlayerData {JsonUtility.ToJson(playerData)}");
+    // }
+
+    public int GetLocalTeamIndex()
+    {
+        for (int i = 0; i < matchDataList.Count; i++)
+        {
+            if (matchDataList[i].IsLocalPlayer)
+            {
+                return matchDataList[i].TeamIndex;
+            }
+        }
+        Debug.LogWarning("SOMatchData GetLocalTeamIndex: Local player not found.");
+        return -1; // Return -1 if local player is not found
+    }
+
+    public void AddPlayer(MatchPlayerData playerData)
+    {
+        if (matchDataList == null) matchDataList = new List<MatchPlayerData>();
+        //Debug.Log($"SOMatchData AddPlayer {JsonUtility.ToJson(playerData)}");
+        matchDataList.Add(playerData);
+    }
+    
+    public void RemovePlayerData(PlayerRef playerRef)
+    {
+        int index = matchDataList.FindIndex(p => p.PlayerId == playerRef.AsIndex);
+        if (index >= 0)
+        {
+            matchDataList.RemoveAt(index);
+            Debug.Log($"SOMatchData RemovePlayerData: Removed player with PlayerId {playerRef.AsIndex}");
+        }
+        else
+        {
+            Debug.LogWarning($"SOMatchData RemovePlayerData: Player with PlayerId {playerRef.AsIndex} not found.");
+        }
+    }
+
+    public MatchPlayerData GetPlayerAtIndex(int playerIndex)
+    {
+        if (playerIndex < 0 || playerIndex >= MatchDataArray.Length)
+        {
+            Debug.LogWarning($"SOMatchData GetPlayerAtIndex: Invalid player index {playerIndex}");
+            return default;
+        }
+        //Debug.Log($"SOMatchData GetPlayerAtIndex {playerIndex}");
+        MatchPlayerData existingPlayer = MatchDataArray[playerIndex];
+        Debug.Log($"SOMatchData GetPlayerAtIndex found {JsonUtility.ToJson(existingPlayer)}");
+        return existingPlayer;
+    }
+
+    public MatchPlayerData GetPlayerAtIndex(PlayerRef playerRef)
+    {
+        int index = matchDataList.FindIndex(p => p.PlayerId == playerRef.AsIndex);
+        return GetPlayerAtIndex(index);
+    }
+
+    public void ClearAll()
+    {
+        matchDataList.Clear();
+    }
+
+    // public void GetReady(PlayerRef playerRef)
+    // {
+    //     MatchPlayerData player = GetPlayerAtIndex(playerRef);
+    //     if (player != null)
+    //     {
+    //         player.IsReady = true;
+    //         Debug.Log($"SOMatchData GetReady: Player {player.PlayerName} is ready.");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"SOMatchData GetReady: Player with PlayerId {playerRef.AsIndex} not found.");
+    //     }
+    // }
+
+    // public void SetPlay(PlayerRef playerRef)
+    // {
+    //     MatchPlayerData player = GetPlayerAtIndex(playerRef);
+    //     if (player != null)
+    //     {
+    //         player.IsJoined = true;
+    //         Debug.Log($"SOMatchData SetPlay: Player {player.PlayerName} has joined the match.");
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning($"SOMatchData SetPlay: Player with PlayerId {playerRef.AsIndex} not found.");
+    //     }
+    // }
+}
+
+
+================================================================================
+FILE 524/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankAbilityCollection.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TankAbilityCollection", menuName = "ScriptableObjects/TankAbilityCollection", order = 1)]
+public class TankAbilityCollection : CollectionBase<TankAbilityDocument>
+{
+    public TankAbilityDocument GetByAbilityId(string abilityID)
+    {
+        foreach (var ability in documents)
+        {
+            if (ability.abilityID == abilityID)
+            {
+                return ability;
+            }
+        }
+        return null;
+    }
+    public TankAbilityDocument GetTankAbilityDocumentById(string abilityID)
+    {
+        if (string.IsNullOrEmpty(abilityID))
+        {
+            Debug.LogWarning("Ability ID is null or empty.");
+            return null;
+        }
+        return documents.Find(doc => doc.abilityID == abilityID);
+    }
+}
+
+
+================================================================================
+FILE 525/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankAbilityDocument.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+
+[System.Serializable]
+public class TankAbilityDocument
+{
+    public string abilityID; // Unique identifier for the skill
+    public string abilityName; // Name of the skill
+    public string description; // Description of the skill
+    public float castTime; // Time taken to cast the skill in seconds
+    public float duration; // Duration of the skill effect in seconds
+    public float cooldown; // Cooldown time for the skill in seconds
+    public CustomProperty[] customProperties; // Array of properties associated with the skill
+
+    //contructer
+    public TankAbilityDocument(string id, string name, string desc, float dur, float cd, CustomProperty[] props)
+    {
+        abilityID = id;
+        abilityName = name;
+        description = desc;
+        duration = dur;
+        cooldown = cd;
+        customProperties = props;
+    }
+}
+[System.Serializable]
+public class CustomProperty
+{
+    public string propertyName;
+    public float propertyValue;
+}
+
+
+================================================================================
+FILE 526/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankCollection.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TankCollection", menuName = "ScriptableObjects/TankCollection", order = 1)]
+public class TankCollection : CollectionBase<TankDocument>
+{
+    public TankDocument GetActiveTank()
+    {
+        // get the selected tank from player document
+        var selectedTank = DatabaseManager.GetDB<PlayerCollection>().GetMine().selectedTank;
+        // Find the first tank that is selected
+        return FindDocumentByProperty(tank => tank.tankId.Equals(selectedTank), true).DeepClone();
+    }
+
+    public TankDocument GetTankByID(TankType tankType)
+    {
+        if (documents != null)
+        {
+            foreach (var tank in documents)
+            {
+                if (tank.tankType == tankType)
+                {
+                    return tank.DeepClone();
+                }
+            }
+        }
+        Debug.LogWarning($"Tank of type {tankType} not found in the collection.");
+        return default(TankDocument);
+    }
+
+    public TankDocument GetTankByID(string tankId)
+    {
+        if (documents != null)
+        {
+            foreach (var tank in documents)
+            {
+                if (tank.tankId == tankId)
+                {
+                    return tank.DeepClone();
+                }
+            }
+        }
+        Debug.LogWarning($"Tank with ID {tankId} not found in the collection.");
+        return default(TankDocument);
+    }
+}
+
+
+================================================================================
+FILE 527/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankComponents.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+
+[System.Serializable]
+public class TankComponents
+{
+    public TankHullDocument hull; // Model for the tank hull
+    public TankWeaponDocument[] weapons; // Array of weapons mounted on the tank
+}
+
+
+================================================================================
+FILE 528/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankDamageStepVariable.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	[CreateAssetMenu(fileName = "Tank Damage Step", menuName = "Scriptable Object/Special/Tank Damage Step", order = 1)]
+	public class TankDamageStepVariable : ScriptableObject
+	{
+		[SerializeField] private Mesh _hullMesh;
+		[SerializeField] private Mesh _turretMesh;
+		[SerializeField] private GameObject _hitDebris;
+		[SerializeField] private ParticleSystem _hitParticles;
+		[SerializeField] private ParticleSystem _drivingDust;
+
+		public Mesh HullMesh => _hullMesh;
+		public Mesh TurretMesh => _turretMesh;
+		public GameObject HitDebris => _hitDebris;
+		public ParticleSystem HitParticles => _hitParticles;
+		public ParticleSystem DrivingDust => _drivingDust;
+	}
+}
+
+
+================================================================================
+FILE 529/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankDecorCollection.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TankDecorCollection<TDocument> : CollectionBase<TDocument>
+    where TDocument : TankDecorDocument
+{
+    public TankDecorDocument GetByCatalogId(string itemCatalogId)
+    {
+        foreach (var item in documents)
+        {
+            if (item.itemCatalogId == itemCatalogId)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    public TankDecorDocument GetTankCustomLiveryDocumentById(int itemId)
+    {
+        if (itemId < 0)
+        {
+            Debug.LogWarning("LiveryID ID is invalid.");
+            return null;
+        }
+        return documents.Find(doc => doc.itemId == itemId);
+    }
+
+    public List<TDocument> GetAllWraps()
+    {
+        return documents.FindAll(doc => doc.itemType == TankDecorDocument.ItemType.Wrap);
+    }
+}
+
+
+================================================================================
+FILE 530/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankDecorDocument.cs
+================================================================================
+
+using UnityEngine;
+using Newtonsoft.Json;
+
+[System.Serializable]
+public class TankDecorDocument
+{
+    public enum ItemType
+    {
+        None,
+        Wrap,
+        Decal,
+        Sticker,
+        AISticker
+    }
+    public int itemId;
+    public string itemCatalogId;
+    public string itemTitle;
+    public string texturePath;
+    public string iconPath;
+    public ItemType itemType;
+    public DecorData[] wrapDecalStickerData;
+
+    // Constructor mặc định cho Unity Serialization
+    public TankDecorDocument() { }
+
+    // Constructor đầy đủ
+    public TankDecorDocument(int itemId, string itemCatalogId, string itemTitle, string texturePath, string iconPath, ItemType itemType, DecorData[] wrapDecalStickerData)
+    {
+        this.itemId = itemId;
+        this.itemCatalogId = itemCatalogId;
+        this.itemTitle = itemTitle;
+        this.texturePath = texturePath;
+        this.iconPath = iconPath;
+        this.itemType = itemType;
+        this.wrapDecalStickerData = wrapDecalStickerData;
+    }
+}
+
+[System.Serializable]
+public class DecorData
+{
+    public enum PropertyType { Float, Vector2, String }
+    public string tankId;
+    public CustomProperty[] customProperties;
+
+    // Constructor mặc định cho Unity Serialization
+    public DecorData() { }
+
+    // Constructor đầy đủ
+    public DecorData(string tankId, CustomProperty[] customProperties)
+    {
+        this.tankId = tankId;
+        this.customProperties = customProperties;
+    }
+
+    
+    [System.Serializable]
+    public class CustomProperty
+    {
+        public string propertyName;
+        public string propertyType;
+        public float propertyValue;
+        public string propertyValueTypeString;
+        [JsonConverter(typeof(Vector2Converter))]
+        public Vector2 propertyValueTypeVector2;
+    }
+}
+
+[System.Serializable]
+public class TankWrapDocument : TankDecorDocument
+{
+    // Nếu cần, thêm field riêng cho wrap
+}
+
+[System.Serializable]
+public class TankStickerDocument : TankDecorDocument
+{
+    // Nếu cần, thêm field riêng cho sticker
+}
+
+
+================================================================================
+FILE 531/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankDocument.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+using System;
+using Fusion;
+
+[Serializable]
+public class TankDocument
+{
+    public string tankName;
+    public string tankId;
+    public TankType tankType;
+    public string description;
+    public string[] abilityIDs; // Array of ability IDs associated with the tank
+    public string hullID; // Unique identifier for the tank hull
+    public string primaryWeaponID; // Unique identifier for the primary weapon
+    public string secondaryWeaponID; // Unique identifier for the secondary weapon
+}
+
+[Serializable]
+public enum TankType
+{
+    None,
+    Scout,
+    Assault,
+    Heavy,
+    Outpost,
+}
+
+
+================================================================================
+FILE 532/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankHullCollection.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TankHullCollection", menuName = "ScriptableObjects/TankHullCollection", order = 1)]
+public class TankHullCollection : CollectionBase<TankHullDocument>
+{
+    public TankHullDocument GetByType(TankType tankType)
+    {
+        // Find the first tank hull that matches the specified tank type
+        TankHullDocument activeHull = FindDocumentByProperty(hull => hull.tankType == tankType, true);
+        if (activeHull != null)
+        {
+            return activeHull;
+        }
+        else
+        {
+            Debug.LogWarning($"No active tank hull found for type {tankType} in the collection.");
+            return null;
+        }
+    }
+
+    public TankHullDocument GetDocByID(string hullId)
+    {
+        if (documents != null)
+        {
+            if (documents != null)
+            {
+                foreach (var hullDocument in documents)
+                {       
+                    if (hullDocument.hullID == hullId)
+                    {
+                        return hullDocument;
+                    }
+                }
+            }
+        }
+        Debug.LogWarning($"Tank with ID {hullId} not found in the collection.");
+        return default(TankHullDocument);
+    }
+}
+
+
+================================================================================
+FILE 533/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankHullDocument.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using UnityEngine;
+
+[System.Serializable]
+public class TankHullDocument
+{
+    public string hullName;
+    public string hullID;
+    public TankType tankType;
+    public int hpMultiplier; //%
+    public int brakingMultiplier; //%
+    public int speedMultiplier; //%
+    public int accelerationMultiplier; //%
+    public int rotationSpeedMultiplier; //%
+    public string description;
+}
+
+
+================================================================================
+FILE 534/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankStatBaseData.cs
+================================================================================
+
+using UnityEngine;
+
+public class TankStatBaseData
+{
+    public const int maxSpeed = 8; // Maximum speed of the tank
+    public const int acceleration = 50; // Acceleration rate of the tank
+    public const int rotationSpeed = 7; // Rotation speed of the tank
+    public const int braking = 8; // Braking force of the tank
+    public const int hp = 1000; // Health of the tank
+    public const int minDMG = 70; // Damage dealt by the tank's weapon
+    public const int maxDMG = 100; // Damage dealt by the tank's weapon
+    public const int range = 15; // Effective range of the tank's weapon
+    public const int fireRate = 2; // Rate of fire of the tank's weapon
+    public const int reloadTime = 2; // Reload time of the tank's weapon
+    public const int magazineSize = 1; // Size of the tank's weapon magazine
+    public const byte projectileCount = 1; // Number of projectiles fired per shot by the tank's weapon
+    public const int projectileSpeed = 20; // Speed of the projectile fired by the tank's weapon
+}
+
+
+================================================================================
+FILE 535/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankStickerCollection.cs
+================================================================================
+
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TankStickerCollection", menuName = "ScriptableObjects/TankStickerCollection", order = 1)]
+public class TankStickerCollection : TankDecorCollection<TankStickerDocument>
+{
+    
+}
+
+
+================================================================================
+FILE 536/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankWeaponCollection.cs
+================================================================================
+
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = nameof(TankWeaponCollection), menuName = "ScriptableObjects/" + nameof(TankWeaponCollection), order = 1)]
+public class TankWeaponCollection : CollectionBase<TankWeaponDocument>
+{
+    public TankWeaponDocument GetDocByType(TankType tankType)
+    {
+        // Find the first tank weapon that matches the specified tank type
+        TankWeaponDocument activeWeapon = FindDocumentByProperty(weapon => weapon.tankType == tankType, true);
+        if (activeWeapon != null)
+        {
+            return activeWeapon;
+        }
+        else
+        {
+            Debug.LogWarning($"No active tank weapon found for type {tankType} in the collection.");
+            return null;
+        }
+    }
+
+    public TankWeaponDocument GetDocByID(string weaponId)
+    {
+        if (documents != null)
+        {
+            if (documents != null)
+            {
+                foreach (var weaponDocument in documents)
+                {
+                    if (weaponDocument.weaponID == weaponId)
+                    {
+                        return weaponDocument;
+                    }
+                }
+            }
+        }
+        Debug.LogWarning($"Tank with ID {weaponId} not found in the collection.");
+        return default(TankWeaponDocument);
+    }
+}
+
+
+================================================================================
+FILE 537/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankWeaponDocument.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using Fusion.TankOnlineModule;
+using UnityEngine;
+
+[System.Serializable]
+public class TankWeaponDocument
+{
+    public string weaponName; // Name of the weapon
+    public string weaponID; // Unique identifier for the weapon
+    public TankType tankType; // Type of tank this weapon is compatible with
+    public WeaponType weaponType; // Type of the weapon (e.g., primary, secondary)
+    public PowerupType powerupType;
+    public DamageAreaType damageAreaType; // Type of damage area (e.g., single target, area of effect)
+    public int damageMultiplier; // %
+    public int rangeMultiplier; // %
+    public int fireRateMultiplier; // %
+    public int reloadTimeMultiplier; // %
+    public int projectileSpeedMultiplier; // %
+    public int magazineSizeMultiplier; // %
+    public int projectileCountMultiplier; // %
+}
+
+public enum WeaponType
+{
+    None = -1,
+    Primary, // Main weapon of the tank
+    Secondary, // Secondary weapon (e.g., machine gun, missile launcher)
+    Support // Support weapon (e.g., smoke launcher, flare gun)
+}
+
+public enum DamageAreaType
+{
+    None = -1,
+    SingleTarget, // Weapon targets a single enemy
+    AreaOfEffect, // Weapon affects an area (e.g., splash damage)
+    Continuous // Weapon provides continuous fire (e.g., laser, beam)
+}
+
+
+================================================================================
+FILE 538/682: Assets/_GameModules/TankFusionModule/Scripts/Data/TankWrapCollection.cs
+================================================================================
+
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "TankWrapCollection", menuName = "ScriptableObjects/TankWrapCollection", order = 1)]
+public class TankWrapCollection : TankDecorCollection<TankWrapDocument>
+{
+    
+}
+
+
+================================================================================
+FILE 539/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankAbilityCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankAbilityCollection))]
+public class TankAbilityCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankAbilityCollection collection = (TankAbilityCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankAbilityCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của TankWeapon
+        var type = typeof(TankWeaponDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 540/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankCollection))]
+public class TankCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankCollection collection = (TankCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của TankCollection
+        var type = typeof(TankDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 541/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankDecorEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankWrapCollection))]
+public class TankWrapCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankWrapCollection collection = (TankWrapCollection)target;
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankWrapCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        var type = typeof(TankWrapDocument);
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+                if (value == null) return "";
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+}
+
+[CustomEditor(typeof(TankStickerCollection))]
+public class TankStickerCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankStickerCollection collection = (TankStickerCollection)target;
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankStickerCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        var type = typeof(TankStickerDocument);
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+                if (value == null) return "";
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+}
+
+
+================================================================================
+FILE 542/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankHullCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankHullCollection))]
+public class TankHullCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankHullCollection collection = (TankHullCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankHullCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của TankHull
+        var type = typeof(TankHullDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 543/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankUpgradeCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankUpgradeCollection))]
+public class TankUpgradeCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankUpgradeCollection collection = (TankUpgradeCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankUpgradeCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của SOTankUpgradeData
+        var type = typeof(TankDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 544/682: Assets/_GameModules/TankFusionModule/Scripts/Editor/TankWeaponCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+
+[CustomEditor(typeof(TankWeaponCollection))]
+public class TankWeaponCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        TankWeaponCollection collection = (TankWeaponCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(TankWeaponCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của TankWeapon
+        var type = typeof(TankWeaponDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 545/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/AutoReleasedFx.cs
+================================================================================
+
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public abstract class AutoReleasedFx : MonoBehaviour
+	{
+		private float _timeToDie;
+		
+		protected abstract float Duration { get; }
+
+		protected void OnEnable()
+		{
+			_timeToDie = Duration;
+		}
+
+		private void Update()
+		{
+			if (_timeToDie > 0)
+			{
+				_timeToDie -= Time.deltaTime;
+				if(_timeToDie<=0)
+					LocalObjectPool.Release(this);
+			}
+		}		
+	}
+}
+
+
+================================================================================
+FILE 546/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/ExplosionFX.cs
+================================================================================
+
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ExplosionFX : AutoReleasedFx
+	{
+		[SerializeField] private ParticleSystem _particle;
+
+		protected override float Duration => _particle ? _particle.main.duration : 2.0f;
+		
+		private void OnValidate()
+		{
+			if (!_particle)
+				_particle = GetComponent<ParticleSystem>();
+		}
+
+		private new void OnEnable()
+		{
+			base.OnEnable();
+			AudioHelper.PlaySFX(SFX.EXPLOSION1);
+			if (_particle)
+				_particle.Play();
+		}
+
+		private void OnDisable()
+		{
+			if (_particle)
+			{
+				_particle.Stop();
+				_particle.Clear();
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 547/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/MuzzleFlash.cs
+================================================================================
+
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class MuzzleFlash : AutoReleasedFx
+	{
+		[SerializeField] private ParticleSystem _particleEmitter;
+		[SerializeField] private float _timeToFade;
+
+		protected override float Duration => _timeToFade;
+		
+		public virtual void OnFire(ShotState state)
+		{
+			AudioHelper.PlaySFX(SFX.EXPLOSION1);
+			_particleEmitter.Play();
+		}
+	}
+}
+
+
+================================================================================
+FILE 548/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/MuzzleFlashGigavolt.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Fusion.TankOnlineModule
+{
+	public class MuzzleFlashGigavolt : MuzzleFlash
+	{
+		[FormerlySerializedAs("lines")] [SerializeField] private LineRenderer[] _lines;
+
+		private float _squiggleSpacing = .75f; // How far apart should the points be added on the lines, in units of distance.
+
+		[FormerlySerializedAs("squiggleIntensityCurve")] [SerializeField] private AnimationCurve _squiggleIntensityCurve = null;
+		[FormerlySerializedAs("fadeCurve")] [SerializeField] private AnimationCurve _fadeCurve = null;
+		[FormerlySerializedAs("fadeDuration")] [SerializeField] private float _fadeDuration = 1f;
+
+		public override void OnFire(ShotState shot)
+		{
+			base.OnFire(shot);
+			Debug.Log($"Fire Zappy from {shot.Position} to {shot.Position+shot.Direction}");
+			DrawAllBeams(shot.Position, shot.Position+shot.Direction);
+		}
+
+		private void DrawAllBeams(Vector3 origin, Vector3 target)
+		{
+			float distance = Vector3.Distance(origin, target);
+			for (int i = 0; i < _lines.Length; i++)
+			{
+				LineRenderer line = _lines[i];
+				line.enabled = true;
+
+				if (i == 0)
+				{
+					// draw the first beam as a thick straight line
+					DrawBeam(line, origin, target, distance, false);
+				}
+				else
+				{
+					// draw the rest of the beams as squiggled lines
+					DrawBeam(line, origin, target, distance, true);
+				}
+
+				// start fading out the beam
+				StartCoroutine(FadeBeam(line, distance));
+			}
+		}
+
+		// Draw a squiggely beam between fromPosition and toPosition, and add the distance too because this function is too lazy to figure it out.
+		private void DrawBeam(LineRenderer lr, Vector3 fromPosition, Vector3 toPosition, float distance, bool squiggled)
+		{
+			List<Vector3> points = new List<Vector3>();
+			//add the first point, which shouldn't be randomized in any way
+			points.Add(fromPosition);
+
+			// only if the line is squiggled do we need to add points inbetween from and to position
+			if (squiggled)
+			{
+				int numPoints = Mathf.FloorToInt(distance);
+
+				// add all the in-between points to the list of points.
+				float pointDistance = _squiggleSpacing;
+				while (pointDistance < distance)
+				{
+					//The squigglecurve determines how randomized each point is - a lower number leads to a more focused beam.
+					Vector3 point = Vector3.MoveTowards(fromPosition, toPosition, pointDistance);
+					float randomIntensity = _squiggleIntensityCurve.Evaluate(pointDistance / distance);
+					Vector3 randomizedPoint = RandomizePoint(point, randomIntensity);
+
+					points.Add(randomizedPoint);
+
+					pointDistance += _squiggleSpacing;
+				}
+			}
+
+			// add the end point
+			points.Add(toPosition);
+
+			// set all the points in the line renderer
+			lr.positionCount = points.Count;
+			lr.SetPositions(points.ToArray());
+		}
+
+		// Add some randomization to a given Vector3
+		private Vector3 RandomizePoint(Vector3 point, float intensity)
+		{
+			float x = point.x + Random.Range(intensity * -1, intensity);
+			float y = point.y + Random.Range(intensity * -1, intensity);
+			float z = point.z + Random.Range(intensity * -1, intensity);
+
+			return new Vector3(x, y, z);
+		}
+
+		private IEnumerator FadeBeam(LineRenderer lr, float distance)
+		{
+			float timer = 0;
+			float duration = _fadeDuration;
+
+			while (timer < duration)
+			{
+				float t = timer / duration;
+
+				lr.material.SetFloat("_BeamFade", _fadeCurve.Evaluate(t));
+
+				timer += Time.deltaTime;
+				yield return null;
+			}
+
+			lr.material.SetFloat("_BeamFade", 1);
+		}
+	}
+}
+
+
+================================================================================
+FILE 549/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/TankTeleportInEffect.cs
+================================================================================
+
+using System.Collections;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class TankTeleportInEffect : MonoBehaviour
+	{
+		private Player _player;
+
+		[Header("Time Settings")] [SerializeField]
+		private float _timeBeforeParticles = 0.1f;
+
+		[SerializeField] private float _timeDelayImpactParticles = 0.2f;
+
+		[Header("Visuals")] [SerializeField] private GameObject _teleportTarget;
+		[SerializeField] private ParticleSystem _teleportBeamParticle;
+		[SerializeField] private ParticleSystem _teleportImpactParticle;
+		[SerializeField] private ParticleSystem _energyDischargeParticle;
+		[SerializeField] private GameObject _tankDummy;
+
+		[Header("Audio")] [SerializeField] private GDO.Audio.AudioEmitter _audioEmitter;
+		[SerializeField] private GDO.Audio.AudioClipData _beamAudioClip;
+		[SerializeField] private GDO.Audio.AudioClipData _dischargeAudioClip;
+
+		private Transform _tankDummyTurret;
+		private Transform _tankDummyHull;
+
+		private bool _endTeleportation;
+
+		// Initialize dummy tank and set colors based on the assigned player
+		public void Initialize(Player player)
+		{
+			_player = player;
+
+			_tankDummyTurret = _tankDummy.transform.Find("EnergyTankIn_Turret");
+			_tankDummyHull = _tankDummy.transform.Find("EnergyTankIn_Hull");
+
+			ColorChanger.ChangeColor(transform, player.PlayerColor);
+
+			ResetTeleporter();
+		}
+
+		public void EndTeleport()
+		{
+			_endTeleportation = true;
+		}
+
+		private void ResetTeleporter()
+		{
+			_endTeleportation = false;
+			_teleportTarget.SetActive(false);
+			_teleportBeamParticle.Stop();
+			_teleportImpactParticle.Stop();
+			_energyDischargeParticle.Stop();
+			_tankDummy.SetActive(false);
+		}
+
+		public void StartTeleport()
+		{
+			ResetTeleporter();
+			StartCoroutine(TeleportIn());
+		}
+
+		private IEnumerator TeleportIn()
+		{
+			_teleportTarget.SetActive(true);
+			yield return new WaitForSeconds(_timeBeforeParticles);
+
+			// Play the downwards beam
+			_teleportBeamParticle.Play();
+			_audioEmitter.PlayOneShot(_beamAudioClip);
+			yield return new WaitForSeconds(_timeDelayImpactParticles);
+
+			// Play impact particle
+			_teleportTarget.SetActive(false);
+			_teleportBeamParticle.Stop();
+			_teleportImpactParticle.Play();
+
+			// Set the dummy tank
+			_tankDummy.SetActive(true);
+			_tankDummyTurret.rotation = _player.visuals.Turret.rotation;
+			_tankDummyHull.rotation = _player.visuals.Hull.rotation;
+
+			// Waits for the tank to be ready before playing the discharge effect
+			while (!_endTeleportation)
+				yield return null;
+
+			_tankDummy.SetActive(false);
+			_energyDischargeParticle.Play();
+			_audioEmitter.PlayOneShot(_dischargeAudioClip);
+		}
+	}
+}
+
+
+================================================================================
+FILE 550/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/TankTeleportOutEffect.cs
+================================================================================
+
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class TankTeleportOutEffect : AutoReleasedFx
+	{
+		[SerializeField] private float _duration = 5.0f;
+		[SerializeField] private Transform _dummyTankTurret;
+		[SerializeField] private Transform _dummyTankHull;
+
+		[SerializeField] private ParticleSystem _teleportEffect;
+
+		[Header("Audio")] 
+		[SerializeField] private GDO.Audio.AudioEmitter _audioEmitter;
+
+		protected override float Duration => _duration;
+		
+		public void StartTeleport(Color color, Quaternion turretRotation, Quaternion hullRotation)
+		{
+			ColorChanger.ChangeColor(transform, color);
+			
+			_teleportEffect.Stop();
+			
+			if(_audioEmitter.isActiveAndEnabled)
+				_audioEmitter.PlayOneShot();
+
+			_dummyTankTurret.rotation = turretRotation;
+			_dummyTankHull.rotation = hullRotation;
+
+			_teleportEffect.Play();
+		}
+	}
+}

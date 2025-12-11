@@ -2,11 +2,12 @@
 
 import { LayoutWithSidebar } from "../layout-with-sidebar"
 import { EnhancedChat } from "@/components/chat/enhanced-chat"
-import { useState } from "react"
+import { useWorkspace } from "@/lib/contexts/workspace-context"
 
 export default function ChatPage() {
-  const [workspaceId] = useState("default")
-  const [docIds] = useState<string[]>([])
+  const { currentWorkspace } = useWorkspace()
+  const workspaceId = currentWorkspace?.id ?? "tank_war"
+  const docIds: string[] = []
 
   return (
     <LayoutWithSidebar>

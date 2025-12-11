@@ -1,0 +1,1956 @@
+# Code Snapshot for tank_online_1-dev - Test Sample
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Files: 6
+================================================================================
+
+
+================================================================================
+FILE: Assets/_GamePlay/Scripts/GameManager.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+
+
+namespace Fusion.GameSystems
+{
+    /// <summary>
+    /// GameManager is a singleton class that manages the overall game state and transitions between different game states.
+    /// It initializes the game state machine and handles game start and stop operations.
+    /// </summary>
+    public class GameManager : Singleton<GameManager>
+    {
+        [System.Serializable]
+        public class ManagerConfig
+        {
+            public string name;
+            public NetworkType networkType = NetworkType.Both;
+            public float initTimeout = 5f; // Timeout in seconds
+            public float waitingTime = 5f; // Delay between retries
+        }
+        public static string fixedRegion = "asia";//default region
+        public GameStateMachine GSM { get; private set; }
+        public DeviceQualityManager QualityManager { get; private set; }
+        public static bool IsApplicationQuitting { get; private set; } = false;
+        private string managersPath = "Prefabs";
+        [SerializeField] private ManagerConfig[] managers;
+        private Dictionary<GamePhase, System.Func<GameStateMachine, IGameState>> stateFactory;
+        private GamePhase currentState = GamePhase.None;
+        [SerializeField] private DeviceQualityConfig deviceQualityConfig;
+        [SerializeField] private GameObject fPSDebug;
+        [SerializeField] private GameObject consoleDebug;
+        public int countDone = 0;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            StartCoroutine(Initialize());
+            InitializeQualityManager();
+        }
+
+        /// <summary>
+        /// Initialize the DeviceQualityManager
+        /// </summary>
+        private void InitializeQualityManager()
+        {
+            QualityManager = new DeviceQualityManager(deviceQualityConfig);
+            QualityManager.Initialize();
+
+            Debug.Log($"[GameManager] Quality Manager initialized - {QualityManager.GetQualityInfo()}");
+        }
+
+        /// <summary>
+        /// Public method to change quality level at runtime
+        /// </summary>
+        public void ChangeQualityLevel(int level)
+        {
+            if (QualityManager != null)
+            {
+                QualityManager.SetManualQualityLevel(level);
+                Debug.Log($"[GameManager] Quality level changed to {level}");
+            }
+        }
+
+        /// <summary>
+        /// Get current quality information
+        /// </summary>
+        public string GetCurrentQualityInfo()
+        {
+            return QualityManager?.GetQualityInfo() ?? "Quality Manager not initialized";
+        }
+
+        private void OnValidate()
+        {
+            if (managers == null || managers.Length == 0)
+            {
+                managers = new ManagerConfig[]
+                {
+                    new() { name = nameof(EventManager),                initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(UIManager),                   initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(DatabaseManager),             initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(FirestoreManager),            initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(RemoteConfigManager),         initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(MatchmakingManager),          initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(IAPManager),                  initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(GDO.Audio.AudioManager),      initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(SceneLoader),                 initTimeout = 5f, waitingTime = 0.2f },
+                };
+            }
+        }
+
+        private IEnumerator Initialize()
+        {
+            stateFactory =
+            new()
+            {
+                { GamePhase.ScreenLoading,                      gsm => new LoadingState(gsm) },
+                { GamePhase.MatchIdling,                        gsm => new HomeState(gsm) },
+                { GamePhase.MatchSearching,                     gsm => new MatchSearchingState(gsm) },
+                { GamePhase.MatchFindCanceling,                 gsm => new MatchCancelingState(gsm) },
+                { GamePhase.MatchFound,                         gsm => new MatchFoundState(gsm) },
+                { GamePhase.MatchPicking,                       gsm => new MatchPickingState(gsm) },
+                { GamePhase.MatchLoading,                       gsm => new MatchLoadingState(gsm) },
+                { GamePhase.MatchCountdown,                     gsm => new MatchCountdownState(gsm) },
+                { GamePhase.MatchPlaying,                       gsm => new MatchPlayingState(gsm) },
+                { GamePhase.MatchEnding,                        gsm => new MatchEndingState(gsm) },
+                { GamePhase.MatchLeaving,                       gsm => new MatchLeavingState(gsm) },
+                { GamePhase.MatchFinal,                         gsm => new FinalState(gsm) },
+                { GamePhase.Auth,                               gsm => new AuthState(gsm) },
+                { GamePhase.OnboardingMatchIdling,              gsm => new OnboardingMatchIdlingState(gsm) },
+            };
+
+            var initTasks = new List<(string name, bool isLoaded, string error)>();
+            var retryDelay = new WaitForSeconds(0.1f); // Cache WaitForSeconds instance
+            StartCoroutine(InitManager());
+            yield return null;
+
+            // for (int i = 0; i < managers.Length; i++)
+            // {
+            //     var manager = managers[i];
+
+            //     if (manager.networkType == NetworkType.Unused)
+            //     {
+            //         continue; // Skip unused managers
+            //     }
+
+            //     // Load manager prefab (outside try-catch to avoid yield issues)
+            //     float elapsed = 0;
+            //     GameObject prefab = null;
+
+            //     // Try to load with retry logic
+            //     for (int attempt = 0; attempt < 3 && prefab == null && elapsed < manager.initTimeout; attempt++)
+            //     {
+            //         prefab = Resources.Load<GameObject>($"{managersPath}/{manager.name}");
+            //         if (prefab == null)
+            //         {
+            //             elapsed += Time.deltaTime;
+            //             yield return retryDelay; // Small delay between retries
+            //         }
+            //     }
+
+            //     if (prefab == null)
+            //     {
+            //         var error = $"Failed to load manager prefab: {manager.name}";
+            //         initTasks.Add((manager.name, false, error));
+
+            //         Debug.LogError(error);
+            //     }
+
+            //     try
+            //     {
+            //         // Create manager instance
+            //         var instance = Instantiate(prefab);
+            //         if (instance == null)
+            //         {
+            //             throw new System.Exception($"Failed to instantiate {manager.name}");
+            //         }
+
+            //         // Configure manager
+            //         instance.name = $"__{manager.name}";
+            //         DontDestroyOnLoad(instance);
+
+            //         initTasks.Add((manager.name, true, null));
+            //         IInitializableManager initializable = instance.GetComponent<IInitializableManager>();
+            //         initializable.OnInitialized = (success) =>
+            //         {
+            //             if (!success)
+            //             {
+            //                 Debug.LogError($"Initialization failed for manager: {manager.name}");
+            //             }
+            //             Debug.Log($"Manager initialized: {manager.name}");
+            //             countDone++;
+
+            //             if (countDone == managers.Length)
+            //             {
+            //                 // Log detailed initialization summary
+            //                 var summary = "Manager Initialization Summary:\n" +
+            //                             $"Total: {initTasks.Count}\n" +
+            //                             $"Succeeded: {initTasks.Count(x => x.isLoaded)}\n" +
+            //                             $"Failed: {initTasks.Count(x => !x.isLoaded)}\n\n" +
+            //                             string.Join("\n", initTasks.Select(t =>
+            //                                 $"- {t.name}: {(t.isLoaded ? "OK" : "FAILED")}" +
+            //                                 (!t.isLoaded ? $" ({t.error})" : "")));
+
+            //                 Debug.Log(summary);
+            //                 // Only initialize game state if all required managers loaded successfully
+            //                 GSM = new GameStateMachine();
+            //                 if (EventManager.Instance != null)
+            //                 {
+            //                     EventManager.Register<GamePhase>(ChangeState);
+            //                 }
+            //                 else
+            //                 {
+            //                     Debug.LogError("EventManager not found - cannot initialize game states");
+            //                 }
+            //                 Debug.Log("GameManager initialized successfully.");
+            //             }
+            //         };
+
+            //         //show progress
+            //         if (i > 0)
+            //             EventManager.TriggerEvent(new LoadingScreenParam { currentStep = i + 1, totalSteps = managers.Length });
+            //     }
+            //     catch (System.Exception e)
+            //     {
+            //         var error = $"Error initializing {manager.name}: {e.Message}";
+            //         initTasks.Add((manager.name, false, error));
+
+            //         Debug.LogError(error);
+            //     }
+
+            //     // Wait one frame to allow Awake/Start to complete (outside try-catch)
+            //     yield return new WaitForSeconds(manager.waitingTime);
+            // }
+        }
+        
+        private IEnumerator InitManager()
+        {
+            var initTasks = new List<(string name, bool isLoaded, string error)>();
+            var retryDelay = new WaitForSeconds(0.1f); // Cache WaitForSeconds instance
+
+            var manager = managers[countDone];
+
+            if (manager.networkType == NetworkType.Unused)
+            {
+                countDone++;
+                StartCoroutine(InitManager());
+                yield break; // Skip unused managers
+            }
+
+            // Load manager prefab (outside try-catch to avoid yield issues)
+            float elapsed = 0;
+            GameObject prefab = null;
+
+            // Try to load with retry logic
+            for (int attempt = 0; attempt < 3 && prefab == null && elapsed < manager.initTimeout; attempt++)
+            {
+                prefab = Resources.Load<GameObject>($"{managersPath}/{manager.name}");
+                if (prefab == null)
+                {
+                    elapsed += Time.deltaTime;
+                    yield return retryDelay; // Small delay between retries
+                }
+            }
+
+            if (prefab == null)
+            {
+                var error = $"Failed to load manager prefab: {manager.name}";
+                initTasks.Add((manager.name, false, error));
+
+                Debug.LogError(error);
+            }
+
+            try
+            {
+                // Create manager instance
+                var instance = Instantiate(prefab);
+                if (instance == null)
+                {
+                    throw new System.Exception($"Failed to instantiate {manager.name}");
+                }
+
+                // Configure manager
+                instance.name = $"__{manager.name}";
+                DontDestroyOnLoad(instance);
+
+                initTasks.Add((manager.name, true, null));
+                IInitializableManager initializable = instance.GetComponent<IInitializableManager>();
+                initializable.OnInitialized = (success) =>
+                {
+                    if (!success)
+                    {
+                        string message = $"Initialization failed for manager: {manager.name}";
+                        Debug.LogError(message);
+                        EventManager.TriggerEvent(new ShowPopupEvent(PopupIDs.Inform, new InformPopupParam() { message = message }));
+                    }
+                    Debug.Log($"Manager initialized: {manager.name}");
+                    countDone++;
+
+                    if (countDone >= managers.Length)
+                    {
+                        // Log detailed initialization summary
+                        var summary = "Manager Initialization Summary:\n" +
+                                    $"Total: {initTasks.Count}\n" +
+                                    $"Succeeded: {initTasks.Count(x => x.isLoaded)}\n" +
+                                    $"Failed: {initTasks.Count(x => !x.isLoaded)}\n\n" +
+                                    string.Join("\n", initTasks.Select(t =>
+                                        $"- {t.name}: {(t.isLoaded ? "OK" : "FAILED")}" +
+                                        (!t.isLoaded ? $" ({t.error})" : "")));
+
+                        Debug.Log(summary);
+                        // Only initialize game state if all required managers loaded successfully
+                        GSM = new GameStateMachine();
+                        if (EventManager.Instance != null)
+                        {
+                            EventManager.Register<GamePhase>(ChangeState);
+                        }
+                        else
+                        {
+                            Debug.LogError("EventManager not found - cannot initialize game states");
+                        }
+                        Debug.Log("GameManager initialized successfully.");
+                    }
+                    else 
+                    {
+                        //show progress
+                        EventManager.TriggerEvent(new LoadingScreenParam { currentStep = countDone + 1, totalSteps = managers.Length }); 
+                        StartCoroutine(InitManager());
+                    }
+                };
+                initializable.Initialize();
+            }
+            catch (System.Exception e)
+            {
+                var error = $"Error initializing {manager.name}: {e.Message}";
+                initTasks.Add((manager.name, false, error));
+
+                Debug.LogError(error);
+            }
+        }
+
+        void Update()
+        {
+            GSM?.Update();
+#if UNITY_EDITOR
+            fPSDebug.SetActive(true);
+            consoleDebug.SetActive(true);
+#else
+            if (Input.touchCount >= 5 && fPSDebug != null)
+            {
+                fPSDebug.SetActive(!fPSDebug.activeSelf);
+                consoleDebug.SetActive(!consoleDebug.activeSelf);
+            }
+#endif
+        }
+
+        public void ChangeState(GamePhase stateType)
+        {
+            if (currentState == stateType) return;
+            
+            currentState = stateType;
+
+            if (stateFactory.TryGetValue(stateType, out var factory))
+            {
+                GSM.Change(factory(GSM));
+            }
+            else
+            {
+                Debug.LogWarning($"Unknown game state: {stateType}");
+            }
+        }
+
+        protected override void OnApplicationQuit()
+        {
+            base.OnApplicationQuit();
+            IsApplicationQuitting = true;
+        }
+
+        protected override void OnDestroy()
+        {
+            if (GSM != null)
+            {
+                GSM = null;
+            }
+        }
+    }
+}
+
+public enum GamePhase
+{
+    None,
+    ScreenLoading,
+    MatchIdling,
+    MatchSearching,
+    MatchCanceling,
+    MatchLoading,
+    MatchFindCanceling,
+    MatchFound,
+    MatchPicking,
+    MatchCountdown,
+    MatchPlaying,
+    MatchEnding,
+    MatchLeaving,
+    MatchFinal,
+    Auth,
+    MatchReleasing,
+    OnboardingMatchIdling
+}
+
+public enum NetworkType
+{
+    Both,
+    ServerOnly,
+    ClientOnly,
+    Unused,
+}
+
+
+================================================================================
+FILE: Assets/_GamePlay/Scripts/SceneLoader.cs
+================================================================================
+
+using UnityEngine;
+
+public class SceneLoader : Singleton<SceneLoader>
+{
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    /// <summary>
+    /// Loads a scene by name.
+    /// </summary>
+    /// <param name="sceneName">The name of the scene to load.</param>
+    public void LoadScene(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError("Scene name cannot be null or empty.");
+            return;
+        }
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        Debug.Log($"Loading scene: {sceneName}");
+    }
+
+    /// <summary>
+    /// Reloads the current active scene.
+    /// </summary>
+    public void ReloadCurrentScene()
+    {
+        var currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        LoadScene(currentScene.name);
+        Debug.Log($"Reloading current scene: {currentScene.name}");
+    }
+}
+
+
+
+================================================================================
+FILE: Assets/_GameUI/MainScreen/Scripts/HomeScreen.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.GameSystems;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HomeScreen : UIScreenBase
+{
+    [SerializeField] private Sprite[] playerCountSprites; // 0=empty, 1=joined
+    [SerializeField] private Image[] playerCountImages;
+    [SerializeField] private Button findMatchButton, cancelMatchButton;
+    [SerializeField] private TMP_Dropdown dropdown;
+
+    [SerializeField] private TMP_Text txtPlayerName, txtGold, txtDiamond, txtElo, txtCurModeName;
+    [SerializeField] private Image playerAvatarImage;
+    [SerializeField] private Sprite defaultAvatar;
+    [SerializeField] private TankPreviewComp myTankPreview;
+
+    [Header("Popup Change Mode")]
+    [SerializeField] private Transform popupChangeMode;
+    [SerializeField] private Transform scrollviewModeContent;
+    [SerializeField] private GameObject gameModeItemPrefab;
+    [SerializeField] private Toggle multiplayerToggle;
+
+    private MatchmakingCollection matchmakingCollection;
+    private bool IsFinding { get; set; }
+    private List<GameModeItemComp> gameModeItemComps = new List<GameModeItemComp>();
+
+    private void OnDestroy()
+    {
+        UnregisterEvents();
+    }
+
+    public override void RegisterEvents()
+    {
+        EventManager.Register<MainMenuEvent>(DisplayFindMatchButton);
+    }
+
+    private void UnregisterEvents()
+    {
+        EventManager.Unregister<MainMenuEvent>(DisplayFindMatchButton);
+    }
+
+    public override void Initialize()
+    {
+        findMatchButton.onClick.AddListener(OnFindMatchClicked);
+        cancelMatchButton.onClick.AddListener(OnCancelMatchClicked);
+        RegisterEvents();
+        base.Initialize();
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        RegisterEvents();
+
+        matchmakingCollection = DatabaseManager.GetDB<MatchmakingCollection>();
+        dropdown.value = matchmakingCollection.GetSelectedMatchIndex();
+        IsFinding = MatchmakingManager.IsFinding;
+        if (!IsFinding)
+        {
+            findMatchButton.gameObject.SetActive(true);
+            cancelMatchButton.gameObject.SetActive(false);
+            DisplayFindMatchButton(MainMenuEvent.StopFindMatch());
+        }
+        UpdatePlayerInfo();
+        UpdateMatchMode();
+    }
+
+    public override void Hide()
+    {
+        //UnregisterEvents();
+        // remove tank preview
+        myTankPreview.HideTankPreview();
+
+        base.Hide();
+    }
+
+    public void ShowChooseModePopup()
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        multiplayerToggle.isOn = true;
+        ShowMatchModesByType(new MatchType[] { MatchType.Ranked });
+    }
+
+    public void ToggleChangeModePopup(int index) // index = 0 is multiplayer, 1 is solo
+    {
+        if (index == 0)
+        {
+            ShowMatchModesByType(new MatchType[] { MatchType.Ranked });
+        }
+        else
+        {
+            ShowMatchModesByType(new MatchType[] { MatchType.Normal });
+        }
+    }
+    
+    private void ShowMatchModesByType(MatchType[] types)
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        // Hide all items first
+        for (int i = 0; i < scrollviewModeContent.childCount; i++)
+        {
+            scrollviewModeContent.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // Show only items matching the selected mode type
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            if (itemComp.ModeData.Region.ToLower() != GameManager.fixedRegion.ToLower())
+            {
+                continue; // skip items not in the fixed region
+            }
+            
+            if (itemComp != null && System.Array.Exists(types, type => type == itemComp.GetMatchType()))
+            {
+                itemComp.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void ShowMatchModesByType(MatchMode[] modeType)
+    {
+        popupChangeMode.gameObject.SetActive(true);
+        // Hide all items first
+        for (int i = 0; i < scrollviewModeContent.childCount; i++)
+        {
+            scrollviewModeContent.GetChild(i).gameObject.SetActive(false);
+        }
+
+        // Show only items matching the selected mode type
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            if (itemComp.ModeData.Region.ToLower() != GameManager.fixedRegion.ToLower())
+            {
+                continue; // skip items not in the fixed region
+            }
+            
+            if (itemComp != null && System.Array.Exists(modeType, mode => mode == itemComp.GetMatchMode()))
+            {
+                itemComp.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    private void UpdateMatchMode()
+    {
+        List<MatchmakingDocument> documents = DatabaseManager.GetDB<MatchmakingCollection>().GetAllDocuments();
+        // filter follow GameManager.fixedRegion
+        Debug.Log("Fixed Region: " + GameManager.fixedRegion);
+
+        txtCurModeName.text = documents.Find(doc => doc.IsSelected)?.matchName ?? string.Empty;
+        //scrollviewModeContent add scroll items
+        // Only destroy redundant items for better performance
+        int childCount = scrollviewModeContent.childCount;
+        int docCount = documents.Count;
+
+        // Destroy extra items if there are more children than needed
+        for (int i = docCount; i < childCount; i++)
+        {
+            Destroy(scrollviewModeContent.GetChild(i).gameObject);
+        }
+        gameModeItemComps = new List<GameModeItemComp>();
+        // Reuse or create items as needed
+        for (int i = 0; i < docCount; i++)
+        {
+            int index = i;
+            GameObject item;
+            if (i < scrollviewModeContent.childCount)
+            {
+                // Reuse existing item
+                item = scrollviewModeContent.GetChild(i).gameObject;
+                item.SetActive(true);
+            }
+            else
+            {
+                // Instantiate new item if not enough
+                item = Instantiate(gameModeItemPrefab, scrollviewModeContent);
+            }
+            string modeKey = "match." + Enum.GetName(typeof(MatchMode), documents[i].MatchMode).ToLower();
+            string matchName = LocalizationHelper.GetSmartString(nameof(LocKeys.UI_Common),  modeKey + ".name", new Dictionary<string, object>
+                {
+                    { "Total", documents[i].maxPlayers }
+                });
+
+            string matchDes = LocalizationHelper.GetSmartString(nameof(LocKeys.UI_Common), modeKey + ".description", new Dictionary<string, object>
+                {
+                    { "Second", documents[i].MatchDuration}
+                });
+
+            GameModeItemData itemData = new GameModeItemData
+            {
+                Region = documents[i].FixedRegion,
+                ModeId = documents[i].matchID,
+                ModeName = matchName,
+                ModeDesc = matchDes,
+                MatchMode = documents[i].matchMode,
+                MatchType = documents[i].matchType,
+                IsActiveMode = documents[i].IsActive,
+                IsSelected = documents[i].IsSelected
+            };
+            var itemComp = item.GetComponent<GameModeItemComp>();
+            itemComp.Init(itemData, (isSelected) =>
+            {
+                if (isSelected)
+                {
+                    matchmakingCollection.SetMatchIndex(index);
+                    foreach (var comp in gameModeItemComps)
+                    {
+                        if (comp != itemComp)
+                            comp.SetSelected(false);
+                        else
+                        {
+                            itemComp.SetSelected(true);
+                            txtCurModeName.text = itemData.ModeName;
+                        }
+                    }
+                }
+            });
+            gameModeItemComps.Add(itemComp);
+        }
+        
+        // hide all matches not match the fixed region
+        for (int i = 0; i < gameModeItemComps.Count; i++)
+        {
+            var itemComp = gameModeItemComps[i];
+            Debug.Log("Match Region: " + itemComp.ModeData.Region + " vs Fixed Region: " + GameManager.fixedRegion);
+            itemComp.gameObject.SetActive(itemComp.ModeData.Region.ToLower() == GameManager.fixedRegion.ToLower());
+        }
+    }
+
+    private void UpdatePlayerInfo()
+    {
+        var playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+
+        if (playerDocument != null)
+        {
+            txtGold.text = playerDocument.gold.ToString();
+            txtDiamond.text = playerDocument.diamond.ToString();
+            txtElo.text = playerDocument.elo.ToString();
+            txtPlayerName.text = playerDocument.playerName;
+
+            if (playerAvatarImage != null)
+            {
+                var playerAvatar = !string.IsNullOrWhiteSpace(playerDocument.playerAvatar) ? DatabaseManager.GetDB<GameAssetCollection>()
+                    .GetGameAssetDocumentById(playerDocument.playerAvatar).icon : null;
+                playerAvatarImage.sprite = playerAvatar != null ? playerAvatar : defaultAvatar;
+            }
+        }
+
+        // remove tank preview
+        myTankPreview.HideTankPreview();
+
+        // show preview of selected tank
+        myTankPreview.ShowTankPreview(playerDocument.selectedTank);
+        int wrapId = PlayerDocument.GetMineWrapId(playerDocument.selectedTank);
+        myTankPreview.ChangeWrap(wrapId, playerDocument.selectedTank);
+    }
+
+    public void OnChangeMode(int index)
+    {
+        matchmakingCollection.SetMatchIndex(index);
+    }
+
+
+    private void EnableFinding(bool status)
+    {
+        if (status == IsFinding) return;
+
+        if (status)
+        {
+            EventManager.TriggerEvent(GamePhase.MatchSearching);
+        }
+        else
+            EventManager.TriggerEvent(GamePhase.MatchIdling);
+
+        IsFinding = status;
+
+        findMatchButton.gameObject.SetActive(!IsFinding);
+        cancelMatchButton.gameObject.SetActive(IsFinding);
+    }
+
+    private IEnumerator DelayChangeFindMatchStatus(Button button, int playerCount, int maxPlayers, string buttonLabel, float delayTime, bool isCanTouch, bool isCanChangeMode, bool isCanSeePlayerCount = true)
+    {
+        yield return new WaitForSeconds(delayTime);
+        dropdown.interactable = isCanChangeMode;
+
+        for (int i = 0; i < playerCountImages.Length; i++)
+        {
+            if (i + 1 > maxPlayers)
+            {
+                playerCountImages[i].gameObject.SetActive(false);
+                continue;
+            }
+            else
+            {
+                playerCountImages[i].gameObject.SetActive(true);
+                if (i < playerCount)
+                    playerCountImages[i].sprite = playerCountSprites[1];
+                else
+                    playerCountImages[i].sprite = playerCountSprites[0];
+            }
+        }
+    }
+
+    private void DisplayFindMatchButton(MainMenuEvent args)
+    {
+        //if (IsVisible == false) return;
+
+        Debug.Log($"Matchmaking Status: {args.status}, Player Count: {args.playerCount}/{args.maxPlayers}");
+        if (args.status == MatchmakingStatus.Found || args.status == MatchmakingStatus.Updating)
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(cancelMatchButton, args.playerCount, args.maxPlayers, "Matching...", 0.1f, isCanTouch: true, false));
+        }
+        else if (args.status == MatchmakingStatus.Finding)
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(cancelMatchButton, args.playerCount, args.maxPlayers, "Matching...", 0, isCanTouch: false, false, false));
+        }
+        else
+        {
+            StartCoroutine(DelayChangeFindMatchStatus(findMatchButton, args.playerCount, args.maxPlayers, "Find Match", 1, isCanTouch: true, true, false));
+        }
+    }
+
+    public void OnFindMatchClicked()
+    {
+        EnableFinding(true);
+    }
+
+    public void OnCancelMatchClicked()
+    {
+        EnableFinding(false);
+    }
+
+    public void DeleteAccount()
+    {
+        // Delete account on firebase (if applicable)
+        DatabaseManager.GetDB<PlayerCollection>().DeleteAccountFromFirebase();
+
+        // Clear local player preferences
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        Debug.Log("All player preferences have been deleted.");
+        EventManager.TriggerEvent(GamePhase.Auth);
+    }
+
+    private void OnValidate()
+    {
+        if (findMatchButton == null)
+        {
+            Debug.LogError("[MainMenuScreen] findMatchButton is not assigned.");
+        }
+
+        if (cancelMatchButton == null)
+        {
+            Debug.LogError("[MainMenuScreen] cancelMatchButton is not assigned.");
+        }
+    }
+}
+
+
+================================================================================
+FILE: Assets/_GameUI/LobbyScreen/Scripts/ChooseTankScreen.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Fusion;
+using Fusion.TankOnlineModule;
+using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
+
+public class ChooseTankScreen : UIScreenBase
+{
+    [SerializeField] private Transform tankItemParent;
+    [SerializeField] private TextMeshProUGUI countdownText, stateText, teamText, targetText, killText;
+    [SerializeField] private Image targetIcon, killIcon;
+    [SerializeField] private Sprite[] targetSprites, killSprites; // 0=defender, 1=attacker
+    [SerializeField] private ChooseTankPlayerCard[] playerCards; // my team, my position is index=0
+    [SerializeField] private ChooseTankItem[] tankItems;
+    [SerializeField] private ChooseTankItem chooseTankItemPrefab, selectedTankItem;
+    private UnityAction<string> onSelectTank;
+    private int localPlayerTeamIndex = -1, slotIndex = -1; // Store local player's team index and player index
+    private ServerState serverState;
+
+    public override void Initialize()
+    {
+        RegisterEvents();
+        ClearAllPlayerCards();
+        onSelectTank = OnTankSelected;
+        base.Initialize();
+    }
+
+    public override void RegisterEvents()
+    {
+        EventManager.Register<ChooseTankBaseInfo>(DisplayExistingPlayers);
+        EventManager.Register<ChooseTankTimeEvent>(OnUpdateCountdown);
+        //EventManager.Register<ServerStateEvent>(OnChooseTankState);
+        EventManager.Register<ChooseTankEvent>(OnAllowChooseTank);
+    }
+
+    private void OnAllowChooseTank(ChooseTankEvent chooseTankEvent)
+    {
+        Debug.Log($"[OnAllowChooseTank] ChangeState to {chooseTankEvent.State}");
+        serverState = chooseTankEvent.State;
+        switch (chooseTankEvent.State)
+        {
+            case ServerState.PICKING:
+                DisplayExistingPlayers(new ChooseTankBaseInfo());
+                break;
+        }
+    }
+
+    private void OnChooseTankState(ServerStateEvent stateEvent)
+    {
+        Debug.Log($"[OnChooseTankState] ChangeState to {stateEvent.NewState}");
+        //if (IsVisible == false) return;
+        serverState = stateEvent.NewState;
+        switch (stateEvent.NewState)
+        {
+            case ServerState.PICKING:
+                DisplayExistingPlayers(new ChooseTankBaseInfo());
+                break;
+        }
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show(additionalSortingOrder, param);
+        CreateTankItems();
+        for (int i = 0; i < playerCards.Length; i++)
+        {
+            playerCards[i].gameObject.SetActive(false);
+        }
+    }
+
+    public override void Hide()
+    {
+        localPlayerTeamIndex = -1;
+        ClearAllPlayerCards();
+        base.Hide();
+    }
+
+    private void DisplayExistingPlayers(ChooseTankBaseInfo info)
+    {
+        ClearAllPlayerCards();
+        //if (IsVisible == false) return;
+        MatchPlayerData[] allPlayers = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        // foreach (var p in allPlayers)
+        // {
+        //     Debug.Log($"[DisplayExistingPlayers] -- PlayerID:{p.PlayerId} PlayerName:{p.PlayerName} TeamIndex:{p.TeamIndex} IsLocalPlayer:{p.IsLocalPlayer} TankId:{p.TankId}");
+        // }
+
+        // find the local player's team index
+        localPlayerTeamIndex = allPlayers.FirstOrDefault(p => p.IsLocalPlayer).TeamIndex;
+        MatchPlayerData[] myteamPlayers = allPlayers.Where(p => p.TeamIndex == localPlayerTeamIndex).ToArray();
+        Debug.Log($"[DisplayExistingPlayers] local team index: {localPlayerTeamIndex}, players in team: {myteamPlayers.Length}, PlayerIDs: {string.Join(", ", myteamPlayers.Select(p => p.IndexInTeam))}");
+        slotIndex = 1;
+        
+        for (int i = 0; i < myteamPlayers.Length; i++)
+        {
+            UpdatePlayerCard(new ChooseTankBaseInfo
+            {
+                IsLocalPlayer = myteamPlayers[i].IsLocalPlayer,
+                PlayerIndex = myteamPlayers[i].IndexInTeam,
+                PlayerName = myteamPlayers[i].PlayerName,
+                TankId = myteamPlayers[i].TankId,
+                TeammateIndex = myteamPlayers[i].TeamIndex,
+                PlayerId = myteamPlayers[i].PlayerId
+            });
+        }
+    }
+
+    // private IEnumerator DelayedDisplayExistingPlayers()
+    // {
+    //     while (true)
+    //     {
+    //         MatchPlayerData[] allPlayers = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+    //         // nếu tất cả đều Joined = true 
+    //         if (allPlayers.All(p => p.IsJoined))
+    //         {
+    //             break;
+    //         }
+    //         yield return null;
+    //     }
+
+    //     yield return null;
+    //     DisplayExistingPlayers(new ChooseTankBaseInfo());
+    //     yield return null;
+    //     SelectDefaultTank();
+    // }
+    
+    private void SelectDefaultTank()
+    {
+        // Select the default tank for the local player
+        PlayerDocument playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        string selectedTankId = playerDocument.selectedTank;
+
+        selectedTankItem = tankItems.FirstOrDefault(item => item.TankId.Equals(selectedTankId));
+        if (selectedTankItem != null)
+        {
+            InventoryHelper.SetSelectedTank(selectedTankId);
+            int wrapId = playerDocument.GetWrapId(selectedTankId);
+            GameServer.Instance.MyTank.RPC_ChooseTank(selectedTankId, wrapId);
+            selectedTankItem.Highlight(true);
+        }
+        else Debug.LogWarning($"[SelectDefaultTank] Tank ID {selectedTankId} not found in tank items.");
+    }
+
+    private void ClearAllPlayerCards()
+    {
+        // Clear all player cards except the local player card
+        for (int i = 0; i < playerCards.Length; i++)
+        {
+            if (playerCards[i] != null)
+            {
+                playerCards[i].ClearInfo();
+            }
+        }
+    }
+
+    private void UpdateRule(int teamIndex = -1)
+    {
+        MatchmakingDocument matchmakingDocument = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        string defenderLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_Defender);
+        string attackerLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_Attacker);
+        string protectOutpostLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_ProtectOutpost);
+        string destroyOutpostLabel = GetStringByKey(LocKeys.UI_ChooseTank.UI_ChooseTank_DestroyOutpost);
+        string killEnemiesLabel = GetSmartStringByKey( matchmakingDocument.killsNeededToWin == 1 ? LocKeys.UI_ChooseTank.UI_ChooseTank_KillOne : LocKeys.UI_ChooseTank.UI_ChooseTank_KillEnemies,
+        new Dictionary<string, object>
+        {
+            { "Count", matchmakingDocument.KillsNeededToWin }
+        });
+
+        teamText.text = teamIndex == 0 ? defenderLabel : attackerLabel;
+        targetText.text = teamIndex == 0 ? protectOutpostLabel : destroyOutpostLabel;
+        killText.text = killEnemiesLabel;
+        targetIcon.sprite = teamIndex == 0 ? targetSprites[0] : targetSprites[1];
+        killIcon.sprite = teamIndex == 0 ? killSprites[0] : killSprites[1];
+    }
+
+    private void UpdatePlayerCard(ChooseTankBaseInfo playerData)
+    {
+        Debug.Log($"[UpdatePlayerCard]  IsLocalPlayer:{playerData.IsLocalPlayer}/ PlayerName:{playerData.PlayerName}/ TeammateIndex:{playerData.TeammateIndex}");
+        if (playerData.IsLocalPlayer)
+        {
+            OnTankSelected(playerData.TankId.ToString());
+            UpdateRule(localPlayerTeamIndex);
+            playerCards[0].gameObject.SetActive(true);
+            playerCards[0].SetInfo(playerData);
+        }
+        else
+        {
+            if (slotIndex >= playerCards.Length)
+                return;
+
+            Debug.Log($"[UpdatePlayerCard] slotIndex:{slotIndex} TeammateIndex:{playerData.TeammateIndex} localPlayerTeamIndex:{localPlayerTeamIndex}, PlayerIndex:{playerData.PlayerIndex}");
+            // Slot 0 is reserved for local player, teammates are 1..4
+            playerCards[slotIndex].gameObject.SetActive(true);
+            playerCards[slotIndex].SetInfo(playerData);
+            slotIndex++;
+        }
+    }
+
+    private void OnTankSelected(string tankId)
+    {
+        if (selectedTankItem != null)
+        {
+            selectedTankItem.Highlight(false);
+        }
+
+        selectedTankItem = tankItems.FirstOrDefault(item => item.TankId.Equals(tankId));
+        if (selectedTankItem != null)
+        {
+            selectedTankItem.Highlight(true);
+        }
+    }
+
+    private void OnUpdateCountdown(ChooseTankTimeEvent @event)
+    {
+         if (IsVisible == false) return;
+
+        countdownText.text = TimeSpan.FromSeconds(@event.Seconds).ToString(@"ss");
+    }
+
+    private void CreateTankItems()
+    {
+        TankCollection tankCollection = DatabaseManager.GetDB<TankCollection>();
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        var allTankDatas = tankCollection.CloneDocumentsByProperty(doc => doc.tankType != TankType.Outpost, true);
+        string mySelectedTankId = tankCollection.GetActiveTank().tankId;
+        foreach (var item in tankItems)
+        {
+            Destroy(item.gameObject);
+        }
+
+        tankItems = new ChooseTankItem[allTankDatas.Length];
+        for (int i = 0; i < allTankDatas.Length; i++)
+        {
+            var tankDocument = allTankDatas[i];
+            var tankItem = Instantiate(chooseTankItemPrefab, tankItemParent);
+            tankItem.gameObject.SetActive(true);
+            gameAssetCollection.GetAssets(tankDocument.tankId, out Sprite mainIcon, out Sprite previewIcon, out Sprite classIcon);
+            tankItem.Init(tankDocument.tankId, tankDocument.tankType, previewIcon, classIcon, ServerState.PICKING);
+            tankItem.SetCallback(onSelectTank);
+            tankItems[i] = tankItem;
+
+            if (selectedTankItem == null && tankDocument.tankId == mySelectedTankId)
+            {
+                selectedTankItem = tankItem;
+            }
+        }
+
+        chooseTankItemPrefab.gameObject.SetActive(false);
+    }
+
+    private string GetStringByKey(string key)
+    {
+        return LocalizationHelper.GetString(nameof(LocKeys.UI_ChooseTank), key);
+    }
+
+    private string GetSmartStringByKey(string key, Dictionary<string, object> variables)
+    {
+        return LocalizationHelper.GetSmartString(nameof(LocKeys.UI_ChooseTank), key, variables);
+    }
+}
+
+[Serializable]
+public struct ChooseTankBaseInfo : INetworkStruct
+{
+    public int TeammateIndex { get; set; }
+    public int PlayerIndex { get; set; }
+    public NetworkString<_32> PlayerName { get; set; }
+    public NetworkString<_32> TankId { get; set; }
+    public int PlayerId { get; set; }
+    public bool IsLocalPlayer { get; set; }
+}
+
+public struct ChooseTankTimeEvent
+{
+    public int Seconds { get; set; }
+}
+
+public struct PlayerUpdate
+{
+    public Player Player { get; set; }
+}
+
+public struct ChooseTankEvent{
+    public ServerState State { get; set; }
+}
+
+
+================================================================================
+FILE: Assets/_GameModules/LocalizationModule/Scripts/LanguageManager.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.Localization.Settings;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.Events;
+
+public class LanguageManager : MonoBehaviour, IInitializableManager
+{
+    [Header("Settings")]
+    [SerializeField] private string defaultLocaleCode = "en"; // Fallback language
+    [SerializeField] private bool autoDetectOnStart = true;
+    
+    [Header("Debug")]
+    [SerializeField] private bool showDebugLogs = true;
+
+    private const string PREF_KEY_LANGUAGE = "UserLanguage";
+    private bool isInitialized = false;
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    #region Lifecycle
+
+    private void Start()
+    {
+        RegisterEvents();
+    }
+    
+    public void Initialize()
+    {
+        if (autoDetectOnStart)
+        {
+            StartCoroutine(InitializeLanguageCoroutine());
+        }
+    }
+
+    private void OnDestroy()
+    {
+        UnregisterEvents();
+    }
+
+    #endregion
+
+    #region Event Management
+
+    private void RegisterEvents()
+    {
+        EventManager.Register<ChangeLanguageEvent>(OnChangeLanguage);
+    }
+
+    private void UnregisterEvents()
+    {
+        EventManager.Unregister<ChangeLanguageEvent>(OnChangeLanguage);
+    }
+
+    #endregion
+
+    #region Initialization
+
+    /// <summary>
+    /// Initialize language with priority: Saved > System > Default
+    /// </summary>
+    private IEnumerator InitializeLanguageCoroutine()
+    {
+        LogDebug("🌍 Initializing language system...");
+
+        // Wait for Localization system to be ready
+        yield return LocalizationSettings.InitializationOperation;
+
+        string targetLocaleCode = DetermineLanguage();
+        
+        yield return SetLanguageCoroutine(targetLocaleCode, true);
+        
+        isInitialized = true;
+        LogDebug($"✅ Language system initialized with: {targetLocaleCode}");
+        OnInitialized?.Invoke(true);
+    }
+
+    /// <summary>
+    /// Determine which language to use
+    /// Priority: Saved Preference > System Language > Default English
+    /// </summary>
+    private string DetermineLanguage()
+    {
+        // 1. Check saved preference
+        if (PlayerPrefs.HasKey(PREF_KEY_LANGUAGE))
+        {
+            string savedLanguage = PlayerPrefs.GetString(PREF_KEY_LANGUAGE);
+            if (IsLocaleAvailable(savedLanguage))
+            {
+                LogDebug($"📌 Using saved language: {savedLanguage}");
+                return savedLanguage;
+            }
+            else
+            {
+                LogDebug($"⚠️ Saved language '{savedLanguage}' not available");
+            }
+        }
+
+        // 2. Try system language
+        string systemLanguage = GetSystemLanguageCode();
+        if (IsLocaleAvailable(systemLanguage))
+        {
+            LogDebug($"🖥️ Using system language: {systemLanguage}");
+            return systemLanguage;
+        }
+        else
+        {
+            LogDebug($"⚠️ System language '{systemLanguage}' not available");
+        }
+
+        // 3. Fallback to default
+        LogDebug($"🔄 Falling back to default language: {defaultLocaleCode}");
+        return defaultLocaleCode;
+    }
+
+    /// <summary>
+    /// Get system language code (ISO 639-1 format)
+    /// </summary>
+    private string GetSystemLanguageCode()
+    {
+        SystemLanguage systemLang = Application.systemLanguage;
+        
+        // Map Unity's SystemLanguage to ISO 639-1 codes
+        Dictionary<SystemLanguage, string> languageMap = new Dictionary<SystemLanguage, string>
+        {
+            { SystemLanguage.English, "en" },
+            { SystemLanguage.Vietnamese, "vi" },
+            { SystemLanguage.Chinese, "zh" },
+            { SystemLanguage.ChineseSimplified, "zh-Hans" },
+            { SystemLanguage.ChineseTraditional, "zh-Hant" },
+            { SystemLanguage.Japanese, "ja" },
+            { SystemLanguage.Korean, "ko" },
+            { SystemLanguage.French, "fr" },
+            { SystemLanguage.German, "de" },
+            { SystemLanguage.Spanish, "es" },
+            { SystemLanguage.Russian, "ru" },
+            { SystemLanguage.Portuguese, "pt" },
+            { SystemLanguage.Italian, "it" },
+            { SystemLanguage.Thai, "th" },
+            { SystemLanguage.Indonesian, "id" },
+        };
+
+        if (languageMap.TryGetValue(systemLang, out string localeCode))
+        {
+            return localeCode;
+        }
+
+        LogDebug($"⚠️ Unknown system language: {systemLang}, using default");
+        return defaultLocaleCode;
+    }
+
+    /// <summary>
+    /// Check if locale is available in the project
+    /// </summary>
+    private bool IsLocaleAvailable(string localeCode)
+    {
+        if (string.IsNullOrEmpty(localeCode))
+            return false;
+
+        var locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
+        return locale != null;
+    }
+
+    #endregion
+
+    #region Language Change
+
+    /// <summary>
+    /// Event handler for language change requests
+    /// </summary>
+    public void OnChangeLanguage(ChangeLanguageEvent e)
+    {
+        if (!isInitialized)
+        {
+            Debug.LogWarning("⚠️ LanguageManager not initialized yet!");
+            return;
+        }
+
+        StartCoroutine(SetLanguageCoroutine(e.LocaleCode, false));
+    }
+
+    /// <summary>
+    /// Change language and save preference
+    /// </summary>
+    private IEnumerator SetLanguageCoroutine(string localeCode, bool isInitialSetup)
+    {
+        if (!isInitialSetup)
+        {
+            // Wait for Localization to be ready (if not already)
+            yield return LocalizationSettings.InitializationOperation;
+        }
+
+        var locale = LocalizationSettings.AvailableLocales.GetLocale(localeCode);
+
+        if (locale != null)
+        {
+            LocalizationSettings.SelectedLocale = locale;
+            
+            // Save preference (only if user manually changed)
+            if (!isInitialSetup)
+            {
+                PlayerPrefs.SetString(PREF_KEY_LANGUAGE, localeCode);
+                PlayerPrefs.Save();
+                LogDebug($"💾 Language preference saved: {localeCode}");
+            }
+
+            LogDebug($"✅ Language switched to: {locale.Identifier.Code}");
+            
+            // Fire event for other systems to react
+            EventManager.TriggerEvent(new LanguageChangedEvent(localeCode));
+        }
+        else
+        {
+            Debug.LogError($"❌ Locale '{localeCode}' not found! Available locales:");
+            PrintAvailableLocales();
+            
+            // Fallback to default if requested locale not found
+            if (localeCode != defaultLocaleCode)
+            {
+                LogDebug($"🔄 Falling back to default: {defaultLocaleCode}");
+                yield return SetLanguageCoroutine(defaultLocaleCode, isInitialSetup);
+            }
+        }
+    }
+
+    #endregion
+
+    #region Public API
+
+    /// <summary>
+    /// Get current language code
+    /// </summary>
+    public string GetCurrentLanguage()
+    {
+        if (LocalizationSettings.SelectedLocale != null)
+        {
+            return LocalizationSettings.SelectedLocale.Identifier.Code;
+        }
+        return defaultLocaleCode;
+    }
+
+    /// <summary>
+    /// Reset to system language
+    /// </summary>
+    public void ResetToSystemLanguage()
+    {
+        PlayerPrefs.DeleteKey(PREF_KEY_LANGUAGE);
+        PlayerPrefs.Save();
+        
+        StartCoroutine(InitializeLanguageCoroutine());
+    }
+
+    /// <summary>
+    /// Manually set language
+    /// </summary>
+    public void SetLanguage(string localeCode)
+    {
+        EventManager.TriggerEvent(new ChangeLanguageEvent(localeCode));
+    }
+
+    #endregion
+
+    #region Debug Helpers
+
+    private void LogDebug(string message)
+    {
+        if (showDebugLogs)
+        {
+            Debug.Log($"[LanguageManager] {message}");
+        }
+    }
+
+    private void PrintAvailableLocales()
+    {
+        if (!showDebugLogs) return;
+
+        var locales = LocalizationSettings.AvailableLocales.Locales;
+        Debug.Log($"📋 Available locales ({locales.Count}):");
+        
+        foreach (var locale in locales)
+        {
+            Debug.Log($"  - {locale.Identifier.Code} ({locale.LocaleName})");
+        }
+    }
+
+    [ContextMenu("Print Available Locales")]
+    private void DebugPrintLocales()
+    {
+        PrintAvailableLocales();
+    }
+
+    [ContextMenu("Reset Language Preference")]
+    private void DebugResetLanguage()
+    {
+        ResetToSystemLanguage();
+    }
+
+    [ContextMenu("Print Current Language")]
+    private void DebugPrintCurrentLanguage()
+    {
+        Debug.Log($"Current Language: {GetCurrentLanguage()}");
+    }
+
+    #endregion
+}
+
+#region Events
+
+public struct ChangeLanguageEvent
+{
+    public string LocaleCode;
+
+    public ChangeLanguageEvent(string localeCode)
+    {
+        LocaleCode = localeCode;
+    }
+}
+
+/// <summary>
+/// Fired when language actually changed
+/// </summary>
+public struct LanguageChangedEvent
+{
+    public string NewLocaleCode;
+
+    public LanguageChangedEvent(string newLocaleCode)
+    {
+        NewLocaleCode = newLocaleCode;
+    }
+}
+
+#endregion
+
+
+================================================================================
+FILE: Assets/_GameModules/GameDataModule/Scripts/UserDataCollectionBase.cs
+================================================================================
+
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Firebase.Firestore;
+using UnityEngine;
+
+[System.Serializable]
+public class UserDataCollectionBase<T> : CollectionBase<T> where T : IUserData
+{
+    [SerializeField] private string documentId;
+    private FirebaseFirestore db => FirestoreManager.Instance?.db;
+    
+    // Collection name based on the type T
+    private string CollectionName => $"{typeof(T).Name}";
+    
+    // Initialize with user ID
+    public void Initialize(string documentId)
+    {
+        this.documentId = documentId;
+        documents.Clear();
+        if (string.IsNullOrEmpty(this.documentId))
+        {
+            Debug.LogError($"UserDataCollectionBase<{typeof(T).Name}>: User ID cannot be null or empty");
+        }
+    }
+
+    public override async void Read()
+    {
+        await ReadAsync();
+    }
+
+    /// <summary>
+    /// Manual conversion from Firestore document to type T using custom converter factory or Newtonsoft.Json
+    /// </summary>
+    private T ManualConvertFromDocument(DocumentSnapshot document)
+    {
+        try
+        {
+            // Use factory for all IUserData types
+            var result = FirestoreDocumentConverterFactory.FromFirestoreData<T>(document);
+            if (result != null)
+            {
+                return result;
+            }
+
+            // Fallback: Convert the document data to a dictionary
+            var documentData = document.ToDictionary();
+            
+            // Use JsonConvert with lenient settings
+            var settings = new Newtonsoft.Json.JsonSerializerSettings
+            {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+                Error = (sender, args) => {
+                    Debug.LogWarning($"JsonConvert error: {args.ErrorContext.Error.Message}");
+                    args.ErrorContext.Handled = true; // Continue despite errors
+                }
+            };
+            
+            // Serialize the dictionary to JSON
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(documentData, settings);
+            
+            // Deserialize JSON to type T
+            T instance = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json, settings);
+            
+            return instance;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to manually convert document to {typeof(T).Name}: {ex.Message}");
+            return default(T);
+        }
+    }
+
+    /// <summary>
+    /// Manual conversion from type T to Dictionary for Firestore using custom converter factory or Newtonsoft.Json
+    /// </summary>
+    private Dictionary<string, object> ManualConvertToDocument(T item)
+    {
+        try
+        {
+            // Use factory for all IUserData types
+            var result = FirestoreDocumentConverterFactory.ToFirestoreData(item);
+            if (result != null && result.Count > 0)
+            {
+                return result;
+            }
+
+            // Fallback: Use JsonConvert with lenient settings
+            var settings = new Newtonsoft.Json.JsonSerializerSettings
+            {
+                NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                MissingMemberHandling = Newtonsoft.Json.MissingMemberHandling.Ignore,
+                Error = (sender, args) => {
+                    Debug.LogWarning($"JsonConvert error during serialization: {args.ErrorContext.Error.Message}");
+                    args.ErrorContext.Handled = true; // Continue despite errors
+                }
+            };
+            
+            // Serialize the object to JSON
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(item, settings);
+            
+            // Deserialize JSON to Dictionary
+            var dictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(json, settings);
+            
+            return dictionary ?? new Dictionary<string, object>();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to manually convert {typeof(T).Name} to document: {ex.Message}");
+            return new Dictionary<string, object>();
+        }
+    }
+
+    public override async void Write()
+    {
+         await WriteAsync();
+    }
+
+    /// <summary>
+    /// Delete a specific document by its ID
+    /// </summary>
+    /// <param name="documentId">The ID of the document to delete</param>
+    public async Task DeleteDocument(string documentId)
+    {
+        if (!ValidateFirestore()) return;
+
+        try
+        {
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            await docRef.DeleteAsync();
+
+            // Remove from local collection
+            documents.RemoveAll(d => d.ID == documentId);
+
+            Debug.Log($"Successfully deleted document {documentId} from Firestore for {typeof(T).Name} collection (User: {this.documentId})");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to delete document {documentId} from Firestore (User: {this.documentId}): {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Get a specific document by its ID
+    /// </summary>
+    /// <param name="documentId">The ID of the document to get</param>
+    /// <returns>The document if found, otherwise default(T)</returns>
+    public async Task<T> GetDocument(string documentId)
+    {
+        if (!ValidateFirestore()) return default(T);
+
+        try
+        {
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+
+            if (snapshot.Exists)
+            {
+                try
+                {
+                    // Try to convert using Firebase's built-in converter first
+                    return snapshot.ConvertTo<T>();
+                }
+                catch (System.Exception converterEx)
+                {
+                    // Fallback: Manual conversion using custom converter or Newtonsoft.Json
+                    Debug.LogWarning($"GetDocument Firebase converter failed for {typeof(T).Name}, using manual conversion: {converterEx.Message}");
+                    return ManualConvertFromDocument(snapshot);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Document {documentId} not found for {typeof(T).Name} collection (User: {this.documentId})");
+                return default(T);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error getting document {documentId} from Firestore (User: {this.documentId}): {ex.Message}");
+            return default(T);
+        }
+    }
+
+    /// <summary>
+    /// Check if a specific document exists by its ID
+    /// </summary>
+    /// <param name="documentId">The ID of the document to check</param>
+    /// <returns>True if the document exists, false otherwise</returns>
+    public async Task<bool> DocumentExists(string documentId)
+    {
+        if (!ValidateFirestore()) return false;
+
+        try
+        {
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            return snapshot.Exists;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error checking existence of document {documentId} in Firestore (User: {this.documentId}): {ex.Message}");
+            return false;
+        }
+    }
+
+    public override void Delete()
+    {
+        DeleteAsync();
+    }
+    
+    private bool ValidateFirestore()
+    {
+        if (db == null)
+        {
+            Debug.LogError($"FirestoreManager not initialized. Cannot perform Firestore operations for {typeof(T).Name} collection.");
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(documentId))
+        {
+            Debug.LogError($"User ID not set. Call Initialize(roleID) before using Firestore operations for {typeof(T).Name} collection.");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Async versions for better performance when you can use async/await
+    public override async Task ReadAsync()
+    {
+        if (!ValidateFirestore()) return;
+
+        try
+        {
+            // Directly fetch the specific document by its ID instead of querying all documents
+            CollectionReference collectionRef = db.Collection(CollectionName);
+            DocumentReference documentRef = collectionRef.Document(documentId);
+            DocumentSnapshot document = await documentRef.GetSnapshotAsync();
+
+            documents = new List<T>();
+
+            if (document.Exists)
+            {
+                // For known problematic types, skip Firebase converter and use custom converter directly
+                if (typeof(T) == typeof(PlayerDocument) || typeof(T) == typeof(UserDocument) || typeof(T) == typeof(PlayerSettingsDocument))
+                {
+                    Debug.Log($"ReadAsync Using custom converter for {typeof(T).Name} to avoid Firebase conversion issues");
+                    T item = ManualConvertFromDocument(document);
+                    if (item != null)
+                    {
+                        documents.Add(item);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        // Try to convert using Firebase's built-in converter first
+                        T item = document.ConvertTo<T>();
+                        documents.Add(item);
+                    }
+                    catch (System.Exception converterEx)
+                    {
+                        // Log detailed debug information
+                        FirestoreDebugHelper.LogConversionAttempt<T>(document, "ReadAsync", converterEx);
+                        
+                        // Fallback: Manual conversion using custom converter or Newtonsoft.Json
+                        Debug.LogWarning($"ReadAsync Firebase converter failed for {typeof(T).Name}, using manual conversion: {converterEx.Message}");
+                        T item = ManualConvertFromDocument(document);
+                        if (item != null)
+                        {
+                            documents.Add(item);
+                        }
+                    }
+                }
+            }
+
+            Debug.Log($"Successfully loaded {documents.Count} documents from Firestore for {typeof(T).Name} collection (User: {documentId})");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error loading {typeof(T).Name} collection from Firestore (User: {documentId}): {ex.Message}");
+            documents = new List<T>();
+            
+            // Fallback to base implementation (local file)
+            base.Read();
+        }
+    }
+
+    public override async Task WriteAsync()
+    {
+        if (!ValidateFirestore()) return;
+
+        if (documents == null || documents.Count == 0)
+        {
+            Debug.LogWarning($"No documents to save for {typeof(T).Name} collection (User: {documentId})");
+            return;
+        }
+
+        try
+        {
+            // Only save the user's specific document
+            if (documents.Count > 0)
+            {
+                T document = documents[0]; // Should only be one document for this user
+                
+                // Use the documentId as the Firestore document ID
+                DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+                
+                // For known problematic types, skip Firebase converter and use custom converter directly
+                if (typeof(T) == typeof(PlayerDocument) || typeof(T) == typeof(UserDocument) || typeof(T) == typeof(PlayerSettingsDocument))
+                {
+                    Debug.Log($"WriteAsync Using custom converter for {typeof(T).Name} to avoid Firebase conversion issues");
+                    var documentData = ManualConvertToDocument(document);
+                    await docRef.SetAsync(documentData);
+                }
+                else
+                {
+                    // Try to use Firebase's built-in converter first
+                    try
+                    {
+                        await docRef.SetAsync(document);
+                    }
+                    catch (System.Exception converterEx)
+                    {
+                        // Log detailed debug information
+                        FirestoreDebugHelper.LogWriteAttempt(document, "WriteAsync");
+                        
+                        // Fallback: Manual conversion using custom converter or Newtonsoft.Json
+                        Debug.LogWarning($"WriteAsync Firebase converter failed for {typeof(T).Name}, using manual conversion: {converterEx.Message}");
+                        var documentData = ManualConvertToDocument(document);
+                        await docRef.SetAsync(documentData);
+                    }
+                }
+            }
+
+            Debug.Log($"Successfully saved user document to Firestore for {typeof(T).Name} collection (User: {documentId})");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to save {typeof(T).Name} collection to Firestore (User: {documentId}): {ex.Message}");
+            
+            // Fallback to base implementation (local file)
+            base.Write();
+        }
+    }
+
+    public override async void DeleteAsync()
+    {
+        if (!ValidateFirestore()) return;
+
+        try
+        {
+            // Only delete the user's specific document
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            await docRef.DeleteAsync();
+
+            // Clear local data
+            documents = new List<T>();
+
+            Debug.Log($"Successfully deleted user document from Firestore for {typeof(T).Name} collection (User: {documentId})");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to delete {typeof(T).Name} collection from Firestore (User: {documentId}): {ex.Message}");
+
+            // Fallback to base implementation (local file)
+            base.Delete();
+        }
+    }
+
+    public override async void AddDocumentAsync(T document)
+    {
+        if (!ValidateFirestore()) return;
+
+        if (documents == null)
+        {
+            documents = new List<T>();
+        }
+        
+        // For user-specific collections, we should only have one document per user
+        // Replace any existing document with the new one
+        documents.Clear();
+        documents.Add(document);
+        UpdateTimestamp();
+        
+        try
+        {
+            // Save directly to the user's document
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            
+            // For known problematic types, skip Firebase converter and use custom converter directly
+            if (typeof(T) == typeof(PlayerDocument) || typeof(T) == typeof(UserDocument) || typeof(T) == typeof(PlayerSettingsDocument))
+            {
+                Debug.Log($"AddDocumentAsync Using custom converter for {typeof(T).Name} to avoid Firebase conversion issues");
+                var documentData = ManualConvertToDocument(document);
+                await docRef.SetAsync(documentData);
+            }
+            else
+            {
+                try
+                {
+                    await docRef.SetAsync(document);
+                }
+                catch (System.Exception converterEx)
+                {
+                    // Fallback: Manual conversion using custom converter or Newtonsoft.Json
+                    Debug.LogWarning($"AddDocumentAsync Firebase converter failed for {typeof(T).Name}, using manual conversion: {converterEx.Message}");
+                    var documentData = ManualConvertToDocument(document);
+                    await docRef.SetAsync(documentData);
+                }
+            }
+            
+            Debug.Log($"Successfully added user document to Firestore for {typeof(T).Name} collection (User: {documentId})");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to add document to {typeof(T).Name} collection in Firestore (User: {documentId}): {ex.Message}");
+        }
+    }
+    
+    public async Task UpdateDocumentAsync(T document)
+    {
+        //return;//closed for disable firebase
+
+        if (!ValidateFirestore()) return;
+        
+        try
+        {
+            // Check if the document already exists
+            DocumentReference docRef = db.Collection(CollectionName).Document(documentId);
+            DocumentSnapshot snapshot = await docRef.GetSnapshotAsync();
+            
+            if (snapshot.Exists)
+            {
+                // Document exists - update it
+                Debug.Log($"UpdateDocumentAsync Document exists, updating {typeof(T).Name} for user {documentId}");
+                
+                // Update local collection
+                var index = documents.FindIndex(d => d.ID.Equals(document.ID));
+                if (index >= 0)
+                {
+                    documents[index] = document;
+                }
+                else
+                {
+                    documents.Clear();
+                    documents.Add(document);
+                }
+                
+                UpdateTimestamp();
+                
+                // Update in Firestore
+                // For known problematic types, skip Firebase converter and use custom converter directly
+                if (typeof(T) == typeof(PlayerDocument) || typeof(T) == typeof(UserDocument) || typeof(T) == typeof(PlayerSettingsDocument))
+                {
+                    Debug.Log($"UpdateDocumentAsync Using custom converter for {typeof(T).Name} to avoid Firebase conversion issues");
+                    var documentData = ManualConvertToDocument(document);
+                    Debug.Log($"UpdateDocumentAsync Updating document data: {JsonUtility.ToJson(documentData)}");
+                    await docRef.SetAsync(documentData);
+                }
+                else
+                {
+                    try
+                    {
+                        await docRef.SetAsync(document);
+                    }
+                    catch (System.Exception converterEx)
+                    {
+                        // Fallback: Manual conversion using custom converter or Newtonsoft.Json
+                        Debug.LogWarning($"UpdateDocumentAsync Firebase converter failed for {typeof(T).Name}, using manual conversion: {converterEx.Message}");
+                        var documentData = ManualConvertToDocument(document);
+                        Debug.Log($"UpdateDocumentAsync Updating document data: {JsonUtility.ToJson(documentData)}");
+                        await docRef.SetAsync(documentData);
+                    }
+                }
+                
+                Debug.Log($"UpdateDocumentAsync Successfully updated document in Firestore for {typeof(T).Name} collection (User: {documentId})");
+            }
+            else
+            {
+                // Document doesn't exist - add new one
+                Debug.Log($"UpdateDocumentAsync Document doesn't exist, adding new {typeof(T).Name} for user {documentId}");
+                AddDocumentAsync(document);
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"UpdateDocumentAsync Failed to update document for {typeof(T).Name} collection in Firestore (User: {documentId}): {ex.Message}");
+        }
+    }
+}
+
+

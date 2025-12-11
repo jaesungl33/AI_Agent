@@ -17,9 +17,12 @@ from __future__ import annotations
 
 import sys
 import time
+import zipfile
+import tempfile
+import shutil
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, List, Union
+from typing import Optional, List, Union, Set
 import asyncio
 import logging
 
@@ -37,6 +40,7 @@ logging.basicConfig(
         logging.StreamHandler(sys.stdout),
     ]
 )
+logger = logging.getLogger(__name__)
 
 # Ensure project root is on PYTHONPATH so we can import existing modules later
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -57,9 +61,27 @@ from gdd_rag_backbone.rag_backend.chunk_qa import (  # type: ignore
 )
 from gdd_rag_backbone.gdd import (  # type: ignore
     extract_all_requirements,
-    evaluate_all_requirements,
+    evaluate_all_requirements_behavior,
 )
+from gdd_rag_backbone.gdd.behavior_indexing import BEHAVIOR_INDEX_CACHE_DIR
+from gdd_rag_backbone.workspace import WorkspaceManager, WorkspaceStorage  # type: ignore
 from gdd_rag_backbone.gdd.schemas import GddRequirement  # type: ignore
+
+ALLOWED_GDD_EXTS: Set[str] = {".pdf", ".docx", ".doc", ".txt", ".md"}
+ALLOWED_CODE_EXTS: Set[str] = {
+    ".cs",
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".py",
+    ".cpp",
+    ".cc",
+    ".c",
+    ".h",
+    ".hpp",
+    ".java",
+}
 
 
 app = FastAPI(title="GDD RAG Backend", version="0.1.0")
@@ -91,12 +113,187 @@ async def health() -> dict:
     return {"status": "ok", "time": datetime.utcnow().isoformat() + "Z"}
 
 
+# ============================================================================
+# Workspace Management Endpoints
+# ============================================================================
+
+class WorkspaceCreateRequest(BaseModel):
+    name: str
+    description: Optional[str] = ""
+    workspaceId: Optional[str] = None
+
+
+class WorkspaceUpdateRequest(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+@app.post("/workspaces")
+async def create_workspace(payload: WorkspaceCreateRequest) -> JSONResponse:
+    """Create a new workspace."""
+    try:
+        manager = WorkspaceManager()
+        workspace_id = manager.create_workspace(
+            name=payload.name,
+            description=payload.description or "",
+            workspace_id=payload.workspaceId,
+        )
+        workspace = manager.get_workspace(workspace_id)
+        if workspace:
+            return JSONResponse({
+                "id": workspace.id,
+                "name": workspace.name,
+                "description": workspace.description,
+                "created_at": workspace.created_at,
+            })
+        raise HTTPException(status_code=500, detail="Failed to create workspace")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"[Workspace] Create error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create workspace: {str(e)}")
+
+
+@app.get("/workspaces")
+async def list_workspaces() -> JSONResponse:
+    """List all workspaces."""
+    try:
+        manager = WorkspaceManager()
+        workspaces = manager.list_workspaces()
+        return JSONResponse([
+            {
+                "id": ws.id,
+                "name": ws.name,
+                "description": ws.description,
+                "created_at": ws.created_at,
+                "updated_at": ws.updated_at,
+                "stats": ws.stats,
+            }
+            for ws in workspaces
+        ])
+    except Exception as e:
+        logger.error(f"[Workspace] List error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to list workspaces: {str(e)}")
+
+
+@app.get("/workspaces/{workspace_id}")
+async def get_workspace(workspace_id: str) -> JSONResponse:
+    """Get workspace details."""
+    try:
+        manager = WorkspaceManager()
+        workspace = manager.get_workspace(workspace_id)
+        if not workspace:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        return JSONResponse({
+            "id": workspace.id,
+            "name": workspace.name,
+            "description": workspace.description,
+            "created_at": workspace.created_at,
+            "updated_at": workspace.updated_at,
+            "settings": workspace.settings,
+            "stats": workspace.stats,
+        })
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Get error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get workspace: {str(e)}")
+
+
+@app.put("/workspaces/{workspace_id}")
+async def update_workspace(workspace_id: str, payload: WorkspaceUpdateRequest) -> JSONResponse:
+    """Update workspace metadata."""
+    try:
+        manager = WorkspaceManager()
+        success = manager.update_workspace(
+            workspace_id,
+            name=payload.name,
+            description=payload.description,
+        )
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        workspace = manager.get_workspace(workspace_id)
+        return JSONResponse({
+            "id": workspace.id,
+            "name": workspace.name,
+            "description": workspace.description,
+            "updated_at": workspace.updated_at,
+        })
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Update error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to update workspace: {str(e)}")
+
+
+@app.delete("/workspaces/{workspace_id}")
+async def delete_workspace(workspace_id: str) -> JSONResponse:
+    """Delete a workspace and all its data."""
+    try:
+        manager = WorkspaceManager()
+        success = manager.delete_workspace(workspace_id)
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        return JSONResponse({"success": True, "message": f"Workspace '{workspace_id}' deleted"})
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Delete error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to delete workspace: {str(e)}")
+
+
+@app.post("/workspaces/{workspace_id}/set-default")
+async def set_default_workspace(workspace_id: str) -> JSONResponse:
+    """Set a workspace as the default."""
+    try:
+        manager = WorkspaceManager()
+        manager.set_default_workspace(workspace_id)
+        return JSONResponse({"success": True, "default_workspace": workspace_id})
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"[Workspace] Set default error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to set default workspace: {str(e)}")
+
+
+@app.get("/workspaces/default")
+async def get_default_workspace() -> JSONResponse:
+    """Get the default workspace ID."""
+    try:
+        manager = WorkspaceManager()
+        default_id = manager.get_default_workspace()
+        if not default_id:
+            return JSONResponse({"default_workspace": None})
+        workspace = manager.get_workspace(default_id)
+        if workspace:
+            return JSONResponse({
+                "default_workspace": default_id,
+                "name": workspace.name,
+            })
+        return JSONResponse({"default_workspace": None})
+    except Exception as e:
+        logger.error(f"[Workspace] Get default error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get default workspace: {str(e)}")
+
+
+# ============================================================================
+# Workspace-Scoped Document Endpoints
+# ============================================================================
+
 @app.get("/documents")
-async def list_documents() -> JSONResponse:
+async def list_documents(workspaceId: Optional[str] = None) -> JSONResponse:
     """
-    Return all indexed documents from the RAG status store.
+    Return all indexed documents (backward compatible).
+    Uses default workspace if workspaceId not provided.
     """
-    status = load_doc_status()
+    # Use workspace_id if provided, otherwise use default
+    if workspaceId:
+        workspace_id = workspaceId
+    else:
+        manager = WorkspaceManager()
+        workspace_id = manager.get_default_workspace()
+    
+    status = load_doc_status(workspace_id=workspace_id)
     documents = []
 
     for doc_id, meta in status.items():
@@ -159,15 +356,89 @@ async def list_documents() -> JSONResponse:
     return JSONResponse(documents)
 
 
+@app.get("/workspaces/{workspace_id}/documents")
+async def list_workspace_documents(workspace_id: str) -> JSONResponse:
+    """
+    Return all indexed documents from a workspace.
+    """
+    # Verify workspace exists
+    manager = WorkspaceManager()
+    if not manager.workspace_exists(workspace_id):
+        raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    
+    status = load_doc_status(workspace_id=workspace_id)
+    documents = []
+
+    for doc_id, meta in status.items():
+        file_path = meta.get("file_path", "")
+        file_name = meta.get("file_name") or Path(file_path).name or doc_id
+
+        # Normalize document type
+        raw_type = (meta.get("doc_type") or "").lower()
+        if raw_type in {"code", "gdd"}:
+            doc_type = raw_type
+        elif doc_id.startswith("code_"):
+            doc_type = "code"
+        elif doc_id.startswith("tank_online_codebase_batch"):
+            doc_type = "code"
+        else:
+            doc_type = "gdd"
+
+        # Normalize status
+        raw_status = (meta.get("status") or "").lower()
+        if raw_status in {"indexed", "processed"}:
+            norm_status = "indexed"
+        elif raw_status in {"uploading", "indexing"}:
+            norm_status = "indexing"
+        elif raw_status in {"error", "failed"}:
+            norm_status = "error"
+        elif raw_status == "uploaded":
+            norm_status = "uploaded"
+        else:
+            norm_status = "indexed"
+
+        chunks = meta.get("chunks_list") or meta.get("chunks") or []
+
+        documents.append(
+            {
+                "id": doc_id,
+                "name": file_name,
+                "type": doc_type,
+                "filePath": file_path,
+                "status": norm_status,
+                "indexedAt": meta.get("updated_at") or meta.get("created_at"),
+                "chunksCount": len(chunks),
+            }
+        )
+
+    documents.sort(key=lambda doc: doc["id"])
+    return JSONResponse(documents)
+
+
 @app.post("/documents/gdd")
 async def upload_gdd(
     file: UploadFile = File(...),
     docId: Optional[str] = Form(default=None),
+    workspaceId: Optional[str] = Form(default=None),
 ) -> JSONResponse:
     """
-    Upload and index a GDD document using the existing RAG pipeline.
+    Upload and index a GDD document (backward compatible).
+    Uses default workspace if workspaceId not provided.
     """
-    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    # Get workspace
+    manager = WorkspaceManager()
+    if workspaceId:
+        workspace_id = workspaceId
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+    
+    storage = WorkspaceStorage(workspace_id)
+    docs_dir = storage.get_documents_dir("gdd")
+    docs_dir.mkdir(parents=True, exist_ok=True)
 
     # Determine doc_id
     if docId and docId.strip():
@@ -175,9 +446,9 @@ async def upload_gdd(
     else:
         doc_id = Path(file.filename).stem.replace(" ", "_")
 
-    # Save file to docs/
+    # Save file to workspace documents/
     suffix = Path(file.filename).suffix or ".pdf"
-    target_path = DEFAULT_DOCS_DIR / f"{doc_id}{suffix}"
+    target_path = docs_dir / f"{doc_id}{suffix}"
     contents = await file.read()
     target_path.write_bytes(contents)
     status: str = "uploaded"
@@ -194,6 +465,7 @@ async def upload_gdd(
             doc_id=doc_id,
             llm_func=llm_func,
             embedding_func=embedding_func,
+            workspace_id=workspace_id,
         )
         status = "indexed"
         message = f'File "{file.filename}" saved and indexed as "{target_path.name}".'
@@ -207,23 +479,168 @@ async def upload_gdd(
     return JSONResponse(
         {
             "docId": doc_id,
+            "workspaceId": workspace_id,
             "status": status,
             "message": message,
         }
     )
 
 
+@app.post("/documents/gdd/batch")
+async def upload_gdd_batch(
+    files: List[UploadFile] = File(...),
+) -> JSONResponse:
+    """
+    Upload multiple GDD files at once.
+    Each file is saved and indexed individually.
+    """
+    if not files:
+        raise HTTPException(status_code=400, detail="No files uploaded.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+
+    results = []
+    for file in files:
+        doc_id = Path(file.filename).stem.replace(" ", "_")
+        suffix = Path(file.filename).suffix or ".pdf"
+        target_path = DEFAULT_DOCS_DIR / f"{doc_id}{suffix}"
+        try:
+            contents = await file.read()
+            target_path.write_bytes(contents)
+
+            status = "uploaded"
+            message = f'File "{file.filename}" saved as "{target_path.name}".'
+
+            try:
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=doc_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'File "{file.filename}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = (
+                    f'File "{file.filename}" was saved as "{target_path.name}", '
+                    f"but indexing failed: {exc}"
+                )
+
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": status,
+                    "message": message,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": "error",
+                    "message": f'Failed to save "{file.filename}": {exc}',
+                }
+            )
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+@app.post("/documents/gdd/archive")
+async def upload_gdd_archive(
+    file: UploadFile = File(...),
+) -> JSONResponse:
+    """
+    Upload a ZIP archive of GDD files and index each allowed document inside.
+    Allowed extensions: .pdf, .docx, .doc, .txt, .md
+    """
+    if not file.filename.lower().endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Only ZIP archives are supported for GDD archive upload.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+
+    temp_dir = Path(tempfile.mkdtemp(prefix="gdd_archive_"))
+    results = []
+    try:
+        archive_path = temp_dir / file.filename
+        archive_path.write_bytes(await file.read())
+
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            zf.extractall(temp_dir)
+
+        # Walk extracted files
+        for path in temp_dir.rglob("*"):
+            if path.is_dir():
+                continue
+            ext = path.suffix.lower()
+            if ext not in ALLOWED_GDD_EXTS:
+                continue
+
+            doc_id = path.stem.replace(" ", "_")
+            target_path = DEFAULT_DOCS_DIR / f"{doc_id}{ext}"
+            try:
+                shutil.copy2(path, target_path)
+                status = "uploaded"
+                message = f'File "{path.name}" saved as "{target_path.name}".'
+
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=doc_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'File "{path.name}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = f'File "{path.name}" was saved but indexing failed: {exc}'
+
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": status,
+                    "message": message,
+                }
+            )
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
 @app.post("/documents/code")
 async def upload_code(
     file: UploadFile = File(...),
     indexId: Optional[str] = Form(default=None),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+    workspaceId: Optional[str] = Form(default=None),
 ) -> JSONResponse:
     """
-    Upload a game code archive (e.g. ZIP).
-
-    Currently just saves the file to `docs/` as a placeholder.
+    Upload a game code archive (e.g. ZIP) and index it for coverage/behaviors.
+    Supports workspace context.
     """
-    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    # Get workspace
+    manager = WorkspaceManager()
+    if workspaceId:
+        workspace_id = workspaceId
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+    
+    storage = WorkspaceStorage(workspace_id)
+    docs_dir = storage.get_documents_dir("code")
+    docs_dir.mkdir(parents=True, exist_ok=True)
 
     if indexId and indexId.strip():
         idx_id = indexId.strip()
@@ -231,18 +648,208 @@ async def upload_code(
         idx_id = Path(file.filename).stem.replace(" ", "_")
 
     suffix = Path(file.filename).suffix or ".zip"
-    target_path = DEFAULT_DOCS_DIR / f"{idx_id}{suffix}"
+    target_path = docs_dir / f"{idx_id}{suffix}"
     contents = await file.read()
     target_path.write_bytes(contents)
+
+    status = "uploaded"
+    message = f'Code file "{file.filename}" saved as "{target_path.name}".'
+
+    # Index the code archive so it becomes a code document with chunks
+    try:
+        provider = QwenProvider()
+        llm_func = make_llm_model_func(provider)
+        embedding_func = make_embedding_func(provider)
+
+        await indexing.index_document(
+            doc_path=target_path,
+            doc_id=idx_id,
+            llm_func=llm_func,
+            embedding_func=embedding_func,
+            workspace_id=workspace_id,
+        )
+        status = "indexed"
+        message = f'Code file "{file.filename}" saved and indexed as "{target_path.name}".'
+    except Exception as exc:  # pragma: no cover
+        status = "error"
+        message = (
+            f'Code file "{file.filename}" was saved as "{target_path.name}", '
+            f"but indexing failed: {exc}"
+        )
+
+    # Optionally clear cached behavior index for this code id so next coverage rebuilds it
+    if rebuildBehaviorIndex:
+        cache_path = storage.get_behavior_cache_dir() / f"{idx_id}_behaviors.json"
+        try:
+            if cache_path.exists():
+                cache_path.unlink()
+                logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+        except Exception as exc:
+            logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
 
     return JSONResponse(
         {
             "indexId": idx_id,
-            "status": "uploaded",
-            "message": f'Code file "{file.filename}" saved as "{target_path.name}". (Indexing not yet implemented.)',
+            "workspaceId": workspace_id,
+            "status": status,
+            "message": message,
             "batchCount": 1,
+            "rebuildBehaviorIndex": rebuildBehaviorIndex,
         }
     )
+
+
+@app.post("/documents/code/batch")
+async def upload_code_batch(
+    files: List[UploadFile] = File(...),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+) -> JSONResponse:
+    """
+    Upload multiple code files/archives at once.
+    Saves them to docs/ and indexes each for coverage/behaviors.
+    """
+    if not files:
+        raise HTTPException(status_code=400, detail="No files uploaded.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    results = []
+
+    for file in files:
+        idx_id = Path(file.filename).stem.replace(" ", "_")
+        suffix = Path(file.filename).suffix or ".zip"
+        target_path = DEFAULT_DOCS_DIR / f"{idx_id}{suffix}"
+        try:
+            contents = await file.read()
+            target_path.write_bytes(contents)
+
+            status = "uploaded"
+            message = f'Code file "{file.filename}" saved as "{target_path.name}".'
+
+            try:
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=idx_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'Code file "{file.filename}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = (
+                    f'Code file "{file.filename}" was saved as "{target_path.name}", '
+                    f"but indexing failed: {exc}"
+                )
+
+            if rebuildBehaviorIndex:
+                cache_path = BEHAVIOR_INDEX_CACHE_DIR / f"{idx_id}_behaviors.json"
+                try:
+                    if cache_path.exists():
+                        cache_path.unlink()
+                        logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+                except Exception as exc:
+                    logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
+
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "status": status,
+                    "message": message,
+                    "batchCount": 1,
+                    "rebuildBehaviorIndex": rebuildBehaviorIndex,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "status": "error",
+                    "message": f'Failed to save "{file.filename}": {exc}',
+                }
+            )
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+@app.post("/documents/code/archive")
+async def upload_code_archive(
+    file: UploadFile = File(...),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+) -> JSONResponse:
+    """
+    Upload a ZIP archive of code files. Allowed extensions mirror code behavior indexing.
+    Each allowed file is saved and indexed individually under docs/.
+    """
+    if not file.filename.lower().endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Only ZIP archives are supported for code archive upload.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    temp_dir = Path(tempfile.mkdtemp(prefix="code_archive_"))
+    results = []
+    try:
+        archive_path = temp_dir / file.filename
+        archive_path.write_bytes(await file.read())
+
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            zf.extractall(temp_dir)
+
+        for path in temp_dir.rglob("*"):
+            if path.is_dir():
+                continue
+            ext = path.suffix.lower()
+            if ext not in ALLOWED_CODE_EXTS:
+                continue
+
+            idx_id = path.stem.replace(" ", "_")
+            target_path = DEFAULT_DOCS_DIR / f"{idx_id}{ext}"
+            try:
+                shutil.copy2(path, target_path)
+
+                status = "uploaded"
+                message = f'Code file "{path.name}" saved as "{target_path.name}".'
+
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=idx_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'Code file "{path.name}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = f'Code file "{path.name}" was saved but indexing failed: {exc}'
+
+            if rebuildBehaviorIndex:
+                cache_path = BEHAVIOR_INDEX_CACHE_DIR / f"{idx_id}_behaviors.json"
+                try:
+                    if cache_path.exists():
+                        cache_path.unlink()
+                        logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+                except Exception as exc:
+                    logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
+
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "status": status,
+                    "message": message,
+                    "batchCount": 1,
+                    "rebuildBehaviorIndex": rebuildBehaviorIndex,
+                }
+            )
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    return JSONResponse({"uploaded": len(results), "results": results})
 
 
 @app.get("/gdd/{doc_id}/summary")
@@ -299,6 +906,7 @@ class CoverageEvaluateRequest(BaseModel):
     docId: Union[str, List[str]]  # Single GDD or list of GDDs to extract requirements from
     codeIndexId: Union[str, List[str]]  # Single code index or list of code indices (all batches)
     topK: Optional[int] = 8
+    workspaceId: Optional[str] = None  # Workspace ID (uses default if not provided)
 
 
 @app.post("/coverage/evaluate")
@@ -318,10 +926,23 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
     import logging
     logger = logging.getLogger(__name__)
     
+    start_time = time.time()
     try:
         logger.info(f"[Coverage] Starting evaluation: docId={payload.docId}, codeIndexId={payload.codeIndexId}, topK={payload.topK}")
         
-        status = load_doc_status()
+        # Get workspace
+        manager = WorkspaceManager()
+        if payload.workspaceId:
+            workspace_id = payload.workspaceId
+            if not manager.workspace_exists(workspace_id):
+                raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        else:
+            workspace_id = manager.get_default_workspace()
+            if not workspace_id:
+                raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+        
+        storage = WorkspaceStorage(workspace_id)
+        status = load_doc_status(workspace_id=workspace_id)
         
         # Normalize to lists
         gdd_ids = payload.docId if isinstance(payload.docId, list) else [payload.docId]
@@ -449,18 +1070,22 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
         
         logger.info(f"[Coverage] Evaluating {len(requirements)} requirements against {len(code_indices)} code batch(es)")
         
-        # Step 2: Evaluate each requirement against the ENTIRE codebase (all batches)
-        # Use the first GDD ID for report naming, but search across all code batches
+        # Step 2: Evaluate via behavior-based pipeline (with cached behavior index)
         primary_gdd_id = gdd_ids[0]
         try:
-            report_path = await evaluate_all_requirements(
+            # Use workspace-scoped report directory
+            reports_dir = storage.get_reports_dir() / "coverage_checks"
+            report_path = await evaluate_all_requirements_behavior(
                 primary_gdd_id,
                 code_indices,  # Pass all code batches
                 requirements,
+                output_dir=reports_dir,
                 provider=provider,
                 top_k=payload.topK or 8,
+                use_behavior_index_cache=True,
+                workspace_id=workspace_id,
             )
-            logger.info(f"[Coverage] Evaluation complete, report saved to: {report_path}")
+            logger.info(f"[Coverage] Behavior evaluation complete, report saved to: {report_path}")
         except Exception as e:
             logger.error(f"[Coverage] Evaluation failed: {e}", exc_info=True)
             raise HTTPException(
@@ -468,20 +1093,19 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
                 detail=f"Evaluation failed: {str(e)}. Check logs for details."
             )
         
-        # Step 3: Load and format the report
+        # Step 3: Load behavior report and map to frontend format
         try:
             report_data = json.loads(report_path.read_text())
             results = report_data.get("results", [])
             if not results:
-                logger.warning(f"[Coverage] Report file exists but contains no results")
+                logger.warning(f"[Coverage] Behavior report exists but contains no results")
         except Exception as e:
-            logger.error(f"[Coverage] Failed to load report: {e}")
+            logger.error(f"[Coverage] Failed to load behavior report: {e}")
             raise HTTPException(
                 status_code=500,
                 detail=f"Failed to load evaluation report: {str(e)}"
             )
         
-        # Convert to frontend format
         coverage_results = []
         implemented_count = 0
         partially_implemented_count = 0
@@ -493,7 +1117,6 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
                 req_id = result.get("requirement_id", "")
                 status_val = result.get("status", "error")
                 
-                # Find the original requirement for name/type
                 req = next((r for r in requirements if r.id == req_id), None)
                 item_name = req.title if req else req_id or "Unknown"
                 item_type = "requirement"
@@ -507,32 +1130,60 @@ async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
                 else:
                     error_count += 1
                 
-                evidence = result.get("evidence", [])
-                retrieved_chunks = result.get("retrieved_chunks", [])
-                
+                reason = result.get("reason") or result.get("llm_reason") or ""
+                best_match = result.get("best_match")
+                missing_triggers = result.get("missing_triggers") or []
+                missing_effects = result.get("missing_effects") or []
+                gaps = []
+                if missing_triggers:
+                    gaps.append(f"Missing triggers: {', '.join(missing_triggers)}")
+                if missing_effects:
+                    gaps.append(f"Missing effects: {', '.join(missing_effects)}")
+
+                evidence: list[dict] = []
+                if reason or best_match:
+                    msg = reason or ""
+                    if best_match:
+                        msg = f"{msg} (best match: {best_match})" if msg else f"Best match: {best_match}"
+                    evidence.append({"file": None, "reason": msg})
+                for gap in gaps:
+                    evidence.append({"file": None, "reason": gap})
+
+                top_matches = result.get("top_matches") or []
+                retrieved_chunks = [
+                    {
+                        "chunkId": tm.get("symbol", "") or "",
+                        "content": "",
+                        "score": float(tm.get("similarity", 0.0)),
+                        "filePath": None,
+                    }
+                    for tm in top_matches
+                ]
+
                 coverage_results.append({
                     "itemId": req_id or f"unknown_{len(coverage_results)}",
                     "itemType": item_type,
                     "itemName": item_name,
                     "status": status_val,
-                    "evidence": evidence if isinstance(evidence, list) else [],
-                    "retrievedChunks": [
+                    "evidence": evidence,
+                    "retrievedChunks": retrieved_chunks,
+                    "topMatches": [
                         {
-                            "chunkId": str(chunk.get("chunk_id", "")),
-                            "content": str(chunk.get("content", "")),
-                            "score": float(chunk.get("score", 0.0)),
-                            "filePath": chunk.get("file_path"),
+                            "symbol": tm.get("symbol", ""),
+                            "similarity": float(tm.get("similarity", 0.0)),
+                            "description": tm.get("description"),
                         }
-                        for chunk in (retrieved_chunks if isinstance(retrieved_chunks, list) else [])
+                        for tm in top_matches
                     ],
+                    "missingTriggers": missing_triggers,
+                    "missingEffects": missing_effects,
                 })
             except Exception as e:
-                logger.warning(f"[Coverage] Error processing result: {e}")
+                logger.warning(f"[Coverage] Error processing behavior result: {e}")
                 error_count += 1
                 continue
         
         now = datetime.utcnow().isoformat() + "Z"
-        # Format IDs for display
         gdd_id_display = ", ".join(gdd_ids) if len(gdd_ids) > 1 else gdd_ids[0]
         code_id_display = ", ".join(code_indices) if len(code_indices) > 1 else code_indices[0]
         report = {

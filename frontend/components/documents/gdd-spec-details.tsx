@@ -11,6 +11,11 @@ interface GddSpecDetailsProps {
 export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
   if (!spec) return null
 
+  const requirements = spec.requirements ?? []
+  const systems = spec.systems ?? []
+  const objects = spec.objects ?? []
+  const logicRules = spec.logicRules ?? []
+
   return (
     <div className="space-y-4">
 
@@ -20,10 +25,10 @@ export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
           <CardDescription>Detailed requirements extracted from the GDD</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          {spec.requirements.length === 0 && (
+          {requirements.length === 0 && (
             <p className="text-sm text-muted-foreground">No requirements extracted yet.</p>
           )}
-          {spec.requirements.slice(0, 25).map((req) => (
+          {requirements.slice(0, 25).map((req) => (
             <div key={req.id} className="p-3 rounded-lg border">
               <div className="flex items-center justify-between gap-2">
                 <p className="font-medium">{req.title || req.id}</p>
@@ -43,9 +48,9 @@ export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
               )}
             </div>
           ))}
-          {spec.requirements.length > 25 && (
+          {requirements.length > 25 && (
             <p className="text-xs text-muted-foreground">
-              Showing first 25 of {spec.requirements.length} requirements.
+              Showing first 25 of {requirements.length} requirements.
             </p>
           )}
         </CardContent>
@@ -57,10 +62,10 @@ export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
           <CardDescription>Gameplay systems defined in the GDD</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          {spec.systems.length === 0 && (
+          {systems.length === 0 && (
             <p className="text-sm text-muted-foreground">No systems extracted.</p>
           )}
-          {spec.systems.map((system) => (
+          {systems.map((system) => (
             <div key={system.id} className="p-3 rounded-lg border">
               <p className="font-medium">{system.name}</p>
               {system.description && (
@@ -80,10 +85,10 @@ export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
           <CardDescription>Core objects, tanks, and props defined in the GDD</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          {spec.objects.length === 0 && (
+          {objects.length === 0 && (
             <p className="text-sm text-muted-foreground">No objects extracted.</p>
           )}
-          {spec.objects.map((object) => (
+          {objects.map((object) => (
             <div key={object.id} className="p-3 rounded-lg border">
               <div className="flex items-center gap-2">
                 <p className="font-medium">{object.name}</p>
@@ -112,10 +117,10 @@ export function GddSpecDetails({ spec }: GddSpecDetailsProps) {
           <CardDescription>Conditional rules or interactions discovered in the GDD</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
-          {spec.logicRules.length === 0 && (
+          {logicRules.length === 0 && (
             <p className="text-sm text-muted-foreground">No logic rules extracted.</p>
           )}
-          {spec.logicRules.map((rule) => (
+          {logicRules.map((rule) => (
             <div key={rule.id} className="p-3 rounded-lg border">
               <p className="font-medium">{rule.summary}</p>
               {rule.description && (

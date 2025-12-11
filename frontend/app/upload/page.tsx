@@ -2,11 +2,11 @@
 
 import { LayoutWithSidebar } from "../layout-with-sidebar"
 import { WorkspaceSetup } from "@/components/workspace-setup"
-import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useWorkspace } from "@/lib/contexts/workspace-context"
 
 export default function UploadPage() {
-  const [workspaceId] = useState("default")
+  const { currentWorkspace } = useWorkspace()
   const router = useRouter()
 
   const handleGDDUploaded = (docId: string) => {
@@ -27,11 +27,17 @@ export default function UploadPage() {
             Upload your Game Design Documents and codebase for analysis
           </p>
         </div>
-        <WorkspaceSetup
-          workspaceId={workspaceId}
-          onGDDUploaded={handleGDDUploaded}
-          onCodeUploaded={handleCodeUploaded}
-        />
+        {currentWorkspace ? (
+          <WorkspaceSetup
+            workspaceId={currentWorkspace.id}
+            onGDDUploaded={handleGDDUploaded}
+            onCodeUploaded={handleCodeUploaded}
+          />
+        ) : (
+          <div className="text-center py-12 text-muted-foreground">
+            <p>Please select or create a workspace first</p>
+          </div>
+        )}
       </div>
     </LayoutWithSidebar>
   )

@@ -7,11 +7,14 @@
 export interface Workspace {
   id: string
   name: string
-  createdAt: string
-  updatedAt: string
-  gddDocId?: string
-  codeIndexId?: string
-  status: WorkspaceStatus
+  description?: string
+  createdAt?: string
+  updatedAt?: string
+  stats?: {
+    documents?: number
+    gdds?: number
+    codeFiles?: number
+  }
 }
 
 export type WorkspaceStatus = 
@@ -115,6 +118,9 @@ export interface CoverageResult {
   status: "implemented" | "partially_implemented" | "not_implemented" | "error"
   evidence: Evidence[]
   retrievedChunks: CodeChunk[]
+  topMatches?: TopMatch[]
+  missingTriggers?: string[]
+  missingEffects?: string[]
 }
 
 export interface Evidence {
@@ -127,6 +133,12 @@ export interface CodeChunk {
   content: string
   score: number
   filePath?: string
+}
+
+export interface TopMatch {
+  symbol: string
+  similarity: number
+  description?: string
 }
 
 // Chat Types
@@ -158,6 +170,7 @@ export interface UploadGDDResponse {
 export interface UploadCodeRequest {
   file: File | Blob // zip file
   indexId?: string
+  rebuildBehaviorIndex?: boolean
 }
 
 export interface UploadCodeResponse {
@@ -169,6 +182,7 @@ export interface UploadCodeResponse {
 
 export interface CreateWorkspaceRequest {
   name: string
+  description?: string
 }
 
 export interface CreateWorkspaceResponse {

@@ -1,0 +1,6002 @@
+# Code Snapshot for tank_online_1-dev - Batch 12/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 50
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 551/682: Assets/_GameModules/TankFusionModule/Scripts/Effects/TargetMarker.cs
+================================================================================
+
+namespace Fusion.TankOnlineModule
+{
+	public class TargetMarker : AutoReleasedFx
+	{
+		protected override float Duration => 2.0f;
+	}
+}
+
+
+================================================================================
+FILE 552/682: Assets/_GameModules/TankFusionModule/Scripts/GamePlayDataEvent.cs
+================================================================================
+
+using Fusion;
+
+public struct GamePlayDataEvent : INetworkStruct
+{
+    public int totalKillTeam1 { get; set; }
+    public int totalKillTeam2 { get; set; }
+    public int targetToWin { get; set; }
+}
+
+public struct GameOverEvent : INetworkStruct
+{
+    public int winningTeam { get; set; }
+}
+
+public struct GamePlayOutpostEvent : INetworkStruct
+{
+}
+
+public struct GamePlayDeathEvent : INetworkStruct
+{
+}
+
+
+================================================================================
+FILE 553/682: Assets/_GameModules/TankFusionModule/Scripts/GameServer.cs
+================================================================================
+
+using UnityEngine;
+using FusionHelpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using Fusion.GameSystems;
+using Fusion;
+
+namespace Fusion.TankOnlineModule
+{
+	public class GameServer : FusionSession
+	{
+		public static GameServer Instance { get; private set; }
+		[Networked, Capacity(10)] private NetworkArray<PlayerStats> allPlayerStates => default;
+		[Networked, Capacity(10)] private NetworkDictionary<PlayerRef, int> teamReadyStates => default;
+		[Networked] private TickTimer PassiveCurrencyTimer { get; set; }
+		[Networked] private TickTimer CheckGameOverTimer { get; set; }
+		public Player lastPlayerStanding { get; set; }
+		public List<string> TurretsAlive { get; private set; } = new();
+		[SerializeField] private PingDebug pingDebug;
+		private RenderTexture renderTexture;
+		[SerializeField] private GameObject pickingTimerPrefab, gameTimerPrefab;
+		public override void Spawned()
+		{
+			Instance = this;
+			Runner.RegisterSingleton(this);
+			base.Spawned();
+
+			ResetOutpost();
+			RegisterEvents();
+			pingDebug.SetRunner(Runner);
+			ChangeStateByMaster(ServerState.MATCH_FINDING);
+			CheckGameOverTimer = TickTimer.CreateFromSeconds(Runner, 0.3f);
+		}
+
+		public override void Despawned(NetworkRunner runner, bool hasState)
+		{
+			pingDebug.SetRunner(null);
+			Debug.Log("CoreGamePlay Despawned called");
+			UnRegisterEvents();
+			if (runner != null && runner.IsRunning)
+				runner.UnregisterSingleton(this);
+			base.Despawned(runner, hasState);
+		}
+
+		public override void FixedUpdateNetwork()
+		{
+			base.FixedUpdateNetwork();
+			if (Runner.IsSharedModeMasterClient && CurrentPlayState == ServerState.LEVEL && PassiveCurrencyTimer.ExpiredOrNotRunning(Runner))
+			{
+				RPC_MasterAddGoldState(matchmakingDocument.GoldPerSecond);
+				PassiveCurrencyTimer = TickTimer.CreateFromSeconds(Runner, 1);
+
+			}
+
+			if (Runner.IsSharedModeMasterClient && CurrentPlayState == ServerState.LEVEL && CheckGameOverTimer.ExpiredOrNotRunning(Runner))
+			{
+				OnConditionsChecking();
+				CheckGameOverTimer = TickTimer.CreateFromSeconds(Runner, 0.3f);
+			}
+		}
+
+		[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+		public void RPC_SetReady(PlayerRef playerRef)
+		{
+			Debug.Log($"2[RPC_SetReady] Player {playerRef} is ready.");
+			if (!Object.HasStateAuthority) return;
+
+			if (playerRef == PlayerRef.None) return;
+
+			teamReadyStates.Add(playerRef, 1);
+
+			// Check if all players are ready
+			bool allReady = true;
+
+			if (teamReadyStates.Count < Runner.ActivePlayers.Count())
+			{
+				allReady = false;
+			}
+
+			foreach (var state in teamReadyStates)
+			{
+				if (state.Value == 0)
+				{
+					allReady = false;
+					break;
+				}
+			}
+
+			if (allReady)
+			{
+				Debug.Log("[RPC_SetReady] All players are ready. Starting the game...");
+				EventManager.TriggerEvent(new ServerStateEvent { NewState = ServerState.PICKING });
+			}
+		}
+
+		public void AddPickingTimer()
+		{
+			if (Object.HasStateAuthority && Runner.IsSharedModeMasterClient)
+			{
+				Runner.Spawn(pickingTimerPrefab);
+			}
+		}
+
+		public void AddGameTimer()
+		{
+			if (Object.HasStateAuthority && Runner.IsSharedModeMasterClient)
+			{
+				Runner.Spawn(gameTimerPrefab);
+			}
+		}
+
+		private void RegisterEvents()
+		{
+			EventManager.Register<LevelEvent>(ClearData);
+			EventManager.Register<TimeEvent>(OnTimeUpdated);
+			EventManager.Register<ServerStateEvent>(OnServerStateChanged);
+		}
+
+		private void UnRegisterEvents()
+		{
+			if (GameManager.IsApplicationQuitting) return;
+
+			EventManager.Unregister<LevelEvent>(ClearData);
+			EventManager.Unregister<TimeEvent>(OnTimeUpdated);
+			EventManager.Unregister<ServerStateEvent>(OnServerStateChanged);
+		}
+
+		private void OnUpdateAllInfos(GamePlayDataEvent matchData)
+		{
+			OnConditionsChecking();
+		}
+
+		private void OnTimeUpdated(TimeEvent @event)
+		{
+			if (@event.TimeRemaining <= 0)
+			{
+				GameOver();
+			}
+		}
+
+		[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+		public void RPC_CreatePlayer(ClientDataEvent clientDataEvent)
+		{
+
+		}
+
+		/// <summary>
+		/// Add gold to player has state authority
+		/// </summary>
+		/// <param name="bonus"></param>
+		[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+		public void RPC_MasterAddGoldState(int bonus)
+		{
+			foreach (var player in AllPlayers)
+			{
+				Player p = player as Player;
+				if (p && p.Object && p.Object.HasStateAuthority) // only work on player has state authority
+				{
+					p.IncreaseGold(bonus);
+				}
+			}
+		}
+
+		[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+		public void RPC_DestroyedOutpost(OutpostEvent @event)
+		{
+			if (TurretsAlive.Contains(@event.turretId.ToString()))
+				TurretsAlive.Remove(@event.turretId.ToString());
+			Debug.Log($"RPC_DestroyedOutpost: TeamIndex={@event.teamIndex}, PlayerId={@event.playerId}, TurretId={@event.turretId}");
+			foreach (FusionPlayer fusionPlayer in AllPlayers)
+			{
+				Player player = (Player)fusionPlayer;
+				// update score for player
+				if (player.PlayerId.AsIndex == @event.playerId && player.Object.HasStateAuthority)
+				{
+					lastPlayerStanding = player;
+					player.NetDestroyedOutpost++;
+				}
+
+				// add gold if player is in the same team
+				if (player && player.Object && player.Object.HasStateAuthority && player.PlayerTeamIndex == @event.teamIndex)
+				{
+					player.RPC_ReceiveCurrencyTeam(matchmakingDocument.GoldDestroyOutpost);
+				}
+			}
+		}
+
+		[Rpc(RpcSources.All, RpcTargets.All)]
+		internal void RPC_UpdateKillDeath(PlayerKillEvent @event)
+		{
+			Debug.Log($"UpdateKillDeath: killerId={@event.KillerId}, targetId={@event.TargetId}");
+
+			// Update kill/death stats for the players involved
+			if (@event.TargetId != -1)
+			{
+				PlayerDeath(@event.TargetId);
+			}
+
+			//don't count when kill himself
+			if (@event.KillerId == @event.TargetId)
+				return;
+
+			if (@event.KillerId != -1 && @event.KillerId != MatchIndexs.Turret)
+			{
+				PlayerKill(@event.KillerId);
+			}
+		}
+
+		private void ResetOutpost()
+		{
+			TurretsAlive.Clear();
+			TurretsAlive = tankCollection.CloneDocumentsByProperty(doc => doc.tankType == TankType.Outpost, true)
+				.Select(t => t.tankId)
+				.ToList();
+		}
+
+		public void CheckEndGame()
+		{
+			if (ActivePlayState != ServerState.LEVEL) return;
+
+			// count alive players
+			int alivePlayers = Runner.ActivePlayers.Count();
+
+			if (alivePlayers <= 1)
+			{
+				Debug.Log("[MatchmakingManager] Ending game due to all players dead");
+				GameOver();
+			}
+
+			// count players in each team, if one team has no players in active, end game
+			int countTeam0 = 0;
+			int countTeam1 = 0;
+			foreach (var player in AllPlayers)
+			{
+				Player p = player as Player;
+				if (p && p.Object && p.Object.HasStateAuthority) // only count player has state authority and alive
+				{
+					if (p.PlayerTeamIndex == 0)
+						countTeam0++;
+					else if (p.PlayerTeamIndex == 1)
+						countTeam1++;
+				}
+			}
+
+			if(countTeam0 == 0 || countTeam1 == 0)
+			{
+				Debug.Log("[MatchmakingManager] Ending game due to all players in one team dead");
+				GameOver();
+			}
+		}
+
+		private void GameOver()
+		{
+			if (CurrentPlayState != ServerState.LEVEL || !Object.HasStateAuthority || !Runner.IsSharedModeMasterClient) return;
+			ChangeStateByMaster(ServerState.GAMEOVER);
+		}
+
+		private void OnServerStateChanged(ServerStateEvent newStateEvent)
+		{
+			ChangeStateByMaster(newStateEvent.NewState);
+
+			// ngay lập tức xử lý sự kiện thời gian nếu đây là đối tượng giữ quyền state authority
+			switch (newStateEvent.NewState)
+			{
+				case ServerState.PICKING:
+					AddPickingTimer();
+					break;
+
+				case ServerState.LEVEL:
+					AddGameTimer();
+					break;
+
+				case ServerState.FINAL:
+					StartCoroutine(ClearAllPlayerAvatars());
+					break;
+			}
+		}
+
+		[Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+		public void RPC_ChangeStateByMaster(ServerState newState)
+		{
+			if (Object != null && Object.IsValid && Object.HasStateAuthority && Runner.IsSharedModeMasterClient && ActivePlayState != newState)
+			{
+				ActivePlayState = newState;
+			}
+		}
+
+		public void ChangeStateByMaster(ServerState newState)
+		{
+			if (Object != null && Object.IsValid && Object.HasStateAuthority && Runner.IsSharedModeMasterClient && ActivePlayState != newState)
+			{
+				ActivePlayState = newState;
+			}
+		}
+
+		private void ClearData(LevelEvent gameplaySceneEvent)
+		{
+			if (!HasStateAuthority)
+				return;
+
+			for (int i = 0; i < allPlayerStates.Length; i++)
+			{
+				var playerStats = new PlayerStats();
+				var player = GetPlayerByIndex<Player>(i);
+				if (player != null)
+				{
+					playerStats.team = player.PlayerTeamIndex;
+					allPlayerStates.Set(i, playerStats);
+				}
+			}
+		}
+
+		protected override void OnPlayerAvatarAdded(Player fusionPlayer)
+		{
+			Debug.Log($"[FusionSession] OnPlayerAvatarAdded: {fusionPlayer.PlayerId} - team:{fusionPlayer.PlayerTeamIndex} - index_in_team:{fusionPlayer.PlayerIndex}");
+			proxyPlayerList[fusionPlayer.Object.InputAuthority] = fusionPlayer;
+			Debug.Log($"[FusionSession] OnPlayerAvatarAdded Current Players: {proxyPlayerList.Count}");
+			CheckPickingPhase();
+			if (!fusionPlayer.HasInputAuthority)
+			{
+				return;
+			}
+			if (Runner.GetLevelManager())
+			{
+				Runner.GetLevelManager().IsometricCamera.Initialize(fusionPlayer);
+			}
+		}
+
+		protected override void OnPlayerAvatarRemoved(FusionPlayer fusionPlayer)
+		{
+			// remove ready state
+			teamReadyStates.Remove(fusionPlayer.PlayerId);
+			// đang tìm trận thì đơn giản là cập nhật lại số người chơi cho những người chơi còn lại
+			if (ActivePlayState == ServerState.MATCH_FINDING)
+			{
+				EventManager.TriggerEvent(new MainMenuEvent
+				{
+					status = MatchmakingStatus.Updating,
+					playerCount = Runner.ActivePlayers.Count(),
+					maxPlayers = Runner.SessionInfo.MaxPlayers,
+					immediate = true
+				});
+				return;
+			}
+
+			// nếu đang trong giai đoạn chọn xe tank thì đưa người chơi về lại trạng thái chờ
+			// lý do là nếu đang chọn xe thì phòng đã khóa, nên phải hủy bỏ cả trận đấu và người chơi tìm trận lại
+			if (ActivePlayState == ServerState.PICKING)
+			{
+				EventManager.TriggerEvent(GamePhase.MatchIdling);
+				return;
+			}
+		}
+
+		private void CheckPickingPhase()
+		{
+			if (Runner.ActivePlayers.Count() < Runner.SessionInfo.MaxPlayers) return;
+			if (Object.HasStateAuthority)
+			{
+				CheckCreateTeam();
+				Debug.Log("[MatchmakingManager] Starting tank picking phase");
+			}
+		}
+
+
+		/// <summary>
+		/// Check the conditions for winning the game
+		/// </summary>
+		public void OnConditionsChecking()
+		{
+			Debug.Log("[GameServer] GameOver! called & ActivePlayState:" + ActivePlayState + ", Object.HasStateAuthority: " + Object.HasStateAuthority);
+
+			switch (matchmakingDocument.MatchMode)
+			{
+				case MatchMode.TeamDeathmatch:
+					CheckTeamDeathmatchWinCondition();
+					break;
+
+				case MatchMode.CaptureBase:
+					CheckCaptureBaseWinCondition();
+					break;
+			}
+		}
+
+		private void CheckCaptureBaseWinCondition()
+		{
+			if (Object.HasStateAuthority == false) return;
+
+			if (ActivePlayState == ServerState.LEVEL)
+			{
+				int deadTeam1 = 0, deadTeam2 = 0;
+				int destroyedTurrets = 0;
+				for (int i = 0; i < matchmakingDocument.MaxPlayers; i++)
+				{
+					MatchPlayerData data = sOMatchData.GetPlayerAtIndex(i);
+					if (data.TeamIndex == 0)
+						deadTeam1 += data.Death;
+					else
+						deadTeam2 += data.Death;
+
+					destroyedTurrets += data.DestroyedTurrets;
+				}
+				Debug.Log($"[GameServer] GameOver! deadTeam1={deadTeam1}, deadTeam2={deadTeam2}, destroyedTurrets={destroyedTurrets}");
+				// win if kill 20 or destroy all turrets
+				if (deadTeam1 >= matchmakingDocument.KillsNeededToWin
+				|| deadTeam2 >= matchmakingDocument.KillsNeededToWin
+				|| destroyedTurrets >= matchmakingDocument.TargetsNeededToWin)
+				{
+					GameOver();
+				}
+				else lastPlayerStanding = null;
+			}
+		}
+		
+		private void CheckTeamDeathmatchWinCondition()
+		{
+			if (Object.HasStateAuthority == false) return;
+			
+			if (ActivePlayState == ServerState.LEVEL)
+			{
+				int deadTeam1 = 0, deadTeam2 = 0;
+				for (int i = 0; i < matchmakingDocument.MaxPlayers; i++)
+				{
+					MatchPlayerData data = sOMatchData.GetPlayerAtIndex(i);
+					if (data.TeamIndex == 0)
+						deadTeam1 += data.Death;
+					else
+						deadTeam2 += data.Death;
+				}
+				Debug.Log($"[GameServer] GameOver! deadTeam1={deadTeam1}, deadTeam2={deadTeam2}");
+				// win if kill 20
+				if (deadTeam1 >= matchmakingDocument.KillsNeededToWin
+				|| deadTeam2 >= matchmakingDocument.KillsNeededToWin)
+				{
+					GameOver();
+				}
+				else lastPlayerStanding = null;
+			}
+		}
+
+		#region Update Player Stats
+
+		public void PlayerKill(int playerId)
+		{
+			foreach (var player in AllPlayers)
+			{
+				Player p = player as Player;
+				if (p && p.Object && p.Object.HasStateAuthority && p.PlayerId.AsIndex == playerId) // only work on player has state authority
+				{
+					p.IncreaseKill();
+					p.IncreaseGold(matchmakingDocument.GoldPerKill);
+				}
+			}
+		}
+
+		public void PlayerDeath(int playerId)
+		{
+			foreach (var player in AllPlayers)
+			{
+				Player p = player as Player;
+				if (p && p.Object && p.Object.HasStateAuthority && p.PlayerId.AsIndex == playerId) // only work on player has state authority
+				{
+					p.IncreaseDeath();
+				}
+			}
+		}
+
+		#endregion
+
+		private void OnDestroy()
+		{
+			Debug.Log("CoreGamePlay OnDestroy called");
+			// Release render texture only when the session ends
+			if (renderTexture != null)
+			{
+				renderTexture.Release();
+				renderTexture = null;
+			}
+			if (Runner != null && Runner.IsRunning)
+				Runner.UnregisterSingleton(this);
+		}
+
+		[Serializable]
+		public struct PlayerStats : INetworkStruct
+		{
+			public int team;
+			public int Kill;
+			public int Death;
+			public int OutpostsDestroyed;
+		}
+
+		public struct PlayerKillEvent : INetworkStruct
+		{
+			public int KillerId { get; set; }
+			public int TargetId { get; set; }
+		}
+
+		public struct OutpostEvent : INetworkStruct
+		{
+			public int teamIndex { get; set; }
+			public int playerId { get; set; }
+			public NetworkString<_16> turretId { get; set; }
+		}
+		public struct TimeEvent
+		{
+			public int TimeRemaining { get; set; }
+		}
+
+		public struct GoldEvent : INetworkStruct
+		{
+			public int Gold { get; set; }
+		}
+
+		public struct UpgradeEvent : INetworkStruct
+		{
+			public UpgradeType UpgradeType { get; set; }
+		}
+
+		
+	}
+}
+
+public enum ServerState { WAITING, MATCH_FINDING, PICKING, COUNTDOWN, LEVEL, MAP_LOADING, FINAL, GAMEOVER }
+
+public struct ServerStateEvent : INetworkStruct
+{
+	public ServerState NewState { get; set; }
+}
+
+
+================================================================================
+FILE 554/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/NetPlayerWallet.cs
+================================================================================
+
+using Fusion;
+using UnityEngine;
+
+public class NetPlayerWallet : NetworkBehaviour
+{
+    [Networked] public int Gold { get; private set; }
+
+    public override void Spawned()
+    {
+        if (Object.HasStateAuthority)
+        {
+            Gold = 500;
+        }
+    }
+
+    // Only called on StateAuthority
+    public bool TrySpend(int amount)
+    {
+        if (amount <= 0) return true;
+        if (Gold < amount) return false;
+        Gold -= amount;
+        return true;
+    }
+}
+
+
+================================================================================
+FILE 555/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/NetTankStats.cs
+================================================================================
+
+using Fusion;
+using Fusion.TankOnlineModule;
+using UnityEngine;
+
+public class NetTankStats : NetworkBehaviour
+{
+    #region LEVEL
+    [Networked] public int NetMaxHPLevel { get; private set; }
+    [Networked] public int NetDamageLevel { get; private set; }
+    [Networked] public int NetMovementSpeedLevel { get; private set; }
+    [Networked] public int NetFireRateLevel { get; private set; }
+    #endregion
+
+
+    #region NETWORKED PROPERTIES
+    [Networked] public int NetPlayerIndex { get; set; }
+    [Networked] public NetworkString<_32> NetPlayerName { get; set; }
+    [Networked] public int NetAvatarId { get; set; }
+    [Networked] public int NetTeammateIndex { get; set; } = -1;
+    [Networked] public NetworkString<_32> NetTankId { get; set; } = "";
+    [Networked] public int NetMinDamage { get; private set; }
+    [Networked] public int NetMaxDamage { get; private set; }
+    [Networked] public float NetMovementSpeed { get; private set; } // max speed
+    [Networked] public float NetFireRate { get; private set; } // fire rate
+    [Networked] public int NetKill { get; set; }
+    [Networked] public int NetDeath { get; set; }
+    [Networked] public int NetDestroyedOutpost { get; set; }
+    [Networked] public int NetMaxHP { get; private set; }
+    [Networked] public int NetCurrentHP { get; set; }
+    #endregion
+
+    [SerializeField] private SOMatchPlayerData playerData;
+
+    public override void Spawned()
+    {
+        if (Object.HasStateAuthority)
+        {
+            playerData.data = DatabaseManager.CreateMatchPlayer(NetTankId.ToString());
+        }
+    }
+
+    public void Upgrade(UpgradeType type, SOUpgradeDefinition def, int nextLevel)
+    {
+        switch (type)
+        {
+            case UpgradeType.MaxHP:
+                NetMaxHPLevel = nextLevel;
+                break;
+            case UpgradeType.Damage:
+                NetDamageLevel = nextLevel;
+                break;
+            case UpgradeType.MovementSpeed:
+                NetMovementSpeedLevel = nextLevel;
+                break;
+            case UpgradeType.FireRate:
+                NetFireRateLevel = nextLevel;
+                break;
+        }
+        Recalculate(def, type);
+    }
+
+    private void Recalculate(SOUpgradeDefinition changedDef, UpgradeType type)
+    {
+        if (changedDef != null)
+        {
+            switch (type)
+            {
+                case UpgradeType.MaxHP:
+                    NetMaxHP += changedDef.GetBonusAtLevel(type, NetMaxHPLevel);
+                    break;
+
+                case UpgradeType.Damage:
+                    NetMinDamage += changedDef.GetBonusAtLevel(type, NetDamageLevel);
+                    NetMaxDamage += changedDef.GetBonusAtLevel(type, NetDamageLevel);
+                    break;
+
+                case UpgradeType.MovementSpeed:
+                    NetMovementSpeed += changedDef.GetBonusAtLevel(type, NetMovementSpeedLevel);
+                    break;
+                    
+                case UpgradeType.FireRate:
+                    NetFireRate += changedDef.GetBonusAtLevel(type, NetFireRateLevel);
+                    break;
+            }
+
+            ApplyData();
+        }
+    }
+
+    private void ApplyData()
+    {
+        if (playerData.data != null)
+        {
+            playerData.data.MaxHitpoints = NetMaxHP;
+            playerData.data.Damage[0] = NetMinDamage;
+            playerData.data.Damage[1] = NetMaxDamage;
+            playerData.data.MaxSpeed = NetMovementSpeed;
+            playerData.data.FireRate = NetFireRate;
+        }
+    }
+}
+
+
+================================================================================
+FILE 556/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/OutpostManager.cs
+================================================================================
+
+using Fusion;
+using UnityEngine;
+
+public class OutpostManager : NetworkBehaviour
+{
+    private void Start()
+    {
+       EventManager.Register<OutpostDestroyEvent>(KillOutpost);
+    }
+
+    // Method to handle outpost killing logic
+    // Only the host or master client should process this event
+    private void KillOutpost(OutpostDestroyEvent outpostData)
+    {
+        if (!Object.HasInputAuthority)
+            return;
+
+        // Implement the logic to kill the outpost with the given ID
+        Debug.Log($"Outpost with ID {outpostData.OutpostId.ToString()} has been killed by {outpostData.KillerId}.");
+
+        
+    }
+}
+
+public struct OutpostDestroyEvent : INetworkStruct
+{
+    public NetworkString<_32> OutpostId;
+
+    public int KillerId;
+}
+
+
+================================================================================
+FILE 557/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/SOMatchPlayerData.cs
+================================================================================
+
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Game/Match Player Data")]
+public class SOMatchPlayerData : ScriptableObject
+{
+    public MatchPlayerData data;
+}
+
+
+================================================================================
+FILE 558/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/SOUpgradeDefinition.cs
+================================================================================
+
+using System;
+using UnityEngine;
+
+public enum UpgradeType
+{
+    MaxHP,
+    Damage,
+    MovementSpeed,
+    FireRate,
+    Count,
+}
+
+[Serializable]
+public class SOUpgradeDefinition
+{
+    public string tankId;
+    public TankUpgradeStats[] tankUpgradeStats;
+
+    public TankUpgradeStats GetStat(UpgradeType type)
+    {
+        foreach (var stats in tankUpgradeStats)
+        {
+            if (stats.type == type)
+            {
+                return stats.DeepClone();
+            }
+        }
+        return null;
+    }
+
+    public int GetCost(UpgradeType type, int nextLevel)
+    {
+        foreach (var stats in tankUpgradeStats)
+        {
+            if (stats.type == type)
+            {
+                return stats.GetCost(nextLevel);
+            }
+        }
+        return 0;
+    }
+
+    public int GetBonusAtLevel(UpgradeType type, int level)
+    {
+        foreach (var stats in tankUpgradeStats)
+        {
+            if (stats.type == type)
+            {
+                return stats.GetBonusAtLevel(level);
+            }
+        }
+        return 0;
+    }
+}
+
+[System.Serializable]
+public class TankUpgradeStats
+{
+    public UpgradeType type;
+
+    [Header("Price at Level=1")]
+    public int baseCost = 100;
+
+    [Header("Values for each level (1 to maxLevel) (%)")]
+    public int[] upgradeValues;
+
+    [Header("Default = 1 (%)")]
+    public int costMultiplier = 100;
+
+    public int GetCost(int nextLevel)
+    {
+        // geometric
+        return Mathf.RoundToInt(baseCost * Mathf.Pow(costMultiplier, nextLevel - 1));
+    }
+
+    public int GetBonusAtLevel(int level) => upgradeValues[level - 1];
+}
+
+
+================================================================================
+FILE 559/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/TankUpgradeCollection.cs
+================================================================================
+
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Game/SO TankUpgradeData")]
+public class TankUpgradeCollection : CollectionBase<SOUpgradeDefinition>
+{
+    public SOUpgradeDefinition GetDefinition(string tankId)
+    {
+        foreach (var definition in GetAllDocuments())
+        {
+            if (definition.tankId == tankId)
+            {
+                return definition;
+            }
+        }
+        Debug.LogWarning($"Upgrade definition for tank ID {tankId} not found.");
+        return null;
+    }
+}
+
+
+================================================================================
+FILE 560/682: Assets/_GameModules/TankFusionModule/Scripts/Gameplay/UpgradeManager.cs
+================================================================================
+
+using Fusion;
+using UnityEngine;
+
+public class UpgradeManager : NetworkBehaviour
+{
+    public SOUpgradeDefinition scout;
+    public SOUpgradeDefinition assault;
+    public SOUpgradeDefinition heavy;
+    public NetTankStats _stats;
+    public NetPlayerWallet _wallet;
+
+    SOUpgradeDefinition GetDef(UpgradeType t) =>
+        t == UpgradeType.MaxHP ? scout :
+        t == UpgradeType.Damage ? assault : heavy;
+
+    int GetCurrentLevel(UpgradeType t) =>
+        t == UpgradeType.MaxHP ? _stats.NetMaxHPLevel :
+        t == UpgradeType.Damage ? _stats.NetDamageLevel :
+        t == UpgradeType.MovementSpeed ? _stats.NetMovementSpeedLevel :
+        t == UpgradeType.FireRate ? _stats.NetFireRateLevel : -1;
+
+    // CLIENT gọi hàm này; nó gửi RPC tới StateAuthority.
+    public void RequestUpgrade(UpgradeType type)
+    {
+        RPC_RequestUpgrade(type);
+    }
+
+    // Client -> StateAuthority
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    void RPC_RequestUpgrade(UpgradeType type, RpcInfo info = default)
+    {
+        if (!Object.HasStateAuthority) return;
+
+        SOUpgradeDefinition def = GetDef(type);
+        int cur = GetCurrentLevel(type);
+        int next = cur + 1;
+
+        // Validate
+        if (def == null) { RPC_UpgradeResult(false, "No def", type); return; }
+        if (next > def.tankUpgradeStats.Length) { RPC_UpgradeResult(false, "Max level", type); return; }
+
+        int cost = def.GetCost(type, next);
+
+        // Trừ tiền (server-side)
+        if (_wallet == null || !_wallet.TrySpend(cost))
+        {
+            RPC_UpgradeResult(false, "Not enough coins", type);
+            return;
+        }
+
+        // Áp dụng nâng cấp
+        _stats.Upgrade(type, def, next);
+
+        // Phản hồi cho client sở hữu (InputAuthority)
+        RPC_UpgradeResult(true, "", type);
+    }
+
+    // StateAuthority -> InputAuthority (feedback UI)
+    [Rpc(RpcSources.StateAuthority, RpcTargets.InputAuthority)]
+    void RPC_UpgradeResult(bool success, string message, UpgradeType type, RpcInfo info = default)
+    {
+        // Tại client: báo UI
+        if (!success)
+            Debug.LogWarning($"Upgrade {type} failed: {message}");
+        else
+            Debug.Log($"Upgrade {type} success!");
+    }
+}
+
+
+================================================================================
+FILE 561/682: Assets/_GameModules/TankFusionModule/Scripts/Helpers/DesignerHelper.cs
+================================================================================
+
+using UnityEngine;
+
+/// <summary>
+/// Help to find the place for set model and other designer related tasks.
+/// </summary>
+public class DesignerHelper : MonoBehaviour
+{
+    [Header("To set hull model")]
+    [SerializeField] private Transform hullRoot;
+
+    [Header("To set chain model")]
+    [SerializeField] private Transform chainRoot;
+
+    [Header("To set turret model")]
+    [SerializeField] private Transform turretRoot;
+
+    [Header("To set weapon model, drag weapon prefab to root")]
+    [SerializeField] private Transform primaryWeaponRoot;
+    [SerializeField] private Transform secondaryWeaponRoot;
+}
+
+
+================================================================================
+FILE 562/682: Assets/_GameModules/TankFusionModule/Scripts/Helpers/TextureDownloader.cs
+================================================================================
+
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Data.Common;
+
+public class TextureDownloader : Singleton<TextureDownloader>
+{
+    // Quản lý các url đang tải và callback chờ
+    private Dictionary<string, List<Action<Texture2D>>> _pendingCallbacks = new();
+    private HashSet<string> _downloadingUrls = new();
+
+    public void Start()
+    {
+        DatabaseManager.OnCollectionUpdated -= OnCollectionUpdatedHandler;
+        DatabaseManager.OnCollectionUpdated += OnCollectionUpdatedHandler;
+    }
+
+    private void OnCollectionUpdatedHandler(object collection)
+    {
+        var type = collection.GetType();
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(RuntimeCollection<>))
+        {
+            var genericArg = type.GetGenericArguments()[0];
+            if (genericArg != typeof(TankWrapDocument))
+            {
+                return;
+            }
+        }
+
+        List<string> urls = new List<string>();
+        var docs = DatabaseManager.GetDB<TankWrapCollection>();
+        if (docs != null)
+        {
+            foreach (var doc in docs.documents)
+            {
+                if (!string.IsNullOrEmpty(doc.texturePath))
+                {
+                    urls.Add(doc.texturePath);
+                }
+                if (!string.IsNullOrEmpty(doc.iconPath))
+                {
+                    urls.Add(doc.iconPath);
+                }
+            }
+        }
+        if (urls.Count > 0)
+            PredownloadResource(urls, "TankDecors");
+        Debug.Log($"PredownloadResource triggered for {urls.Count} tank wrap textures.");
+    }
+
+    /// <summary>
+    /// Tải ngầm các ảnh, chỉ tải nếu chưa có trong Resources hoặc chưa lưu file
+    /// </summary>
+    public void PredownloadResource(List<string> urls, string subFolder = "TankDecors", Action onCompleted = null)
+    {
+        // Load toàn bộ texture từ Resources một lần, lưu lại tên
+        var resourceTextures = Resources.LoadAll<Texture2D>(subFolder);
+        var resourceNames = new HashSet<string>();
+        foreach (var tex in resourceTextures)
+        {
+            if (tex != null)
+            {
+                resourceNames.Add(tex.name);
+                Resources.UnloadAsset(tex); // Giải phóng texture sau khi lấy tên
+            }
+        }
+
+        int total = urls?.Count ?? 0;
+        int finished = 0;
+        if (total == 0)
+        {
+            onCompleted?.Invoke();
+            return;
+        }
+
+        foreach (var url in urls)
+        {
+            string fileName = GetFileNameFromURL(url);
+            string fileNameNoExt = Path.GetFileNameWithoutExtension(fileName);
+            if (string.IsNullOrEmpty(fileName))
+            {
+                finished++;
+                if (finished == total) onCompleted?.Invoke();
+                continue;
+            }
+
+            // Kiểm tra trong Resources (chỉ so sánh tên, không load lại)
+            if (resourceNames.Contains(fileNameNoExt))
+            {
+                finished++;
+                if (finished == total) onCompleted?.Invoke();
+                continue;
+            }
+
+            // Kiểm tra file đã lưu
+            string path = Path.Combine(Application.persistentDataPath, subFolder, fileName);
+            if (File.Exists(path))
+            {
+                finished++;
+                if (finished == total) onCompleted?.Invoke();
+                continue;
+            }
+
+            // Nếu đang tải thì chỉ cần callback khi xong
+            if (_downloadingUrls.Contains(url))
+            {
+                if (!_pendingCallbacks.ContainsKey(url))
+                    _pendingCallbacks[url] = new List<Action<Texture2D>>();
+                _pendingCallbacks[url].Add(_ =>
+                {
+                    finished++;
+                    if (finished == total) onCompleted?.Invoke();
+                });
+                continue;
+            }
+
+            _downloadingUrls.Add(url);
+            DownloadImage(url, fileName, subFolder, tex =>
+            {
+                _downloadingUrls.Remove(url);
+                if (_pendingCallbacks.TryGetValue(url, out var callbacks))
+                {
+                    foreach (var cb in callbacks)
+                        cb?.Invoke(tex);
+                    _pendingCallbacks.Remove(url);
+                }
+                finished++;
+                if (finished == total) onCompleted?.Invoke();
+            });
+        }
+    }
+
+    /// <summary>
+    /// Load ảnh từ thư mục đã lưu. Nếu chưa có thì download và cache lại.
+    /// Nếu url đang tải thì chờ tải xong rồi trả về.
+    /// </summary>
+    public void LoadImage(string url, GameObject caller, string subFolder = "TankDecors", Action<Texture2D> onComplete = null)
+    {
+        string fileName = GetFileNameFromURL(url);
+        if (string.IsNullOrEmpty(fileName))
+        {
+            onComplete?.Invoke(null);
+            return;
+        }
+
+        // Load từ Resources trước
+        string resourcePath = Path.Combine(subFolder, Path.GetFileNameWithoutExtension(fileName));
+        Texture2D resourceTex = Resources.Load<Texture2D>(resourcePath);
+        if (resourceTex != null)
+        {
+            Debug.Log($"Đã load từ Resources: {resourcePath}");
+            if (caller != null)
+                onComplete?.Invoke(resourceTex);
+            return;
+        }
+
+        string path = Path.Combine(Application.persistentDataPath, subFolder, fileName);
+        string folderPath = Path.Combine(Application.persistentDataPath, subFolder);
+        Debug.Log($"Thư mục lưu file: {folderPath}");
+
+        if (File.Exists(path))
+        {
+            byte[] bytes = File.ReadAllBytes(path);
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(bytes);
+
+            if (caller != null)
+                onComplete?.Invoke(tex);
+        }
+        else
+        {
+            // Nếu đang tải thì chờ tải xong rồi trả về
+            if (_downloadingUrls.Contains(url))
+            {
+                if (!_pendingCallbacks.ContainsKey(url))
+                    _pendingCallbacks[url] = new List<Action<Texture2D>>();
+                _pendingCallbacks[url].Add(texture =>
+                {
+                    if (caller != null)
+                        onComplete?.Invoke(texture);
+                });
+                return;
+            }
+
+            _downloadingUrls.Add(url);
+            DownloadImage(url, fileName, subFolder, texture =>
+            {
+                _downloadingUrls.Remove(url);
+                if (_pendingCallbacks.TryGetValue(url, out var callbacks))
+                {
+                    foreach (var cb in callbacks)
+                        cb?.Invoke(texture);
+                    _pendingCallbacks.Remove(url);
+                }
+                if (caller != null)
+                    onComplete?.Invoke(texture);
+                Debug.Log($"Downloaded: {url}");
+            });
+        }
+    }
+
+    #region Helper
+    public static string GetFileNameFromURL(string url)
+    {
+        if (string.IsNullOrEmpty(url))
+            return string.Empty;
+
+        try
+        {
+            Uri uri = new Uri(url);
+            string fileName = Path.GetFileName(uri.LocalPath);
+            // Kiểm tra fileName hợp lệ (không rỗng, không chứa ký tự đặc biệt)
+            if (string.IsNullOrEmpty(fileName) || fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+                return string.Empty;
+            return fileName;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"GetFileNameFromURL error: {ex.Message}, URL: {url}");
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Tải ảnh từ URL và lưu file (tự động chạy coroutine, ghi đè nếu trùng tên).
+    /// </summary>
+    public void DownloadImage(string url, string fileName, string subFolder = "TankDecors", Action<Texture2D> onComplete = null)
+    {
+        StartCoroutine(DownloadImageCoroutine(url, fileName, subFolder, onComplete));
+    }
+
+    private IEnumerator DownloadImageCoroutine(string url, string fileName, string subFolder, Action<Texture2D> onComplete)
+    {
+        string folderPath = Path.Combine(Application.persistentDataPath, subFolder);
+        if (!Directory.Exists(folderPath))
+            Directory.CreateDirectory(folderPath);
+
+        if (string.IsNullOrEmpty(fileName))
+        {
+            Debug.LogError("FileName rỗng hoặc không hợp lệ, không thể ghi file.");
+            onComplete?.Invoke(null);
+            yield break;
+        }
+
+        string filePath = Path.Combine(folderPath, fileName);
+
+        using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+        {
+            yield return uwr.SendWebRequest();
+
+            if (uwr.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"❌ Lỗi tải hình: {uwr.error}");
+                onComplete?.Invoke(null);
+            }
+            else
+            {
+                Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+                byte[] bytes = texture.EncodeToPNG();
+
+                try
+                {
+                    File.WriteAllBytes(filePath, bytes);
+                    Debug.Log($"✅ Đã lưu (ghi đè nếu trùng): {filePath}");
+                    onComplete?.Invoke(texture);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"❌ Lỗi ghi file: {ex.Message}");
+                    onComplete?.Invoke(null);
+                }
+            }
+        }
+    }
+    #endregion Helper
+}
+
+
+================================================================================
+FILE 563/682: Assets/_GameModules/TankFusionModule/Scripts/IDamagable.cs
+================================================================================
+
+public interface IDamagable
+{
+    public void TakeDamage(DamageEvent @event);
+}
+
+
+================================================================================
+FILE 564/682: Assets/_GameModules/TankFusionModule/Scripts/IFusionObject.cs
+================================================================================
+
+using System;
+using Fusion;
+using FusionHelpers;
+
+public interface IFusionObject : IDamagable, INetworkStruct
+{
+    [Networked] public int NetTeammateIndex { get; set; }
+    public string PlayerName { get; set; }
+    public int PlayerIndex { get; set; }
+    public int PlayerTeamIndex { get; set; }
+    public void RaiseEvent<T>(T evt) where T : unmanaged, INetworkEvent { }
+    public void RegisterEventListener<T>(Action<T> listener) where T : unmanaged, INetworkEvent { }
+    public void UpdateHPImmediately(int damage) { }
+}
+
+
+================================================================================
+FILE 565/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/BushArea.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Fusion.TankOnlineModule;
+using UnityEngine;
+public class BushArea : MonoBehaviour
+{
+}
+
+
+================================================================================
+FILE 566/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/Destructible.cs
+================================================================================
+
+using UnityEngine;
+using GDO.Audio;
+
+namespace Fusion.TankOnlineModule
+{
+	/// Simple destructible that can be destroyed by either getting run over by a tank or taking damage from an explosion.
+	/// This is not a network object but relies on local physics triggers. This is not recommended for any behaviour that
+	/// has actual gameplay impact, since it is possible for these triggers to be slightly off between different clients.
+	/// In this case, destructibles are just visual decorations and the triggers (tanks and explosions) are sufficiently slow moving, that it works.
+	
+	public class Destructible : MonoBehaviour
+	{
+		[SerializeField] private ParticleSystem _destroyedParticlePrefab;
+		[SerializeField] private GameObject _visual;
+		[SerializeField] private Collider _trigger;
+		[SerializeField] private GameObject _debrisPrefab;
+		[SerializeField] private LayerMask _destroyedByLayers;
+
+		private ParticleSystem _destroyedParticle;
+		private GameObject _debris;
+
+		[SerializeField] private AudioEmitter _audioEmitter;
+
+        private void Awake()
+        {
+			_trigger = GetComponent<Collider>();
+			if (_trigger == null)
+				_trigger = GetComponentInChildren<Collider>();
+        }
+
+        private void Start()
+		{
+			if (_destroyedParticlePrefab != null)
+				_destroyedParticle = Instantiate(_destroyedParticlePrefab, transform.position, transform.rotation, transform.parent);
+		}
+
+		// Using OnEnable to make the destructible recyclable
+		private void OnEnable()
+		{
+			if (_debris != null)
+				Destroy(_debris);
+			if (_trigger != null)
+				_trigger.enabled = true;
+			if (_visual != null)
+				_visual.SetActive(true);
+		}
+
+		private void OnTriggerEnter(Collider other)
+		{
+			if ( ((1<<other.gameObject.layer) & _destroyedByLayers) !=0 )
+			{
+				DestroyObject();
+			}
+		}
+
+		private void DestroyObject()
+		{
+			if (_audioEmitter != null)
+				_audioEmitter.PlayOneShot();
+			if (_destroyedParticle != null)
+				_destroyedParticle.Play();
+			if (_trigger != null)
+				_trigger.enabled = false;
+			if (_visual != null)
+				_visual.SetActive(false);
+
+			// if (_debrisPrefab != null)
+			// 	_debris = Instantiate(_debrisPrefab, transform.parent);
+		}
+	}
+}
+
+
+================================================================================
+FILE 567/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/ForceField.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ForceField : MonoBehaviour
+	{
+		[SerializeField] Material forceFieldMaterial;
+
+		[SerializeField] MeshRenderer meshRenderer;
+
+		string[] toggleProperties = new string[4] {"_PLAYER1Toggle", "_PLAYER2Toggle", "_PLAYER3Toggle", "_PLAYER4Toggle"};
+		string[] positionProperties = new string[4] {"_PositionPLAYER1", "_PositionPLAYER2", "_PositionPLAYER3", "_PositionPLAYER4"};
+
+		void Awake()
+		{
+			forceFieldMaterial = new Material(forceFieldMaterial);
+			meshRenderer.material = forceFieldMaterial;
+		}
+
+		public void SetPlayer(int index, MonoBehaviour behaviour)
+		{
+			if (behaviour != null)
+				forceFieldMaterial.SetVector(positionProperties[index], behaviour.transform.position);
+			forceFieldMaterial.SetInt(toggleProperties[index], behaviour==null ? 0 : 1);
+		}
+	}
+}
+
+
+================================================================================
+FILE 568/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/Grasses.cs
+================================================================================
+
+using UnityEngine;
+
+public class Grasses : MonoBehaviour
+{
+}
+
+
+================================================================================
+FILE 569/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/LaserBeam.cs
+================================================================================
+
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class LaserBeam : MonoBehaviour
+	{
+		[Header("Laser Beam Settings")] [SerializeField]
+		private byte _damage;
+
+		[SerializeField] private LayerMask _collisionMask;
+		[SerializeField] private float _range;
+
+		[Header("Effects")] 
+		[SerializeField] private LineRenderer _laser;
+		[SerializeField] private ParticleSystem _spark;
+		[SerializeField] private ParticleSystem _muzzleFlash;
+
+		private Player _target;
+		private Vector3 _targetPoint;
+
+		public void Init()
+		{
+			_muzzleFlash.Play();
+			_spark.Play();
+		}
+
+		public void Render(bool applyDamage)
+		{
+			Vector3 pos = transform.position;
+			_laser.SetPosition(0, pos);
+
+			if (FindTarget(out RaycastHit hit))
+			{
+				if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+				{
+					_target = hit.collider.GetComponentInParent<Player>();
+					_targetPoint = hit.point;
+				}
+			}
+		
+			if (applyDamage && _target != null)
+			{
+				Vector3 impulse = _target.transform.position - _targetPoint;
+				float l = Mathf.Clamp(5.0f - impulse.magnitude, 0, 5.0f);
+				impulse = 10.0f * l * impulse.normalized;
+				_target.ApplyAreaDamage(-1, impulse, _damage);
+				_target = null;
+			}
+
+			_spark.transform.position = hit.point;
+			_laser.SetPosition(1, hit.point);
+		}
+
+		private bool FindTarget(out RaycastHit hit)
+		{
+			Vector3 forward = transform.rotation * Vector3.forward;
+			if (Physics.Raycast(transform.position, forward, out hit, _range, _collisionMask))
+				return true;
+			hit.point = transform.position + forward * _range;
+			return false;
+		}
+	}
+}
+
+
+================================================================================
+FILE 570/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/LevelBehaviour.cs
+================================================================================
+
+using System;
+using UnityEngine;
+using Fusion.GameSystems;
+
+namespace Fusion.TankOnlineModule
+{
+	public class LevelBehaviour : MonoBehaviour
+	{
+		// Class for storing the lighting settings of a level
+		[System.Serializable]
+		public struct LevelLighting
+		{
+			public Color ambientColor;
+			public Color fogColor;
+			public bool fog;
+		}
+
+		[Header("Level Settings")]
+		[SerializeField] private LevelLighting _levelLighting;
+
+		[Header("Level Objects")]
+		[SerializeField] private GameObject[] _gameObjs;
+
+		[Header("Light Objects")]
+		[SerializeField] private GameObject[] _lightObjects;
+		[SerializeField] private bool _activateLightsOnSceneLoaded = true;
+		[SerializeField] private float _lightActivationDelay = 0.1f; // Small delay to ensure scene is fully ready
+
+		private SpawnPoint[] _playerSpawnPoints;
+		private bool _isSceneFullyLoaded = false;
+		private bool _lightsActivated = false;
+
+		// [SerializeField] private GameObject cheatUI;
+		private void Awake()
+		{
+			_playerSpawnPoints = GetComponentsInChildren<SpawnPoint>(true);
+			EventManager.Register<ToggleEvent>(OnToggle);
+
+			// Initially deactivate all light objects
+			DeactivateAllLights();
+		}
+
+		void OnToggle(ToggleEvent toggle) {
+			// if (cheatUI != null)
+			// {
+			// 	if (toggle.featureName == "map")
+			// 	{
+			// 		cheatUI.SetActive(!cheatUI.activeSelf);
+			// 	}
+			// }
+		}
+		
+		/// <summary>
+		/// Called when scene is fully loaded and ready
+		/// </summary>
+		private void OnSceneFullyLoaded()
+		{
+			if (_isSceneFullyLoaded && _lightsActivated)
+				return;
+
+			_isSceneFullyLoaded = true;
+
+			Debug.Log("[LevelBehaviour] Scene fully loaded, initializing level...");
+
+			// Set the lighting for the level
+			SetLevelLighting();
+
+			// Activate all light objects
+			ActivateAllLights();
+
+			Debug.Log("[LevelBehaviour] Level lighting and objects initialized.");
+		}
+
+		/// <summary>
+		/// Public method called by LevelManager when scene loading is complete
+		/// </summary>
+		public void OnSceneLoadingComplete()
+		{
+			OnSceneFullyLoaded();
+		}
+
+		/// <summary>
+		/// Legacy method - now calls OnSceneFullyLoaded
+		/// </summary>
+		private void OnSceneLoaded()
+		{
+			OnSceneFullyLoaded();
+		}
+
+		public void Activate()
+		{
+			// Legacy method - lighting is now handled in OnSceneFullyLoaded
+			// Keep for backward compatibility but ensure lights are activated
+			if (!_lightsActivated)
+			{
+				OnSceneFullyLoaded();
+			}
+		}
+
+		/// <summary>
+		/// Deactivate all light objects
+		/// </summary>
+		private void DeactivateAllLights()
+		{
+			if (_lightObjects == null) return;
+
+			foreach (GameObject lightObj in _lightObjects)
+			{
+				if (lightObj != null)
+				{
+					lightObj.SetActive(false);
+				}
+			}
+
+			_lightsActivated = false;
+			Debug.Log("[LevelBehaviour] All lights deactivated.");
+		}
+
+		/// <summary>
+		/// Activate all light objects
+		/// </summary>
+		private void ActivateAllLights()
+		{
+			if (_lightObjects == null) return;
+
+			foreach (GameObject lightObj in _lightObjects)
+			{
+				if (lightObj != null)
+				{
+					lightObj.SetActive(true);
+				}
+			}
+
+			_lightsActivated = true;
+			Debug.Log($"[LevelBehaviour] {_lightObjects.Length} light objects activated.");
+		}
+
+		/// <summary>
+		/// Toggle lights on/off
+		/// </summary>
+		public void ToggleLights(bool activate)
+		{
+			if (activate)
+			{
+				ActivateAllLights();
+			}
+			else
+			{
+				DeactivateAllLights();
+			}
+		}
+
+		private void SetLevelLighting()
+		{
+			RenderSettings.ambientLight = _levelLighting.ambientColor;
+			RenderSettings.fogColor = _levelLighting.fogColor;
+			RenderSettings.fog = _levelLighting.fog;
+
+			Debug.Log($"[LevelBehaviour] Level lighting applied - Ambient: {_levelLighting.ambientColor}, Fog: {_levelLighting.fog}");
+		}
+
+		private void OnDestroy()
+		{
+			if (GameManager.IsApplicationQuitting) return;
+			EventManager.Unregister<ToggleEvent>(OnToggle);
+		}
+
+		public SpawnPoint GetPlayerSpawnPoint(int teamIndex, int playerIndex)
+		{
+			if (_playerSpawnPoints == null || _playerSpawnPoints.Length == 0)
+			{
+				Debug.LogError("No player spawn points found in the level.");
+				return null;
+			}
+
+			if (teamIndex < 0 || teamIndex >= _playerSpawnPoints.Length)
+			{
+				Debug.LogError($"Invalid team index: {teamIndex}. Must be between 0 and {_playerSpawnPoints.Length - 1}.");
+				return null;
+			}
+
+			if (playerIndex < 0 || playerIndex >= _playerSpawnPoints.Length)
+			{
+				Debug.LogError($"Invalid player index: {playerIndex} for team index: {teamIndex}.");
+				return null;
+			}
+
+			for (int i = 0; i < _playerSpawnPoints.Length; i++)
+			{
+				if (_playerSpawnPoints[i].team == teamIndex && _playerSpawnPoints[i].playerIndex == playerIndex)
+				{
+					return _playerSpawnPoints[i];
+				}
+			}
+
+			return _playerSpawnPoints[teamIndex].GetComponent<SpawnPoint>();
+		}
+	}
+}
+
+
+================================================================================
+FILE 571/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/PowerupElement.cs
+================================================================================
+
+using UnityEngine;
+using GDO.Audio;
+
+namespace Fusion.TankOnlineModule
+{
+	public enum PowerupType
+	{
+		DEFAULT = 0,
+		MINIGUN = 1,
+		GIGAVOLT = 2,
+		GRENADES = 3,
+		HEALTH = 4,
+		EMPTY = 5
+	}
+	
+	[CreateAssetMenu(fileName = "PE_", menuName = "ScriptableObjects/PowerupElement")]
+	public class PowerupElement : ScriptableObject
+	{
+		public WeaponManager.WeaponInstallationType weaponInstallationType;
+		public PowerupType powerupType;
+		public Mesh powerupSpawnerMesh;
+		public AudioClipData pickupSnd;
+	}
+}
+
+
+================================================================================
+FILE 572/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/PowerupSpawner.cs
+================================================================================
+
+using Fusion;
+using FusionHelpers;
+using UnityEngine;
+using Random = UnityEngine.Random;
+using GDO.Audio;
+
+namespace Fusion.TankOnlineModule
+{
+	public class PowerupSpawner : NetworkBehaviourWithState<PowerupSpawner.NetworkState> 
+	{
+		[Networked] public override ref NetworkState State => ref MakeRef<NetworkState>();
+		public struct NetworkState : INetworkStruct
+		{
+			public TickTimer respawnTimer;
+			public int activePowerupIndex;
+		}
+
+		[SerializeField] private Renderer _renderer;
+		[SerializeField] private MeshFilter _meshFilter;
+		[SerializeField] private MeshRenderer _rechargeCircle;
+
+		[Header("Colors")] 
+		[SerializeField] private Color _mainPowerupColor;
+		[SerializeField] private Color _specialPowerupColor;
+		[SerializeField] private Color _buffPowerupColor;
+
+		const float RESPAWN_TIME = 3f;
+
+		private static readonly int Recharge = Shader.PropertyToID("_Recharge");
+		private AudioEmitter _audio;
+
+		public override void Spawned()
+		{
+			_audio = GetComponent<AudioEmitter>();
+			if(Object.HasStateAuthority)
+				SetNextPowerup();
+			InitPowerupVisuals();
+		}
+
+		public override void Render()
+		{
+			if ( TryGetStateChanges(out var old, out var current) )
+			{
+				if(old.respawnTimer.TargetTick>0) // Avoid triggering sound effect on initial init
+					_audio.PlayOneShot(GetPowerup(old.activePowerupIndex).pickupSnd);
+				InitPowerupVisuals();
+			}
+
+			float progress = 0;
+			if (!State.respawnTimer.Expired(Runner))
+				progress = 1.0f - (State.respawnTimer.RemainingTime(Runner) ?? 0) / RESPAWN_TIME;
+			else
+				_renderer.transform.localScale = Vector3.Lerp(_renderer.transform.localScale, Vector3.one, Time.deltaTime * 5f);
+			_rechargeCircle.material.SetFloat(Recharge, progress);
+		}
+
+		private void OnTriggerStay(Collider collisionInfo)
+		{
+			if (!State.respawnTimer.Expired(Runner))
+				return;
+
+			Player player = collisionInfo.gameObject.GetComponent<Player>();
+			if (!player)
+				return;
+
+			int powerup = State.activePowerupIndex;
+			player.RaiseEvent( new Player.PickupEvent { powerup = powerup} );
+
+			SetNextPowerup();
+		}
+
+		private void InitPowerupVisuals()
+		{
+			PowerupElement powerup = GetPowerup(State.activePowerupIndex);
+			_renderer.transform.localScale = Vector3.zero;
+			_meshFilter.mesh = powerup.powerupSpawnerMesh;
+			_rechargeCircle.material.color = GetPowerupColor(powerup.weaponInstallationType);
+		}
+
+		private void SetNextPowerup()
+		{
+			State.respawnTimer = TickTimer.CreateFromSeconds(Runner, RESPAWN_TIME);
+			GetPowerup(0); // Force load of powerups
+			// Strictly speaking, this isn't correct since it will assign different values on proxies.
+			// However, we rely on this being updated from StateAuth before the respawnTimer expires. 
+			State.activePowerupIndex = Random.Range(0, _powerupElements.Length);
+		}
+
+		private Color GetPowerupColor(WeaponManager.WeaponInstallationType weaponType)
+		{
+			switch (weaponType)
+			{
+				default:
+				case WeaponManager.WeaponInstallationType.PRIMARY: return _mainPowerupColor;
+				case WeaponManager.WeaponInstallationType.SECONDARY: return _specialPowerupColor;
+				case WeaponManager.WeaponInstallationType.BUFF: return _buffPowerupColor;
+			}
+		}
+		
+		private static PowerupElement[] _powerupElements;
+		public static PowerupElement GetPowerup(int powerupIndex)
+		{
+			if (_powerupElements == null)
+			{
+				_powerupElements = Resources.LoadAll<PowerupElement>("PowerupElements");
+			}
+
+			for (int i = 0; i < _powerupElements.Length; i++)
+			{
+				Debug.Log($"Powerup {i}: {_powerupElements[i].name} - Type: {_powerupElements[i].powerupType}");
+            }
+            return _powerupElements[powerupIndex];
+		} 
+	}
+}
+
+
+================================================================================
+FILE 573/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/RotatingTurret.cs
+================================================================================
+
+using UnityEngine;
+using Fusion;
+
+namespace Fusion.TankOnlineModule
+{
+	public class RotatingTurret : NetworkBehaviour
+	{
+		[SerializeField] private LaserBeam[] _laserBeams;
+		[SerializeField] private float _rpm;
+		[SerializeField] private float _timeOffset;
+
+		public override void Spawned()
+		{
+			for (int i = 0; i < _laserBeams.Length; i++)
+				_laserBeams[i].Init();
+		}
+
+		public override void Render()
+		{
+			transform.rotation = Quaternion.Euler(0, (Object.RenderTime - _timeOffset) * _rpm, 0);
+			for (int i = 0; i < _laserBeams.Length; i++)
+				_laserBeams[i].Render( Runner.IsForward );
+		}
+	}
+}
+
+
+================================================================================
+FILE 574/682: Assets/_GameModules/TankFusionModule/Scripts/LevelDesign/SpawnPoint.cs
+================================================================================
+
+using UnityEditor;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// SpawnPoint is used by the LevelBehaviour to figure out where it can spawn things.
+	/// There is nothing Fusion specific about this.
+	/// </summary>
+	public class SpawnPoint : MonoBehaviour
+	{
+		public int team = 0;
+		public int playerIndex = 0;
+		
+		#if UNITY_EDITOR
+		private static bool _spawnPointIsSelected;
+
+		private void OnDrawGizmosSelected()
+		{
+			// If the selected object contains a spawn point, show gizmos for ALL spawn points.
+			CheckIfSpawnPointIsSelected();
+		}
+
+		private void OnDrawGizmos()
+		{
+			// If one spawn point is selected, all spawn points will draw a gizmo.
+			if (_spawnPointIsSelected)
+			{
+				// Check if spawn point has since been deselected.
+				if (CheckIfSpawnPointIsSelected() == false)
+				{
+					return;
+				}
+
+				const float FORWD_LEN = 2;
+				const float OTHER_LEN = 1f;
+
+				var pos = transform.position;
+				var forward = transform.forward;
+				var right = transform.right;
+				var up = transform.up;
+
+				//Gizmos.color = Color.yellow;
+				//Gizmos.DrawWireSphere(pos, 1);
+				Gizmos.DrawRay(pos, forward * FORWD_LEN);
+				Gizmos.DrawRay(pos, right * OTHER_LEN);
+				Gizmos.DrawRay(pos, up * OTHER_LEN);
+				Gizmos.color = Color.white;
+				Gizmos.DrawSphere(pos, .5f);
+
+				Gizmos.color = Color.blue;
+				Gizmos.DrawSphere(pos + forward * FORWD_LEN, .25f);
+				Gizmos.color = Color.red;
+				Gizmos.DrawSphere(pos + right * OTHER_LEN, .25f);
+				Gizmos.DrawSphere(pos - right * OTHER_LEN, .25f);
+				Gizmos.color = Color.green;
+				Gizmos.DrawSphere(pos + up * OTHER_LEN, .25f);
+			}
+		}
+
+		private bool CheckIfSpawnPointIsSelected()
+		{
+			if (Selection.activeGameObject != null)
+				_spawnPointIsSelected = Selection.activeGameObject.GetComponent<SpawnPoint>();
+			else
+				_spawnPointIsSelected = false;
+
+			return _spawnPointIsSelected;
+		}
+#endif
+	}
+}
+
+
+================================================================================
+FILE 575/682: Assets/_GameModules/TankFusionModule/Scripts/LevelManager.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Fusion.GameSystems;
+using FusionHelpers;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// The LevelManager controls the map - keeps track of spawn points for players.
+	/// </summary>
+	/// TODO: This is partially left over from previous SDK versions which had a less capable SceneManager, so could probably be simplified quite a bit
+	public class LevelManager : NetworkSceneManagerDefault
+	{
+		[SerializeField] private CountdownManager _countdownManager;
+		[SerializeField] private CameraFollowIsometric cameraFollowIsometric;
+		[SerializeField] private MinimapCameraFollow minimapCameraFollow;
+		[SerializeField] private CameraScreenFXBehaviour _transitionEffect;
+		[SerializeField] private GDO.Audio.AudioEmitter _audioEmitter;
+		private LevelBehaviour currentLevel;
+		private SceneRef loadedScene = SceneRef.None;
+		public CameraFollowIsometric IsometricCamera => cameraFollowIsometric;
+		public MinimapCameraFollow MinimapCamera => minimapCameraFollow;
+		[SerializeField] private GameObject[] _gameObjects;
+
+		private void Awake()
+		{
+			Initialize();
+		}
+
+		void OnToggle(ToggleEvent toggle)
+		{
+			foreach (GameObject gameObj in _gameObjects)
+			{
+				if (gameObj.name == toggle.featureName || toggle.featureName == "level")
+				{
+					gameObj.SetActive(!gameObj.activeSelf);
+				}
+			}
+		}
+
+		private void Initialize()
+		{
+			_countdownManager.Reset();
+			EventManager.Register<LevelEvent>(LoadLevel);
+			EventManager.Register<ToggleEvent>(OnToggle);
+			EventManager.Register<ELevelManagerState>(OnGamePhaseChanged);
+		}
+
+		private void OnDestroy()
+		{
+			if (GameManager.IsApplicationQuitting) return;
+		}
+
+		public override void Shutdown()
+		{
+			Debug.Log("LevelManager.Shutdown();");
+
+			// Clear references first
+			currentLevel = null;
+			InputController.fetchInput = false;
+
+			// Clear local state AFTER base shutdown
+			loadedScene = SceneRef.None;
+
+			// Let base class handle proper scene cleanup
+			base.Shutdown();
+		}
+		public SpawnPoint GetPlayerSpawnPoint(int teamIndex, int playerIndex)
+		{
+			if (currentLevel != null)
+				return currentLevel.GetPlayerSpawnPoint(teamIndex, playerIndex);
+			return null;
+		}
+
+		private void LoadLevel(LevelEvent @event)
+		{
+			if (Runner != null && Runner.IsSharedModeMasterClient)
+			{
+				StartCoroutine(LoadLevelCoroutine(@event));
+			}
+			else
+			{
+				Debug.LogWarning("Cannot load level: Runner is null or not in authority");
+			}
+		}
+
+		private IEnumerator LoadLevelCoroutine(LevelEvent @event)
+		{
+			yield return new WaitForSeconds(1);
+			currentLevel = null;
+			var newScene = SceneRef.FromIndex(@event.sceneIndex);
+			if (newScene == loadedScene)
+			{
+				Debug.Log($"LevelManager.LoadLevelCoroutine: Scene {newScene} is already loaded, skipping load.");
+				yield break;
+			}
+
+			// Unload previous scene if valid
+			if (loadedScene.IsValid)
+			{
+				Debug.Log($"LevelManager.UnloadLevel(); - _currentLevel={currentLevel} _loadedScene={loadedScene}");
+				var unloadOp = Runner.UnloadScene(loadedScene);
+
+				// Wait for unload to complete
+				while (!unloadOp.IsDone)
+				{
+					yield return null;
+				}
+
+				// Check if unload was successful
+				if (!unloadOp.IsValid)
+				{
+					Debug.LogError($"Failed to unload scene {loadedScene}");
+					yield break;
+				}
+
+				loadedScene = SceneRef.None;
+			}
+
+			// Load new scene
+			Debug.Log($"LevelManager.LoadLevel({@event.sceneIndex}, {@event.loadSceneMode})");
+			var sceneRef = SceneRef.FromIndex(@event.sceneIndex);
+
+			// Use proper Unity LoadSceneParameters with Fusion's load method
+			var unityLoadParams = new LoadSceneParameters(@event.loadSceneMode, LocalPhysicsMode.None);
+
+			var loadOp = Runner.LoadScene(sceneRef, unityLoadParams, true);
+
+			// Wait for load to complete
+			while (!loadOp.IsDone)
+			{
+				yield return null;
+			}
+
+			// Check if load was successful
+			if (!loadOp.IsValid)
+			{
+				Debug.LogError($"Failed to load scene {sceneRef}");
+				yield break;
+			}
+
+			// Update loaded scene reference only after successful load
+			loadedScene = sceneRef;
+			Debug.Log($"Scene {sceneRef} loaded successfully");
+		}
+
+		protected override IEnumerator UnloadSceneCoroutine(SceneRef prevScene)
+		{
+			Debug.Log($"LevelManager.UnloadSceneCoroutine({prevScene});");
+
+			// Wait for CoreGamePlay with timeout
+			GameServer coreGameplay = null;
+			int attempts = 0;
+			const int maxAttempts = 100;
+
+			while (coreGameplay == null && attempts < maxAttempts)
+			{
+				if (Runner.TryGetSingleton(out coreGameplay))
+				{
+					break;
+				}
+				Debug.LogWarning($"Waiting for CoreGamePlay (Attempt {attempts + 1}/{maxAttempts})");
+				yield return null;
+				attempts++;
+			}
+
+			if (coreGameplay == null)
+			{
+				Debug.LogError($"CoreGamePlay not found after {maxAttempts} attempts during unload!");
+				// Still continue with base unload even if CoreGamePlay is missing
+				yield return base.UnloadSceneCoroutine(prevScene);
+				yield break;
+			}
+
+			// Only process if we have a valid previous scene
+			if (prevScene.AsIndex > 0)
+			{
+				yield return new WaitForSeconds(1.0f);
+
+				InputController.fetchInput = false;
+
+				// De-spawning all tanks
+				Debug.Log("De-spawning all tanks");
+
+				// Snapshot first so despawns can't modify the collection we're iterating
+				var playersSnapshot = coreGameplay.AllPlayers.ToArray();
+
+				foreach (var fusionPlayer in playersSnapshot)
+				{
+					if (fusionPlayer is Player player)
+					{
+						Debug.Log($"De-spawning tank {player.PlayerId.AsIndex}:{player}");
+						player.TeleportOut();
+						yield return new WaitForSeconds(0.1f);
+					}
+					else
+					{
+						Debug.LogWarning($"FusionPlayer {fusionPlayer} is not a Player instance");
+					}
+				}
+
+				yield return new WaitForSeconds(1.5f - coreGameplay.PlayerCount * 0.1f);
+			}
+
+			// Always call base implementation
+			yield return base.UnloadSceneCoroutine(prevScene);
+		}
+		protected override IEnumerator OnSceneLoaded(SceneRef newScene, UnityEngine.SceneManagement.Scene loadedScene, NetworkLoadSceneParameters sceneFlags)
+		{
+			Debug.Log($"LevelManager.OnSceneLoaded({newScene},{loadedScene.name},{sceneFlags});");
+
+			// Call base implementation FIRST
+			yield return base.OnSceneLoaded(newScene, loadedScene, sceneFlags);
+
+			if (newScene.AsIndex == 0)
+				yield break;
+
+			_transitionEffect.ToggleGlitch(true);
+			_audioEmitter.Play();
+
+			yield return null;
+
+			this.loadedScene = newScene;
+			Debug.Log($"Loading scene {newScene}");
+
+			// Delay one frame
+			yield return null;
+
+			// Activate the next level - Use FindFirstObjectByType instead of deprecated FindAnyObjectByType
+			currentLevel = FindFirstObjectByType<LevelBehaviour>();
+			if (currentLevel != null)
+			{
+				// Don't activate immediately - wait for scene to be fully ready
+				Debug.Log($"LevelBehaviour found in scene {loadedScene.name}");
+			}
+			else
+			{
+				Debug.LogWarning($"No LevelBehaviour found in scene {loadedScene.name}");
+			}
+			yield return new WaitForSeconds(0.3f);
+
+			Debug.Log($"Stop glitching");
+			_transitionEffect.ToggleGlitch(false);
+			_audioEmitter.Stop();
+
+			// Wait for CoreGamePlay with timeout
+			GameServer gameManager = null;
+			int attempts = 0;
+			const int maxAttempts = 100;
+
+			while (gameManager == null && attempts < maxAttempts)
+			{
+				if (Runner.TryGetSingleton(out gameManager))
+				{
+					break;
+				}
+				Debug.Log($"Waiting for GameManager to Spawn! (Attempt {attempts + 1}/{maxAttempts})");
+				yield return null;
+				attempts++;
+			}
+
+			if (gameManager == null)
+			{
+				Debug.LogError($"Failed to find CoreGamePlay after {maxAttempts} attempts!");
+				yield break;
+			}
+
+			gameManager.lastPlayerStanding = null;
+
+			// Respawn with slight delay between each player
+			Debug.Log($"Respawning All {gameManager.PlayerCount} Players");
+			var gameManagerAllPlayers = gameManager.AllPlayers.ToArray();
+			foreach (FusionPlayer fusionPlayer in gameManagerAllPlayers)
+			{
+				if (fusionPlayer is Player player)
+				{
+					player.Reset();
+					player.Respawn();
+					yield return new WaitForSeconds(0.3f);
+				}
+				else
+				{
+					Debug.LogWarning($"FusionPlayer {fusionPlayer} is not a Player instance");
+				}
+			}
+			Debug.Log($"All Players Respawned: " + this.loadedScene.AsIndex + " / " + loadedScene.name);
+
+			// NOW the scene is fully loaded and ready - activate level with lights
+			if (currentLevel != null)
+			{
+				currentLevel.OnSceneLoadingComplete();
+				Debug.Log($"[LevelManager] Scene loading complete, level activated with lights");
+			}
+		}
+
+		private void OnGamePhaseChanged(ELevelManagerState newState)
+		{
+			// get info from SessionProperties
+			int lobbySceneIndex=-1, mapSceneIndex=-1;
+			if (Runner.SessionInfo.Properties.TryGetValue(nameof(MatchmakingDocument.LobbySceneIndex), out SessionProperty lobbyProperty))
+				int.TryParse(lobbyProperty.PropertyValue.ToString(), out lobbySceneIndex);
+			if (Runner.SessionInfo.Properties.TryGetValue(nameof(MatchmakingDocument.MapSceneIndex), out SessionProperty mapProperty))
+				int.TryParse(mapProperty.PropertyValue.ToString(), out mapSceneIndex);
+			
+			if(lobbySceneIndex < 0 || mapSceneIndex < 0)
+			{
+				Debug.LogError($"Invalid scene indices in SessionProperties: Lobby={lobbySceneIndex}, Map={mapSceneIndex}");
+				return;
+			}
+
+			Debug.Log($"OnGamePhaseChanged: {newState}, LobbySceneIndex={lobbySceneIndex}, MapSceneIndex={mapSceneIndex}");
+
+			switch (newState)
+			{
+				case ELevelManagerState.LOBBY:
+					if (!Runner.IsSharedModeMasterClient) break;
+
+					// Load the lobby scene
+					Runner.LoadScene(SceneRef.FromIndex(lobbySceneIndex), new LoadSceneParameters(LoadSceneMode.Single), true);
+					break;
+
+				case ELevelManagerState.GAMEPLAY:
+					if (!Runner.IsSharedModeMasterClient) break;
+
+					// Load the gameplay scene
+					Runner.LoadScene(SceneRef.FromIndex(mapSceneIndex), new LoadSceneParameters(LoadSceneMode.Single), true);
+					break;
+
+				case ELevelManagerState.COUNTDOWN:
+					// handled in CoreGamePlay
+					StartCoroutine(_countdownManager.Countdown(() =>
+					{
+						// Set state to playing level
+						// if (Runner != null && (runner.IsSharedModeMasterClient))
+						// {
+						// 	if (Runner.TryGetSingleton(out CoreGamePlay gameManager))
+						// 	{
+						// 		EventManager.Emit<GamePhase>(GamePhase.MatchPlaying);
+						// 	}
+						// }
+						EventManager.TriggerEvent<GamePhase>(GamePhase.MatchPlaying);
+						// Enable inputs after countdow finishes
+						InputController.fetchInput = true;
+					}));
+					break;
+			}
+		}
+	}
+}
+
+public enum ELevelManagerState
+{
+	LOBBY,
+	GAMEPLAY, 
+	COUNTDOWN,
+}
+
+
+================================================================================
+FILE 576/682: Assets/_GameModules/TankFusionModule/Scripts/LookAtMainCamera.cs
+================================================================================
+
+using UnityEngine;
+
+public class LookAtMainCamera : MonoBehaviour
+{
+    [SerializeField] private Camera _camera;
+    private int _retryCount = 0;
+    [SerializeField] private Vector3 positionOffset = Vector3.up;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
+
+    private void LateUpdate()
+    {
+        if (_retryCount > 10)
+        {
+            return;
+        }
+
+        if (_camera == null)
+        {
+            _retryCount++;
+            _camera = Camera.main;
+
+            if (_retryCount >= 10)
+            {
+                Debug.LogError("LookAtMainCamera: Camera.main is not set after multiple attempts.");
+                return;
+            }
+        }
+        // Make the name tag face away from the camera
+        Vector3 direction = transform.position - _camera.transform.position;
+        transform.position = transform.parent.position + positionOffset; // Adjust height if needed
+
+        // Only rotate on Y axis, keep X rotation at 45 degrees
+        float yRotation = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        
+        // Snap Y rotation to 0 or 180 based on which is closer
+        if (Mathf.Abs(yRotation) < 90f)
+        {
+            yRotation = -45f;
+        }
+        else
+        {
+            yRotation = 135;
+        }
+        
+        transform.rotation = Quaternion.Euler(45f, yRotation, 0f);
+    }
+}
+
+
+================================================================================
+FILE 577/682: Assets/_GameModules/TankFusionModule/Scripts/NetworkRunnerStaticRefs.cs
+================================================================================
+
+using System.Linq;
+using Fusion;
+using FusionHelpers;
+
+namespace Fusion.TankOnlineModule
+{
+	public static class NetworkRunnerStaticRefs
+	{
+		public static LevelManager GetLevelManager(this NetworkRunner runner) => runner ? (LevelManager)runner.SceneManager : null;
+	}
+}
+
+
+================================================================================
+FILE 578/682: Assets/_GameModules/TankFusionModule/Scripts/Player.cs
+================================================================================
+
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
+using FusionHelpers;
+using UnityEngine;
+using Newtonsoft.Json;
+using ExitGames.Client.Photon.StructWrapping;
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// The Player class represent the players avatar - in this case the Tank.
+	/// </summary>
+	[RequireComponent(typeof(NetworkCharacterController))]
+	public class Player : FusionPlayer
+	{
+		#region Visuals
+		[SerializeField] private List<TankVisual> _visualsArray;
+		[SerializeField] private TankPartVisual tankPartVisual;
+		[SerializeField] public AbilityManager abilityManager;
+		[SerializeField] public EffectApplier EffectApplier;
+		[SerializeField] public TankVisualsVfx TankVisualsVfx;
+		public TankVisual visuals;
+		public TankUI tankUI;
+		public TankIndicator tankIndicator;
+		#endregion
+
+		#region Parameters
+		private NetworkCharacterController ncc;
+		private ChangeDetector changes;
+		private NetworkInputData oldInput;
+		private float respawnTime = 5f; // Default respawn time
+		#endregion
+
+		#region Properties
+		[OnChangedRender(nameof(OnPlayerStageChanged))]
+		[Networked] public Stage NetPlayerStage { get; set; }
+		[Networked] public Angle AimDirection { get; set; }
+		[Networked] public Angle HullDirection { get; set; }
+		[Networked] private TickTimer RespawnTimer { get; set; }
+		[Networked] private TickTimer invulnerabilityTimer { get; set; }
+		[OnChangedRender(nameof(OnAnimStateChanged))]
+		[Networked] public byte TankAnimState { get; set; }
+		public bool IsDead => NetPlayerStage == Stage.Dead;
+		public Player Target { get; }
+		public bool IsCreated { get; set; }
+		public int CurrentCurrency => PlayerGold;
+		public bool IsActivated => (gameObject.activeInHierarchy && (NetPlayerStage == Stage.Active || NetPlayerStage == Stage.TeleportIn || NetPlayerStage == Stage.Invisible));
+		public bool IsBlockMove => (EffectApplier != null
+								&& (EffectApplier.HasEffect((int)EffectData.EffectType.Root)
+								|| EffectApplier.HasEffect((int)EffectData.EffectType.Stun)
+								|| EffectApplier.HasEffect((int)EffectData.EffectType.Knockback))
+								) || IsDead;
+		public bool IsBlockAim => (EffectApplier != null
+								&& (EffectApplier.HasEffect((int)EffectData.EffectType.Stun)
+								|| EffectApplier.HasEffect((int)EffectData.EffectType.Knockback))
+								) || IsDead;
+		public bool IsBlockAtk => (EffectApplier != null
+								&& (EffectApplier.HasEffect((int)EffectData.EffectType.Stun)
+								|| EffectApplier.HasEffect((int)EffectData.EffectType.Knockback))
+								) || IsDead;
+		public bool ExplosionOnDeath = true;
+		public bool IsRespawningDone => NetPlayerStage == Stage.TeleportIn && RespawnTimer.Expired(Runner);
+		public Material PlayerMaterial { get; set; }
+		public Color PlayerColor { get; set; } = Color.white;
+		public Vector3 Velocity => Object != null && Object.IsValid ? ncc.Velocity : Vector3.zero;
+		public GameObject CameraTarget => ncc.gameObject;
+		public int Direction { get { return PlayerTeamIndex != -1 ? (PlayerTeamIndex == 0 ? -1 : 1) : -1; } }
+
+		public NetworkCharacterController NCC => ncc;
+
+		public bool HasLocalSignal { get; set; } = false;
+		#endregion
+
+		#region Ability
+
+		#endregion
+		private void Awake()
+		{
+			DontDestroyOnLoad(this);
+			ncc = GetComponent<NetworkCharacterController>();
+			GameMatchData = DatabaseManager.GetDB<SOMatchData>();
+		}
+
+		protected override void OnNetPlayerIndexChanged() { }
+		protected override void OnNetTankIdChanged()
+		{
+			UpdateTankData();
+			SetVisual();
+			ApplyNCCStats();
+			abilityManager?.Initialize(this);
+			UpdateUITankSelected();
+		}
+		protected override void OnNetWrapIdChanged()
+		{
+			Debug.Log($"[OnNetWrapIdChanged] PlayerWrapId: {PlayerWrap}");
+
+			visuals?.LoadWrap(PlayerWrap, PlayerTankId);
+			PlayerData.WrapId = PlayerWrap;
+			UpdateDataChanged();
+		}
+
+		protected override void OnNetPlayerNameChanged()
+		{
+			tankUI.SetPlayerName(PlayerName);
+			gameObject.name = $"pos[{PlayerId.AsIndex}]_name[{PlayerName}]";
+			GameMatchData.AddPlayer(new MatchPlayerData { PlayerName = PlayerName, PlayerId = PlayerId.AsIndex, IndexInTeam = PlayerIndex, IsLocalPlayer = Object.HasInputAuthority });
+		}
+
+		protected override void OnNetTeamIndexChanged()
+		{
+			Debug.Log($"OnNetTeamIndexChanged {PlayerName} to team {PlayerTeamIndex}");
+			PlayerData.TeamIndex = PlayerTeamIndex;
+			tankUI.SetTeam(PlayerTeamIndex);
+
+			SetReadyState();
+		}
+
+		protected override void OnNetAvatarIdChanged() { }
+		protected override void OnNetGoldChanged()
+		{
+			PlayerData.Gold = PlayerGold;
+			EventManager.TriggerEvent<GameServer.GoldEvent>(new GameServer.GoldEvent { Gold = PlayerGold });
+		}
+
+		protected override void OnNetKillChanged()
+		{
+			PlayerData.Kill = PlayerKill;
+			PlayerKillStreak++;
+			tankUI.UpdateKillStreak(PlayerKillStreak);
+			UpdateDataChanged();
+		}
+
+		protected override void OnNetDeathChanged()
+		{
+			Debug.Log($"OnNetDeathChanged {PlayerName} to death {PlayerDeath}");
+			PlayerData.Death = PlayerDeath;
+			PlayerKillStreak = 0;
+			tankUI.UpdateKillStreak(PlayerKillStreak);
+			UpdateDataChanged();
+		}
+
+		protected override void OnNetDestroyedOutpostChanged()
+		{
+			DestroyedTurrets = NetDestroyedOutpost;
+			PlayerData.DestroyedTurrets = DestroyedTurrets;
+			UpdateDataChanged();
+		}
+
+		protected override void OnNetHPChanged()
+		{
+			PlayerData.HP = PlayerHP;
+			tankUI.ChangeHP(PlayerHP, PlayerMaxHP);
+		}
+		protected override void OnNetMaxHPChanged()
+		{
+			PlayerData.MaxHitpoints = PlayerMaxHP;
+			PlayerData.HP = PlayerHP;
+			tankUI.ChangeHP(PlayerHP, PlayerMaxHP);
+			tankUI.SetLineDecorHP(PlayerMaxHP);
+		}
+		protected override void OnNetUpgradesChanged()
+		{
+			tankUI.UpdateLevel();
+			ApplyNCCStats();
+		}
+
+		private void UpdateDataChanged()
+		{
+			EventManager.TriggerEvent<MatchPlayerData>(PlayerData);
+			EventManager.TriggerEvent<GamePlayDataEvent>(new GamePlayDataEvent());
+		}
+
+		protected override void OnNetModifyStatsChanged()
+		{
+			if (PlayerData == null) return;
+
+			if (!Mathf.Approximately(PlayerData.ModifySpeedRatio, MoveSpeedModifyRatio))
+			{
+				PlayerData.ModifySpeedRatio = MoveSpeedModifyRatio;
+				ApplyNCCStats();
+				Debug.Log($"[FusionPlayer] MoveSpeedModifyRatio changed: {PlayerData.ModifySpeedRatio}");
+			}
+
+			if (!Mathf.Approximately(PlayerData.ModifyFireRateRatio, FireRateModifyRatio))
+			{
+				PlayerData.ModifyFireRateRatio = FireRateModifyRatio;
+				visuals.WeaponManager.UpgradeFireRate();
+				Debug.Log($"[FusionPlayer] FireRateModifyRatio changed: {PlayerData.ModifyFireRateRatio}");
+			}
+
+		}
+		public override void Spawned()
+		{
+			base.Spawned();
+			UpdateTankData();
+
+			EffectApplier?.Initialize(this);
+			changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+			Runner.WaitForSingleton<GameServer>(session =>
+			{
+				session.AddPlayerAvatar(this);
+			});
+
+			RegisterEventListener((DamageEvent evt) => TakeDamage(evt));
+			RegisterEventListener((PickupEvent evt) => OnPickup(evt));
+			RegisterEventListener((EffectEvent evt) => OnEffectApply(evt));
+		}
+
+		/// <summary>
+		/// Initializes the network state for the player.
+		/// </summary>
+		public override void InitNetworkState(string tankId, string playerName, int playerIndex = -1, int teamIndex = -1, string avatarUrl = "", int wrapId = 0)
+		{
+			Debug.Log($"Initializing Player Network State: TankId={tankId}, PlayerName={playerName}, PlayerIndex={playerIndex}, TeamIndex={teamIndex}, AvatarUrl={avatarUrl}, wrapId={wrapId}");
+
+			InitData(tankId, playerName, avatarUrl, wrapId);
+			// Proxies may not be in state "NEW" when they spawn, so make sure we handle the state properly, regardless of what it is
+			NetPlayerStage = Stage.New; // first state
+		}
+
+		private void InitData(string tankId, string pName, string avatarUrl, int wrapId)
+		{
+			IsCreated = false;
+
+			if (Object.HasStateAuthority)
+			{
+				Debug.Log($"[SyncVisual] InitData for Player {-1} with TankId {tankId} and Name {pName}");
+
+				NetPlayerName = pName; // set data
+				NetTankId = tankId; // set data
+				NetDestroyedOutpost = 0; // set data
+				NetAvatarId = avatarUrl; // set data
+				NetKill = 0; // set data
+				NetDeath = 0; // set data
+				NetGold = 0; // set data
+				NetWrapId = wrapId; // set data
+			}
+
+			IsCreated = true;
+		}
+
+		public override void FixedUpdateNetwork()
+		{
+			if (Object.HasStateAuthority)
+			{
+				CheckRespawn();
+
+				if (IsRespawningDone)
+					RevivalPlayer();
+
+				ScanTargetInRange(30f);
+			}
+
+			if (GameServer.Instance == null || GameServer.Instance.gameObject == null || GameServer.Instance.CurrentPlayState != ServerState.LEVEL)
+			{
+				return; // Skip input processing if not in the level state
+			}
+
+			bool controlledByJoystick = false;
+			if (InputController.fetchInput)
+			{
+				if (GetInput(out NetworkInputData input))
+				{
+					controlledByJoystick = input.aimDirection != Vector2.zero;
+					bool allowClick = !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+					SetDirections(input.moveDirection.normalized, input.aimDirection.normalized);
+					//Preset ability params
+					var range = 0f;
+					var radius = 0f;
+					const int REMOVE_NORMALIZE_INDEX = 1;//NOTE: to convert to zero-based index OF ABILITY ARRAY
+					if (!IsBlockAtk)
+					{
+						int btnDown = input.GetSlotBtnDownIndex();
+						switch (btnDown)
+						{
+							case -1:
+								tankIndicator?.ActiveIndicator(false);
+								break;
+							case 0:
+								visuals.WeaponManager.FireWeapon(WeaponManager.WeaponInstallationType.PRIMARY);
+								range = 5f;
+								break;
+							default:
+								int abilitySlot = btnDown;
+								var ability = abilityManager?.GetAbilityBySlot(abilitySlot - REMOVE_NORMALIZE_INDEX);
+								range = ability?.GetCustomPropertiesRuntime().FirstOrDefault(p => p.propertyName == "Range")?.propertyValue ?? 0f;
+								radius = ability?.GetCustomPropertiesRuntime().FirstOrDefault(p => p.propertyName == "Radius")?.propertyValue ?? 0f;
+								break;
+						}
+						if (btnDown >= 0)
+						{
+							tankIndicator?.ActiveIndicator(true);
+							if (input.aimDirection != Vector2.zero)
+							{
+								tankIndicator?.SetIndicatorSkillRotate(input.aimDirection.normalized, range);
+								tankIndicator?.SetIndicatorAim(input.rangeRatio, radius, range);
+							}
+							else
+								tankIndicator?.PresetIndicator(new Vector2(visuals.Turret.forward.x, visuals.Turret.forward.z), 0);
+						}
+
+						for (int i = 0; i <= 3; i++)
+						{
+							uint btn = (1u << i);
+							if (input.WasReleased(btn, oldInput))
+							{
+								if ((input.CancelMask & btn) != 0)
+								{
+									continue;
+								}
+								if (btn == NetworkInputData.BUTTON_FIRE_PRIMARY)
+								{
+
+								}
+								else
+								{
+									int abilityWasPressedSlot = i;
+									var abilityWasPressed = abilityManager?.GetAbilityBySlot(abilityWasPressedSlot - REMOVE_NORMALIZE_INDEX);
+									Vector3 aimDir = visuals.WeaponManager.GetMainWeapon().transform.forward;
+									if (!IsDead)
+										abilityManager?.ActivateAbilityBySlot(abilityWasPressedSlot - REMOVE_NORMALIZE_INDEX, aimDir);
+								}
+							}
+						}
+					}
+					oldInput = input;
+				}
+
+				RotateTargetAutomatically(!(controlledByJoystick || abilityManager.IsAbilityBlockAutoAim));
+			}
+			CheckStayInBushes();
+		}
+
+		/// <summary>
+		/// Render is the Fusion equivalent of Unity's Update() and unlike FixedUpdateNetwork which is very different from FixedUpdate,
+		/// Render is in fact exactly the same. It even uses the same Time.deltaTime time steps. The purpose of Render is that
+		/// it is always called *after* FixedUpdateNetwork - so to be safe you should use Render over Update if you're on a
+		/// SimulationBehaviour.
+		///
+		/// Here, we use Render to update visual aspects of the Tank that does not involve changing of networked properties.
+		/// </summary>
+		public override void Render()
+		{
+			this.transform.position = new Vector3(this.transform.position.x, 0.08f, this.transform.position.z);
+
+			if (visuals != null)
+			{
+				visuals.RenderVisuals(this);
+				CheckInvisibilityTogether();
+			}
+		}
+
+		private void SetReadyState()
+		{
+			if (string.IsNullOrEmpty(PlayerTankId) || PlayerTeamIndex == -1)
+			{
+				Debug.LogWarning($"1[RPC_SetReady] Player {PlayerName} cannot be ready. TankId: {PlayerTankId}, TeamIndex: {PlayerTeamIndex}");
+				return;
+			}
+			Debug.Log($"1[RPC_SetReady] for Player {PlayerName}, TankId: {PlayerTankId}, TeamIndex: {PlayerTeamIndex}");
+			PlayerData.IsJoined = true;
+			Runner.WaitForSingleton<GameServer>(session =>
+			{
+				session.RPC_SetReady(PlayerId);
+			});
+		}
+
+		private void UpdateUITankSelected()
+		{
+			Debug.Log($"UpdateUITankSelected for Player {PlayerName}, TankId: {PlayerTankId}, TeamIndex: {PlayerTeamIndex}");
+			if (string.IsNullOrEmpty(PlayerTankId)) return;
+
+			EventManager.TriggerEvent<ChooseTankBaseInfo>(
+				new ChooseTankBaseInfo
+				{
+					IsLocalPlayer = IsLocalPlayer,
+					TeammateIndex = PlayerTeamIndex,
+					PlayerName = PlayerName,
+					PlayerIndex = PlayerIndex,
+					TankId = PlayerTankId,
+					PlayerId = PlayerId.AsIndex,
+				});
+		}
+
+		private void UpdateTankData()
+		{
+			if (string.IsNullOrEmpty(PlayerTankId) || PlayerIndex == -1)
+			{
+				Debug.LogWarning("[UpdateTankData] PlayerTankId is null or empty or PlayerIndex is -1, cannot sync visual.");
+				return;
+			}
+			// cập nhật dữ liệu về tank từ database vào GameMatchData với PlayerIndex là vị trí slot của người chơi
+			MatchPlayerData matchPlayerData = DatabaseManager.CreateMatchPlayer(PlayerTankId);
+
+			// Gán trực tiếp wrapId (kiểu int) cho MatchPlayerData
+			matchPlayerData.WrapId = PlayerWrap;
+
+			Debug.Log($"[UpdateTankData] WrapId: {matchPlayerData.WrapId}");
+
+			GameMatchData.UpdatePlayerData(Object.InputAuthority, matchPlayerData);
+
+			// cập nhật lại HP và max HP theo tank mới, chỉ người sở hữu quyền hạn mới được phép thay đổi dữ liệu mạng
+			if (Object.HasStateAuthority)
+			{
+				respawnTime = PlayerRespawnTime = matchPlayerData.RespawnInSeconds; // đặt lại thời gian hồi sinh mới
+				NetHP = NetMaxHP = matchPlayerData.MaxHitpoints; // đặt lại giá trị Network HP và MaxHP
+			}
+		}
+
+		private TickTimer TargetDetectionTimer { get; set; }
+		[SerializeField] private Player _tankTarget;
+		[SerializeField] private Turret _turretTarget;
+		private Collider[] _areaHits = new Collider[20];
+		private void ScanTargetInRange(float customRange = -1)
+		{
+			if (NetPlayerStage != Stage.Active && NetPlayerStage != Stage.Invisible) return;
+
+			if (!TargetDetectionTimer.ExpiredOrNotRunning(Runner))
+				return;
+
+			float TARGET_DETECTION_INTERVAL = Runner.DeltaTime * 5f; // *5 to reduce frame rate
+			TargetDetectionTimer = TickTimer.CreateFromSeconds(Runner, TARGET_DETECTION_INTERVAL);
+
+			float _range = customRange > 0 ? customRange : PlayerData.Range;
+			float rangeSqr = _range * _range;
+			int cnt = Physics.OverlapSphereNonAlloc(transform.position, _range, _areaHits, LayerMask.GetMask("Player", "Outpost"), QueryTriggerInteraction.Ignore);
+
+			Player nearestEnemy = null;
+			Turret nearestOutpost = null;
+			float minEnemyDistSqr = float.MaxValue;
+			float minOutpostDistSqr = float.MaxValue;
+
+			for (int i = 0; i < cnt; i++)
+			{
+				var col = _areaHits[i];
+				if (col == null) continue;
+				if (CheckSignBlocked(col.transform)) continue;
+
+				Player p = col.GetComponent<Player>();
+				if (p != null)
+				{
+					if (p.PlayerTeamIndex == PlayerTeamIndex || p.IsDead || !p.HasLocalSignal) continue;
+					float distSqr = (transform.position - p.visuals.Turret.position).sqrMagnitude;
+					if (distSqr < minEnemyDistSqr)
+					{
+						minEnemyDistSqr = distSqr;
+						nearestEnemy = p;
+					}
+					continue;
+				}
+
+				Turret t = col.GetComponent<Turret>();
+				if (t != null)
+				{
+					if (t.TurretTeamIndex == PlayerTeamIndex || !t.IsAlive) continue;
+					float distSqr = (transform.position - t.TurretHead.position).sqrMagnitude;
+					if (distSqr < minOutpostDistSqr)
+					{
+						minOutpostDistSqr = distSqr;
+						nearestOutpost = t;
+					}
+				}
+			}
+
+			_tankTarget = nearestEnemy;
+			_turretTarget = nearestOutpost;
+		}
+
+		private void RotateTargetAutomatically(bool active = false)
+		{
+			if (!active)
+				return;
+			Vector3 turretPos = visuals.Turret.position;
+
+			// Nếu không có target nào thì return
+			if (_tankTarget == null && _turretTarget == null)
+				return;
+
+			// Chọn target gần nhất
+			float tankDist = _tankTarget != null ? Vector3.Distance(turretPos, _tankTarget.visuals.Turret.position) : float.MaxValue;
+			float turretDist = _turretTarget != null ? Vector3.Distance(turretPos, _turretTarget.TurretHead.position) : float.MaxValue;
+
+			Vector3 targetPos = (tankDist < turretDist)
+				? _tankTarget.visuals.Turret.position
+				: _turretTarget.TurretHead.position;
+
+			Vector3 direction = targetPos - turretPos;
+			direction.y = 0;
+			if (direction.sqrMagnitude > 0.01f)
+			{
+				visuals.Turret.forward = direction.normalized;
+				AimDirection = visuals.Turret.rotation.eulerAngles.y;
+			}
+
+		}
+		private bool CheckSignBlocked(Transform target)
+		{
+			if (target == null) return true;
+
+			Vector3 from = transform.position + Vector3.up * 0.5f;
+			Vector3 to = target.position + Vector3.up * 0.5f;
+			Vector3 dir = (to - from);
+			float length = dir.magnitude;
+
+			// Nếu target rất gần thì bỏ qua kiểm tra chắn tường
+			if (length < 0.5f)
+				return false;
+
+			dir /= length; // Chuẩn hóa
+
+			int blockedLayer = LayerMask.GetMask("Wall");
+
+			// Dùng SphereCast thay vì Raycast để ổn định hơn (bán kính nhỏ, ví dụ 0.2f)
+			if (Physics.SphereCast(from, 0.2f, dir, out var hitinfo, length, blockedLayer, QueryTriggerInteraction.Ignore))
+				return true;
+
+			return false;
+		}
+
+		private void ShootTargetAutomatically()
+		{
+			Vector3 turretPos = visuals.Turret.position;
+			float tankDist = (_tankTarget != null && !_tankTarget.IsDead)
+				? Vector3.Distance(turretPos, _tankTarget.visuals.Turret.position)
+				: float.MaxValue;
+			float turretDist = (_turretTarget != null && _turretTarget.IsAlive)
+				? Vector3.Distance(turretPos, _turretTarget.TurretHead.position)
+				: float.MaxValue;
+
+			// Không có mục tiêu hợp lệ thì return
+			if (tankDist == float.MaxValue && turretDist == float.MaxValue)
+				return;
+
+			Transform targetTransform = null;
+			Vector3 direction;
+			if (tankDist < turretDist)
+				targetTransform = _tankTarget.visuals.Turret;
+			else
+				targetTransform = _turretTarget.TurretHead;
+
+			if (!targetTransform) return;
+			if (CheckSignBlocked(targetTransform))
+				return;
+
+			direction = targetTransform.position - turretPos;
+			direction.y = 0;
+			if (direction.sqrMagnitude > 0.01f)
+			{
+				visuals.Turret.forward = direction.normalized;
+				AimDirection = visuals.Turret.rotation.eulerAngles.y;
+			}
+		}
+
+		// hiện thị tank mà nguời chơi đã chọn theo TankId
+		private void SetVisual()
+		{
+			visuals = _visualsArray.Find(tank => tank.tankId.Equals(PlayerTankId.ToString()));
+			if (visuals == null)
+			{
+				Debug.LogError($"No TankVisual found for TankId {PlayerTankId}. Check if the TankVisuals are set up correctly.");
+				return;
+			}
+
+			for (int i = 0; i < _visualsArray.Count; i++)
+			{
+				_visualsArray[i].gameObject.SetActive(false);
+			}
+
+			visuals.gameObject.SetActive(true);
+			visuals.Initialize(this);
+		}
+
+		private void ApplyNCCStats()
+		{
+			ncc.maxSpeed = PlayerData.MaxSpeed;
+			ncc.braking = PlayerData.Braking;
+			ncc.rotationSpeed = PlayerData.RotationSpeed;
+			ncc.acceleration = PlayerData.Acceleration;
+		}
+
+		[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+		public void RPC_AddUpgrade(GameServer.UpgradeEvent @event)
+		{
+			var upgrade = DatabaseManager.GetDB<TankUpgradeCollection>().GetDefinition(PlayerTankId).GetStat(@event.UpgradeType);
+
+			var upgradeCount = NetUpgrades[(int)upgrade.type];
+			var nextUpgradeIndex = upgradeCount;
+
+			if (nextUpgradeIndex >= upgrade.upgradeValues.Length) return;
+
+			var nextUpgradeValue = upgrade.upgradeValues[nextUpgradeIndex];
+			var nextUpgradeCost = upgrade.baseCost;
+
+			var gold = NetGold;
+			if (gold < nextUpgradeCost) return;
+
+			Debug.Log($"RPC: Upgrade {upgrade.type} | {nextUpgradeIndex + 1}");
+			RPC_AddGold(-nextUpgradeCost);
+
+			NetUpgrades.Set((int)upgrade.type, nextUpgradeIndex + 1);
+			switch (upgrade.type)
+			{
+				case UpgradeType.MaxHP:
+					int newMaxHP = PlayerData.GetUpgradeMaxHP(nextUpgradeValue);
+					int deltaHP = newMaxHP - PlayerData.MaxHitpoints;
+					NetMaxHP = newMaxHP;
+					NetHP += deltaHP;
+					break;
+
+				case UpgradeType.Damage:
+					PlayerData.Upgrade(damageMultiplier: nextUpgradeValue);
+					break;
+
+				case UpgradeType.FireRate:
+					PlayerData.Upgrade(fireRateMultiplier: nextUpgradeValue);
+					visuals.WeaponManager.UpgradeFireRate();
+					break;
+
+				case UpgradeType.MovementSpeed:
+					PlayerData.Upgrade(speedMultiplier: nextUpgradeValue);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+			Debug.Log($"Upgraded Player {PlayerId} stats: MaxSpeed={nextUpgradeValue}, Damage={PlayerData.Damage[0]}");
+		}
+
+		[Rpc(RpcSources.InputAuthority, RpcTargets.All)]
+		public void RPC_ChooseTank(string tankId, int wrapId)
+		{
+			Debug.Log($"Player select tank {tankId}");
+			if (PlayerTankId.ToString().Equals(tankId)) return;
+			NetTankId = tankId;
+
+			// Cập nhật lại wrap decal sticker khi đổi tank
+			//get from db PlayerDocument
+			Debug.Log($"RPC wrap {tankId}, old wrap: {NetWrapId}");
+			NetWrapId = wrapId;
+		}
+
+		[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+		public void RPC_ReceiveCurrencyTeam(int bonus)
+		{
+			Debug.Log($"RPC_ReceiveCurrencyTeam: PlayerIndex={PlayerIndex}, bonus={bonus}, team={PlayerTeamIndex}");
+			Debug.Log($"RPC_ReceiveCurrencyTeam: Adding {bonus} currency to PlayerIndex={PlayerIndex}");
+			NetGold += bonus;
+		}
+
+		public void IncreaseKill()
+		{
+			NetKill++;
+		}
+
+		public void IncreaseDeath()
+		{
+			NetDeath++;
+		}
+
+		public void IncreaseGold(int bonus)
+		{
+			NetGold += bonus;
+		}
+
+		[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+		public void RPC_RequestPurchase(int cost, int powerupIndex)
+		{
+			if (PlayerGold >= cost)
+			{
+				PlayerGold -= cost;
+				RPC_AddGold(PlayerGold); // Only notify the requesting player
+				RaiseEvent(new PickupEvent { powerup = powerupIndex });
+				Debug.Log($"Purchase approved: -{cost} coins");
+			}
+			else
+			{
+				Debug.Log("Not enough coins (server validated)");
+			}
+		}
+
+		public override void Despawned(NetworkRunner runner, bool hasState)
+		{
+			Debug.Log($"Despawned PlayerAvatar for PlayerRef {PlayerId}");
+			base.Despawned(runner, hasState);
+			SpawnTeleportOutFx();
+		}
+
+		private void OnDestroy()
+		{
+			if (visuals != null && visuals.DeathExplosionInstance != null)
+				Destroy(visuals.DeathExplosionInstance);
+		}
+
+		private void OnPickup(PickupEvent evt)
+		{
+			PowerupElement powerup = PowerupSpawner.GetPowerup(evt.powerup);
+
+			if (powerup.powerupType == PowerupType.HEALTH)
+			{
+				PlayerHP = PlayerData.MaxHitpoints;
+				EventManager.TriggerEvent<Player>(this);
+			}
+			else
+				visuals.WeaponManager.InstallWeapon(powerup);
+		}
+		private void OnEffectApply(EffectEvent evt)
+		{
+			if (EffectApplier == null)
+				return;
+
+			if (EffectApplier.HasEffect((int)EffectData.EffectType.ImmuneCC) && EffectData.IsCCEffect(evt.effectId))
+				return;
+
+			//add more logic here if needed
+			EffectApplier?.ApplyEffect(new EffectData
+			{
+				effectId = evt.effectId,
+				duration = evt.duration,
+				lifeTime = evt.duration,
+				value = evt.value,
+				dir = Player.EffectEvent.ConvertToDir(evt.angle),
+				srcPlayerId = evt.srcPlayerId,
+			});
+		}
+
+		private void HideVisuals(bool hide)
+		{
+			tankPartVisual.EnableVisual(hide);
+		}
+
+		/// <summary>
+		/// Set the direction of movement and aim
+		/// </summary>
+		private void SetDirections(Vector2 moveVector, Vector2 aimVector)
+		{
+			if (!IsActivated)
+				return;
+
+			if (!IsBlockMove)
+			{
+				Vector3 moveDirection = new Vector3(moveVector.x, 0, moveVector.y);
+				ncc.Move(moveDirection, this.visuals.Hull);
+				HullDirection = this.visuals.Hull.rotation.eulerAngles.y;
+
+				if (moveVector.sqrMagnitude > 0)
+					visuals.DrivingFx(true);
+				else
+					visuals.DrivingFx(false);
+			}
+			if (!IsBlockAim)
+			{
+				if (aimVector.sqrMagnitude > 0)
+					visuals.Turret.forward = new Vector3(aimVector.x, 0, aimVector.y);
+				AimDirection = visuals.Turret.rotation.eulerAngles.y;
+			}
+		}
+
+		public override void TakeDamage(DamageEvent @event)
+		{
+			base.TakeDamage(@event);
+			Debug.Log($"Player {PlayerId} took {@event.damage} damage, life = {PlayerHP}, max = {PlayerMaxHP}");
+			if (!IsActivated || !invulnerabilityTimer.Expired(Runner))
+				return;
+
+			if (HasStateAuthority && Runner.TryGetSingleton(out GameServer game))
+			{
+				if (game == null)
+				{
+					Debug.LogWarning("CoreGamePlay singleton not found, cannot apply damage.");
+					return;
+				}
+
+				if (@event.damage >= PlayerHP)
+				{
+					if (game.ActivePlayState == ServerState.LEVEL)
+					{
+						game.RPC_UpdateKillDeath(new GameServer.PlayerKillEvent { KillerId = @event.targetPlayerRef, TargetId = PlayerId.AsIndex });
+						NetHP = 0;
+						NetPlayerStage = Stage.Dead; // killed by another player or outpost
+						Respawn(PlayerRespawnTime);
+					}
+				}
+				else
+				{
+					NetHP -= @event.damage;
+				}
+			}
+
+			if (visuals != null)
+				visuals.ShowVFXDamage(this, @event.damage);
+
+			if (@event.targetPlayerRef != PlayerId.AsIndex)// only show damage if not self-inflicted
+				tankUI.ShowTextDamage(@event.damage);
+		}
+
+		// for show on attacker side immediately
+		public override void UpdateHPImmediately(int damage)
+		{
+			tankUI.ChangeHP(NetHP - damage, NetMaxHP);
+		}
+
+		/// <summary>
+		/// Apply damage to Tank with an associated impact impulse
+		/// </summary>
+		/// <param name="impulse"></param>
+		/// <param name="damage"></param>
+		/// <param name="attacker"></param>
+		public void ApplyAreaDamage(int killerIndex, Vector3 impulse, int damage)
+		{
+			//closed 
+
+			// if (!IsActivated || !invulnerabilityTimer.Expired(Runner))
+			// 	return;
+
+			// if (HasStateAuthority && Runner.TryGetSingleton(out CoreGamePlay game))
+			// {
+			// 	_ncc.Velocity += impulse / 10.0f; // Magic constant to compensate for not properly dealing with masses
+			// 	_ncc.Move(Vector3.zero); // Velocity property is only used by CC when steering, so pretend we are, without actually steering anywhere
+
+			// 	if (damage >= PlayerHP)
+			// 	{
+			// 		if (game.ActivePlayState == CoreGamePlay.PlayState.LEVEL)
+			// 		{
+			// 			PlayerDeath += 1;
+			// 			game.RPC_UpdateKillDeath(killerIndex, PlayerIndex);
+
+			// 			PlayerHP = 0;
+			// 			NetPlayerStage = Stage.Dead;
+			// 			Respawn(PlayerRespawnTime);
+			// 		}
+			// 	}
+			// 	else
+			// 	{
+			// 		PlayerHP -= damage;
+			// 		Debug.Log($"Player {PlayerId} took {damage} damage, life = {PlayerHP}");
+			// 	}
+			// }
+
+			// visuals.DamageVisuals.UpdateText(damage);
+			// visuals.DamageVisuals.CheckHealth(PlayerHP, PlayerMaxHP);
+
+			// invulnerabilityTimer = TickTimer.CreateFromSeconds(Runner, 0.1f);
+		}
+
+		public void Reset()
+		{
+			Debug.Log($"Resetting player #{PlayerIndex} ID:{PlayerId}");
+		}
+
+		public void Respawn(float inSeconds = 0)
+		{
+			respawnTime = inSeconds;
+		}
+
+		private void CheckRespawn()
+		{
+			if (respawnTime >= 0)
+			{
+				respawnTime -= Runner.DeltaTime;
+				tankUI.UpdateRevivalText(Mathf.CeilToInt(respawnTime));
+
+				if (respawnTime <= 0)
+				{
+					SpawnPoint spawnpt = Runner.GetLevelManager().GetPlayerSpawnPoint(PlayerTeamIndex, PlayerIndex);
+					if (spawnpt == null)
+					{
+						respawnTime = Runner.DeltaTime;
+						return;
+					}
+
+					Debug.Log($"Respawning Player #{PlayerIndex} ID:{PlayerId}, life={PlayerHP}, kills={PlayerKill}, deaths={PlayerDeath}, hasStateAuth={Object.HasStateAuthority} from state={NetPlayerStage} @{spawnpt}");
+
+					// Make sure we don't get in here again, even if we hit exactly zero
+					respawnTime = -1;
+
+					// Restore health
+					NetHP = NetMaxHP;
+
+					// Start the respawn timer and trigger the teleport in effect
+					RespawnTimer = TickTimer.CreateFromSeconds(Runner, 1); // Add a small delay to ensure the timer is not expired immediately
+					invulnerabilityTimer = TickTimer.CreateFromSeconds(Runner, 3);
+
+					// Place the tank at its spawn point. This has to be done in FUN() because the transform gets reset otherwise
+					Transform spawn = spawnpt.transform;
+					ncc.Teleport(spawn.position, spawn.rotation);
+
+					// If the player was already here when we joined, it might already be active, in which case we don't want to trigger any spawn FX, so just leave it ACTIVE
+					if (NetPlayerStage != Stage.Active)
+						NetPlayerStage = Stage.TeleportIn;
+					Debug.Log($"Respawned player {PlayerId} @ {spawn.position}, tick={Runner.Tick}, timer={RespawnTimer.IsRunning}:{RespawnTimer.TargetTick}, life={PlayerHP}, kills={PlayerKill}, deaths={PlayerDeath}, hasStateAuth={Object.HasStateAuthority} to state={NetPlayerStage}");
+				}
+			}
+		}
+
+		private void OnAnimStateChanged()
+		{
+			visuals?.SetAnimation(TankAnimState);
+		}
+
+		public void OnPlayerStageChanged()
+		{
+			if (visuals == null) return;
+
+			switch (NetPlayerStage)
+			{
+				case Stage.TeleportIn:
+					Debug.Log($"Starting teleport for player {PlayerId} @ {transform.position} cc@ {ncc.Data.Position}, tick={Runner.Tick}");
+					DOVirtual.DelayedCall(0.7f, () =>
+					{
+						if (TankVisualsVfx) TankVisualsVfx.SetVfx(TankVisualsVfx.VfxType.SpawnVfxBlue, true, 1f);
+					}).SetTarget(this);
+					break;
+
+				case Stage.Active:
+					visuals.Active();
+					break;
+
+				case Stage.Invisible:
+					if (!Object.HasInputAuthority)
+					{
+						// Đồng minh có thể nhìn thấy nhau ở bất kỳ đâu
+						// Cùng trong bụi thì sẽ nhìn thấy nhau
+						//HideVisuals(false);
+					}
+					break;
+
+				case Stage.Dead:
+					visuals.Dead(this, ExplosionOnDeath);
+					abilityManager?.ExitAllAbility();
+					ExplosionOnDeath = true;
+					break;
+
+				case Stage.TeleportOut:
+					SpawnTeleportOutFx();
+					break;
+			}
+
+			tankUI.EnableUI(NetPlayerStage != Stage.Dead);
+			visuals.EnableCollider(NetPlayerStage != Stage.Dead);
+		}
+
+		private void SpawnTeleportOutFx()
+		{
+			if (visuals == null || visuals.TeleportOutPrefab == null) return;
+
+			TankTeleportOutEffect teleout = LocalObjectPool.Acquire(visuals.TeleportOutPrefab, transform.position, transform.rotation, null);
+			teleout.StartTeleport(PlayerColor, visuals.Turret.rotation, visuals.Hull.rotation);
+		}
+
+		private void RevivalPlayer()
+		{
+			if (visuals == null || visuals.WeaponManager == null) return;
+
+			Debug.Log($"Resetting player {PlayerId}, tick={Runner.Tick}, timer={RespawnTimer.IsRunning}:{RespawnTimer.TargetTick}, life={PlayerHP}, kills={PlayerKill}, deaths={PlayerDeath}, hasStateAuth={Object.HasStateAuthority} to state={NetPlayerStage}");
+			visuals.WeaponManager.ResetAllWeapons();
+			NetPlayerStage = Stage.Active;
+		}
+
+		[SerializeField] private LayerMask grassLayer, bushLayer;
+		[SerializeField] private float radius = 5f;
+
+#if UNITY_EDITOR
+		private void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.green;
+			Gizmos.DrawWireSphere(transform.position, radius);
+		}
+#endif
+
+		void CheckStayInBushes()
+		{
+			if (Object.HasInputAuthority == false) return;
+
+			Collider[] hits = Physics.OverlapSphere(transform.position, radius, grassLayer);
+			Player mine = GameServer.Instance.MyTank;
+			if (mine == null || mine.IsDead) return;
+
+			if (hits.Length > 0)
+			{
+				HideOnBushes(true);
+			}
+			else
+			{
+				HideOnBushes(false);
+			}
+		}
+
+		public BushArea currentBush;
+		public Player mine;
+		Collider[] hits = new Collider[20];
+		void CheckInvisibilityTogether()
+		{
+			mine = GameServer.Instance.MyTank;
+			if (mine == null) return;
+
+			if (IsDead) return; // dead can not see anyone
+
+			int cnt = Physics.OverlapSphereNonAlloc(transform.position, radius, hits, bushLayer, QueryTriggerInteraction.Collide);
+			if (cnt > 0)
+			{
+				for (int i = 0; i < cnt; i++)
+				{
+					if (hits[i] != null && hits[i].TryGetComponent(out BushArea bush))
+					{
+						currentBush = bush;
+						break;
+					}
+				}
+			}
+			else currentBush = null;
+
+			// Same team can always see each other
+			if (PlayerTeamIndex == mine.PlayerTeamIndex)
+			{
+				tankPartVisual.EnableVisual(true);
+				visuals.EnableVisuals(true);
+				return;
+			}
+			else // different team
+			{
+				if (mine.currentBush == null && NetPlayerStage == Stage.Invisible) // you stand outside of bush, you can not see enemy in bush
+				{
+					tankPartVisual.EnableVisual(false);
+					visuals.EnableVisuals(false);
+					HasLocalSignal = false;
+				}
+				else
+				{
+					// case1: enemy is outside of bush, you can see him
+					if (NetPlayerStage == Stage.Active)
+					{
+						// can see him
+						tankPartVisual.EnableVisual(true);
+						visuals.EnableVisuals(true);
+						HasLocalSignal = true;
+						return;
+					}
+
+					// case2: both players are in the same bush, they can see each other
+					if (mine.currentBush != null && currentBush != null &&
+					mine.NetPlayerStage == Stage.Invisible &&
+					NetPlayerStage == Stage.Invisible &&
+					mine.currentBush.GetInstanceID() == currentBush.GetInstanceID())
+					{
+						// can see him
+						tankPartVisual.EnableVisual(true);
+						visuals.EnableVisuals(true);
+						HasLocalSignal = true;
+						return;
+					}
+
+					// case3: enemy is in bush, you are outside of bush, you can not see him
+					if (NetPlayerStage == Stage.Invisible || mine.NetPlayerStage == Stage.Active)
+					{
+						// can not see him
+						tankPartVisual.EnableVisual(false);
+						visuals.EnableVisuals(false);
+						HasLocalSignal = false;
+						return;
+					}
+				}
+			}
+		}
+
+		public void HideOnBushes(bool isHide)
+		{
+			if (NetPlayerStage == Stage.Active && isHide == true)
+			{
+				NetPlayerStage = Stage.Invisible;
+			}
+			else if (isHide == false && NetPlayerStage == Stage.Invisible)
+			{
+				NetPlayerStage = Stage.Active;
+			}
+		}
+
+		public void TeleportOut()
+		{
+			if (NetPlayerStage == Stage.Dead || NetPlayerStage == Stage.TeleportOut || NetPlayerStage == Stage.New)
+				return;
+
+			if (Object.HasStateAuthority)
+				NetPlayerStage = Stage.TeleportOut;
+		}
+
+		public enum Stage
+		{
+			New,
+			TeleportOut,
+			TeleportIn,
+			Active,
+			Dead,
+			Invisible
+		}
+
+		public struct PickupEvent : INetworkEvent
+		{
+			public int powerup;
+		}
+
+		public struct EffectEvent : INetworkEvent
+		{
+			public byte effectId;         // 1
+			public byte srcPlayerId;      // 1
+			public float duration;        // 4
+			public float value;           // 4
+			public float angle;           // 4 hướng knockback/hook
+
+			public static Vector3 ConvertToDir(float angle)
+			{
+				float rad = angle * Mathf.Deg2Rad;
+				return new Vector3(Mathf.Cos(rad), 0, Mathf.Sin(rad));
+			}
+			public static float ConvertToAngle(Vector3 dir)
+			{
+				return Mathf.Atan2(dir.z, dir.x) * Mathf.Rad2Deg;
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 579/682: Assets/_GameModules/TankFusionModule/Scripts/PlayerNetwork.cs
+================================================================================
+
+using Fusion;
+using UnityEngine;
+
+public class PlayerNetwork : NetworkBehaviour
+{
+    [Networked]
+    public NetworkString<_32> PlayerName { get; set; } // Max 32 chars
+    private string cachedName = "";
+    public TMPro.TextMeshPro nameTag;
+
+    public override void Spawned()
+    {
+        // Nếu là local player, set name
+        if (Object.HasInputAuthority)
+        {
+            var playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+            RPC_SetPlayerName(playerDocument.playerName);
+        }
+
+        // Gán name tag text
+        nameTag.text = PlayerName.ToString();
+    }
+
+   public override void FixedUpdateNetwork()
+    {
+        string currentName = PlayerName.ToString();
+
+        if (cachedName != currentName)
+        {
+            cachedName = currentName;
+            nameTag.text = currentName;
+        }
+    }
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    public void RPC_SetPlayerName(string name)
+    {
+        PlayerName = name;
+    }
+}
+
+
+================================================================================
+FILE 580/682: Assets/_GameModules/TankFusionModule/Scripts/Shot.cs
+================================================================================
+
+using Fusion;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public struct ShotState : ISparseState<Shot>
+	{
+		/// <summary>
+		/// Generic sparse state properties required by the interface
+		/// </summary>
+		public int StartTick { get; set; }
+		public int EndTick { get; set; }
+
+		/// <summary>
+		/// Shot specific sparse properties
+		/// </summary>
+		public Vector3 Position;
+		public Vector3 Direction;
+		public Vector3 StartPosition { get; set; }
+
+		public Vector3 Scale;
+
+		public bool IsCancel;
+		public bool IsCustomHited;
+
+		public bool IsAnimActive;
+
+		public int OwnerId;
+		public int TeamIndex;
+		public ShotState(Vector3 parentPosition, Vector3 startPosition, Vector3 direction, Vector3 scale = default, int ownerId = 1, int teamIndex = -1, bool isAnimActive = false)
+		{
+			StartPosition = parentPosition;
+			StartTick = 0;
+			EndTick = 0;
+			Position = startPosition;
+			Direction = direction;
+			Scale = scale;
+			IsCancel = false;
+			IsCustomHited = false;
+			OwnerId = ownerId;
+			TeamIndex = teamIndex;
+			IsAnimActive = isAnimActive;
+		}
+
+		public bool IsOutOfRange(float range)
+		{
+			return Vector3.Distance(StartPosition, Position) > range;
+		}
+
+		public void Extrapolate(float t, Shot prefab)
+		{
+			Position = GetPositionAt(t, prefab);
+			Direction = GetDirectionAt(t, prefab);
+		}
+
+		public Vector3 GetTargetPosition(Shot prefab)
+		{
+			float a = 0.5f * prefab.Gravity.y;
+			float b = prefab.Speed * Direction.y;
+			float c = Position.y;
+			float d = b * b - 4 * a * c;
+			float t = (-b - Mathf.Sqrt(d)) / (2 * a);
+			Vector3 p = GetPositionAt(t, prefab);
+			p.y = 0.05f; // Return the position with a slight y offset to avoid placing target where it will end up z-fighting with the ground;
+			return p;
+		}
+
+		private Vector3 GetPositionAt(float t, Shot prefab) => Position + t * (prefab.Speed * Direction + 0.5f * t * prefab.Gravity);
+		private Vector3 GetDirectionAt(float t, Shot prefab) => prefab.Speed == 0 ? Direction : (prefab.Speed * Direction + t * prefab.Gravity).normalized;
+	}
+
+	public class Shot : MonoBehaviour, ISparseVisual<ShotState, Shot>
+	{
+		[Header("Settings")]
+		[SerializeField] private ProjectileType _projectileType;
+		[SerializeField] private Vector3 _gravity;
+		[SerializeField] private float _speed;
+		[SerializeField] private float _radius;
+		[SerializeField] private LayerMask _hitMask;
+		[SerializeField] private float _range;
+		[SerializeField] private float _areaRadius;
+		[SerializeField] private float _areaImpulse;
+		[SerializeField] private int[] _areaDamage;
+		[SerializeField] private float _timeToLive;
+		[SerializeField] private bool _isHitScan;
+
+		[Header("GameObject")]
+		[SerializeField] protected Transform panelPrefab;
+		[Header("Fx Prefabs")]
+		[SerializeField] private ExplosionFX _detonationPrefab;
+		[SerializeField] private ExplosionFX customHitedPrefab;
+		[SerializeField] private TargetMarker _targetPrefab;
+		[SerializeField] private MuzzleFlash _muzzleFxPrefab;
+
+		public Vector3 Gravity => _gravity;
+		public float Speed => _speed;
+		public float Radius => _radius;
+		public LayerMask HitMask => _hitMask;
+		public float Range { get => _range; set => _range = value; }
+		public float AOERadius => _areaRadius;
+		public float AreaImpulse => _areaImpulse;
+		public int[] AreaDamage => _areaDamage;
+		public float TimeToLive => _timeToLive;
+		public bool IsHitScan => _isHitScan;
+		public ProjectileType ProjectileType => _projectileType;
+
+		private Transform _xform;
+		protected bool isCustomHited = false;
+		private void Awake()
+		{
+			_xform = transform;
+		}
+
+		public virtual void ApplyStateToVisual(NetworkBehaviour owner, ShotState state, float t, bool isFirstRender, bool isLastRender)
+		{
+			if (isLastRender)
+			{
+				OnLastRender(state);
+			}
+			if (!state.IsCustomHited) isCustomHited = false;
+			if (state.IsCustomHited && !isCustomHited)
+			{
+				OnCustomHited(state);
+				isCustomHited = true;
+			}
+			if (isFirstRender)
+			{
+				OnFirstRender(state);
+			}
+			_xform.forward = state.Direction;
+			_xform.position = state.Position;
+			if (state.Scale != default)
+				_xform.localScale = state.Scale;
+		}
+		protected virtual void OnFirstRender(ShotState state)
+		{
+			if (_targetPrefab) LocalObjectPool.Acquire(_targetPrefab, state.GetTargetPosition(this), Quaternion.identity);
+			if (_muzzleFxPrefab) LocalObjectPool.Acquire(_muzzleFxPrefab, state.Position, Quaternion.LookRotation(state.Direction)).OnFire(state);
+			isCustomHited = false;
+		}
+		protected virtual void OnLastRender(ShotState state)
+		{
+			if (!state.IsCancel)
+			{
+				if (IsHitScan && _detonationPrefab)
+					LocalObjectPool.Acquire(_detonationPrefab, state.Position + state.Direction, Quaternion.identity);
+				else if (_detonationPrefab)
+					LocalObjectPool.Acquire(_detonationPrefab, state.Position, Quaternion.identity);
+			}
+		}
+		protected virtual void OnCustomHited(ShotState state)
+		{
+			if (customHitedPrefab && !state.IsCancel)
+				LocalObjectPool.Acquire(customHitedPrefab, state.Position, Quaternion.identity);
+		}
+		public void OverrideData(MatchPlayerData data)
+		{
+			_speed = data.ProjectileSpeed;
+			Range = data.Range;
+			_areaDamage = data.Damage;
+		}
+
+		public virtual bool IsMatchTeammate(int teamIndex)
+		{
+			var localPlayer = GameServer.Instance.MyTank;
+			if (!localPlayer)
+				return true;
+			if (localPlayer.PlayerTeamIndex < 0 || teamIndex < 0)
+				return true;
+			return localPlayer.PlayerTeamIndex == teamIndex;
+		}
+	}
+}
+
+
+================================================================================
+FILE 581/682: Assets/_GameModules/TankFusionModule/Scripts/ShotAnim.cs
+================================================================================
+
+
+
+
+using UnityEngine;
+namespace Fusion.TankOnlineModule
+{
+	public class ShotAnim : Shot
+	{
+		[Header("Custom Settings")]
+		public Transform view;
+		public Animator animator;
+
+		public override void ApplyStateToVisual(NetworkBehaviour owner, ShotState state, float t, bool isFirstRender, bool isLastRender)
+		{
+			base.ApplyStateToVisual(owner, state, t, isFirstRender, isLastRender);
+			animator.SetBool("active", state.IsAnimActive);
+		}
+		protected override void OnCustomHited(ShotState state)
+		{
+			base.OnCustomHited(state);
+		}
+	}
+}
+
+
+================================================================================
+FILE 582/682: Assets/_GameModules/TankFusionModule/Scripts/ShotRope.cs
+================================================================================
+
+using Fusion;
+using FusionHelpers;
+using UnityEngine;
+using GogoGaga.OptimizedRopesAndCables;
+using Unity.VisualScripting;
+using Fusion.GameSystems;
+using ExitGames.Client.Photon.StructWrapping;
+namespace Fusion.TankOnlineModule
+{
+
+	public class ShotRope : Shot
+	{
+		[Header("Custom Settings")]
+		public Transform view;
+		public Transform customVFX;
+		public Transform startPoint;
+		public Transform endPoint;
+		public Rope ropeRenderer;
+		Vector3 originDirection;
+		public void OnEnable()
+		{
+			if (view)
+				view.gameObject.SetActive(false);
+			if (ropeRenderer)
+			{
+				ropeRenderer.damping = 1;
+				ropeRenderer.ropeLength = 1f;
+			}
+		}
+		public override void ApplyStateToVisual(NetworkBehaviour owner, ShotState state, float t, bool isFirstRender, bool isLastRender)
+		{
+			if (isLastRender)
+			{
+				if (startPoint != null)
+				{
+					startPoint.parent = transform;
+					startPoint.localPosition = Vector3.zero;
+					startPoint.localRotation = Quaternion.identity;
+				}
+				if (ropeRenderer)
+				{
+					ropeRenderer.damping = 1;
+					ropeRenderer.ropeLength = 1f;
+				}
+				if (view)
+				{
+					view.localPosition = Vector3.zero;
+					view.gameObject.SetActive(false);
+				}
+				HitedTransform = null;
+				OwnerPlayer = null;
+			}
+
+			base.ApplyStateToVisual(owner, state, t, isFirstRender, isLastRender);
+
+			if (isFirstRender)
+			{
+				customVFX?.gameObject.SetActive(true);
+				if (startPoint != null)
+				{
+					startPoint.parent = null;
+					startPoint.position = new Vector3(state.StartPosition.x, state.StartPosition.y + 1f, state.StartPosition.z);
+
+					if (ropeRenderer)
+					{
+						ropeRenderer.damping = 1;
+						ropeRenderer.ropeLength = 1f;
+					}
+					ropeRenderer.Init();
+					if (view)
+					{
+						view.localPosition = Vector3.zero;
+						view.gameObject.SetActive(true);
+					}
+					if (state.OwnerId > -1)
+					{
+						byte playerId = (byte)state.OwnerId;
+						OwnerPlayer = GameServer.Instance.GetPlayer<Player>(playerId);
+					}
+				}
+				originDirection = transform.forward;
+			}
+			if (ropeRenderer != null)
+			{
+				var range = Vector3.Distance(startPoint.position, endPoint.position);
+				ropeRenderer.damping = Mathf.Max(1, (int)range);
+				ropeRenderer.ropeLength = Mathf.Max(1, (int)range);
+			}
+			if (view)
+			{
+				view.rotation = Quaternion.LookRotation(originDirection, Vector3.up);
+			}
+		}
+
+		Transform HitedTransform;
+		public Player OwnerPlayer;
+		void Update()
+		{
+			if (view != null && HitedTransform == null)
+			{
+				Collider[] hits = Physics.OverlapSphere(view.position, 0.5f);
+				foreach (var hit in hits)
+				{
+					// Bỏ qua chính mình, startPoint, endPoint
+					if (hit.transform == this.transform || hit.transform == startPoint || hit.transform == endPoint)
+						continue;
+
+					// Chỉ nhận va chạm với Player khác bản thân
+					var player = hit.GetComponent<Player>();
+					if (player != null && OwnerPlayer && player.PlayerId != OwnerPlayer.PlayerId)
+					{
+						HitedTransform = hit.transform;
+						break;
+					}
+				}
+			}
+			if (HitedTransform != null)
+			{
+				view.position = HitedTransform.position + Vector3.up * 1.5f;
+				Debug.Log($"HitedTransform position: {HitedTransform.position}");
+			}
+		}
+		protected override void OnCustomHited(ShotState state)
+		{
+			base.OnCustomHited(state);
+			customVFX?.gameObject.SetActive(false);
+		}
+	}
+}
+
+
+================================================================================
+FILE 583/682: Assets/_GameModules/TankFusionModule/Scripts/ShotTrap.cs
+================================================================================
+
+using DG.Tweening;
+using Fusion;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ShotTrap : Shot
+	{
+		[SerializeField] private float delayToHide = 1f;
+		Tween tween = null;
+		protected override void OnFirstRender(ShotState state)
+		{
+			base.OnFirstRender(state);
+			// Show panel if teammate
+			if (panelPrefab)
+				panelPrefab.gameObject.SetActive(true);
+			if (tween != null)
+			{
+				tween.Kill();
+				tween = null;
+			}
+			if (!IsMatchTeammate(state.TeamIndex))
+				tween = DOVirtual.DelayedCall(delayToHide, () =>
+				{
+					if (panelPrefab)
+						panelPrefab.gameObject.SetActive(false);
+				}, ignoreTimeScale: false).SetTarget(this);
+
+		}
+		void OnDisable()
+		{
+			//Clear tween
+			if (tween != null)
+			{
+				tween.Kill();
+				tween = null;
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 584/682: Assets/_GameModules/TankFusionModule/Scripts/StatType.cs
+================================================================================
+
+public enum StatType
+{
+    MovementSpeed,
+    FireRate,
+    Damage,
+}
+
+
+================================================================================
+FILE 585/682: Assets/_GameModules/TankFusionModule/Scripts/TankNameComponent.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using TMPro;
+using UnityEngine;
+
+public class TankNameComponent : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI nameTag;
+
+    public void UpdateNameTag(Player player)
+    {
+        if (nameTag == null)
+        {
+            Debug.LogError("Name tag is not assigned.");
+            return;
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("Player is null.");
+            return;
+        }
+
+        // Update the name tag text with the player's name
+        nameTag.text = player.PlayerName.ToString();
+    }
+}
+
+
+================================================================================
+FILE 586/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisual.cs
+================================================================================
+
+using UnityEngine;
+using FusionHelpers;
+using TMPro;
+using System;
+
+namespace Fusion.TankOnlineModule
+{
+    public class TankVisual : MonoBehaviour
+    {
+        public string tankId;
+        #region Visuals
+        [SerializeField] private Transform _hull;
+        [SerializeField] private Transform _turret;
+        [SerializeField] private Transform _visualParent;
+        [SerializeField] private Transform _visualSpawnEffect;
+        [SerializeField] private TankTeleportInEffect _teleportIn;
+        [SerializeField] private TankTeleportOutEffect _teleportOutPrefab;
+        [SerializeField] private GameObject _deathExplosionPrefab;
+        [SerializeField] private WeaponManager weaponManager;
+        [SerializeField] private Collider[] _collider;
+        [SerializeField] private GameObject _deathExplosionInstance;
+        [SerializeField] private TankDamageVisual _damageVisuals;
+        [SerializeField] private TankPartVisual[] _tankPartVisuals;
+        [SerializeField] private Transform[] _drivingDustParents;
+        [SerializeField] private Animation[] tankAnims;
+
+        public Transform[] DrivingDustParents { get => _drivingDustParents; private set => _drivingDustParents = value; }
+        public Transform Hull { get => _hull; private set => _hull = value; }
+        public Transform Turret { get => _turret; private set => _turret = value; }
+        public Transform VisualParent { get => _visualParent; private set => _visualParent = value; }
+        public TankTeleportInEffect TeleportIn { get => _teleportIn; private set => _teleportIn = value; }
+        public TankTeleportOutEffect TeleportOutPrefab { get => _teleportOutPrefab; private set => _teleportOutPrefab = value; }
+        public GameObject DeathExplosionPrefab { get => _deathExplosionPrefab; private set => _deathExplosionPrefab = value; }
+        public WeaponManager WeaponManager { get => weaponManager; private set => weaponManager = value; }
+        public Collider[] Collider { get => _collider; private set => _collider = value; }
+        public GameObject DeathExplosionInstance { get => _deathExplosionInstance; set => _deathExplosionInstance = value; }
+        public TankDamageVisual DamageVisuals { get => _damageVisuals; private set => _damageVisuals = value; }
+        public TankPartVisual[] TankPartVisuals { get => _tankPartVisuals; private set => _tankPartVisuals = value; }
+        #endregion
+
+        private void Awake()
+        {
+            _collider = transform.root.GetComponentsInChildren<Collider>();
+            _tankPartVisuals = GetComponentsInChildren<TankPartVisual>();
+            tankAnims = GetComponentsInChildren<Animation>();
+        }
+
+        public void Initialize(Player player)
+        {
+            // Initialize the teleport in effect with the player
+            TeleportIn.Initialize(player);
+
+            // Initialize the damage visuals with the player's material
+            DamageVisuals.Initialize(this, player);
+
+            // Initialize the weapon manager with the player
+            WeaponManager.Initialize(player);
+
+            SetUpDeathExplosion(player);
+
+            //WrapDecalStickers Fixme
+            Debug.Log($"[TankVisual.Initialize] PlayerData.WrapId: {(player.PlayerData.WrapId == null ? "null" : player.PlayerData.WrapId.ToString())}");
+            LoadWrap(player.PlayerData.WrapId, player.PlayerTankId);
+        }
+
+        internal void SetUpDeathExplosion(Player player)
+        {
+            if (DeathExplosionPrefab != null)
+            {
+                DeathExplosionInstance = Instantiate(DeathExplosionPrefab, transform.position, transform.rotation, player.transform);
+                DeathExplosionInstance.SetActive(false);
+                ColorChanger.ChangeColor(DeathExplosionInstance.transform, player.PlayerColor);
+            }
+        }
+
+        internal void Dead(Player player, bool showExplosion = true)
+        {
+            if (showExplosion)
+            {
+                if (DeathExplosionInstance == null) SetUpDeathExplosion(player);
+                DeathExplosionInstance.transform.position = transform.position;
+                DeathExplosionInstance.SetActive(false); // dirty fix to reactivate the death explosion if the particlesystem is still active
+                DeathExplosionInstance.SetActive(true);
+            }
+
+            VisualParent.gameObject.SetActive(false);
+            DamageVisuals.OnDeath();
+        }
+        public void LoadWrap(int wrapId, string tankId)
+        {
+            Debug.Log($"[TankVisual.LoadWrap] wrapId: {wrapId}, tankId: {tankId}");
+            if (TankPartVisuals == null || TankPartVisuals.Length == 0)
+            {
+                Debug.LogWarning("[TankVisual.LoadWrap] TankPartVisuals is null or empty");
+                return;
+            }
+            foreach (var part in TankPartVisuals)
+            {
+                Debug.Log($"[TankVisual.LoadWrap] Call LoadWrap on part: {part.name}, tankId: {tankId}, wrapId: {wrapId}");
+                part.LoadWrap(wrapId, tankId);
+            }
+        }
+        public void EnableVisuals(bool status)
+        {
+            foreach (var part in TankPartVisuals)
+            {
+                part.EnableVisual(status);
+            }
+        }
+
+        internal void EnableCollider(bool enable)
+        {
+            foreach (var col in Collider)
+            {
+                col.enabled = enable;
+            }
+        }
+
+        internal void Active()
+        {
+            DamageVisuals.CleanUpDebris();
+            TeleportIn.EndTeleport();
+            VisualParent.gameObject.SetActive(true);
+        }
+
+        internal bool IsTurretAvailable()
+        {
+            return Turret != null;
+        }
+
+        internal void RenderVisuals(Player player)
+        {
+            var interpolated = new NetworkBehaviourBufferInterpolator(player);
+            Turret.rotation = Quaternion.Euler(0, interpolated.Angle(nameof(player.AimDirection)), 0);
+
+            float targetY = interpolated.Angle(nameof(player.HullDirection));
+            Quaternion targetRot = Quaternion.Euler(0, targetY, 0);
+            Hull.rotation = Quaternion.RotateTowards(
+                Hull.rotation,
+                targetRot,
+                360f * Time.deltaTime // hoặc tốc độ xoay mong muốn, ví dụ: 180f * Time.deltaTime
+            );
+            DamageVisuals.CheckHPToShowVFX(player.PlayerHP, player.PlayerMaxHP);
+        }
+
+        internal void ShowVFXDamage(Player player, int damage)
+        {
+            DamageVisuals.CheckHPToShowVFX(player.PlayerHP, player.PlayerMaxHP);
+        }
+
+        public void DrivingFx(bool isDriving)
+        {
+            //DrivingDustParents
+            foreach (var dust in DrivingDustParents)
+            {
+                if (dust != null && dust.gameObject.activeSelf != isDriving)
+                    dust.gameObject.SetActive(isDriving);
+            }
+        }
+
+        public void SetAnimation(byte anim)
+        {
+            if (tankAnims == null || tankAnims.Length <= 0) return;
+            foreach (var a in tankAnims)
+            {
+                if (a != null)
+                {
+                    if (a.clip != null && anim > 0)
+                    {
+                        a.wrapMode = WrapMode.Loop;
+                        a.Play();
+                    }
+                    else
+                    {
+                        a.Stop();
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 587/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/LaserSightLine.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class LaserSightLine : MonoBehaviour
+	{
+		[SerializeField] private AnimationCurve _thicknessCurve;
+		[SerializeField] private AnimationCurve _visibilityCurve;
+
+		private LineRenderer _laserSight;
+		[SerializeField] private float _duration = 10f;
+		[SerializeField] private LayerMask _collisionMask;
+		[SerializeField] private Transform _sightImpact;
+
+		private float _timer = 0;
+
+		private float _initialThickness;
+		private Vector3 _initialImpactBallScale;
+
+		bool _active = false;
+		bool _initialized = false;
+
+		public void SetDuration(float duration)
+		{
+			_duration = duration;
+		}
+
+		private void OnDestroy()
+		{
+			Destroy(_sightImpact.gameObject);
+		}
+
+		public void Initialize()
+		{
+			_laserSight = GetComponent<LineRenderer>();
+			_initialThickness = _laserSight.widthMultiplier;
+			_initialImpactBallScale = _sightImpact.transform.localScale;
+
+			_initialized = true;
+		}
+
+		public void Activate()
+		{
+			if (!_initialized)
+				Initialize();
+
+			_timer = 0;
+
+			ToggleLaserSight(true);
+			ResetPosition();
+		}
+
+		public void Deactivate()
+		{
+			if (!_initialized)
+				Initialize();
+
+			ToggleLaserSight(false);
+		}
+
+		void ToggleLaserSight(bool value)
+		{
+			_active = value;
+			_laserSight.enabled = _active;
+			_sightImpact.gameObject.SetActive(_active);
+		}
+
+		public void Recharge()
+		{
+			_timer = 0;
+		}
+
+		void ResetPosition()
+		{
+			_laserSight.SetPosition(0, transform.position);
+			_laserSight.SetPosition(1, transform.position);
+			_sightImpact.transform.position = transform.position;
+		}
+
+		// Do visual updates in late update to get the correct position after FUN has adjusted tank visuals
+		private void LateUpdate()
+		{
+			if (!_active)
+				return;
+
+			//Increase the timer
+			_timer = Mathf.Clamp(_timer + Time.deltaTime, 0, _duration);
+
+			//Draw the line
+			DrawLaserSightLine();
+			AdjustVisuals();
+		}
+
+		void DrawLaserSightLine()
+		{
+			_laserSight.SetPosition(0, transform.position);
+			Ray ray = new Ray(transform.position, transform.forward);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit, Mathf.Infinity, _collisionMask))
+			{
+				Vector3 direction = Vector3.forward * hit.distance;
+				_laserSight.SetPosition(1, hit.point);
+				_sightImpact.transform.position = hit.point;
+				Debug.DrawRay(transform.position, transform.forward * Mathf.Infinity, Color.yellow);
+				Debug.DrawLine(transform.position, hit.point, Color.red);
+			}
+		}
+
+		void AdjustVisuals()
+		{
+			float t = _timer / _duration;
+			float thickness = _thicknessCurve.Evaluate(t);
+			float visibility = _visibilityCurve.Evaluate(t);
+			float finalMultiplier = (_initialThickness * thickness) * visibility;
+			_laserSight.widthMultiplier = finalMultiplier;
+
+			_sightImpact.transform.localScale = _initialImpactBallScale * finalMultiplier;
+		}
+	}
+}
+
+
+================================================================================
+FILE 588/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/MotorShake.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Fusion.TankOnlineModule
+{
+	public class MotorShake : MonoBehaviour
+	{
+		[FormerlySerializedAs("shakeAmountByAxis")] [SerializeField] private Vector3 _shakeAmountByAxis = new Vector3(0, 0.01f, 0);
+		[FormerlySerializedAs("shakeSpeed")] [SerializeField] private float _shakeSpeed = 10f;
+
+		private float _offset;
+		private Vector3 _originScale;
+
+		void Start()
+		{
+			_originScale = transform.localScale;
+			_offset = Random.Range(-Mathf.PI, Mathf.PI);
+		}
+
+		Vector3 CalculateShake()
+		{
+			Vector3 shake = new Vector3(Mathf.Sin(Time.time * _shakeSpeed + _offset), Mathf.Sin(Time.time * _shakeSpeed + _offset), Mathf.Sin(Time.time * _shakeSpeed + _offset));
+			shake.x *= _shakeAmountByAxis.x;
+			shake.y *= _shakeAmountByAxis.y;
+			shake.z *= _shakeAmountByAxis.z;
+			return shake;
+		}
+
+		void Update()
+		{
+			transform.localScale = _originScale + CalculateShake();
+		}
+	}
+}
+
+
+================================================================================
+FILE 589/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/TankBelts.cs
+================================================================================
+
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class TankBelts : MonoBehaviour
+	{
+		[SerializeField] private Player _tankBehaviour;
+
+		[SerializeField] private Transform _leftBelt;
+		[SerializeField] private Transform _rightBelt;
+		private List<Transform> _treadTransforms;
+		private Vector3[] _prevPositions;
+
+		private const int _numTreads = 2;
+		private Renderer _renderer;
+		private MaterialPropertyBlock _matProps;
+		private List<float> _materialOffsets;
+
+		private Vector3 _lastForward;
+
+
+		[SerializeField] private float _trackSpeed = 16f;
+
+		public void Awake()
+		{
+			_renderer = GetComponent<MeshRenderer>();
+			_matProps = new MaterialPropertyBlock();
+
+			_treadTransforms = new List<Transform> {_rightBelt, _leftBelt};
+			_materialOffsets = new List<float>(_numTreads);
+			_prevPositions = new Vector3[_numTreads];
+		}
+
+
+		public void Start()
+		{
+			for (int i = 0; i < _numTreads; i++)
+			{
+				_materialOffsets.Add(0f);
+				_prevPositions[i] = _treadTransforms[i].position;
+			}
+
+			_lastForward = transform.forward;
+		}
+
+		void Update()
+		{
+			for (int i = 0; i < _numTreads; i++)
+			{
+				CalculateTreadMovementSimplified(i);
+			}
+		}
+
+		void CalculateTreadMovementSimplified(int treadIndex)
+		{
+			float tankMovementMultiplier = _tankBehaviour.Velocity.magnitude;
+
+			// Only adjust the treads if the tank is moving
+			if (tankMovementMultiplier > 0.05f)
+			{
+				// Which direction is the tank moving?
+				float dot = Vector3.Dot(_tankBehaviour.Velocity, _treadTransforms[treadIndex].forward);
+				float movement = dot < 0 ? -1 : 1;
+
+				// Offset threads based on forward direction - makes them not rotate perfectly together
+				float rotationStrengthMultiplier = Vector3.Dot(_lastForward, transform.forward);
+
+				// Update the material offset
+				float materialOffset = tankMovementMultiplier * rotationStrengthMultiplier * movement * (_trackSpeed * 0.1f * Time.deltaTime);
+				UpdateTreadOffset(treadIndex, materialOffset);
+			}
+
+			_lastForward = transform.forward;
+		}
+
+		private void UpdateTreadOffset(int treadIndex, float newOffset)
+		{
+			_materialOffsets[treadIndex] += newOffset;
+
+			_renderer.GetPropertyBlock(_matProps, treadIndex);
+			_matProps.SetFloat("_Offset", _materialOffsets[treadIndex]);
+			_renderer.SetPropertyBlock(_matProps, treadIndex);
+		}
+	}
+}
+
+
+================================================================================
+FILE 590/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/TankDamageVisual.cs
+================================================================================
+
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using GDO.Audio;
+
+namespace Fusion.TankOnlineModule
+{
+	public class TankDamageVisual : MonoBehaviour
+	{
+		private int _previousHealth;
+		[SerializeField] private Transform _damageParticleParent;
+		[SerializeField] private MeshFilter _tankBotVisual;
+		[SerializeField] private MeshFilter _tankTopVisual;
+		private bool _active = false;
+		private Material _damageMaterial;
+		[SerializeField] private float _flashTime = 0.1f;
+
+		[Header("Damage Steps")]
+		[SerializeField]
+		private List<TankDamageStepVariable> _damageSteps = new List<TankDamageStepVariable>();
+
+		//Internal lists
+		private List<ParticleSystem> _drivingDustParticles = new List<ParticleSystem>();
+		private List<ParticleSystem> _damageParticles = new List<ParticleSystem>();
+
+		//Remember certain previous values
+		private Mesh _currentHullMesh = null;
+		private Mesh _currentTurretMesh = null;
+		private ParticleSystem _currentDrivingDustParticle = null;
+		private GameObject _lastDebri = null;
+		private List<GameObject> _activeDebris = new List<GameObject>();
+
+		[Header("Audio")][SerializeField] private AudioClipData _damageSnd;
+		[SerializeField] private AudioClipData _explosionSnd;
+		[SerializeField] private AudioEmitter _audioEmitter;
+
+		public void Initialize(TankVisual tankVisual, Player player)
+		{
+			// set color for HP follow team
+			//healthBar.color = teamColors[teamIndex];
+
+			_damageMaterial = player.PlayerMaterial;
+
+			_damageParticleParent.parent = transform.parent;
+
+
+			//Instantiate damage particles
+			foreach (TankDamageStepVariable damageStep in _damageSteps)
+			{
+				//Pre instantiate the hitparticles
+				if (damageStep.HitParticles != null)
+				{
+					InstantiateNewParticles(damageStep.HitParticles, _damageParticles, _damageParticleParent, true);
+				}
+				else
+				{
+					_damageParticles.Add(null);
+				}
+
+				//Pre instantiate the drivingdust particlesystems
+				if (damageStep.DrivingDust != null)
+				{
+					if (tankVisual.DrivingDustParents != null && tankVisual.DrivingDustParents.Length > 0)
+					{
+						foreach (var dustParent in tankVisual.DrivingDustParents)
+						{
+							if (dustParent.childCount > 0) continue; //skip if already has driving dust
+							InstantiateNewParticles(damageStep.DrivingDust, _drivingDustParticles, dustParent);
+						}
+					}
+				}
+				else
+				{
+					_drivingDustParticles.Add(null);
+				}
+			}
+			_active = true;
+		}
+
+		private void OnDisable()
+		{
+			if (_damageMaterial != null && _active)
+			{
+				_damageMaterial.SetFloat("_Transition", 0f);
+			}
+		}
+
+		//Generalized creation of particlesystem from a list of particleprefabs to a list of particles with a set parent
+		void InstantiateNewParticles(ParticleSystem prefab, List<ParticleSystem> particleList, Transform parent, bool useCommonMaterial = false)
+		{
+			ParticleSystem part = Instantiate(prefab, parent.position, parent.rotation, parent);
+
+			if (useCommonMaterial)
+			{
+				foreach (Transform child in part.transform)
+				{
+					//Let all particle effects from this tank use the same base material to prevent multiple instances
+					ParticleSystemRenderer partRenderer = child.GetComponent<ParticleSystemRenderer>();
+					if (_damageMaterial == null)
+					{
+						_damageMaterial = new Material(partRenderer.material);
+					}
+
+					partRenderer.material = _damageMaterial; //Apply material 
+				}
+			}
+
+			particleList.Add(part);
+		}
+
+		public void OnDeath()
+		{
+			_audioEmitter.PlayOneShot(_explosionSnd);
+			CheckHPToShowVFX(0, 1);
+		}
+
+		public void CheckHPToShowVFX(int life, int maxLife)
+		{
+			if (life == maxLife)
+				_previousHealth = maxLife;
+
+			//healthBar.fillAmount = Mathf.Clamp01((float)life / (float)maxLife);
+			//Check if health has changed
+			if (HealthHasReduced(life))
+			{
+				float value = 1 - ((float)life / (float)maxLife);
+				value = Mathf.Clamp(value, 0, 1);
+				int index = CalculateIndex(_damageSteps.Count - 1, value);
+
+				OnDamaged(life <= 0);
+				UpdateDrivingDust(index);
+				UpdateTankVisuals(index);
+				DropParts(index);
+				UpdateDamageParticles(index);
+			}
+		}
+
+		//Check if the health has changed and return the answer - also sets previous health to current health for later use
+		bool HealthHasReduced(int life)
+		{
+			if (_previousHealth > life)
+			{
+				_previousHealth = life;
+				return true;
+			}
+			return false;
+		}
+
+		// Update the tank visuals based on how much health is left
+		void UpdateTankVisuals(int index)
+		{
+			ChangeTankMesh(index, _tankTopVisual, _damageSteps[index].TurretMesh, _currentTurretMesh);
+			ChangeTankMesh(index, _tankBotVisual, _damageSteps[index].HullMesh, _currentHullMesh);
+		}
+
+		//Common function for changing a MeshFilters mesh based on a value and a mesh-list
+		void ChangeTankMesh(int index, MeshFilter meshFilter, Mesh newMesh, Mesh currentMesh)
+		{
+			if (newMesh == null)
+			{
+				return;
+			}
+
+			if (meshFilter == null)
+			{
+				return;
+			}
+
+			//Only if there are any meshes in the meshlist we change the mesh
+			if (newMesh != currentMesh)
+			{
+				meshFilter.mesh = newMesh; //Change the mesh
+				currentMesh = newMesh; //Save the mesh
+			}
+		}
+
+		// Update the tanks damage particles based on how much health is left
+		void UpdateDrivingDust(int index)
+		{
+			//Get the driving dust particle and check if it is null - if so - return from this function
+			ParticleSystem drivingDustParticle = _drivingDustParticles[index];
+			if (drivingDustParticle == null)
+			{
+				return;
+			}
+
+			//Stop the current driving dust particle
+			if (_currentDrivingDustParticle != null)
+				_currentDrivingDustParticle.Stop();
+
+			//Start the new driving dust particle system
+			drivingDustParticle.Play();
+			_currentDrivingDustParticle = drivingDustParticle;
+		}
+
+		//Particle effect happening when damaged
+		void UpdateDamageParticles(int index)
+		{
+			//Get the damage particle and check if it is null - if so - return from this function
+			ParticleSystem damageParticle = _damageParticles[index];
+			if (damageParticle == null)
+			{
+				return;
+			}
+
+			//Play the damage particle
+			damageParticle.transform.position = transform.position;
+			damageParticle.Play();
+		}
+
+		//Drop parts that stay around until the tank has been respawned
+		void DropParts(int index)
+		{
+			//Get the debri prefab and check if it is null - if so - return from this function
+			GameObject debriPrefab = _damageSteps[index].HitDebris;
+			if (debriPrefab == null)
+			{
+				return;
+			}
+
+			//Only instantiate new debri if the new debri is not the same as the lastly instantiated debri
+			if (debriPrefab != _lastDebri)
+			{
+				GameObject debris = Instantiate(debriPrefab, transform.position, transform.rotation);
+				//closed
+				// //Set tank color on debris
+				// Material debrisMaterial = null;
+				// foreach (Transform child in debris.transform)
+				// {
+				// 	MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+				// 	if (debrisMaterial == null)
+				// 	{
+				// 		debrisMaterial = new Material(meshRenderer.material);
+				// 		debrisMaterial.mainTexture = _damageMaterial.mainTexture;
+				// 	}
+
+				// 	meshRenderer.material = debrisMaterial;
+				// }
+
+				_activeDebris.Add(debris);
+				_lastDebri = debriPrefab;
+			}
+		}
+
+		private void OnDamaged(bool isDead)
+		{
+			if (!isDead && _damageMaterial != null && _active)
+			{
+				StartCoroutine(Flash());
+				_audioEmitter.PlayOneShot(_damageSnd);
+			}
+		}
+
+		//Calculate an index based on the value
+		int CalculateIndex(int max, float value)
+		{
+			return Mathf.FloorToInt(max * value);
+		}
+
+		IEnumerator Flash()
+		{
+			_damageMaterial.SetFloat("_Transition", 1f);
+			yield return new WaitForSeconds(_flashTime);
+			_damageMaterial.SetFloat("_Transition", 0f);
+		}
+
+		public void CleanUpDebris()
+		{
+			for (int i = _activeDebris.Count - 1; i >= 0; i--)
+			{
+				Destroy(_activeDebris[i]);
+			}
+
+			_activeDebris.Clear();
+			_lastDebri = null;
+		}
+
+		private void OnDestroy()
+		{
+			CleanUpDebris();
+			if (_damageParticleParent != null)
+				Destroy(_damageParticleParent.gameObject);
+		}
+	}
+}
+
+
+================================================================================
+FILE 591/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/TankIndicator.cs
+================================================================================
+
+using System;
+using UnityEngine;
+public class TankIndicator : MonoBehaviour
+{
+    //menu header tank indicator
+    [Header("Tank Indicator")]
+    [SerializeField] private Transform indicatorPanel;
+    [SerializeField] private SpriteRenderer indicatorRange;
+    [SerializeField] private Transform indicatorAim;
+    [SerializeField] private Transform indicatorCircle;
+
+     [SerializeField] private Transform indicatorMyTank;
+
+    public void SetIndicatorSkillRotate(Vector2 aimVector = default, float range = 0)
+    {
+        if (indicatorPanel != null)
+        {
+            indicatorPanel.forward = new Vector3(aimVector.x, 0, aimVector.y);
+            indicatorPanel.gameObject.SetActive(range > 0);
+        }
+        if (indicatorRange != null)
+        {
+            // float width = radius;
+            // transform.localScale = new Vector3(width, 1, 1);
+            indicatorRange.size = new Vector2(indicatorRange.size.x, range);
+        }
+        // if (indicatorCircle != null)
+        // {
+        //     //indicatorCircle.localScale = new Vector3(range, range, range);
+        //     indicatorCircle.localScale = new Vector3(0, 0, 0);
+        // }
+    }
+    public void SetIndicatorAim(float rangeRatio, float radius, float rangeMax = 0)
+    {
+        if (indicatorAim != null)
+        {
+            float distance = rangeMax * rangeRatio;
+            indicatorAim.localPosition = new Vector3(0, distance, 0);
+            indicatorAim.localScale = new Vector3(radius, radius, radius);
+            indicatorAim.gameObject.SetActive(rangeRatio > 0 && rangeMax > 0);
+        }
+    }
+
+    public void PresetIndicator(Vector2 aimVector = default, float range = 0)
+    {
+        if (indicatorPanel.forward != new Vector3(aimVector.x, 0, aimVector.y))
+            indicatorPanel.forward = new Vector3(aimVector.x, 0, aimVector.y);
+        if (indicatorRange != null)
+            indicatorRange.size = new Vector2(indicatorRange.size.x, range);
+        indicatorPanel.gameObject.SetActive(range > 0);
+    }
+    public void ActiveIndicator(bool active)
+    {
+        if (indicatorPanel?.gameObject.activeSelf != active) indicatorPanel?.gameObject.SetActive(active);
+        if (indicatorRange?.gameObject.activeSelf != active) indicatorRange?.gameObject.SetActive(active);
+        //if (indicatorCircle?.gameObject.activeSelf != active) indicatorCircle?.gameObject.SetActive(active);
+    }
+    public void ShowMyTankIndicator()
+    {
+        //if (indicatorMyTank?.gameObject?.activeSelf == false) indicatorMyTank?.gameObject?.SetActive(true);
+    }
+}
+
+
+================================================================================
+FILE 592/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/TankPartMesh.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class TankPartMesh : MonoBehaviour
+	{
+		public void SetMaterial(Material material)
+		{
+			MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+
+			meshRenderer.sharedMaterial = material;
+		}
+	}
+}
+
+
+================================================================================
+FILE 593/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisuals/TankPartVisual.cs
+================================================================================
+
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class TankPartVisual : MonoBehaviour
+{
+    public MeshRenderer[] meshRenderers;
+    public List<GameObject> groupObj;
+    Material defaultMaterial;
+    private void OnEnable()
+    {
+    }
+
+    private void OnDisable()
+    {
+    }
+
+    public void EnableVisual(bool enable)
+    {
+        if (meshRenderers != null)
+        {
+            foreach (var renderer in meshRenderers)
+            {
+                if (renderer != null)
+                    renderer.enabled = enable;
+            }
+        }
+
+        if (groupObj != null && groupObj.Count > 0)
+        {
+            foreach (var obj in groupObj)
+            {
+                if (obj != null)
+                    obj.SetActive(enable);
+            }
+        }
+    }
+
+
+    public void DefaultWrapData()
+    {
+        //cache all renderers' material to avoid modifying shared materials
+        if (meshRenderers == null)
+        {
+            Debug.LogWarning("[DefaultWrapData] meshRenderers is null");
+            return;
+        }
+        defaultMaterial = meshRenderers[0].sharedMaterial;
+    }
+    public void LoadWrap(int wrapId, string tankId = "")
+    {
+        if (!this.gameObject.activeSelf)
+            return;
+        if (meshRenderers == null)
+        {
+            Debug.LogWarning("[LoadWrap] meshRenderers is null");
+            return;
+        }
+
+        var wrapDocument = DatabaseManager.GetDB<TankWrapCollection>();
+        var wrapData = wrapDocument.GetTankCustomLiveryDocumentById(wrapId);
+
+        if (wrapData == null)
+        {
+            ApplyDefaultWrap();
+            return;
+        }
+
+        string fileName = TextureDownloader.GetFileNameFromURL(wrapData.texturePath);
+
+        if (string.IsNullOrEmpty(fileName))
+        {
+            ApplyDefaultWrap();
+            return;
+        }
+
+        //linq;
+        var decorData = wrapData.wrapDecalStickerData.FirstOrDefault(w => w.tankId == tankId);
+
+        if(decorData == null)
+        {
+            Debug.LogWarning("[LoadWrap] decorData is null for tankId: " + tankId);
+            ApplyDefaultWrap();
+            return;
+        }
+        // Kiểm tra nếu đã có ảnh thì load, nếu chưa thì download
+        TextureDownloader.Instance.LoadImage(wrapData.texturePath, this.gameObject, onComplete: (downloadedTexture) =>
+        {
+            if (downloadedTexture == null)
+            {
+                ApplyDefaultWrap();
+                return;
+            }
+            ApplyTextureToRenderers(downloadedTexture, decorData.customProperties);
+    }   );
+
+    }
+
+    // Hàm phụ để apply texture và custom float property
+    private void ApplyTextureToRenderers(Texture texture, DecorData.CustomProperty[] customProps)
+    {
+        foreach (var renderer in meshRenderers)
+        {
+            if (renderer != null && renderer.sharedMaterial != null)
+            {
+                renderer.material = new Material(renderer.sharedMaterial);
+                renderer.material.SetTexture("_Wrap_Texture", texture);
+                foreach (var customProp in customProps)
+                {
+                    if (renderer.material.HasProperty(customProp.propertyName))
+                    {
+                        // Debug.LogWarning("customProp.propertyName: " + customProp.propertyName);
+                        // // Thử lấy float
+                        // float floatVal = renderer.material.GetFloat(customProp.propertyName);
+                        // // Thử lấy vector
+                        // Vector4 vectorVal = renderer.material.GetVector(customProp.propertyName);
+                        // Debug.LogWarning("floatVal: " + floatVal + ", vectorVal: " + vectorVal);
+                        // // Kiểm tra kiểu dữ liệu
+                        // if (floatVal != 0f || renderer.material.GetFloat(customProp.propertyName) == 0f) // float luôn trả về số, nên cần logic riêng
+                        // {
+                        //     renderer.material.SetFloat(customProp.propertyName, customProp.propertyValue);
+                        // }
+                        // else if (vectorVal != Vector4.zero)
+                        // {
+                        //     renderer.material.SetVector(customProp.propertyName, customProp.propertyValueTypeVector2);
+                        // }
+                        // else
+                        //     Debug.Log($"{customProp.propertyName} type unknown or not set");
+
+                        if (customProp.propertyType == DecorData.PropertyType.Vector2.ToString())//(customProp.propertyValueTypeVector2 != Vector2.zero)
+                        {
+                            renderer.material.SetVector(customProp.propertyName, customProp.propertyValueTypeVector2);
+                            continue;
+                        }
+                        if (customProp.propertyType == DecorData.PropertyType.Float.ToString())//(customProp.propertyValue != 0)
+                        {
+                            //Debug.LogError($"Set float property: {customProp.propertyName} with value: {customProp.propertyValue}");
+                            renderer.material.SetFloat(customProp.propertyName, customProp.propertyValue);
+                            continue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Hàm set wrap về default
+    private void ApplyDefaultWrap()
+    {
+        if (defaultMaterial == null)
+        {
+            Debug.LogWarning("[ApplyDefaultWrap] defaultMaterial is null");
+            return;
+        }
+        foreach (var renderer in meshRenderers)
+        {
+            if (renderer != null && renderer.sharedMaterial != null)
+            {
+                renderer.material = new Material(defaultMaterial);
+            }
+        }
+    }
+}
+
+
+================================================================================
+FILE 594/682: Assets/_GameModules/TankFusionModule/Scripts/TankVisualsVfx.cs
+================================================================================
+
+using UnityEngine;
+using Fusion;
+using Fusion.TankOnlineModule;
+
+public class TankVisualsVfx : NetworkBehaviour
+{
+    public enum VfxType
+    {
+        None = 0,
+        SlowStorm = 1,
+        SpawnVfxBlue = 2,
+        SpawnVfxRed = 3,
+    }
+    [SerializeField] private AssetContainer assetContainer;
+    private GameObject[] vfxInstances;
+    private float[] vfxDurations;
+    private Player player;
+    private void Awake()
+    {
+        player = GetComponentInParent<Player>();
+        int vfxCount = System.Enum.GetValues(typeof(VfxType)).Length;
+        vfxInstances = new GameObject[vfxCount];
+        vfxDurations = new float[vfxCount];
+    }
+    private void Update()
+    {
+        for (int i = 0; i < vfxDurations.Length; i++)
+        {
+            if (vfxDurations[i] > 0f)
+            {
+                vfxDurations[i] -= Time.deltaTime;
+                if (vfxDurations[i] <= 0f)
+                {
+                    SetVfx((VfxType)i, false);
+                }
+            }
+        }
+    }
+    public void SetVfx(VfxType type, bool enable, float duration = 0f)
+    {
+        int idx = (int)type;
+        if (enable)
+        {
+            // Nếu đã có duration lớn hơn thì giữ lại, chỉ set lại nếu duration mới lớn hơn
+            if (duration > 0f)
+            {
+                if (vfxDurations[idx] < duration)
+                    vfxDurations[idx] = duration;
+            }
+
+            if (vfxInstances[idx] == null)
+            {
+                var prefab = assetContainer.Get<GameObject>(type.ToString());
+                if (prefab != null)
+                    vfxInstances[idx] = Instantiate(prefab, transform);
+            }
+            if (vfxInstances[idx] != null)
+                vfxInstances[idx].SetActive(true);
+        }
+        else
+        {
+            if (vfxInstances[idx] != null)
+                vfxInstances[idx].SetActive(false);
+            vfxDurations[idx] = 0f;
+        }
+    }
+}
+
+
+================================================================================
+FILE 595/682: Assets/_GameModules/TankFusionModule/Scripts/Turret.cs
+================================================================================
+
+using System;
+using ExitGames.Client.Photon.StructWrapping;
+using FusionHelpers;
+using UnityEngine;
+using DG.Tweening;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Fusion.TankOnlineModule
+{
+    [RequireComponent(typeof(NetworkTransform))]
+    public class Turret : NetworkBehaviour
+    {
+        [SerializeField] private Animator animator;
+        public TurretWeapon weapon;
+        public float detectTime = 1f;
+        public float rotationSpeed = 5f;
+        public Vector3 velocity = Vector3.zero;
+        private TickTimer primaryFireDelay;
+        private int teamIndex = MatchIndexs.Attacker;
+        private Collider[] _areaHits = new Collider[10];
+        [SerializeField] private Player _target;
+        [SerializeField] private Transform area;
+        [SerializeField] private SpriteRenderer areaRenderer;
+        [SerializeField] private Color[] areaColor;
+        [SerializeField] private Transform turretHead;
+        [SerializeField] private Transform explosion;
+        [Networked] public NetworkString<_32> NetOutpostId { get; set; }
+        [Networked] private Angle NetworkedY { get; set; }
+        [Networked] private Angle NetworkedX { get; set; }
+        [Networked] public int NetHP { get; set; }
+        [Networked] public int NetMaxHP { get; set; }
+        [Networked] public float NetRange { get; set; }
+        [Networked] private TickTimer TargetDetectionTimer { get; set; }
+        [Networked] public bool IsAlive { get; set; }
+        private int lastHP { get; set; }
+        public int TurretTeamIndex { get => teamIndex; }
+        public Transform TurretHead { get => turretHead; private set => turretHead = value; }
+        private ChangeDetector _changes;
+        [SerializeField] private DamageVisual damageVisual;
+        [SerializeField] private UnityEngine.UI.Image virtualHP, realHP;
+        [SerializeField] private GameObject hpBar;
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
+        public override void Spawned()
+        {
+            if (Object.HasStateAuthority)
+            {
+                TargetDetectionTimer = TickTimer.CreateFromSeconds(Runner, detectTime);
+                IsAlive = true;
+            }
+            Debug.Log("Turret spawned and initialized.");
+
+            _areaHits = new Collider[10];
+            _changes = GetChangeDetector(ChangeDetector.Source.SimulationState);
+
+            teamIndex = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument().MaxPlayers <= 1 ? MatchIndexs.Attacker : MatchIndexs.Defender;
+        }
+
+        private void OnValueChanged()
+		{
+            var interpolated = new NetworkBehaviourBufferInterpolator(this);
+			// Detect changes in player properties
+            foreach (var change in _changes.DetectChanges(this))
+            {
+                switch (change)
+                {
+                    case nameof(NetOutpostId):
+                        Init(NetOutpostId.ToString());
+                        break;
+
+                    case nameof(NetHP):
+                    case nameof(NetMaxHP):
+                        OnHealthChanged();
+                        break;
+
+                    case nameof(NetworkedX):
+                        turretHead.rotation = Quaternion.Euler(interpolated.Angle(nameof(NetworkedX)), interpolated.Angle(nameof(NetworkedY)), 0);
+                        break;
+
+                    case nameof(NetworkedY):
+                        turretHead.rotation = Quaternion.Euler(interpolated.Angle(nameof(NetworkedX)), interpolated.Angle(nameof(NetworkedY)), 0);
+                        break;
+                }
+            }
+		}
+
+        public void Init(string id)
+        {
+            NetOutpostId = id;
+            MatchPlayerData data = DatabaseManager.CreateMatchPlayer(id);
+            NetHP = data.HP;
+            lastHP = data.HP;
+            NetMaxHP = data.MaxHitpoints;
+            weapon.Initialize(this, data);
+            animator.SetFloat("attack_speed", 1.4f * 1 / weapon.data.FireRate);
+            NetRange = data.Range;
+            detectTime = weapon.Delay / 100f;
+            explosion?.gameObject?.SetActive(false);
+            hpBar.SetActive(true);
+        }
+
+        private void ShowArea()
+        {
+            var localPlayer = GameServer.Instance.MyTank;
+            var pos = localPlayer?.transform.position;
+            var rangeToLocalPlayer = Vector3.Distance(transform.position, pos ?? Vector3.zero);
+            var rangeActive = NetRange + 4f;
+            var fadeRange = rangeActive - NetRange;
+            bool sameTeam = localPlayer != null && localPlayer.PlayerTeamIndex == TurretTeamIndex;
+            //Debug.LogError("Turret ShowArea range: " + rangeToLocalPlayer);
+            bool active = IsAlive && (rangeActive > rangeToLocalPlayer);
+
+            if (area.gameObject.activeSelf != active)
+                area.gameObject.SetActive(active);
+            area.localScale = new Vector3(NetRange * 2, 1, NetRange * 2);
+            if (areaColor.Length >= 2)
+                areaRenderer.GetComponent<SpriteRenderer>().color = sameTeam ? areaColor[0] : areaColor[1];
+            if(active)
+            {
+                if (rangeToLocalPlayer > NetRange)
+                {
+                    float alpha = 1f - (rangeToLocalPlayer - NetRange) / fadeRange;
+                    var c = areaRenderer.GetComponent<SpriteRenderer>().color;
+                    c.a = alpha;
+                    areaRenderer.GetComponent<SpriteRenderer>().color = c;
+                }
+            }
+        }
+
+        public override void Render()
+        {
+            OnValueChanged();
+            ShowArea();
+            if (hpBar.activeSelf != IsAlive)
+                hpBar.SetActive(IsAlive);
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            if (!IsAlive) return;
+            if (Object.HasStateAuthority)
+            {
+                if (!IsAlive) return;
+                LookAtTarget();
+                ScanTargetInRange();
+                Fire();
+            }
+        }
+
+        public void ChangeHP(int damage, int life, int maxLife)
+        {
+            if (damage > 0)
+                damageVisual.ShowText(damage.ToString(), Color.red);
+
+            DoRealHP(life, maxLife);
+            lastHP = life;
+        }
+
+        private void DoVirtualHP(int life, int maxLife)
+        {
+            virtualHP.DOFillAmount((float)life / (float)maxLife, 0.5f);
+        }
+
+        private void DoRealHP(int life, int maxLife)
+        {
+            realHP.DOFillAmount((float)life / (float)maxLife, 0.5f).OnComplete(() => DoVirtualHP(life, maxLife));
+        }
+
+        private void OnHealthChanged()
+        {
+            Debug.Log($"Turret health changed: {NetHP}");
+            ChangeHP(lastHP - NetHP, NetHP, NetMaxHP);
+        }
+
+        [Rpc(RpcSources.All, RpcTargets.All)]
+        public void RPC_DealDamage(DamageEvent @event)
+        {
+            TakeDamage(@event);
+        }
+
+        public void TakeDamage(DamageEvent @event)
+        {
+            Debug.Log($"Turret {Object.InputAuthority} took damage: {@event.damage}");
+            if (!IsAlive) return;
+            if (Object.HasStateAuthority)
+            {
+                NetHP = Mathf.Max(NetHP - @event.damage, 0);
+                if (NetHP <= 0)
+                {
+                    IsAlive = false;
+                    //check left alive turrets
+                    if (Runner.TryGetSingleton(out GameServer game))
+                    {
+                        game.RPC_DestroyedOutpost(new GameServer.OutpostEvent { teamIndex = @event.teamIndex, playerId = @event.playerId, turretId = NetOutpostId.ToString() });
+                    }
+                    animator.SetTrigger("dead");
+                    explosion?.gameObject?.SetActive(true);
+                    // DOVirtual.DelayedCall(1f, () =>
+                    // {
+                    //     //Runner.Despawn(Object);
+                    // }, ignoreTimeScale: false).SetTarget(this);
+                }
+            }
+        }
+
+        // for show on attacker side immediately
+		public void UpdateHPImmediately(int damage)
+		{
+			ChangeHP(damage, NetHP, NetMaxHP);
+		}
+
+        private void ScanTargetInRange()
+        {
+            if (TargetDetectionTimer.ExpiredOrNotRunning(Runner))
+            {
+                TargetDetectionTimer = TickTimer.CreateFromSeconds(Runner, detectTime);
+                if (_target != null)
+                {
+                    if (_target.IsDead || Vector3.Distance(transform.position, _target.visuals.Turret.position) > NetRange) // out of range
+                    {
+                        _target = null; //reset for find new target
+                    }
+                    else
+                    {
+                        return; //target is still valid
+                    }
+                }
+
+                int cnt = Physics.OverlapSphereNonAlloc(transform.position, NetRange, _areaHits, LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore);
+                if (cnt > 0)
+                {
+                    List<Player> enemies = new List<Player>();
+                    for (int i = 0; i < cnt; i++)
+                    {
+                        if (_areaHits[i] != null && _areaHits[i].TryGetComponent(out Player p2))
+                        {
+                            if (p2.PlayerTeamIndex == TurretTeamIndex) continue;
+                            if (p2.IsDead) continue;
+                            if (CheckSignBlocked(p2.transform)) continue;
+                            enemies.Add(p2);
+                        }
+                    }
+
+                    // calculate the distance from turret to enemies and get nearest
+                    if (enemies.Count > 0)
+                    {
+                        _target = enemies.OrderBy(e => e.visuals == null ? float.MaxValue : Vector3.Distance(transform.position, e.visuals.Turret.position)).First();
+                        if(_target.visuals == null) 
+                        {
+                            _target = null;
+                        }
+                        else primaryFireDelay = TickTimer.CreateFromSeconds(Runner, weapon.Delay);
+                    }
+                }
+                else _target = null;
+            }
+        }
+
+        private void LookAtTarget()
+        {
+            if (_target != null)
+            {
+                Vector3 direction = _target.visuals.Turret.position - turretHead.position;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                Quaternion newRotation = Quaternion.Slerp(turretHead.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+                NetworkedX = newRotation.eulerAngles.x;
+                NetworkedY = newRotation.eulerAngles.y;
+            }
+        }
+
+        private void Fire()
+        {
+            if (_target == null || weapon == null)
+                return;
+            if (CheckSignBlocked(_target.transform))
+            {
+                _target = null;
+                return;
+            }
+
+            if (primaryFireDelay.ExpiredOrNotRunning(Runner))
+            {
+                primaryFireDelay = TickTimer.CreateFromSeconds(Runner, weapon.Delay);
+                if (_target.TryGetComponent(out Player p1))
+                {
+                    if (p1.IsDead || p1.PlayerTeamIndex == TurretTeamIndex)
+                    {
+                        _target = null;
+                        return;
+                    }
+                }
+                animator.SetTrigger("fire");
+                weapon.Fire(Runner, PlayerRef.MasterClient, velocity);
+            }
+        }
+
+        private bool CheckSignBlocked(Transform target)
+        {
+            if (target == null) return true;
+
+            // Hướng từ turret đến target
+
+            Vector3 start = turretHead.position + Vector3.up * 0.5f;
+            Vector3 end = target.position;
+            Vector3 dir = (end - start).normalized;
+            float length = Vector3.Distance(start, end);
+
+            int blockedLayer = LayerMask.GetMask("Wall");
+
+            // Raycast kiểm tra bị chắn bởi tường
+            if (Physics.Raycast(start, dir, out var hitinfo, length, blockedLayer, QueryTriggerInteraction.Ignore))
+            {
+                // Nếu hitinfo không phải target thì bị chắn
+                if (hitinfo.transform != target)
+                {
+                    return true;
+                }
+            }
+
+            // Không bị chắn
+            return false;
+        }
+    }
+}
+
+
+================================================================================
+FILE 596/682: Assets/_GameModules/TankFusionModule/Scripts/TurretSpawner.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Fusion;
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using UnityEngine;
+
+public class TurretSpawner : NetworkBehaviour
+{
+    [SerializeField] private Turret turretPrefab;
+    [SerializeField] private OutpostObject[] outpostObjects;
+    [SerializeField] private List<NetworkObject> networkObjects = new();
+    private TankCollection tankCollection;
+
+    public OutpostObject[] Outposts => outpostObjects;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        RegisterEvents(); 
+    }
+
+    public override void Spawned()
+    {
+        tankCollection = DatabaseManager.GetDB<TankCollection>();
+        TankDocument[] tanks = tankCollection.CloneDocumentsByProperty(doc => doc.tankType == TankType.Outpost, true);
+        for (int i = 0; i < tanks.Length; i++)
+        {
+            outpostObjects[i].outpostId = tanks[i].tankId;
+        }
+        base.Spawned();
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        UnregisterEvents();
+        base.Despawned(runner, hasState);
+    }
+
+    private void RegisterEvents()
+    {
+       EventManager.Register<TurretSpawnerEvent>(OnLevelEvent);
+    }
+
+    private void UnregisterEvents()
+    {
+        if (GameManager.IsApplicationQuitting) return;
+
+        EventManager.Unregister<TurretSpawnerEvent>(OnLevelEvent);
+    }
+
+    private void OnLevelEvent(TurretSpawnerEvent @event)
+    {
+        SpawnTurrets();
+    }
+
+    public void DespawnTurrets()
+    {
+        foreach (var turret in networkObjects)
+        {
+            Runner.Despawn(turret);
+        }
+        networkObjects.Clear();
+    }
+
+    public void SpawnTurrets()
+    {
+        if (Object.HasStateAuthority && (Runner.IsServer || Runner.IsSharedModeMasterClient))
+        {
+            foreach (var outpost in outpostObjects)
+            {
+                Turret newTurret = Runner.Spawn(turretPrefab, outpost.position, outpost.rotation, inputAuthority: null);
+                newTurret.Init(outpost.outpostId);
+                networkObjects.Add(newTurret.Object);
+            }
+
+            Debug.Log($"Đã spawn {outpostObjects.Length} trụ.");
+        }
+        else
+        {
+            Debug.LogWarning("Chỉ có server hoặc master client mới có thể spawn trụ.");
+            return;
+        }
+    }
+}
+
+public struct TurretSpawnerEvent : INetworkEvent
+{
+}
+
+[System.Serializable]
+public class OutpostObject
+{
+    public string outpostId;
+    public Vector3 position;
+    public Quaternion rotation = Quaternion.identity; //default
+}
+
+
+================================================================================
+FILE 597/682: Assets/_GameModules/TankFusionModule/Scripts/TurretWeapon.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using Unity.VisualScripting;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// The Weapon class controls how fast a weapon fires, which projectiles it uses
+	/// and the start position and direction of projectiles.
+	/// </summary>
+	public class TurretWeapon : NetworkBehaviourWithState<TurretWeapon.NetworkState>
+	{
+		[Networked] public override ref NetworkState State => ref MakeRef<NetworkState>();
+		public struct NetworkState : INetworkStruct
+		{
+			[Networked, Capacity(10)] 
+			public NetworkArray<ShotState> bulletStates => default;
+		}
+
+		[SerializeField] private Transform[] _gunExits;
+		[SerializeField] private float _rateOfFire;
+		[SerializeField] private byte _ammo;
+		[SerializeField] private bool _infiniteAmmo;
+		[SerializeField] private LaserSightLine _laserSight;
+		[SerializeField] private PowerupType _powerupType = PowerupType.DEFAULT;
+		[SerializeField] private Shot _bulletPrefab;
+		[SerializeField] private Turret _turret;
+		[SerializeField] private Transform _target;
+
+		private SparseCollection<ShotState, Shot> bullets;
+		private float _visible;
+		private bool _active;
+		private Collider[] _areaHits = new Collider[4];
+
+		public float Delay => _rateOfFire;
+		public bool IsShowing => _visible >= 1.0f;
+		public byte Ammo => _ammo;
+		public bool InfiniteAmmo => _infiniteAmmo;
+		public PowerupType powerupType => _powerupType;
+		public ProjectileType projectileType;
+		public MatchPlayerData data;
+
+		public void Initialize(Turret turret, MatchPlayerData data)
+		{
+			this._turret = turret;
+			this.data = data;
+
+			_rateOfFire = 1 / data.FireRate;
+			_ammo = data.ProjectileCount;
+			if (_bulletPrefab != null)
+				_bulletPrefab.OverrideData(data);
+		}
+
+		public override void Spawned()
+		{
+			bullets = new SparseCollection<ShotState, Shot>(State.bulletStates, _bulletPrefab);
+		}
+
+#if UNITY_EDITOR
+		private void OnDrawGizmos()
+		{
+			if (_target != null)
+			{
+				Gizmos.color = Color.red;
+				Gizmos.DrawLine(_turret.transform.position, _target.position);
+				if (_bulletPrefab != null)
+				{
+					Vector3 dir = (_target.position - _turret.transform.position).normalized;
+					float t = (_target.position - _turret.transform.position).magnitude / _bulletPrefab.Speed;
+					Vector3 p = _turret.transform.position + t * (_bulletPrefab.Speed * dir + 0.5f * t * _bulletPrefab.Gravity);
+					Gizmos.color = Color.red;
+					Gizmos.DrawLine(_turret.transform.position, p);
+					//Debug.Log($"distance: {(_target.position - _turret.transform.position).magnitude}, time: {t}, target: {_target.position}, predicted: {p}");
+				}
+			}
+		}
+#endif
+        public override void FixedUpdateNetwork()
+		{
+			bullets.Process(this, (ref ShotState bullet, int tick) => // process each bullet added to the collection
+			{
+				if (bullet.Position.y < -.15f)
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				}
+
+				if (bullet.IsOutOfRange(_bulletPrefab.Range))
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				}
+
+				if (!_bulletPrefab.IsHitScan && bullet.EndTick > Runner.Tick)
+				{
+					Vector3 dir = bullet.Direction.normalized;
+					float length = Mathf.Max(_bulletPrefab.Radius, data.ProjectileSpeed * Runner.DeltaTime);
+					// float length = Mathf.Max(_bulletPrefab.Radius, _bulletPrefab.Speed * Runner.DeltaTime);
+					if (Physics.Raycast(bullet.Position - length * dir, dir, out var hitinfo, length, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore))
+					//					if (Runner.LagCompensation.Raycast(bullet.Position - length*dir, dir, length, Object.InputAuthority, out var hitinfo, _bulletPrefab.HitMask.value, HitOptions.IgnoreInputAuthority | HitOptions.IncludePhysX))
+					{
+						_target = hitinfo.transform;
+						bullet.Position = hitinfo.point;
+						bullet.EndTick = Runner.Tick;
+						if (_bulletPrefab.ProjectileType == ProjectileType.Single)
+							ApplySingleDamage(hitinfo.collider.transform.root.GetComponent<Player>());
+						else if (_bulletPrefab.ProjectileType == ProjectileType.AOE)
+							ApplyAreaDamage(hitinfo.point);
+						return true;
+					}
+				}
+				return false;
+			});
+		}
+		
+
+		public override void Render()
+		{
+			if (TryGetStateChanges(out var from, out var to))
+				OnFireTickChanged();
+			else
+				TryGetStateSnapshots(out from, out _, out _, out _, out _);
+
+			bullets.Render(this, from.bulletStates);
+		}
+
+		/// <summary>
+		/// Control the visual appearance of the weapon. This is controlled by the Player based
+		/// on the currently selected weapon, so the boolean parameter is entirely derived from a
+		/// networked property (which is why nothing in this class is sync'ed).
+		/// </summary>
+		/// <param name="show">True if this weapon is currently active and should be visible</param>
+		public void Show(bool show)
+		{
+			if (_active && !show)
+			{
+				ToggleActive(false);
+			}
+			else if (!_active && show)
+			{
+				ToggleActive(true);
+			}
+
+			_visible = Mathf.Clamp(_visible + (show ? Time.deltaTime : -Time.deltaTime) * 5f, 0, 1);
+
+			if (show)
+				transform.localScale = Tween.easeOutElastic(0, 1, _visible) * Vector3.one;
+			else
+				transform.localScale = Tween.easeInExpo(0, 1, _visible) * Vector3.one;
+		}
+
+		private void ToggleActive(bool value)
+		{
+			_active = value;
+
+			if (_laserSight != null)
+			{
+				if (_active)
+				{
+					_laserSight.SetDuration(0.5f);
+					_laserSight.Activate();
+				}
+				else
+					_laserSight.Deactivate();
+			}
+		}
+
+		public void Fire(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			if (powerupType == PowerupType.EMPTY || _gunExits.Length == 0)
+				return;
+			
+			Transform exit = GetExitPoint(Runner.Tick);
+			
+			SpawnNetworkShot(runner, owner, exit, ownerVelocity);
+		}
+
+		private void OnFireTickChanged()
+		{
+			// Recharge the laser sight if this weapon has it
+			if (_laserSight != null)
+				_laserSight.Recharge();
+		}
+
+		private void SpawnNetworkShot(NetworkRunner runner, PlayerRef owner, Transform exit, Vector3 ownerVelocity)
+		{
+			if(_bulletPrefab.ProjectileType == ProjectileType.Single)
+			{
+				bullets.Add(runner, new ShotState(_turret.transform.position, exit.position, exit.forward), _bulletPrefab.TimeToLive);
+			}
+
+			// bool impact;
+			// if (runner.GameMode == GameMode.Shared)
+			// {
+			// 	impact = runner.GetPhysicsScene().Raycast(exit.position, exit.forward, out var hitinfo, _bulletPrefab.Range, _bulletPrefab.HitMask.value);
+			// }
+			// else
+			// {
+			// 	impact = Runner.LagCompensation.Raycast(exit.position, exit.forward, _bulletPrefab.Range, Object.InputAuthority, out var hitinfo, _bulletPrefab.HitMask.value, HitOptions.IgnoreInputAuthority | HitOptions.IncludePhysX);
+			// }
+
+			// if (impact)
+			// 	bullets.Add(runner, new ShotState(exit.position, exit.forward), _bulletPrefab.TimeToLive);
+		}
+		
+		private void ApplySingleDamage(Player target)
+		{
+			if (target != null && target.NetTeammateIndex != _turret.TurretTeamIndex)
+			{
+				var damageEvent = new DamageEvent { targetPlayerRef = MatchIndexs.Turret, damage = Random.Range(data.Damage[0], data.Damage[1]) };
+				target.UpdateHPImmediately(damageEvent.damage);	
+				target.RaiseEvent(damageEvent);
+			}
+		}
+
+		private void ApplyAreaDamage(Vector3 hitPoint)
+		{
+			int cnt = Physics.OverlapSphereNonAlloc(hitPoint, _bulletPrefab.AOERadius, _areaHits, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore);
+			if (cnt > 0)
+			{
+				for (int i = 0; i < cnt; i++)
+				{
+					GameObject other = _areaHits[i].gameObject;
+					if (other)
+					{
+						Player target = other.GetComponent<Player>();
+						if (target != null && target.NetTeammateIndex != _turret.TurretTeamIndex)
+						{
+							Vector3 impulse = other.transform.position - hitPoint;
+							float l = Mathf.Clamp(_bulletPrefab.AOERadius - impulse.magnitude, 0, _bulletPrefab.AOERadius);
+							impulse = _bulletPrefab.AreaImpulse * l * impulse.normalized;
+							target.RaiseEvent(new DamageEvent { targetPlayerRef =  MatchIndexs.Turret, damage = Random.Range(data.Damage[0], data.Damage[1]) });
+						}
+					}
+				}
+			}
+		}
+
+		public Transform GetExitPoint(int tick)
+		{
+			Transform exit = _gunExits[tick% _gunExits.Length];
+			return exit;
+		}
+	}
+}
+
+
+================================================================================
+FILE 598/682: Assets/_GameModules/TankFusionModule/Scripts/UI/BounceUI.cs
+================================================================================
+
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class BounceUI : MonoBehaviour
+	{
+		[SerializeField] private AnimationCurve _bounceCurve;
+
+		[SerializeField] private float _animCurveWeight = 1f;
+		private Vector3 _defaultScale;
+		private RectTransform _rect;
+
+
+		private float _timer = 0;
+		[SerializeField] private float _bounceDuration = 0.5f;
+		private float _targetDuration;
+
+
+		[SerializeField] private float _minDelay = 1f;
+
+		[SerializeField] private float _randomOffset = 0.5f;
+
+		[SerializeField] private bool _bounceWithTime = false;
+		private bool _caughtUpWithTime = false;
+
+		private float _randomDelay = 0;
+
+		// Use this for initialization
+		void Start()
+		{
+			_rect = GetComponent<RectTransform>();
+			_defaultScale = _rect.localScale;
+			_timer = _bounceDuration;
+		}
+
+		private void OnEnable()
+		{
+			_caughtUpWithTime = false;
+			StartCoroutine(Wait());
+		}
+
+		void UpdateTimer()
+		{
+			_timer += Time.deltaTime;
+			_timer = Mathf.Min(_timer, _bounceDuration);
+		}
+
+		void Bounce()
+		{
+			float t = _timer / _bounceDuration;
+			float multiplier = _bounceCurve.Evaluate(t) * _animCurveWeight;
+
+			_rect.localScale = _defaultScale + Vector3.one * multiplier;
+		}
+
+		void SetRandomDelay()
+		{
+			_randomDelay = _minDelay + Random.Range(0, _randomOffset);
+		}
+
+		IEnumerator Wait()
+		{
+			while (gameObject.activeSelf)
+			{
+				SetRandomDelay();
+				yield return new WaitForSeconds(_randomDelay);
+				if (_bounceWithTime && !_caughtUpWithTime)
+				{
+					_timer = _bounceDuration;
+					float currentTime = Time.time;
+					int ceiledCurrentTime = Mathf.CeilToInt(currentTime);
+					float fractionTime = ceiledCurrentTime - currentTime;
+
+					float modFracTime = fractionTime % _bounceDuration;
+					_timer = modFracTime;
+					_caughtUpWithTime = true;
+				}
+				else
+				{
+					_timer = 0;
+				}
+
+				yield return new WaitForSeconds(_bounceDuration);
+			}
+		}
+
+		void Update()
+		{
+			UpdateTimer();
+			Bounce();
+		}
+	}
+}
+
+
+================================================================================
+FILE 599/682: Assets/_GameModules/TankFusionModule/Scripts/UI/CountdownManager.cs
+================================================================================
+
+using System.Collections;
+using UnityEngine;
+using TMPro;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// CountdownManager handles the countdown before the game starts.
+	/// It displays the countdown on the UI and plays a sound effect.
+	/// </summary>
+	public class CountdownManager : MonoBehaviour
+	{
+		[SerializeField] private float _countdownFrom;
+		[SerializeField] private AnimationCurve _countdownCurve;
+		[SerializeField] private TextMeshProUGUI _countdownUI;
+		[SerializeField] GDO.Audio.AudioEmitter _audioEmitter;
+		[SerializeField] private GameObject attackObj, defenseObj;
+		private float _countdownTimer;
+
+		public delegate void Callback();
+
+		private void Start()
+		{
+			Reset();
+		}
+
+		public void Reset()
+		{
+			_countdownUI.transform.localScale = Vector3.zero;
+		}
+
+		public IEnumerator Countdown(Callback callback)
+		{
+			_countdownUI.transform.localScale = Vector3.zero;
+
+			_countdownUI.text = _countdownFrom.ToString();
+			_countdownUI.gameObject.SetActive(true);
+			attackObj.gameObject.SetActive(false);
+			defenseObj.gameObject.SetActive(false);
+			int lastCount = Mathf.CeilToInt(_countdownFrom + 1);
+			_countdownTimer = _countdownFrom;
+
+			while (_countdownTimer > 0)
+			{
+				int currentCount = Mathf.CeilToInt(_countdownTimer);
+
+				if (lastCount != currentCount)
+				{
+					lastCount = currentCount;
+					_countdownUI.text = currentCount.ToString();
+					_audioEmitter.PlayOneShot();
+				}
+
+				float x = _countdownTimer - Mathf.Floor(_countdownTimer);
+
+				float t = _countdownCurve.Evaluate(x);
+				if (t >= 0)
+					_countdownUI.transform.localScale = Vector3.one * t;
+
+				_countdownTimer -= Time.deltaTime * 1.5f;
+				yield return null;
+			}
+			
+			_countdownUI.text = "";
+			_countdownUI.gameObject.SetActive(false);
+			yield return new WaitForSeconds(0.1f);
+			var teamIndex = DatabaseManager.GetDB<SOMatchData>().GetLocalTeamIndex();
+			if (teamIndex == 0)
+				defenseObj.gameObject.SetActive(true);
+			else if (teamIndex == 1)
+				attackObj.gameObject.SetActive(true);
+			yield return new WaitForSeconds(0.5f);
+			defenseObj.gameObject.SetActive(false);
+			attackObj.gameObject.SetActive(false);
+			callback?.Invoke();
+		}
+	}
+}
+
+
+================================================================================
+FILE 600/682: Assets/_GameModules/TankFusionModule/Scripts/UI/ErrorBox.cs
+================================================================================
+
+using System;
+using Fusion.UIHelpers;
+using Fusion.Utility;
+using TMPro;
+using UnityEngine;
+
+namespace Tanknarok.UI
+{
+	[RequireComponent(typeof(Panel))]
+	public class ErrorBox : Singleton<ErrorBox>
+	{
+		[SerializeField] private TMP_Text _header;
+		[SerializeField] private TMP_Text _message;
+
+		private Action _onClose;
+		[SerializeField] private Panel _panel;
+
+		public static void Show(string header, string message, Action onclose)
+		{
+			Singleton<ErrorBox>.Instance.ShowInternal(header, message, onclose);
+		}
+
+		private void ShowInternal(string header, string message, Action onclose)
+		{
+			if(_panel==null)
+				_panel = GetComponent<Panel>();
+			_panel.SetVisible(true);
+
+			_header.text = header;
+			_message.text = message;
+			_onClose = onclose;
+	
+		}
+
+		public void OnClose()
+		{
+			_panel.SetVisible(false);
+			_onClose?.Invoke();
+		}
+	}
+}

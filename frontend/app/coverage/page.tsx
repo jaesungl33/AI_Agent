@@ -14,21 +14,29 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { documentAPI, gddAPI } from "@/lib/api/client"
+import { useWorkspace } from "@/lib/contexts/workspace-context"
 import type { Document, GameSpec } from "@/lib/api/types"
 import { GddSpecDetails } from "@/components/documents/gdd-spec-details"
 import { Loader2, FileText, Code } from "lucide-react"
 
 export default function CoveragePage() {
+  const { currentWorkspace } = useWorkspace()
+  const workspaceId = currentWorkspace?.id ?? "tank_war"
   const [documents, setDocuments] = useState<Document[]>([])
-  const [selectedGddIds, setSelectedGddIds] = useState<string[]>([])  // All GDDs by default
-  const [selectedCodeIds, setSelectedCodeIds] = useState<string[]>([])  // All code batches by default
+  const [fastMode, setFastMode] = useState(true)
+  const [selectedGddIds, setSelectedGddIds] = useState<string[]>([])  // legacy multi (auto all)
+  const [selectedCodeIds, setSelectedCodeIds] = useState<string[]>([]) // legacy multi (auto all)
+  const [selectedSingleGdd, setSelectedSingleGdd] = useState<string | null>(null)
+  const [selectedSingleCode, setSelectedSingleCode] = useState<string | null>(null)
   const [spec, setSpec] = useState<GameSpec | null>(null)
   const [isLoadingSpec, setIsLoadingSpec] = useState(false)
   const [isLoadingDocs, setIsLoadingDocs] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
+  const [exportLoading, setExportLoading] = useState<"gdd" | "code" | "compare" | null>(null)
 
   useEffect(() => {
     loadDocuments()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const loadDocuments = async () => {
@@ -36,7 +44,7 @@ export default function CoveragePage() {
       setIsLoadingDocs(true)
       setLoadError(null)
       console.log("[CoveragePage] Loading documents from backend...")
-      const docs = await documentAPI.list()
+      const docs = await documentAPI.list(workspaceId)
       console.log("[CoveragePage] Loaded documents:", docs.length)
       setDocuments(docs)
       
@@ -53,6 +61,12 @@ export default function CoveragePage() {
       if (codeDocs.length > 0 && selectedCodeIds.length === 0) {
         setSelectedCodeIds(codeDocs.map(d => d.id))
       }
+      if (!selectedSingleGdd && gddDocs.length > 0) {
+        setSelectedSingleGdd(gddDocs[0].id)
+      }
+      if (!selectedSingleCode && codeDocs.length > 0) {
+        setSelectedSingleCode(codeDocs[0].id)
+      }
     } catch (error: any) {
       console.error("[CoveragePage] Failed to load documents:", error)
       setLoadError(error?.message || "Failed to load documents. Check if backend is running at http://localhost:8000")
@@ -62,12 +76,15 @@ export default function CoveragePage() {
   }
 
   const handleExtractSpec = async () => {
-    if (selectedGddIds.length === 0) return
+    const evalGddIds = fastMode
+      ? (selectedSingleGdd ? [selectedSingleGdd] : [])
+      : selectedGddIds
+    if (evalGddIds.length === 0) return
     
     try {
       setIsLoadingSpec(true)
       // Extract from first GDD for display (we'll merge all in backend)
-      const specData = await gddAPI.getSpec(selectedGddIds[0])
+      const specData = await gddAPI.getSpec(evalGddIds[0])
       setSpec(specData)
     } catch (error) {
       console.error("Failed to extract spec:", error)
@@ -77,8 +94,16 @@ export default function CoveragePage() {
     }
   }
 
-  const gddDocs = documents.filter(d => d.type === "gdd" && d.status === "indexed")
-  const codeDocs = documents.filter(d => d.type === "code" && d.status === "indexed")
+  const isIndexed = (status?: string) => status === "indexed" || status === "processed"
+  const gddDocs = documents.filter(d => d.type === "gdd" && isIndexed(d.status))
+  const codeDocs = documents.filter(d => d.type === "code" && isIndexed(d.status))
+
+  const evalGddIds = fastMode
+    ? (selectedSingleGdd ? [selectedSingleGdd] : [])
+    : selectedGddIds
+  const evalCodeIds = fastMode
+    ? (selectedSingleCode ? [selectedSingleCode] : [])
+    : selectedCodeIds
 
   return (
     <LayoutWithSidebar>
@@ -86,17 +111,31 @@ export default function CoveragePage() {
         <div>
           <h1 className="text-3xl font-bold">Code Coverage</h1>
           <p className="text-muted-foreground mt-2">
-            Extract requirements from ALL GDDs and compare with your ENTIRE codebase
+            Behavior-based coverage: extract GDD behaviors, match to code behaviors, LLM-verify top candidates.
           </p>
         </div>
 
         {/* Document Selection */}
         <Card>
           <CardHeader>
-            <CardTitle>Document Selection</CardTitle>
-            <CardDescription>
-              Comparing ALL GDDs against ENTIRE codebase (all batches). This gives you complete coverage.
-            </CardDescription>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <CardTitle>Document Selection</CardTitle>
+                <CardDescription>
+                  Fast mode runs a single GDD vs a single code batch to avoid timeouts.
+                </CardDescription>
+              </div>
+              <div className="flex items-center gap-2">
+                <Label className="text-sm">Fast mode</Label>
+                <Button
+                  size="sm"
+                  variant={fastMode ? "default" : "outline"}
+                  onClick={() => setFastMode(!fastMode)}
+                >
+                  {fastMode ? "On" : "Off"}
+                </Button>
+              </div>
+            </div>
           </CardHeader>
           <CardContent className="space-y-4">
             {isLoadingDocs && (
@@ -119,51 +158,99 @@ export default function CoveragePage() {
                 </Button>
               </div>
             )}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>
-                  <FileText className="inline h-4 w-4 mr-2" />
-                  Game Design Documents ({selectedGddIds.length} selected)
-                </Label>
-                <div className="p-3 rounded-lg bg-muted border border-border">
-                  {selectedGddIds.length > 0 ? (
-                    <div className="space-y-1">
-                      {gddDocs
-                        .filter(d => selectedGddIds.includes(d.id))
-                        .map((doc) => (
-                          <div key={doc.id} className="text-sm">
-                            ✓ {doc.name} ({doc.chunksCount || 0} chunks)
-                          </div>
-                        ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">No GDDs available</p>
-                  )}
+            {fastMode ? (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>
+                    <FileText className="inline h-4 w-4 mr-2" />
+                    Select one GDD
+                  </Label>
+                  <Select
+                    onValueChange={(val) => setSelectedSingleGdd(val)}
+                    value={selectedSingleGdd ?? undefined}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a GDD" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {gddDocs.map((doc) => (
+                        <SelectItem key={doc.id} value={doc.id}>
+                          {doc.name} ({doc.chunksCount || 0} chunks)
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <Label>
-                  <Code className="inline h-4 w-4 mr-2" />
-                  Code Batches ({selectedCodeIds.length} selected)
-                </Label>
-                <div className="p-3 rounded-lg bg-muted border border-border">
-                  {selectedCodeIds.length > 0 ? (
-                    <div className="space-y-1 max-h-32 overflow-y-auto">
-                      {codeDocs
-                        .filter(d => selectedCodeIds.includes(d.id))
-                        .map((doc) => (
-                          <div key={doc.id} className="text-sm">
-                            ✓ {doc.name} ({doc.chunksCount || 0} chunks)
-                          </div>
-                        ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted-foreground">No code batches available</p>
-                  )}
+                <div className="space-y-2">
+                  <Label>
+                    <Code className="inline h-4 w-4 mr-2" />
+                    Select one Code batch
+                  </Label>
+                  <Select
+                    onValueChange={(val) => setSelectedSingleCode(val)}
+                    value={selectedSingleCode ?? undefined}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose code batch" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {codeDocs.map((doc) => (
+                        <SelectItem key={doc.id} value={doc.id}>
+                          {doc.name} ({doc.chunksCount || 0} chunks)
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>
+                    <FileText className="inline h-4 w-4 mr-2" />
+                    Game Design Documents ({selectedGddIds.length} selected)
+                  </Label>
+                  <div className="p-3 rounded-lg bg-muted border border-border">
+                    {selectedGddIds.length > 0 ? (
+                      <div className="space-y-1">
+                        {gddDocs
+                          .filter(d => selectedGddIds.includes(d.id))
+                          .map((doc) => (
+                            <div key={doc.id} className="text-sm">
+                              ✓ {doc.name} ({doc.chunksCount || 0} chunks)
+                            </div>
+                          ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">No GDDs available</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>
+                    <Code className="inline h-4 w-4 mr-2" />
+                    Code Batches ({selectedCodeIds.length} selected)
+                  </Label>
+                  <div className="p-3 rounded-lg bg-muted border border-border">
+                    {selectedCodeIds.length > 0 ? (
+                      <div className="space-y-1 max-h-32 overflow-y-auto">
+                        {codeDocs
+                          .filter(d => selectedCodeIds.includes(d.id))
+                          .map((doc) => (
+                            <div key={doc.id} className="text-sm">
+                              ✓ {doc.name} ({doc.chunksCount || 0} chunks)
+                            </div>
+                          ))}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">No code batches available</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800">
               <p className="text-sm text-blue-900 dark:text-blue-100">
@@ -191,51 +278,124 @@ export default function CoveragePage() {
           </CardContent>
         </Card>
 
+        {/* Exports */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Exports</CardTitle>
+            <CardDescription>
+              Generate markdown exports for all GDD requirements and code functions, then compare.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-3">
+            <Button
+              variant="outline"
+              disabled={!!exportLoading}
+              onClick={async () => {
+                try {
+                  setExportLoading("gdd")
+                  const res = await fetch(`/api/export/gdd?workspaceId=${workspaceId}`)
+                  if (!res.ok) throw new Error(await res.text())
+                  const data = await res.json()
+                  alert(`GDD export done: ${data.file}`)
+                } catch (e: any) {
+                  alert(`GDD export failed: ${e?.message || "Error"}`)
+                } finally {
+                  setExportLoading(null)
+                }
+              }}
+            >
+              {exportLoading === "gdd" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+              Export GDD Requirements
+            </Button>
+            <Button
+              variant="outline"
+              disabled={!!exportLoading}
+              onClick={async () => {
+                try {
+                  setExportLoading("code")
+                  const res = await fetch(`/api/export/code?workspaceId=${workspaceId}`)
+                  if (!res.ok) throw new Error(await res.text())
+                  const data = await res.json()
+                  alert(`Code export done: ${data.file}`)
+                } catch (e: any) {
+                  alert(`Code export failed: ${e?.message || "Error"}`)
+                } finally {
+                  setExportLoading(null)
+                }
+              }}
+            >
+              {exportLoading === "code" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+              Export Code Functions
+            </Button>
+            <Button
+              variant="default"
+              disabled={!!exportLoading}
+              onClick={async () => {
+                try {
+                  setExportLoading("compare")
+                  const res = await fetch(`/api/export/compare?workspaceId=${workspaceId}`, { method: "POST" })
+                  if (!res.ok) throw new Error(await res.text())
+                  const data = await res.json()
+                  alert(`Comparison ready: ${data.file}`)
+                } catch (e: any) {
+                  alert(`Compare failed: ${e?.message || "Error"}`)
+                } finally {
+                  setExportLoading(null)
+                }
+              }}
+            >
+              {exportLoading === "compare" ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+              Compare Exports
+            </Button>
+          </CardContent>
+        </Card>
+
         {/* Spec Summary & Details */}
         {spec && (
           <div className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Extracted Game Specification</CardTitle>
-                <CardDescription>
-                  Requirements, systems, objects, and logic rules found in the GDD
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-4 gap-4">
-                  <div className="text-center p-4 rounded-lg bg-muted">
-                    <p className="text-2xl font-bold">{spec.requirements.length}</p>
-                    <p className="text-sm text-muted-foreground">Requirements</p>
-                  </div>
-                  <div className="text-center p-4 rounded-lg bg-muted">
-                    <p className="text-2xl font-bold">{spec.systems.length}</p>
-                    <p className="text-sm text-muted-foreground">Systems</p>
-                  </div>
-                  <div className="text-center p-4 rounded-lg bg-muted">
-                    <p className="text-2xl font-bold">{spec.objects.length}</p>
-                    <p className="text-sm text-muted-foreground">Objects</p>
-                  </div>
-                  <div className="text-center p-4 rounded-lg bg-muted">
-                    <p className="text-2xl font-bold">{spec.logicRules.length}</p>
-                    <p className="text-sm text-muted-foreground">Logic Rules</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle>Extracted Game Specification</CardTitle>
+            <CardDescription>
+              Requirements, systems, objects, and logic rules found in the GDD
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-4 gap-4">
+              <div className="text-center p-4 rounded-lg bg-muted">
+                <p className="text-2xl font-bold">{spec.requirements?.length ?? 0}</p>
+                <p className="text-sm text-muted-foreground">Requirements</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-muted">
+                <p className="text-2xl font-bold">{spec.systems?.length ?? 0}</p>
+                <p className="text-sm text-muted-foreground">Systems</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-muted">
+                <p className="text-2xl font-bold">{spec.objects?.length ?? 0}</p>
+                <p className="text-sm text-muted-foreground">Objects</p>
+              </div>
+              <div className="text-center p-4 rounded-lg bg-muted">
+                <p className="text-2xl font-bold">{spec.logicRules?.length ?? 0}</p>
+                <p className="text-sm text-muted-foreground">Logic Rules</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
             <GddSpecDetails spec={spec} />
           </div>
         )}
 
         {/* Coverage Evaluation */}
-        {selectedGddIds.length > 0 && selectedCodeIds.length > 0 && (
+        {evalGddIds.length > 0 && evalCodeIds.length > 0 && (
           <CodeCoverage 
-            docId={selectedGddIds.length === 1 ? selectedGddIds[0] : selectedGddIds} 
-            codeIndexId={selectedCodeIds.length === 1 ? selectedCodeIds[0] : selectedCodeIds} 
+            docId={evalGddIds.length === 1 ? evalGddIds[0] : evalGddIds} 
+            codeIndexId={evalCodeIds.length === 1 ? evalCodeIds[0] : evalCodeIds}
+            workspaceId={workspaceId}
           />
         )}
 
-        {(selectedGddIds.length === 0 || selectedCodeIds.length === 0) && (
+        {(evalGddIds.length === 0 || evalCodeIds.length === 0) && (
           <Card>
             <CardContent className="py-8 text-center text-muted-foreground">
               Please ensure you have at least one GDD and one code batch indexed.

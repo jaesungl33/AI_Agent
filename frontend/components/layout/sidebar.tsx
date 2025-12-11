@@ -14,15 +14,15 @@ import {
   ChevronRight
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { WorkspaceSelector } from "@/components/workspace-selector"
 import { cn } from "@/lib/utils"
 
 const navigation = [
-  { name: "Workspaces", href: "/", icon: FolderOpen },
-  { name: "Upload", href: "/upload", icon: Upload },
+  { name: "Dashboard", href: "/", icon: FolderOpen },
   { name: "Documents", href: "/documents", icon: FileText },
-  { name: "Chat", href: "/chat", icon: MessageSquare },
+  { name: "Upload", href: "/upload", icon: Upload },
   { name: "Coverage", href: "/coverage", icon: Code },
-  { name: "Settings", href: "/settings", icon: Settings },
+  { name: "Chat", href: "/chat", icon: MessageSquare },
 ]
 
 export function Sidebar() {
@@ -54,6 +54,13 @@ export function Sidebar() {
           )}
         </Button>
       </div>
+      
+      {/* Workspace Selector */}
+      {!collapsed && (
+        <div className="px-4 pb-4 border-b border-border">
+          <WorkspaceSelector />
+        </div>
+      )}
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-1">

@@ -4,35 +4,27 @@ __pycache__/
 *$py.class
 *.so
 .Python
-*.egg-info/
+build/
+develop-eggs/
 dist/
-build/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
 *.egg
-.venv/
+
+# Virtual environments
 venv/
-ENV/
 env/
-
-# Node.js / Frontend
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnp
-.pnp.js
-.next/
-out/
-build/
-.vercel
-.gradio
-*.tsbuildinfo
-
-# Environment variables
-.env
-.env.local
-.env*.local
-.env.production
-.env.development
+ENV/
+.venv
 
 # IDE
 .vscode/
@@ -40,70 +32,43 @@ build/
 *.swp
 *.swo
 *~
-.DS_Store
 
-# Large Unity Project (1.9GB+)
-# DO NOT COMMIT - Too large for GitHub
-tank_online_1-dev/
+# Environment variables
+.env
+.env.local
 
-# RAG Storage (large JSON files - can be regenerated)
-rag_storage/*.json
-rag_storage/*.graphml
-# Keep directory structure but ignore contents
-!rag_storage/.gitkeep
-
-# Output files (generated content)
-output/
-
-# Large code snapshot files
-docs/*_codebase*.txt
-docs/*_batch*.txt
-
-# Logs
+# Data directories (runtime data, not source)
+data/rag_storage/
+data/output/
+data/reports/
+data/workspaces/
 *.log
-logs/
+artifacts/
+*.tar.gz
+*.zip
+tests/tank_online_1-dev/
+
+# Node
+node_modules/
+.next/
+out/
+frontend/.next/
+frontend/out/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.backup
+*.bak
+*.backup_*
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
 
 # Temporary files
 *.tmp
 *.temp
-.cache/
-
-# Large binary files
-*.so
-*.bundle
-*.dylib
-*.dll
-
-# Firebase plugins (large binaries)
-**/Firebase/Plugins/**/*.so
-**/Firebase/Plugins/**/*.bundle
-
-# Large model files
-*.bin
-*.pt
-*.pth
-*.h5
-*.ckpt
-
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-
-# Archives (unless specifically needed)
-*.zip
-*.tar
-*.tar.gz
-*.rar
-# Exception: Allow the RAG data backup archive (tracked with Git LFS)
-!rag_data_backup.tar.gz
-
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini

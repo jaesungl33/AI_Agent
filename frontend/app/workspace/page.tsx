@@ -54,9 +54,9 @@ export default function WorkspacePage() {
     try {
       setIsCreating(true)
       setError(null)
-      const res = await workspaceAPI.create({ name: wsName.trim() })
-      setWorkspaces((prev) => [...prev, res.workspace])
-      setSelectedWs(res.workspace.id)
+      const workspace = await workspaceAPI.create({ name: wsName.trim() })
+      setWorkspaces((prev) => [...prev, workspace])
+      setSelectedWs(workspace.id)
       setWsName("")
     } catch (e: any) {
       setError(e?.message || "Failed to create workspace")

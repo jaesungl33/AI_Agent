@@ -2,15 +2,48 @@
 
 AI-powered framework for processing Game Design Documents (GDDs) with RAG-based analysis, requirement extraction, and code coverage checking.
 
-## Features
+## 📁 Project Structure
 
-- 📄 **Document Processing**: Index and query PDF/DOCX game design documents
-- 🤖 **AI-Powered Analysis**: Ask natural language questions about your GDDs
-- 📊 **Structured Extraction**: Automatically extract objects, systems, requirements
-- ✅ **Code Coverage**: Compare GDD requirements against your codebase
-- 🚀 **Multiple Interfaces**: Web UI (Vercel), REST API (Render)
+```
+AI_Agent/
+├── src/                          # Core library
+│   └── gdd_rag_backbone/
+│       ├── gdd/                  # GDD processing modules
+│       ├── llm_providers/        # LLM provider implementations
+│       ├── rag_backend/          # RAG indexing and querying
+│       └── workspace/            # Workspace management
+│
+├── backend/                      # FastAPI backend server
+│   ├── main.py
+│   └── requirements.txt
+│
+├── frontend/                     # Next.js frontend
+│   ├── app/                     # Next.js app router
+│   ├── components/              # React components
+│   └── lib/                     # Utilities and API client
+│
+├── scripts/                      # Utility scripts
+│   ├── migration/               # Data migration scripts
+│   ├── indexing/                # Indexing utilities
+│   ├── testing/                 # Test scripts
+│   └── utilities/               # Helper scripts
+│
+├── data/                         # Runtime data
+│   ├── rag_storage/            # RAG indices and vectors
+│   ├── output/                  # Processing output
+│   ├── reports/                 # Coverage reports
+│   ├── workspaces/              # Workspace data
+│   └── gdd_documents/           # GDD source files
+│
+├── docs/                         # Documentation
+│   ├── architecture/            # Architecture docs
+│   ├── guides/                  # User guides
+│   └── api/                     # API documentation
+│
+└── tests/                        # Test files and test codebase
+```
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Installation
 
@@ -21,20 +54,31 @@ cd AI_Agent
 
 # Install Python dependencies
 pip install -r requirements.txt
+pip install -r backend/requirements.txt
 
 # Install frontend dependencies
 cd frontend && npm install && cd ..
+```
 
-# Setup environment
-cp .env.example .env
-# Edit .env with your API keys
+### Environment Setup
+
+Create a `.env` file in the project root:
+
+```bash
+# Qwen/DashScope API
+DASHSCOPE_API_KEY=your_api_key_here
+REGION=intl  # or "cn"
+
+# Optional: Override defaults
+DEFAULT_LLM_MODEL=qwen-max
+DEFAULT_EMBEDDING_MODEL=text-embedding-v3
 ```
 
 ### Local Development
 
 **Backend API:**
 ```bash
-cd backend_api
+cd backend
 uvicorn main:app --reload
 # Runs on http://localhost:8000
 ```
@@ -46,99 +90,35 @@ npm run dev
 # Runs on http://localhost:3000
 ```
 
-## Deployment
+## ✨ Features
 
-### Frontend (Vercel)
+- 📄 **Document Processing**: Index and query PDF/DOCX game design documents
+- 🤖 **AI-Powered Analysis**: Ask natural language questions about your GDDs
+- 📊 **Structured Extraction**: Automatically extract objects, systems, requirements
+- ✅ **Code Coverage**: Behavior-based pipeline that matches GDD behaviors to code behaviors
+- 🏢 **Workspace Management**: Isolated workspaces for different projects
+- 🚀 **Multiple Interfaces**: Web UI (Vercel), REST API (Render)
 
-1. Push code to GitHub
-2. Connect repository to [Vercel](https://vercel.com)
-3. Set root directory to `frontend`
-4. Add environment variable: `NEXT_PUBLIC_API_URL`
-5. Deploy automatically on push to `main`
+## 📚 Documentation
 
-### Backend (Render)
+- [Architecture Documentation](docs/architecture/)
+- [User Guides](docs/guides/)
+- [API Documentation](docs/api/)
 
-1. Push code to GitHub
-2. Connect repository to [Render](https://render.com)
-3. Render auto-detects `Render.yaml` configuration
-4. Add environment variables in Render dashboard
-5. Deploy automatically on push to `main`
+## 🧪 Testing
 
-## Project Structure
-
-```
-AI_Agent/
-├── backend_api/          # FastAPI REST backend
-│   ├── main.py          # API endpoints
-│   └── requirements.txt # Backend dependencies
-├── frontend/            # Next.js frontend (Vercel)
-│   ├── app/            # Next.js app router
-│   ├── components/     # React components
-│   └── lib/            # Utilities and API client
-├── gdd_rag_backbone/   # Core Python library
-│   ├── rag_backend/    # RAG indexing and querying
-│   ├── gdd/           # GDD extraction logic
-│   └── llm_providers/ # LLM provider abstractions
-├── docs/               # Document storage
-├── rag_storage/        # RAG data (indexed documents)
-├── scripts/            # Utility scripts
-└── Render.yaml         # Render deployment config
-```
-
-## Usage
-
-### Index a Document
-
-```python
-from gdd_rag_backbone.rag_backend import index_document
-from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func, make_embedding_func
-
-provider = QwenProvider()
-await index_document(
-    doc_path="docs/game_design.pdf",
-    doc_id="my_gdd",
-    llm_func=make_llm_model_func(provider),
-    embedding_func=make_embedding_func(provider),
-)
-```
-
-### Query Documents
-
-```python
-from gdd_rag_backbone.rag_backend.chunk_qa import ask_across_docs
-
-result = ask_across_docs(
-    doc_ids=["my_gdd"],
-    question="What are the main game systems?",
-    provider=provider,
-)
-print(result["answer"])
-```
-
-## Documentation
-
-- **[USER_GUIDE.md](USER_GUIDE.md)** - Complete user guide
-- **[OPENAI_USAGE.md](OPENAI_USAGE.md)** - API usage notes
-- **[TEST_COVERAGE.md](TEST_COVERAGE.md)** - Code coverage testing
-
-## Environment Variables
-
-**Local Development:**
 ```bash
-cp .env.example .env
-# Edit .env with your API keys
+# Run tests
+python -m pytest tests/
+
+# Run specific test
+python -m pytest tests/test_extraction.py
 ```
 
-**Deployment:**
-- **Vercel**: Set `NEXT_PUBLIC_API_URL` in dashboard
-- **Render**: Set `QWEN_API_KEY`, `DASHSCOPE_API_KEY` in dashboard
+## 📝 License
 
-## Requirements
+[Your License Here]
 
-- Python 3.10+
-- Node.js 18+
-- API key for Qwen/DashScope
+## 🤝 Contributing
 
-## License
-
-[Your License]
+[Contributing Guidelines]

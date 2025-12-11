@@ -1,0 +1,4795 @@
+# Code Snapshot for tank_online_1-dev - Batch 10/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 50
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 451/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchData.cs
+================================================================================
+
+[System.Serializable]
+public struct MatchData
+{
+	private int mapId;
+	private MatchType matchType;
+	private MatchMode matchMode;
+	private MatchTeamData[] teams;
+	private int maxPlayers;
+	private int matchDuration; // Time of match in seconds
+	private MatchmakingDocument document;
+
+	public int MapId { get => mapId; set => mapId = value; }
+	public MatchType MatchType { get => matchType; set => matchType = value; }
+	public MatchMode MatchMode { get => matchMode; set => matchMode = value; }
+	public MatchTeamData[] Teams { get => teams; set => teams = value; }
+	public int MaxPlayers { get => maxPlayers; set => maxPlayers = value; }
+	public int MatchDuration { get => matchDuration; set => matchDuration = value; }
+	public MatchmakingDocument Document
+	{
+		get => document; set => document = value;
+	}
+	public MatchData(int mapId, MatchType matchType, MatchMode matchMode, MatchTeamData[] teams, int maxPlayers, int matchDuration, MatchmakingDocument matchmakingDocument)
+	{
+		this.mapId = mapId;
+		this.matchType = matchType;
+		this.matchMode = matchMode;
+		this.teams = teams;
+		this.maxPlayers = maxPlayers;
+		this.matchDuration = matchDuration;
+		this.document = matchmakingDocument;
+	}
+}
+
+
+================================================================================
+FILE 452/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchMode.cs
+================================================================================
+
+public enum MatchMode
+{
+    None,
+    SingleDeathmatch,
+    TeamDeathmatch,
+    CaptureBase,
+    KingOfTheHill,
+    KeepTheGoal,
+}
+
+
+================================================================================
+FILE 453/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchPlayerData.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Fusion;
+using NUnit.Framework;
+using UnityEngine;
+
+public struct MatchPlayerUpgradeData
+{
+    public UpgradeType upgradeType;
+    public int upgradeCount;
+}
+
+[System.Serializable]
+public class MatchPlayerData
+{
+    [SerializeField] private string playerName;
+    [SerializeField] int playerId;
+    [SerializeField] private bool joined;
+    [SerializeField] private bool isLocal;
+    [SerializeField] private int teamIndex;
+    [SerializeField] private int indexInTeam;
+    [SerializeField] private string tankId;
+    [SerializeField] private string avatarId;
+    [SerializeField] private int itemIds;
+    [SerializeField] private int kill;
+    [SerializeField] private int killStreak; // Number of consecutive kills without dying (reset on death)
+    [SerializeField] private int death;
+    [SerializeField] private int destroyedTurrets;
+    [SerializeField] private int gold;
+    [SerializeField] private int hitpoints;
+    [SerializeField] private int maxHitpoints;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float braking;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private int[] damage;
+    [SerializeField] private int reloadTime;
+    [SerializeField] private float fireRate;
+    [SerializeField] private int projectileSpeed;
+    [SerializeField] private int range;
+    [SerializeField] private int magazineSize;
+    [SerializeField] private byte projectileCount;
+    [SerializeField] private float respawnInSeconds; // Time in seconds before the player can respawn
+    [SerializeField] private string[] abilityIDs;
+
+    [SerializeField] private int wrapId; //WrapDecalStickers Fixme
+
+    public int PlayerId { get => playerId; set => playerId = value; }
+    public bool IsJoined { get => joined; set => joined = value; }
+    public bool IsLocalPlayer { get => isLocal; set => isLocal = value; }
+    public int TeamIndex { get => teamIndex; set => teamIndex = value; }
+    public string AvatarId { get => avatarId; set => avatarId = value; }
+    public string TankId { get => tankId; set => tankId = value; }
+    public int IndexInTeam { get => indexInTeam; set => indexInTeam = value; }
+    public string PlayerName { get => playerName; set => playerName = value; }
+    public int ItemIds { get => itemIds; set => itemIds = value; }
+    public int Kill { get => kill; set => kill = value; }
+    public int KillStreak { get => killStreak; set => killStreak = value; }
+    public int Death { get => death; set => death = value; }
+    public int DestroyedTurrets { get => destroyedTurrets; set => destroyedTurrets = value; }
+    public int Gold { get => gold; set => gold = value; }
+    public int HP { get => hitpoints; set => hitpoints = value; }
+    public int MaxHitpoints { get => maxHitpoints; set => maxHitpoints = value; }
+    public float MaxSpeed
+    {
+        get => Mathf.Max(0f, maxSpeed * (1 + ModifySpeedRatio));
+        set => maxSpeed = value;
+    }
+    public int[] Damage { get => damage; set => damage = value; }
+    public int ReloadTime { get => reloadTime; set => reloadTime = value; }
+    public float FireRate
+    {
+        get => Mathf.Max(0f, fireRate * (1 + ModifyFireRateRatio));
+        set => fireRate = value;
+    }
+    public int ProjectileSpeed { get => projectileSpeed; set => projectileSpeed = value; }
+    public int Range { get => range; set => range = value; }
+    public int MagazineSize { get => magazineSize; set => magazineSize = value; }
+    public byte ProjectileCount { get => projectileCount; set => projectileCount = value; }
+    public float RespawnInSeconds { get => respawnInSeconds; set => respawnInSeconds = value; }
+    public float Braking { get => braking; set => braking = value; }
+    public float Acceleration { get => acceleration; set => acceleration = value; }
+    public float RotationSpeed { get => rotationSpeed; set => rotationSpeed = value; }
+    public string[] AbilityIDs { get => abilityIDs; set => abilityIDs = value; }
+
+    //WrapDecalStickers Fixme
+    public int WrapId { get => wrapId; set => wrapId = value; }
+    public void Upgrade(float damageMultiplier = 0, float speedMultiplier = 0, float hpMultiplier = 0, float fireRateMultiplier = 0)
+    {
+        Damage = new int[] { Damage[0] + Mathf.RoundToInt(Damage[0] * damageMultiplier / 100), Damage[1] + Mathf.RoundToInt(Damage[1] * damageMultiplier / 100) };
+        MaxSpeed += MaxSpeed * speedMultiplier / 100;
+        HP += Mathf.RoundToInt(MaxHitpoints * hpMultiplier / 100);
+        MaxHitpoints += Mathf.RoundToInt(MaxHitpoints * hpMultiplier / 100);
+        FireRate += FireRate * fireRateMultiplier / 100;
+    }
+
+    public int GetUpgradeMaxHP(float multiplier = 0)
+    {
+        return MaxHitpoints + Mathf.RoundToInt(MaxHitpoints * multiplier / 100);
+    }
+
+
+    #region Modify Stats Methods
+    public float ModifySpeedRatio;
+    public float ModifyFireRateRatio;
+    #endregion
+}
+
+
+================================================================================
+FILE 454/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchTeamData.cs
+================================================================================
+
+using System.Linq;
+using Fusion.TankOnlineModule;
+
+[System.Serializable]
+public struct MatchTeamData
+{
+	private int teamIndex;
+	private string teamName;
+	private MatchTeamType teamType;
+	private MatchConditionData[] winConditions;
+	private Player[] players;
+	private MatchPlayerData[] matchPlayerDatas;
+	public int TeamIndex => teamIndex;
+	public string TeamName => teamName;
+	public MatchTeamType TeamType => teamType;
+	public MatchConditionData[] WinConditions => winConditions;
+	public int Kill => matchPlayerDatas.Sum(p => p.Kill);
+	public int Death => matchPlayerDatas.Sum(p => p.Death);
+
+	public bool WinConditionMet()
+	{
+		foreach (var condition in winConditions)
+		{
+			return condition.IsWinner();
+		}
+		return false;
+	}
+}
+
+
+================================================================================
+FILE 455/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchTeamType.cs
+================================================================================
+
+public enum MatchTeamType
+{
+	None,
+	Normal,
+	Attack,
+	Defense
+}
+
+
+================================================================================
+FILE 456/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchType.cs
+================================================================================
+
+public enum MatchType
+{
+    None,
+    Normal,
+    Ranked,
+    Custom,
+    OnBoarding,
+}
+
+
+================================================================================
+FILE 457/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchmakingCollection.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = nameof(MatchmakingCollection), menuName = "ScriptableObjects/" + nameof(MatchmakingCollection), order = 1)]
+public class MatchmakingCollection : CollectionBase<MatchmakingDocument>
+{
+    public MatchmakingDocument GetActiveDocument()
+    {
+        // Find the first document that is selected
+        return FindDocumentByProperty(doc => doc.IsSelected, true).DeepClone();
+    }
+
+    public void GetDocumentByProperty(Func<MatchmakingDocument, bool> predicate, bool value, Action<MatchmakingDocument> callback)
+    {
+        MatchmakingDocument foundDocument = FindDocumentByProperty(predicate, value);
+        if (foundDocument != null)
+        {
+            callback?.Invoke(foundDocument.DeepClone());
+        }
+        else
+        {
+            Debug.LogWarning("No document found matching the given property.");
+            callback?.Invoke(null);
+        }
+    }
+
+    internal int GetIndex(string matchId)
+    {
+        int index = -1;
+        for (int i = 0; i < documents.Count; i++)
+        {
+            if (documents[i].matchID == matchId)
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public void SetMatchIndex(int index)
+    {
+        if (index < 0 || index >= documents.Count)
+        {
+            Debug.LogWarningFormat("Index out of range: " + index);
+            return;
+        }
+        for (int i = 0; i < documents.Count; i++)
+        {
+            documents[i].IsSelected = (i == index);
+        }
+    }
+
+    public int GetSelectedMatchIndex()
+    {
+        for (int i = 0; i < documents.Count; i++)
+        {
+            if (documents[i].IsSelected)
+            {
+                return i;
+            }
+        }
+        Debug.LogWarning("No selected document found to get index.");
+        return -1; // Return -1 if no document is selected
+    }
+}
+
+
+================================================================================
+FILE 458/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Data/MatchmakingDocument.cs
+================================================================================
+
+
+using UnityEngine;
+using System;
+
+[System.Serializable]
+public class MatchmakingDocument
+{
+    public const string mainIdFieldName = nameof(matchID); // Tên field chính để lấy ID tài liệu remote config 
+    // ====== FIELDS (Unity/JSON dùng) ======
+    public string matchID;
+    public string matchName;
+    public string matchDescription;
+    public bool isActive;
+    public bool isSelected;
+    public string fixedRegion; // Vùng cố định để vào phòng
+    public string fixedEloName; // Tên elo cố định để vào phòng
+    public int maxRoom;
+    public PlayerElos[] playerElos;
+    public MatchType matchType;
+    public MatchMode matchMode;
+    public byte maxPlayers;
+    public int killsNeededToWin;
+    public int targetsNeededToWin;
+
+    [Min(0)]  public int maxWaitPlayersTime;
+    [Min(5)]  public int selectTankTime;
+    [Min(3)]  public int countdownTime;
+    [Min(5)]  public int targetReadingTime;
+
+    [Min(0)]  public int matchDuration;
+    [Min(0)]  public int lobbySceneIndex;
+    [Min(0)]  public int mapSceneIndex;
+    public int goldStarting;
+    public int goldPerSecond;
+    public int goldPerKill;
+    public int goldDestroyOutpost;
+    public int goldDefendOutpost;
+    public int doubleKillBonus;
+    public int tripleKillBonus;
+    public int quadraKillBonus;
+    public int pentaKillBonus;
+    // Hai field này bạn có trong class gốc, thêm luôn để đầy đủ:
+    public int goldKillStreakBonus;
+    public int goldShutDownBonus;
+    public int winPoint;
+    public int losePoint;
+    public int respawnInSeconds;
+    public string[] rewards;
+
+    public string MatchName { get => matchName; }
+    public string MatchDescription { get => matchDescription; }
+    public bool IsActive { get => isActive; set => isActive = value; }
+    public bool IsSelected { get => isSelected; set => isSelected = value; }
+    public string FixedRegion { get => fixedRegion; }
+    public string FixedEloName { get => fixedEloName; }
+    public PlayerElos[] PlayerElos { get => playerElos; }
+    public MatchType MatchType { get => matchType; }
+    public MatchMode MatchMode          { get => matchMode; }
+    public byte MaxPlayers              { get => maxPlayers; }
+    public int KillsNeededToWin         { get => killsNeededToWin; }
+    public int TargetsNeededToWin       { get => targetsNeededToWin; }
+    public int PickingTime { get => selectTankTime; }
+    public int CountdownTime { get => countdownTime; }
+    public int TargetReadingTime { get => targetReadingTime; }
+    public int MaxRoom { get => maxRoom; }
+    public int LobbySceneIndex          { get => lobbySceneIndex; }
+    public int MapSceneIndex            { get => mapSceneIndex; }
+    public int MatchDuration            { get => matchDuration; }
+    public int GoldPerSecond            { get => goldPerSecond; }
+    public int GoldStarting             { get => goldStarting; }
+    public int GoldPerKill              { get => goldPerKill; }
+    public int GoldDestroyOutpost       { get => goldDestroyOutpost; }
+    public int GoldDefendOutpost        { get => goldDefendOutpost; }
+    public int DoubleKillBonus          { get => doubleKillBonus; }
+    public int TripleKillBonus          { get => tripleKillBonus; }
+    public int QuadraKillBonus          { get => quadraKillBonus; }
+    public int PentaKillBonus           { get => pentaKillBonus; }
+    public int WinPoint                 { get => winPoint; }
+    public int LosePoint                { get => losePoint; }
+    public int RespawnInSeconds         { get => respawnInSeconds; }
+    public string[] Rewards             { get => rewards; }
+
+}
+
+
+================================================================================
+FILE 459/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/Editor/MatchmakingCollectionEditor.cs
+================================================================================
+
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using System.Text;
+using System.Reflection;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+
+[CustomEditor(typeof(MatchmakingCollection))]
+public class MatchmakingCollectionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        GUILayout.Label("Export / Import Options", EditorStyles.boldLabel);
+
+        MatchmakingCollection collection = (MatchmakingCollection)target;
+
+        if (GUILayout.Button("Export to JSON"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to JSON",
+                "",
+                $"{collection.name}.json",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore,
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                    TypeNameHandling = TypeNameHandling.Auto,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver
+                    {
+                        NamingStrategy = new Newtonsoft.Json.Serialization.DefaultNamingStrategy()
+                    }
+                };
+                string json = JsonConvert.SerializeObject(collection, settings);
+                // string json = JsonUtility.ToJson(collection, true);
+                File.WriteAllText(path, json);
+                Debug.Log($"Exported to JSON at: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Import from JSON"))
+        {
+            string path = EditorUtility.OpenFilePanel(
+                "Import Collection from JSON",
+                "",
+                "json");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                string json = File.ReadAllText(path);
+                JsonUtility.FromJsonOverwrite(json, collection);
+                EditorUtility.SetDirty(collection);
+                AssetDatabase.SaveAssets();
+                Debug.Log($"Imported from JSON: {path}");
+            }
+        }
+
+        if (GUILayout.Button("Export to CSV"))
+        {
+            string path = EditorUtility.SaveFilePanel(
+                "Export Collection to CSV",
+                "",
+                "collection.csv",
+                "csv");
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                ExportToCsv(collection, path);
+            }
+        }
+    }
+
+    private void ExportToCsv(MatchmakingCollection collection, string path)
+    {
+        var docs = collection.GetAllDocuments();
+        StringBuilder sb = new StringBuilder();
+
+        if (docs == null || docs.Count == 0)
+        {
+            Debug.LogWarning("Collection is empty. Nothing to export.");
+            return;
+        }
+
+        // Lấy type của TankHull
+        var type = typeof(TankHullDocument);
+
+        // Lấy tất cả field public và private có [SerializeField]
+        var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        fields = fields.Where(f => f.IsPublic || f.GetCustomAttribute<SerializeField>() != null).ToArray();
+
+        // Header
+        sb.AppendLine(string.Join(",", fields.Select(f => f.Name)));
+
+        // Rows
+        foreach (var doc in docs)
+        {
+            var values = fields.Select(f =>
+            {
+                var value = f.GetValue(doc);
+
+                if (value == null)
+                    return "";
+
+                // Escape dấu phẩy và xuống dòng nếu có
+                string s = value.ToString();
+                if (s.Contains(",") || s.Contains("\n"))
+                    s = $"\"{s.Replace("\"", "\"\"")}\"";
+
+                return s;
+            });
+            sb.AppendLine(string.Join(",", values));
+        }
+
+        File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+        Debug.Log($"Exported to CSV at: {path}");
+    }
+
+}
+
+
+================================================================================
+FILE 460/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/MatchmakingManager.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Linq;
+using Fusion;
+using Fusion.Sockets;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using System.Collections.Generic;
+using Fusion.GameSystems;
+using Fusion.Photon.Realtime;
+using UnityEngine.Events;
+
+/// <summary>
+/// Find a match based on player characteristics and preferences
+/// - Match types include:
+///     - SoloMatch: Single player matches
+///     - TeamMatch: Matches with teams
+///     - CustomMatch: User-defined matches
+/// - ELO range from A to B
+/// - Match size options (3x3, 5x5)
+/// Returns match information including session name and game mode.
+/// </summary>
+public class MatchmakingManager : Singleton<MatchmakingManager>, INetworkRunnerCallbacks, IInitializableManager
+{
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private GameServer gameServerPrefab;
+    [SerializeField] private NetworkRunner runnerPrefab;
+    [SerializeField] private NetworkRunner runnerInstance;
+    // [SerializeField] private List<FusionPlayer> players = new List<FusionPlayer>();
+    private StartGameResult findMatchResult;
+    private Coroutine matchmakingCoroutine;
+    private SOMatchData soMatchPlayerData;
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    private GameServer GServer { get; set; }
+    public SOMatchData GameMatchData
+    {
+        get => soMatchPlayerData;
+        set => soMatchPlayerData = value;
+    }
+
+    public static bool IsFinding { get; set; } = false;
+    public static bool IsJoined { get; set; } = false;
+    public NetworkRunner RunnerInstance => runnerInstance;
+
+
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    public void Initialize()
+    {
+        if (runnerPrefab == null)
+        {
+            Debug.LogError("[MatchmakingManager] NetworkRunner prefab is not assigned");
+            return;
+        }
+        if (levelManager == null)
+        {
+            Debug.LogError("[MatchmakingManager] LevelManager is not assigned");
+            return;
+        }
+        if (gameServerPrefab == null)
+        {
+            Debug.LogError("[MatchmakingManager] GameServer is not assigned");
+            return;
+        }
+
+        GameMatchData = DatabaseManager.GetDB<SOMatchData>();
+        Debug.Log("[MatchmakingManager] Initialized");
+        EventManager.Register<MatchmakingEvent>(FindMatchOrCancel);
+        // EventManager.Register<FusionPlayer>(AddPlayer);
+        EventManager.Register<GamePhase>(OnState);
+        OnInitialized?.Invoke(true);
+    }
+    
+    private void OnState(GamePhase state)
+    {
+        Debug.Log("[MatchmakingManager] Exiting matchmaking due to game left session state: " + state.ToString());
+
+        switch (state)
+        {
+            case GamePhase.MatchFinal:
+                //ResetData();
+                break;
+            case GamePhase.MatchReleasing:
+                // ResetData();
+                break;
+        }
+    }
+
+    public async void ResetData()
+    {
+        Debug.Log("[MatchmakingManager] Resetting matchmaking data");
+        IsFinding = false;
+        if (runnerInstance == null) return;
+    
+        if (GServer != null && GServer.Object != null && GServer.Object.IsValid && GServer.HasStateAuthority)
+        {
+            runnerInstance.Despawn(GServer.Object);
+            GServer = null;
+        }
+
+        await runnerInstance.Shutdown();
+    }
+
+    // private void AddPlayer(FusionPlayer player)
+    // {
+    //     if (player != null && !players.Contains(player))
+    //     {
+    //         players.Add(player);
+    //         Debug.Log($"Player {player.NetPlayerName.ToString()} added to matchmaking list.");
+    //     }
+    // }
+
+    // public List<FusionPlayer> GetAllPlayers()
+    // {
+    //     return players;
+    // }
+
+    private void FindMatchOrCancel(MatchmakingEvent args)
+    {
+        if (args.isFinding & IsFinding == false)
+        {
+            IsFinding = true;
+            GameMatchData.ClearAll();
+            matchmakingCoroutine = StartCoroutine(JoinOrCreateRoomRoutine());
+        }
+        else
+        {
+            if (IsFinding)
+            {
+                IsFinding = false;
+                Debug.Log("[MatchmakingManager] Stopping matchmaking");
+                StopCoroutine(matchmakingCoroutine);
+                matchmakingCoroutine = null;
+                CancelMatchmaking();
+            }
+            else
+            {
+                Debug.Log("[MatchmakingManager] Matchmaking is not in progress");
+            }
+        }
+    }
+
+    private void CancelMatchmaking()
+    {
+        if (runnerInstance != null)
+        {
+            Debug.Log("[MatchmakingManager] Cancelling matchmaking...");
+            ResetData();
+        }
+        else
+        {
+            Debug.LogWarning("[MatchmakingManager] No active matchmaking session to cancel.");
+        }
+    }
+
+    private IEnumerator JoinOrCreateRoomRoutine()
+    {
+        yield return null; // Wait one frame to ensure all players are added
+        if (runnerPrefab == null)
+        {
+            Debug.LogError("[MatchmakingManager] NetworkRunner prefab is not assigned");
+            yield break;
+        }
+
+        DatabaseManager.GetDB<MatchmakingCollection>(collection =>
+        {
+            MatchmakingDocument doc = collection.GetActiveDocument();
+            if (!object.ReferenceEquals(doc, null))
+            {
+                JoinRoom(doc);
+            }
+            else
+            {
+                Debug.LogError("MatchmakingDocument not found in Database.");
+            }
+        });
+    }
+
+    private void JoinRoom(MatchmakingDocument matchmakingDocument)
+    {
+        DatabaseManager.GetDB<PlayerCollection>(async playerCollection =>
+        {
+            if (playerCollection == null)
+            {
+                Debug.LogError("[MatchmakingManager] PlayerCollection not found in Database.");
+                return;
+            }
+
+            PlayerDocument playerDocument = playerCollection.GetMine();
+
+            for (int index = 0; index <= matchmakingDocument.MaxRoom; index++)
+            {
+                runnerInstance = Instantiate(runnerPrefab);
+                runnerInstance.ProvideInput = true;
+                runnerInstance.AddCallbacks(this);
+                //string roomName = string.Format($"{GetSessionName(matchmakingDocument, playerDocument.elo)}{index}").ToLower();
+                string roomName = $"{matchmakingDocument.FixedRegion}_{matchmakingDocument.MatchType}_{matchmakingDocument.MatchMode}_{matchmakingDocument.MaxPlayers}_{index}";
+                roomName = roomName.ToLower();
+                Debug.Log($"[Matchmaking] Trying to join or create room: {roomName}");
+
+                var appSettings = BuildCustomAppSetting(GameManager.fixedRegion);
+
+                findMatchResult = await runnerInstance.StartGame(new StartGameArgs()
+                {
+                    GameMode = GameMode.Shared,
+                    SessionName = roomName,
+                    SceneManager = levelManager,
+                    PlayerCount = matchmakingDocument.MaxPlayers,
+                    CustomPhotonAppSettings = appSettings,
+                    SessionProperties = new Dictionary<string, SessionProperty>()
+                    {
+                        { nameof(MatchmakingDocument.MatchType), matchmakingDocument.MatchType.ToString() },
+                        { nameof(MatchmakingDocument.MatchMode), matchmakingDocument.MatchMode.ToString() },
+                        { nameof(MatchmakingDocument.MaxPlayers), matchmakingDocument.MaxPlayers.ToString() },
+                        { nameof(MatchmakingDocument.FixedEloName), GetEloName(matchmakingDocument, playerDocument.elo) },
+                        { nameof(MatchmakingDocument.LobbySceneIndex), matchmakingDocument.lobbySceneIndex.ToString() },
+                        { nameof(MatchmakingDocument.MapSceneIndex), matchmakingDocument.MapSceneIndex.ToString() }
+                    }
+                });
+
+                if (findMatchResult.Ok)
+                {
+                    Debug.Log($"[Matchmaking] Successfully joined or created room: {roomName}");
+                    EventManager.TriggerEvent<GamePhase>(GamePhase.MatchFound);
+                    return;
+                }
+                else
+                {
+                    Debug.LogWarning($"[Matchmaking] Failed to join/create room '{roomName}', reason: {findMatchResult.ShutdownReason}");
+                }
+            }
+        });
+    }
+
+    private FusionAppSettings BuildCustomAppSetting(string region, string customAppID = null, string appVersion = "1.0.0") {
+
+        var appSettings = PhotonAppSettings.Global.AppSettings.GetCopy();;
+
+        appSettings.UseNameServer = true;
+        appSettings.AppVersion = appVersion;
+
+        if (string.IsNullOrEmpty(customAppID) == false) {
+            appSettings.AppIdFusion = customAppID;
+        }
+
+        if (string.IsNullOrEmpty(region) == false) {
+            appSettings.FixedRegion = region.ToLower();
+        }
+
+        // If the Region is set to China (CN),
+        // the Name Server will be automatically changed to the right one
+        // appSettings.Server = "ns.photonengine.cn";
+
+        return appSettings;
+    }
+
+    private string GetEloName(MatchmakingDocument doc, int elo)
+    {
+        // Validate data
+        if (doc?.PlayerElos == null || doc.PlayerElos.Length == 0)
+        {
+            Debug.LogWarning("[MatchmakingManager] PlayerElos data is missing");
+            return "Unranked";
+        }
+
+        // Sort by eloPoint (ascending)
+        var sortedElos = doc.PlayerElos.OrderBy(x => x.eloPoint).ToArray();
+
+        // Case 1: ELO is lower than minimum rank
+        if (elo < sortedElos[0].eloPoint)
+        {
+            // Return lowest rank
+            return sortedElos[0].eloName;
+        }
+
+        // Case 2: Find appropriate rank range
+        for (int i = 0; i < sortedElos.Length - 1; i++)
+        {
+            // Check if ELO falls in this range: [current, next)
+            if (elo >= sortedElos[i].eloPoint && elo < sortedElos[i + 1].eloPoint)
+            {
+                return sortedElos[i].eloName;
+            }
+        }
+
+        // Case 3: ELO is higher than or equal to highest rank
+        return sortedElos[sortedElos.Length - 1].eloName;
+    }
+
+    private string GetSessionName(MatchmakingDocument matchmakingDocument, int elo)
+    {
+        // Generate a session name based on ELO and range
+        return $"{matchmakingDocument.matchID}_{GetEloName(matchmakingDocument, elo)}_";
+    }
+
+    private void CleanAfterShutdown(NetworkRunner runner)
+    {
+        if (!GameManager.IsApplicationQuitting)
+        {
+            EventManager.TriggerEvent(MainMenuEvent.StopFindMatch());
+        }
+        
+        runner.ClearRunnerSingletons();
+        runner.RemoveCallbacks(this);
+        runnerInstance = null;
+        GServer = null;
+        IsJoined = false;  
+    }
+
+    private void CheckCloseRoom(NetworkRunner runner)
+    {
+        if (runner.ActivePlayers.Count() >= runner.SessionInfo.MaxPlayers)
+        {
+            if (runner.IsSharedModeMasterClient)
+            {
+                runner.SessionInfo.IsOpen = false;
+                runner.SessionInfo.IsVisible = false;
+            }
+        }
+    }
+
+    private void UpdateUIFindingStatus(NetworkRunner runner)
+    {
+        EventManager.TriggerEvent(new MainMenuEvent
+        {
+            status = MatchmakingStatus.Found,
+            playerCount = runner.ActivePlayers.Count(),
+            maxPlayers = runner.SessionInfo.MaxPlayers,
+            immediate = false
+        });
+    }
+
+    private void UpdateMasterServer(NetworkRunner runner)
+    {
+        if (runner.IsSharedModeMasterClient)
+        {
+            // SPAWN MASTER SERVER IF NOT EXIST
+            if (!runner.TryGetSingleton(out GameServer session) && gameServerPrefab != null)
+            {
+                GServer = runner.Spawn(gameServerPrefab);
+            }
+            else GServer = session;
+            if (GServer == null)
+            {
+                Debug.LogError("Failed to spawn or get CoreGamePlay singleton.");
+                return;
+            }
+            Debug.Log("MasterServer (CoreGamePlay) instance created or found.");
+
+            // OPEN THE ROOM
+            runner.SessionInfo.IsOpen = true;
+            runner.SessionInfo.IsVisible = true;
+        }
+    }
+
+    private void CreateLocalPlayer(PlayerRef player, NetworkRunner runner)
+    {
+        // CREATE PLAYER FOR LOCAL PLAYER
+        PlayerDocument playerDocument = DatabaseManager.GetDB<PlayerCollection>().GetMine();
+        TankDocument tankDocument = DatabaseManager.GetDB<TankCollection>().GetActiveTank();
+
+        int wrapId = playerDocument.GetWrapId(tankDocument.tankId);
+        runner.WaitForSingleton<GameServer>(session =>
+        {
+            if (player == runner.LocalPlayer)
+            {
+                // Initialize local player data
+                session.HandleJoinedPlayer(runner, player, playerDocument.playerName, tankDocument.tankId, playerDocument.playerAvatar, wrapId);
+            }
+            UpdateUIFindingStatus(runner);
+        });
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        // This will be called on all clients in this session (including the one that joined)
+        Debug.Log($"Player {player} joined the session.");
+        UpdateMasterServer(runner);
+        CheckCloseRoom(runner);
+        CreateLocalPlayer(player, runner);
+
+        if (runner.LocalPlayer == player)
+            IsJoined = true;
+    }
+
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        // This will be called on all clients in this session (except the one that left)
+        if (runner.TryGetSingleton(out GameServer GServer))
+        {
+            GServer.PlayerLeft(player); // Notify FusionSession about the player leaving
+            GServer.CheckEndGame();
+        }
+        else Debug.LogWarning("GameServer instance is null or invalid in OnPlayerLeft.");
+
+        // // This will be called on all clients in this session (except the one that left)
+        // Debug.Log($"Player {player} left the session ");
+        // if (GServer != null && GServer.Object != null && GServer.Object.IsValid)
+        // {
+        //     GServer.PlayerLeft(player); // Notify FusionSession about the player leaving
+        //     GServer.CheckEndGame();
+        // }
+        // else Debug.LogWarning("GameServer instance is null or invalid in OnPlayerLeft.");
+    }
+
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
+    {
+        // This will be called on client going down
+        string message = "";
+        switch (shutdownReason)
+        {
+            case ShutdownReason.IncompatibleConfiguration:
+                message = "This room already exist in a different game mode!";
+                break;
+            case ShutdownReason.Ok:
+                message = "User terminated network session!";
+                break;
+            case ShutdownReason.Error:
+                message = "Unknown network error!";
+                break;
+            case ShutdownReason.ServerInRoom:
+                message = "There is already a server/host in this room";
+                break;
+            case ShutdownReason.DisconnectedByPluginLogic:
+                message = "The Photon server plugin terminated the network session!";
+                break;
+            default:
+                message = shutdownReason.ToString();
+                break;
+        }
+
+        Debug.Log($"MatchmakingManager.OnShutdown: {message}");
+        CleanAfterShutdown(runner);
+    }
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token)
+    {
+        request.Accept();
+    }
+    
+    public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+    public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
+    public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
+    public void OnInput(NetworkRunner runner, NetworkInput input) { }
+    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+    public void OnSessionListUpdated(NetworkRunner runner, System.Collections.Generic.List<SessionInfo> sessionList)
+    {
+    }
+
+    public void OnCustomAuthenticationResponse(NetworkRunner runner, System.Collections.Generic.Dictionary<string, object> data) { }
+    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
+    {
+        Debug.Log("OnHostMigration for " + runner.name);
+    }
+
+    public void OnSceneLoadDone(NetworkRunner runner)
+    {
+        Debug.Log("All clients finished loading the scene " + SceneManager.GetActiveScene().name);
+        StartCoroutine(DelayedStartGamePlay(runner));
+    }
+
+    private IEnumerator DelayedStartGamePlay(NetworkRunner runner)
+    {
+        yield return new WaitForSeconds(1f); // Wait for 1 second to ensure all data is ready
+        if (runner.TryGetSingleton(out GameServer session))
+        {
+            session.ChangeStateByMaster(ServerState.COUNTDOWN);
+        }
+        else
+        {
+            Debug.LogError("GameServer instance is null or invalid in OnSceneLoadDone.");
+        }
+    }
+    
+    public void OnSceneLoadStart(NetworkRunner runner) { }
+
+    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
+    {
+        Debug.Log($"Disconnected from server: {reason}");
+    }
+
+    public void OnConnectedToServer(NetworkRunner runner)
+    {
+    }
+}
+
+public struct MatchInfo
+{
+    public string sessionName;
+    public GameMode gameMode;
+    public byte maxPlayers;
+}
+
+public struct MainMenuEvent
+{
+    public bool immediate;
+    public MatchmakingStatus status;
+    public int playerCount;
+    public int maxPlayers;
+    public string buttonLabel;
+
+    public static MainMenuEvent StopFindMatch()
+    {
+        return new MainMenuEvent
+        {
+            status = MatchmakingStatus.Idle,
+            playerCount = 0,
+            maxPlayers = 0,
+            immediate = true
+        };
+    }
+
+    public static MainMenuEvent Find()
+    {
+        return new MainMenuEvent
+        {
+            status = MatchmakingStatus.Finding,
+            playerCount = 0,
+            maxPlayers = 0,
+            immediate = false
+        };
+    }
+
+    public static MainMenuEvent Updating(int activePlayers, int maxPlayers)
+    {
+        return new MainMenuEvent
+        {
+            status = MatchmakingStatus.Updating,
+            playerCount = activePlayers,
+            maxPlayers = maxPlayers,
+            immediate = false
+        };
+    }
+}
+
+public enum MatchmakingStatus
+{
+    Idle,
+    Finding,
+    Found,
+    Updating
+}
+
+public struct MatchmakingEvent
+{
+    public bool isFinding;
+
+    public static MatchmakingEvent Find()
+    {
+        // Return a new instance with isFinding set to true
+        return new MatchmakingEvent
+        {
+            isFinding = true
+        };
+    }
+
+    public static MatchmakingEvent Exit()
+    {
+        // Return a new instance with isFinding set to false
+        return new MatchmakingEvent
+        {
+            isFinding = false
+        };
+    }
+}
+
+public struct LevelEvent
+{
+    public int sceneIndex;
+    public LoadSceneMode loadSceneMode;
+
+    public LevelEvent(int sceneIndex, LoadSceneMode loadSceneMode)
+    {
+        this.sceneIndex = sceneIndex;
+        this.loadSceneMode = loadSceneMode;
+    }
+
+    // Static factory method instead of parameterless constructor
+    public static LevelEvent GamePlay()
+    {
+        MatchmakingDocument doc = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        return new LevelEvent { sceneIndex = doc.MapSceneIndex, loadSceneMode = LoadSceneMode.Additive };
+    }
+}
+
+
+================================================================================
+FILE 461/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/PlayerElos.cs
+================================================================================
+
+using UnityEngine;
+
+[System.Serializable]
+public class PlayerElos
+{
+    public string eloName;
+    public int eloPoint;
+}
+
+
+================================================================================
+FILE 462/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchCancellingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchCancelingState : MatchState
+    {
+        public MatchCancelingState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+            // Hide all the UI screens
+            EventManager.TriggerEvent(new UIEvent(UIIDs.None));
+
+            // Show the gameplay UI
+            EventManager.TriggerEvent(new UIEvent(UIIDs.Gameplay));
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 463/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchCountdownState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.TankOnlineModule;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchCountdownState : MatchState
+    {
+        public MatchCountdownState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+            
+            // Hide all the UI screens
+            EventManager.TriggerEvent<UIEvent>(new UIEvent(UIIDs.None));
+
+            // Show the gameplay UI
+            EventManager.TriggerEvent(new UIEvent(UIIDs.Gameplay));
+
+            EventManager.TriggerEvent(new TurretSpawnerEvent());
+
+            // Start countdown 
+            EventManager.TriggerEvent<ELevelManagerState>(ELevelManagerState.COUNTDOWN);
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 464/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchEndingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchEndingState : MatchState
+    {
+        public MatchEndingState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+            // Hide all the UI screens
+            EventManager.TriggerEvent(new UIEvent(UIIDs.None));
+
+            // Show the gameplay UI
+            EventManager.TriggerEvent(new UIEvent(UIIDs.Gameplay));
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 465/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchFoundState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchFoundState : MatchState
+    {
+        public MatchFoundState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+
+            // Load lobby scene if not already loaded
+            // EventManager.Emit<ELevelManagerState>(ELevelManagerState.LOBBY);
+
+            // Preload audio
+            AudioHelper.PlayBGM(BGM.LOBBY);
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 466/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchIdleState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchIdleState : MatchState
+    {
+        public MatchIdleState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+            // Hide all the UI screens
+            EventManager.TriggerEvent(new UIEvent(UIIDs.None));
+
+            // Show the gameplay UI
+            EventManager.TriggerEvent(new UIEvent(UIIDs.Gameplay));
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 467/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchLeavingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchLeavingState : MatchState
+    {
+        public MatchLeavingState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+            // Hide all the UI screens
+            EventManager.TriggerEvent(new UIEvent(UIIDs.None));
+
+            // Show the gameplay UI
+            EventManager.TriggerEvent(new UIEvent(UIIDs.Gameplay));
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 468/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchLoadingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.TankOnlineModule;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchLoadingState : MatchState
+    {
+        public MatchLoadingState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+
+            // Hide all the UI screens
+            EventManager.TriggerEvent(new UIEvent(UIIDs.None));
+
+            // Show match loading screen
+            EventManager.TriggerEvent(new UIEvent(UIIDs.MatchLoading));
+
+            // Load gameplay scene if not already loaded
+            EventManager.TriggerEvent<ELevelManagerState>(ELevelManagerState.GAMEPLAY);
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 469/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchPickingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchPickingState : MatchState
+    {
+        public MatchPickingState(GameStateMachine stateMachine) : base(stateMachine) { }
+
+        public override void Enter()
+        {
+            base.Enter();
+            
+            // Hide all the UI screens
+            EventManager.TriggerEvent<UIEvent>(new UIEvent(UIIDs.None));
+
+            // Load the lobby scene if not already loaded
+            EventManager.TriggerEvent<UIEvent>(new UIEvent(UIIDs.ChooseTank));
+
+            // allow picking tank
+            EventManager.TriggerEvent<ChooseTankEvent>(new ChooseTankEvent() { State = ServerState.PICKING });
+
+            // Preload audio
+            AudioHelper.PlayBGM(BGM.LOBBY);
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+
+        }
+    }
+}
+
+
+================================================================================
+FILE 470/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchPlayingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.TankOnlineModule;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchPlayingState : MatchState
+    {
+        public MatchPlayingState(GameStateMachine stateMachine) : base(stateMachine) {}
+
+        public override void Enter()
+        {
+            base.Enter();
+
+            // change play game state
+            EventManager.TriggerEvent<ServerStateEvent>(new ServerStateEvent{NewState = ServerState.LEVEL});
+
+            // Preload audio
+            EventManager.TriggerEvent(new AudioEvent(SoundType.BackgroundMusic, BGM.GAMEPLAY));
+
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 471/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchSearchingState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using GDO.Audio;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public class MatchSearchingState : MatchState
+    {
+        public MatchSearchingState(GameStateMachine stateMachine) : base(stateMachine) {}
+        public override void Enter()
+        {
+            base.Enter();
+            // Lock find until joined a room
+            EventManager.TriggerEvent(MainMenuEvent.Find());
+            // Start matchmaking process
+            EventManager.TriggerEvent(MatchmakingEvent.Find());
+            // Set the time scale to normal
+            Time.timeScale = 1f;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void Update()
+        {
+            
+        }
+    }
+}
+
+
+================================================================================
+FILE 472/682: Assets/_GameModules/MatchMakingFusionModule/Scripts/State/MatchState.cs
+================================================================================
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Fusion.GameSystems
+{
+    public abstract class MatchState : IGameState
+    {
+        protected GameStateMachine stateMachine;
+
+        protected MatchState(GameStateMachine stateMachine)
+        {
+            this.stateMachine = stateMachine;
+        }
+        
+        public virtual void Enter()
+        {
+            Debug.Log($"{GetType().Name}: Entered");
+        }
+        public virtual void Exit()
+        { 
+            Debug.Log($"{GetType().Name}: Exited");
+        }
+        public virtual void Update() { }
+    }
+}
+
+
+================================================================================
+FILE 473/682: Assets/_GameModules/NetworkingModule/Scripts/ClientConnector.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Fusion;
+using Fusion.Sockets;
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using GDO.Audio;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
+public class ClientConnector : MonoBehaviour, INetworkRunnerCallbacks
+{
+    public enum SearchingState
+    {
+        None,
+        JoinedLobby,
+        JoinedSession
+    }
+  
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private AudioEmitter audioEmitter;
+    public SearchingState CurrentState { get; private set; } = SearchingState.None;
+    public GameServer GameServer { get; private set; } = null;
+    [SerializeField] private NetworkRunner runnerPrefab;
+    public NetworkRunner Runner { get; private set; }
+    public ClientDataEvent ClientData => clientData;
+    public bool IsApplicationQuitting { get; private set; } = false;
+    public event UnityAction OnClientCleanupAction;
+    public event UnityAction OnClientJoinedSessionAction;
+    public event UnityAction<ClientDataEvent> OnClientJoinedLobbyAction;
+    public event UnityAction OnClientShutdownAction;
+    public event UnityAction<PlayerRef> OnPlayerJoinedAction;
+    public event UnityAction<PlayerRef> OnPlayerLeftAction;
+    public event UnityAction<PlayerRef, ClientDataEvent> OnPlayerDataUpdatedAction;
+    public event UnityAction<string> OnErrorAction;
+    [SerializeField] private ClientDataEvent clientData = default;
+    private CancellationTokenSource cts;
+    private List<SessionInfo> availableSessions = new List<SessionInfo>();
+    private int maxTimeoutTry = 10; // 10 attempts
+    private Coroutine autoLevelLobbyCoroutine;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        InitEventHandlers();
+    }
+
+    private async void OnApplicationQuit()
+    {
+        IsApplicationQuitting = true;
+        await LeftTheSession();
+    }
+
+    private void InitEventHandlers()
+    {
+        EventManager.Register<ClientDataEvent>(OnPlayerDataReceived);
+
+        // Prepare event handlers
+        OnClientCleanupAction = () =>
+        {
+            Debug.Log("Server cleanup initiated.");
+            clientData = default;
+            if (Runner != null && Runner.IsRunning)
+            {
+                Runner.RemoveCallbacks(this);
+                Runner.ClearRunnerSingletons();
+                _ = Runner.Shutdown();
+                Runner = null;
+            }
+        };
+
+        // Join lobby event
+        OnClientJoinedLobbyAction = playerDataEvent =>
+        {
+            Debug.Log("Joined lobby.");
+            clientData = playerDataEvent;
+            autoLevelLobbyCoroutine = StartCoroutine(AutoLeaveLobby());
+        };
+
+        // Join session event
+        OnClientJoinedSessionAction = () => EventManager.TriggerEvent(MainMenuEvent.Updating(Runner.ActivePlayers.Count(), Runner.SessionInfo.MaxPlayers));
+
+        // Stop server event
+        OnClientShutdownAction = () =>
+        {
+            Debug.Log("Client shutdown.");
+            //EventManager.Emit(GamePhase.CancelSearching);
+        };
+
+        OnPlayerLeftAction = player => EventManager.TriggerEvent(MainMenuEvent.Updating(Runner.ActivePlayers.Count(), Runner.SessionInfo.MaxPlayers));
+        OnPlayerDataUpdatedAction += (player, data) => Debug.Log($"Player data updated: {player}, {data}");
+        OnErrorAction += message => Debug.LogError($"Error: {message}");
+    }
+
+    private IEnumerator RequestCreateMyTank()
+    {
+        while (GameServer == null)
+        {
+            Debug.Log("Waiting for game server instance...");
+            if (Runner.TryGetSingleton(out GameServer gameServerInstance))
+            {
+                Debug.Log("Game server instance found.");
+                GameServer = gameServerInstance;
+                GameServer.RPC_CreatePlayer(clientData);
+            }
+            else
+                Debug.LogWarning("Game server instance not found.");
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private IEnumerator AutoLeaveLobby()
+    {
+        yield return new WaitForSeconds(maxTimeoutTry);
+        if (CurrentState == SearchingState.JoinedLobby)
+        {
+            Debug.Log("Auto leaving lobby due to timeout.");
+            EventManager.TriggerEvent(GamePhase.MatchCanceling);
+        }
+    }
+
+    private void OnPlayerDataReceived(ClientDataEvent playerDataEvent)
+    {
+        if (playerDataEvent.matchMode == 0 || playerDataEvent.matchType == 0)
+        {
+            Debug.LogWarning("Maybe this is a cancel searching match event");
+            if (CurrentState == SearchingState.JoinedSession)
+                _ = LeftTheSession();
+            else if (CurrentState == SearchingState.JoinedLobby)
+                _ = LeaveTheLobby();
+            return;
+        }
+        else
+            _ = JoinTheLobby(playerDataEvent);
+    }
+
+    /// <summary>
+    /// Join the lobby as a client.
+    /// Get the list of available sessions from the lobby.
+    /// If a suitable session is found, join that session.
+    /// </summary>
+    /// <returns></returns>
+    public async Task JoinTheLobby(ClientDataEvent playerDataEvent = default)
+    {
+        if (CurrentState != SearchingState.None)
+        {
+            Debug.LogWarning("Lobby is already running.");
+            return;
+        }
+
+        cts = new CancellationTokenSource();
+
+        Runner = Instantiate(runnerPrefab);
+        Runner.name = "LobbyClientRunner";
+        Runner.ProvideInput = false;
+        Runner.AddCallbacks(this);
+
+        var lobbyResult = await Runner.JoinSessionLobby(SessionLobby.ClientServer);
+
+        if (lobbyResult.Ok)
+        {
+            CurrentState = SearchingState.JoinedLobby;
+            Debug.Log("Joined lobby successfully.");
+            OnClientJoinedLobbyAction?.Invoke(playerDataEvent);
+        }
+        else
+        {
+            Debug.LogError($"Failed to start lobby client: {lobbyResult.ShutdownReason}");
+            OnErrorAction?.Invoke(lobbyResult.ShutdownReason.ToString());
+        }
+    }
+    
+    public async Task LeaveTheLobby()
+    {
+        if (CurrentState != SearchingState.JoinedLobby)
+        {
+            Debug.LogWarning("Lobby is not running.");
+            return;
+        }
+
+        cts.Cancel();
+
+        if (Runner != null)
+        {
+            await Runner.Shutdown();
+            Destroy(Runner.gameObject);
+            Runner = null;
+        }
+
+        CurrentState = SearchingState.None;
+    }
+
+    private async Task<string> GetSessionName()
+    {
+        int maxTry = maxTimeoutTry; // 10 attempts
+        while (!cts.Token.IsCancellationRequested && maxTry > 0)
+        {
+            Debug.Log("Searching for available sessions...");
+            // find a session match the region and game mode, fixedEloName, maxPlayers
+            for (int i = 0; i < availableSessions.Count; i++)
+            {
+                var session = availableSessions[i];
+                if (session.IsOpen &&
+                    session.Properties != null &&
+                    session.Properties.TryGetValue(nameof(ClientDataEvent.region), out var regionProp) && regionProp == clientData.region.ToString() &&
+                    session.Properties.TryGetValue(nameof(ClientDataEvent.fixedEloName), out var fixedEloNameProp) && fixedEloNameProp == clientData.fixedEloName.ToString() &&
+                    session.Properties.TryGetValue(nameof(ClientDataEvent.matchType), out var matchTypeProp) && matchTypeProp == clientData.matchType &&
+                    session.Properties.TryGetValue(nameof(ClientDataEvent.matchMode), out var matchModeProp) && matchModeProp == clientData.matchMode &&
+                    session.Properties.TryGetValue(nameof(ClientDataEvent.maxPlayers), out var maxPlayersProp) && maxPlayersProp == clientData.maxPlayers)
+                {
+                    Debug.Log($"Found matching session: {session.Name}");
+                    return session.Name;
+                }
+
+                await Task.Yield();
+            }
+
+            await Task.Delay(1000, cts.Token); // Wait 1 second before checking again
+            maxTry -= 1;
+            Debug.Log($"Retrying... {maxTry} attempts left.");
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Join a session as a client.
+    /// </summary>
+    /// <param name="playerDataEvent"></param>
+    /// <returns></returns>
+    public async Task JoinTheSession()
+    {
+        if (CurrentState == SearchingState.JoinedSession)
+        {
+            Debug.LogWarning("You are already in a session.");
+            return;
+        }
+        StopCoroutine(autoLevelLobbyCoroutine);
+
+        string sessionName = await GetSessionName();
+        if (sessionName == null)
+        {
+            Debug.LogWarning("No suitable session found to join.");
+            EventManager.TriggerEvent(GamePhase.MatchCanceling);
+            return;
+        }
+        
+        await LeaveTheLobby();
+        await Task.Delay(500);
+
+        cts = new CancellationTokenSource();
+
+        Runner = Instantiate(runnerPrefab);
+        Runner.name = "ClientConnectorRunner";
+        Runner.AddCallbacks(this);
+        Runner.RegisterSingleton(this);
+        Runner.ProvideInput = true;
+        
+        clientData.sessionName = sessionName;
+        var startGameArgs = new StartGameArgs()
+        {
+            GameMode = GameMode.Client,
+            SessionName = sessionName
+        };
+
+        var result = await Runner.StartGame(startGameArgs);
+
+        if (result.Ok)
+        {
+            CurrentState = SearchingState.JoinedSession;
+            clientData.playerRef = Runner.LocalPlayer;
+            StartCoroutine(RequestCreateMyTank());
+            Debug.Log("Joined session successfully.");
+        }
+        else
+        {
+            Debug.LogError($"Failed to join session: {result.ShutdownReason}");
+            OnErrorAction?.Invoke(result.ShutdownReason.ToString());
+        }
+    }
+
+    public async Task LeftTheSession()
+    {
+        if (CurrentState != SearchingState.JoinedSession)
+        {
+            Debug.LogWarning("Client is not in a session.");
+            return;
+        }
+
+        cts.Cancel();
+
+        if (Runner != null)
+        {
+            await Runner.Shutdown();
+            Destroy(Runner.gameObject);
+            Runner = null;
+        }
+        OnClientShutdownAction?.Invoke();
+        CurrentState = SearchingState.None;
+    }
+
+    public void SetCamera(Player player)
+    {
+        if(Runner.LocalPlayer != player.Object.InputAuthority) return;
+
+        if (levelManager.IsometricCamera != null)
+        {
+            levelManager.IsometricCamera.Initialize(player);
+        }
+        else
+        {
+            Debug.LogWarning("CameraFollowIsometric is not assigned.");
+        }
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        // this will be called when a player joins the session (including the host)
+        OnClientJoinedSessionAction?.Invoke();
+    }
+
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        // this will be called when a player leaves the session (except the quitter)
+        OnPlayerLeftAction?.Invoke(player);
+    }
+
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
+    {
+        // this will be called when the runner is shutdown (only quitter will receive this event)
+        CurrentState = SearchingState.None;
+    }
+
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+    {
+        Debug.Log($"Session list updated. Total sessions: {sessionList.Count}");
+        if (sessionList.Count == 0) return;
+        availableSessions = sessionList;
+
+        if( CurrentState == SearchingState.JoinedLobby)
+            _ = JoinTheSession();
+    }
+
+    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken){}
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token){}
+    public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) { }
+    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+    public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
+    public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
+    public void OnInput(NetworkRunner runner, NetworkInput input) { }
+    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+    public void OnConnectedToServer(NetworkRunner runner) { }
+    public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
+    public void OnSceneLoadDone(NetworkRunner runner){}
+    public void OnSceneLoadStart(NetworkRunner runner) { }
+}
+
+
+================================================================================
+FILE 474/682: Assets/_GameModules/NetworkingModule/Scripts/DedicatedServer.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Fusion;
+using Fusion.Sockets;
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class DedicatedServer : MonoBehaviour, INetworkRunnerCallbacks
+{
+    [SerializeField] private NetworkRunner runnerPrefab;
+    [SerializeField] private GameServer gameServer;
+    [SerializeField] private LevelManager levelManager;
+    public NetworkRunner Runner { get; private set; }
+    public GameServer GameServerInstance { get; private set; }
+    public bool IsRunning { get; private set; } = false;
+    public bool IsApplicationQuitting { get; private set; } = false;
+    public event UnityAction OnServerStartedAction = new UnityAction(() => { });
+    public event UnityAction OnServerStoppedAction = new UnityAction(() => { });
+    public event UnityAction<PlayerRef> OnPlayerJoinedAction = new UnityAction<PlayerRef>(player => { });
+    public event UnityAction<PlayerRef> OnPlayerLeftAction = new UnityAction<PlayerRef>(player => { });
+    public event UnityAction<PlayerRef, ClientDataEvent> OnPlayerDataUpdatedAction = new UnityAction<PlayerRef, ClientDataEvent>((player, data) => { });
+    public event UnityAction<string> OnErrorAction = new UnityAction<string>(message => { });
+    private Dictionary<PlayerRef, ClientDataEvent> clients = new Dictionary<PlayerRef, ClientDataEvent>();
+    [SerializeField] private ServerDataEvent serverDataEvent;
+    private CancellationTokenSource cts;
+    private SceneRef loadedScene = SceneRef.None;
+
+    private void Awake()
+    {
+        InitEventHandlers();
+    }
+
+    private async void OnApplicationQuit()
+    {
+        IsApplicationQuitting = true;
+        await StopServer();
+    }
+
+    private void InitEventHandlers()
+    {
+        EventManager.Register<ServerDataEvent>(OnServerDataReceived);
+
+        // Start server event
+        OnServerStartedAction = () =>
+        {
+            Debug.Log("Server started.");
+            GameServerInstance = Runner.Spawn(gameServer);
+        };
+
+        // Stop server event
+        OnServerStoppedAction = () =>
+        {
+            Debug.Log("Server stopped.");
+            clients.Clear();
+
+            _= StartServer(serverDataEvent);
+        };
+
+        // Player joined event
+        OnPlayerJoinedAction = player =>
+        {
+            Debug.Log($"Player joined: {player}");
+            var data = default(ClientDataEvent);
+            clients[player] = data;
+            OnPlayerDataUpdatedAction?.Invoke(player, data);
+        };
+
+        // Player left event
+        OnPlayerLeftAction = player =>
+        {
+            Debug.Log($"Player left: {player}");
+            RemovePlayerData(player);
+        };
+
+        // Player data updated event
+        OnPlayerDataUpdatedAction = (player, data) =>
+        {
+            Debug.Log($"Player data updated: {player}, {data}");
+            if (Runner.ActivePlayers.Count() == Runner.SessionInfo.MaxPlayers - 1)
+            {
+                Debug.Log("All players have joined. Ready to start the game.");
+                // Implement your game start logic here
+                Runner.SessionInfo.IsOpen = false;
+                Runner.SessionInfo.IsVisible = false;
+                GameServerInstance.ChangeStateByMaster(ServerState.PICKING); // review later
+            }
+        };
+
+        // Error event
+        OnErrorAction = message =>
+        {
+            Debug.LogError($"Error: {message}");
+        };
+    }
+
+    private void OnServerDataReceived(ServerDataEvent serverData)
+    {
+        if (serverData.matchMode == 0 || serverData.matchType == 0)
+        {
+            Debug.LogWarning("Invalid match mode or type.");
+            return;
+        }
+
+        _ = StartServer(serverData);
+    }
+
+    public async Task StartServer(ServerDataEvent serverData)
+    {
+        if (IsRunning)
+        {
+            Debug.LogWarning("Server is already running.");
+            return;
+        }
+
+        cts = new CancellationTokenSource();
+        Dictionary<string, SessionProperty> sessionProperties = new Dictionary<string, SessionProperty>
+        {
+            { nameof(ServerDataEvent.region), serverData.region.ToString() },
+            { nameof(ServerDataEvent.fixedEloName), serverData.fixedEloName.ToString() },
+            { nameof(ServerDataEvent.matchType), (byte)serverData.matchType },
+            { nameof(ServerDataEvent.matchMode), (byte)serverData.matchMode },
+            { nameof(ServerDataEvent.maxPlayers), (byte)serverData.maxPlayers }
+        };
+
+        Runner = Instantiate(runnerPrefab);
+        Runner.gameObject.name = "DedicatedServerRunner";
+        Runner.ProvideInput = false;
+        Runner.AddCallbacks(this);
+        
+        var startGameArgs = new StartGameArgs()
+        {
+            GameMode = GameMode.Server,
+            PlayerCount = serverData.maxPlayers,
+            Scene = SceneRef.FromIndex(serverData.sceneIndex),
+            SceneManager = levelManager,
+            IsOpen = true,
+            IsVisible = true,
+            SessionProperties = sessionProperties,
+        };
+
+        var result = await Runner.StartGame(startGameArgs);
+
+        if (result.Ok)
+        {
+            IsRunning = true;
+            Debug.Log("Dedicated server started successfully.");
+            serverDataEvent = serverData;
+            serverDataEvent.sessionName = Runner.SessionInfo.Name;
+            OnServerStartedAction?.Invoke();
+        }
+        else
+        {
+            Debug.LogError($"Failed to start dedicated server: {result.ShutdownReason}");
+            OnErrorAction?.Invoke(result.ShutdownReason.ToString()); 
+        }
+    }
+
+    public async Task StopServer()
+    {
+        if (!IsRunning)
+        {
+            Debug.LogWarning("Server is not running.");
+            return;
+        }
+
+        cts.Cancel();
+
+        if (Runner != null)
+        {
+            await Task.Delay(3000); // Wait for 3 seconds to allow graceful shutdown
+            await Runner.Shutdown();
+            Destroy(Runner.gameObject);
+            Runner = null;
+        }
+
+        IsRunning = false;
+        Debug.Log("Dedicated server stopped.");
+        OnServerStoppedAction?.Invoke();
+    }
+
+    public ClientDataEvent? GetPlayerData(PlayerRef playerRef)
+    {
+        if (clients.TryGetValue(playerRef, out var data))
+        {
+            return data;
+        }
+        return null;
+    }
+
+    public List<ClientDataEvent> GetAllPlayerData()
+    {
+        return new List<ClientDataEvent>(clients.Values);
+    }
+
+    public void RemovePlayerData(PlayerRef playerRef)
+    {
+        if (clients.Remove(playerRef))
+        {   
+            GameServerInstance.RemovePlayerInSession(playerRef);
+            CheckGameOverEarly();
+            Debug.Log($"Removed data for player {playerRef}");
+        }
+    }
+
+    private void CheckGameOverEarly()
+    {
+        if(GameServerInstance == null || GameServerInstance.ActivePlayState != ServerState.LEVEL)
+            return;
+
+        int teamWinner = -1;
+        var teams = clients.Values.GroupBy(p => p.teamIndex).ToList();
+
+        // case 1: just one player active
+        if (Runner.ActivePlayers.Count() == 1)
+        {
+            teamWinner = teams[0].Key; // winner
+        }
+        else if (Runner.ActivePlayers.Count() > 1)
+        {
+            // case 2: all players in teammate are gone
+            foreach (var team in teams)
+            {
+                if (team.Count() == 0)
+                {
+                    if (teamWinner == -1)
+                        teamWinner = team.Key; // winner
+                    else
+                    {
+                        teamWinner = 2; // draw
+                    }
+                }
+            }
+        }
+        else if (Runner.ActivePlayers.Count() == 0) teamWinner = 2; // draw
+
+        if (teamWinner != -1)
+        {
+            // GameServerInstance.GameOver(teamWinner); //review later
+            Debug.Log($"Team {teamWinner} has won. Stopping the server.");
+            _ = StopServer();
+        }
+    }
+
+    public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
+    {
+        // this will be called when a player joins the session (including the host)
+        OnPlayerJoinedAction?.Invoke(player);
+    }
+
+    public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
+    {
+        // this will be called when a player leaves the session (except the quitter)
+        OnPlayerLeftAction?.Invoke(player);
+    }
+
+    public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token)
+    {
+        // Automatically accept all connection requests
+        request.Accept();
+    }
+
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList){}
+    public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken){}
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason){}
+    public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player) { }
+    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) { }
+    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+    public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data) { }
+    public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress) { }
+    public void OnInput(NetworkRunner runner, NetworkInput input) { }
+    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+    public void OnConnectedToServer(NetworkRunner runner) { }
+    public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
+    public void OnSceneLoadDone(NetworkRunner runner){}
+    public void OnSceneLoadStart(NetworkRunner runner){}
+}
+
+
+================================================================================
+FILE 475/682: Assets/_GameModules/NetworkingModule/Scripts/ServerDataEvent.cs
+================================================================================
+
+using System;
+using System.Linq;
+using Fusion;
+using Fusion.TankOnlineModule;
+
+/// <summary>
+/// Use this struct to send player-related data during matchmaking and choose tank phase.
+/// </summary>
+[System.Serializable]
+public struct ServerDataEvent : INetworkStruct
+{
+    public PlayerRef playerRef;
+    public byte matchType;
+    public byte matchMode;
+    public byte maxPlayers;
+    public byte sceneIndex;
+    public NetworkString<_32> region;
+    public NetworkString<_32> fixedEloName;
+    public NetworkString<_32> sessionName;
+
+    public static ServerDataEvent StartServer(MatchmakingDocument matchDoc)
+    {
+        return new ServerDataEvent
+        {
+            playerRef = PlayerRef.None,
+            region = matchDoc.fixedRegion,
+            fixedEloName = matchDoc.fixedEloName,
+            matchType = (byte)matchDoc.matchType,
+            matchMode = (byte)matchDoc.matchMode,
+            sceneIndex = (byte)matchDoc.mapSceneIndex,
+            maxPlayers = matchDoc.maxPlayers,
+            sessionName = GetSessionName(matchDoc)
+        };
+    }
+    
+    private static string GetSessionName(MatchmakingDocument matchDoc)
+    {
+        var matchType = Enum.GetName(typeof(MatchType), matchDoc.matchType);
+        string roomName = $"{matchDoc.fixedRegion}_{matchType}_{matchDoc.fixedEloName}_max{matchDoc.maxPlayers}_room{matchDoc.maxRoom}";
+        return roomName.ToLower();
+    }
+}
+
+
+================================================================================
+FILE 476/682: Assets/_GameModules/PlayerModule/Scripts/PlayerCollection.cs
+================================================================================
+
+using Fusion.GameSystems;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PlayerCollection", menuName = "ScriptableObjects/PlayerCollection", order = 1)]
+public class PlayerCollection : UserDataCollectionBase<PlayerDocument>, IStorage
+{
+    public PlayerDocument GetPlayerDocument(string id)
+    {
+        return FindDocumentByProperty(doc => doc.ID, id);
+    }
+
+    public PlayerDocument GetMine()
+    {
+        var roleID = PlayerPrefs.GetString(Constants.Key_RoleID);
+        Debug.Assert(!string.IsNullOrEmpty(roleID), "RoleID is not set in PlayerPrefs.");
+        return GetPlayerDocument(roleID);
+    }
+
+    public void DeleteAccountFromFirebase()
+    {
+        PlayerDocument mine = GetMine();
+        if (mine != null)
+        {
+            _ = DeleteDocument(mine.roleID);
+            Debug.Log("Player document deleted from Firebase.");
+        }
+        else
+        {
+            Debug.LogWarning("No player document found to delete.");
+        }
+    }
+    
+    public void UpdatePlayerElo(int newElo)
+    {
+        Debug.Log($"Updating player ELO by {newElo} points.");
+        PlayerDocument mine = GetMine();
+        if (mine != null)
+        {
+            mine.elo += newElo;
+            _ = UpdateDocumentAsync(mine);
+            Debug.Log($"Player ELO updated to {mine.elo}.");
+        }
+        else
+        {
+            Debug.LogWarning("No player document found to update ELO.");
+        }
+    }
+}
+
+
+================================================================================
+FILE 477/682: Assets/_GameModules/PlayerModule/Scripts/PlayerDocument.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using UnityEngine;
+using Firebase.Firestore;
+
+[Serializable]
+[FirestoreData]
+public class PlayerDocument : IUserData
+{
+    [FirestoreProperty("roleID")]
+    public string roleID { get; set; } // Unique identifier for the account
+
+    [FirestoreProperty("elo")]
+    [Min(500)]
+    public int elo { get; set; } // all players start with 1000 elo
+
+    [FirestoreProperty("playerName")]
+    public string playerName { get; set; }
+
+    [FirestoreProperty("playerAvatar")]
+    public string playerAvatar { get; set; }
+
+    [FirestoreProperty("gold")]
+    public int gold { get; set; }
+
+    [FirestoreProperty("diamond")]
+    public int diamond { get; set; }
+
+    [FirestoreProperty("exp")]
+    public long exp { get; set; }
+
+    [FirestoreProperty("level")]
+    public int level { get; set; }
+
+    [FirestoreProperty("tutorialCount")]
+    public int tutorialCount { get; set; }
+    
+    [FirestoreProperty("tutorialCompleted")]
+    public bool tutorialCompleted { get; set; }
+
+    [FirestoreProperty("selectedModeIndex")]
+    public int selectedModeIndex { get; set; } // Convert enum to int for Firebase compatibility
+
+    [FirestoreProperty("selectedTank")]
+    public string selectedTank { get; set; }
+
+    [FirestoreProperty("tanks")]
+    public List<string> tanks { get; set; } = new List<string>();
+
+    [FirestoreProperty("ownedWraps")]
+    public List<string> ownedWraps { get; set; } = new List<string>();
+
+    [FirestoreProperty("ownedDecals")]
+    public List<string> ownedDecals { get; set; } = new List<string>();
+
+    [FirestoreProperty("ownedStickers")]
+    public List<string> ownedStickers { get; set; } = new List<string>();
+
+    [FirestoreProperty("ownedAIStickers")]
+    public List<string> ownedAIStickers { get; set; } = new List<string>();
+
+    [FirestoreProperty("formationTanks")]
+    public List<string> formationTanks { get; set; } = new List<string>();
+
+    [JsonIgnore]
+    public string ID => roleID;
+
+    // Helper property for enum conversion
+    [JsonIgnore]
+    public MatchMode SelectedMode
+    {
+        get => (MatchMode)selectedModeIndex;
+        set => selectedModeIndex = (int)value;
+    }
+
+    // Default constructor required for Firebase
+    public PlayerDocument()
+    {
+        tanks = new List<string>();
+    }
+
+
+    #region Helper Methods
+    public List<FormationTanks> GetFormationTanks()
+    {
+        var result = new List<FormationTanks>();
+        foreach (var json in formationTanks)
+        {
+            if (!string.IsNullOrEmpty(json))
+            {
+                try
+                {
+                    var obj = JsonConvert.DeserializeObject<FormationTanks>(json);
+                    if (obj != null)
+                        result.Add(obj);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Invalid FormationTanks JSON: {json}\n{ex}");
+                }
+            }
+        }
+        return result;
+    }
+    public FormationTanks GetFormationTankByTankId(string tankId)
+    {
+        foreach (var json in formationTanks)
+        {
+            Debug.Log($"[GetFormationTankByTankId] Checking JSON: {json}");
+            if (!string.IsNullOrEmpty(json))
+            {
+                try
+                {
+                    var obj = JsonConvert.DeserializeObject<FormationTanks>(json);
+                    Debug.Log($"[GetFormationTankByTankId] Deserialized tankID: {obj?.tankID}");
+                    if (obj != null && obj.tankID == tankId)
+                    {
+                        Debug.Log($"[GetFormationTankByTankId] Found tankID: {tankId}");
+                        return obj;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Invalid FormationTanks JSON: {json}\n{ex}");
+                }
+            }
+        }
+        Debug.LogWarning($"[GetFormationTankByTankId] Not found tankID: {tankId}");
+        return null;
+    }
+    public int GetWrapId(string tankId)
+    {
+        var formationTank = GetFormationTankByTankId(tankId);
+        if (formationTank != null)
+        {
+            Debug.Log($"[GetWrapId] tankId: {tankId}, wrapId: {formationTank.wrapId}");
+            return formationTank.wrapId;
+        }
+        Debug.LogWarning($"[GetWrapId] Not found tankId: {tankId}");
+        return 0;
+    }
+    public class FormationTanks
+    {
+        public string tankID;
+        public int wrapId;
+        public FormationTanks(string tankID, int wrapId)
+        {
+            this.tankID = tankID;
+            this.wrapId = wrapId;
+        }
+        public string ToJson()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+        public string SkinIdsToJson()
+        {
+            return JsonConvert.SerializeObject(this.wrapId);
+        }
+    }
+
+    public static int GetMineWrapId(string tankId)
+    {
+        var playerCollection = DatabaseManager.GetDB<PlayerCollection>();
+        var playerDocument = playerCollection?.GetMine();
+        if (playerDocument == null)
+        {
+            Debug.LogWarning("[GetMineWrapId] playerDocument is null");
+            return 0;
+        }
+
+        var formationTank = playerDocument.GetFormationTankByTankId(tankId);
+        if (formationTank != null)
+        {
+            Debug.Log($"[GetMineWrapId] tankId: {tankId}, wrapId: {formationTank.wrapId}");
+            return formationTank.wrapId;
+        }
+        Debug.LogWarning($"[GetMineWrapId] Not found tankId: {tankId}");
+        return 0;
+    }
+    #endregion
+}
+
+
+================================================================================
+FILE 478/682: Assets/_GameModules/PlayerModule/Scripts/PlayerDocumentConverter.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Firebase.Firestore;
+using UnityEngine;
+
+/// <summary>
+/// Custom converter for PlayerDocument to handle complex types for Firebase Firestore
+/// </summary>
+public static class PlayerDocumentConverter
+{
+    /// <summary>
+    /// Convert PlayerDocument to Dictionary for Firestore storage
+    /// </summary>
+    public static Dictionary<string, object> ToFirestoreData(PlayerDocument player)
+    {
+        if (player == null) return new Dictionary<string, object>();
+
+        var data = new Dictionary<string, object>
+        {
+            ["roleID"] = player.roleID ?? "",
+            ["elo"] = player.elo,
+            ["playerName"] = player.playerName ?? "",
+            ["playerAvatar"] = player.playerAvatar ?? "",
+            ["gold"] = player.gold,
+            ["diamond"] = player.diamond,
+            ["exp"] = player.exp,
+            ["level"] = player.level,
+            ["selectedModeIndex"] = player.selectedModeIndex,
+            ["tanks"] = player.tanks ?? new List<string>(),
+            [nameof(player.selectedTank)] = player.selectedTank ?? "",
+            [nameof(player.ownedAIStickers)] = player.ownedAIStickers ?? new List<string>(),
+            [nameof(player.ownedDecals)] = player.ownedDecals ?? new List<string>(),
+            [nameof(player.ownedStickers)] = player.ownedStickers ?? new List<string>(),
+            [nameof(player.ownedWraps)] = player.ownedWraps ?? new List<string>(),
+            [nameof(player.formationTanks)] = player.formationTanks ?? new List<string>(),
+        };
+
+        // // Convert achievements dictionary to a format Firebase can handle
+        // if (player.achievements != null && player.achievements.Count > 0)
+        // {
+        //     var achievementsData = new Dictionary<string, object>();
+        //     foreach (var achievement in player.achievements)
+        //     {
+        //         achievementsData[achievement.Key] = achievement.Value;
+        //     }
+        //     data["achievements"] = achievementsData;
+        // }
+        // else
+        // {
+        //     data["achievements"] = new Dictionary<string, object>();
+        // }
+
+        return data;
+    }
+
+    /// <summary>
+    /// Convert Firestore DocumentSnapshot to PlayerDocument
+    /// </summary>
+    public static PlayerDocument FromFirestoreData(DocumentSnapshot document)
+    {
+        if (!document.Exists) return null;
+
+        try
+        {
+            var data = document.ToDictionary();
+            var player = new PlayerDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                player.roleID = roleIdObj?.ToString() ?? "";
+
+            if (data.TryGetValue("playerName", out object nameObj))
+                player.playerName = nameObj?.ToString() ?? "";
+
+            if (data.TryGetValue("playerAvatar", out object avatarObj))
+                player.playerAvatar = avatarObj?.ToString() ?? "";
+
+            // Numeric fields
+            if (data.TryGetValue("elo", out object eloObj))
+                player.elo = ConvertToInt(eloObj, 1000);
+
+            if (data.TryGetValue("gold", out object goldObj))
+                player.gold = ConvertToInt(goldObj, 0);
+
+            if (data.TryGetValue("diamond", out object diamondObj))
+                player.diamond = ConvertToInt(diamondObj, 0);
+
+            if (data.TryGetValue("exp", out object expObj))
+                player.exp = ConvertToLong(expObj, 0);
+
+            if (data.TryGetValue("level", out object levelObj))
+                player.level = ConvertToInt(levelObj, 1);
+
+            if (data.TryGetValue("selectedModeIndex", out object modeObj))
+                player.selectedModeIndex = ConvertToInt(modeObj, 0);
+
+            if (data.TryGetValue("tanks", out object tanksObj))
+            {
+                player.tanks = ConvertToList(tanksObj);
+            }
+
+            if (data.TryGetValue("selectedTank", out object selectedTankObj))
+                player.selectedTank = selectedTankObj?.ToString() ?? "";
+
+            if (data.TryGetValue("ownedAIStickers", out object ownedAIStickersObj))
+                player.ownedAIStickers = ConvertToList(ownedAIStickersObj);
+
+            if (data.TryGetValue("ownedDecals", out object ownedDecalsObj))
+                player.ownedDecals = ConvertToList(ownedDecalsObj);
+
+            if (data.TryGetValue("ownedStickers", out object ownedStickersObj))
+                player.ownedStickers = ConvertToList(ownedStickersObj);
+
+            if (data.TryGetValue("ownedWraps", out object ownedWrapsObj))
+                player.ownedWraps = ConvertToList(ownedWrapsObj);
+
+            if (data.TryGetValue("formationTanks", out object formationTanksObj))
+                player.formationTanks = ConvertToList(formationTanksObj);
+
+            return player;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore document to PlayerDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Convert Firestore Dictionary to PlayerDocument
+    /// </summary>
+    public static PlayerDocument FromFirestoreData(Dictionary<string, object> data)
+    {
+        if (data == null) return null;
+
+        try
+        {
+            var player = new PlayerDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                player.roleID = roleIdObj?.ToString() ?? "";
+
+            if (data.TryGetValue("playerName", out object nameObj))
+                player.playerName = nameObj?.ToString() ?? "";
+
+            if (data.TryGetValue("playerAvatar", out object avatarObj))
+                player.playerAvatar = avatarObj?.ToString() ?? "";
+
+            // Numeric fields
+            if (data.TryGetValue("elo", out object eloObj))
+                player.elo = ConvertToInt(eloObj, 1000);
+
+            if (data.TryGetValue("gold", out object goldObj))
+                player.gold = ConvertToInt(goldObj, 0);
+
+            if (data.TryGetValue("diamond", out object diamondObj))
+                player.diamond = ConvertToInt(diamondObj, 0);
+
+            if (data.TryGetValue("exp", out object expObj))
+                player.exp = ConvertToLong(expObj, 0);
+
+            if (data.TryGetValue("level", out object levelObj))
+                player.level = ConvertToInt(levelObj, 1);
+
+            if (data.TryGetValue("selectedModeIndex", out object modeObj))
+                player.selectedModeIndex = ConvertToInt(modeObj, 0);
+
+            // Handle tanks array/list
+            if (data.TryGetValue("tanks", out object tanksObj))
+            {
+                player.tanks = ConvertToList(tanksObj);
+            }
+
+            if (data.TryGetValue("selectedTank", out object selectedTankObj))
+                player.selectedTank = selectedTankObj?.ToString() ?? "";
+
+            if (data.TryGetValue("ownedAIStickers", out object ownedAIStickersObj))
+                player.ownedAIStickers = ConvertToList(ownedAIStickersObj);
+
+            if (data.TryGetValue("ownedDecals", out object ownedDecalsObj))
+                player.ownedDecals = ConvertToList(ownedDecalsObj);
+
+            if (data.TryGetValue("ownedStickers", out object ownedStickersObj))
+                player.ownedStickers = ConvertToList(ownedStickersObj);
+
+            if (data.TryGetValue("ownedWraps", out object ownedWrapsObj))
+                player.ownedWraps = ConvertToList(ownedWrapsObj);
+                
+            if (data.TryGetValue("formationTanks", out object formationTanksObj))
+                player.formationTanks = ConvertToList(formationTanksObj);
+
+            return player;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore data to PlayerDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static int ConvertToInt(object value, int defaultValue = 0)
+    {
+        if (value == null) return defaultValue;
+        if (value is int intVal) return intVal;
+        if (value is long longVal) return (int)longVal;
+        if (int.TryParse(value.ToString(), out int result)) return result;
+        return defaultValue;
+    }
+
+    private static long ConvertToLong(object value, long defaultValue = 0)
+    {
+        if (value == null) return defaultValue;
+        if (value is long longVal) return longVal;
+        if (value is int intVal) return intVal;
+        if (long.TryParse(value.ToString(), out long result)) return result;
+        return defaultValue;
+    }
+
+    private static List<string> ConvertToList(object value)
+    {
+        var result = new List<string>();
+
+        if (value == null) return result;
+        
+        if (value is List<object> objectList)
+        {
+            foreach (var item in objectList)
+            {
+                if (item != null)
+                    result.Add(item.ToString());
+            }
+        }
+        else if (value is string[] stringArray)
+        {
+            foreach (var item in stringArray)
+            {
+                if (item != null)
+                    result.Add(item);
+            }
+        }
+        else if (value is List<string> stringList)
+        {
+            foreach (var item in stringList)
+            {
+                if (item != null)
+                    result.Add(item);
+            }
+        }
+
+        return result;
+    }
+
+    private static Dictionary<string, object> ConvertToObjectDictionary(object value)
+    {
+        var result = new Dictionary<string, object>();
+        
+        if (value == null) return result;
+        
+        if (value is Dictionary<string, object> dict)
+        {
+            return dict;
+        }
+        else if (value is Dictionary<object, object> objDict)
+        {
+            foreach (var kvp in objDict)
+            {
+                if (kvp.Key != null)
+                {
+                    result[kvp.Key.ToString()] = kvp.Value;
+                }
+            }
+        }
+        
+        return result;
+    }
+
+    private static Dictionary<string, long> ConvertToLongDictionary(object value)
+    {
+        var result = new Dictionary<string, long>();
+        
+        if (value == null) return result;
+        
+        if (value is Dictionary<string, object> dict)
+        {
+            foreach (var kvp in dict)
+            {
+                result[kvp.Key] = ConvertToLong(kvp.Value, 0);
+            }
+        }
+        
+        return result;
+    }
+}
+
+
+================================================================================
+FILE 479/682: Assets/_GameModules/PlayerModule/Scripts/PlayerSettingsCollection.cs
+================================================================================
+
+using Fusion.GameSystems;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "PlayerSettingsCollection", menuName = "ScriptableObjects/PlayerSettingsCollection", order = 1)]
+public class PlayerSettingsCollection: UserDataCollectionBase<PlayerSettingsDocument>, IStorage
+{
+    public PlayerSettingsDocument GetSettingsDocument(string id)
+    {
+        return FindDocumentByProperty(doc => doc.ID, id);
+    }
+
+    public PlayerSettingsDocument GetMine()
+    {
+        var roleID = PlayerPrefs.GetString(Constants.Key_RoleID);
+        return GetSettingsDocument(roleID);
+    }
+}
+
+
+================================================================================
+FILE 480/682: Assets/_GameModules/PlayerModule/Scripts/PlayerSettingsDocument.cs
+================================================================================
+
+using System;
+using Newtonsoft.Json;
+using Firebase.Firestore;
+
+[Serializable]
+[FirestoreData]
+public class PlayerSettingsDocument : IUserData
+{
+    [FirestoreProperty("roleID")]
+    public string roleID { get; set; } // Unique identifier for the account
+    
+    [FirestoreProperty("graphicSetting")]
+    public int graphicSetting { get; set; } = 0;
+    
+    [FirestoreProperty("enableSfx")]
+    public bool enableSfx { get; set; } = true;
+    
+    [FirestoreProperty("enableBgm")]
+    public bool enableBgm { get; set; } = true;
+    
+    [FirestoreProperty("enableVibrate")]
+    public bool enableVibrate { get; set; } = true;
+    
+    [FirestoreProperty("enableNotification")]
+    public bool enableNotification { get; set; } = true;
+    
+    [JsonIgnore]
+    public string ID => roleID;
+    
+    // Default constructor required for Firebase
+    public PlayerSettingsDocument()
+    {
+        graphicSetting = 0;
+        enableSfx = true;
+        enableBgm = true;
+        enableVibrate = true;
+        enableNotification = true;
+    }
+}
+
+
+================================================================================
+FILE 481/682: Assets/_GameModules/PlayerModule/Scripts/PlayerSettingsDocumentConverter.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Firebase.Firestore;
+using UnityEngine;
+
+/// <summary>
+/// Custom converter for PlayerSettingsDocument to handle complex types for Firebase Firestore
+/// </summary>
+public static class PlayerSettingsDocumentConverter
+{
+    /// <summary>
+    /// Convert PlayerSettingsDocument to Dictionary for Firestore storage
+    /// </summary>
+    public static Dictionary<string, object> ToFirestoreData(PlayerSettingsDocument settings)
+    {
+        if (settings == null) return new Dictionary<string, object>();
+
+        var data = new Dictionary<string, object>
+        {
+            ["roleID"] = settings.roleID ?? "",
+            ["graphicSetting"] = settings.graphicSetting,
+            ["enableSfx"] = settings.enableSfx,
+            ["enableBgm"] = settings.enableBgm,
+            ["enableVibrate"] = settings.enableVibrate,
+            ["enableNotification"] = settings.enableNotification
+        };
+
+        return data;
+    }
+
+    /// <summary>
+    /// Convert Firestore DocumentSnapshot to PlayerSettingsDocument
+    /// </summary>
+    public static PlayerSettingsDocument FromFirestoreData(DocumentSnapshot document)
+    {
+        if (!document.Exists) return null;
+
+        try
+        {
+            var data = document.ToDictionary();
+            var settings = new PlayerSettingsDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                settings.roleID = roleIdObj?.ToString() ?? "";
+
+            // Numeric fields
+            if (data.TryGetValue("graphicSetting", out object graphicObj))
+                settings.graphicSetting = ConvertToInt(graphicObj, 0);
+
+            // Boolean fields
+            if (data.TryGetValue("enableSfx", out object sfxObj))
+                settings.enableSfx = ConvertToBool(sfxObj, true);
+
+            if (data.TryGetValue("enableBgm", out object bgmObj))
+                settings.enableBgm = ConvertToBool(bgmObj, true);
+
+            if (data.TryGetValue("enableVibrate", out object vibrateObj))
+                settings.enableVibrate = ConvertToBool(vibrateObj, true);
+
+            if (data.TryGetValue("enableNotification", out object notificationObj))
+                settings.enableNotification = ConvertToBool(notificationObj, true);
+
+            return settings;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore document to PlayerSettingsDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Convert Firestore Dictionary to PlayerSettingsDocument
+    /// </summary>
+    public static PlayerSettingsDocument FromFirestoreData(Dictionary<string, object> data)
+    {
+        if (data == null) return null;
+
+        try
+        {
+            var settings = new PlayerSettingsDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                settings.roleID = roleIdObj?.ToString() ?? "";
+
+            // Numeric fields
+            if (data.TryGetValue("graphicSetting", out object graphicObj))
+                settings.graphicSetting = ConvertToInt(graphicObj, 0);
+
+            // Boolean fields
+            if (data.TryGetValue("enableSfx", out object sfxObj))
+                settings.enableSfx = ConvertToBool(sfxObj, true);
+
+            if (data.TryGetValue("enableBgm", out object bgmObj))
+                settings.enableBgm = ConvertToBool(bgmObj, true);
+
+            if (data.TryGetValue("enableVibrate", out object vibrateObj))
+                settings.enableVibrate = ConvertToBool(vibrateObj, true);
+
+            if (data.TryGetValue("enableNotification", out object notificationObj))
+                settings.enableNotification = ConvertToBool(notificationObj, true);
+
+            return settings;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore data to PlayerSettingsDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static int ConvertToInt(object value, int defaultValue = 0)
+    {
+        if (value == null) return defaultValue;
+        if (value is int intVal) return intVal;
+        if (value is long longVal) return (int)longVal;
+        if (int.TryParse(value.ToString(), out int result)) return result;
+        return defaultValue;
+    }
+
+    private static bool ConvertToBool(object value, bool defaultValue = false)
+    {
+        if (value == null) return defaultValue;
+        if (value is bool boolVal) return boolVal;
+        if (bool.TryParse(value.ToString(), out bool result)) return result;
+        return defaultValue;
+    }
+}
+
+
+================================================================================
+FILE 482/682: Assets/_GameModules/PlayerModule/Scripts/RandomNameGenerator.cs
+================================================================================
+
+public class RandomNameGenerator
+{
+    private static readonly string[] FirstNames =
+    {
+        "James","John","Robert","Michael","William","David","Richard","Joseph","Thomas","Charles",
+        "Christopher","Daniel","Matthew","Anthony","Mark","Donald","Steven","Paul","Andrew","Joshua",
+        "Kenneth","Kevin","Brian","George","Edward","Ronald","Timothy","Jason","Jeffrey","Ryan",
+        "Jacob","Gary","Nicholas","Eric","Jonathan","Stephen","Larry","Justin","Scott","Brandon",
+        "Benjamin","Samuel","Gregory","Alexander","Frank","Patrick","Raymond","Jack","Dennis","Jerry",
+        "Emma","Olivia","Ava","Sophia","Isabella","Mia","Charlotte","Amelia","Evelyn","Abigail",
+        "Harper","Emily","Elizabeth","Sofia","Madison","Avery","Ella","Scarlett","Grace","Chloe",
+        "Victoria","Riley","Aria","Lily","Aurora","Zoey","Penelope","Nora","Hannah","Lillian",
+        "Addison","Eleanor","Stella","Natalie","Zoe","Leah","Hazel","Violet","Aurora","Savannah",
+        "Audrey","Brooklyn","Bella","Claire","Skylar","Lucy","Paisley","Everly","Anna","Caroline"
+    };
+
+    private static readonly string[] LastNames =
+    {
+        "Smith","Johnson","Williams","Brown","Jones","Miller","Davis","Garcia","Rodriguez","Wilson",
+        "Martinez","Anderson","Taylor","Thomas","Hernandez","Moore","Martin","Jackson","Thompson","White"
+    };
+
+    private static readonly System.Random rnd = new System.Random();
+
+    public static string GetRandomEnglishName()
+    {
+        string first = FirstNames[rnd.Next(FirstNames.Length)];
+        // string last = LastNames[rnd.Next(LastNames.Length)];
+        return $"{first}";
+    }
+}
+
+
+================================================================================
+FILE 483/682: Assets/_GameModules/PlayerModule/Scripts/UserCollection.cs
+================================================================================
+
+using Fusion.GameSystems;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "UserCollection", menuName = "ScriptableObjects/UserCollection", order = 1)]
+public class UserCollection : UserDataCollectionBase<UserDocument>, IStorage
+{
+    public UserDocument GetUserDocument(string userId)
+    {
+        return FindDocumentByProperty(doc => doc.ID, userId);
+    }
+
+    public UserDocument GetMine()
+    {
+        var userId = PlayerPrefs.GetString(Constants.Key_UserID);
+        return GetUserDocument(userId);
+    }
+}
+
+
+================================================================================
+FILE 484/682: Assets/_GameModules/PlayerModule/Scripts/UserDocument.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Firebase.Firestore;
+
+[Serializable]
+[FirestoreData]
+public class UserDocument : IUserData
+{
+    [FirestoreProperty("userID")]
+    public string userID { get; set; } // Unique identifier for the user
+    
+    [FirestoreProperty("roleID")]
+    public string roleID { get; set; } // Unique identifier for the account
+    
+    [FirestoreProperty("inactiveRoleIDs")]
+    public List<string> inactiveRoleIDs { get; set; } = new List<string>();
+
+    [JsonIgnore]
+    public string ID => userID;
+    
+    // Default constructor required for Firebase
+    public UserDocument()
+    {
+        inactiveRoleIDs = new List<string>();
+    }
+}
+
+
+================================================================================
+FILE 485/682: Assets/_GameModules/PlayerModule/Scripts/UserDocumentConverter.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using Firebase.Firestore;
+using UnityEngine;
+
+/// <summary>
+/// Custom converter for UserDocument to handle complex types for Firebase Firestore
+/// </summary>
+public static class UserDocumentConverter
+{
+    /// <summary>
+    /// Convert UserDocument to Dictionary for Firestore storage
+    /// </summary>
+    public static Dictionary<string, object> ToFirestoreData(UserDocument user)
+    {
+        if (user == null) return new Dictionary<string, object>();
+
+        var data = new Dictionary<string, object>
+        {
+            ["userID"] = user.userID ?? "",
+            ["roleID"] = user.roleID ?? "",
+            ["inactiveRoleIDs"] = user.inactiveRoleIDs ?? new List<string>()
+        };
+
+        return data;
+    }
+
+    /// <summary>
+    /// Convert Firestore DocumentSnapshot to UserDocument
+    /// </summary>
+    public static UserDocument FromFirestoreData(DocumentSnapshot document)
+    {
+        if (!document.Exists) return null;
+
+        try
+        {
+            var data = document.ToDictionary();
+            var user = new UserDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("userID", out object userIdObj))
+                user.userID = userIdObj?.ToString() ?? "";
+
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                user.roleID = roleIdObj?.ToString() ?? "";
+
+            // Handle inactiveRoleIDs list
+            if (data.TryGetValue("inactiveRoleIDs", out object inactiveRoleIDsObj))
+            {
+                user.inactiveRoleIDs = ConvertToStringList(inactiveRoleIDsObj);
+            }
+
+            return user;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore document to UserDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Convert Firestore Dictionary to UserDocument
+    /// </summary>
+    public static UserDocument FromFirestoreData(Dictionary<string, object> data)
+    {
+        if (data == null) return null;
+
+        try
+        {
+            var user = new UserDocument();
+
+            // Basic string fields
+            if (data.TryGetValue("userID", out object userIdObj))
+                user.userID = userIdObj?.ToString() ?? "";
+
+            if (data.TryGetValue("roleID", out object roleIdObj))
+                user.roleID = roleIdObj?.ToString() ?? "";
+
+            // Handle inactiveRoleIDs list
+            if (data.TryGetValue("inactiveRoleIDs", out object inactiveRoleIDsObj))
+            {
+                user.inactiveRoleIDs = ConvertToStringList(inactiveRoleIDsObj);
+            }
+
+            return user;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error converting Firestore data to UserDocument: {ex.Message}");
+            return null;
+        }
+    }
+
+    private static List<string> ConvertToStringList(object value)
+    {
+        var result = new List<string>();
+        
+        if (value == null) return result;
+        
+        if (value is List<object> objectList)
+        {
+            foreach (var item in objectList)
+            {
+                if (item != null)
+                    result.Add(item.ToString());
+            }
+        }
+        else if (value is string[] stringArray)
+        {
+            result.AddRange(stringArray);
+        }
+        else if (value is List<string> stringList)
+        {
+            result.AddRange(stringList);
+        }
+
+        return result;
+    }
+}
+
+
+================================================================================
+FILE 486/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/Kino/Glitch/DigitalGlitch.cs
+================================================================================
+
+//
+// KinoGlitch - Video glitch effect
+//
+// Copyright (C) 2015 Keijiro Takahashi
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+using UnityEngine;
+
+namespace Kino
+{
+    //[ExecuteInEditMode]
+    [RequireComponent(typeof(Camera))]
+    [AddComponentMenu("Kino Image Effects/Digital Glitch")]
+    public class DigitalGlitch : MonoBehaviour
+    {
+        #region Public Properties
+
+        [SerializeField, Range(0, 1)]
+        float _intensity = 0;
+
+        public float intensity
+        {
+            get { return _intensity; }
+            set { _intensity = value; }
+        }
+
+        #endregion
+
+        #region Private Properties
+
+        [SerializeField] Shader _shader;
+
+        Material _material;
+        Texture2D _noiseTexture;
+        RenderTexture _trashFrame1;
+        RenderTexture _trashFrame2;
+
+        #endregion
+
+        #region Private Functions
+
+        static Color RandomColor()
+        {
+            return new Color(Random.value, Random.value, Random.value, Random.value);
+        }
+
+        void SetUpResources()
+        {
+            if (_material != null) return;
+
+            _material = new Material(_shader);
+            _material.hideFlags = HideFlags.DontSave;
+
+            _noiseTexture = new Texture2D(32, 16, TextureFormat.ARGB32, false);
+            _noiseTexture.hideFlags = HideFlags.DontSave;
+            _noiseTexture.wrapMode = TextureWrapMode.Clamp;
+            _noiseTexture.filterMode = FilterMode.Point;
+
+            _trashFrame1 = new RenderTexture(Screen.width, Screen.height, 0);
+            _trashFrame2 = new RenderTexture(Screen.width, Screen.height, 0);
+            _trashFrame1.hideFlags = HideFlags.DontSave;
+            _trashFrame2.hideFlags = HideFlags.DontSave;
+
+            UpdateNoiseTexture();
+        }
+
+        void UpdateNoiseTexture()
+        {
+            var color = RandomColor();
+
+            for (var y = 0; y < _noiseTexture.height; y++)
+            {
+                for (var x = 0; x < _noiseTexture.width; x++)
+                {
+                    if (Random.value > 0.89f) color = RandomColor();
+                    _noiseTexture.SetPixel(x, y, color);
+                }
+            }
+
+            _noiseTexture.Apply();
+        }
+
+        #endregion
+
+        #region MonoBehaviour Functions
+
+        void Update()
+        {
+            if (Random.value > Mathf.Lerp(0.9f, 0.5f, _intensity))
+            {
+                SetUpResources();
+                UpdateNoiseTexture();
+            }
+        }
+
+        void OnRenderImage(RenderTexture source, RenderTexture destination)
+        {
+            SetUpResources();
+
+            // Update trash frames on a constant interval.
+            var fcount = Time.frameCount;
+            if (fcount % 13 == 0) Graphics.Blit(source, _trashFrame1);
+            if (fcount % 73 == 0) Graphics.Blit(source, _trashFrame2);
+
+            _material.SetFloat("_Intensity", _intensity);
+            _material.SetTexture("_NoiseTex", _noiseTexture);
+            var trashFrame = Random.value > 0.5f ? _trashFrame1 : _trashFrame2;
+            _material.SetTexture("_TrashTex", trashFrame);
+
+            Graphics.Blit(source, destination, _material);
+        }
+
+        #endregion
+    }
+}
+
+
+================================================================================
+FILE 487/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/Kino/Glitch/Editor/DigitalGlitchEditor.cs
+================================================================================
+
+//
+// KinoGlitch - Video glitch effect
+//
+// Copyright (C) 2015 Keijiro Takahashi
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+using UnityEngine;
+using UnityEditor;
+
+namespace Kino
+{
+    [CanEditMultipleObjects]
+    [CustomEditor(typeof(DigitalGlitch))]
+    public class DigitalGlitchEditor : Editor
+    {
+        SerializedProperty _intensity;
+
+        void OnEnable()
+        {
+            _intensity = serializedObject.FindProperty("_intensity");
+        }
+
+        public override void OnInspectorGUI()
+        {
+            serializedObject.Update();
+
+            EditorGUILayout.PropertyField(_intensity);
+
+            serializedObject.ApplyModifiedProperties();
+        }
+    }
+}
+
+
+================================================================================
+FILE 488/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/Kino/Glitch/Shader/DigitalGlitch.shader
+================================================================================
+
+//
+// KinoGlitch - Video glitch effect
+//
+// Copyright (C) 2015 Keijiro Takahashi
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in
+// the Software without restriction, including without limitation the rights to
+// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+// the Software, and to permit persons to whom the Software is furnished to do so,
+// subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+Shader "Hidden/Kino/Glitch/Digital"
+{
+    Properties
+    {
+        _MainTex  ("-", 2D) = "" {}
+        _NoiseTex ("-", 2D) = "" {}
+        _TrashTex ("-", 2D) = "" {}
+    }
+
+    CGINCLUDE
+
+    #include "UnityCG.cginc"
+
+    sampler2D _MainTex;
+    sampler2D _NoiseTex;
+    sampler2D _TrashTex;
+    float _Intensity;
+
+    float4 frag(v2f_img i) : SV_Target 
+    {
+        float4 glitch = tex2D(_NoiseTex, i.uv);
+        float thresh = 1.001 - _Intensity * 1.001;
+        float w_d = step(thresh, pow(glitch.z, 2.5)); // displacement glitch
+        float w_f = step(thresh, pow(glitch.w, 2.5)); // frame glitch
+        float w_c = step(thresh, pow(glitch.z, 3.5)); // color glitch
+
+        // Displacement.
+        float2 uv = frac(i.uv + glitch.xy * w_d);
+        float4 source = tex2D(_MainTex, uv);
+
+        // Mix with trash frame.
+        float3 color = lerp(source, tex2D(_TrashTex, uv), w_f).rgb;
+
+        // Shuffle color components.
+        float3 neg = saturate(color.grb + (1 - dot(color, 1)) * 0.5);
+        color = lerp(color, neg, w_c);
+
+        return float4(color, source.a);
+    }
+
+    ENDCG
+
+    SubShader
+    {
+        Pass
+        {
+            ZTest Always Cull Off ZWrite Off
+            CGPROGRAM
+            #pragma vertex vert_img
+            #pragma fragment frag
+            #pragma target 3.0
+            ENDCG
+        }
+    }
+}
+
+
+================================================================================
+FILE 489/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/Tanknarok_PulsatingGlow.shader
+================================================================================
+
+﻿Shader "Tanknarok/PulseGlow"
+{
+	Properties{
+		_Color1("Color1", Color) = (1,1,1,1)
+		_Color2("Color2", Color) = (0,0,0,1)
+		_PulseSpeed("Pulse Speed", Float) = 1
+		_GlowStrength("Glow Strength", Float) = 1
+		_Delay("Pulse Delay", Range(0, 1)) = 0
+	}
+	SubShader{
+		Tags {
+			"RenderType" = "Opaque"
+		}
+		LOD 200
+		Pass {
+			Name "FORWARD"
+			Tags {
+				"LightMode" = "ForwardBase"
+			}
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase_fullshadows
+			#pragma only_renderers d3d9 d3d11 glcore gles xboxone
+			#pragma target 3.0
+
+			float4 _Color1;
+			float4 _Color2;
+			float _GlowStrength;
+			float _PulseSpeed;
+			float _Delay;
+
+			struct VertexInput {
+				float4 vertex : POSITION;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+			};
+
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.pos = UnityObjectToClipPos(v.vertex);
+				UNITY_TRANSFER_FOG(o,o.pos);
+				return o;
+			}
+			float4 frag(VertexOutput i) : COLOR {
+				float s = sin((_PulseSpeed * _Time.y) + (_Delay * 3.14)) * 0.5 + 0.5;
+				float3 emissive = (lerp(_Color1.rgb, _Color2.rgb, s) * _GlowStrength);
+
+				fixed4 col = fixed4(emissive, 1);
+				return col;
+			}
+			ENDCG
+		}
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 490/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_BlinkGlow.shader
+================================================================================
+
+﻿Shader "Tanknarok/BlinkGlow"
+{
+	Properties {
+		_Color1("Color1", Color) = (1,1,1,1)
+		_Color2("Color2", Color) = (0,0,0,1)
+		_PulseSpeed("Pulse Speed", Float) = 1
+		_GlowStrength("Glow Strength", Float) = 1
+		_Delay("Delay", Range(0, 1)) = 0
+	}
+
+	SubShader {
+		Tags {
+			"RenderType" = "Opaque"
+		}
+		LOD 200
+		Pass {
+			Name "FORWARD"
+			Tags {
+				"LightMode" = "ForwardBase"
+			}
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase_fullshadows
+			//#pragma only_renderers d3d9 d3d11 glcore gles 
+			#pragma target 3.0
+
+			float4 _Color1;
+			float4 _Color2;
+			float _GlowStrength;
+			float _PulseSpeed;
+			float _Delay;
+
+			struct VertexInput {
+				float4 vertex : POSITION;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+			};
+
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.pos = UnityObjectToClipPos(v.vertex);
+				return o;
+			}
+			float4 frag(VertexOutput i) : COLOR {
+				float s = round(sin((_PulseSpeed * _Time.y) + (_Delay * 3.14)) * 0.5 + 0.5);
+				float3 emissive = lerp(_Color1.rgb, _Color2.rgb, s) * _GlowStrength;
+
+				fixed4 col = fixed4(emissive, 1);
+				return col;
+			}
+			ENDCG
+		}
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 491/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_DepthIntersection.shader
+================================================================================
+
+﻿Shader "Tanknarok/DepthIntersection"
+{
+	Properties{
+		_Color("Color", Color) = (1,1,1,1)
+		_DepthColor("DepthColor", Color) = (0.5,0.5,0.5,1)
+		_Depth("Depth", Float) = 2.5
+		_EmissionStrength("EmissionStrength", Float) = 1
+	}
+	SubShader{
+		Tags {
+			"IgnoreProjector" = "True"
+			"Queue" = "Transparent"
+			"RenderType" = "Transparent"
+		}
+		Pass {
+			Name "FORWARD"
+
+			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite Off
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#define UNITY_PASS_FORWARDBASE
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase
+			#pragma only_renderers d3d9 d3d11 glcore gles xboxone
+			#pragma target 3.0
+
+			uniform sampler2D _CameraDepthTexture;
+			uniform float4 _Color;
+			uniform float4 _DepthColor;
+			uniform float _Depth;
+			uniform float _EmissionStrength;
+
+			struct VertexInput {
+				float4 vertex : POSITION;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+				float4 posWorld : TEXCOORD0;
+				float4 projPos : TEXCOORD2;
+			};
+
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
+				o.projPos = ComputeScreenPos(o.pos);
+				COMPUTE_EYEDEPTH(o.projPos.z);
+				return o;
+			}
+			float4 frag(VertexOutput i) : COLOR {
+				float sceneZ = max(0, LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)))) - _ProjectionParams.g);
+				float partZ = max(0,i.projPos.z - _ProjectionParams.g);
+
+
+				float normalizedDepth = (1.0 - saturate((sceneZ - partZ) / _Depth));
+				float3 lavaColor = _Color.rgb * _EmissionStrength;
+				float3 depthColor = _DepthColor * normalizedDepth;
+				float3 emissive = lavaColor + depthColor;
+
+				return fixed4(emissive, 1);
+			}
+			ENDCG
+		}
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 492/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_EnergyBeam.shader
+================================================================================
+
+﻿Shader "Tanknarok/EnergyBeam" {
+	Properties{
+		_TintColor("Tint Color", Color) = (0.5,0.5,0.5,0.5)
+		_MainTex("Particle Texture", 2D) = "white" {}
+		_NoiseTex("Noise Texture", 2D) = "black" {}
+		_InvFade("Soft Particles Factor", Range(0.01,10.0)) = 1.0
+		_EmissionStrength("Emission Strength", Range(1.0, 30.0)) = 1.0
+		_BeamFade("Beam fade", Range(0, 1)) = 0
+	}
+
+	Category{
+		Tags {
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+			"PreviewType" = "Plane"
+		}
+		Blend SrcAlpha One
+		ColorMask RGB
+		Cull Off Lighting Off ZWrite Off
+
+		SubShader {
+			Pass {
+
+				CGPROGRAM
+				#pragma vertex vert
+				#pragma fragment frag
+				#pragma target 3.0
+				#pragma multi_compile_particles
+
+				#include "UnityCG.cginc"
+
+				sampler2D _MainTex;
+				sampler2D _NoiseTex;
+				fixed4 _TintColor;
+				
+				
+
+				struct appdata_t {
+					float4 vertex : POSITION;
+					fixed4 color : COLOR;
+					float2 uv : TEXCOORD0;
+					UNITY_VERTEX_INPUT_INSTANCE_ID
+				};
+
+				struct v2f {
+					float4 vertex : SV_POSITION;
+					fixed4 color : COLOR;
+					float2 uv : TEXCOORD0;
+
+					#ifdef SOFTPARTICLES_ON
+					float4 projPos : TEXCOORD2;
+					#endif
+					UNITY_VERTEX_OUTPUT_STEREO
+				};
+
+				float4 _MainTex_ST;
+
+				v2f vert(appdata_t v)
+				{
+					v2f o;
+					UNITY_SETUP_INSTANCE_ID(v);
+					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+					o.vertex = UnityObjectToClipPos(v.vertex);
+					#ifdef SOFTPARTICLES_ON
+					o.projPos = ComputeScreenPos(o.vertex);
+					COMPUTE_EYEDEPTH(o.projPos.z);
+					#endif
+					o.color = v.color;
+					o.uv = TRANSFORM_TEX(v.uv,_MainTex);
+					return o;
+				}
+
+				UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
+				float _InvFade;
+				float _EmissionStrength;
+				float _BeamFade;
+
+				fixed4 frag(v2f i) : SV_Target
+				{
+					#ifdef SOFTPARTICLES_ON
+					float sceneZ = LinearEyeDepth(SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)));
+					float partZ = i.projPos.z;
+					float fade = saturate(_InvFade * (sceneZ - partZ));
+					i.color.a *= fade;
+					#endif
+
+					// draw the beam
+					fixed4 col = tex2D(_MainTex, i.uv) * i.color * _TintColor * _EmissionStrength;
+
+					//fade the baem using _BeamFade
+					//float slideFade = smoothstep(0, 0.01, saturate((1 - _BeamFade) * (i.uv.x - _BeamFade)));
+					//float totalFade = 1 - smoothstep(0.01, 0.05, _BeamFade);
+					//return col * slideFade * totalFade;
+
+					float noise = tex2D(_NoiseTex, float2(i.uv.x, (i.uv.y / 10))).r;
+					float noiseFade = smoothstep(0.5, .8, (1 - (_BeamFade * noise)));
+
+					float beamFade = 1 - _BeamFade;
+					return col * beamFade * noiseFade;
+				}
+				ENDCG
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 493/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_ForcefieldHologram.shader
+================================================================================
+
+﻿Shader "Tanknarok/ForcefieldHologram" {
+	Properties{
+		_MainTex("MainTex", 2D) = "white" {}
+		_TintColor("Color", Color) = (0.5,0.5,0.5,1)
+
+		_MaxDistance("MaxDistance", Float) = 4
+		_EmissionIntensity("Player Proximity Intensity", Float) = 1.2
+		
+		_MinStrength("MinStrength", Range(0, 1)) = 0	
+		_FallOffStrength("FallOffStrength", Range(0, 4)) = 1.1
+		[HideInInspector]_FallOffYOffset("FallOffYOffset", Range(0, 1)) = 0
+		_IntersectBoost("Intersection Boost", Range(0, 1)) = 1
+		
+
+		_PositionPLAYER1("PositionPLAYER1", Vector) = (0,0,0,0)
+		_PositionPLAYER2("PositionPLAYER2", Vector) = (0,0,0,0)
+		_PositionPLAYER3("PositionPLAYER3", Vector) = (0,0,0,0)
+		_PositionPLAYER4("PositionPLAYER4", Vector) = (0,0,0,0)
+
+		[MaterialToggle] _PLAYER2Toggle("PLAYER2Toggle", Float) = 0
+		[MaterialToggle] _PLAYER1Toggle("PLAYER1Toggle", Float) = 0
+		[MaterialToggle] _PLAYER3Toggle("PLAYER3Toggle", Float) = 0
+		[MaterialToggle] _PLAYER4Toggle("PLAYER4Toggle", Float) = 0
+
+		[HideInInspector]_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
+	}
+	SubShader{
+		Tags {
+			"IgnoreProjector" = "True"
+			"Queue" = "Transparent"
+			"RenderType" = "Transparent"
+		}
+		Pass {
+			Name "FORWARD"
+			Tags {
+				"LightMode" = "ForwardBase"
+			}
+
+			//https://docs.unity3d.com/Manual/SL-Blend.html
+			Blend SrcAlpha OneMinusSrcAlpha // Traditional transparency
+			//Blend One OneMinusSrcAlpha // Premultiplied transparency
+			//Blend One One // Additive
+			//Blend OneMinusDstColor One // Soft Additive
+			//Blend DstColor Zero // Multiplicative
+			//Blend DstColor SrcColor // 2x Multiplicative
+
+			//https://docs.unity3d.com/Manual/SL-Pass.html
+			Cull Off // render the backside
+			//Lighting Off
+			ZWrite Off // Prevent forcefield from hiding other transparent things
+
+			//https://docs.unity3d.com/Manual/SL-ShaderPrograms.html
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma target 3.0
+
+			#include "UnityCG.cginc"
+
+			uniform sampler2D _CameraDepthTexture;
+			uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
+			uniform float4 _TintColor;
+			uniform float _MaxDistance;
+			uniform float _IntersectBoost;
+			uniform float _MinStrength;
+			uniform float _FallOffStrength;
+			uniform float _FallOffYOffset;
+			uniform float _EmissionIntensity;
+
+			uniform float4 _PositionPLAYER1;
+			uniform float4 _PositionPLAYER2;
+			uniform float4 _PositionPLAYER3;
+			uniform float4 _PositionPLAYER4;
+			uniform fixed _PLAYER2Toggle;
+			uniform fixed _PLAYER1Toggle;
+			uniform fixed _PLAYER3Toggle;
+			uniform fixed _PLAYER4Toggle;
+
+			struct VertexInput {
+				float4 vertex : POSITION;
+				float2 texcoord0 : TEXCOORD0;
+				//float4 vertexColor : COLOR;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+				float2 uv0 : TEXCOORD0;
+				float4 posWorld : TEXCOORD1;
+				//float4 vertexColor : COLOR;
+				float4 projPos : TEXCOORD2;
+
+			};
+
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.uv0 = v.texcoord0;
+				//o.vertexColor = v.vertexColor;
+				o.posWorld = mul(unity_ObjectToWorld, v.vertex);
+				o.pos = UnityObjectToClipPos(v.vertex);
+				o.projPos = ComputeScreenPos(o.pos);
+				COMPUTE_EYEDEPTH(o.projPos.z);
+				return o;
+			}
+			float4 frag(VertexOutput i, float facing : VFACE) : COLOR {
+				//float isFrontFace = (facing >= 0 ? 1 : 0);
+				//float faceSign = (facing >= 0 ? 1 : -1);
+				float sceneZ = max(0,LinearEyeDepth(UNITY_SAMPLE_DEPTH(tex2Dproj(_CameraDepthTexture, UNITY_PROJ_COORD(i.projPos)))) - _ProjectionParams.y);
+				float partZ = max(0, i.projPos.z - _ProjectionParams.y);
+				float4 tex = tex2D(_MainTex, TRANSFORM_TEX(i.uv0, _MainTex));
+
+				float3 center = float3(0, 0, 0);
+				float p1Distance = distance(lerp(center, _PositionPLAYER1.xyz, _PLAYER1Toggle), i.posWorld.xyz) / _MaxDistance;  // The distance between player1 and the current pixel in world space.
+				float p2Distance = distance(lerp(center, _PositionPLAYER2.xyz, _PLAYER2Toggle), i.posWorld.xyz) / _MaxDistance;  // If the player isn't present (playertoggle) then use the world center instead.
+				float p3Distance = distance(lerp(center, _PositionPLAYER3.xyz, _PLAYER3Toggle), i.posWorld.xyz) / _MaxDistance;  // Oh, and the player toggles and positions are updated via a script.
+				float p4Distance = distance(lerp(center, _PositionPLAYER4.xyz, _PLAYER4Toggle), i.posWorld.xyz) / _MaxDistance;
+				float shortestDistance = saturate(1.0 - min(min(min(p1Distance, p2Distance), p3Distance), p4Distance));  // get the distance from the closest player
+				float intensity = max(_MinStrength, shortestDistance * _EmissionIntensity);  // calculate the brightness/intensity based on the distance. Closer -> more intense.
+				
+
+				float3 base = tex.rgb * _TintColor.rgb * intensity * 2.0;	// the base hologram
+				float3 intersect = (1.0 - saturate((sceneZ - partZ) / _IntersectBoost)) * intensity * _TintColor.rgb;  // added boost where the hologram intersects anything
+				float falloff = 1.0 - saturate((i.uv0.g.r - _FallOffYOffset) * _FallOffStrength);  // fades the hologram at the top
+
+				// put it all together
+				float3 emissive = (base + intersect) * falloff * fmod(i.pos.y, 2);
+
+				return fixed4(emissive, length(emissive));
+			}
+			ENDCG
+		}
+	}
+}
+
+
+================================================================================
+FILE 494/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_ParticleDiffuseCustomOrder.shader
+================================================================================
+
+// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+
+Shader "Tanknarok/ParticleDiffuseCustomOrder"
+{
+	Properties
+	{
+		_MainTex("Albedo", 2D) = "white" {}
+		_Color("Color", Color) = (1,1,1,1)
+
+		_Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+
+		_MetallicGlossMap("Metallic", 2D) = "white" {}
+		[Gamma] _Metallic("Metallic", Range(0.0, 1.0)) = 0.0
+		_Glossiness("Smoothness", Range(0.0, 1.0)) = 0.5
+
+		_BumpScale("Scale", Float) = 1.0
+		_BumpMap("Normal Map", 2D) = "bump" {}
+
+		_EmissionColor("Color", Color) = (0,0,0)
+		_EmissionMap("Emission", 2D) = "white" {}
+
+		_DistortionStrength("Strength", Float) = 1.0
+		_DistortionBlend("Blend", Range(0.0, 1.0)) = 0.5
+
+		_SoftParticlesNearFadeDistance("Soft Particles Near Fade", Float) = 0.0
+		_SoftParticlesFarFadeDistance("Soft Particles Far Fade", Float) = 1.0
+		_CameraNearFadeDistance("Camera Near Fade", Float) = 1.0
+		_CameraFarFadeDistance("Camera Far Fade", Float) = 2.0
+
+		// Hidden properties
+		[HideInInspector] _Mode("__mode", Float) = 0.0
+		[HideInInspector] _FlipbookMode("__flipbookmode", Float) = 0.0
+		[HideInInspector] _LightingEnabled("__lightingenabled", Float) = 1.0
+		[HideInInspector] _DistortionEnabled("__distortionenabled", Float) = 0.0
+		[HideInInspector] _EmissionEnabled("__emissionenabled", Float) = 0.0
+		[HideInInspector] _BlendOp("__blendop", Float) = 0.0
+		[HideInInspector] _SrcBlend("__src", Float) = 1.0
+		[HideInInspector] _DstBlend("__dst", Float) = 0.0
+		[HideInInspector] _ZWrite("__zw", Float) = 1.0
+		[HideInInspector] _Cull("__cull", Float) = 2.0
+		[HideInInspector] _SoftParticlesEnabled("__softparticlesenabled", Float) = 0.0
+		[HideInInspector] _CameraFadingEnabled("__camerafadingenabled", Float) = 0.0
+		[HideInInspector] _SoftParticleFadeParams("__softparticlefadeparams", Vector) = (0,0,0,0)
+		[HideInInspector] _CameraFadeParams("__camerafadeparams", Vector) = (0,0,0,0)
+		[HideInInspector] _DistortionStrengthScaled("__distortionstrengthscaled", Float) = 0.0
+	}
+
+		SubShader
+		{
+			Tags { 
+				"RenderType" = "Opaque" 
+				"IgnoreProjector" = "True" 
+				"PreviewType" = "Plane" 
+				"PerformanceChecks" = "False" 
+				"Queue" = "Geometry+2"
+			}
+
+			BlendOp[_BlendOp]
+			Blend[_SrcBlend][_DstBlend]
+			ZWrite[_ZWrite]
+			Cull[_Cull]
+
+			GrabPass
+			{
+				Tags { "LightMode" = "Always" }
+				"_GrabTexture"
+			}
+
+			Pass
+			{
+				Name "ShadowCaster"
+				Tags { "LightMode" = "ShadowCaster" }
+
+				BlendOp Add
+				Blend One Zero
+				ZWrite On
+				Cull Off
+
+				CGPROGRAM
+				#pragma target 3.5
+
+				#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON _ALPHAMODULATE_ON
+				#pragma shader_feature _METALLICGLOSSMAP
+				#pragma shader_feature _REQUIRE_UV2
+				#pragma multi_compile_shadowcaster
+				#pragma multi_compile_instancing
+				#pragma instancing_options procedural:vertInstancingSetup
+
+				#pragma vertex vertParticleShadowCaster
+				#pragma fragment fragParticleShadowCaster
+
+				#include "UnityStandardParticleShadow.cginc"
+				ENDCG
+			}
+
+			CGPROGRAM
+			#pragma surface surf Standard nolightmap nometa noforwardadd keepalpha vertex:vert
+			#pragma multi_compile __ SOFTPARTICLES_ON
+			#pragma multi_compile_instancing
+			#pragma instancing_options procedural:vertInstancingSetup
+			#pragma target 3.5
+
+			#pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON _ALPHAMODULATE_ON
+			#pragma shader_feature _METALLICGLOSSMAP
+			#pragma shader_feature _NORMALMAP
+			#pragma shader_feature _EMISSION
+			#pragma shader_feature _FADING_ON
+			#pragma shader_feature _REQUIRE_UV2
+			#pragma shader_feature EFFECT_BUMP
+
+			#include "UnityStandardParticles.cginc"
+			ENDCG
+		}
+
+			Fallback "VertexLit"
+			CustomEditor "StandardParticlesShaderGUI"
+}
+
+
+================================================================================
+FILE 495/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_ParticleInstancedSurface.shader
+================================================================================
+
+﻿Shader "Tanknarok/ParticleInstancedSurface" {
+    Properties {
+        _Color ("Color", Color) = (1,1,1,1)
+        _MainTex ("Albedo (RGB)", 2D) = "white" {}
+    }
+    
+    SubShader {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+
+        CGPROGRAM
+        // Physically based Standard lighting model, and enable shadows on all light types
+        // And generate the shadow pass with instancing support
+        //#pragma surface surf Standard nolightmap nometa noforwardadd keepalpha fullforwardshadows addshadow vertex:vert
+        #pragma surface surf Standard fullforwardshadows addshadow vertex:vert
+        #pragma target 4.5
+        
+        // Enable instancing for this shader
+        #pragma multi_compile_instancing
+        #pragma instancing_options procedural:vertInstancingSetup
+        #pragma exclude_renderers gles
+        #include "UnityStandardParticleInstancing.cginc"
+        
+        sampler2D _MainTex;
+        struct Input {
+            float2 uv_MainTex;
+            fixed4 vertexColor;
+        };
+        
+        fixed4 _Color;
+        
+        void vert (inout appdata_full v, out Input o)
+        {
+            UNITY_INITIALIZE_OUTPUT(Input, o);
+            vertInstancingColor(o.vertexColor);
+            vertInstancingUVs(v.texcoord, o.uv_MainTex);
+        }
+
+        void surf (Input IN, inout SurfaceOutputStandard o) {
+            // Albedo comes from a texture tinted by color
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * IN.vertexColor * _Color;
+            o.Albedo = c.rgb;
+
+            o.Metallic = 0.0;
+            o.Smoothness = 0.0;
+            o.Alpha = 1;
+        }
+        ENDCG
+    }
+    FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 496/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_ParticleUnlitZTestAlways.shader
+================================================================================
+
+// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+
+Shader "Tanknarok/ParticleUnlitZTestAlways"
+{
+    Properties
+    {
+        _MainTex("Albedo", 2D) = "white" {}
+        _Color("Color", Color) = (1,1,1,1)
+
+        _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+
+        _BumpScale("Scale", Float) = 1.0
+        _BumpMap("Normal Map", 2D) = "bump" {}
+
+        _EmissionColor("Color", Color) = (0,0,0)
+        _EmissionMap("Emission", 2D) = "white" {}
+
+        _DistortionStrength("Strength", Float) = 1.0
+        _DistortionBlend("Blend", Range(0.0, 1.0)) = 0.5
+
+        _SoftParticlesNearFadeDistance("Soft Particles Near Fade", Float) = 0.0
+        _SoftParticlesFarFadeDistance("Soft Particles Far Fade", Float) = 1.0
+        _CameraNearFadeDistance("Camera Near Fade", Float) = 1.0
+        _CameraFarFadeDistance("Camera Far Fade", Float) = 2.0
+
+        // Hidden properties
+        [HideInInspector] _Mode ("__mode", Float) = 0.0
+        [HideInInspector] _ColorMode ("__colormode", Float) = 0.0
+        [HideInInspector] _FlipbookMode ("__flipbookmode", Float) = 0.0
+        [HideInInspector] _LightingEnabled ("__lightingenabled", Float) = 0.0
+        [HideInInspector] _DistortionEnabled ("__distortionenabled", Float) = 0.0
+        [HideInInspector] _EmissionEnabled ("__emissionenabled", Float) = 0.0
+        [HideInInspector] _BlendOp ("__blendop", Float) = 0.0
+        [HideInInspector] _SrcBlend ("__src", Float) = 1.0
+        [HideInInspector] _DstBlend ("__dst", Float) = 0.0
+        [HideInInspector] _ZWrite ("__zw", Float) = 1.0
+        [HideInInspector] _Cull ("__cull", Float) = 2.0
+        [HideInInspector] _SoftParticlesEnabled ("__softparticlesenabled", Float) = 0.0
+        [HideInInspector] _CameraFadingEnabled ("__camerafadingenabled", Float) = 0.0
+        [HideInInspector] _SoftParticleFadeParams ("__softparticlefadeparams", Vector) = (0,0,0,0)
+        [HideInInspector] _CameraFadeParams ("__camerafadeparams", Vector) = (0,0,0,0)
+        [HideInInspector] _ColorAddSubDiff ("__coloraddsubdiff", Vector) = (0,0,0,0)
+        [HideInInspector] _DistortionStrengthScaled ("__distortionstrengthscaled", Float) = 0.0
+    }
+
+    Category
+    {
+        SubShader
+        {
+            Tags { 
+				"RenderType"="Opaque" 
+				"IgnoreProjector"="True" 
+				"PreviewType"="Plane" 
+				"PerformanceChecks"="False"
+			}
+
+            BlendOp [_BlendOp]
+            Blend [_SrcBlend] [_DstBlend]
+            ZWrite [_ZWrite]
+			ZTest Always
+            Cull [_Cull]
+            ColorMask RGB
+
+            GrabPass
+            {
+                Tags { "LightMode" = "Always" }
+                "_GrabTexture"
+            }
+
+            Pass
+            {
+                Name "ShadowCaster"
+                Tags { "LightMode" = "ShadowCaster" }
+
+                BlendOp Add
+                Blend One Zero
+                ZWrite On
+                Cull Off
+
+                CGPROGRAM
+                #pragma target 2.5
+
+                #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON _ALPHAMODULATE_ON
+                #pragma shader_feature _ _COLOROVERLAY_ON _COLORCOLOR_ON _COLORADDSUBDIFF_ON
+                #pragma shader_feature _REQUIRE_UV2
+                #pragma multi_compile_shadowcaster
+                #pragma multi_compile_instancing
+                #pragma instancing_options procedural:vertInstancingSetup
+
+                #pragma vertex vertParticleShadowCaster
+                #pragma fragment fragParticleShadowCaster
+
+                #include "UnityStandardParticleShadow.cginc"
+                ENDCG
+            }
+
+            Pass
+            {
+                Name "SceneSelectionPass"
+                Tags { "LightMode" = "SceneSelectionPass" }
+
+                BlendOp Add
+                Blend One Zero
+                ZWrite On
+                Cull Off
+
+                CGPROGRAM
+                #pragma target 2.5
+
+                #pragma shader_feature _ _ALPHATEST_ON
+                #pragma shader_feature _REQUIRE_UV2
+                #pragma multi_compile_instancing
+                #pragma instancing_options procedural:vertInstancingSetup
+
+                #pragma vertex vertEditorPass
+                #pragma fragment fragSceneHighlightPass
+
+                #include "UnityStandardParticleEditor.cginc"
+                ENDCG
+            }
+
+            Pass
+            {
+                Name "ScenePickingPass"
+                Tags{ "LightMode" = "Picking" }
+
+                BlendOp Add
+                Blend One Zero
+                ZWrite On
+                Cull Off
+
+                CGPROGRAM
+                #pragma target 2.5
+
+                #pragma shader_feature _ _ALPHATEST_ON
+                #pragma shader_feature _REQUIRE_UV2
+                #pragma multi_compile_instancing
+                #pragma instancing_options procedural:vertInstancingSetup
+
+                #pragma vertex vertEditorPass
+                #pragma fragment fragScenePickingPass
+
+                #include "UnityStandardParticleEditor.cginc"
+                ENDCG
+            }
+
+            Pass
+            {
+                Tags { "LightMode"="ForwardBase" }
+
+                CGPROGRAM
+                #pragma multi_compile __ SOFTPARTICLES_ON
+                #pragma multi_compile_fog
+                #pragma target 2.5
+
+                #pragma shader_feature _ _ALPHATEST_ON _ALPHABLEND_ON _ALPHAPREMULTIPLY_ON _ALPHAMODULATE_ON
+                #pragma shader_feature _ _COLOROVERLAY_ON _COLORCOLOR_ON _COLORADDSUBDIFF_ON
+                #pragma shader_feature _NORMALMAP
+                #pragma shader_feature _EMISSION
+                #pragma shader_feature _FADING_ON
+                #pragma shader_feature _REQUIRE_UV2
+                #pragma shader_feature EFFECT_BUMP
+
+                #pragma vertex vertParticleUnlit
+                #pragma fragment fragParticleUnlit
+                #pragma multi_compile_instancing
+                #pragma instancing_options procedural:vertInstancingSetup
+
+                #include "UnityStandardParticles.cginc"
+                ENDCG
+            }
+        }
+    }
+
+    Fallback "VertexLit"
+    CustomEditor "StandardParticlesShaderGUI"
+}
+
+
+================================================================================
+FILE 497/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_PowerupRechargeCircle.shader
+================================================================================
+
+﻿Shader "Tanknarok/PowerupRechargeCircle" {
+	Properties{
+		_Color("Color", Color) = (0,0.710345,1,1)
+		_Recharge("Recharge", Range(0, 1)) = 0
+		_EmissionMultiplier("EmissionMultiplier", Float) = 1
+		_Thickness_Outer("Thickness_Outer", Range(0, 1)) = 0
+		_Thickness_Inner("Thickness_Inner", Range(0, 1)) = 0
+		[HideInInspector]_Cutoff("Alpha cutoff", Range(0,1)) = 0.5
+		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
+		_Stencil("Stencil ID", Float) = 0
+		_StencilReadMask("Stencil Read Mask", Float) = 255
+		_StencilWriteMask("Stencil Write Mask", Float) = 255
+		_StencilComp("Stencil Comparison", Float) = 8
+		_StencilOp("Stencil Operation", Float) = 0
+		_StencilOpFail("Stencil Fail Operation", Float) = 0
+		_StencilOpZFail("Stencil Z-Fail Operation", Float) = 0
+	}
+
+	SubShader{
+		Tags {
+			"Queue" = "AlphaTest"
+			"RenderType" = "TransparentCutout"
+			"CanUseSpriteAtlas" = "True"
+			"PreviewType" = "Plane"
+		}
+		Pass {
+			Name "FORWARD"
+			Tags {
+				"LightMode" = "ForwardBase"
+			}
+			Blend One OneMinusSrcAlpha
+			Cull Off
+
+
+			Stencil {
+				Ref[_Stencil]
+				ReadMask[_StencilReadMask]
+				WriteMask[_StencilWriteMask]
+				Comp[_StencilComp]
+				Pass[_StencilOp]
+				Fail[_StencilOpFail]
+				ZFail[_StencilOpZFail]
+			}
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#pragma multi_compile _ PIXELSNAP_ON
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase_fullshadows
+//			#pragma only_renderers d3d9 d3d11 glcore gles 
+			#pragma target 3.0
+			uniform float4 _Color;
+			uniform float _Recharge;
+			uniform float _EmissionMultiplier;
+			uniform float _Thickness_Outer;
+			uniform float _Thickness_Inner;
+			struct VertexInput {
+				float4 vertex : POSITION;
+				float2 texcoord0 : TEXCOORD0;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+				float2 uv0 : TEXCOORD0;
+			};
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.uv0 = v.texcoord0;
+				o.pos = UnityObjectToClipPos(v.vertex);
+				#ifdef PIXELSNAP_ON
+					o.pos = UnityPixelSnap(o.pos);
+				#endif
+				return o;
+			}
+			float4 frag(VertexOutput i, float facing : VFACE) : COLOR {
+				float isFrontFace = (facing >= 0 ? 1 : 0);
+				float faceSign = (facing >= 0 ? 1 : -1);
+				float2 node_1792 = (i.uv0*2.0 + -1.0);
+				float2 node_7025 = node_1792.rg;
+				float node_7802 = length(node_1792);
+				clip(((1.0 - ceil((((atan2(node_7025.g,node_7025.r) / 6.28318530718) + 0.5) - _Recharge)))*floor((_Thickness_Inner + node_7802))*(1.0 - floor((node_7802 + _Thickness_Outer)))) - 0.5);
+
+				float3 emissive = (_EmissionMultiplier*_Color.rgb);
+				float3 finalColor = emissive;
+				return fixed4(finalColor,1);
+			}
+			ENDCG
+		}
+		Pass {
+			Name "ShadowCaster"
+			Tags {
+				"LightMode" = "ShadowCaster"
+			}
+			Offset 1, 1
+			Cull Off
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			#define UNITY_PASS_SHADOWCASTER
+			#pragma multi_compile _ PIXELSNAP_ON
+			#include "UnityCG.cginc"
+			#include "Lighting.cginc"
+			#pragma fragmentoption ARB_precision_hint_fastest
+			#pragma multi_compile_shadowcaster
+			//#pragma only_renderers d3d9 d3d11 glcore gles 
+			#pragma target 3.0
+			uniform float _Recharge;
+			uniform float _Thickness_Outer;
+			uniform float _Thickness_Inner;
+			struct VertexInput {
+				float4 vertex : POSITION;
+				float2 texcoord0 : TEXCOORD0;
+			};
+			struct VertexOutput {
+				V2F_SHADOW_CASTER;
+				float2 uv0 : TEXCOORD1;
+			};
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.uv0 = v.texcoord0;
+				o.pos = UnityObjectToClipPos(v.vertex);
+				#ifdef PIXELSNAP_ON
+					o.pos = UnityPixelSnap(o.pos);
+				#endif
+				TRANSFER_SHADOW_CASTER(o)
+				return o;
+			}
+			float4 frag(VertexOutput i, float facing : VFACE) : COLOR {
+				float isFrontFace = (facing >= 0 ? 1 : 0);
+				float faceSign = (facing >= 0 ? 1 : -1);
+				float2 node_1792 = (i.uv0*2.0 + -1.0);
+				float2 node_7025 = node_1792.rg;
+				float node_7802 = length(node_1792);
+				clip(((1.0 - ceil((((atan2(node_7025.g,node_7025.r) / 6.28318530718) + 0.5) - _Recharge)))*floor((_Thickness_Inner + node_7802))*(1.0 - floor((node_7802 + _Thickness_Outer)))) - 0.5);
+				SHADOW_CASTER_FRAGMENT(i)
+			}
+			ENDCG
+		}
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 498/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_PulsatingGlow.shader
+================================================================================
+
+﻿Shader "Tanknarok/PulseGlow"
+{
+	Properties{
+		_Color1("Color1", Color) = (1,1,1,1)
+		_Color2("Color2", Color) = (0,0,0,1)
+		_PulseSpeed("Pulse Speed", Float) = 1
+		_GlowStrength("Glow Strength", Float) = 1
+		_Delay("Pulse Delay", Range(0, 1)) = 0
+	}
+	SubShader{
+		Tags {
+			"RenderType" = "Opaque"
+		}
+		LOD 200
+		Pass {
+			Name "FORWARD"
+			Tags {
+				"LightMode" = "ForwardBase"
+			}
+
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+
+			#include "UnityCG.cginc"
+			#pragma multi_compile_fwdbase_fullshadows
+			//#pragma only_renderers d3d9 d3d11 glcore gles 
+			#pragma target 3.0
+
+			float4 _Color1;
+			float4 _Color2;
+			float _GlowStrength;
+			float _PulseSpeed;
+			float _Delay;
+
+			struct VertexInput {
+				float4 vertex : POSITION;
+			};
+			struct VertexOutput {
+				float4 pos : SV_POSITION;
+			};
+
+			VertexOutput vert(VertexInput v) {
+				VertexOutput o = (VertexOutput)0;
+				o.pos = UnityObjectToClipPos(v.vertex);
+				UNITY_TRANSFER_FOG(o,o.pos);
+				return o;
+			}
+			float4 frag(VertexOutput i) : COLOR {
+				float s = sin((_PulseSpeed * _Time.y) + (_Delay * 3.14)) * 0.5 + 0.5;
+				float3 emissive = (lerp(_Color1.rgb, _Color2.rgb, s) * _GlowStrength);
+
+				fixed4 col = fixed4(emissive, 1);
+				return col;
+			}
+			ENDCG
+		}
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 499/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_Standard.shader
+================================================================================
+
+Shader "Tanknarok/Standard" {
+	Properties{
+        [Header(Main texture)]
+		[NoScaleOffset] _MainTex("Albedo (RGB)", 2D) = "black" {}
+		_MainColor("Main Color (if no texture)", Color) = (0,0,0,0)
+	    _Smoothness("Smoothness", Range(0,1)) = 0
+		
+		[Space]
+		[Header(Variant offset)]
+		[IntRange] _NumVariants("NumVariants", Range(1,16)) = 1
+		_Variant("Variant", float) = 0
+        
+        [Space]
+        [Header(Worldspace Gradient)]
+		_WSOuterColor("Outer Color   (Transparent disables)", Color) = (0,0,0,0)
+		_WSVerticalColor("Vertical Color   (Transparent disables)", Color) = (0,0,0,0)
+		_WSVerticalThreshold("Vertical Threshold", Range(0,10)) = 10
+		[HideInInspector] _WSMapWidth("MapWidth", Float) = 26.35	// defult tanknarok mapwidth
+		[HideInInspector] _WSMapHeight("MapHeight", Float) = 17.7	// defult tanknarok mapheight
+		_WSInnerFudge("Inner Fudge", Range(0, 2)) = 0.8
+		_WSOuterFudge("Outer Fudge", Range(0, 2)) = 1.2
+		
+	//	[Space]
+	//	[Header(Fresnel)]  // fresnel was used by ice crystals at one point, but was later replaced with just smoothness
+	//	_RimColor("RimColor", Color) = (0,0,0,0)
+	//	_RimAngle("RimAngle", Range(0.0, 10.0)) = 3.0
+		
+	//	[Space]
+	//	[Header(Sparkles)]
+	//	[NoScaleOffset] _SparkleTex("Sparkle Texture", 2D) = "black" {}
+	//	[HideInInspector] _SparkleScale("Sparkle Scale", float) = 0.5
+	//	_SparkleStrength("Sparkle Strength", Range(0, 20)) = 1
+		
+		[Space]
+		[Header(Splatmap)]
+        //_SplatOpacity("Splatmap Opacity", Range(0, 1)) = 1  // I get an error if this comes after the splat texture??? 
+        [NoScaleOffset] _SplatTexture ("Splatmap Texture   (None disables)", 2D) = "black" {}
+        [HideInInspector] _SplatTextureScale ("Splatmap Scale", Float) = 60  // needs to match the size of the plane that catches splat hit raycasts
+	}
+
+	SubShader{
+		Tags {
+			"RenderType" = "Opaque"
+		}
+		LOD 200
+
+		CGPROGRAM
+		// Physically based Standard lighting model, and enable shadows on all light types
+		#pragma surface surf Standard fullforwardshadows
+
+		// Use shader model 3.0 target, to get nicer looking lighting
+		#pragma target 3.0
+
+		sampler2D _MainTex;
+		float4 _MainColor;
+		float _Smoothness;
+
+		struct Input {
+			float2 uv_MainTex;  // altering this will ruin the offset/tiling on the image; you cant have variables start with uv_, you big dumb sack of literal garbage
+			float3 worldPos;
+			float3 worldNormal;
+			float3 viewDir;
+		};
+
+		float _NumVariants;
+
+		float4 _WSOuterColor;
+		float4 _WSVerticalColor;
+		float _WSVerticalThreshold;
+		float _WSMapWidth;
+		float _WSMapHeight;
+		float _WSInnerFudge;
+		float _WSOuterFudge;
+		
+	//	float4 _RimColor;
+	//	float _RimAngle;
+		
+	//	sampler2D _SparkleTex;
+	//	float _SparkleScale;
+	//	float _SparkleStrength;
+	//	
+        sampler2D _SplatTexture;
+        //float _SplatOpacity;
+        float _SplatTextureScale;
+
+		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+		// #pragma instancing_options assumeuniformscaling
+		UNITY_INSTANCING_BUFFER_START(Props)
+			UNITY_DEFINE_INSTANCED_PROP(float, _Variant)
+		UNITY_INSTANCING_BUFFER_END(Props)
+
+		void surf(Input IN, inout SurfaceOutputStandard o) {
+			o.Metallic = 0;
+			o.Smoothness = _Smoothness;
+			o.Alpha = 1;
+            _WSVerticalThreshold = max(_WSVerticalThreshold, 0);
+
+            // variant offset
+			int nv = floor(_NumVariants);
+			int v = floor(abs(UNITY_ACCESS_INSTANCED_PROP(Props, _Variant)));
+
+			float2 xy = IN.uv_MainTex.xy;
+			xy.x += fmod(v, nv) * (1.0 / nv);
+
+			fixed3 col = tex2D(_MainTex, xy).rgb + _MainColor.rgb;
+
+			// worldspacegradient
+            float distance = abs((IN.worldPos.x*IN.worldPos.x) / (_WSMapWidth*_WSMapWidth)) + abs((IN.worldPos.z*IN.worldPos.z) / (_WSMapHeight*_WSMapHeight));
+            col = lerp(col, _WSVerticalColor.rgb, smoothstep(0, _WSVerticalThreshold, (IN.worldPos.y * _WSVerticalColor.a)));  // vertical color  (transparent disables)
+            col = lerp(col, _WSOuterColor.rgb, smoothstep(_WSInnerFudge, _WSOuterFudge, (distance * _WSOuterColor.a)));     // inside or outside color  (transparent disables)
+
+    //      // fresnel
+	//		float fresnel = dot(IN.worldNormal, IN.viewDir); //get the dot product between the normal and the view direction
+	//		fresnel = saturate(1 - fresnel); //invert the fresnel so the big values are on the outside
+	//		fresnel = pow(fresnel, _RimAngle); //raise the fresnel value to the exponents power to be able to adjust it
+	//		float3 fresnelColor = fresnel * _RimColor.rgb;
+	//		col = col + fresnelColor;
+			
+	//		// sparkles
+	//		float3 viewDir = normalize(IN.worldPos.xyz - _WorldSpaceCameraPos.xyz);
+	//		float sparkle = tex2D(_SparkleTex, (IN.worldPos.xz * _SparkleScale) + viewDir.xz).r * tex2D(_SparkleTex, (IN.worldPos.xz * _SparkleScale) - viewDir.xz).g;
+	//		col = col +  (sparkle * _SparkleStrength);
+			
+            // splatmap
+            float2 splatPosition = (IN.worldPos.xz * -1) + (_SplatTextureScale * 0.5);
+            float4 splatColor = tex2D(_SplatTexture, (splatPosition / _SplatTextureScale));
+            splatColor = lerp(splatColor, float4(0,0,0,0), smoothstep(0, 1, IN.worldPos.y - 3));  // quickfix: fade out the splat colors above a certain y-height. Quick and dirty; might want to parameterize those magic numbers there.
+            col = lerp(col, splatColor.rgb, splatColor.a);
+			
+            o.Albedo = col;
+
+		}
+		ENDCG
+	}
+	FallBack "Diffuse"
+}
+
+
+================================================================================
+FILE 500/682: Assets/_GameModules/TankFusionModule/GameAssets/Shaders/ragnarok/Tanknarok_Stripes.shader
+================================================================================
+
+﻿Shader "Tanknarok/Stripes" {
+	Properties {
+		_MainTex("Albedo (RGB)", 2D) = "black" {}
+		[PerRendererData] _Offset("Offset", Float) = 0
+	}
+	SubShader {
+		Tags { 
+			"RenderType"="Opaque"
+		}
+		LOD 200
+
+		CGPROGRAM
+		// Physically based Standard lighting model, and enable shadows on all light types
+		#pragma surface surf Standard fullforwardshadows
+
+		// Use shader model 3.0 target, to get nicer looking lighting
+		#pragma target 3.0
+
+		struct Input {
+			float2 uv_MainTex;
+		};
+
+		sampler2D _MainTex;
+
+		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+		// #pragma instancing_options assumeuniformscaling
+		UNITY_INSTANCING_BUFFER_START(Props)
+		    UNITY_DEFINE_INSTANCED_PROP(float, _Offset)
+		UNITY_INSTANCING_BUFFER_END(Props)
+
+		void surf (Input IN, inout SurfaceOutputStandard o) {
+			o.Metallic = 0;
+			o.Smoothness = 0;
+
+			float2 xy = (IN.uv_MainTex + (UNITY_ACCESS_INSTANCED_PROP(Props, _Offset) * float2(0, 1)));
+            fixed3 col = tex2D(_MainTex, xy).rgb;
+
+			o.Albedo = col;
+		}
+		ENDCG
+	}
+	FallBack "Diffuse"
+}

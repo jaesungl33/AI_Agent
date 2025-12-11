@@ -1,0 +1,5447 @@
+# Code Snapshot for tank_online_1-dev - Batch 13/14
+Source: /Users/madeinheaven/Documents/GitHub/AI_Agent/tank_online_1-dev
+Generated: 2025-11-28T04:22:56.241493+00:00
+Files in this batch: 50
+Total files: 682
+
+Each section below represents a file from the source tree.
+Lines are captured verbatim to help semantic retrieval.
+
+================================================================================
+
+
+================================================================================
+FILE 601/682: Assets/_GameModules/TankFusionModule/Scripts/UI/FinalGameScoreUI.cs
+================================================================================
+
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+using TMPro;
+
+namespace Fusion.TankOnlineModule
+{
+	public class FinalGameScoreUI : MonoBehaviour
+	{
+		[SerializeField] private SpriteRenderer _crown;
+		[SerializeField] private TextMeshPro _score;
+		[SerializeField] private TextMeshPro _playerName;
+
+		public void SetPlayerName(Player player)
+		{
+			_playerName.text = $"{player.PlayerName}";
+
+			_score.color = Color.red;
+			_playerName.color = Color.red;
+		}
+
+		public void SetScore(int newScore)
+		{
+			_score.text = newScore.ToString();
+		}
+
+		public void ToggleCrown(bool on)
+		{
+			_crown.enabled = on;
+		}
+	}
+}
+
+
+================================================================================
+FILE 602/682: Assets/_GameModules/TankFusionModule/Scripts/UI/IntermediateLevelScoreUI.cs
+================================================================================
+
+using System.Collections;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+using TMPro;
+
+namespace Fusion.TankOnlineModule
+{
+	public class IntermediateLevelScoreUI : MonoBehaviour
+	{
+		[SerializeField] private TextMeshProUGUI _score;
+		[SerializeField] private GDO.Audio.AudioEmitter _audioEmitter;
+
+		private bool _active;
+
+		public void Initialize(Player player)
+		{
+			Color scoreColor = player.PlayerMaterial.GetColor("_SilhouetteColor");
+			_score.color = scoreColor;
+		}
+
+		public void SetScore(int score, bool animate)
+		{
+			_score.enabled = true;
+
+			if(animate)
+				StartCoroutine(IncreaseScoreSequence(score,1f));
+			else
+				_score.text = score.ToString();
+		}
+
+		private IEnumerator IncreaseScoreSequence(int score,float switchDelay)
+		{
+			_active = true;
+			_score.text = (score - 1).ToString();
+
+			yield return new WaitForSeconds(switchDelay);
+
+			_score.text = score.ToString();
+			_score.transform.localScale = Vector3.one * 2f;
+
+			_audioEmitter.PlayOneShot();
+
+			yield return new WaitForSeconds(1f);
+
+			_active = false;
+		}
+
+		private void Update()
+		{
+			if (!_active)
+				return;
+
+			_score.transform.localScale = Vector3.Lerp(_score.transform.localScale, Vector3.one, Time.deltaTime * 3f);
+		}
+	}
+}
+
+
+================================================================================
+FILE 603/682: Assets/_GameModules/TankFusionModule/Scripts/UI/Panel.cs
+================================================================================
+
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Fusion.Utility;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Fusion.UIHelpers
+{
+	public class Panel : MonoBehaviour
+	{
+		public enum HideLocation
+		{
+			SAME_POSITION,
+			LEFT_EDGE,
+			RIGHT_EDGE,
+			UPPER_EDGE,
+			LOWER_EDGE,
+			SPECIFIED_RECT,
+			SPECIFIED_POS
+		}
+
+		[Tooltip("Easing method used when showing panel")]
+		public Tween.EaseType _showEase = Tween.EaseType.easeOutExpo;
+
+		[Tooltip("Easing method used when hiding panel")]
+		public Tween.EaseType _hideEase = Tween.EaseType.easeOutExpo;
+
+		[Tooltip("Easing time (secs)")] public float _easeTime = .5f;
+
+		[Tooltip("Abstract location to move panel to when hiding")]
+		public HideLocation _hideAt = HideLocation.SAME_POSITION;
+
+		[Tooltip("Hide panel initially")] public bool _hideInitially = true;
+		[Tooltip("Disable when hidden")] public bool _disableWhenHidden = true;
+
+		[Tooltip("Target rect when hiding to 'specified rect'")]
+		public RectTransform _hideRect;
+
+		[Tooltip("Specific location to move panel to when hiding (If SPECIFIED_POS)")]
+		public Vector2 _hiddenPos;
+
+		[Tooltip("Scale to apply when hidden")]
+		public Vector3 _hideScale = Vector3.one;
+
+		[Tooltip("Alpha to apply to child Graphics when hidden")]
+		public float _hideAlpha = 1.0f;
+
+		[Tooltip("Position to use when showing panel (updates automatically)")]
+		public Vector2 _shownPos;
+
+		[Tooltip("Scale to use when showing panel (updates automatically)")]
+		public Vector3 _shownScale = Vector3.one;
+
+		[Tooltip("Alpha to apply to child Graphics when shown")]
+		public float _showAlpha = 1.0f;
+
+		[Tooltip("True if panel should remember current child-alphas before hiding")]
+		public bool _rememberAlphas;
+
+		[Tooltip("True if panel should remember current position before hiding")]
+		public bool _rememberPosition;
+
+		private Vector2 _shownSize;
+
+		private bool _isShowing;
+		private Coroutine _coroutine;
+
+		public bool isShowing
+		{
+			get { return _isShowing; }
+		}
+
+		public Vector2 shownPos
+		{
+			get { return _shownPos; }
+			set { _shownPos = value; }
+		}
+
+		private Dictionary<Graphic, float> _orgAlphas;
+		private bool _captured;
+
+		protected void Awake()
+		{
+			_isShowing = true;
+			if (_hideInitially)
+			{
+				CaptureRect();
+				((RectTransform) transform).anchoredPosition = hiddenPos;
+				((RectTransform) transform).localScale = _hideScale;
+				if (_disableWhenHidden)
+					gameObject.SetActive(false);
+				_isShowing = false;
+			}
+		}
+
+		private void CaptureRect()
+		{
+			if (!_captured)
+			{
+				_shownPos = ((RectTransform) transform).anchoredPosition;
+				_shownScale = transform.localScale;
+				_captured = true;
+			}
+		}
+
+		public virtual Vector2 hiddenSize
+		{
+			get
+			{
+				if (_hideAt == HideLocation.SPECIFIED_RECT)
+					return _hideRect.rect.size;
+				return _shownSize;
+			}
+		}
+
+		public virtual Vector2 hiddenPos
+		{
+			get
+			{
+				if (transform.parent == null || !(transform.parent is RectTransform))
+					return _shownPos;
+
+				RectTransform rt = (RectTransform) transform;
+				RectTransform prt = (RectTransform) transform.parent;
+
+				Vector2 hidden = _shownPos;
+
+				switch (_hideAt)
+				{
+					case HideLocation.SAME_POSITION:
+						break;
+					case HideLocation.LOWER_EDGE:
+						hidden.y = prt.rect.height * (rt.anchorMin.y * (rt.pivot.y - 1.0f) - rt.anchorMax.y * rt.pivot.y) + (rt.pivot.y - 1.0f) * _hideScale.y * rt.rect.height;
+						break;
+					case HideLocation.UPPER_EDGE:
+						hidden.y = prt.rect.height * (1 + rt.anchorMin.y * (rt.pivot.y - 1.0f) - rt.anchorMax.y * rt.pivot.y) + (rt.pivot.y) * _hideScale.y * rt.rect.height;
+						break;
+					case HideLocation.LEFT_EDGE:
+						hidden.x = prt.rect.width * (rt.anchorMin.x * (rt.pivot.x - 1.0f) - rt.anchorMax.x * rt.pivot.x) + (rt.pivot.x - 1.0f) * _hideScale.x * rt.rect.width;
+						break;
+					case HideLocation.RIGHT_EDGE:
+						hidden.x = prt.rect.width * (1 + rt.anchorMin.x * (rt.pivot.x - 1.0f) - rt.anchorMax.x * rt.pivot.x) + (rt.pivot.x) * _hideScale.x * rt.rect.width;
+						break;
+					case HideLocation.SPECIFIED_RECT:
+						hidden = MapAnchoredPosition(_hideRect, (RectTransform) transform);
+						break;
+					case HideLocation.SPECIFIED_POS:
+						hidden = _hiddenPos;
+						break;
+				}
+
+				return hidden;
+			}
+		}
+
+		private Vector2 MapAnchoredPosition(RectTransform from, RectTransform to)
+		{
+			float wto = ((RectTransform) from.parent).rect.width;
+			float hto = ((RectTransform) from.parent).rect.height;
+			Vector2 vto = from.anchoredPosition;
+			Vector2 cto = new Vector2((from.anchorMin.x + from.anchorMax.x) * wto / 2, (from.anchorMin.y + from.anchorMax.y) * hto / 2);
+
+			float wfrom = ((RectTransform) to.parent).rect.width;
+			float hfrom = ((RectTransform) to.parent).rect.height;
+			Vector2 cfrom = new Vector2((to.anchorMin.x + to.anchorMax.x) * wfrom / 2, (to.anchorMin.y + to.anchorMax.y) * hfrom / 2);
+
+			Debug.Log("Center To " + cto + " Center From " + cfrom + " to " + vto);
+
+			return cto + vto - cfrom;
+		}
+
+		public void SetVisible(bool v, bool immediately = false, Action then = null)
+		{
+			if (_shownSize.x == 0 || _shownSize.y == 0)
+				_shownSize = ((RectTransform) transform).rect.size;
+			if (v == isShowing)
+				return;
+			if (_coroutine != null)
+			{
+				StopCoroutine(_coroutine);
+				_coroutine = null;
+			}
+
+			if (v)
+				Show(immediately, then);
+			else
+				Hide(immediately, then);
+		}
+
+		private void Hide(bool immediately = false, Action then = null)
+		{
+			_isShowing = false;
+			if (onHide != null)
+				onHide(this);
+			WillHide();
+			CaptureRect();
+			if (_rememberPosition)
+				_shownPos = ((RectTransform) transform).anchoredPosition;
+			if (_hideAlpha < 1.0f && (_rememberAlphas || _orgAlphas == null))
+				RememberAlphas();
+
+			Action onHidden = () =>
+			{
+				DidHide();
+				if (onDidHide != null)
+					onDidHide(this);
+				if (_disableWhenHidden)
+					gameObject.SetActive(false);
+				if (then != null)
+					then();
+			};
+
+			if (gameObject.activeInHierarchy)
+				_coroutine = StartCoroutine(AnimateRect(immediately, _shownPos, hiddenPos, _shownScale, _hideScale, _shownSize, hiddenSize, _showAlpha, _hideAlpha, Tween.GetEasingFunction(_hideEase),
+					onHidden));
+			else
+				AnimateRect(true, _shownPos, hiddenPos, _shownScale, _hideScale, _shownSize, hiddenSize, _showAlpha, _hideAlpha, Tween.GetEasingFunction(_hideEase), onHidden);
+		}
+
+		private void RememberAlphas()
+		{
+			_orgAlphas = new Dictionary<Graphic, float>();
+			foreach (Graphic graphic in GetComponentsInChildren<Graphic>(true))
+			{
+				_orgAlphas[graphic] = graphic.color.a;
+			}
+		}
+
+		private void Show(bool immediately = false, Action then = null)
+		{
+			if (_hideInitially)
+			{
+				((RectTransform) transform).anchoredPosition = hiddenPos;
+				((RectTransform) transform).localScale = _hideScale;
+				_hideInitially = false; // Prevent immediately hiding it again if this is the first time we show it!
+			}
+
+			if (transform.parent != null && !transform.parent.gameObject.activeInHierarchy)
+			{
+				Debug.Log("Can't show " + this + " because parent is disabled");
+				return;
+			}
+
+			gameObject.SetActive(true);
+			if (_hideAlpha < 1.0f && _orgAlphas == null)
+				RememberAlphas();
+			_coroutine = StartCoroutine(AnimateRect(immediately, hiddenPos, _shownPos, _hideScale, _shownScale, hiddenSize, _shownSize, _hideAlpha, _showAlpha, Tween.GetEasingFunction(_showEase), () =>
+			{
+				DidShow();
+				if (onDidShow != null)
+					onDidShow(this);
+				if (then != null)
+					then();
+			}));
+			_isShowing = true;
+			if (onShow != null)
+				onShow(this);
+			WillShow();
+		}
+
+		public event Action<Panel> onHide;
+		public event Action<Panel> onShow;
+		public event Action<Panel> onDidHide;
+		public event Action<Panel> onDidShow;
+
+		public virtual void WillShow()
+		{
+		}
+
+		public virtual void DidShow()
+		{
+		}
+
+		public virtual void WillHide()
+		{
+		}
+
+		public virtual void DidHide()
+		{
+		}
+
+		protected IEnumerator AnimateRect(bool immediately, Vector2 from_position, Vector2 to_position, Vector2 from_scale, Vector2 to_scale, Vector2 from_size, Vector2 to_size, float from_alpha,
+			float to_alpha, Tween.EasingFunction func, Action whenDone)
+		{
+			if (_isShowing)
+			{
+				from_position = ((RectTransform) transform).anchoredPosition;
+				from_scale = ((RectTransform) transform).localScale;
+				from_size = ((RectTransform) transform).rect.size;
+				from_alpha = 1.0f;
+			}
+
+			Graphic[] gfx = null;
+			float[] fromAlphas = null;
+			if (from_alpha != to_alpha) //  _alphas != null)
+			{
+				gfx = GetComponentsInChildren<Graphic>(false);
+				fromAlphas = new float[gfx.Length];
+
+				if (from_alpha > 0)
+				{
+					for (int g = 0; g < gfx.Length; g++)
+					{
+						fromAlphas[g] = from_alpha * gfx[g].color.a;
+					}
+				}
+			}
+
+			for (float f = immediately ? 1 : 0; immediately || Step.Forward(ref f, Time.deltaTime / _easeTime);)
+			{
+				if (from_position != to_position)
+				{
+					float x = func(from_position.x, to_position.x, f);
+					float y = func(from_position.y, to_position.y, f);
+					((RectTransform) transform).anchoredPosition = new Vector2(x, y);
+				}
+
+				if (from_scale != to_scale)
+				{
+					float sx = func(from_scale.x, to_scale.x, f);
+					float sy = func(from_scale.y, to_scale.y, f);
+					((RectTransform) transform).localScale = new Vector3(sx, sy, 1);
+				}
+
+				if (_hideAt == HideLocation.SPECIFIED_RECT && from_size != to_size)
+				{
+					float w = func(from_size.x, to_size.x, f);
+					float h = func(from_size.y, to_size.y, f);
+					((RectTransform) transform).SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, w);
+					((RectTransform) transform).SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, h);
+				}
+
+				if (gfx != null) //  _alphas != null)
+				{
+					for (int g = 0; g < gfx.Length; g++)
+					{
+						if (gfx[g]) // Just in case someone destroyed this while we were animating it!
+						{
+							float alpha_org = 1.0f;
+							if (_orgAlphas != null)
+								_orgAlphas.TryGetValue(gfx[g], out alpha_org);
+							Color c = gfx[g].color;
+							c.a = func(fromAlphas[g], to_alpha * alpha_org, f);
+							gfx[g].color = c;
+						}
+					}
+				}
+
+				if (!immediately)
+					yield return new WaitForEndOfFrame();
+				immediately = false;
+			}
+
+			whenDone();
+		}
+	}
+}
+
+
+================================================================================
+FILE 604/682: Assets/_GameModules/TankFusionModule/Scripts/UI/ReadyupIndicator.cs
+================================================================================
+
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ReadyupIndicator : MonoBehaviour
+	{
+		[SerializeField] private Transform _parent;
+		[SerializeField] private TMPro.TextMeshProUGUI _readyText;
+
+		private Camera _camera;
+		private Transform _target;
+		private float _timer;
+		private int _direction = -1;
+		private int _previousState = -1;
+
+		public void Dirty()
+		{
+			_previousState = _direction;
+			_direction = -1;
+		}
+
+		public bool Refresh(Player followPlayer)
+		{
+			_camera = Camera.main;
+			//_direction = followPlayer.ready ? 1 : -1;
+			bool changed = _previousState != _direction;
+			_previousState = _direction;
+			_target = followPlayer.transform;
+			_readyText.color = followPlayer.PlayerMaterial.GetColor("_SilhouetteColor");
+			return changed;
+		}
+
+		// Follow the assigned transform and scale up or down depending on if the player is ready or not
+		private void LateUpdate()
+		{
+			UpdateTimer();
+			ScaleText();
+
+			if (_target == null)
+				return;
+
+			transform.position = _camera.WorldToScreenPoint(_target.position);
+		}
+
+		private void UpdateTimer()
+		{
+			_timer += Time.deltaTime * _direction;
+			_timer = Mathf.Clamp(_timer, 0, 0.1f);
+		}
+
+		private void ScaleText()
+		{
+			float t = _timer / 0.1f;
+			_parent.localScale = Vector3.one * t;
+		}
+	}
+}
+
+
+================================================================================
+FILE 605/682: Assets/_GameModules/TankFusionModule/Scripts/UI/TankPreview.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class TankPreview : MonoBehaviour
+{
+    [SerializeField] private Camera mCamera;
+    [SerializeField] private Transform mTankTransform;
+    [SerializeField] private TankPartVisual mTankPartVisual;
+    private float rotationSpeed = 60f;
+
+    private void Start()
+    {
+        mCamera = GetComponentInChildren<Camera>();
+        mTankTransform.AddComponent<MotorShake>();
+    }
+
+    public void SetRenderTexture(RenderTexture rt)
+    {
+        if (mCamera != null)
+        {
+            mCamera.targetTexture = rt;
+        }
+    }
+
+    // User can rotate the tank preview by dragging the mouse or finger
+    private Vector2 lastTouchPosition;
+    private bool isDragging = false;
+
+    private void Update()
+    {
+        // block interaction if pointer is over UI
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+        TouchRotate();
+    }
+
+    public void TouchRotate()
+    {
+        // Mouse rotation
+        if (Input.GetMouseButton(0))
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            mTankTransform.Rotate(Vector3.up, -mouseX * rotationSpeed * Time.deltaTime, Space.World);
+        }
+
+        // Touch rotation
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                lastTouchPosition = touch.position;
+                isDragging = true;
+            }
+            else if (touch.phase == TouchPhase.Moved && isDragging)
+            {
+                float deltaX = touch.position.x - lastTouchPosition.x;
+                mTankTransform.Rotate(Vector3.up, -deltaX * rotationSpeed * Time.deltaTime * 0.1f, Space.World);
+                lastTouchPosition = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                isDragging = false;
+            }
+        }
+    }
+    
+    public void ReloadWrap(int wrapId, string tankId = "")
+    {
+        if (mTankPartVisual)
+            mTankPartVisual.LoadWrap(wrapId, tankId);
+    }
+}
+
+
+================================================================================
+FILE 606/682: Assets/_GameModules/TankFusionModule/Scripts/UI/TankUI.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using System.Collections;
+using System;
+
+public class TankUI : MonoBehaviour
+{
+    [Header("HP References")]
+    [SerializeField] private Image realHPImg;      // HP hiện tại (màu đậm)
+    [SerializeField] private Image virtualHPImg;   // HP ảo (màu nhạt, delayed)
+    
+    [Header("UI References")]
+    [SerializeField] private Image[] stars;
+    [SerializeField] private Image avatarImg, panelBgImg, starsBgImg;
+    [SerializeField] private TMP_Text nameText, levelText, damageText, revivalText;
+    
+    [Header("Settings")]
+    [SerializeField] private float realHPAnimDuration = 0.15f;
+    [SerializeField] private float virtualHPDelay = 0.3f;
+    [SerializeField] private float virtualHPAnimDuration = 0.25f;
+    private Ease realHPEase = Ease.OutQuad;
+    private Ease virtualHPEase = Ease.OutCubic;
+    
+    [Header("Colors")]
+    [SerializeField] private Color[] teamColors;
+    [SerializeField] private Color[] panelBgColors;
+    [SerializeField] private Color[] starsBgColors;
+    
+    [Header("Components")]
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private DamageVisual damageVisual;
+    [SerializeField] private GameObject[] objectsToHideWhenDead;
+    [SerializeField] private HPLineComp hpLineComp;
+
+    private int playerLevel = 0;
+    private Sequence currentHPSequence; // Cache sequence để kill khi cần
+    private int lastLife = -1;
+    private int lastMaxLife = -1;
+
+    private void Awake()
+    {
+        ValidateComponents();
+        SetDefaultInfo();
+    }
+
+    private void OnDestroy()
+    {
+        // Cleanup DOTween sequences
+        KillHPSequence();
+    }
+
+    private void ValidateComponents()
+    {
+        if (realHPImg == null || virtualHPImg == null)
+        {
+            Debug.LogError("[TankUI] Real HP or Virtual HP Image is not assigned!");
+        }
+
+        if (canvas == null)
+        {
+            Debug.LogError("[TankUI] Canvas is not assigned!");
+        }
+    }
+
+    #region HP System
+
+    /// <summary>
+    /// Update HP with smooth animation
+    /// Real HP updates immediately, Virtual HP follows with delay
+    /// </summary>
+    public void ChangeHP(int life, int maxLife)
+    {
+        // Validate inputs
+        if (maxLife <= 0)
+        {
+            Debug.LogWarning("[TankUI] MaxLife must be greater than 0");
+            maxLife = 1;
+        }
+
+        life = Mathf.Clamp(life, 0, maxLife);
+
+        // Skip if no change
+        if (life == lastLife && maxLife == lastMaxLife)
+            return;
+
+        float targetFillAmount = (float)life / maxLife;
+        float currentRealHP = realHPImg.fillAmount;
+
+        // Determine if taking damage or healing
+        bool isTakingDamage = targetFillAmount < currentRealHP;
+
+        // Kill previous sequence to prevent conflicts
+        KillHPSequence();
+
+        // Create new sequence
+        currentHPSequence = DOTween.Sequence();
+
+        if (isTakingDamage)
+        {
+            // ===== TAKING DAMAGE =====
+            // Real HP drops immediately
+            // Virtual HP follows after delay
+            currentHPSequence
+                .Append(realHPImg.DOFillAmount(targetFillAmount, realHPAnimDuration).SetEase(realHPEase))
+                .AppendInterval(virtualHPDelay)
+                .Append(virtualHPImg.DOFillAmount(targetFillAmount, virtualHPAnimDuration).SetEase(virtualHPEase))
+                .OnComplete(() => OnHPAnimationComplete(life, maxLife));
+        }
+        else
+        {
+            // ===== HEALING =====
+            // Virtual HP rises immediately
+            // Real HP follows after delay
+            currentHPSequence
+                .Append(virtualHPImg.DOFillAmount(targetFillAmount, realHPAnimDuration).SetEase(realHPEase))
+                .AppendInterval(virtualHPDelay)
+                .Append(realHPImg.DOFillAmount(targetFillAmount, virtualHPAnimDuration).SetEase(virtualHPEase))
+                .OnComplete(() => OnHPAnimationComplete(life, maxLife));
+        }
+
+        currentHPSequence.Play();
+
+        // Update cache
+        lastLife = life;
+        lastMaxLife = maxLife;
+
+        Debug.Log($"[TankUI] HP changed: {life}/{maxLife} ({targetFillAmount:P0}) - {(isTakingDamage ? "Damage" : "Heal")}");
+    }
+
+    /// <summary>
+    /// Set HP immediately without animation (for initialization)
+    /// </summary>
+    public void SetHPImmediate(int life, int maxLife)
+    {
+        if (maxLife <= 0)
+        {
+            Debug.LogWarning("[TankUI] MaxLife must be greater than 0");
+            maxLife = 1;
+        }
+
+        life = Mathf.Clamp(life, 0, maxLife);
+        float fillAmount = (float)life / maxLife;
+
+        KillHPSequence();
+
+        realHPImg.fillAmount = fillAmount;
+        virtualHPImg.fillAmount = fillAmount;
+
+        lastLife = life;
+        lastMaxLife = maxLife;
+
+        Debug.Log($"[TankUI] HP set immediately: {life}/{maxLife} ({fillAmount:P0})");
+    }
+
+    /// <summary>
+    /// Kill current HP animation sequence
+    /// </summary>
+    private void KillHPSequence()
+    {
+        if (currentHPSequence != null && currentHPSequence.IsActive())
+        {
+            currentHPSequence.Kill();
+            currentHPSequence = null;
+        }
+    }
+
+    /// <summary>
+    /// Called when HP animation completes
+    /// </summary>
+    private void OnHPAnimationComplete(int life, int maxLife)
+    {
+        currentHPSequence = null;
+
+        // Handle death
+        if (life <= 0)
+        {
+            OnPlayerDeath();
+        }
+
+        Debug.Log($"[TankUI] HP animation completed: {life}/{maxLife}");
+    }
+
+    /// <summary>
+    /// Handle player death
+    /// </summary>
+    private void OnPlayerDeath()
+    {
+        Debug.Log("[TankUI] Player died");
+        EnableUI(false);
+    }
+
+    #endregion
+
+    #region UI Management
+
+    public void EnableUI(bool enable)
+    {
+        foreach (var obj in objectsToHideWhenDead)
+        {
+            if (obj != null)
+                obj.SetActive(enable);
+        }
+
+        if (enable)
+        {
+            ResetUI();
+        }
+    }
+
+    private void ResetUI()
+    {
+        UpdateKillStreak(0);
+        UpdateRevivalText(0);
+    }
+
+    public void UpdateRevivalText(int count)
+    {
+        if (revivalText != null)
+        {
+            revivalText.gameObject.SetActive(count > 0);
+            revivalText.text = count > 0 ? $"Respawn in: {count}" : "";
+        }
+    }
+
+    public void UpdateLevel()
+    {
+        playerLevel++;
+        if (levelText != null)
+            levelText.text = playerLevel.ToString();
+    }
+
+    public void UpdateKillStreak(int kill)
+    {
+        if (stars == null) return;
+
+        for (int i = 0; i < stars.Length; i++)
+        {
+            if (stars[i] != null)
+                stars[i].gameObject.SetActive(i < kill);
+        }
+    }
+
+    public void ShowTextDamage(int damage)
+    {
+        if (damage > 0 && damageVisual != null)
+        {
+            damageVisual.ShowText(damage.ToString(), Color.red);
+        }
+    }
+
+    internal void SetDefaultInfo()
+    {
+        if (canvas != null)
+            canvas.worldCamera = Camera.main;
+
+        if (levelText != null)
+            levelText.text = "0";
+
+        playerLevel = 0;
+
+        if (nameText != null)
+            nameText.text = "";
+
+        SetHPImmediate(100, 100); // Initialize with 100% HP
+    }
+
+    public void SetPlayerName(string playerName)
+    {
+        if (nameText != null)
+            nameText.text = playerName;
+    }
+
+    public void SetTeam(int teamIndex)
+    {
+        if (teamIndex < 0 || teamIndex >= teamColors.Length)
+        {
+            Debug.LogError($"[TankUI] Invalid team index: {teamIndex}");
+            return;
+        }
+
+        if (realHPImg != null)
+            realHPImg.color = teamColors[teamIndex];
+
+        if (panelBgImg != null)
+            panelBgImg.color = panelBgColors[teamIndex];
+
+        if (starsBgImg != null)
+            starsBgImg.color = starsBgColors[teamIndex];
+    }
+
+    public void SetLineDecorHP(int maxHp)
+    {
+        if (hpLineComp != null)
+        {
+            hpLineComp.SetByHP(maxHp);
+        }
+    }
+
+    #endregion
+
+    #region Debug
+
+    [ContextMenu("Test Take Damage")]
+    private void TestTakeDamage()
+    {
+        int currentHP = Mathf.RoundToInt(realHPImg.fillAmount * 100);
+        ChangeHP(Mathf.Max(0, currentHP - 20), 100);
+    }
+
+    [ContextMenu("Test Heal")]
+    private void TestHeal()
+    {
+        int currentHP = Mathf.RoundToInt(realHPImg.fillAmount * 100);
+        ChangeHP(Mathf.Min(100, currentHP + 20), 100);
+    }
+
+    [ContextMenu("Test Death")]
+    private void TestDeath()
+    {
+        ChangeHP(0, 100);
+    }
+
+    [ContextMenu("Test Full Heal")]
+    private void TestFullHeal()
+    {
+        ChangeHP(100, 100);
+    }
+
+    #endregion
+}
+
+
+================================================================================
+FILE 607/682: Assets/_GameModules/TankFusionModule/Scripts/Weapon.cs
+================================================================================
+
+using Fusion;
+using Fusion.Utility;
+using FusionHelpers;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	/// <summary>
+	/// The Weapon class controls how fast a weapon fires, which projectiles it uses
+	/// and the start position and direction of projectiles.
+	/// </summary>
+
+	public class Weapon : NetworkBehaviourWithState<Weapon.NetworkState>
+	{
+		[Networked] public override ref NetworkState State => ref MakeRef<NetworkState>();
+		public struct NetworkState : INetworkStruct
+		{
+			[Networked, Capacity(12)]
+			public NetworkArray<ShotState> bulletStates => default;
+		}
+		[SerializeField] private Transform[] _gunExits;
+		[SerializeField] private float _rateOfFire;
+		[SerializeField] private byte _ammo;
+		[SerializeField] private bool _infiniteAmmo;
+		[SerializeField] private LaserSightLine _laserSight;
+		[SerializeField] private PowerupType _powerupType = PowerupType.DEFAULT;
+		[SerializeField] private Shot _bulletPrefab;
+		[SerializeField] private string _bulletId;
+		private SparseCollection<ShotState, Shot> bullets;
+		private float _visible;
+		private bool _active;
+		private Collider[] _areaHits = new Collider[4];
+		private Player _player;
+
+		public float delay => _rateOfFire;
+		public bool isShowing => _visible >= 1.0f;
+		public byte ammo => _ammo;
+		public bool infiniteAmmo => _infiniteAmmo;
+
+		public PowerupType powerupType => _powerupType;
+
+		public void Initialize(Player player)
+		{
+			if (player == null)
+			{
+				Debug.LogError("Weapon Initialize failed: player is null");
+				return;
+			}
+			
+			_player = player;
+
+			_rateOfFire = 1/_player.PlayerData.FireRate;
+			_ammo = _player.PlayerData.ProjectileCount;
+			if (_bulletPrefab != null)
+				_bulletPrefab.OverrideData(_player.PlayerData);
+		}
+
+		public void UpdateFireRate()
+		{
+			_rateOfFire = 1/_player.PlayerData.FireRate;
+		}
+
+		public override void Spawned()
+		{
+			bullets = new SparseCollection<ShotState, Shot>(State.bulletStates, _bulletPrefab);
+		}
+
+#if UNITY_EDITOR
+		private void OnDrawGizmos()
+		{
+			// show the red line to virtual target with range of bulletPrefab
+			if (_bulletPrefab != null)
+			{
+				Vector3 targetPos = _gunExits[0].position + _gunExits[0].forward * _bulletPrefab.Range;
+				Gizmos.color = Color.red;
+				Gizmos.DrawLine(_gunExits[0].position, targetPos);
+				Vector3 dir = (targetPos - _gunExits[0].position).normalized;
+				float a = 0.5f * _bulletPrefab.Gravity.y;
+				float b = _bulletPrefab.Speed * dir.y;
+				float c = _gunExits[0].position.y;
+				float d = b * b - 4 * a * c;
+				if (d < 0)
+					return;
+				float t = (-b - Mathf.Sqrt(d)) / (2 * a);
+				Vector3 p = _gunExits[0].position + t * (_bulletPrefab.Speed * dir + 0.5f * t * _bulletPrefab.Gravity);
+				Gizmos.color = Color.red;
+				Gizmos.DrawLine(_gunExits[0].position, p);
+				//Debug.Log($"distance: {(targetPos - _gunExits[0].position).magnitude}, time: {t}, target: {targetPos}, predicted: {p}");
+			}
+		}
+#endif
+
+		public override void FixedUpdateNetwork()
+		{
+			bullets.Process(this, (ref ShotState bullet, int tick) =>
+			{
+				if (bullet.Position.y < -.15f)
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				}
+
+				if (bullet.IsOutOfRange(_bulletPrefab.Range))
+				{
+					bullet.EndTick = Runner.Tick;
+					return true;
+				}
+
+				if (!_bulletPrefab.IsHitScan && bullet.EndTick > Runner.Tick)
+				{
+					Vector3 dir = bullet.Direction.normalized;
+					float length = Mathf.Max(_bulletPrefab.Radius, _player.PlayerData.ProjectileSpeed * Runner.DeltaTime);
+					if (Physics.Raycast(bullet.Position - length * dir, dir, out var hitinfo, length, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore))
+					//if (Runner.LagCompensation.Raycast(bullet.Position - length*dir, dir, length, Object.InputAuthority, out var hitinfo, _bulletPrefab.HitMask.value, HitOptions.IgnoreInputAuthority | HitOptions.IncludePhysX))
+					{
+						bullet.IsCustomHited = true;
+						bullet.Position = hitinfo.point;
+						bullet.EndTick = Runner.Tick;
+						if (_bulletPrefab.ProjectileType == ProjectileType.Single)
+						{
+							if (hitinfo.collider.transform.root.TryGetComponent<Player>(out Player target))
+							{
+								ApplySingleDamage(target);
+							}
+							else if (hitinfo.collider.TryGetComponent<Turret>(out Turret turret))
+							{
+								ApplySingleDamage(turret);
+							}
+						}
+						else if (_bulletPrefab.ProjectileType == ProjectileType.AOE)
+							ApplyAreaDamage(hitinfo.point);
+						return true;
+					}
+				}
+				return false;
+			});
+		}
+
+		public override void Render()
+		{
+			if (TryGetStateChanges(out var from, out var to))
+				OnFireTickChanged();
+			else
+				TryGetStateSnapshots(out from, out _, out _, out _, out _);
+
+			bullets.Render(this, from.bulletStates );
+		}
+
+		/// <summary>
+		/// Control the visual appearance of the weapon. This is controlled by the Player based
+		/// on the currently selected weapon, so the boolean parameter is entirely derived from a
+		/// networked property (which is why nothing in this class is sync'ed).
+		/// </summary>
+		/// <param name="show">True if this weapon is currently active and should be visible</param>
+		public void Show(bool show)
+		{
+			if (_active && !show)
+			{
+				ToggleActive(false);
+			}
+			else if (!_active && show)
+			{
+				ToggleActive(true);
+			}
+
+			_visible = Mathf.Clamp(_visible + (show ? Time.deltaTime : -Time.deltaTime) * 5f, 0, 1);
+			gameObject.SetActive(show);
+		}
+
+		private void ToggleActive(bool value)
+		{
+			_active = value;
+
+			if (_laserSight != null)
+			{
+				if (_active)
+				{
+					_laserSight.SetDuration(0.5f);
+					_laserSight.Activate();
+				}
+				else
+					_laserSight.Deactivate();
+			}
+		}
+
+		public void Fire(NetworkRunner runner, PlayerRef owner, Vector3 ownerVelocity)
+		{
+			if (powerupType == PowerupType.EMPTY || _gunExits.Length == 0)
+				return;
+			
+			Transform exit = GetExitPoint(Runner.Tick);
+			
+			Debug.DrawLine(exit.position, exit.position+exit.forward, Color.blue, 1.0f);
+			SpawnNetworkShot(runner, owner, exit, ownerVelocity);
+		}
+
+		private void OnFireTickChanged()
+		{
+			// Recharge the laser sight if this weapon has it
+			if (_laserSight != null)
+				_laserSight.Recharge();
+		}
+
+		private void SpawnNetworkShot(NetworkRunner runner, PlayerRef owner, Transform exit, Vector3 ownerVelocity)
+		{
+			if(_bulletPrefab.ProjectileType == ProjectileType.Single)
+			{
+				bullets.Add(runner, new ShotState(_player.transform.position, exit.position, exit.forward), _bulletPrefab.TimeToLive);
+			}
+
+			// if (_bulletPrefab.IsHitScan)
+			// {
+			// 	bool impact;
+			// 	Vector3 hitPoint = exit.position + _bulletPrefab.Range * exit.forward;
+			// 	if (runner.GameMode == GameMode.Shared)
+			// 	{
+			// 		impact = runner.GetPhysicsScene().Raycast(exit.position, exit.forward, out var hitinfo, _bulletPrefab.Range, _bulletPrefab.HitMask.value);
+			// 		hitPoint = hitinfo.point;
+			// 	}
+			// 	else
+			// 	{
+			// 		impact = Runner.LagCompensation.Raycast(exit.position, exit.forward, _bulletPrefab.Range, Object.InputAuthority, out var hitinfo, _bulletPrefab.HitMask.value, HitOptions.IgnoreInputAuthority | HitOptions.IncludePhysX);
+			// 		hitPoint = hitinfo.Point;
+			// 	}
+
+			// 	if (impact)
+			// 	{
+			// 		ApplyAreaDamage(hitPoint);
+			// 	}
+
+			// 	bullets.Add( runner, new ShotState(exit.position, hitPoint-exit.position), 0);
+			// }
+			// else
+			// 	bullets.Add(runner, new ShotState(exit.position, exit.forward), _bulletPrefab.TimeToLive);
+		}
+		
+		private void ApplySingleDamage(IFusionObject target)
+		{
+			if (target != null && target.PlayerTeamIndex != _player.PlayerTeamIndex)
+			{
+				// int damage = Random.Range(_bulletPrefab.AreaDamage[0], _bulletPrefab.AreaDamage[1]);
+				int damage = Random.Range(_player.PlayerData.Damage[0], _player.PlayerData.Damage[1]);
+				Debug.Log("Applying single damage to target: " + target.PlayerName + " with damage: " + damage);
+				var damageEvent = new DamageEvent { targetPlayerRef = _player.PlayerId.AsIndex, damage = damage };
+				target.UpdateHPImmediately(damageEvent.damage);
+				target.RaiseEvent(damageEvent);
+			}
+		}
+
+		private void ApplySingleDamage(Turret target)
+		{
+			Debug.Log($"Applying single damage to turret: {target.name} at index: {target.TurretTeamIndex}");
+			if (target != null && target.TurretTeamIndex != _player.PlayerTeamIndex)
+			{
+				int damage = Random.Range(_player.PlayerData.Damage[0], _player.PlayerData.Damage[1]);
+				Debug.Log("Damaged to turret: " + target.name + " with damage: " + damage);
+				var damageEvent = new DamageEvent { playerId = _player.PlayerId.AsIndex, teamIndex = _player.PlayerTeamIndex, targetPlayerRef = _player.PlayerId.AsIndex, damage = damage };
+				//target.UpdateHPImmediately(damageEvent.damage);
+				target.RPC_DealDamage(damageEvent);
+			}
+		}
+
+		private void ApplyAreaDamage(Vector3 hitPoint)
+		{
+			int cnt = Physics.OverlapSphereNonAlloc(hitPoint, _bulletPrefab.AOERadius, _areaHits, _bulletPrefab.HitMask.value, QueryTriggerInteraction.Ignore);
+			if (cnt > 0)
+			{
+				for (int i = 0; i < cnt; i++)
+				{
+					GameObject other = _areaHits[i].gameObject;
+					if (other)
+					{
+						Player target = other.GetComponent<Player>();
+						if (target != null && target != _player
+						&& target.PlayerTeamIndex != _player.PlayerTeamIndex)
+						{
+							Vector3 impulse = other.transform.position - hitPoint;
+							float l = Mathf.Clamp(_bulletPrefab.AOERadius - impulse.magnitude, 0, _bulletPrefab.AOERadius);
+							var damageEvent = new DamageEvent { targetPlayerRef = _player.PlayerId.AsIndex, damage = Random.Range(_player.PlayerData.Damage[0], _player.PlayerData.Damage[1]) };
+							target.UpdateHPImmediately(damageEvent.damage);
+							target.RaiseEvent(damageEvent);
+						}
+					}
+				}
+			}
+		}
+
+		public Transform GetExitPoint(int tick)
+		{
+			Transform exit = _gunExits[tick% _gunExits.Length];
+			return exit;
+		}
+	}
+}
+
+
+================================================================================
+FILE 608/682: Assets/_GameModules/TankFusionModule/Scripts/WeaponManager.cs
+================================================================================
+
+using UnityEngine;
+using Fusion;
+
+namespace Fusion.TankOnlineModule
+{
+	public class WeaponManager : NetworkBehaviour
+	{
+		public enum WeaponInstallationType
+		{
+			PRIMARY,
+			SECONDARY,
+			BUFF
+		};
+		
+		[SerializeField] private Weapon[] _weapons;
+		private Player _player;
+
+		[Networked]
+		public byte selectedPrimaryWeapon { get; set; }
+
+		[Networked]
+		public byte selectedSecondaryWeapon { get; set; }
+
+		[Networked]
+		public TickTimer primaryFireDelay { get; set; }
+
+		[Networked]
+		public TickTimer secondaryFireDelay { get; set; }
+
+		[Networked]
+		public byte primaryAmmo { get; set; }
+
+		[Networked]
+		public byte secondaryAmmo { get; set; }
+
+		private byte _activePrimaryWeapon;
+		private byte _activeSecondaryWeapon;
+		private byte _defaultPrimaryWeapon = 0; // Default primary weapon index
+
+		public override void Render()
+		{
+			ShowAndHideWeapons();
+		}
+
+        public void OnValidate()
+        {
+            _weapons = GetComponentsInChildren<Weapon>(true);
+        }
+
+		public void Initialize(Player player)
+		{
+			_player = player;
+
+			for (int i = 0; i < _weapons.Length; i++)
+			{
+				_weapons[i].Initialize(player);
+			}
+
+			selectedPrimaryWeapon = 0;
+			selectedSecondaryWeapon = 4; // Default to the last weapon in the list
+			primaryFireDelay = TickTimer.CreateFromSeconds(Runner, _weapons[selectedPrimaryWeapon].delay);
+			secondaryFireDelay = TickTimer.CreateFromSeconds(Runner, _weapons[selectedSecondaryWeapon].delay);
+			primaryAmmo = _weapons[selectedPrimaryWeapon].ammo;
+			secondaryAmmo = _weapons[selectedSecondaryWeapon].ammo;
+			ResetAllWeapons();
+		}
+
+		
+		private void ShowAndHideWeapons()
+		{
+			// Animates the scale of the weapon based on its active status
+			if (_weapons == null || _weapons.Length == 0)
+			{
+				Debug.LogError("[Critical] No weapons found in WeaponManager");
+				return;
+			}
+
+			for (int i = 0; i < _weapons.Length; i++)
+			{
+				_weapons[i].Show(i == selectedPrimaryWeapon || i == selectedSecondaryWeapon);
+			}
+
+			// Whenever the weapon visual is fully visible, set the weapon to be active - prevents shooting when changing weapon
+			SetWeaponActive(selectedPrimaryWeapon, ref _activePrimaryWeapon);
+			SetWeaponActive(selectedSecondaryWeapon, ref _activeSecondaryWeapon);
+		}
+
+		void SetWeaponActive(byte selectedWeapon, ref byte _activeWeapon)
+		{
+			if (_weapons[selectedWeapon].isShowing)
+				_activeWeapon = selectedWeapon;
+		}
+
+		/// <summary>
+		/// Activate a new weapon when picked up
+		/// </summary>
+		/// <param name="weaponType">Type of weapon that should be activated</param>
+		/// <param name="weaponIndex">Index of weapon the _Weapons list for the player</param>
+		public void ActivateWeapon(WeaponInstallationType weaponType, int weaponIndex)
+		{
+			byte selectedWeapon = weaponType == WeaponInstallationType.PRIMARY ? selectedPrimaryWeapon : selectedSecondaryWeapon;
+			byte activeWeapon = weaponType == WeaponInstallationType.PRIMARY ? _activePrimaryWeapon : _activeSecondaryWeapon;
+
+			if (!_player.IsActivated || selectedWeapon != activeWeapon)
+				return;
+
+			// Fail safe, clamp the weapon index within weapons list bounds
+			weaponIndex = Mathf.Clamp(weaponIndex, 0, _weapons.Length - 1);
+
+			if (weaponType == WeaponInstallationType.PRIMARY)
+			{
+				selectedPrimaryWeapon = (byte)weaponIndex;
+				primaryAmmo = _weapons[(byte) weaponIndex].ammo;
+			}
+			else
+			{
+				selectedSecondaryWeapon = (byte)weaponIndex;
+				secondaryAmmo = _weapons[(byte) weaponIndex].ammo;
+			}
+		}
+
+		/// <summary>
+		/// Fire the current weapon. This is called from the Input Auth Client and on the Server in
+		/// response to player input. Input Auth Client spawns a dummy shot that gets replaced by the networked shot
+		/// whenever it arrives
+		/// </summary>
+		public void FireWeapon(WeaponInstallationType weaponType)
+		{
+			if (!IsWeaponFireAllowed(weaponType))
+				return;
+			Debug.Log($"Firing weapon {weaponType}");
+			byte ammo = weaponType == WeaponInstallationType.PRIMARY ? primaryAmmo : secondaryAmmo;
+
+			TickTimer tickTimer = weaponType==WeaponInstallationType.PRIMARY ? primaryFireDelay : secondaryFireDelay;
+			if (tickTimer.ExpiredOrNotRunning(Runner) && ammo > 0)
+			{
+				byte weaponIndex = weaponType == WeaponInstallationType.PRIMARY ? _activePrimaryWeapon : _activeSecondaryWeapon;
+				Weapon weapon = _weapons[weaponIndex];
+
+				weapon.Fire(Runner,Object.InputAuthority,_player.Velocity);
+
+				if (!weapon.infiniteAmmo)
+					ammo--;
+
+				if (weaponType == WeaponInstallationType.PRIMARY)
+				{
+					primaryFireDelay = TickTimer.CreateFromSeconds(Runner, weapon.delay);
+					primaryAmmo = ammo;
+				}
+				else
+				{
+					secondaryFireDelay = TickTimer.CreateFromSeconds(Runner, weapon.delay);
+					secondaryAmmo = ammo;
+				}
+					
+				if (/*Object.HasStateAuthority &&*/ ammo == 0)
+				{
+					ResetWeapon(weaponType);
+				}
+			}
+		}
+
+		private bool IsWeaponFireAllowed(WeaponInstallationType weaponType)
+		{
+			Debug.Log($"IsWeaponFireAllowed: PlayerActivated={_player.IsActivated}, WeaponType={weaponType}, ActivePrimaryWeapon={_activePrimaryWeapon}, SelectedPrimaryWeapon={selectedPrimaryWeapon}");
+			if (!_player.IsActivated)
+				return false;
+
+			// Has the selected weapon become fully visible yet? If not, don't allow shooting
+			if (weaponType == WeaponInstallationType.PRIMARY && _activePrimaryWeapon != selectedPrimaryWeapon)
+				return false;
+			if (weaponType == WeaponInstallationType.SECONDARY && _activeSecondaryWeapon != selectedSecondaryWeapon)
+				return false;
+			return true;
+		}
+
+		public void ResetAllWeapons()
+		{
+			ResetWeapon(WeaponInstallationType.PRIMARY);
+			ResetWeapon(WeaponInstallationType.SECONDARY);
+		}
+
+		void ResetWeapon(WeaponInstallationType weaponType)
+		{
+			if (weaponType == WeaponInstallationType.PRIMARY)
+			{
+				ActivateWeapon(weaponType, _defaultPrimaryWeapon);
+			}
+			else if (weaponType == WeaponInstallationType.SECONDARY)
+			{
+				ActivateWeapon(weaponType, 4);
+			}
+		}
+
+		public void InstallWeapon(PowerupElement powerup)
+		{
+			int weaponIndex = GetWeaponIndex(powerup.powerupType);
+			ActivateWeapon(powerup.weaponInstallationType, weaponIndex);
+		}
+
+		public void UpgradeFireRate()
+		{
+			Weapon currentWeapon = _weapons[_activePrimaryWeapon];
+			if (currentWeapon != null)
+			{
+				currentWeapon.UpdateFireRate();
+			}
+		}
+
+		private int GetWeaponIndex(PowerupType powerupType)
+		{
+			for (int i = 0; i < _weapons.Length; i++)
+			{
+				if (_weapons[i].powerupType == powerupType)
+					return i;
+			}
+
+			Debug.LogError($"Weapon {powerupType} was not found in the weapon list, returning <color=red>0 </color>");
+			return 0;
+		}
+
+		public Weapon GetMainWeapon()
+		{
+			//check null
+			if (_weapons[_activePrimaryWeapon] == null)
+			{
+				Debug.LogError($"Main weapon is null");
+				return null;
+			}
+			else
+				return _weapons[_activePrimaryWeapon];
+		}
+	}
+}
+
+
+================================================================================
+FILE 609/682: Assets/_GameModules/TestingModule/DebugUI.cs
+================================================================================
+
+using Fusion;
+using FusionHelpers;
+using TMPro;
+using UnityEngine;
+
+public class DebugUI : NetworkBehaviour
+{
+	[SerializeField] private TMP_Text _text;
+
+	// private int lastRTT = -1;
+
+	// void Update()
+	// {
+	// 	if (Runner)
+	// 	{
+	// 		if (lastRTT < 0 || Runner.Tick % 20 == 0)
+	// 			lastRTT = Mathf.RoundToInt(1000f * (float)Runner.GetPlayerRtt(PlayerRef.None));
+	// 		Runner.WaitForSingleton<FusionSession>(session => { _text.text = $"Me:{Runner.LocalPlayer} Tick:{Runner.Tick} Region:{Runner.SessionInfo.Region} RTT:{lastRTT}"; });
+	// 	}
+	// }
+}
+
+
+================================================================================
+FILE 610/682: Assets/_GameModules/UICursorModule/Scripts/MouseCursor.cs
+================================================================================
+
+﻿using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class MouseCursor : MonoBehaviour
+	{
+		RectTransform _rect;
+		[SerializeField] private CursorLockMode _cursorLockState = CursorLockMode.None;
+
+		void Start()
+		{
+			if (Input.mousePresent)
+			{
+				_rect = GetComponent<RectTransform>();
+
+				if (!Application.isEditor)
+					Cursor.visible = false;
+				Cursor.lockState = _cursorLockState;
+			}
+			else
+				gameObject.SetActive(false);
+		}
+
+		private void LateUpdate()
+		{
+			_rect.position = Input.mousePosition;
+		}
+	}
+}
+
+
+================================================================================
+FILE 611/682: Assets/_GameModules/Utilities/ColorChanger.cs
+================================================================================
+
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace Fusion.TankOnlineModule
+{
+	public class ColorChanger : MonoBehaviour
+	{
+		private ParticleSystem _partSystem;
+		private MeshRenderer _meshRenderer;
+		private UnityEngine.UI.Image _imageComponent;
+
+		private ParticleSystem.MainModule _mainModule;
+
+		public void Initialize()
+		{
+			_partSystem = GetComponent<ParticleSystem>();
+			_meshRenderer = GetComponent<MeshRenderer>();
+			_imageComponent = GetComponent<UnityEngine.UI.Image>();
+		}
+
+		public void ChangeColor(Color newColor)
+		{
+			if (_meshRenderer != null)
+			{
+				_meshRenderer.material.color = newColor;
+			}
+
+			if (_partSystem != null)
+			{
+				try
+				{
+					_mainModule = _partSystem.main;
+					_mainModule.startColor = newColor;
+				}
+				catch (System.NullReferenceException)
+				{
+					Debug.LogError("NullReference in ColorChanger. (Do not create your own module instances)");
+				}
+			}
+
+			if (_imageComponent != null)
+			{
+				_imageComponent.color = newColor;
+			}
+		}
+		
+		public static void FindColorChangers(Transform currentTransform, ref List<ColorChanger> colorChangers)
+		{
+			ColorChanger colorChanger = currentTransform.GetComponent<ColorChanger>();
+			if (colorChanger != null)
+			{
+				colorChangers.Add(colorChanger);
+				colorChanger.Initialize();
+			}
+
+			foreach (Transform go in currentTransform)
+			{
+				FindColorChangers(go, ref colorChangers);
+			}
+		}
+
+		public static void ChangeColor(Color color, List<ColorChanger> colorChangers)
+		{
+			foreach (ColorChanger colorChanger in colorChangers)
+			{
+				colorChanger.ChangeColor(color);
+			}
+		}
+
+		public static void ChangeColor(Transform fromRoot, Color color)
+		{
+			List<ColorChanger> changers = new List<ColorChanger>();
+			FindColorChangers( fromRoot, ref changers);
+			ChangeColor(color,changers);
+		}
+	}
+}
+
+
+================================================================================
+FILE 612/682: Assets/_GameModules/Utilities/DeepCloneExtensions.cs
+================================================================================
+
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+public static class DeepCloneExtensions
+{
+public static T DeepClone<T>(this T obj)
+{
+    if (obj == null) return default;
+    
+    using var ms = new MemoryStream();
+    var formatter = new BinaryFormatter();
+    formatter.Serialize(ms, obj);
+    ms.Position = 0;
+    return (T)formatter.Deserialize(ms);
+}
+}
+
+
+================================================================================
+FILE 613/682: Assets/_GameModules/Utilities/FPSDebug.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using Fusion;
+using Fusion.GameSystems;
+using System.Threading;
+using System.Threading.Tasks;
+
+public class FPSDebug : MonoBehaviour
+{
+    [Header("Settings")]
+    public TextMeshProUGUI fpsText;
+    [SerializeField] private float updateInterval = 0.5f; // Update every 0.5 seconds (optimized)
+    [SerializeField] private bool showFrameTime = true;
+    [SerializeField] private bool autoDetectThresholds = true; // Auto-detect from DeviceQualityManager
+
+    [Header("Manual FPS Thresholds (if autoDetect disabled)")]
+    [SerializeField] private float goodFPS = 60f;
+    [SerializeField] private float averageFPS = 30f;
+
+    // Cached values for performance
+    private float timeSinceUpdate;
+    private int frameCount;
+    private float accumulatedTime;
+    private int targetFPS;
+    private Color currentColor;
+    private bool isInitialized;
+
+    // String builder to reduce GC allocation
+    private System.Text.StringBuilder stringBuilder;
+
+    void Start()
+    {
+        // Initialize string builder for text updates (reduces GC)
+        stringBuilder = new System.Text.StringBuilder(32);
+
+        // Get target FPS from DeviceQualityManager
+        InitializeFPSThresholds();
+
+        isInitialized = true;
+    }
+
+    void Update()
+    {
+        if (!isInitialized || fpsText == null) return;
+
+        // Accumulate time and frame count
+        float deltaTime = Time.unscaledDeltaTime;
+        accumulatedTime += deltaTime;
+        frameCount++;
+        timeSinceUpdate += deltaTime;
+
+        // Update display at specified interval
+        if (timeSinceUpdate >= updateInterval)
+        {
+            UpdateFPSDisplay();
+
+            // Reset counters
+            timeSinceUpdate = 0f;
+            frameCount = 0;
+            accumulatedTime = 0f;
+        }
+    }
+
+    /// <summary>
+    /// Initialize FPS thresholds from DeviceQualityManager or use manual values
+    /// </summary>
+    private void InitializeFPSThresholds()
+    {
+        if (autoDetectThresholds && GameManager.Instance != null && GameManager.Instance.QualityManager != null)
+        {
+            // Get target FPS from DeviceQualityManager
+            targetFPS = GameManager.Instance.QualityManager.CurrentTargetFrameRate;
+
+            // Set thresholds based on target FPS
+            // Good: >= 90% of target
+            // Average: >= 50% of target
+            goodFPS = targetFPS * 0.9f;
+            averageFPS = targetFPS * 0.5f;
+
+            Debug.Log($"[FPSDebug] Auto-detected thresholds - Target: {targetFPS}, Good: {goodFPS:F0}, Average: {averageFPS:F0}");
+        }
+        else
+        {
+            // Use manual thresholds
+            targetFPS = Application.targetFrameRate > 0 ? Application.targetFrameRate : 60;
+            Debug.Log($"[FPSDebug] Using manual thresholds - Good: {goodFPS:F0}, Average: {averageFPS:F0}");
+        }
+    }
+
+    /// <summary>
+    /// Update FPS display - optimized to reduce GC allocation
+    /// </summary>
+    private void UpdateFPSDisplay()
+    {
+        if (frameCount == 0 || accumulatedTime <= 0f) return;
+
+        // Calculate average FPS over the interval
+        float currentFPS = frameCount / accumulatedTime;
+
+        // Build display text using StringBuilder (reduces GC)
+        stringBuilder.Clear();
+        stringBuilder.Append("FPS: ");
+        stringBuilder.Append(currentFPS.ToString("F0")); // Show whole number for cleaner look
+
+        if (showFrameTime)
+        {
+            float frameTime = accumulatedTime / frameCount * 1000f; // Convert to milliseconds
+            stringBuilder.Append("\n");
+            stringBuilder.Append(frameTime.ToString("F1"));
+            stringBuilder.Append("ms");
+        }
+
+        // Set text (only if changed to reduce overhead)
+        fpsText.text = stringBuilder.ToString();
+
+        // Determine color based on performance
+        Color newColor;
+        if (currentFPS >= goodFPS)
+        {
+            newColor = Color.green;
+        }
+        else if (currentFPS >= averageFPS)
+        {
+            newColor = Color.yellow;
+        }
+        else
+        {
+            newColor = Color.red;
+        }
+
+        // Only update color if it changed (reduce overhead)
+        if (newColor != currentColor)
+        {
+            currentColor = newColor;
+            fpsText.color = currentColor;
+        }
+    }
+}
+
+
+================================================================================
+FILE 614/682: Assets/_GameModules/Utilities/KeepAlive.cs
+================================================================================
+
+using UnityEngine;
+
+/// <summary>
+/// KeepAlive is a utility class that prevents the GameObject it is attached to from being destroyed when loading a new scene.
+/// This is useful for objects that need to persist across scene loads, such as managers or singletons.
+/// </summary>
+public class KeepAlive : MonoBehaviour
+{
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+}
+
+
+================================================================================
+FILE 615/682: Assets/_GameModules/Utilities/PingDebug.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+using Fusion;
+using System.Threading;
+
+public class PingDebug : MonoBehaviour
+{
+    [Header("Settings")]
+    public TextMeshProUGUI pingText;
+
+    [Header("Network Settings")]
+    [SerializeField] private bool showNetworkInfo = true;
+    [SerializeField] private float networkUpdateInterval = 1.0f; // Update network info every 1 second
+
+    // Cached values for performance
+    private bool isInitialized;
+
+    // Network-related variables
+    private NetworkRunner networkRunner;
+    private float timeSinceNetworkUpdate;
+    private int lastPing;
+    private string currentRegion = "sa";
+
+    // String builder to reduce GC allocation
+    private System.Text.StringBuilder stringBuilder;
+    private CancellationTokenSource tokenSource;
+
+    void Start()
+    {
+        // Initialize string builder for text updates (reduces GC)
+        stringBuilder = new System.Text.StringBuilder(32);
+        currentRegion = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument().FixedRegion;
+    }
+
+    void Update()
+    {
+        if (!isInitialized) return;
+
+        // Accumulate time and frame count
+        float deltaTime = Time.unscaledDeltaTime;
+        timeSinceNetworkUpdate += deltaTime;
+
+        // Update network info at specified interval
+        if (timeSinceNetworkUpdate >= networkUpdateInterval && showNetworkInfo)
+        {
+            UpdateNetworkInfo();
+            timeSinceNetworkUpdate = 0f;
+        }
+    }
+
+    public void SetRunner(NetworkRunner runner)
+    {
+        networkRunner = runner;
+        isInitialized = true;
+    }
+
+    /// <summary>
+    /// Update network information including ping and region
+    /// </summary>
+    private void UpdateNetworkInfo()
+    {
+        if (networkRunner != null && networkRunner.IsRunning)
+        {
+            // Get ping information
+            RefreshRegionList();
+            ShowPing();
+        }
+        else
+        {
+            // Not connected or no runner
+            ShowOfflinePing();
+        }
+    }
+
+    private async void RefreshRegionList()
+    {
+        tokenSource = new CancellationTokenSource();
+
+        var regions = await NetworkRunner.GetAvailableRegions(cancellationToken: tokenSource.Token);
+        foreach (var reg in regions)
+        {
+            if (reg.RegionCode == currentRegion)
+            {
+                lastPing = reg.RegionPing;
+                break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Display ping information when connected
+    /// </summary>
+    private void ShowPing()
+    {
+        if (pingText == null) return;
+
+        stringBuilder.Clear();
+        stringBuilder.Append("Ping: ");
+        stringBuilder.Append(lastPing.ToString());
+        stringBuilder.Append("ms");
+        stringBuilder.Append("\nRegion: ");
+        stringBuilder.Append(currentRegion);
+
+        pingText.text = stringBuilder.ToString();
+
+        // Color coding for ping
+        Color pingColor;
+        if (lastPing <= 50)
+        {
+            pingColor = Color.green; // Excellent
+        }
+        else if (lastPing <= 100)
+        {
+            pingColor = Color.yellow; // Good
+        }
+        else if (lastPing <= 150)
+        {
+            pingColor = new Color(1f, 0.5f, 0f); // Orange - Fair
+        }
+        else
+        {
+            pingColor = Color.red; // Poor
+        }
+
+        pingText.color = pingColor;
+    }
+
+    /// <summary>
+    /// Display offline status when not connected
+    /// </summary>
+    private void ShowOfflinePing()
+    {
+        if (pingText == null) return;
+
+        pingText.text = "Status: Offline\nRegion: --";
+        pingText.color = Color.gray;
+    }
+
+    void OnDestroy()
+    {
+        // Cleanup
+        networkRunner = null;
+    }
+}
+
+
+================================================================================
+FILE 616/682: Assets/_GameModules/Utilities/RegionDetection.cs
+================================================================================
+
+using UnityEngine;
+using System.Globalization;
+using System.Collections;
+using UnityEngine.Networking;
+using System.Threading;
+using Fusion;
+using System;
+using Fusion.GameSystems;
+using System.Collections.Generic;
+
+public class RegionDetection : MonoBehaviour
+{
+    public NetworkRunner runnerPrefab;
+    private NetworkRunner runnerInstance;
+    [Serializable]
+    public class RegionInfo
+    {
+        public string RegionCode;
+        public int RegionPing;
+    }
+    private CancellationTokenSource _tokenSource;
+    public List<RegionInfo> regionList = new List<RegionInfo>();
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    private void Start()
+    {
+        runnerInstance = Instantiate(runnerPrefab);
+        DontDestroyOnLoad(runnerInstance.gameObject);
+        RefreshRegionDropdown();
+    }
+
+    private void OnDestroy()
+    {
+        _tokenSource?.Cancel();
+        _tokenSource?.Dispose();
+    }
+
+    public async void RefreshRegionDropdown()
+    {
+        // Cancel token cũ nếu có
+        _tokenSource?.Cancel();
+        _tokenSource?.Dispose();
+
+        _tokenSource = new CancellationTokenSource();
+        regionList.Clear();
+
+        try
+        {
+            var regions = await NetworkRunner.GetAvailableRegions(cancellationToken: _tokenSource.Token);
+
+            if (regions != null)
+            {
+                for (int i = 0; i < regions.Count; i++)
+                {
+                    var region = regions[i];
+                    regionList.Add(new RegionInfo { RegionCode = region.RegionCode, RegionPing = region.RegionPing });
+                }
+            }
+            ChooseBestRegion();
+            _ = runnerInstance.Shutdown();
+            Destroy(runnerInstance.gameObject);
+            Destroy(this.gameObject);
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log("RefreshRegionDropdown cancelled.");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error refreshing regions: {ex}");
+        }
+    }
+
+    private void ChooseBestRegion()
+    {
+        if (regionList == null || regionList.Count == 0)
+            return;
+
+        int bestIndex = 0;
+        int bestPing = int.MaxValue;
+
+        for (int i = 0; i < regionList.Count; i++)
+        {
+            int ping = regionList[i].RegionPing;
+            if (ping < bestPing)
+            {
+                if (ping < bestPing)
+                {
+                    bestPing = ping;
+                    bestIndex = i;
+                }
+            }
+        }
+        GameManager.fixedRegion = regionList[bestIndex].RegionCode;
+    }
+}
+
+
+================================================================================
+FILE 617/682: Assets/_GameModules/Utilities/RenderTextureSaver.cs
+================================================================================
+
+using UnityEngine;
+using System.IO;
+
+public static class RenderTextureSaver
+{
+    /// <summary>
+    /// Lưu RenderTexture thành file PNG.
+    /// </summary>
+    public static void SaveRenderTextureToPNG(RenderTexture rt, string path)
+    {
+        // Lưu trạng thái RT đang active
+        RenderTexture prev = RenderTexture.active;
+
+        try
+        {
+            // Gán RT cần đọc
+            RenderTexture.active = rt;
+
+            // Tạo Texture2D để copy dữ liệu
+            Texture2D tex = new Texture2D(rt.width, rt.height, TextureFormat.RGBA32, false);
+            tex.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+            tex.Apply();
+
+            // Encode sang PNG
+            byte[] bytes = tex.EncodeToPNG();
+            File.WriteAllBytes(path, bytes);
+
+            Debug.Log($"[RenderTextureSaver] Saved PNG to: {path}");
+
+            Object.Destroy(tex); // dọn dẹp
+        }
+        finally
+        {
+            // Khôi phục lại RT active
+            RenderTexture.active = prev;
+        }
+    }
+}
+
+
+================================================================================
+FILE 618/682: Assets/_GameModules/Utilities/RotateForever.cs
+================================================================================
+
+﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+namespace Fusion.TankOnlineModule
+{
+	public class RotateForever : MonoBehaviour
+	{
+		private enum Axis { X, Y, Z };
+
+		[SerializeField] private Axis axis = Axis.Y;
+		[SerializeField] bool reverse = false;
+		[SerializeField] public float _rotationsPerSecond = 1f;
+
+		void Update()
+		{
+			Rotate();
+		}
+
+		void Rotate()
+		{
+			float direction = reverse == true ? -1 : 1;
+			float rotation = _rotationsPerSecond * 360f * Time.deltaTime * direction;
+
+			switch (axis)
+			{
+				case Axis.X:
+					transform.Rotate(rotation, 0, 0);
+					break;
+				case Axis.Y:
+					transform.Rotate(0, rotation, 0);
+					break;
+				case Axis.Z:
+					transform.Rotate(0, 0, rotation);
+					break;
+			}
+		}
+	}
+}
+
+
+================================================================================
+FILE 619/682: Assets/_GameModules/Utilities/ScriptableObjectCloner.cs
+================================================================================
+
+using UnityEngine;
+
+public static class ScriptableObjectCloner
+{
+    /// <summary>
+    /// Clone một ScriptableObject và trả về bản sao mới, độc lập với bản gốc.
+    /// </summary>
+    /// <typeparam name="T">Kiểu của ScriptableObject</typeparam>
+    /// <param name="original">ScriptableObject gốc</param>
+    /// <returns>Bản sao clone</returns>
+    public static T Clone<T>(T original) where T : ScriptableObject
+    {
+        if (original == null)
+        {
+            Debug.LogWarning("Clone failed: original is null");
+            return null;
+        }
+
+        T clone = ScriptableObject.CreateInstance<T>();
+        JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(original), clone);
+        return clone;
+    }
+}
+
+
+================================================================================
+FILE 620/682: Assets/_GameModules/Utilities/Serialization.cs
+================================================================================
+
+// Date: 28 June 2025
+// AI-Generated: This code structure was created with AI assistance
+
+using System;
+using System.Collections.Generic;
+
+[Serializable]
+public class Serialization<TKey, TValue>
+{
+    public List<TKey> keys;
+    public List<TValue> values;
+    public Dictionary<TKey, TValue> dictionary;
+
+    public Serialization(Dictionary<TKey, TValue> dict)
+    {
+        keys = new List<TKey>(dict.Keys);
+        values = new List<TValue>(dict.Values);
+        dictionary = dict;
+    }
+
+    public void OnAfterDeserialize()
+    {
+        dictionary = new Dictionary<TKey, TValue>();
+        for (int i = 0; i < keys.Count; i++)
+            dictionary.Add(keys[i], values[i]);
+    }
+
+    public void OnBeforeSerialize() { }
+}
+
+
+================================================================================
+FILE 621/682: Assets/_GameModules/Utilities/Singleton.cs
+================================================================================
+
+
+
+using UnityEngine;
+
+/// <summary>
+/// A generic singleton base class for MonoBehaviour.
+/// Use by inheriting: `public class YourClass : Singleton<YourClass>`
+/// </summary>
+public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+{
+    private static T _instance;
+    private static readonly object _lock = new object();
+    private static bool _isShuttingDown = false;
+
+    /// <summary>
+    /// The singleton instance.
+    /// </summary>
+    public static T Instance
+    {
+        get
+        {
+            if (_isShuttingDown)
+            {
+                Debug.LogWarning($"[Singleton] Instance of {typeof(T)} already destroyed. Returning null.");
+                return null;
+            }
+
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    // Try to find existing instance
+                    _instance = FindAnyObjectByType<T>();
+
+                    // Create new instance if one doesn't already exist
+                    if (_instance == null)
+                    {
+                        var singletonObject = new GameObject();
+                        _instance = singletonObject.AddComponent<T>();
+                        singletonObject.name = $"[Singleton] {typeof(T)} (Auto-Created)";
+                    }
+                }
+
+                return _instance;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Unity callback when the script instance is being loaded.
+    /// Ensures that only one instance of the singleton exists.
+    /// </summary>
+    protected virtual void Awake()
+    {
+        // Ensure that only one instance exists
+        if (_instance == null)
+        {
+            _instance = this as T;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (_instance != this)
+        {
+            Debug.LogWarning($"[Singleton] Instance of {typeof(T)} already exists. Destroying duplicate.");
+            Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Unity callback when the application is quitting.
+    /// Prevents recreation of singleton during shutdown.
+    /// </summary>
+    protected virtual void OnApplicationQuit()
+    {
+        _isShuttingDown = true;
+    }
+
+    /// <summary>
+    /// Unity callback when the object is destroyed.
+    /// Prevents recreation of singleton during shutdown.
+    /// </summary>
+    protected virtual void OnDestroy()
+    {
+        _isShuttingDown = true;
+    }
+}
+
+
+================================================================================
+FILE 622/682: Assets/_GameModules/Utilities/Step.cs
+================================================================================
+
+namespace Fusion.Utility
+{
+	/// <summary>
+	/// Convenient helper to use in for-loops when stepping fractional values but want to be sure to always end exactly at 1.0f
+	/// If the counter is initialized to a negative value, the first value returned will be 0
+	/// for(float f=-1;Step.Forward(ref f, some_step); )
+	/// {
+	///  // This block will execute once for all values of f=[0;1] and is guaranteed to be called for both values 0 and 1, regardless of some_step. 
+	/// }
+	/// If used in a coroutine, you can loop each frame over a second like so:
+	///
+	/// for(float f=0;Step.Forward(ref f); )
+	/// {
+	///   yield return new WaitForEndOfFrame();
+	/// }
+	/// </summary>
+	public static class Step
+	{
+		public static bool Forward(ref float f, float step)
+		{
+			if (f < 0)
+			{
+				f = 0;
+				return true;
+			}
+
+			if (f == 1)
+				return false;
+
+			f = f + step;
+			if (f >= 1)
+				f = 1;
+			return true;
+		}
+
+		public static bool Backwards(ref float f, float step)
+		{
+			if (f > 1)
+			{
+				f = 1;
+				return true;
+			}
+
+			if (f == 0)
+				return false;
+
+			f = f - step;
+			if (f <= 0)
+				f = 0;
+			return true;
+		}
+	}
+}
+
+
+================================================================================
+FILE 623/682: Assets/_GameModules/Utilities/Tween.cs
+================================================================================
+
+using UnityEngine;
+
+namespace Fusion.Utility
+{
+	public class Tween
+	{
+		public delegate float EasingFunction(float start, float end, float Value);
+
+		public enum EaseType
+		{
+			easeInQuad,
+			easeOutQuad,
+			easeInOutQuad,
+			easeInCubic,
+			easeOutCubic,
+			easeInOutCubic,
+			easeInQuart,
+			easeOutQuart,
+			easeInOutQuart,
+			easeInQuint,
+			easeOutQuint,
+			easeInOutQuint,
+			easeInSine,
+			easeOutSine,
+			easeInOutSine,
+			easeInExpo,
+			easeOutExpo,
+			easeInOutExpo,
+			easeInCirc,
+			easeOutCirc,
+			easeInOutCirc,
+			linear,
+			spring,
+
+			/* GFX47 MOD START */
+			//bounce,
+			easeInBounce,
+			easeOutBounce,
+			easeInOutBounce,
+
+			/* GFX47 MOD END */
+			easeInBack,
+			easeOutBack,
+			easeInOutBack,
+
+			/* GFX47 MOD START */
+			//elastic,
+			easeInElastic,
+			easeOutElastic,
+			easeInOutElastic,
+
+			/* GFX47 MOD END */
+			punch
+		}
+
+		//instantiates a cached ease equation refrence:
+		public static EasingFunction GetEasingFunction(Tween.EaseType easeType)
+		{
+			EasingFunction ease = null;
+			switch (easeType)
+			{
+				case EaseType.easeInQuad:
+					ease = easeInQuad;
+					break;
+				case EaseType.easeOutQuad:
+					ease = easeOutQuad;
+					break;
+				case EaseType.easeInOutQuad:
+					ease = easeInOutQuad;
+					break;
+				case EaseType.easeInCubic:
+					ease = easeInCubic;
+					break;
+				case EaseType.easeOutCubic:
+					ease = easeOutCubic;
+					break;
+				case EaseType.easeInOutCubic:
+					ease = easeInOutCubic;
+					break;
+				case EaseType.easeInQuart:
+					ease = easeInQuart;
+					break;
+				case EaseType.easeOutQuart:
+					ease = easeOutQuart;
+					break;
+				case EaseType.easeInOutQuart:
+					ease = easeInOutQuart;
+					break;
+				case EaseType.easeInQuint:
+					ease = easeInQuint;
+					break;
+				case EaseType.easeOutQuint:
+					ease = easeOutQuint;
+					break;
+				case EaseType.easeInOutQuint:
+					ease = easeInOutQuint;
+					break;
+				case EaseType.easeInSine:
+					ease = easeInSine;
+					break;
+				case EaseType.easeOutSine:
+					ease = easeOutSine;
+					break;
+				case EaseType.easeInOutSine:
+					ease = easeInOutSine;
+					break;
+				case EaseType.easeInExpo:
+					ease = easeInExpo;
+					break;
+				case EaseType.easeOutExpo:
+					ease = easeOutExpo;
+					break;
+				case EaseType.easeInOutExpo:
+					ease = easeInOutExpo;
+					break;
+				case EaseType.easeInCirc:
+					ease = easeInCirc;
+					break;
+				case EaseType.easeOutCirc:
+					ease = easeOutCirc;
+					break;
+				case EaseType.easeInOutCirc:
+					ease = easeInOutCirc;
+					break;
+				case EaseType.linear:
+					ease = linear;
+					break;
+				case EaseType.spring:
+					ease = spring;
+					break;
+				/* GFX47 MOD START */
+				/*case EaseType.bounce:
+				ease = new EasingFunction(bounce);
+				break;*/
+				case EaseType.easeInBounce:
+					ease = easeInBounce;
+					break;
+				case EaseType.easeOutBounce:
+					ease = easeOutBounce;
+					break;
+				case EaseType.easeInOutBounce:
+					ease = easeInOutBounce;
+					break;
+				/* GFX47 MOD END */
+				case EaseType.easeInBack:
+					ease = easeInBack;
+					break;
+				case EaseType.easeOutBack:
+					ease = easeOutBack;
+					break;
+				case EaseType.easeInOutBack:
+					ease = easeInOutBack;
+					break;
+				/* GFX47 MOD START */
+				/*case EaseType.elastic:
+				ease = new EasingFunction(elastic);
+				break;*/
+				case EaseType.easeInElastic:
+					ease = easeInElastic;
+					break;
+				case EaseType.easeOutElastic:
+					ease = easeOutElastic;
+					break;
+				case EaseType.easeInOutElastic:
+					ease = easeInOutElastic;
+					break;
+				/* GFX47 MOD END */
+			}
+
+			return ease;
+		}
+
+
+		public static float linear(float start, float end, float value)
+		{
+			return Mathf.Lerp(start, end, value);
+		}
+
+		public static float clerp(float start, float end, float value)
+		{
+			float min = 0.0f;
+			float max = 360.0f;
+			float half = Mathf.Abs((max - min) * 0.5f);
+			float retval = 0.0f;
+			float diff = 0.0f;
+			if ((end - start) < -half)
+			{
+				diff = ((max - start) + end) * value;
+				retval = start + diff;
+			}
+			else if ((end - start) > half)
+			{
+				diff = -((max - end) + start) * value;
+				retval = start + diff;
+			}
+			else
+				retval = start + (end - start) * value;
+
+			return retval;
+		}
+
+		public static float spring(float start, float end, float value)
+		{
+			value = Mathf.Clamp01(value);
+			value = (Mathf.Sin(value * Mathf.PI * (0.2f + 2.5f * value * value * value)) * Mathf.Pow(1f - value, 2.2f) + value) * (1f + (1.2f * (1f - value)));
+			return start + (end - start) * value;
+		}
+
+		public static float easeInQuad(float start, float end, float value)
+		{
+			end -= start;
+			return end * value * value + start;
+		}
+
+		public static float easeOutQuad(float start, float end, float value)
+		{
+			end -= start;
+			return -end * value * (value - 2) + start;
+		}
+
+		public static float easeInOutQuad(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return end * 0.5f * value * value + start;
+			value--;
+			return -end * 0.5f * (value * (value - 2) - 1) + start;
+		}
+
+		public static float easeInCubic(float start, float end, float value)
+		{
+			end -= start;
+			return end * value * value * value + start;
+		}
+
+		public static float easeOutCubic(float start, float end, float value)
+		{
+			value--;
+			end -= start;
+			return end * (value * value * value + 1) + start;
+		}
+
+		public static float easeInOutCubic(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return end * 0.5f * value * value * value + start;
+			value -= 2;
+			return end * 0.5f * (value * value * value + 2) + start;
+		}
+
+		public static float easeInQuart(float start, float end, float value)
+		{
+			end -= start;
+			return end * value * value * value * value + start;
+		}
+
+		public static float easeOutQuart(float start, float end, float value)
+		{
+			value--;
+			end -= start;
+			return -end * (value * value * value * value - 1) + start;
+		}
+
+		public static float easeInOutQuart(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return end * 0.5f * value * value * value * value + start;
+			value -= 2;
+			return -end * 0.5f * (value * value * value * value - 2) + start;
+		}
+
+		public static float easeInQuint(float start, float end, float value)
+		{
+			end -= start;
+			return end * value * value * value * value * value + start;
+		}
+
+		public static float easeOutQuint(float start, float end, float value)
+		{
+			value--;
+			end -= start;
+			return end * (value * value * value * value * value + 1) + start;
+		}
+
+		public static float easeInOutQuint(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return end * 0.5f * value * value * value * value * value + start;
+			value -= 2;
+			return end * 0.5f * (value * value * value * value * value + 2) + start;
+		}
+
+		public static float easeInSine(float start, float end, float value)
+		{
+			end -= start;
+			return -end * Mathf.Cos(value * (Mathf.PI * 0.5f)) + end + start;
+		}
+
+		public static float easeOutSine(float start, float end, float value)
+		{
+			end -= start;
+			return end * Mathf.Sin(value * (Mathf.PI * 0.5f)) + start;
+		}
+
+		public static float easeInOutSine(float start, float end, float value)
+		{
+			end -= start;
+			return -end * 0.5f * (Mathf.Cos(Mathf.PI * value) - 1) + start;
+		}
+
+		public static float easeInExpo(float start, float end, float value)
+		{
+			end -= start;
+			return end * Mathf.Pow(2, 10 * (value - 1)) + start;
+		}
+
+		public static float easeOutExpo(float start, float end, float value)
+		{
+			if (value == 1.0f) return end;
+			end -= start;
+			return end * (-Mathf.Pow(2, -10 * value) + 1) + start;
+		}
+
+		public static float easeInOutExpo(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return end * 0.5f * Mathf.Pow(2, 10 * (value - 1)) + start;
+			value--;
+			return end * 0.5f * (-Mathf.Pow(2, -10 * value) + 2) + start;
+		}
+
+		public static float easeInCirc(float start, float end, float value)
+		{
+			end -= start;
+			return -end * (Mathf.Sqrt(1 - value * value) - 1) + start;
+		}
+
+		public static float easeOutCirc(float start, float end, float value)
+		{
+			value--;
+			end -= start;
+			return end * Mathf.Sqrt(1 - value * value) + start;
+		}
+
+		public static float easeInOutCirc(float start, float end, float value)
+		{
+			value /= .5f;
+			end -= start;
+			if (value < 1)
+				return -end * 0.5f * (Mathf.Sqrt(1 - value * value) - 1) + start;
+			value -= 2;
+			return end * 0.5f * (Mathf.Sqrt(1 - value * value) + 1) + start;
+		}
+
+		/* GFX47 MOD START */
+		public static float easeInBounce(float start, float end, float value)
+		{
+			end -= start;
+			float d = 1f;
+			return end - easeOutBounce(0, end, d - value) + start;
+		}
+		/* GFX47 MOD END */
+
+		/* GFX47 MOD START */
+		//private float bounce(float start, float end, float value){
+		public static float easeOutBounce(float start, float end, float value)
+		{
+			value /= 1f;
+			end -= start;
+			if (value < (1 / 2.75f))
+			{
+				return end * (7.5625f * value * value) + start;
+			}
+			else if (value < (2 / 2.75f))
+			{
+				value -= (1.5f / 2.75f);
+				return end * (7.5625f * (value) * value + .75f) + start;
+			}
+			else if (value < (2.5 / 2.75))
+			{
+				value -= (2.25f / 2.75f);
+				return end * (7.5625f * (value) * value + .9375f) + start;
+			}
+			else
+			{
+				value -= (2.625f / 2.75f);
+				return end * (7.5625f * (value) * value + .984375f) + start;
+			}
+		}
+		/* GFX47 MOD END */
+
+		/* GFX47 MOD START */
+		public static float easeInOutBounce(float start, float end, float value)
+		{
+			end -= start;
+			float d = 1f;
+			if (value < d * 0.5f)
+				return easeInBounce(0, end, value * 2) * 0.5f + start;
+			else
+				return easeOutBounce(0, end, value * 2 - d) * 0.5f + end * 0.5f + start;
+		}
+		/* GFX47 MOD END */
+
+		public static float easeInBack(float start, float end, float value)
+		{
+			end -= start;
+			value /= 1;
+			float s = 1.70158f;
+			return end * (value) * value * ((s + 1) * value - s) + start;
+		}
+
+		public static float easeOutBack(float start, float end, float value)
+		{
+			float s = 1.70158f;
+			end -= start;
+			value = (value) - 1;
+			return end * ((value) * value * ((s + 1) * value + s) + 1) + start;
+		}
+
+		public static float easeInOutBack(float start, float end, float value)
+		{
+			float s = 1.70158f;
+			end -= start;
+			value /= .5f;
+			if ((value) < 1)
+			{
+				s *= (1.525f);
+				return end * 0.5f * (value * value * (((s) + 1) * value - s)) + start;
+			}
+
+			value -= 2;
+			s *= (1.525f);
+			return end * 0.5f * ((value) * value * (((s) + 1) * value + s) + 2) + start;
+		}
+
+		public static float punch(float amplitude, float value)
+		{
+			float s = 9;
+			if (value == 0)
+			{
+				return 0;
+			}
+			else if (value == 1)
+			{
+				return 0;
+			}
+
+			float period = 1 * 0.3f;
+			s = period / (2 * Mathf.PI) * Mathf.Asin(0);
+			return (amplitude * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * 1 - s) * (2 * Mathf.PI) / period));
+		}
+
+		/* GFX47 MOD START */
+		public static float easeInElastic(float start, float end, float value)
+		{
+			end -= start;
+
+			float d = 1f;
+			float p = d * .3f;
+			float s = 0;
+			float a = 0;
+
+			if (value == 0)
+				return start;
+
+			if ((value /= d) == 1)
+				return start + end;
+
+			if (a == 0f || a < Mathf.Abs(end))
+			{
+				a = end;
+				s = p / 4;
+			}
+			else
+			{
+				s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+			}
+
+			return -(a * Mathf.Pow(2, 10 * (value -= 1)) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p)) + start;
+		}
+		/* GFX47 MOD END */
+
+		/* GFX47 MOD START */
+		//private float elastic(float start, float end, float value){
+		public static float easeOutElastic(float start, float end, float value)
+		{
+			/* GFX47 MOD END */
+			//Thank you to rafael.marteleto for fixing this as a port over from Pedro's UnityTween
+			end -= start;
+
+			float d = 1f;
+			float p = d * .3f;
+			float s = 0;
+			float a = 0;
+
+			if (value == 0)
+				return start;
+
+			if ((value /= d) == 1)
+				return start + end;
+
+			if (a == 0f || a < Mathf.Abs(end))
+			{
+				a = end;
+				s = p * 0.25f;
+			}
+			else
+			{
+				s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+			}
+
+			return (a * Mathf.Pow(2, -10 * value) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) + end + start);
+		}
+
+		public static float easeInOutElastic(float start, float end, float value)
+		{
+			end -= start;
+
+			float d = 1f;
+			float p = d * .3f;
+			float s = 0;
+			float a = 0;
+
+			if (value == 0)
+				return start;
+
+			if ((value /= d * 0.5f) == 2)
+				return start + end;
+
+			if (a == 0f || a < Mathf.Abs(end))
+			{
+				a = end;
+				s = p / 4;
+			}
+			else
+			{
+				s = p / (2 * Mathf.PI) * Mathf.Asin(end / a);
+			}
+
+			if (value < 1)
+				return -0.5f * (a * Mathf.Pow(2, 10 * (value -= 1)) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p)) + start;
+			return a * Mathf.Pow(2, -10 * (value -= 1)) * Mathf.Sin((value * d - s) * (2 * Mathf.PI) / p) * 0.5f + end + start;
+		}
+	}
+}
+
+
+================================================================================
+FILE 624/682: Assets/_GamePlay/Scripts/Constants.cs
+================================================================================
+
+namespace Fusion.GameSystems
+{
+    public static class Constants
+    {
+        public static string Key_UserID = nameof(UserDocument.userID);
+        public static string Key_RoleID = nameof(UserDocument.roleID);
+        public static string Key_PlayerName = nameof(PlayerDocument.playerName);
+    }
+}
+
+
+================================================================================
+FILE 625/682: Assets/_GamePlay/Scripts/GameManager.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Events;
+
+
+namespace Fusion.GameSystems
+{
+    /// <summary>
+    /// GameManager is a singleton class that manages the overall game state and transitions between different game states.
+    /// It initializes the game state machine and handles game start and stop operations.
+    /// </summary>
+    public class GameManager : Singleton<GameManager>
+    {
+        [System.Serializable]
+        public class ManagerConfig
+        {
+            public string name;
+            public NetworkType networkType = NetworkType.Both;
+            public float initTimeout = 5f; // Timeout in seconds
+            public float waitingTime = 5f; // Delay between retries
+        }
+        public static string fixedRegion = "asia";//default region
+        public GameStateMachine GSM { get; private set; }
+        public DeviceQualityManager QualityManager { get; private set; }
+        public static bool IsApplicationQuitting { get; private set; } = false;
+        private string managersPath = "Prefabs";
+        [SerializeField] private ManagerConfig[] managers;
+        private Dictionary<GamePhase, System.Func<GameStateMachine, IGameState>> stateFactory;
+        private GamePhase currentState = GamePhase.None;
+        [SerializeField] private DeviceQualityConfig deviceQualityConfig;
+        [SerializeField] private GameObject fPSDebug;
+        [SerializeField] private GameObject consoleDebug;
+        public int countDone = 0;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            StartCoroutine(Initialize());
+            InitializeQualityManager();
+        }
+
+        /// <summary>
+        /// Initialize the DeviceQualityManager
+        /// </summary>
+        private void InitializeQualityManager()
+        {
+            QualityManager = new DeviceQualityManager(deviceQualityConfig);
+            QualityManager.Initialize();
+
+            Debug.Log($"[GameManager] Quality Manager initialized - {QualityManager.GetQualityInfo()}");
+        }
+
+        /// <summary>
+        /// Public method to change quality level at runtime
+        /// </summary>
+        public void ChangeQualityLevel(int level)
+        {
+            if (QualityManager != null)
+            {
+                QualityManager.SetManualQualityLevel(level);
+                Debug.Log($"[GameManager] Quality level changed to {level}");
+            }
+        }
+
+        /// <summary>
+        /// Get current quality information
+        /// </summary>
+        public string GetCurrentQualityInfo()
+        {
+            return QualityManager?.GetQualityInfo() ?? "Quality Manager not initialized";
+        }
+
+        private void OnValidate()
+        {
+            if (managers == null || managers.Length == 0)
+            {
+                managers = new ManagerConfig[]
+                {
+                    new() { name = nameof(EventManager),                initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(UIManager),                   initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(DatabaseManager),             initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(FirestoreManager),            initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(RemoteConfigManager),         initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(MatchmakingManager),          initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(IAPManager),                  initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(GDO.Audio.AudioManager),      initTimeout = 5f, waitingTime = 0.2f },
+                    new() { name = nameof(SceneLoader),                 initTimeout = 5f, waitingTime = 0.2f },
+                };
+            }
+        }
+
+        private IEnumerator Initialize()
+        {
+            stateFactory =
+            new()
+            {
+                { GamePhase.ScreenLoading,                      gsm => new LoadingState(gsm) },
+                { GamePhase.MatchIdling,                        gsm => new HomeState(gsm) },
+                { GamePhase.MatchSearching,                     gsm => new MatchSearchingState(gsm) },
+                { GamePhase.MatchFindCanceling,                 gsm => new MatchCancelingState(gsm) },
+                { GamePhase.MatchFound,                         gsm => new MatchFoundState(gsm) },
+                { GamePhase.MatchPicking,                       gsm => new MatchPickingState(gsm) },
+                { GamePhase.MatchLoading,                       gsm => new MatchLoadingState(gsm) },
+                { GamePhase.MatchCountdown,                     gsm => new MatchCountdownState(gsm) },
+                { GamePhase.MatchPlaying,                       gsm => new MatchPlayingState(gsm) },
+                { GamePhase.MatchEnding,                        gsm => new MatchEndingState(gsm) },
+                { GamePhase.MatchLeaving,                       gsm => new MatchLeavingState(gsm) },
+                { GamePhase.MatchFinal,                         gsm => new FinalState(gsm) },
+                { GamePhase.Auth,                               gsm => new AuthState(gsm) },
+                { GamePhase.OnboardingMatchIdling,              gsm => new OnboardingMatchIdlingState(gsm) },
+            };
+
+            var initTasks = new List<(string name, bool isLoaded, string error)>();
+            var retryDelay = new WaitForSeconds(0.1f); // Cache WaitForSeconds instance
+            StartCoroutine(InitManager());
+            yield return null;
+
+            // for (int i = 0; i < managers.Length; i++)
+            // {
+            //     var manager = managers[i];
+
+            //     if (manager.networkType == NetworkType.Unused)
+            //     {
+            //         continue; // Skip unused managers
+            //     }
+
+            //     // Load manager prefab (outside try-catch to avoid yield issues)
+            //     float elapsed = 0;
+            //     GameObject prefab = null;
+
+            //     // Try to load with retry logic
+            //     for (int attempt = 0; attempt < 3 && prefab == null && elapsed < manager.initTimeout; attempt++)
+            //     {
+            //         prefab = Resources.Load<GameObject>($"{managersPath}/{manager.name}");
+            //         if (prefab == null)
+            //         {
+            //             elapsed += Time.deltaTime;
+            //             yield return retryDelay; // Small delay between retries
+            //         }
+            //     }
+
+            //     if (prefab == null)
+            //     {
+            //         var error = $"Failed to load manager prefab: {manager.name}";
+            //         initTasks.Add((manager.name, false, error));
+
+            //         Debug.LogError(error);
+            //     }
+
+            //     try
+            //     {
+            //         // Create manager instance
+            //         var instance = Instantiate(prefab);
+            //         if (instance == null)
+            //         {
+            //             throw new System.Exception($"Failed to instantiate {manager.name}");
+            //         }
+
+            //         // Configure manager
+            //         instance.name = $"__{manager.name}";
+            //         DontDestroyOnLoad(instance);
+
+            //         initTasks.Add((manager.name, true, null));
+            //         IInitializableManager initializable = instance.GetComponent<IInitializableManager>();
+            //         initializable.OnInitialized = (success) =>
+            //         {
+            //             if (!success)
+            //             {
+            //                 Debug.LogError($"Initialization failed for manager: {manager.name}");
+            //             }
+            //             Debug.Log($"Manager initialized: {manager.name}");
+            //             countDone++;
+
+            //             if (countDone == managers.Length)
+            //             {
+            //                 // Log detailed initialization summary
+            //                 var summary = "Manager Initialization Summary:\n" +
+            //                             $"Total: {initTasks.Count}\n" +
+            //                             $"Succeeded: {initTasks.Count(x => x.isLoaded)}\n" +
+            //                             $"Failed: {initTasks.Count(x => !x.isLoaded)}\n\n" +
+            //                             string.Join("\n", initTasks.Select(t =>
+            //                                 $"- {t.name}: {(t.isLoaded ? "OK" : "FAILED")}" +
+            //                                 (!t.isLoaded ? $" ({t.error})" : "")));
+
+            //                 Debug.Log(summary);
+            //                 // Only initialize game state if all required managers loaded successfully
+            //                 GSM = new GameStateMachine();
+            //                 if (EventManager.Instance != null)
+            //                 {
+            //                     EventManager.Register<GamePhase>(ChangeState);
+            //                 }
+            //                 else
+            //                 {
+            //                     Debug.LogError("EventManager not found - cannot initialize game states");
+            //                 }
+            //                 Debug.Log("GameManager initialized successfully.");
+            //             }
+            //         };
+
+            //         //show progress
+            //         if (i > 0)
+            //             EventManager.TriggerEvent(new LoadingScreenParam { currentStep = i + 1, totalSteps = managers.Length });
+            //     }
+            //     catch (System.Exception e)
+            //     {
+            //         var error = $"Error initializing {manager.name}: {e.Message}";
+            //         initTasks.Add((manager.name, false, error));
+
+            //         Debug.LogError(error);
+            //     }
+
+            //     // Wait one frame to allow Awake/Start to complete (outside try-catch)
+            //     yield return new WaitForSeconds(manager.waitingTime);
+            // }
+        }
+        
+        private IEnumerator InitManager()
+        {
+            var initTasks = new List<(string name, bool isLoaded, string error)>();
+            var retryDelay = new WaitForSeconds(0.1f); // Cache WaitForSeconds instance
+
+            var manager = managers[countDone];
+
+            if (manager.networkType == NetworkType.Unused)
+            {
+                countDone++;
+                StartCoroutine(InitManager());
+                yield break; // Skip unused managers
+            }
+
+            // Load manager prefab (outside try-catch to avoid yield issues)
+            float elapsed = 0;
+            GameObject prefab = null;
+
+            // Try to load with retry logic
+            for (int attempt = 0; attempt < 3 && prefab == null && elapsed < manager.initTimeout; attempt++)
+            {
+                prefab = Resources.Load<GameObject>($"{managersPath}/{manager.name}");
+                if (prefab == null)
+                {
+                    elapsed += Time.deltaTime;
+                    yield return retryDelay; // Small delay between retries
+                }
+            }
+
+            if (prefab == null)
+            {
+                var error = $"Failed to load manager prefab: {manager.name}";
+                initTasks.Add((manager.name, false, error));
+
+                Debug.LogError(error);
+            }
+
+            try
+            {
+                // Create manager instance
+                var instance = Instantiate(prefab);
+                if (instance == null)
+                {
+                    throw new System.Exception($"Failed to instantiate {manager.name}");
+                }
+
+                // Configure manager
+                instance.name = $"__{manager.name}";
+                DontDestroyOnLoad(instance);
+
+                initTasks.Add((manager.name, true, null));
+                IInitializableManager initializable = instance.GetComponent<IInitializableManager>();
+                initializable.OnInitialized = (success) =>
+                {
+                    if (!success)
+                    {
+                        string message = $"Initialization failed for manager: {manager.name}";
+                        Debug.LogError(message);
+                        EventManager.TriggerEvent(new ShowPopupEvent(PopupIDs.Inform, new InformPopupParam() { message = message }));
+                    }
+                    Debug.Log($"Manager initialized: {manager.name}");
+                    countDone++;
+
+                    if (countDone >= managers.Length)
+                    {
+                        // Log detailed initialization summary
+                        var summary = "Manager Initialization Summary:\n" +
+                                    $"Total: {initTasks.Count}\n" +
+                                    $"Succeeded: {initTasks.Count(x => x.isLoaded)}\n" +
+                                    $"Failed: {initTasks.Count(x => !x.isLoaded)}\n\n" +
+                                    string.Join("\n", initTasks.Select(t =>
+                                        $"- {t.name}: {(t.isLoaded ? "OK" : "FAILED")}" +
+                                        (!t.isLoaded ? $" ({t.error})" : "")));
+
+                        Debug.Log(summary);
+                        // Only initialize game state if all required managers loaded successfully
+                        GSM = new GameStateMachine();
+                        if (EventManager.Instance != null)
+                        {
+                            EventManager.Register<GamePhase>(ChangeState);
+                        }
+                        else
+                        {
+                            Debug.LogError("EventManager not found - cannot initialize game states");
+                        }
+                        Debug.Log("GameManager initialized successfully.");
+                    }
+                    else 
+                    {
+                        //show progress
+                        EventManager.TriggerEvent(new LoadingScreenParam { currentStep = countDone + 1, totalSteps = managers.Length }); 
+                        StartCoroutine(InitManager());
+                    }
+                };
+                initializable.Initialize();
+            }
+            catch (System.Exception e)
+            {
+                var error = $"Error initializing {manager.name}: {e.Message}";
+                initTasks.Add((manager.name, false, error));
+
+                Debug.LogError(error);
+            }
+        }
+
+        void Update()
+        {
+            GSM?.Update();
+#if UNITY_EDITOR
+            fPSDebug.SetActive(true);
+            consoleDebug.SetActive(true);
+#else
+            if (Input.touchCount >= 5 && fPSDebug != null)
+            {
+                fPSDebug.SetActive(!fPSDebug.activeSelf);
+                consoleDebug.SetActive(!consoleDebug.activeSelf);
+            }
+#endif
+        }
+
+        public void ChangeState(GamePhase stateType)
+        {
+            if (currentState == stateType) return;
+            
+            currentState = stateType;
+
+            if (stateFactory.TryGetValue(stateType, out var factory))
+            {
+                GSM.Change(factory(GSM));
+            }
+            else
+            {
+                Debug.LogWarning($"Unknown game state: {stateType}");
+            }
+        }
+
+        protected override void OnApplicationQuit()
+        {
+            base.OnApplicationQuit();
+            IsApplicationQuitting = true;
+        }
+
+        protected override void OnDestroy()
+        {
+            if (GSM != null)
+            {
+                GSM = null;
+            }
+        }
+    }
+}
+
+public enum GamePhase
+{
+    None,
+    ScreenLoading,
+    MatchIdling,
+    MatchSearching,
+    MatchCanceling,
+    MatchLoading,
+    MatchFindCanceling,
+    MatchFound,
+    MatchPicking,
+    MatchCountdown,
+    MatchPlaying,
+    MatchEnding,
+    MatchLeaving,
+    MatchFinal,
+    Auth,
+    MatchReleasing,
+    OnboardingMatchIdling
+}
+
+public enum NetworkType
+{
+    Both,
+    ServerOnly,
+    ClientOnly,
+    Unused,
+}
+
+
+================================================================================
+FILE 626/682: Assets/_GamePlay/Scripts/IInitializableManager.cs
+================================================================================
+
+
+using UnityEngine.Events;
+
+public interface IInitializableManager
+{
+    public UnityAction<bool> OnInitialized { get; set; }
+    public void Initialize();
+}
+
+
+================================================================================
+FILE 627/682: Assets/_GamePlay/Scripts/SceneIDs.cs
+================================================================================
+
+public class SceneIDs
+{
+    public const int Loading = 0;
+    public const int MainMenu = 1;
+    public const int Lobby = 2;
+    public const int GamePlay = 3;
+}
+
+
+================================================================================
+FILE 628/682: Assets/_GamePlay/Scripts/SceneLoader.cs
+================================================================================
+
+using UnityEngine;
+
+public class SceneLoader : Singleton<SceneLoader>
+{
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    /// <summary>
+    /// Loads a scene by name.
+    /// </summary>
+    /// <param name="sceneName">The name of the scene to load.</param>
+    public void LoadScene(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName))
+        {
+            Debug.LogError("Scene name cannot be null or empty.");
+            return;
+        }
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        Debug.Log($"Loading scene: {sceneName}");
+    }
+
+    /// <summary>
+    /// Reloads the current active scene.
+    /// </summary>
+    public void ReloadCurrentScene()
+    {
+        var currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        LoadScene(currentScene.name);
+        Debug.Log($"Reloading current scene: {currentScene.name}");
+    }
+}
+
+
+================================================================================
+FILE 629/682: Assets/_GameUI/Base/Scripts/CanvasLayer.cs
+================================================================================
+
+public enum CanvasLayer
+{
+    InGameHUD = 0,
+    Screen = 100,
+    Popup = 200,
+    Dialog = 300,
+}
+
+
+================================================================================
+FILE 630/682: Assets/_GameUI/Base/Scripts/DOTweenUIScreenAnimation.cs
+================================================================================
+
+using UnityEngine;
+using DG.Tweening;
+
+public class DOTweenUIScreenAnimation : UIScreenAnimation
+{
+    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] private float duration = 0.3f;
+
+    public override void PlayShowAnimation(System.Action onComplete = null)
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.DOFade(1, duration).OnComplete(() => onComplete?.Invoke());
+    }
+
+    public override void PlayHideAnimation(System.Action onComplete = null)
+    {
+        canvasGroup.DOFade(0, duration).OnComplete(() => onComplete?.Invoke());
+    }
+}
+
+
+================================================================================
+FILE 631/682: Assets/_GameUI/Base/Scripts/GameVersion.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+
+public class GameVersion : MonoBehaviour
+{
+    public TMP_Text versionText;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        versionText.text = Application.version;
+    }
+}
+
+
+================================================================================
+FILE 632/682: Assets/_GameUI/Base/Scripts/IScreen.cs
+================================================================================
+
+public interface IScreen
+{
+    public int SortingOrder { get; }
+    void Show(int additionalSortingOrder = 0, ScreenParam param = null);
+    void Hide();
+    void Initialize();
+}
+
+public abstract class ScreenParam
+{
+    
+}
+
+
+================================================================================
+FILE 633/682: Assets/_GameUI/Base/Scripts/PopupBase.cs
+================================================================================
+
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public abstract class PopupBase : MonoBehaviour, IScreen
+{
+    [SerializeField] protected GameObject root;
+    [SerializeField] protected PopupIDs id;
+    [SerializeField] protected CanvasLayer layer = CanvasLayer.Popup;
+
+    protected Canvas rootCanvas;
+    protected int sortingOrder;
+    
+    public bool IsVisible => root.activeSelf;
+    public CanvasLayer Layer => layer;
+    public PopupIDs ID => id;
+
+    protected virtual void Awake()
+    {
+        rootCanvas = GetComponent<Canvas>();
+    }
+
+    public int SortingOrder => sortingOrder;
+
+    public virtual void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        root.SetActive(true);
+        sortingOrder = (int)layer + additionalSortingOrder;
+        rootCanvas.sortingOrder = sortingOrder;
+    }
+
+    public virtual void Hide()
+    {
+        root.SetActive(false);
+    }
+    public void ClosePopup()
+    {
+        EventManager.TriggerEvent(new PopPopupEvent()
+        {
+            popupID = id
+        });
+    }
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (root == null)
+        {
+            root = transform.GetChild(0).gameObject;
+        }
+
+        if (transform.GetComponent<Canvas>() != null)
+        {
+            transform.GetComponent<Canvas>().sortingOrder = (int)layer;
+        }
+        else if (transform.GetComponent<Canvas>() == null)
+        {
+            Debug.LogError("PopupBase requires a Canvas component on the root GameObject.");
+        }
+#endif
+    }
+
+    public virtual void Initialize()
+    {
+        Hide();
+    }
+}
+
+
+================================================================================
+FILE 634/682: Assets/_GameUI/Base/Scripts/PopupIDs.cs
+================================================================================
+
+using System;
+
+[Serializable]
+public enum PopupIDs
+{
+    None,
+    Rewards,
+    Inform,
+    TutorialButtonPopup,
+    TutorialNpcPopup,
+    TutorialSkipPopup,
+    LockUIPopup
+}
+
+
+================================================================================
+FILE 635/682: Assets/_GameUI/Base/Scripts/PopupManager.cs
+================================================================================
+
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+/// <summary>
+/// PopupManager handles the display and management of Popup elements in the game.
+/// It provides methods to show and hide the main menu, game Popup, and other Popup elements as needed.
+/// </summary>
+public class PopupManager : Singleton<PopupManager>
+{
+    [SerializeField] private List<PopupBase> popups;
+    
+    private Dictionary<PopupIDs, PopupBase> popupMap;
+    private Stack<PopupBase> showingPopups = new();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        // Find all popup prefabs in Resources/Prefabs folder
+        PopupBase[] popupPrefabs = Resources.LoadAll<PopupBase>("Prefabs");
+
+        popupMap = new Dictionary<PopupIDs, PopupBase>();
+        List<PopupBase> instantiatedPopups = new List<PopupBase>();
+
+        // Create instances of each popup
+        foreach (var prefab in popupPrefabs)
+        {
+            PopupBase popupInstance = Instantiate(prefab, transform);
+            popupInstance.Initialize();
+            instantiatedPopups.Add(popupInstance);
+            popupMap.Add(popupInstance.ID, popupInstance);
+        }
+        // Update the popups list with instantiated objects
+        popups = instantiatedPopups;
+        EventManager.Register<ShowPopupEvent>(ShowPopup);
+        EventManager.Register<PopPopupEvent>(Pop);
+    }
+
+    private void ShowPopup(ShowPopupEvent uiEvent)
+    {
+        if(uiEvent.ID == PopupIDs.None)
+        {
+            PopAll();
+            return;
+        }
+        if (showingPopups.Any(p => p.ID == uiEvent.ID))
+        {
+            Debug.Log($"Popup {uiEvent.ID} is already active.");
+            return; // No need to show the same Popup again
+        }
+        showingPopups.Push(ShowPopup(uiEvent.ID, uiEvent.Param));
+    }
+
+    private void Pop(PopPopupEvent popPopup)
+    {
+        if(showingPopups.Count == 0)
+        {
+            Debug.LogWarning("No popups to hide.");
+            return;
+        }
+        var popup = showingPopups.Pop();
+        popup.Hide();
+    }
+
+    private void PopAll()
+    {
+        // Implement logic to hide all Popup elements
+        Debug.Log("Hiding All Popup");
+        foreach (var popup in popups)
+        {
+            popup.Hide();
+        }
+    }
+
+    private PopupBase ShowPopup(PopupIDs popupID, ScreenParam param) 
+    {
+        if (popupMap.TryGetValue(popupID, out PopupBase popup))
+        {
+            var lastPopupInLayer = showingPopups.LastOrDefault(p => p.Layer == popup.Layer);
+            var additionalSortingOrder = lastPopupInLayer != null ? lastPopupInLayer.SortingOrder + 5 : 5;
+            popup.Show(additionalSortingOrder, param);
+            return popup;
+        }
+        else
+        {
+            Debug.LogError($"Popup with ID {popupID} not found.");
+            return null;
+        }
+    }
+}
+
+public struct ShowPopupEvent
+{
+    public PopupIDs ID { get; }
+    public ScreenParam Param { get; }
+
+    public ShowPopupEvent(PopupIDs id, ScreenParam param = null)
+    {
+        ID = id;
+        Param = param;
+    }
+}
+
+public struct PopPopupEvent
+{
+    public PopupIDs popupID;
+}
+
+
+================================================================================
+FILE 636/682: Assets/_GameUI/Base/Scripts/SafeArea.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(RectTransform))]
+public class SafeArea : MonoBehaviour
+{
+    private RectTransform panelSafeArea;
+    private Rect lastSafeArea = new Rect(0, 0, 0, 0);
+    private ScreenOrientation lastOrientation = ScreenOrientation.AutoRotation;
+
+    void Awake()
+    {
+        panelSafeArea = GetComponent<RectTransform>();
+        ApplySafeArea();
+    }
+
+    void Update()
+    {
+        if (Application.isMobilePlatform)
+        {
+            if (lastSafeArea != Screen.safeArea || lastOrientation != Screen.orientation)
+                ApplySafeArea();
+        }
+    }
+
+    void ApplySafeArea()
+    {
+        Rect safeArea = Screen.safeArea;
+        lastSafeArea = safeArea;
+        lastOrientation = Screen.orientation;
+
+        // Convert safe area rectangle from absolute pixels to anchor min/max normalized values
+        Vector2 anchorMin = safeArea.position;
+        Vector2 anchorMax = safeArea.position + safeArea.size;
+
+        anchorMin.x /= Screen.width;
+        anchorMin.y /= Screen.height;
+        anchorMax.x /= Screen.width;
+        anchorMax.y /= Screen.height;
+
+        panelSafeArea.anchorMin = anchorMin;
+        panelSafeArea.anchorMax = anchorMax;
+
+        Debug.Log($"SafeArea applied: {safeArea}");
+    }
+}
+
+
+================================================================================
+FILE 637/682: Assets/_GameUI/Base/Scripts/TankIconUI.cs
+================================================================================
+
+﻿using UnityEngine;
+
+public class TankIconUI : MonoBehaviour
+{
+    [SerializeField] private Transform _container;
+
+    private GameObject _tankPreview;
+    
+    public void SetTank(string tankId)
+    {
+        if (_tankPreview != null)
+        {
+            Destroy(_tankPreview);
+            _tankPreview = null;
+        }
+        
+        DatabaseManager.GetDB<GameAssetCollection>(result =>
+        {
+            if (result != null)
+            {
+                var tankPrefab = result.GetGameAssetDocumentById(tankId).previewAsset as GameObject;
+                _tankPreview = Instantiate(tankPrefab, Vector3.zero, Quaternion.identity, _container);
+                _tankPreview.transform.SetParent(_container);
+                _tankPreview.transform.localPosition = Vector3.zero;
+                _tankPreview.transform.localRotation = Quaternion.identity;
+                _tankPreview.transform.localScale = Vector3.one;
+                _tankPreview.transform.localPosition = Vector3.zero;
+                _tankPreview.transform.localRotation = Quaternion.identity;
+                _tankPreview.transform.localScale = Vector3.one;
+            }
+        });
+    }
+}
+
+
+================================================================================
+FILE 638/682: Assets/_GameUI/Base/Scripts/UIIDs.cs
+================================================================================
+
+using System;
+
+[Serializable]
+public enum UIIDs
+{
+    None,
+    Loading,
+    Auth,
+    Home,
+    Settings,
+    Gameplay,
+    Garage,
+    Shop,
+    ChooseTank,
+    MatchLoading,
+    Final,
+    PauseMenu,
+    Scoreboard,
+    PlayerProfile,
+    GarageDeco,
+}
+
+
+================================================================================
+FILE 639/682: Assets/_GameUI/Base/Scripts/UIManager.cs
+================================================================================
+
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Purchasing;
+
+/// <summary>
+/// UIManager handles the display and management of UI elements in the game.
+/// It provides methods to show and hide the main menu, game UI, and other UI elements as needed.
+/// </summary>
+public class UIManager : Singleton<UIManager>, IInitializableManager
+{
+    [SerializeField] private UIIDs currentUIID = UIIDs.None;
+    [SerializeField] private List<UIScreenBase> screens;    
+    private Dictionary<UIIDs, UIScreenBase> uiIDToScreenMap;
+
+    public UnityAction<bool> OnInitialized { get; set; }
+
+    private void Start()
+    {
+        OnInitialized?.Invoke(true);
+    }
+    
+    public void Initialize()
+    {
+        // Find all screen prefabs in Resources/Prefabs folder
+        UIScreenBase[] screenPrefabs = Resources.LoadAll<UIScreenBase>("Prefabs");
+
+        uiIDToScreenMap = new Dictionary<UIIDs, UIScreenBase>();
+        List<UIScreenBase> instantiatedScreens = new List<UIScreenBase>();
+
+        // Create instances of each screen
+        foreach (var prefab in screenPrefabs)
+        {
+            UIScreenBase screenInstance = Instantiate(prefab, transform);
+            screenInstance.Initialize();
+            instantiatedScreens.Add(screenInstance);
+            uiIDToScreenMap.Add(screenInstance.ID, screenInstance);
+        }
+        // Update the screens list with instantiated objects
+        screens = instantiatedScreens;
+        EventManager.Register<UIEvent>(ShowUI);
+
+        ShowStartupUI();
+    }
+
+    private void ShowStartupUI()
+    {
+        ShowUI(new UIEvent(UIIDs.Loading));
+    }
+
+    private void ShowUI(UIEvent uiEvent)
+    {
+        if (currentUIID == uiEvent.ID)
+        {
+            Debug.Log($"UI {uiEvent.ID} is already active.");
+            return; // No need to show the same UI again
+        }
+
+        if (uiEvent.ID == UIIDs.None)
+        {
+            HideAll();
+            currentUIID = uiEvent.ID;
+            return;
+        }
+
+        HideUI(currentUIID);
+
+        EventManager.TriggerEvent(new ShowPopupEvent(PopupIDs.None));    //clear all popups
+        currentUIID = uiEvent.ID;
+        uiIDToScreenMap.TryGetValue(uiEvent.ID, out UIScreenBase screen);
+        if (screen != null)
+        {
+            screen.Show(param: uiEvent.param);
+        }
+        else
+        {
+            Debug.LogError($"UI Screen with ID {uiEvent.ID} not found.");
+        }
+    }
+
+    private void HideUI(UIIDs ID)
+    {
+        uiIDToScreenMap.TryGetValue(ID, out UIScreenBase screen);
+        if (screen != null)
+        {
+            screen.Hide();
+            EventManager.TriggerEvent<HideUIEvent>(new HideUIEvent(ID));
+        }
+    }
+
+    private void HideAll()
+    {
+        // Implement logic to hide all UI elements
+        Debug.Log("Hiding All UI");
+        foreach (var screen in screens)
+        {
+            screen.Hide();
+        }
+    }
+}
+
+public struct UIEvent
+{
+    public UIIDs ID { get; }
+    public ScreenParam param { get; }
+
+    public UIEvent(UIIDs id, ScreenParam param = null)
+    {
+        ID = id;
+        this.param = param;
+    }
+}
+public struct HideUIEvent
+{
+    public UIIDs ID { get; }
+    public HideUIEvent(UIIDs id)
+    {
+        ID = id;
+    }
+}
+
+
+================================================================================
+FILE 640/682: Assets/_GameUI/Base/Scripts/UIScreenAnimation.cs
+================================================================================
+
+using UnityEngine;
+
+public abstract class UIScreenAnimation : MonoBehaviour
+{
+    public abstract void PlayShowAnimation(System.Action onComplete = null);
+    public abstract void PlayHideAnimation(System.Action onComplete = null);
+}
+
+
+================================================================================
+FILE 641/682: Assets/_GameUI/Base/Scripts/UIScreenBase.cs
+================================================================================
+
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public abstract class UIScreenBase : MonoBehaviour, IScreen
+{
+    public UIIDs ID;
+    [SerializeField] protected GameObject root;
+    public bool IsVisible => root.activeSelf;
+    public int SortingOrder => (int)CanvasLayer.Screen;
+
+    protected virtual void Awake()
+    {
+        
+    }
+
+    public virtual void Initialize()
+    {
+        Hide();
+    }
+
+    public virtual void RegisterEvents()
+    {
+        // Override in derived classes to register events
+    }
+
+    public virtual void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        root.SetActive(true);
+    }
+
+    public virtual void Hide()
+    {
+        root.SetActive(false);
+    }
+
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (root == null)
+        {
+            root = transform.GetChild(0).gameObject;
+        }
+
+        if (transform.GetComponent<Canvas>() != null)
+        {
+            transform.GetComponent<Canvas>().sortingOrder = (int)CanvasLayer.Screen;
+        }
+        else if (transform.GetComponent<Canvas>() == null)
+        {
+            Debug.LogError("UIScreenBase requires a Canvas component on the root GameObject.");
+        }
+#endif
+    }
+}
+
+
+================================================================================
+FILE 642/682: Assets/_GameUI/Common/Scripts/CurrencyUI.cs
+================================================================================
+
+using UnityEngine;
+
+public class CurrencyUI : MonoBehaviour
+{
+    public InventoryItemType currencyType;
+    [SerializeField] private TMPro.TextMeshProUGUI currencyAmountText;
+
+    public void UpdateCurrencyAmount(int amount)
+    {
+        currencyAmountText.text = amount.ToString();
+    }
+
+    public void BuyItem()
+    {
+        // move to shop screen
+        EventManager.TriggerEvent<UIIDs>(UIIDs.Shop);
+    }
+}
+
+
+================================================================================
+FILE 643/682: Assets/_GameUI/Common/Scripts/ScreenNavigator.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(Button))]
+public class ScreenNavigator : MonoBehaviour
+{
+    [SerializeField] private UIIDs initialScreen = UIIDs.None;
+
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(OnClicked);
+    }
+
+    public void OnClicked()
+    {
+        if(initialScreen == UIIDs.None)
+        {
+            string message = LocalizationHelper.GetString(nameof(LocKeys.UI_Popup), LocKeys.UI_Popup.UI_Popup_ComingSoon);
+            EventManager.TriggerEvent(new ShowPopupEvent(PopupIDs.Inform, new InformPopupParam() { message = message }));
+            return;
+        }
+        EventManager.TriggerEvent(new UIEvent(initialScreen));
+    }
+}
+
+
+================================================================================
+FILE 644/682: Assets/_GameUI/Common/Scripts/TankPreviewComp.cs
+================================================================================
+
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
+
+public class TankPreviewComp : MonoBehaviour
+{
+    [SerializeField] private RawImage tankPreview;
+
+    private TankPreview currentTankPreviewObject;
+    private RenderTexture currentRenderTexture;
+
+    public void HideTankPreview()
+    {
+        int slotIdx = GetCurrentSlotIndex();
+        if (slotIdx != -1)
+            previewSlots[slotIdx] = null;
+
+        if (currentTankPreviewObject != null)
+        {
+            Destroy(currentTankPreviewObject.gameObject);
+            currentTankPreviewObject = null;
+        }
+        if (currentRenderTexture != null)
+        {
+            currentRenderTexture.Release();
+            currentRenderTexture = null;
+        }
+        if (tankPreview != null)
+            tankPreview.texture = null;
+    }
+
+    public void ShowTankPreview(string tankId)
+    {
+        HideTankPreview();
+        if (!string.IsNullOrEmpty(tankId))
+        {
+            GameAssetDocument tankAsset = DatabaseManager.GetDB<GameAssetCollection>().GetGameAssetDocumentById(tankId);
+            if (tankAsset != null)
+            {
+                int slotIdx = GetFreeSlotIndex();
+                currentTankPreviewObject = Instantiate(tankAsset.previewAsset as GameObject).GetComponent<TankPreview>();
+                currentTankPreviewObject.transform.position = previewStartPos + Vector3.right * previewSpacing * slotIdx;
+
+                // Nếu slot mới, thêm vào list
+                if (slotIdx == previewSlots.Count)
+                    previewSlots.Add(currentTankPreviewObject);
+                else
+                    previewSlots[slotIdx] = currentTankPreviewObject;
+
+                currentRenderTexture = new RenderTexture(768, 768, 24, RenderTextureFormat.ARGB32)
+                {
+                    useMipMap = false,
+                    autoGenerateMips = false,
+                    filterMode = FilterMode.Bilinear,
+                    anisoLevel = 0,
+                    antiAliasing = 1,
+                    enableRandomWrite = false,
+                    wrapMode = TextureWrapMode.Clamp,
+                };
+                currentRenderTexture.Create();
+                currentTankPreviewObject.SetRenderTexture(currentRenderTexture);
+                tankPreview.texture = currentRenderTexture;
+                DontDestroyOnLoad(currentTankPreviewObject.gameObject);
+            }
+        }
+    }
+
+    public void ChangeWrap(int wrapId, string tankId = "")
+    {
+        if (currentTankPreviewObject != null)
+        {
+            currentTankPreviewObject.ReloadWrap(wrapId, tankId);
+        }
+    }
+
+    public void Update()
+    {
+        DragRotate();
+    }
+    private bool isDragging = false;
+    private void DragRotate()
+    {
+        // Mouse
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (tankPreview != null && RectTransformUtility.RectangleContainsScreenPoint(
+                tankPreview.rectTransform, Input.mousePosition, null))
+            {
+                isDragging = true;
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+            isDragging = false;
+
+        // Touch
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (tankPreview != null && RectTransformUtility.RectangleContainsScreenPoint(
+                    tankPreview.rectTransform, touch.position, null))
+                {
+                    isDragging = true;
+                }
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                isDragging = false;
+            }
+        }
+
+        if (isDragging && currentTankPreviewObject != null)
+            currentTankPreviewObject.TouchRotate();
+    }
+
+
+    #region Helper - View Slot Management
+
+    // Danh sách các slot preview, tự động scale theo số lượng tank preview
+    public static List<TankPreview> previewSlots = new List<TankPreview>();
+    private static Vector3 previewStartPos = new Vector3(0, 0, 0);
+    private static float previewSpacing = 10f;
+
+    // Trả về vị trí slot trống đầu tiên
+    private int GetFreeSlotIndex()
+    {
+        for (int i = 0; i < previewSlots.Count; i++)
+            if (previewSlots[i] == null)
+                return i;
+        return previewSlots.Count; // Nếu không có slot trống, dùng slot mới
+    }
+
+    // Trả về vị trí slot của tank preview hiện tại
+    private int GetCurrentSlotIndex()
+    {
+        for (int i = 0; i < previewSlots.Count; i++)
+            if (previewSlots[i] == currentTankPreviewObject)
+                return i;
+        return -1;
+    }
+
+    #endregion
+
+}
+
+
+================================================================================
+FILE 645/682: Assets/_GameUI/FinalScreen/Scripts/FinalScreen.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using GDO.Audio;
+
+public class FinalScreen : UIScreenBase
+{
+    [Header("Team Kill Count")]
+    [SerializeField] private TextMeshProUGUI team0KillCountText;
+    [SerializeField] private TextMeshProUGUI team1KillCountText;
+    
+    [Header("Winner/Loser Display")]
+    [SerializeField] private GameObject winnerDisplay, loserDisplay, drawDisplay;
+    [Header("Winner Display")]
+    [SerializeField] private GameObject team0WinDisplay;
+    [SerializeField] private GameObject team0LoseDisplay;
+    [SerializeField] private GameObject team1WinDisplay;
+    [SerializeField] private GameObject team1LoseDisplay;
+    
+    [Header("MVP Player")]
+    [SerializeField] private Image mvpTankIcon;
+    [SerializeField] private TankPreviewComp mvpTankPreviewComp;
+    [SerializeField] private TextMeshProUGUI mvpPlayerNameText;
+    
+    [Header("Claim Reward")]
+    [SerializeField] private Button claimRewardButton;
+    
+    [Header("Team 0 Players")]
+    [SerializeField] private Transform team0PlayersParent;
+    [SerializeField] private List<FinalScreenPlayerCard> team0PlayerCards = new List<FinalScreenPlayerCard>();
+    
+    [Header("Team 1 Players")]
+    [SerializeField] private Transform team1PlayersParent;
+    [SerializeField] private List<FinalScreenPlayerCard> team1PlayerCards = new List<FinalScreenPlayerCard>();
+    
+    private MatchmakingDocument matchmakingDocument;
+    private int defenderKill;
+    private int attackerKill;
+    private int mvpId;
+    private int winningTeam;
+    private int myPlacementIndex;
+    private PackRewardDocument myRewards;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        if (claimRewardButton != null)
+        {
+            claimRewardButton.onClick.AddListener(OnClaimReward);
+        }
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        InitializeMatchResults();
+    }
+
+    private void InitializeMatchResults()
+    {
+        // Get match data
+        matchmakingDocument = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        GetResultsData();
+        FindMVP();
+        GetRewardsByPlacement();
+        DisplayTeamKillCounts();
+        DisplayWinnerSide();
+        DisplayMvpPlayer();
+        DisplayTeamPlayers();
+        UpdateElo();
+        // Left current session
+        EventManager.TriggerEvent(GamePhase.MatchReleasing);
+    }
+
+    private void GetResultsData()
+    {
+        SOMatchData matchDataDoc = DatabaseManager.GetDB<SOMatchData>();
+        winningTeam = matchDataDoc.winningTeam;
+        defenderKill = matchDataDoc.defenderKill;
+        attackerKill = matchDataDoc.attackerKill;
+    }
+
+    private void GetRewardsByPlacement()
+    {
+        SOMatchData matchDataDoc = DatabaseManager.GetDB<SOMatchData>();
+        MatchPlayerData[] matchData = matchDataDoc.MatchDataArray;
+        // Find all players placement for rewards
+        var placements = matchData.OrderByDescending(p => p.Kill)
+            .ThenBy(p => p.Death)
+            .ToList();
+        myPlacementIndex = placements.FindIndex(p => p.IsLocalPlayer);
+        var rewardId = matchmakingDocument.Rewards[myPlacementIndex];
+        myRewards = DatabaseManager.GetDB<PackRewardCollection>().GetPackRewardByID(rewardId);
+    }
+
+    private void FindMVP()
+    {
+        mvpId = -1; 
+        SOMatchData matchDataDoc = DatabaseManager.GetDB<SOMatchData>();
+        MatchPlayerData[] matchData = matchDataDoc.MatchDataArray;
+        
+        var mvpIdx = matchData
+            .Select((p, i) => new { p, i })
+            .Where(x => x.p.IsJoined && x.p.TeamIndex == winningTeam)
+            .OrderByDescending(x => x.p.Kill)
+            .ThenBy(x => x.p.Death)
+            .Select(x => (int?)x.p.PlayerId)
+            .FirstOrDefault();
+
+        if(mvpIdx == null)
+        {
+            mvpIdx = matchData
+            .Select((p, i) => new { p, i })
+            .Where(x => x.p.IsJoined)
+            .OrderByDescending(x => x.p.Kill)
+            .ThenBy(x => x.p.Death)
+            .Select(x => (int?)x.p.PlayerId)
+            .FirstOrDefault();
+        }
+
+        mvpId = mvpIdx ?? -1;
+        //Debug.Log($"FinalScreen FindMVP: winningTeam={winningTeam}, mvpIndex={mvpId}, matchData={string.Join(", ", matchData.Select(p => p.PlayerId))}");
+    }
+
+    private void UpdateElo()
+    {
+        Debug.Log("FinalScreen UpdateElo called with winningTeam: " + winningTeam);
+        if (winningTeam == -1) return; // no elo change on draw
+
+        // if i am the local player and i am winner, update elo
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        MatchPlayerData localPlayerData = matchData.ToList().Find(p => p.IsLocalPlayer);
+        
+        if (localPlayerData.TeamIndex == winningTeam)
+        {
+            DatabaseManager.GetDB<PlayerCollection>().UpdatePlayerElo(matchmakingDocument.WinPoint);
+        }
+        else
+        {
+            DatabaseManager.GetDB<PlayerCollection>().UpdatePlayerElo(matchmakingDocument.LosePoint);
+        }
+    }
+
+    private void DisplayTeamKillCounts()
+    {
+        if (team0KillCountText != null)
+            team0KillCountText.text = defenderKill.ToString();
+
+        if (team1KillCountText != null)
+            team1KillCountText.text = attackerKill.ToString();
+    }
+
+    private void DisplayWinnerSide()
+    {
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        MatchPlayerData localPlayerIndex = matchData.ToList().Find(p => p.IsLocalPlayer);
+        // Reset all displays
+        if (team0WinDisplay != null) team0WinDisplay.SetActive(false);
+        if (team0LoseDisplay != null) team0LoseDisplay.SetActive(false);
+        if (team1WinDisplay != null) team1WinDisplay.SetActive(false);
+        if (team1LoseDisplay != null) team1LoseDisplay.SetActive(false);
+
+        if (winnerDisplay != null) winnerDisplay.SetActive(false);
+        if (loserDisplay != null) loserDisplay.SetActive(false);
+        if (drawDisplay != null) drawDisplay.SetActive(false);
+        
+        // Show winner display
+        if (winningTeam == localPlayerIndex.TeamIndex)
+        {
+            if (winnerDisplay != null) winnerDisplay.SetActive(true);
+        }
+        else if (winningTeam == -1)
+        {
+            if (drawDisplay != null) drawDisplay.SetActive(true);
+        }
+        else
+        {
+            if (loserDisplay != null) loserDisplay.SetActive(true);
+        }
+    }
+
+    private void DisplayMvpPlayer()
+    {
+        if (mvpId == -1) return;
+
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        MatchPlayerData mvpPlayer = matchData.ToList().Find(p => p.PlayerId == mvpId);
+        // Display MVP tank icon
+        if (mvpTankIcon != null)
+        {
+            var tankIconSprite = gameAssetCollection.GetMainIcon(mvpPlayer.TankId);
+            mvpTankIcon.sprite = tankIconSprite;
+        }
+        if(mvpTankPreviewComp != null)
+        {
+            mvpTankPreviewComp.ShowTankPreview(mvpPlayer.TankId);
+            mvpTankPreviewComp.ChangeWrap(mvpPlayer.WrapId,mvpPlayer.TankId);
+        }
+        
+        // Display MVP player name
+        if (mvpPlayerNameText != null)
+        {
+            mvpPlayerNameText.text = mvpPlayer.PlayerName;
+        }
+    }
+
+    private void DisplayTeamPlayers()
+    {
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        // Setup team 0 player cards
+        var team0Players = matchData.Where(p => p.TeamIndex == 0).ToList();
+        SetupTeamPlayerCards(team0Players, team0PlayerCards, team0PlayersParent);
+        
+        // Setup team 1 player cards
+        var team1Players = matchData.Where(p => p.TeamIndex == 1).ToList();
+        SetupTeamPlayerCards(team1Players, team1PlayerCards, team1PlayersParent);
+    }
+
+    private void SetupTeamPlayerCards(List<MatchPlayerData> teamPlayers, List<FinalScreenPlayerCard> cardsList, Transform parent)
+    {
+        GameAssetCollection gameAssetCollection = DatabaseManager.GetDB<GameAssetCollection>();
+        Debug.Log($"FinalScreen SetupTeamPlayerCards: teamPlayers.Count={teamPlayers.Count}, cardsList.Count={cardsList.Count}");
+        // Set player info for active players
+        for (int i = 0; i < cardsList.Count; i++)
+        {
+            if (i < teamPlayers.Count)
+            {
+                Debug.Log($"FinalScreen SetupTeamPlayerCards: Setting up card for player {teamPlayers[i].PlayerName}");
+                // Player slot - show and set info
+                var player = teamPlayers[i];
+                bool isMvp = mvpId != -1 && player.PlayerId == mvpId;
+                cardsList[i].SetPlayerInfo(player, gameAssetCollection.GetMainIcon(player.TankId), isMvp);
+                cardsList[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.Log($"FinalScreen SetupTeamPlayerCards: Hiding card at index {i}");
+                // Empty slot - hide the card
+                cardsList[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void ClearPlayerCards()
+    {
+        // Just hide all cards instead of destroying them
+        foreach (var card in team0PlayerCards)
+        {
+            if (card != null)
+                card.gameObject.SetActive(false);
+        }
+        
+        foreach (var card in team1PlayerCards)
+        {
+            if (card != null)
+                card.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnClaimReward()
+    {
+        EventManager.TriggerEvent(new ShowPopupEvent(PopupIDs.Rewards, new RewardPopupParam
+        {
+            packReward = myRewards,
+            onClose = () =>
+            {
+                EventManager.TriggerEvent(GamePhase.MatchIdling);
+                mvpTankPreviewComp?.HideTankPreview();
+            }
+        }));
+    }
+
+    protected void OnDestroy()
+    {
+        if (claimRewardButton != null)
+        {
+            claimRewardButton.onClick.RemoveListener(OnClaimReward);
+            mvpTankPreviewComp?.HideTankPreview();
+        }
+    }
+}
+
+
+================================================================================
+FILE 646/682: Assets/_GameUI/FinalScreen/Scripts/FinalScreenPlayerCard.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using FusionHelpers;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FinalScreenPlayerCard : MonoBehaviour
+{
+    [SerializeField] private GameObject goMine;
+    [SerializeField] private Image tankIcon;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI killCountText;
+    [SerializeField] private TextMeshProUGUI deathCountText, goldText;
+    [SerializeField] private GameObject mvpIndicator;
+
+    //private Player player;
+    private MatchPlayerData playerData;
+    private bool isMVP;
+
+    public void SetPlayerInfo(MatchPlayerData data, Sprite tankIconSprite, bool isMvp)
+    {
+        //this.player = player as Player;
+        playerData = data;
+        isMVP = isMvp;
+
+        // Set tank icon
+        if (tankIcon != null)
+        {
+            tankIcon.sprite = tankIconSprite;
+            tankIcon.gameObject.SetActive(true);
+        }
+        // if (tankIcon != null && CoreGamePlay.Instance != null)
+        // {
+        //     var renderIconData = CoreGamePlay.Instance.GetTankIconRenderTexture(player.NetPlayerIndex);
+        //     tankIcon.texture = renderIconData.renderTexture;
+        //     tankIcon.uvRect = renderIconData.uvRect;
+        //     tankIcon.gameObject.SetActive(true);
+        // }
+        
+        // Set player name
+        if (playerNameText != null)
+        {
+            playerNameText.text = data.PlayerName.ToString();
+        }
+        
+        // Set kill count
+        if (killCountText != null)
+        {
+            killCountText.text = playerData.Kill.ToString();
+        }
+
+        // Set death count
+        if (deathCountText != null)
+        {
+            deathCountText.text = playerData.Death.ToString();
+        }
+        
+        if (goldText != null)
+        {
+            goldText.text = playerData.Gold.ToString();
+        }
+        
+        // Show/hide MVP indicator
+        if (mvpIndicator != null)
+        {
+            mvpIndicator.SetActive(isMvp);
+        }
+        
+        if (goMine != null)
+        {
+            goMine.SetActive(false);
+        }
+        // if (goAttack != null)
+        // {
+        //     goAttack.SetActive(false);
+        // }
+        // if (goDefend != null)
+        // {
+        //     goDefend.SetActive(false);
+        // }
+        if (playerData.IsLocalPlayer)
+        {
+            if (goMine != null)
+            {
+                goMine.SetActive(true);
+            }
+        }
+        else
+        {
+            // if (this.player.PlayerTeamIndex == 1)
+            // {
+            //     if (goAttack)
+            //     {
+            //         goAttack.SetActive(true);
+            //     }
+            // }
+            // else
+            // {
+            //     if (goDefend)
+            //     {
+            //         goDefend.SetActive(true);
+            //     }
+            // }
+        }
+    }
+
+    private void OnDisable()
+    {
+        playerData = null;
+        isMVP = false;
+    }
+}
+
+
+================================================================================
+FILE 647/682: Assets/_GameUI/GamePlayScreen/Scripts/GamePlayButtonItem.cs
+================================================================================
+
+using Fusion.TankOnlineModule;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+using Unity.VisualScripting;
+
+public class GamePlayButtonItem : MonoBehaviour
+{
+    public AbilityUseType skillType = AbilityUseType.Instant;
+    [SerializeField] private int slotIdx;
+
+    [SerializeField] private GameObject goItem;
+    [SerializeField] private Transform pnlStack;
+    [SerializeField] private Image icon;
+    [SerializeField] private Image imgCountDown;
+    [SerializeField] private Image imgCountStack;
+    [SerializeField] private TMP_Text txtStack;
+    [SerializeField] private Button btnClick;
+
+    [SerializeField] private Sprite[] slotIcon;
+    private Player player;
+    private bool initialized;
+    private AbilityBase ability;
+
+    private float range;
+    public void Init(Player player)
+    {
+        this.player = player;
+        // if (slotIdx < 0)
+        // {
+        //     initialized = false;
+        //     Hide();
+        //     return;
+        // }
+        Debug.Log("MobileInput|Init|slotIdx: " + slotIdx);
+        const int DEFAULT_ATK_SLOT = 0;
+        if (slotIdx <= DEFAULT_ATK_SLOT)
+        {
+            initialized = false;
+            return;
+        }
+        const int REMOVE_NORMALIZE_INDEX = 1;//NOTE: to convert to zero-based index OF ABILITY ARRAY
+        ability = player.abilityManager.GetAbilityBySlot(slotIdx - REMOVE_NORMALIZE_INDEX);
+        if (!ability)
+        {
+            initialized = false;
+            Hide();
+            return;
+        }
+        var customProperties = ability.GetCustomPropertiesRuntime();
+        //set default if not found customProperties.FirstOrDefault
+        var rangeProp = customProperties.FirstOrDefault(p => p.propertyName == "Range");
+        range = rangeProp != null ? rangeProp.propertyValue : 0f;
+
+        var typeProp = customProperties.FirstOrDefault(p => p.propertyName == "AbilityUseType");
+        skillType = typeProp != null ? (AbilityUseType)typeProp.propertyValue : AbilityUseType.Instant;
+
+        initialized = true;
+
+        LoadIcon(ability.abilityID);
+
+        imgCountDown.fillAmount = 0f;
+        imgCountStack.fillAmount = 0f;
+        txtStack.text = string.Empty;
+    }
+
+    public void Update()
+    {
+        //update countdown
+        if (!initialized || ability == null) return;
+        var customProperties = ability.GetCustomPropertiesRuntime();
+
+        var cooldownProp = customProperties.FirstOrDefault(p => p.propertyName == "Cooldown");
+        var cooldownRemainProp = customProperties.FirstOrDefault(p => p.propertyName == "CooldownRemaining");
+
+        float cooldown = cooldownProp != null ? cooldownProp.propertyValue : 0f;
+        float cooldownRemain = cooldownRemainProp != null ? cooldownRemainProp.propertyValue : 0f;
+
+        var coolDownStackProp = customProperties.FirstOrDefault(p => p.propertyName == "CoolDownStack");
+        var stackTimerProp = customProperties.FirstOrDefault(p => p.propertyName == "StackTimer");
+        var stackProp = customProperties.FirstOrDefault(p => p.propertyName == "Stack");
+
+
+        float coolDownStack = coolDownStackProp != null ? coolDownStackProp.propertyValue : 0f;
+        float stackTimer = stackTimerProp != null ? stackTimerProp.propertyValue : 0f;
+
+        int stack = stackProp != null ? (int)stackProp.propertyValue : 0;
+        txtStack.text = stack.ToString();
+        pnlStack.gameObject.SetActive(coolDownStack > 0);
+
+        imgCountDown.fillAmount = cooldown > 0 ? Mathf.Clamp01(cooldownRemain / cooldown) : 0f;
+
+
+        imgCountStack.fillAmount = coolDownStack > 0 ? Mathf.Clamp01(stackTimer / coolDownStack) : 0f;
+        //Debug.LogError($"GamePlayButtonItem|Update|abilityId: {ability.abilityID}, coolDownStack: {coolDownStack}, stackTimer: {stackTimer}, stack: {stack}, imgCountStack.fillAmount: {imgCountStack.fillAmount}");
+    }
+
+    public void Hide()
+    {
+        this.gameObject.SetActive(false);
+    }
+    public void LoadIcon(string abilityID)
+    {
+        if (!initialized) return;
+        if (abilityID == null || abilityID == "")
+        {
+            goItem.SetActive(false);
+            return;
+        }
+        string iconName = string.Format("{0}.icon", abilityID);
+        int idx = System.Array.FindIndex(slotIcon, s => s.name == iconName);
+        if (idx < 0)
+        {
+            Debug.LogWarning($"GamePlayButtonItem|LoadIcon|Not found icon for abilityId: {abilityID}");
+            goItem.SetActive(false);
+            return;
+        }
+        icon.sprite = slotIcon[idx];
+        goItem.SetActive(true);
+    }
+}
+
+
+================================================================================
+FILE 648/682: Assets/_GameUI/GamePlayScreen/Scripts/GamePlayButtonUpgrade.cs
+================================================================================
+
+using System;
+using Fusion.GameSystems;
+using Fusion.TankOnlineModule;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GamePlayButtonUpgrade : MonoBehaviour
+{
+    [SerializeField] private UpgradeType upgradeType;
+    [SerializeField] private Image icon;
+    [SerializeField] private Image stackIcon;
+    [SerializeField] private TMP_Text txtCurUpgrade;
+    [SerializeField] private TMP_Text txtUpgradeStats;
+    [SerializeField] private TMP_Text txtUpgradeCost;
+    [SerializeField] private Button btnSelect;
+    public bool IsHidden { get; set; } = false;
+    private TankDocument _curTankDocument;
+
+    private Player player;
+    private TankUpgradeStats _data;
+    private int upgradeCount;
+
+    private void Awake()
+    {
+        btnSelect.onClick.AddListener(OnButtonUpgrade);
+    }
+
+    public void DefineTankUpgrades()
+    {
+        _curTankDocument = DatabaseManager.GetDB<TankCollection>().GetActiveTank();
+        if (_curTankDocument != null && !string.IsNullOrWhiteSpace(_curTankDocument.tankId))
+        {
+            _data = DatabaseManager.GetDB<TankUpgradeCollection>().GetDefinition(_curTankDocument.tankId)
+                .GetStat(upgradeType);
+        }
+    }
+
+    public void Enable(bool status)
+    {
+        IsHidden = !status;
+    }
+
+    public void EnableSelectButton(bool status)
+    {
+        btnSelect.interactable = status & !IsHidden;
+        btnSelect.image.raycastTarget = status & !IsHidden;
+    }
+
+    private void OnEnable()
+    {
+       EventManager.Register<GameServer.GoldEvent>(OnGoldEvent);
+    }
+
+    private void OnDisable()
+    {
+        if (!GameManager.IsApplicationQuitting)
+            EventManager.Unregister<GameServer.GoldEvent>(OnGoldEvent);
+    }
+
+    private void OnGoldEvent(GameServer.GoldEvent obj)
+    {
+        Refresh();
+    }
+
+    private void OnButtonUpgrade()
+    {
+        if (upgradeCount >= _data.upgradeValues.Length) return;    //max upgrades
+
+        EventManager.TriggerEvent(new GameServer.UpgradeEvent() { UpgradeType = _data.type });
+    }
+
+    private void UpdateText()
+    {
+        if (upgradeCount >= _data.upgradeValues.Length)
+        {
+            txtUpgradeCost.text = "";
+            txtUpgradeStats.text = "MAX";
+        }
+        else
+        {
+            string typeName = LocalizationHelper.GetString(nameof(LocKeys.UI_GamePlay), LocKeys.UI_GamePlay.GetUpgradeNameType(_data.type));
+            txtUpgradeCost.text = _data.baseCost.ToString();
+            txtUpgradeStats.text = $"+{_data.upgradeValues[upgradeCount]:#0.#}% " + typeName;
+        }
+    }
+
+    public void Refresh()
+    {
+        if (_data == null) 
+            DefineTankUpgrades();
+        
+        player = GameServer.Instance.MyTank;
+        if (player == null) return;
+        if (_data == null)
+        {
+            Debug.LogError("GamePlayButtonUpgrade|Refresh|_data is null");
+            return;
+        } 
+        if (_data.upgradeValues == null)
+        {
+            Debug.LogError("GamePlayButtonUpgrade|Refresh|_data.upgradeValues is null");
+            return;
+        }
+
+        upgradeCount = player.StatsLevel[(int)upgradeType];
+        txtCurUpgrade.text = upgradeCount.ToString();
+        UpdateStackIcon();
+        if (upgradeCount >= _data.upgradeValues.Length)
+        {
+            UpdateText();
+            txtUpgradeCost.text = "";
+            EnableSelectButton(false);
+            return;
+        }
+        EnableSelectButton(true);
+        UpdateText();
+    }
+
+    private void UpdateStackIcon()
+    {
+        if (_data == null || stackIcon == null)
+            return;
+        int maxStack = _data.upgradeValues.Length;
+        int currentStack = upgradeCount;
+        stackIcon.gameObject.SetActive(currentStack > 0 && maxStack > 0);
+        if(!stackIcon.gameObject.activeSelf) return;
+
+
+        stackIcon.fillAmount = Mathf.Clamp01((float)currentStack / maxStack);
+    }
+}
+
+
+================================================================================
+FILE 649/682: Assets/_GameUI/GamePlayScreen/Scripts/GamePlayScreen.cs
+================================================================================
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Fusion.TankOnlineModule;
+using NUnit.Framework;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GamePlayScreen : UIScreenBase
+{
+    [SerializeField] private float _countdownFrom;
+    [SerializeField] private AnimationCurve _countdownCurve;
+    [SerializeField] private TextMeshProUGUI _countdownUI, _timerText, _attackerKillText, _defenderKillText, _goldText;
+    [SerializeField] private TextMeshProUGUI blueTeamDead, redTeamDead;
+    [SerializeField] private PlayerStatsUI currentPlayerStats;
+    [SerializeField] private PlayerStatsUI[] DefenderPlayersStats;
+    [SerializeField] private PlayerStatsUI[] AttackerPlayersStats;
+    [SerializeField] private GamePlayButtonUpgrade[] _buttonUpgrades;
+    [SerializeField] private List<GamePlayTurretIcon> _turretIcons;
+    [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private GameObject[] resultPanels;
+    private int winningTeam = -1;
+
+    public override void Initialize()
+    {
+        RegisterEvents();
+        base.Initialize();
+    }
+
+    public override void Show(int additionalSortingOrder = 0, ScreenParam param = null)
+    {
+        base.Show();
+        Reset();
+        InitTurrets();
+        DisplayUpgradeStats();
+        StartCoroutine(ShowUI());
+    }
+
+    public override void RegisterEvents()
+    {
+        EventManager.Register<Fusion.NetworkArray<GameServer.PlayerStats>>(UpdateScores);
+        EventManager.Register<GameServer.TimeEvent>(UpdateTimer);
+        EventManager.Register<GameServer.GoldEvent>(OnGoldEvent);
+        EventManager.Register<GameServer.UpgradeEvent>(OnUpgradeEvent);
+        EventManager.Register<GamePhase>(OnGameStateChange);
+        // EventManager.Register<CoreGamePlay.GamePlayDataEvent>(UpdateMatchInfo);
+        EventManager.Register<GamePlayDataEvent>(OnUpdateAllInfos);
+        EventManager.Register<GameOverEvent>(OnServerStateChanged);
+    }
+
+    private void UnregisterEvents()
+    {
+        EventManager.Unregister<Fusion.NetworkArray<GameServer.PlayerStats>>(UpdateScores);
+        EventManager.Unregister<GameServer.TimeEvent>(UpdateTimer);
+        EventManager.Unregister<GameServer.GoldEvent>(OnGoldEvent);
+        EventManager.Unregister<GameServer.UpgradeEvent>(OnUpgradeEvent);
+        EventManager.Unregister<GamePhase>(OnGameStateChange);
+        EventManager.Unregister<GamePlayDataEvent>(OnUpdateAllInfos);
+        EventManager.Unregister<GameOverEvent>(OnServerStateChanged);
+    }
+
+    private void OnServerStateChanged(GameOverEvent newState)
+    {
+        Debug.Log($"[GamePlayScreen] OnServerStateChanged: {newState}");
+        StartCoroutine(DisplayWinnerSide());
+    }
+
+    private void CalculateMatchResults()
+    {
+        MatchmakingDocument matchmakingDocument = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+        switch (matchmakingDocument.MatchMode)
+        {
+            case MatchMode.TeamDeathmatch:
+                CheckTeamDeathmatchWin();
+                break;
+            case MatchMode.CaptureBase:
+                CheckCaptureBaseWin();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void CheckCaptureBaseWin()
+    {
+        int defenderKill = 0;
+        int attackerKill = 0;
+        int outpostDestroyed = 0;
+        MatchmakingDocument matchmakingDocument = DatabaseManager.GetDB<MatchmakingCollection>().GetActiveDocument();
+
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        for (int i = 0; i < matchData.Length; i++)
+        {
+            if (matchData[i].TeamIndex == 0) // defender
+            {
+                attackerKill += matchData[i].Death;
+            }
+            else if (matchData[i].TeamIndex == 1) // attacker
+            {
+                outpostDestroyed += matchData[i].DestroyedTurrets;
+                defenderKill += matchData[i].Death;
+            }
+        }
+
+        winningTeam = -1;
+
+        // win if kill 20 or destroy all turrets
+        if (attackerKill >= matchmakingDocument.KillsNeededToWin
+            || outpostDestroyed >= matchmakingDocument.TargetsNeededToWin)
+        {
+            winningTeam = 1;
+        }
+        else
+        {
+            winningTeam = 0;
+        }
+        // save the results to SOMatchData
+        SOMatchData sOMatchData = DatabaseManager.GetDB<SOMatchData>();
+        sOMatchData.winningTeam = winningTeam;
+        sOMatchData.defenderKill = defenderKill;
+        sOMatchData.attackerKill = attackerKill;
+    }
+    
+    private void CheckTeamDeathmatchWin()
+    {
+        int team0Kill = 0;
+        int team1Kill = 0;
+
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        for (int i = 0; i < matchData.Length; i++)
+        {
+            if (matchData[i].TeamIndex == 0)
+            {
+                team1Kill += matchData[i].Death;
+            }
+            else if (matchData[i].TeamIndex == 1)
+            {
+                team0Kill += matchData[i].Death;
+            }
+        }
+
+        winningTeam = -1;
+
+        if (team0Kill > team1Kill)
+        {
+            winningTeam = 0;
+        }
+        else if (team1Kill > team0Kill)
+        {
+            winningTeam = 1;
+        }
+        else
+        {
+            winningTeam = -1; // draw
+        }
+
+        // save the results to SOMatchData
+        SOMatchData sOMatchData = DatabaseManager.GetDB<SOMatchData>();
+        sOMatchData.winningTeam = winningTeam;
+        sOMatchData.defenderKill = team0Kill;
+        sOMatchData.attackerKill = team1Kill;
+    }
+
+    private IEnumerator DisplayWinnerSide()
+    {
+        //calculate winningTeam
+        CalculateMatchResults();
+        endGamePanel.SetActive(true);
+        MatchPlayerData[] matchData = DatabaseManager.GetDB<SOMatchData>().MatchDataArray;
+        MatchPlayerData localPlayerIndex = matchData.ToList().Find(p => p.IsLocalPlayer);
+        resultPanels[0].SetActive(false);
+        resultPanels[1].SetActive(false);
+        resultPanels[2].SetActive(false);
+        // Show winner display
+        if (winningTeam == localPlayerIndex.TeamIndex)
+        {
+            if (resultPanels[1] != null) resultPanels[1].SetActive(true); //victory
+        }
+        else if (winningTeam == -1)
+        {
+            if (resultPanels[2] != null) resultPanels[2].SetActive(true); //draw
+        }
+        else
+        {
+            if (resultPanels[0] != null) resultPanels[0].SetActive(true); //defeat
+        }
+        yield return new WaitForSeconds(2);
+        Debug.Log("[GamePlayScreen] Invoke FINAL state");
+        EventManager.TriggerEvent<ServerStateEvent>(new ServerStateEvent{NewState = ServerState.FINAL});
+    }
+
+    private void DisplayUpgradeStats()
+    {
+        foreach (var buttonUpgrade in _buttonUpgrades)
+        {
+            buttonUpgrade.DefineTankUpgrades();
+        }
+    }
+
+    private void InitTurrets()
+    {
+        var turretsAlive = GameServer.Instance.TurretsAlive;
+        var collection = DatabaseManager.GetDB<TankCollection>();
+
+        foreach (var turretIcon in _turretIcons)
+        {
+            turretIcon.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < turretsAlive.Count; i++)
+        {
+            while (i >= _turretIcons.Count)
+            {
+                var newIcon = Instantiate(_turretIcons[0].gameObject, _turretIcons[0].transform.parent)
+                    .GetComponent<GamePlayTurretIcon>();
+                _turretIcons.Add(newIcon);
+            }
+            var turretIcon = _turretIcons[i];
+            var turret = turretsAlive[i];
+            var turretData = collection.GetTankByID(turret);
+            if (turretData == null)
+            {
+                Debug.LogError($"Turret data is null for {turret}");
+                continue;
+            }
+            turretIcon.gameObject.SetActive(true);
+            turretIcon.Init(turretData.tankId, turretData.tankName);
+        }
+    }
+
+    private void UpdateTurrets()
+    {
+        if (IsVisible == false) return;
+
+        var turretsAlive = GameServer.Instance.TurretsAlive;
+        foreach (var turretIcon in _turretIcons)
+        {
+            if (!turretIcon.gameObject.gameObject.activeSelf) continue;
+            turretIcon.UpdateActive(turretsAlive.Contains(turretIcon.TurretId));
+        }
+    }
+
+    public IEnumerator ShowUI()
+    {
+        yield return null;
+        OnUpdateAllInfos(new GamePlayDataEvent());
+    }
+
+    public void OnUpdateAllInfos(GamePlayDataEvent gamePlayDataEvent)
+    {
+        if (IsVisible == false) return;
+        SOMatchData sOMatchData = DatabaseManager.GetDB<SOMatchData>();
+        UpdateMatchInfo(sOMatchData);
+        UpdateUpgradesUI();
+        UpdatePlayersInfo(sOMatchData);
+    }
+
+
+    private void OnGameStateChange(GamePhase stateType)
+    {
+        if (IsVisible == false) return;
+
+        switch (stateType)
+        {
+            case GamePhase.MatchPlaying:
+                Reset();
+                break;
+
+        }
+    }
+
+    private void UpdateUpgradesUI()
+    {
+        if (IsVisible == false) return;
+        
+        foreach (var buttonUpgrade in _buttonUpgrades)
+        {
+            buttonUpgrade.Refresh();
+        }
+    }
+
+    private void OnUpgradeEvent(GameServer.UpgradeEvent @event)
+    {
+        if (IsVisible == false) return;
+
+        if (GameServer.Instance?.MyTank == null) return;
+
+        GameServer.Instance.MyTank.RPC_AddUpgrade(@event);
+        UpdateUpgradesUI();
+    }
+
+    private void OnGoldEvent(GameServer.GoldEvent @event)
+    {
+        if (IsVisible == false) return;
+
+        if (GameServer.Instance?.MyTank == null) return;
+
+        _goldText.text = $"Gold: {GameServer.Instance.MyTank.PlayerData.Gold}";
+        UpdateUpgradesUI();
+    }
+
+    private void UpdateTimer(GameServer.TimeEvent @event)
+    {
+        if (IsVisible == false) return;
+
+        //Debug.Log($"UpdateTimer: TimeRemaining={@event.TimeRemaining}, IsStarting={@event.IsStarting}");
+        _timerText.rectTransform.localScale = Vector3.one;
+        _timerText.text = TimeSpan.FromSeconds(@event.TimeRemaining).ToString(@"mm\:ss");
+    }
+
+    public void Reset()
+    {
+        endGamePanel.SetActive(false);
+        _countdownUI.transform.localScale = Vector3.zero;
+        _timerText.text = "--:--";
+        _attackerKillText.text = "0";
+        _defenderKillText.text = "0";
+        _goldText.text = "Gold: 0";
+        blueTeamDead.text = "0";
+        redTeamDead.text = "0";
+        //OnUpdateAllInfos(new GamePlayDataEvent());
+
+        // var allPlayers = CoreGamePlay.Instance.AllPlayers.ToList();
+        // Debug.Log($"Reset: {allPlayers.Count}");
+        // var curPlayer = allPlayers.First(p => p.HasInputAuthority);
+        // _currentPlayerStats.Init(curPlayer, true);
+        // var teamatePlayers = allPlayers
+        //     .Where(p => p.PlayerId != curPlayer.PlayerId && p.NetTeammateIndex == curPlayer.NetTeammateIndex)
+        //     .ToArray();
+        // Debug.Log($"Reset: {teamatePlayers.Length}");
+        // for (int i = 0; i < _teamatePlayersStats.Length; i++)
+        // {
+        //     if (i < teamatePlayers.Length)
+        //     {
+        //         _teamatePlayersStats[i].gameObject.SetActive(true);
+        //         _teamatePlayersStats[i].Init(teamatePlayers[i], false);
+        //     }
+        //     else
+        //     {
+        //         _teamatePlayersStats[i].gameObject.SetActive(false);
+        //     }
+        // }
+
+        // // hide all buttons to upgrade
+        // foreach (var buttonUpgrade in _buttonUpgrades)
+        // {
+        //     buttonUpgrade.Enable(false);
+        // }
+    }
+    private void UpdatePlayersInfo(SOMatchData gamePlayData)
+    {
+        if (IsVisible == false) return;
+        
+        if (gamePlayData == null) return;
+        Player myPlayer = GameServer.Instance?.MyTank;
+        if (myPlayer == null || myPlayer.PlayerData == null) return;
+
+        var defenderData = gamePlayData.MatchDataArray
+            .Where(p => p != null && p.IsJoined && p.TeamIndex == MatchIndexs.Defender && !string.IsNullOrEmpty(p.PlayerName))
+            .OrderBy(p => p.IndexInTeam)
+            .ToList();
+
+        var attackerData = gamePlayData.MatchDataArray
+            .Where(p => p != null && p.IsJoined && p.TeamIndex == MatchIndexs.Attacker && !string.IsNullOrEmpty(p.PlayerName))
+            .OrderBy(p => p.IndexInTeam)
+            .ToList();
+
+        for (int i = 0; i < DefenderPlayersStats.Length; i++)
+        {
+            if (i < defenderData.Count)
+            {
+                bool isMine = defenderData[i].IndexInTeam == myPlayer.PlayerData.IndexInTeam;
+                DefenderPlayersStats[i].gameObject.SetActive(true);
+                DefenderPlayersStats[i].Init(defenderData[i], isMine);
+            }
+            else
+            {
+                DefenderPlayersStats[i].gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < AttackerPlayersStats.Length; i++)
+        {
+            if (i < attackerData.Count)
+            {
+                bool isMine = attackerData[i].IndexInTeam == myPlayer.PlayerData.IndexInTeam;
+                AttackerPlayersStats[i].gameObject.SetActive(true);
+                AttackerPlayersStats[i].Init(attackerData[i], isMine);
+            }
+            else
+            {
+                AttackerPlayersStats[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void UpdateMatchInfo(SOMatchData gamePlayData)
+    {
+        if (gamePlayData == null) return;
+
+        // var attackerKillCount = 0;
+        // var defenderKillCount = 0;
+        // foreach (var player in gamePlayData.MatchDataArray)
+        // {
+        //     if (player.IsJoined)
+        //     {
+        //         if (player.TeamIndex == 1)
+        //         {
+        //             attackerKillCount += player.Kill;
+        //         }
+        //         else if (player.TeamIndex == 0)
+        //         {
+        //             defenderKillCount += player.Kill;
+        //         }
+        //     }
+        // }
+
+        UpdateTurrets();
+
+        // _attackerKillText.text = attackerKillCount.ToString();
+        // _defenderKillText.text = defenderKillCount.ToString();
+
+
+        UpdateKill(gamePlayData);
+    }
+
+    // Update dead with team
+    private void UpdateKill(SOMatchData gamePlayData)
+    {
+        if (IsVisible == false) return;
+        
+        var defenderDead = 0;
+        var attackerDead = 0;
+        foreach (var player in gamePlayData.MatchDataArray)
+        {
+            if (player.IsJoined)
+            {
+                if (player.TeamIndex == MatchIndexs.Defender)
+                    defenderDead += player.Death;
+                else
+                    attackerDead += player.Death;
+            }
+        }
+        this.blueTeamDead.text = attackerDead.ToString();
+        this.redTeamDead.text = defenderDead.ToString();
+    }
+
+    private void UpdateScores(Fusion.NetworkArray<GameServer.PlayerStats> playerStats)
+    {
+        if (IsVisible == false) return;
+        // var attackerKillCount = 0;
+        // var defenderKillCount = 0;
+        // foreach (var stats in playerStats)
+        // {
+        //     if (stats.team == 1)
+        //     {
+        //         attackerKillCount += stats.Kill;
+        //     }
+        //     else if (stats.team == 0)
+        //     {
+        //         defenderKillCount += stats.Kill;
+        //     }
+        // }
+
+        UpdateTurrets();
+
+        // _attackerKillText.text = attackerKillCount.ToString();
+        // _defenderKillText.text = defenderKillCount.ToString();
+
+        var _myTeamDead = 0;
+        var _enemyDead = 0;
+        Player player = GameServer.Instance.MyTank;
+        foreach (var stats in playerStats)
+        {
+            if (stats.team == player.PlayerTeamIndex)
+            {
+                _myTeamDead += stats.Death;
+            }
+            else
+            {
+                _enemyDead += stats.Death;
+            }
+        }
+        blueTeamDead.text = _enemyDead.ToString();
+        redTeamDead.text = _myTeamDead.ToString();
+    }
+}
+
+
+================================================================================
+FILE 650/682: Assets/_GameUI/GamePlayScreen/Scripts/GamePlayTurretIcon.cs
+================================================================================
+
+using TMPro;
+using UnityEngine;
+
+public class GamePlayTurretIcon : MonoBehaviour
+{
+    [SerializeField] private GameObject _active;
+    [SerializeField] private GameObject _inactive;
+    [SerializeField] private TMP_Text _txtName;
+    
+    public string TurretId { get; private set; }
+
+    public void Init(string turretId, string nameTxt)
+    {
+        TurretId = turretId;
+        _txtName.text = nameTxt;
+        UpdateActive(true);
+    }
+
+    public void UpdateActive(bool active)
+    {
+        _active.SetActive(active);
+        _inactive.SetActive(!active);
+    }
+}

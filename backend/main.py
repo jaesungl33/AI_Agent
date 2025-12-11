@@ -1,0 +1,1767 @@
+"""
+Minimal FastAPI backend for the GDD RAG frontend.
+
+This provides REST endpoints that the Next.js app can call:
+- GET  /health                -> simple health check
+- POST /documents/gdd         -> upload a GDD file
+- POST /documents/code        -> upload a code archive (placeholder)
+- GET  /gdd/{doc_id}/summary  -> placeholder GDD summary
+- POST /chat                  -> simple echo-style chat
+
+This is intentionally lightweight so you can get a real backend
+running quickly. Later, you can wire these endpoints into the full
+`gdd_rag_backbone` RAG pipeline.
+"""
+
+from __future__ import annotations
+
+import sys
+import time
+import zipfile
+import tempfile
+import shutil
+import re
+from pathlib import Path
+from datetime import datetime
+from typing import Optional, List, Union, Set
+import asyncio
+import logging
+
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse, StreamingResponse
+from pydantic import BaseModel
+import json
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Ensure project root and src are on PYTHONPATH so we can import existing modules later
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
+from gdd_rag_backbone.config import DEFAULT_DOCS_DIR  # type: ignore
+from gdd_rag_backbone.llm_providers import (  # type: ignore
+    QwenProvider,
+    make_llm_model_func,
+    make_embedding_func,
+)
+from gdd_rag_backbone.rag_backend import indexing  # type: ignore
+from gdd_rag_backbone.rag_backend.chunk_qa import (  # type: ignore
+    ask_with_chunks,
+    ask_across_docs,
+    load_doc_status,
+    load_doc_chunks,
+)
+from gdd_rag_backbone.gdd import (  # type: ignore
+    extract_all_requirements,
+    evaluate_all_requirements_behavior,
+)
+# BEHAVIOR_INDEX_CACHE_DIR is now handled via workspace storage
+from gdd_rag_backbone.workspace import WorkspaceManager, WorkspaceStorage  # type: ignore
+from gdd_rag_backbone.gdd.schemas import GddRequirement  # type: ignore
+
+ALLOWED_GDD_EXTS: Set[str] = {".pdf", ".docx", ".doc", ".txt", ".md"}
+ALLOWED_CODE_EXTS: Set[str] = {
+    ".cs",
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".py",
+    ".cpp",
+    ".cc",
+    ".c",
+    ".h",
+    ".hpp",
+    ".java",
+    ".go",
+    ".rs",
+    ".rb",
+    ".swift",
+    ".kt",
+    ".m",
+    ".mm",
+    ".php",
+    ".html",
+    ".css",
+    ".json",
+    ".xml",
+    ".yaml",
+    ".yml",
+    ".txt",
+    ".md",
+}
+
+
+app = FastAPI(title="GDD RAG Backend", version="0.1.0")
+
+# Increase timeout for long-running requests (coverage evaluation can take 2-10 minutes)
+# This ensures the connection stays alive during heavy processing
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Configure uvicorn timeout settings via startup event
+@app.on_event("startup")
+async def startup_event():
+    import logging
+    import uvicorn
+    # Note: These settings need to be passed to uvicorn.run(), not here
+    # But we can log that long-running tasks are expected
+    startup_logger = logging.getLogger(__name__)
+    startup_logger.info("[Backend] Server started. Long-running coverage evaluations are supported (up to 10 minutes).")
+
+
+@app.get("/health")
+async def health() -> dict:
+    """Simple health check used by the frontend to detect backend."""
+    return {"status": "ok", "time": datetime.utcnow().isoformat() + "Z"}
+
+
+# ============================================================================
+# Workspace Management Endpoints
+# ============================================================================
+
+class WorkspaceCreateRequest(BaseModel):
+    name: str
+    description: Optional[str] = ""
+    workspaceId: Optional[str] = None
+
+
+class WorkspaceUpdateRequest(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
+@app.post("/workspaces")
+async def create_workspace(payload: WorkspaceCreateRequest) -> JSONResponse:
+    """Create a new workspace."""
+    try:
+        manager = WorkspaceManager()
+        workspace_id = manager.create_workspace(
+            name=payload.name,
+            description=payload.description or "",
+            workspace_id=payload.workspaceId,
+        )
+        workspace = manager.get_workspace(workspace_id)
+        if workspace:
+            return JSONResponse({
+                "id": workspace.id,
+                "name": workspace.name,
+                "description": workspace.description,
+                "created_at": workspace.created_at,
+            })
+        raise HTTPException(status_code=500, detail="Failed to create workspace")
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"[Workspace] Create error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to create workspace: {str(e)}")
+
+
+@app.get("/workspaces")
+async def list_workspaces() -> JSONResponse:
+    """List all workspaces."""
+    try:
+        manager = WorkspaceManager()
+        workspaces = manager.list_workspaces()
+        return JSONResponse([
+            {
+                "id": ws.id,
+                "name": ws.name,
+                "description": ws.description,
+                "created_at": ws.created_at,
+                "updated_at": ws.updated_at,
+                "stats": ws.stats,
+            }
+            for ws in workspaces
+        ])
+    except Exception as e:
+        logger.error(f"[Workspace] List error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to list workspaces: {str(e)}")
+
+
+@app.get("/workspaces/{workspace_id}")
+async def get_workspace(workspace_id: str) -> JSONResponse:
+    """Get workspace details."""
+    try:
+        manager = WorkspaceManager()
+        workspace = manager.get_workspace(workspace_id)
+        if not workspace:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        return JSONResponse({
+            "id": workspace.id,
+            "name": workspace.name,
+            "description": workspace.description,
+            "created_at": workspace.created_at,
+            "updated_at": workspace.updated_at,
+            "settings": workspace.settings,
+            "stats": workspace.stats,
+        })
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Get error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get workspace: {str(e)}")
+
+
+@app.put("/workspaces/{workspace_id}")
+async def update_workspace(workspace_id: str, payload: WorkspaceUpdateRequest) -> JSONResponse:
+    """Update workspace metadata."""
+    try:
+        manager = WorkspaceManager()
+        success = manager.update_workspace(
+            workspace_id,
+            name=payload.name,
+            description=payload.description,
+        )
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        workspace = manager.get_workspace(workspace_id)
+        return JSONResponse({
+            "id": workspace.id,
+            "name": workspace.name,
+            "description": workspace.description,
+            "updated_at": workspace.updated_at,
+        })
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Update error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to update workspace: {str(e)}")
+
+
+@app.delete("/workspaces/{workspace_id}")
+async def delete_workspace(workspace_id: str) -> JSONResponse:
+    """Delete a workspace and all its data."""
+    try:
+        manager = WorkspaceManager()
+        success = manager.delete_workspace(workspace_id)
+        if not success:
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        return JSONResponse({"success": True, "message": f"Workspace '{workspace_id}' deleted"})
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"[Workspace] Delete error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to delete workspace: {str(e)}")
+
+
+@app.post("/workspaces/{workspace_id}/set-default")
+async def set_default_workspace(workspace_id: str) -> JSONResponse:
+    """Set a workspace as the default."""
+    try:
+        manager = WorkspaceManager()
+        manager.set_default_workspace(workspace_id)
+        return JSONResponse({"success": True, "default_workspace": workspace_id})
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        logger.error(f"[Workspace] Set default error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to set default workspace: {str(e)}")
+
+
+@app.get("/workspaces/default")
+async def get_default_workspace() -> JSONResponse:
+    """Get the default workspace ID."""
+    try:
+        manager = WorkspaceManager()
+        default_id = manager.get_default_workspace()
+        if not default_id:
+            return JSONResponse({"default_workspace": None})
+        workspace = manager.get_workspace(default_id)
+        if workspace:
+            return JSONResponse({
+                "default_workspace": default_id,
+                "name": workspace.name,
+            })
+        return JSONResponse({"default_workspace": None})
+    except Exception as e:
+        logger.error(f"[Workspace] Get default error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get default workspace: {str(e)}")
+
+
+# ============================================================================
+# Workspace-Scoped Document Endpoints
+# ============================================================================
+
+@app.get("/documents")
+async def list_documents(workspaceId: Optional[str] = None) -> JSONResponse:
+    """
+    Return all indexed documents (backward compatible).
+    Uses default workspace if workspaceId not provided.
+    """
+    # Use workspace_id if provided, otherwise use default
+    if workspaceId:
+        workspace_id = workspaceId
+    else:
+        manager = WorkspaceManager()
+        workspace_id = manager.get_default_workspace()
+    
+    status = load_doc_status(workspace_id=workspace_id)
+    documents = []
+
+    for doc_id, meta in status.items():
+        file_path = meta.get("file_path", "")
+        file_name = meta.get("file_name") or Path(file_path).name or doc_id
+
+        # -------------------------
+        # Normalize document type
+        # -------------------------
+        # Heuristic:
+        # - Explicit meta["doc_type"] wins if it is "code" or "gdd"
+        # - IDs starting with "code_" are code
+        # - Tank Online codebase batches (tank_online_codebase_batchXXX) are code
+        # - Otherwise treat as GDD (design docs, maps, systems, etc.)
+        raw_type = (meta.get("doc_type") or "").lower()
+        if raw_type in {"code", "gdd"}:
+            doc_type = raw_type
+        elif doc_id.startswith("code_"):
+            doc_type = "code"
+        elif doc_id.startswith("tank_online_codebase_batch"):
+            doc_type = "code"
+        else:
+            doc_type = "gdd"
+
+        # -------------------------
+        # Normalize status
+        # -------------------------
+        # Frontend expects:
+        # - "uploaded" | "indexing" | "indexed" | "error"
+        # Many RAG docs are stored as "processed" → map to "indexed".
+        raw_status = (meta.get("status") or "").lower()
+        if raw_status in {"indexed", "processed"}:
+            norm_status = "indexed"
+        elif raw_status in {"uploading", "indexing"}:
+            norm_status = "indexing"
+        elif raw_status in {"error", "failed"}:
+            norm_status = "error"
+        elif raw_status == "uploaded":
+            norm_status = "uploaded"
+        else:
+            # Default to indexed so existing docs show up in the UI
+            norm_status = "indexed"
+
+        # Ensure chunks count is accurate by loading from store if metadata is empty
+        chunks = meta.get("chunks_list") or meta.get("chunks") or []
+        if not chunks:
+            try:
+                loaded_chunks = load_doc_chunks(doc_id, workspace_id=workspace_id)
+                chunks = [c.chunk_id for c in loaded_chunks]
+            except Exception:
+                chunks = []
+        if not chunks:
+            try:
+                loaded_chunks = load_doc_chunks(doc_id, workspace_id=workspace_id)
+                chunks = [c.chunk_id for c in loaded_chunks]
+            except Exception:
+                chunks = []
+
+        documents.append(
+            {
+                "id": doc_id,
+                "name": file_name,
+                "type": doc_type,
+                "filePath": file_path,
+                "status": norm_status,
+                "indexedAt": meta.get("updated_at") or meta.get("created_at"),
+                "chunksCount": len(chunks),
+            }
+        )
+
+    # Sort alphabetically for consistent UI
+    documents.sort(key=lambda doc: doc["id"])
+    return JSONResponse(documents)
+
+
+@app.get("/workspaces/{workspace_id}/documents")
+async def list_workspace_documents(workspace_id: str) -> JSONResponse:
+    """
+    Return all indexed documents from a workspace.
+    """
+    # Verify workspace exists
+    manager = WorkspaceManager()
+    if not manager.workspace_exists(workspace_id):
+        raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    
+    status = load_doc_status(workspace_id=workspace_id)
+    documents = []
+
+    for doc_id, meta in status.items():
+        file_path = meta.get("file_path", "")
+        file_name = meta.get("file_name") or Path(file_path).name or doc_id
+
+        # Normalize document type
+        raw_type = (meta.get("doc_type") or "").lower()
+        if raw_type in {"code", "gdd"}:
+            doc_type = raw_type
+        elif doc_id.startswith("code_"):
+            doc_type = "code"
+        elif doc_id.startswith("tank_online_codebase_batch"):
+            doc_type = "code"
+        else:
+            doc_type = "gdd"
+
+        # Normalize status
+        raw_status = (meta.get("status") or "").lower()
+        if raw_status in {"indexed", "processed"}:
+            norm_status = "indexed"
+        elif raw_status in {"uploading", "indexing"}:
+            norm_status = "indexing"
+        elif raw_status in {"error", "failed"}:
+            norm_status = "error"
+        elif raw_status == "uploaded":
+            norm_status = "uploaded"
+        else:
+            norm_status = "indexed"
+
+        chunks = meta.get("chunks_list") or meta.get("chunks") or []
+
+        documents.append(
+            {
+                "id": doc_id,
+                "name": file_name,
+                "type": doc_type,
+                "filePath": file_path,
+                "status": norm_status,
+                "indexedAt": meta.get("updated_at") or meta.get("created_at"),
+                "chunksCount": len(chunks),
+            }
+        )
+
+    documents.sort(key=lambda doc: doc["id"])
+    return JSONResponse(documents)
+
+
+@app.post("/documents/gdd")
+async def upload_gdd(
+    file: UploadFile = File(...),
+    docId: Optional[str] = Form(default=None),
+    workspaceId: Optional[str] = Form(default=None),
+) -> JSONResponse:
+    """
+    Upload and index a GDD document (backward compatible).
+    Uses default workspace if workspaceId not provided.
+    """
+    # Get workspace
+    manager = WorkspaceManager()
+    if workspaceId:
+        workspace_id = workspaceId
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+    
+    storage = WorkspaceStorage(workspace_id)
+    docs_dir = storage.get_documents_dir("gdd")
+    docs_dir.mkdir(parents=True, exist_ok=True)
+
+    # Determine doc_id
+    if docId and docId.strip():
+        doc_id = docId.strip()
+    else:
+        doc_id = Path(file.filename).stem.replace(" ", "_")
+
+    # Save file to workspace documents/
+    suffix = Path(file.filename).suffix or ".pdf"
+    target_path = docs_dir / f"{doc_id}{suffix}"
+    contents = await file.read()
+    target_path.write_bytes(contents)
+    status: str = "uploaded"
+    message: str = f'File "{file.filename}" saved as "{target_path.name}".'
+
+    # Index the document with RAG-Anything so it can be queried in chat
+    try:
+        provider = QwenProvider()
+        llm_func = make_llm_model_func(provider)
+        embedding_func = make_embedding_func(provider)
+
+        await indexing.index_document(
+            doc_path=target_path,
+            doc_id=doc_id,
+            llm_func=llm_func,
+            embedding_func=embedding_func,
+            workspace_id=workspace_id,
+        )
+        status = "indexed"
+        message = f'File "{file.filename}" saved and indexed as "{target_path.name}".'
+    except Exception as exc:  # pragma: no cover - runtime safety
+        status = "error"
+        message = (
+            f'File "{file.filename}" was saved as "{target_path.name}", '
+            f"but indexing failed: {exc}"
+        )
+
+    return JSONResponse(
+        {
+            "docId": doc_id,
+            "workspaceId": workspace_id,
+            "status": status,
+            "message": message,
+        }
+    )
+
+
+@app.post("/documents/gdd/batch")
+async def upload_gdd_batch(
+    files: List[UploadFile] = File(...),
+) -> JSONResponse:
+    """
+    Upload multiple GDD files at once.
+    Each file is saved and indexed individually.
+    """
+    if not files:
+        raise HTTPException(status_code=400, detail="No files uploaded.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+
+    results = []
+    for file in files:
+        doc_id = Path(file.filename).stem.replace(" ", "_")
+        suffix = Path(file.filename).suffix or ".pdf"
+        target_path = DEFAULT_DOCS_DIR / f"{doc_id}{suffix}"
+        try:
+            contents = await file.read()
+            target_path.write_bytes(contents)
+
+            status = "uploaded"
+            message = f'File "{file.filename}" saved as "{target_path.name}".'
+
+            try:
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=doc_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'File "{file.filename}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = (
+                    f'File "{file.filename}" was saved as "{target_path.name}", '
+                    f"but indexing failed: {exc}"
+                )
+
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": status,
+                    "message": message,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": "error",
+                    "message": f'Failed to save "{file.filename}": {exc}',
+                }
+            )
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+# ============================================================================
+# Export utilities (GDD requirements and code functions)
+# ============================================================================
+
+def _get_workspace_status(workspace_id: Optional[str]) -> dict:
+    manager = WorkspaceManager()
+    if workspace_id:
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+    status = load_doc_status(workspace_id=workspace_id)
+    return status, workspace_id
+
+
+@app.get("/export/gdd")
+async def export_gdd_requirements(workspaceId: Optional[str] = None) -> JSONResponse:
+    """
+    Extract requirements/objects/systems/logic rules for all GDDs in a workspace
+    and save to a markdown file in the workspace reports directory.
+    """
+    status, workspace_id = _get_workspace_status(workspaceId)
+    gdd_ids = [doc_id for doc_id, meta in status.items() if (meta.get("doc_type") or "").lower() != "code"]
+    if not gdd_ids:
+        raise HTTPException(status_code=404, detail="No GDDs found in workspace.")
+
+    lines = []
+    total_reqs = 0
+    errors = []
+    storage = WorkspaceStorage(workspace_id)
+    reports_dir = storage.get_reports_dir()
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    try:
+        provider = QwenProvider()
+        llm_func = make_llm_model_func(provider)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"LLM provider init failed: {exc}")
+
+    for gdd_id in gdd_ids:
+        lines.append(f"# {gdd_id}")
+        try:
+            spec_data = await extract_all_requirements(gdd_id, llm_func=llm_func, workspace_id=workspace_id)
+        except Exception as exc:
+            msg = f"Failed to extract {gdd_id}: {exc}"
+            lines.append(f"- {msg}")
+            errors.append(msg)
+            continue
+        reqs = spec_data.get("requirements", [])
+        objs = spec_data.get("objects", [])
+        systems = spec_data.get("systems", [])
+        rules = spec_data.get("logic_rules", [])
+
+        lines.append("## Requirements")
+        for r in reqs:
+            total_reqs += 1
+            lines.append(f"- **{r.get('id','')}**: {r.get('title') or r.get('summary') or ''}")
+            if r.get("description"):
+                lines.append(f"  - {r['description']}")
+        lines.append("## Objects")
+        for o in objs:
+            lines.append(f"- {o.get('id','')}: {o.get('name','')}")
+        lines.append("## Systems")
+        for s in systems:
+            lines.append(f"- {s.get('id','')}: {s.get('name','')}")
+        lines.append("## Logic Rules")
+        for l in rules:
+            lines.append(f"- {l.get('id','')}: {l.get('summary','')}")
+        lines.append("")
+
+    output_path = reports_dir / "gdd_requirements_export.md"
+    output_path.write_text("\n".join(lines), encoding="utf-8")
+
+    return JSONResponse({
+        "workspaceId": workspace_id,
+        "gddCount": len(gdd_ids),
+        "requirementsExported": total_reqs,
+        "file": str(output_path),
+        "errors": errors,
+    })
+
+
+def _extract_function_names(text: str) -> list[str]:
+    # Very simple heuristic for function-like patterns
+    pattern = re.compile(r"\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(", re.MULTILINE)
+    names = pattern.findall(text or "")
+    # Filter out common keywords
+    blocked = {"if", "for", "while", "switch", "catch", "return", "case", "else", "try"}
+    return [n for n in names if n not in blocked]
+
+
+@app.get("/export/code")
+async def export_code_functions(workspaceId: Optional[str] = None) -> JSONResponse:
+    """
+    Extract function/method names from all code docs in a workspace and
+    save to a markdown file in the workspace reports directory.
+    """
+    status, workspace_id = _get_workspace_status(workspaceId)
+    code_ids = [doc_id for doc_id, meta in status.items() if (meta.get("doc_type") or "").lower() == "code"]
+    if not code_ids:
+        raise HTTPException(status_code=404, detail="No code documents found in workspace.")
+
+    storage = WorkspaceStorage(workspace_id)
+    reports_dir = storage.get_reports_dir()
+    reports_dir.mkdir(parents=True, exist_ok=True)
+
+    lines = []
+    total_funcs = 0
+    errors = []
+    for code_id in code_ids:
+        lines.append(f"# {code_id}")
+        try:
+            chunks = load_doc_chunks(code_id, workspace_id=workspace_id)
+            func_set = set()
+            for chunk in chunks:
+                for name in _extract_function_names(chunk.content):
+                    func_set.add(name)
+            total_funcs += len(func_set)
+            if func_set:
+                for name in sorted(func_set):
+                    lines.append(f"- {name}")
+            else:
+                lines.append("- (no functions detected)")
+        except Exception as exc:
+            msg = f"Failed to process {code_id}: {exc}"
+            lines.append(f"- {msg}")
+            errors.append(msg)
+        lines.append("")
+
+    output_path = reports_dir / "code_functions_export.md"
+    output_path.write_text("\n".join(lines), encoding="utf-8")
+
+    return JSONResponse({
+        "workspaceId": workspace_id,
+        "codeDocs": len(code_ids),
+        "functionsExported": total_funcs,
+        "file": str(output_path),
+        "errors": errors,
+    })
+
+
+@app.post("/export/compare")
+async def compare_exports(workspaceId: Optional[str] = None) -> JSONResponse:
+    """
+    Compare exported GDD requirements vs code function names using simple name matching.
+    Outputs a markdown report in the workspace reports directory.
+    """
+    _, workspace_id = _get_workspace_status(workspaceId)
+    storage = WorkspaceStorage(workspace_id)
+    reports_dir = storage.get_reports_dir()
+    gdd_path = reports_dir / "gdd_requirements_export.md"
+    code_path = reports_dir / "code_functions_export.md"
+
+    if not gdd_path.exists() or not code_path.exists():
+        raise HTTPException(status_code=400, detail="Exports not found. Run /export/gdd and /export/code first.")
+
+    gdd_text = gdd_path.read_text(encoding="utf-8")
+    code_text = code_path.read_text(encoding="utf-8")
+
+    # Parse requirements ids/titles from the GDD export (lines starting with "- **ID**:")
+    reqs = []
+    for line in gdd_text.splitlines():
+        if line.startswith("- **"):
+            try:
+                # - **req_id**: title
+                parts = line[3:].split("**", 2)
+                if len(parts) >= 2:
+                    req_id = parts[0]
+                    title_part = parts[-1].lstrip(": ").strip()
+                    reqs.append((req_id, title_part))
+            except Exception:
+                continue
+
+    # Parse function names from code export (lines starting with "- name")
+    funcs = set()
+    for line in code_text.splitlines():
+        if line.startswith("- "):
+            name = line[2:].strip()
+            if name and not name.startswith("("):
+                funcs.add(name)
+
+    implemented = []
+    missing = []
+    for req_id, title in reqs:
+        # naive match: if any function name is substring of title or req_id
+        matched = False
+        for fn in funcs:
+            if fn.lower() in req_id.lower() or fn.lower() in title.lower():
+                implemented.append((req_id, title, fn))
+                matched = True
+                break
+        if not matched:
+            missing.append((req_id, title))
+
+    lines = []
+    lines.append("# Comparison Report")
+    lines.append(f"- Workspace: {workspace_id}")
+    lines.append(f"- Total requirements: {len(reqs)}")
+    lines.append(f"- Total code functions: {len(funcs)}")
+    lines.append(f"- Implemented (naive match): {len(implemented)}")
+    lines.append(f"- Missing (no match): {len(missing)}")
+    lines.append("")
+    lines.append("## Implemented")
+    if implemented:
+        for req_id, title, fn in implemented:
+            lines.append(f"- {req_id}: {title} -> {fn}")
+    else:
+        lines.append("- None")
+    lines.append("")
+    lines.append("## Missing")
+    if missing:
+        for req_id, title in missing:
+            lines.append(f"- {req_id}: {title}")
+    else:
+        lines.append("- None")
+
+    compare_path = reports_dir / "compare_report.md"
+    compare_path.write_text("\n".join(lines), encoding="utf-8")
+
+    return JSONResponse({
+        "workspaceId": workspace_id,
+        "requirements": len(reqs),
+        "functions": len(funcs),
+        "implemented": len(implemented),
+        "missing": len(missing),
+        "file": str(compare_path),
+    })
+
+@app.post("/documents/gdd/archive")
+async def upload_gdd_archive(
+    file: UploadFile = File(...),
+) -> JSONResponse:
+    """
+    Upload a ZIP archive of GDD files and index each allowed document inside.
+    Allowed extensions: .pdf, .docx, .doc, .txt, .md
+    """
+    if not file.filename.lower().endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Only ZIP archives are supported for GDD archive upload.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+
+    temp_dir = Path(tempfile.mkdtemp(prefix="gdd_archive_"))
+    results = []
+    try:
+        archive_path = temp_dir / file.filename
+        archive_path.write_bytes(await file.read())
+
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            zf.extractall(temp_dir)
+
+        # Walk extracted files
+        for path in temp_dir.rglob("*"):
+            if path.is_dir():
+                continue
+            ext = path.suffix.lower()
+            if ext not in ALLOWED_GDD_EXTS:
+                continue
+
+            doc_id = path.stem.replace(" ", "_")
+            target_path = DEFAULT_DOCS_DIR / f"{doc_id}{ext}"
+            try:
+                shutil.copy2(path, target_path)
+                status = "uploaded"
+                message = f'File "{path.name}" saved as "{target_path.name}".'
+
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=doc_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'File "{path.name}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = f'File "{path.name}" was saved but indexing failed: {exc}'
+
+            results.append(
+                {
+                    "docId": doc_id,
+                    "status": status,
+                    "message": message,
+                }
+            )
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+@app.post("/documents/code")
+async def upload_code(
+    file: UploadFile = File(...),
+    indexId: Optional[str] = Form(default=None),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+    workspaceId: Optional[str] = Form(default=None),
+) -> JSONResponse:
+    """
+    Upload a game code archive (e.g. ZIP) and index it for coverage/behaviors.
+    Supports workspace context.
+    """
+    # Get workspace
+    manager = WorkspaceManager()
+    if workspaceId:
+        workspace_id = workspaceId
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+    
+    storage = WorkspaceStorage(workspace_id)
+    docs_dir = storage.get_documents_dir("code")
+    docs_dir.mkdir(parents=True, exist_ok=True)
+
+    if indexId and indexId.strip():
+        idx_id = indexId.strip()
+    else:
+        idx_id = Path(file.filename).stem.replace(" ", "_")
+
+    suffix = Path(file.filename).suffix or ".zip"
+    target_path = docs_dir / f"{idx_id}{suffix}"
+    contents = await file.read()
+    target_path.write_bytes(contents)
+    ext = target_path.suffix.lower()
+
+    status = "uploaded"
+    message = f'Code file "{file.filename}" saved as "{target_path.name}".'
+
+    # Index the code archive so it becomes a code document with chunks
+    try:
+        provider = QwenProvider()
+        llm_func = make_llm_model_func(provider)
+        embedding_func = make_embedding_func(provider)
+
+        # Raw-text ingest for common code/text extensions to bypass parser issues
+        if ext in {".cs", ".txt", ".md", ".js", ".ts", ".jsx", ".tsx", ".py", ".java", ".cpp", ".cc", ".c", ".h", ".hpp", ".go", ".rs", ".rb", ".swift", ".kt", ".m", ".mm", ".php", ".html", ".css", ".json", ".xml", ".yaml", ".yml"}:
+            await indexing.index_document_raw_text(
+                doc_path=target_path,
+                doc_id=idx_id,
+                llm_func=llm_func,
+                embedding_func=embedding_func,
+                workspace_id=workspace_id,
+            )
+        else:
+            await indexing.index_document(
+                doc_path=target_path,
+                doc_id=idx_id,
+                llm_func=llm_func,
+                embedding_func=embedding_func,
+                workspace_id=workspace_id,
+            )
+        status = "indexed"
+        message = f'Code file "{file.filename}" saved and indexed as "{target_path.name}".'
+    except Exception as exc:  # pragma: no cover
+        status = "error"
+        message = (
+            f'Code file "{file.filename}" was saved as "{target_path.name}", '
+            f"but indexing failed: {exc}"
+        )
+
+    # Optionally clear cached behavior index for this code id so next coverage rebuilds it
+    if rebuildBehaviorIndex:
+        cache_path = storage.get_behavior_cache_dir() / f"{idx_id}_behaviors.json"
+        try:
+            if cache_path.exists():
+                cache_path.unlink()
+                logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+        except Exception as exc:
+            logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
+
+    return JSONResponse(
+        {
+            "indexId": idx_id,
+            "workspaceId": workspace_id,
+            "status": status,
+            "message": message,
+            "batchCount": 1,
+            "rebuildBehaviorIndex": rebuildBehaviorIndex,
+        }
+    )
+
+
+@app.post("/documents/code/batch")
+async def upload_code_batch(
+    files: List[UploadFile] = File(...),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+) -> JSONResponse:
+    """
+    Upload multiple code files/archives at once.
+    Saves them to docs/ and indexes each for coverage/behaviors.
+    """
+    if not files:
+        raise HTTPException(status_code=400, detail="No files uploaded.")
+
+    DEFAULT_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+    results = []
+
+    for file in files:
+        idx_id = Path(file.filename).stem.replace(" ", "_")
+        suffix = Path(file.filename).suffix or ".zip"
+        target_path = DEFAULT_DOCS_DIR / f"{idx_id}{suffix}"
+        try:
+            contents = await file.read()
+            target_path.write_bytes(contents)
+
+            status = "uploaded"
+            message = f'Code file "{file.filename}" saved as "{target_path.name}".'
+
+            try:
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                await indexing.index_document(
+                    doc_path=target_path,
+                    doc_id=idx_id,
+                    llm_func=llm_func,
+                    embedding_func=embedding_func,
+                )
+                status = "indexed"
+                message = f'Code file "{file.filename}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = (
+                    f'Code file "{file.filename}" was saved as "{target_path.name}", '
+                    f"but indexing failed: {exc}"
+                )
+
+            if rebuildBehaviorIndex:
+                # Use workspace storage for behavior cache
+                cache_path = storage.get_behavior_cache_dir() / f"{idx_id}_behaviors.json"
+                try:
+                    if cache_path.exists():
+                        cache_path.unlink()
+                        logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+                except Exception as exc:
+                    logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
+
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "workspaceId": workspace_id,
+                    "status": status,
+                    "message": message,
+                    "batchCount": 1,
+                    "rebuildBehaviorIndex": rebuildBehaviorIndex,
+                }
+            )
+        except Exception as exc:
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "status": "error",
+                    "message": f'Failed to save "{file.filename}": {exc}',
+                }
+            )
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+@app.post("/documents/code/archive")
+async def upload_code_archive(
+    file: UploadFile = File(...),
+    rebuildBehaviorIndex: Optional[bool] = Form(default=False),
+    workspaceId: Optional[str] = Form(default=None),
+) -> JSONResponse:
+    """
+    Upload a ZIP archive of code files. Allowed extensions mirror code behavior indexing.
+    Each allowed file is saved and indexed individually under docs/.
+    """
+    if not file.filename.lower().endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Only ZIP archives are supported for code archive upload.")
+
+    # Get workspace
+    manager = WorkspaceManager()
+    if workspaceId:
+        workspace_id = workspaceId
+        if not manager.workspace_exists(workspace_id):
+            raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+    else:
+        workspace_id = manager.get_default_workspace()
+        if not workspace_id:
+            raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+
+    storage = WorkspaceStorage(workspace_id)
+    docs_dir = storage.get_documents_dir("code")
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    temp_dir = Path(tempfile.mkdtemp(prefix="code_archive_"))
+    results = []
+    try:
+        archive_path = temp_dir / file.filename
+        archive_path.write_bytes(await file.read())
+
+        with zipfile.ZipFile(archive_path, "r") as zf:
+            zf.extractall(temp_dir)
+
+        for path in temp_dir.rglob("*"):
+            if path.is_dir():
+                continue
+            ext = path.suffix.lower()
+            if ext not in ALLOWED_CODE_EXTS:
+                continue
+
+            idx_id = path.stem.replace(" ", "_")
+            target_path = docs_dir / f"{idx_id}{ext}"
+            try:
+                shutil.copy2(path, target_path)
+
+                status = "uploaded"
+                message = f'Code file "{path.name}" saved as "{target_path.name}".'
+
+                provider = QwenProvider()
+                llm_func = make_llm_model_func(provider)
+                embedding_func = make_embedding_func(provider)
+
+                # Raw-text ingest for common code/text extensions to bypass parser issues
+                if ext in {".cs", ".txt", ".md", ".js", ".ts", ".jsx", ".tsx", ".py", ".java", ".cpp", ".cc", ".c", ".h", ".hpp", ".go", ".rs", ".rb", ".swift", ".kt", ".m", ".mm", ".php", ".html", ".css", ".json", ".xml", ".yaml", ".yml"}:
+                    await indexing.index_document_raw_text(
+                        doc_path=target_path,
+                        doc_id=idx_id,
+                        llm_func=llm_func,
+                        embedding_func=embedding_func,
+                        workspace_id=workspace_id,
+                    )
+                else:
+                    await indexing.index_document(
+                        doc_path=target_path,
+                        doc_id=idx_id,
+                        llm_func=llm_func,
+                        embedding_func=embedding_func,
+                        workspace_id=workspace_id,
+                    )
+                status = "indexed"
+                message = f'Code file "{path.name}" saved and indexed as "{target_path.name}".'
+            except Exception as exc:  # pragma: no cover
+                status = "error"
+                message = f'Code file "{path.name}" was saved but indexing failed: {exc}'
+
+            if rebuildBehaviorIndex:
+                # Use workspace storage for behavior cache
+                cache_path = storage.get_behavior_cache_dir() / f"{idx_id}_behaviors.json"
+                try:
+                    if cache_path.exists():
+                        cache_path.unlink()
+                        logger.info(f"[UploadCode] Cleared cached behavior index at {cache_path}")
+                except Exception as exc:
+                    logger.warning(f"[UploadCode] Failed to clear behavior cache {cache_path}: {exc}")
+
+            results.append(
+                {
+                    "indexId": idx_id,
+                    "status": status,
+                    "message": message,
+                    "batchCount": 1,
+                    "rebuildBehaviorIndex": rebuildBehaviorIndex,
+                }
+            )
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+    return JSONResponse({"uploaded": len(results), "results": results})
+
+
+@app.get("/gdd/{doc_id}/summary")
+async def get_gdd_summary(doc_id: str) -> JSONResponse:
+    """
+    Return a placeholder GDD summary.
+
+    Later this should call into the real RAG-based analysis.
+    """
+    now = datetime.utcnow().isoformat() + "Z"
+    summary = {
+        "docId": doc_id,
+        "genre": "Action Strategy (placeholder)",
+        "coreLoop": "Players engage in battles, upgrade units, and progress through matches. (placeholder)",
+        "majorSystems": ["Combat", "Progression", "Matchmaking"],
+        "playerInteractions": ["PvP", "Team Play"],
+        "keyObjects": ["Tank", "Map"],
+        "mapsAndModes": ["Deathmatch"],
+        "specialMechanics": ["Placeholder mechanic"],
+        "extractedAt": now,
+    }
+    return JSONResponse({"summary": summary})
+
+
+@app.get("/gdd/{doc_id}/spec")
+async def get_gdd_spec(doc_id: str) -> JSONResponse:
+    """
+    Extract all requirements, systems, objects, and logic rules from a GDD.
+    This is the main function that summarizes what needs to be built.
+    """
+    # Get workspace context
+    manager = WorkspaceManager()
+    workspace_id = manager.get_default_workspace()
+    status = load_doc_status(workspace_id=workspace_id)
+    if doc_id not in status:
+        raise HTTPException(status_code=404, detail=f"Document {doc_id} not found or not indexed")
+    
+    provider = QwenProvider()
+    llm_func = make_llm_model_func(provider)
+    
+    # Extract requirements directly (extract_all_requirements is async)
+    spec_data = await extract_all_requirements(doc_id, llm_func=llm_func, workspace_id=workspace_id)
+    
+    now = datetime.utcnow().isoformat() + "Z"
+    spec = {
+        "docId": doc_id,
+        "workspaceId": workspace_id,
+        "objects": spec_data.get("objects", []),
+        "systems": spec_data.get("systems", []),
+        "logicRules": spec_data.get("logic_rules", []),
+        "requirements": spec_data.get("requirements", []),
+        "extractedAt": now,
+    }
+    
+    # Persist to workspace reports for reuse
+    storage = WorkspaceStorage(workspace_id)
+    reports_dir = storage.get_reports_dir()
+    reports_dir.mkdir(parents=True, exist_ok=True)
+    output_path = reports_dir / f"{doc_id}_spec.json"
+    with output_path.open("w", encoding="utf-8") as f:
+        json.dump(spec, f, ensure_ascii=False, indent=2)
+    
+    return JSONResponse({"spec": spec, "savedTo": str(output_path)})
+
+
+class CoverageEvaluateRequest(BaseModel):
+    docId: Union[str, List[str]]  # Single GDD or list of GDDs to extract requirements from
+    codeIndexId: Union[str, List[str]]  # Single code index or list of code indices (all batches)
+    topK: Optional[int] = 8
+    workspaceId: Optional[str] = None  # Workspace ID (uses default if not provided)
+
+
+@app.post("/coverage/evaluate")
+async def evaluate_coverage(payload: CoverageEvaluateRequest) -> JSONResponse:
+    """
+    Compare GDD requirements against codebase to see what's implemented.
+    
+    This is the main coverage evaluation function:
+    1. Extracts requirements from GDD(s) - can be single or multiple GDDs
+    2. Searches the entire codebase (all code batches) for each requirement
+    3. Classifies each as implemented/not_implemented/partially_implemented
+    
+    Supports:
+    - Multiple GDDs: Extract requirements from all selected GDDs
+    - Multiple code batches: Search across entire codebase
+    """
+    import logging
+    logger = logging.getLogger(__name__)
+    
+    start_time = time.time()
+    try:
+        logger.info(f"[Coverage] Starting evaluation: docId={payload.docId}, codeIndexId={payload.codeIndexId}, topK={payload.topK}")
+        
+        # Get workspace
+        manager = WorkspaceManager()
+        if payload.workspaceId:
+            workspace_id = payload.workspaceId
+            if not manager.workspace_exists(workspace_id):
+                raise HTTPException(status_code=404, detail=f"Workspace '{workspace_id}' not found")
+        else:
+            workspace_id = manager.get_default_workspace()
+            if not workspace_id:
+                raise HTTPException(status_code=400, detail="No workspace available. Please create a workspace first.")
+        
+        storage = WorkspaceStorage(workspace_id)
+        status = load_doc_status(workspace_id=workspace_id)
+        
+        # Normalize to lists
+        gdd_ids = payload.docId if isinstance(payload.docId, list) else [payload.docId]
+        code_indices = payload.codeIndexId if isinstance(payload.codeIndexId, list) else [payload.codeIndexId]
+        
+        # Validate inputs
+        if not gdd_ids or not gdd_ids[0]:
+            raise HTTPException(status_code=400, detail="At least one GDD document ID is required")
+        if not code_indices or not code_indices[0]:
+            raise HTTPException(status_code=400, detail="At least one code index ID is required")
+        
+        # Verify all GDD documents exist
+        missing_gdds = [gdd_id for gdd_id in gdd_ids if gdd_id not in status]
+        if missing_gdds:
+            raise HTTPException(
+                status_code=404, 
+                detail=f"GDD document(s) not found: {', '.join(missing_gdds)}. Available documents: {', '.join(list(status.keys())[:10])}"
+            )
+        
+        # Verify all code indices exist
+        missing_codes = [code_id for code_id in code_indices if code_id not in status]
+        if missing_codes:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Code index(es) not found: {', '.join(missing_codes)}. Available documents: {', '.join(list(status.keys())[:10])}"
+            )
+        
+        logger.info(f"[Coverage] Validated {len(gdd_ids)} GDD(s) and {len(code_indices)} code batch(es)")
+        
+        # Initialize provider with error handling
+        try:
+            provider = QwenProvider()
+            llm_func = make_llm_model_func(provider)
+        except Exception as e:
+            logger.error(f"[Coverage] Failed to initialize LLM provider: {e}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to initialize LLM provider: {str(e)}. Check your API keys."
+            )
+        
+        # Step 1: Extract requirements from ALL GDDs and merge them
+        all_requirements_data: List[dict] = []
+        skipped_gdds: List[str] = []
+        for gdd_id in gdd_ids:
+            try:
+                gdd_meta = status.get(gdd_id, {})
+                # Load chunks from the workspace store instead of relying on status metadata
+                gdd_chunks = load_doc_chunks(gdd_id, workspace_id=workspace_id)
+                # Backfill chunk info into status if missing (in-memory only)
+                if gdd_chunks and not gdd_meta.get("chunks_list"):
+                    gdd_meta["chunks_list"] = [c.chunk_id for c in gdd_chunks]
+                    gdd_meta["chunks"] = gdd_meta["chunks_list"]
+                if not gdd_chunks:
+                    skipped_gdds.append(f"{gdd_id}: document has not been indexed yet")
+                    logger.warning(f"[Coverage] GDD {gdd_id} has no chunks, skipping")
+                    continue
+                
+                logger.info(f"[Coverage] Extracting requirements from GDD: {gdd_id}")
+                spec_data = await extract_all_requirements(gdd_id, llm_func=llm_func, workspace_id=workspace_id)
+                
+                requirements_data = spec_data.get("requirements", [])
+                logger.info(f"[Coverage] Extracted {len(requirements_data)} requirements from {gdd_id}")
+                
+                # Tag each requirement with its source GDD
+                for req in requirements_data:
+                    req["source_gdd"] = gdd_id
+                all_requirements_data.extend(requirements_data)
+            except ValueError as exc:
+                skipped_gdds.append(f"{gdd_id}: {str(exc)}")
+                logger.warning(f"[Coverage] Failed to extract from {gdd_id}: {exc}")
+                continue
+            except Exception as e:
+                skipped_gdds.append(f"{gdd_id}: unexpected error - {str(e)}")
+                logger.error(f"[Coverage] Unexpected error extracting from {gdd_id}: {e}", exc_info=True)
+                continue
+        
+        # Convert dicts to GddRequirement objects (from all GDDs)
+        requirements = []
+        seen_ids = set()  # Deduplicate requirements with same ID
+        for req_dict in all_requirements_data:
+            try:
+                req_id = req_dict.get("id", "")
+                if not req_id:
+                    continue
+                # Skip duplicates (same requirement from multiple GDDs)
+                if req_id in seen_ids:
+                    continue
+                seen_ids.add(req_id)
+                
+                req = GddRequirement(
+                    id=req_id,
+                    title=req_dict.get("title", req_dict.get("summary", "")),
+                    description=req_dict.get("description", req_dict.get("details", "")),
+                    category=req_dict.get("category"),
+                    priority=req_dict.get("priority"),
+                    status=req_dict.get("status"),
+                    acceptance_criteria=req_dict.get("acceptance_criteria"),
+                    related_objects=req_dict.get("related_objects", []),
+                    related_systems=req_dict.get("related_systems", []),
+                    source_note=req_dict.get("source_note"),
+                )
+                requirements.append(req)
+            except Exception as e:
+                logger.warning(f"[Coverage] Skipping invalid requirement: {e}")
+                continue
+        
+        # ------------------------------------------------------------------
+        # TEMP: Limit number of requirements for faster demo runs
+        # ------------------------------------------------------------------
+        # To keep evaluation responsive on a laptop, we cap the number of
+        # requirements we evaluate per request. This still gives a realistic
+        # coverage sample without waiting many minutes.
+        # 
+        # Performance: ~30-35 seconds per requirement
+        # - 5 requirements = ~2.5-3 minutes (safe)
+        # - 10 requirements = ~5-6 minutes (may timeout)
+        # - 20 requirements = ~10-12 minutes (will timeout!)
+        MAX_REQUIREMENTS_FOR_DEMO = 5  # Reduced from 20 to avoid timeout
+        original_count = len(requirements)
+        if len(requirements) > MAX_REQUIREMENTS_FOR_DEMO:
+            requirements = requirements[:MAX_REQUIREMENTS_FOR_DEMO]
+            logger.info(f"[Coverage] Limited requirements from {original_count} to {len(requirements)} for demo (to avoid timeout)")
+
+        if not requirements:
+            gdd_list_str = ", ".join(skipped_gdds) if skipped_gdds else ", ".join(gdd_ids)
+            raise HTTPException(
+                status_code=400,
+                detail=f"No requirements found in GDD(s): {gdd_list_str}. Make sure the documents have been indexed and contain extractable requirements."
+            )
+        
+        logger.info(f"[Coverage] Evaluating {len(requirements)} requirements against {len(code_indices)} code batch(es)")
+        
+        # Step 2: Evaluate via behavior-based pipeline (with cached behavior index)
+        primary_gdd_id = gdd_ids[0]
+        try:
+            # Use workspace-scoped report directory
+            reports_dir = storage.get_reports_dir() / "coverage_checks"
+            report_path = await evaluate_all_requirements_behavior(
+                primary_gdd_id,
+                code_indices,  # Pass all code batches
+                requirements,
+                output_dir=reports_dir,
+                provider=provider,
+                top_k=payload.topK or 8,
+                use_behavior_index_cache=True,
+                workspace_id=workspace_id,
+            )
+            logger.info(f"[Coverage] Behavior evaluation complete, report saved to: {report_path}")
+        except Exception as e:
+            logger.error(f"[Coverage] Evaluation failed: {e}", exc_info=True)
+            raise HTTPException(
+                status_code=500,
+                detail=f"Evaluation failed: {str(e)}. Check logs for details."
+            )
+        
+        # Step 3: Load behavior report and map to frontend format
+        try:
+            report_data = json.loads(report_path.read_text())
+            results = report_data.get("results", [])
+            if not results:
+                logger.warning(f"[Coverage] Behavior report exists but contains no results")
+        except Exception as e:
+            logger.error(f"[Coverage] Failed to load behavior report: {e}")
+            raise HTTPException(
+                status_code=500,
+                detail=f"Failed to load evaluation report: {str(e)}"
+            )
+        
+        coverage_results = []
+        implemented_count = 0
+        partially_implemented_count = 0
+        not_implemented_count = 0
+        error_count = 0
+        
+        for result in results:
+            try:
+                req_id = result.get("requirement_id", "")
+                status_val = result.get("status", "error")
+                
+                req = next((r for r in requirements if r.id == req_id), None)
+                item_name = req.title if req else req_id or "Unknown"
+                item_type = "requirement"
+                
+                if status_val == "implemented":
+                    implemented_count += 1
+                elif status_val == "partially_implemented":
+                    partially_implemented_count += 1
+                elif status_val == "not_implemented":
+                    not_implemented_count += 1
+                else:
+                    error_count += 1
+                
+                reason = result.get("reason") or result.get("llm_reason") or ""
+                best_match = result.get("best_match")
+                missing_triggers = result.get("missing_triggers") or []
+                missing_effects = result.get("missing_effects") or []
+                gaps = []
+                if missing_triggers:
+                    gaps.append(f"Missing triggers: {', '.join(missing_triggers)}")
+                if missing_effects:
+                    gaps.append(f"Missing effects: {', '.join(missing_effects)}")
+
+                evidence: list[dict] = []
+                if reason or best_match:
+                    msg = reason or ""
+                    if best_match:
+                        msg = f"{msg} (best match: {best_match})" if msg else f"Best match: {best_match}"
+                    evidence.append({"file": None, "reason": msg})
+                for gap in gaps:
+                    evidence.append({"file": None, "reason": gap})
+
+                top_matches = result.get("top_matches") or []
+                retrieved_chunks = [
+                    {
+                        "chunkId": tm.get("symbol", "") or "",
+                        "content": "",
+                        "score": float(tm.get("similarity", 0.0)),
+                        "filePath": None,
+                    }
+                    for tm in top_matches
+                ]
+
+                coverage_results.append({
+                    "itemId": req_id or f"unknown_{len(coverage_results)}",
+                    "itemType": item_type,
+                    "itemName": item_name,
+                    "status": status_val,
+                    "evidence": evidence,
+                    "retrievedChunks": retrieved_chunks,
+                    "topMatches": [
+                        {
+                            "symbol": tm.get("symbol", ""),
+                            "similarity": float(tm.get("similarity", 0.0)),
+                            "description": tm.get("description"),
+                        }
+                        for tm in top_matches
+                    ],
+                    "missingTriggers": missing_triggers,
+                    "missingEffects": missing_effects,
+                })
+            except Exception as e:
+                logger.warning(f"[Coverage] Error processing behavior result: {e}")
+                error_count += 1
+                continue
+        
+        now = datetime.utcnow().isoformat() + "Z"
+        gdd_id_display = ", ".join(gdd_ids) if len(gdd_ids) > 1 else gdd_ids[0]
+        code_id_display = ", ".join(code_indices) if len(code_indices) > 1 else code_indices[0]
+        report = {
+            "docId": gdd_id_display,
+            "codeIndexId": code_id_display,
+            "generatedAt": now,
+            "summary": {
+                "totalItems": len(coverage_results),
+                "implemented": implemented_count,
+                "partiallyImplemented": partially_implemented_count,
+                "notImplemented": not_implemented_count,
+                "errors": error_count,
+            },
+            "results": coverage_results,
+        }
+        
+        response_payload = {"report": report}
+        if skipped_gdds:
+            response_payload["warnings"] = skipped_gdds
+        
+        elapsed = time.time() - start_time
+        logger.info(f"[Coverage] Evaluation complete in {elapsed:.1f}s: {implemented_count} implemented, {partially_implemented_count} partial, {not_implemented_count} not implemented")
+        return JSONResponse(response_payload)
+        
+    except HTTPException:
+        # Re-raise HTTP exceptions as-is
+        raise
+    except Exception as e:
+        logger.error(f"[Coverage] Unexpected error in evaluate_coverage: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unexpected error during coverage evaluation: {str(e)}"
+        )
+
+
+class ChatRequestModel(BaseModel):
+    workspaceId: str
+    message: str
+    useAllDocs: Optional[bool] = False
+    docIds: Optional[List[str]] = None
+    topK: Optional[int] = 6
+
+
+@app.post("/chat/stream")
+async def chat_stream(payload: ChatRequestModel):
+    """
+    Streaming RAG-powered chat endpoint.
+    Returns Server-Sent Events (SSE) stream of tokens.
+    """
+    try:
+        from openai import OpenAI
+    except ImportError:
+        raise HTTPException(status_code=500, detail="OpenAI package required for streaming")
+    
+    from gdd_rag_backbone.config import QWEN_API_KEY, QWEN_BASE_URL, DEFAULT_LLM_MODEL
+    
+    # Get workspace context
+    manager = WorkspaceManager()
+    workspace_id = payload.workspaceId or manager.get_default_workspace()
+    status = load_doc_status(workspace_id=workspace_id)
+    all_doc_ids = list(status.keys())
+    
+    # Determine which documents to query
+    doc_ids: List[str] = []
+    if payload.useAllDocs:
+        doc_ids = all_doc_ids[:10] if len(all_doc_ids) > 10 else all_doc_ids
+    elif payload.docIds:
+        doc_ids = [doc_id for doc_id in payload.docIds if doc_id in status]
+    else:
+        if payload.workspaceId in status:
+            doc_ids = [payload.workspaceId]
+    
+    if not doc_ids:
+        async def error_stream():
+            yield f"data: {json.dumps({'type': 'error', 'content': 'No indexed documents found.'})}\n\n"
+        return StreamingResponse(error_stream(), media_type="text/event-stream")
+    
+    # Get context chunks (non-streaming part)
+    provider = QwenProvider()
+    top_k = payload.topK or 4
+    
+    def _get_context():
+        if len(doc_ids) == 1:
+            from gdd_rag_backbone.rag_backend.chunk_qa import ask_with_chunks
+            result = ask_with_chunks(
+                doc_ids[0],
+                payload.message,
+                provider=provider,
+                top_k=top_k,
+                workspace_id=workspace_id,
+            )
+        else:
+            from gdd_rag_backbone.rag_backend.chunk_qa import ask_across_docs
+            result = ask_across_docs(
+                doc_ids,
+                payload.message,
+                provider=provider,
+                top_k=top_k,
+                workspace_id=workspace_id,
+            )
+        return result
+    
+    # Get context in background
+    result = await asyncio.to_thread(_get_context)
+    context_chunks = result.get("context", [])
+    
+    # Build prompt with context
+    context_text = "\n\n".join([chunk.get("content", "") for chunk in context_chunks[:top_k]])
+    system_prompt = "You are a helpful assistant answering questions about game design documents. Use only the provided context to answer."
+    user_prompt = f"Context from game design documents:\n\n{context_text}\n\nQuestion: {payload.message}\n\nAnswer:"
+    
+    # Stream LLM response
+    async def stream_response():
+        try:
+            client = OpenAI(
+                api_key=QWEN_API_KEY,
+                base_url=QWEN_BASE_URL,
+            )
+            
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ]
+            
+            # Send context info first
+            chunks_payload = [
+                {
+                    "chunkId": str(chunk.get("chunk_id") or chunk.get("id") or idx),
+                    "content": chunk.get("content", ""),
+                    "score": float(chunk.get("score", 0.0)),
+                }
+                for idx, chunk in enumerate(context_chunks)
+            ]
+            yield f"data: {json.dumps({'type': 'context', 'docIds': doc_ids, 'chunks': chunks_payload})}\n\n"
+            
+            # Stream LLM tokens
+            stream = client.chat.completions.create(
+                model=DEFAULT_LLM_MODEL,
+                messages=messages,
+                stream=True,
+                temperature=0.3,
+            )
+            
+            for chunk in stream:
+                if chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    yield f"data: {json.dumps({'type': 'token', 'content': content})}\n\n"
+            
+            # Send completion
+            now = datetime.utcnow().isoformat() + "Z"
+            yield f"data: {json.dumps({'type': 'done', 'timestamp': now})}\n\n"
+            
+        except Exception as e:
+            yield f"data: {json.dumps({'type': 'error', 'content': str(e)})}\n\n"
+    
+    return StreamingResponse(stream_response(), media_type="text/event-stream")
+
+
+@app.post("/chat")
+async def chat(payload: ChatRequestModel) -> JSONResponse:
+    """
+    RAG-powered chat endpoint over indexed GDD documents.
+
+    - If payload.useAllDocs is True, query across all indexed docs.
+    - Else if payload.docIds is provided, query across those docs.
+    - Else, fall back to using workspaceId as a single doc_id (if indexed).
+    """
+    # Get workspace context
+    manager = WorkspaceManager()
+    workspace_id = payload.workspaceId or manager.get_default_workspace()
+    status = load_doc_status(workspace_id=workspace_id)
+    all_doc_ids = list(status.keys())
+
+    # Determine which documents to query
+    doc_ids: List[str] = []
+    if payload.useAllDocs:
+        # Limit to first 10 docs for faster responses when querying "all"
+        # Users can specify specific docIds if they want more
+        doc_ids = all_doc_ids[:10] if len(all_doc_ids) > 10 else all_doc_ids
+    elif payload.docIds:
+        # Filter to only known doc_ids
+        doc_ids = [doc_id for doc_id in payload.docIds if doc_id in status]
+    else:
+        # Fallback: treat workspaceId as a doc_id if it has been indexed
+        if payload.workspaceId in status:
+            doc_ids = [payload.workspaceId]
+
+    if not doc_ids:
+        # No indexed documents found for this query; return helpful message
+        now = datetime.utcnow().isoformat() + "Z"
+        content = (
+            "I couldn't find any indexed GDD documents to answer your question.\n\n"
+            "- First, go to the Upload page and upload a GDD.\n"
+            "- Give it a doc ID (for example: `default`).\n"
+            "- After it finishes indexing, come back to Chat and ask again."
+        )
+        response_message = {
+            "id": now,
+            "role": "assistant",
+            "content": content,
+            "timestamp": now,
+            "context": {"docIds": [], "chunks": []},
+        }
+        return JSONResponse({"message": response_message})
+
+    provider = QwenProvider()
+    top_k = payload.topK or 4  # Default to 4 for faster responses
+
+    # Run the chunk-based QA in a thread to avoid blocking the event loop
+    def _run_qa():
+        if len(doc_ids) == 1:
+            return ask_with_chunks(
+                doc_ids[0],
+                payload.message,
+                provider=provider,
+                top_k=top_k,
+                workspace_id=workspace_id,
+            )
+        else:
+            return ask_across_docs(
+                doc_ids,
+                payload.message,
+                provider=provider,
+                top_k=top_k,
+                workspace_id=workspace_id,
+            )
+
+    result = await asyncio.to_thread(_run_qa)
+
+    now = datetime.utcnow().isoformat() + "Z"
+    answer_text = result.get("answer", "").strip()
+    context_chunks = result.get("context", [])
+
+    # Map chunk records to the frontend's CodeChunk shape
+    chunks_payload = [
+        {
+            "chunkId": str(chunk.get("chunk_id") or chunk.get("id") or idx),
+            "content": chunk.get("content", ""),
+            "score": float(chunk.get("score", 0.0)),
+            "filePath": chunk.get("file_path") or result.get("file_path"),
+        }
+        for idx, chunk in enumerate(context_chunks)
+    ]
+
+    response_message = {
+        "id": now,
+        "role": "assistant",
+        "content": answer_text or "I could not generate an answer from the indexed GDD.",
+        "timestamp": now,
+        "context": {"docIds": doc_ids, "chunks": chunks_payload},
+    }
+    return JSONResponse({"message": response_message})
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run("backend_api.main:app", host="0.0.0.0", port=8000, reload=True)
+
+
