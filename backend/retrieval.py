@@ -3,9 +3,8 @@
 Retrieval system with hybrid search and reranking
 """
 
-import os
 import re
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 from collections import defaultdict
 
 # Embeddings for query encoding
@@ -22,7 +21,7 @@ try:
 except ImportError:
     OPENAI_AVAILABLE = False
 
-from .database import Database
+from backend.database import Database
 
 class Retriever:
     """Handles document and code retrieval with hybrid search"""
@@ -38,7 +37,10 @@ class Retriever:
 
         # Initialize LLM for reranking
         if OPENAI_AVAILABLE:
-            self.llm_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            from backend.app.config import get_settings
+
+            settings = get_settings()
+            self.llm_client = OpenAI(api_key=settings.openai_api_key)
         else:
             self.llm_client = None
 

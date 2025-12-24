@@ -3,8 +3,7 @@
 Grounded answer generation with citations
 """
 
-import os
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 # LLM client
 try:
@@ -19,7 +18,10 @@ class Generator:
     def __init__(self):
         """Initialize LLM client"""
         if OPENAI_AVAILABLE:
-            self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            from backend.app.config import get_settings
+
+            settings = get_settings()
+            self.client = OpenAI(api_key=settings.openai_api_key)
         else:
             self.client = None
 
