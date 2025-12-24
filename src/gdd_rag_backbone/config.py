@@ -11,10 +11,15 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 try:
     from dotenv import load_dotenv
-    # Load .env file from project root
+    # Load .env file from project root, but only if readable and not explicitly disabled
     env_path = PROJECT_ROOT / ".env"
-    if env_path.exists():
-        load_dotenv(env_path)
+    dotenv_disabled = os.getenv("PYTHON_DOTENV_DISABLE") in ("1", "true", "True")
+    if env_path.exists() and not dotenv_disabled:
+        if os.access(env_path, os.R_OK):
+            load_dotenv(env_path)
+        else:
+            # Skip silently if .env is not readable in this environment
+            pass
 except ImportError:
     # python-dotenv not installed, skip .env loading
     pass

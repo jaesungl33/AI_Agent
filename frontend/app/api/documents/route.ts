@@ -6,7 +6,7 @@ const getBackendUrl = () => {
   if (envUrl) {
     return envUrl.replace(/localhost/g, "127.0.0.1")
   }
-  return "http://127.0.0.1:8000"
+  return "http://127.0.0.1:8888"
 }
 
 const BACKEND_URL = getBackendUrl()
@@ -20,10 +20,11 @@ export async function GET(request: Request) {
       ? `${BACKEND_URL}/documents?workspaceId=${encodeURIComponent(workspaceId)}`
       : `${BACKEND_URL}/documents`
     
+    // Allow more time for larger workspaces; frontend shows errors if this still times out.
     const res = await fetch(url, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      signal: AbortSignal.timeout(5000), // short timeout for healthiness
+      signal: AbortSignal.timeout(20000), // 20s to avoid proxy timeout on cold start
     })
 
     const text = await res.text()

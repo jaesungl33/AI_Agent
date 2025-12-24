@@ -14,9 +14,9 @@ from __future__ import annotations
 import asyncio
 import logging
 import inspect
-from typing import List, Optional, Sequence, Tuple
+from typing import Any, List, Optional, Sequence, Tuple
 
-import numpy as np
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,30 @@ from gdd_rag_backbone.gdd.schemas import BehaviorRequirement, CodeBehavior
 from gdd_rag_backbone.llm_providers import QwenProvider, make_embedding_func
 
 # In-memory cache for behavior embeddings
-_BEHAVIOR_EMBEDDING_CACHE: dict[str, np.ndarray] = {}
+_BEHAVIOR_EMBEDDING_CACHE: dict[str, List[float]] = {}
+
+
+def _flatten_to_float_list(value: Any) -> List[float]:
+    """Flatten nested embeddings into a 1D float list."""
+    result: List[float] = []
+
+    def _walk(item: Any) -> None:
+        if isinstance(item, (list, tuple)):
+            for sub in item:
+                _walk(sub)
+        elif isinstance(item, (int, float)):
+            result.append(float(item))
+        elif isinstance(item, str):
+            stripped = item.strip()
+            if stripped:
+                try:
+                    result.append(float(stripped))
+                except ValueError:
+                    pass
+        # Ignore other types silently (defensive)
+
+    _walk(value)
+    return result
 
 
 async def embed_behavior_text(
@@ -59,18 +82,23 @@ async def embed_behavior_text(
     if inspect.iscoroutine(embedding):
         embedding = await embedding  # type: ignore
 
-    embedding_array = np.array(embedding).astype(float).ravel()
-    
+    embedding_array = _flatten_to_float_list(embedding)
     _BEHAVIOR_EMBEDDING_CACHE[cache_key] = embedding_array
     return embedding_array
 
 
-def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
+def cosine_similarity(a: Sequence[float], b: Sequence[float]) -> float:
     """Compute cosine similarity between two vectors."""
-    dot_product = np.dot(a, b)
-    norm_a = np.linalg.norm(a)
-    norm_b = np.linalg.norm(b)
-    if norm_a == 0 or norm_b == 0:
+    if not a or not b:
+        return 0.0
+    # Align lengths
+    length = min(len(a), len(b))
+    if length == 0:
+        return 0.0
+    dot_product = sum(a[i] * b[i] for i in range(length))
+    norm_a = math.sqrt(sum(x * x for x in a[:length]))
+    norm_b = math.sqrt(sum(x * x for x in b[:length]))
+    if norm_a == 0.0 or norm_b == 0.0:
         return 0.0
     return float(dot_product / (norm_a * norm_b))
 
@@ -81,7 +109,8 @@ async def find_matching_behaviors(
     *,
     provider: Optional[QwenProvider] = None,
     embedding_func=None,
-    top_k: int = 5,
+    top_k: int = 6,
+    similarity_threshold: float = 0.3,
 ) -> List[Tuple[CodeBehavior, float]]:
     """
     Find top-k code behaviors that match a requirement behavior.
@@ -106,9 +135,10 @@ async def find_matching_behaviors(
         similarity = cosine_similarity(req_embedding, code_embedding)
         similarities.append((code_behavior, similarity))
     
-    # Sort by similarity and return top-k
-    similarities.sort(key=lambda x: x[1], reverse=True)
-    return similarities[:top_k]
+    # Filter by threshold and return top-k above threshold
+    filtered_similarities = [(cb, sim) for cb, sim in similarities if sim >= similarity_threshold]
+    filtered_similarities.sort(key=lambda x: x[1], reverse=True)
+    return filtered_similarities[:top_k]
 
 
 async def batch_find_matching_behaviors(
@@ -117,7 +147,8 @@ async def batch_find_matching_behaviors(
     *,
     provider: Optional[QwenProvider] = None,
     embedding_func=None,
-    top_k: int = 5,
+    top_k: int = 6,
+    similarity_threshold: float = 0.3,
 ) -> dict[str, List[Tuple[CodeBehavior, float]]]:
     """
     Find matching behaviors for multiple requirements.
@@ -131,7 +162,7 @@ async def batch_find_matching_behaviors(
     
     # Pre-compute embeddings for all code behaviors
     logger.info(f"Pre-computing embeddings for {len(code_behaviors)} code behaviors...")
-    code_embeddings: dict[str, np.ndarray] = {}
+    code_embeddings: dict[str, List[float]] = {}
     
     for code_behavior in code_behaviors:
         code_text = code_behavior.to_behavior_text()
@@ -155,9 +186,10 @@ async def batch_find_matching_behaviors(
             similarity = cosine_similarity(req_embedding, code_embedding)
             similarities.append((code_behavior, similarity))
         
-        # Sort and take top-k
-        similarities.sort(key=lambda x: x[1], reverse=True)
-        results[requirement.id] = similarities[:top_k]
+        # Filter by threshold and take top-k above threshold
+        filtered_similarities = [(cb, sim) for cb, sim in similarities if sim >= similarity_threshold]
+        filtered_similarities.sort(key=lambda x: x[1], reverse=True)
+        results[requirement.id] = filtered_similarities[:top_k]
     
     return results
 

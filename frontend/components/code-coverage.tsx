@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { CheckCircle2, XCircle, AlertCircle, Loader2, Search } from "lucide-react"
+import { CheckCircle2, XCircle, AlertCircle, Loader2, Search, Play } from "lucide-react"
 import { coverageAPI } from "@/lib/api/client"
 import type { CoverageReport, CoverageResult } from "@/lib/api/types"
 
@@ -17,9 +17,12 @@ interface CodeCoverageProps {
 }
 
 export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspaceId }: CodeCoverageProps) {
+  // Ensure workspaceId is provided
+  const finalWorkspaceId = workspaceId || "tank_war"
+
   // Normalize to arrays for API calls
   const docIds = Array.isArray(docId) ? docId : [docId]
-  const codeIds = initialCodeIndexId 
+  const codeIds = initialCodeIndexId
     ? (Array.isArray(initialCodeIndexId) ? initialCodeIndexId : [initialCodeIndexId])
     : []
   const [topK, setTopK] = useState(8)
@@ -27,6 +30,7 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspace
   const [isLoading, setIsLoading] = useState(false)
   const [selectedItem, setSelectedItem] = useState<CoverageResult | null>(null)
   const [statusFilter, setStatusFilter] = useState<"all" | "implemented" | "partially_implemented" | "not_implemented" | "error">("all")
+  const [fullEvaluation, setFullEvaluation] = useState(false)  // Toggle for full evaluation (no limit)
 
   const [error, setError] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState<string>("")
@@ -60,11 +64,26 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspace
     
     try {
       // Pass arrays to API (or single strings if only one)
-      const docIdForAPI = docIds.length === 1 ? docIds[0] : docIds
-      const codeIdForAPI = codeIds.length === 1 ? codeIds[0] : codeIds
-      
-      setStatusMessage("Extracting requirements from GDD(s)...")
-      const report = await coverageAPI.evaluate(docIdForAPI, codeIdForAPI, topK, workspaceId)
+      // The new API requires single document IDs
+      const gddDocId = docIds.length >= 1 ? docIds[0] : ""
+      const codeBatchId = codeIds.length >= 1 ? codeIds[0] : ""
+
+      if (!gddDocId || !codeBatchId) {
+        throw new Error("Please select at least one GDD and one code batch")
+      }
+
+      setStatusMessage("Running coverage evaluation...")
+      const mode = fullEvaluation ? "full" : "fast"
+      const maxRequirements = fullEvaluation ? undefined : 5
+
+      const report = await coverageAPI.evaluate(
+        finalWorkspaceId,
+        gddDocId,
+        codeBatchId,
+        mode,
+        topK,
+        maxRequirements
+      )
       
       if (statusInterval) clearInterval(statusInterval)
       
@@ -134,12 +153,18 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspace
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="rounded-lg border bg-muted/40 p-3 text-sm text-muted-foreground">
-            <div className="font-medium text-foreground">How this runs</div>
-            <ul className="list-disc list-inside space-y-1 mt-1">
-              <li>Extracts behavior requirements from the selected GDDs.</li>
-              <li>Builds/uses a behavior index of your methods (one-time, cached).</li>
-              <li>Embeds behaviors, then LLM verifies only the top matches.</li>
-            </ul>
+            <div className="font-medium text-foreground mb-2">📋 Evaluation Process</div>
+            <ol className="list-decimal list-inside space-y-1">
+              <li><strong>Extract Requirements:</strong> Converts GDD text to structured behavior requirements (triggers, effects, entities)</li>
+              <li><strong>Index Code Behaviors:</strong> Extracts methods from code files and converts them to behavior descriptions (cached after first run)</li>
+              <li><strong>Match Behaviors:</strong> Uses embeddings to find similar behaviors (fast semantic search)</li>
+              <li><strong>LLM Verification:</strong> Only verifies top 3-5 matches per requirement (efficient, accurate)</li>
+            </ol>
+            <div className="mt-3 p-2 rounded bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800">
+              <p className="text-xs text-blue-900 dark:text-blue-100">
+                <strong>💡 Tip:</strong> First run may take longer as it builds the behavior index. Subsequent runs use the cached index and are much faster!
+              </p>
+            </div>
           </div>
           <div className="space-y-2">
             <Label>Code Batches</Label>
@@ -173,19 +198,52 @@ export function CodeCoverage({ docId, codeIndexId: initialCodeIndexId, workspace
               Higher = broader recall, lower = faster LLM pass. Recommended: 5–8.
             </p>
           </div>
-          <Button onClick={handleEvaluate} disabled={isLoading || codeIds.length === 0}>
+          
+          <div className="p-3 rounded-lg border bg-muted/40 space-y-2">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="font-medium text-sm">Full Evaluation Mode</div>
+                <div className="text-xs text-muted-foreground mt-0.5">
+                  {fullEvaluation 
+                    ? "⚡ Processing ALL requirements with parallel processing (faster, but may take longer)"
+                    : "⚡ Fast mode: Limit to 5 requirements for quick testing"}
+                </div>
+              </div>
+              <Button
+                type="button"
+                variant={fullEvaluation ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFullEvaluation(!fullEvaluation)}
+                disabled={isLoading}
+              >
+                {fullEvaluation ? "Full" : "Fast"}
+              </Button>
+            </div>
+          </div>
+          <Button 
+            onClick={handleEvaluate} 
+            disabled={isLoading || codeIds.length === 0}
+            size="lg"
+            className="w-full sm:w-auto"
+          >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Evaluating... (this may take a few minutes)
+                Evaluating... ({statusMessage || "Please wait"})
               </>
             ) : (
               <>
-                <Search className="mr-2 h-4 w-4" />
+                <Play className="mr-2 h-4 w-4" />
                 Run Coverage Evaluation
               </>
             )}
           </Button>
+          
+          {codeIds.length > 0 && !isLoading && (
+            <div className="text-xs text-muted-foreground">
+              Will evaluate {docIds.length} GDD(s) against {codeIds.length} code batch(es)
+            </div>
+          )}
           
           {/* Status Message */}
           {statusMessage && (

@@ -90,10 +90,24 @@ export default function WorkspacePage() {
     setStatusMessage("Running coverage...")
     setError(null)
     try {
-      const docId = gddIds.length === 1 ? gddIds[0] : gddIds
-      const codeId = codeIds.length === 1 ? codeIds[0] : codeIds
-      const report = await coverageAPI.evaluate(docId, codeId, 8)
-      setStatusMessage(`Coverage complete: ${report.summary.totalItems} items`)
+      // The new API requires single document IDs, not arrays
+      // For now, just use the first one if multiple are selected
+      const gddDocId = gddIds.length >= 1 ? gddIds[0] : ""
+      const codeBatchId = codeIds.length >= 1 ? codeIds[0] : ""
+
+      if (!gddDocId || !codeBatchId) {
+        throw new Error("Please select at least one GDD and one code batch")
+      }
+
+      const report = await coverageAPI.evaluate(
+        selectedWs,
+        gddDocId,
+        codeBatchId,
+        "fast", // mode
+        4, // topK
+        5 // maxRequirements for fast mode
+      )
+      setStatusMessage(`Coverage complete: ${report.summary?.totalItems || 0} items evaluated`)
     } catch (e: any) {
       setError(e?.message || "Coverage failed")
       setStatusMessage(null)

@@ -189,13 +189,13 @@ def _load_chunk_vectors(doc_ids: Sequence[str], workspace_id: Optional[str] = No
         data = json.loads(vdb_path.read_text())
     except json.JSONDecodeError:  # pragma: no cover - defensive
         return {}
-    allowed = set(doc_ids)
+    allowed = set(doc_ids) if doc_ids else None  # None means load all
     vectors: Dict[str, List[float]] = {}
     for entry in data.get("data", []):
         doc_id = entry.get("full_doc_id")
         chunk_id = entry.get("__id__") or entry.get("id")
         vector = entry.get("vector") or entry.get("embedding")
-        if chunk_id and vector and doc_id in allowed:
+        if chunk_id and vector and (allowed is None or doc_id in allowed):
             float_vector = _ensure_float_vector(vector)
             if float_vector:
                 vectors[chunk_id] = float_vector
@@ -298,11 +298,16 @@ def get_top_chunks(
 def _build_prompt(doc_title: str, context_blocks: List[str], question: str) -> str:
     context = "\n\n".join(f"[Chunk {idx + 1}]\n{block}" for idx, block in enumerate(context_blocks))
     return (
-        "You are an expert assistant answering questions about a Game Design Document. "
-        "Use ONLY the provided context. If the answer is missing, say you don't know.\n"
+        "You are an expert assistant answering questions about Game Design Documents. "
+        "Use the provided context as your primary source of information. "
+        "If the context contains relevant information, use it to provide a comprehensive and accurate answer. "
+        "If the context doesn't contain enough information to fully answer the question, "
+        "use your general knowledge to supplement while clearly indicating what comes from the document vs. general knowledge. "
+        "Be helpful, clear, and provide detailed explanations when appropriate.\n\n"
         f"Document: {doc_title}\n\n"
-        f"Context:\n{context}\n\n"
-        f"Question: {question}\nAnswer:"
+        f"Context from document:\n{context}\n\n"
+        f"Question: {question}\n\n"
+        f"Answer (be comprehensive and helpful):"
     )
 
 
@@ -364,12 +369,31 @@ def ask_across_docs(
 
     all_chunks: List[ChunkRecord] = []
     for doc_id in unique_ids:
-        all_chunks.extend(load_doc_chunks(doc_id, workspace_id=workspace_id))
+        chunks = load_doc_chunks(doc_id, workspace_id=workspace_id)
+        all_chunks.extend(chunks)
+        print(f"[DEBUG] Loaded {len(chunks)} chunks for doc {doc_id}")
+
     if not all_chunks:
-        raise ValueError("No chunks found for the selected documents. Verify they were indexed.")
+        raise ValueError(f"No chunks found for the selected documents {unique_ids}. Verify they were indexed.")
+
+    print(f"[DEBUG] Total chunks loaded: {len(all_chunks)}")
 
     question_embedding = _embed_texts(provider, [question])[0]
     vectors = _load_chunk_vectors(unique_ids, workspace_id=workspace_id)
+
+    print(f"[DEBUG] Loaded {len(vectors)} vectors for {len(unique_ids)} documents")
+    if vectors:
+        print(f"[DEBUG] Sample vector chunk IDs: {list(vectors.keys())[:3]}")
+
+    # If no vectors found for the requested documents, try loading all vectors
+    if not vectors:
+        print(f"[DEBUG] No vectors found for {unique_ids}, trying to load all vectors")
+        vectors = _load_chunk_vectors([], workspace_id=workspace_id)  # Empty list loads all
+        print(f"[DEBUG] Loaded {len(vectors)} vectors total")
+
+    if not vectors:
+        raise ValueError(f"No vectors found in workspace {workspace_id}. The documents may not have been properly indexed with embeddings. Try re-indexing the workspace.")
+
     scored = _score_chunks(question_embedding, all_chunks, vectors, provider)
     selected = _select_top_chunks(
         scored,
@@ -377,12 +401,35 @@ def ask_across_docs(
         per_doc_limit=per_doc_limit or (1 if len(unique_ids) > 1 else None),
     )
 
+    print(f"[DEBUG] Selected {len(selected)} top chunks for answering")
+
+    # Build context more conservatively to avoid overwhelming the model
+    context_blocks = []
+    total_length = 0
+    max_context_length = 3000  # Limit context to avoid token limits
+
+    for _, record in selected:
+        block_length = len(record.content)
+        if total_length + block_length > max_context_length:
+            break  # Stop adding more context if we'd exceed the limit
+        context_blocks.append(record.content)
+        total_length += block_length
+
+    print(f"[DEBUG] Using {len(context_blocks)} chunks with total length {total_length} chars for RAG")
+
     prompt_docs = ", ".join(
         metadata_map.get(doc_id, {}).get("file_path", doc_id) or doc_id
         for doc_id in unique_ids
     )
-    prompt = _build_prompt(prompt_docs, [record.content for _, record in selected], question)
-    answer_text = provider.llm(prompt=prompt)
+    prompt = _build_prompt(prompt_docs, context_blocks, question)
+
+    try:
+        answer_text = provider.llm(prompt=prompt, max_tokens=1024)  # Limit response length
+    except Exception as e:
+        print(f"[DEBUG] LLM call failed: {e}")
+        # If LLM fails, provide a basic answer based on available context
+        answer_text = f"I found {len(selected)} relevant sections from the documents, but couldn't generate a complete answer due to a technical issue. The documents contain information about: {', '.join([metadata_map.get(doc_id, {}).get('file_path', doc_id) for doc_id in unique_ids])}"
+
     context_payload = [
         {
             "doc_id": record.doc_id,

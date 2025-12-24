@@ -141,7 +141,7 @@ export interface TopMatch {
   description?: string
 }
 
-// Chat Types
+// Chat Types - Updated for new RAG backend
 export interface ChatMessage {
   id: string
   role: "user" | "assistant"
@@ -151,8 +151,61 @@ export interface ChatMessage {
 }
 
 export interface ChatContext {
-  docIds: string[]
-  chunks: CodeChunk[]
+  docIds?: string[]
+  chunks?: CodeChunk[]
+  sources?: any[] // Backend may return sources instead of chunks
+  query_type?: string
+  contexts_used?: number
+  error?: string
+}
+
+// New extraction types for chat-first RAG
+export interface Citation {
+  id: string
+  type: string // 'code' or 'docs'
+  path?: string
+  page?: number
+  start_line?: number
+  end_line?: number
+  heading?: string
+}
+
+export interface Evidence {
+  citation_id: string
+  quote: string
+  why: string
+}
+
+export interface ExtractCodeRequest {
+  document_id: string
+  symbol_name: string
+  symbol_type: string
+}
+
+export interface ExtractDocsRequest {
+  document_id: string
+  query: string
+  mode?: string // "phrase" or "section"
+}
+
+export interface ExtractResponse {
+  found: boolean
+  extract?: string
+  extracts?: Array<{
+    text: string
+    page?: number
+    heading?: string
+  }>
+  citations: Citation[]
+  notes?: string
+}
+
+// Updated chat response to match new backend format
+export interface NewChatResponse {
+  mode: string // 'code', 'docs', or 'both'
+  answer: string
+  evidence: Evidence[]
+  citations: Citation[]
 }
 
 // API Request/Response Types

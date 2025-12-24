@@ -105,9 +105,12 @@ export function ChatInterface({
                     <p className="text-sm whitespace-pre-wrap">
                       {message.content}
                     </p>
-                    {message.context && message.context.chunks.length > 0 && (
+                    {message.context && (
+                      (message.context.chunks && message.context.chunks.length > 0) ||
+                      (message.context.sources && message.context.sources.length > 0)
+                    ) && (
                       <p className="text-xs mt-2 opacity-70">
-                        Found {message.context.chunks.length} relevant code
+                        Found {(message.context.chunks?.length || message.context.sources?.length || 0)} relevant code
                         chunks
                       </p>
                     )}

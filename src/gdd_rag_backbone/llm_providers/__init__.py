@@ -13,6 +13,8 @@ from gdd_rag_backbone.llm_providers.base import (
 )
 from gdd_rag_backbone.llm_providers.qwen_provider import QwenProvider
 from gdd_rag_backbone.llm_providers.vertex_provider import VertexProvider
+from gdd_rag_backbone.llm_providers.openai_provider import OpenAIProvider
+from gdd_rag_backbone.llm_providers.ollama_provider import OllamaProvider
 
 __all__ = [
     "LlmProvider",
@@ -21,5 +23,7 @@ __all__ = [
     "make_embedding_func",
     "QwenProvider",
     "VertexProvider",
+    "OpenAIProvider",
+    "OllamaProvider",
 ]
 

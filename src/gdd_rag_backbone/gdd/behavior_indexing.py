@@ -14,6 +14,7 @@ Then convert them to lightweight behavior descriptions via LLM.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import re
@@ -243,6 +244,43 @@ async def extract_code_behavior(
     )
 
 
+def _compute_code_signature(
+    code_index_id: str | Sequence[str],
+    *,
+    workspace_id: Optional[str] = None,
+) -> Dict[str, Any]:
+    """
+    Compute a lightweight signature for a code index based on chunk contents.
+    Used to decide if the behavior index can be reused.
+    """
+    if isinstance(code_index_id, str):
+        code_indices = [code_index_id]
+    else:
+        code_indices = list(code_index_id)
+
+    hasher = hashlib.sha256()
+    total_chunks = 0
+    for code_id in code_indices:
+        chunks = load_doc_chunks(code_id, workspace_id=workspace_id)
+        total_chunks += len(chunks)
+        for chunk in chunks:
+            hasher.update(chunk.chunk_id.encode("utf-8", errors="ignore"))
+            hasher.update(chunk.content.encode("utf-8", errors="ignore"))
+
+    return {
+        "code_indices": code_indices,
+        "workspace_id": workspace_id,
+        "chunk_count": total_chunks,
+        "hash": hasher.hexdigest(),
+    }
+
+
+def _should_skip_method(method_code: str, *, min_lines: int, max_lines: int) -> bool:
+    """Chunk pruning: skip trivial or extremely large methods."""
+    line_count = len(method_code.splitlines())
+    return line_count < min_lines or line_count > max_lines
+
+
 async def index_code_behaviors(
     code_index_id: str | Sequence[str],
     *,
@@ -251,6 +289,8 @@ async def index_code_behaviors(
     max_methods: Optional[int] = None,
     force_rebuild: bool = False,
     workspace_id: Optional[str] = None,
+    min_method_lines: int = 3,
+    max_method_lines: int = 400,
 ) -> List[CodeBehavior]:
     """
     Extract behavior descriptions from all methods in a codebase.
@@ -288,7 +328,9 @@ async def index_code_behaviors(
             # Add file path if available in chunk metadata
             for method in methods:
                 method["file_path"] = file_path
-            all_methods.extend(methods)
+                if _should_skip_method(method["code"], min_lines=min_method_lines, max_lines=max_method_lines):
+                    continue
+                all_methods.append(method)
     
     if max_methods:
         all_methods = all_methods[:max_methods]
@@ -341,5 +383,43 @@ def load_behavior_index(input_path: Path) -> List[CodeBehavior]:
     """Load behavior index from JSON file."""
     data = json.loads(input_path.read_text())
     return [CodeBehavior(**item) for item in data]
+
+
+def save_behavior_index_with_meta(
+    behaviors: List[CodeBehavior],
+    output_path: Path,
+    signature: Dict[str, Any],
+) -> None:
+    """Save behavior index and its signature sidecar file."""
+    save_behavior_index(behaviors, output_path)
+    meta_path = output_path.with_suffix(output_path.suffix + ".meta.json")
+    meta_payload = {
+        "signature": signature,
+        "count": len(behaviors),
+    }
+    meta_path.write_text(json.dumps(meta_payload, indent=2, ensure_ascii=False))
+    logger.info(f"Saved behavior index metadata to {meta_path}")
+
+
+def load_behavior_index_meta(input_path: Path) -> Optional[Dict[str, Any]]:
+    """Load behavior index signature if present."""
+    meta_path = input_path.with_suffix(input_path.suffix + ".meta.json")
+    if not meta_path.exists():
+        return None
+    try:
+        return json.loads(meta_path.read_text())
+    except json.JSONDecodeError:
+        logger.warning(f"Failed to parse behavior index meta: {meta_path}")
+        return None
+
+
+__all__ = [
+    "index_code_behaviors",
+    "load_behavior_index",
+    "save_behavior_index",
+    "save_behavior_index_with_meta",
+    "load_behavior_index_meta",
+    "_compute_code_signature",
+]
 
 

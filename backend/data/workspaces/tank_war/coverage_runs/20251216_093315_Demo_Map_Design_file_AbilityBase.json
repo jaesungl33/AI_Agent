@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "20251216_093315_Demo_Map_Design_file_AbilityBase",
+  "timestamp": "2025-12-16T09:33:15.364406Z",
+  "workspaceId": "tank_war",
+  "gddDocId": "Demo_Map_Design_file",
+  "codeBatchId": "AbilityBase",
+  "mode": "normal",
+  "results": [],
+  "summary": {
+    "totalRequirements": 0,
+    "implemented": 0,
+    "partial": 0,
+    "missing": 0
+  },
+  "cache": {
+    "gddSpecReused": false,
+    "behaviorIndexReused": false,
+    "reindexedFilesCount": 0
+  }
+}

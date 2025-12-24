@@ -1,12 +1,13 @@
 {
-  "name": "gdd-rag-frontend",
-  "version": "0.1.0",
+  "name": "ai-agent-frontend",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "next": "^14.2.0",

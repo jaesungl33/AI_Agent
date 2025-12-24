@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     }, EVALUATION_TIMEOUT)
 
     try {
-      const targetUrl = `${BACKEND_URL}/coverage/evaluate`
+      const targetUrl = `${BACKEND_URL}/coverage/run`
       console.log("[API] Calling backend:", targetUrl)
       
       // Use fetch with extended timeout and keep-alive

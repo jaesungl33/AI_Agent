@@ -107,76 +107,75 @@ export function EnhancedChat({
             </div>
           </div>
         ) : (
-          <>
-            {messages.map((message) => (
+          messages.map((message) => (
+            <div
+              key={message.id}
+              className={cn(
+                "flex gap-4",
+                message.role === "user" ? "justify-end" : "justify-start"
+              )}
+            >
+              {message.role === "assistant" && (
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Bot className="h-4 w-4 text-primary" />
+                </div>
+              )}
+
               <div
-                key={message.id}
                 className={cn(
-                  "flex gap-4",
-                  message.role === "user" ? "justify-end" : "justify-start"
+                  "flex flex-col gap-2 max-w-[80%]",
+                  message.role === "user" && "items-end"
                 )}
               >
-                {message.role === "assistant" && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Bot className="h-4 w-4 text-primary" />
-                  </div>
-                )}
-                
                 <div
                   className={cn(
-                    "flex flex-col gap-2 max-w-[80%]",
-                    message.role === "user" && "items-end"
+                    "rounded-lg px-4 py-3",
+                    message.role === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted"
                   )}
                 >
-                  <div
-                    className={cn(
-                      "rounded-lg px-4 py-3",
-                      message.role === "user"
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted"
-                    )}
-                  >
-                    <p className="text-sm whitespace-pre-wrap leading-relaxed">
-                      {message.content}
-                    </p>
-                  </div>
-                  
-                  {message.context && message.context.chunks.length > 0 && (
-                    <div className="flex items-center gap-2">
-                      <Badge variant="outline" className="text-xs">
-                        {message.context.chunks.length} sources
-                      </Badge>
-                    </div>
-                  )}
-                  
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                    <span>
-                      {new Date(message.timestamp).toLocaleTimeString()}
-                    </span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-6 w-6"
-                      onClick={() => copyToClipboard(message.content, message.id)}
-                    >
-                      {copiedId === message.id ? (
-                        <Check className="h-3 w-3" />
-                      ) : (
-                        <Copy className="h-3 w-3" />
-                      )}
-                    </Button>
-                  </div>
+                  <p className="text-sm whitespace-pre-wrap leading-relaxed">
+                    {message.content}
+                  </p>
                 </div>
 
-                {message.role === "user" && (
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                    <User className="h-4 w-4 text-primary-foreground" />
+                {message.context && (message.context.chunks?.length > 0 || message.context.sources?.length > 0) && (
+                  <div className="flex items-center gap-2">
+                    <Badge variant="outline" className="text-xs">
+                      {(message.context.chunks?.length || 0) + (message.context.sources?.length || 0)} sources
+                    </Badge>
                   </div>
                 )}
+
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span>
+                    {new Date(message.timestamp).toLocaleTimeString()}
+                  </span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6"
+                    onClick={() => copyToClipboard(message.content, message.id)}
+                  >
+                    {copiedId === message.id ? (
+                      <Check className="h-3 w-3" />
+                    ) : (
+                      <Copy className="h-3 w-3" />
+                    )}
+                  </Button>
+                </div>
               </div>
-            ))}
-            {isLoading && (
-              <div className="flex gap-4 justify-start">
+
+              {message.role === "user" && (
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <User className="h-4 w-4 text-primary-foreground" />
+                </div>
+              )}
+            </div>
+          )).concat(
+            isLoading ? [
+              <div key="loading-indicator" className="flex gap-4 justify-start">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                   <Bot className="h-4 w-4 text-primary" />
                 </div>
@@ -184,9 +183,10 @@ export function EnhancedChat({
                   <Loader2 className="h-4 w-4 animate-spin" />
                 </div>
               </div>
-            )}
-            <div ref={messagesEndRef} />
-          </>
+            ] : []
+          ).concat([
+            <div key="messages-end-ref" ref={messagesEndRef} />
+          ])
         )}
       </div>
 

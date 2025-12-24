@@ -20,7 +20,14 @@ logger = logging.getLogger(__name__)
 # Project imports
 from gdd_rag_backbone.gdd.schemas import GddRequirement, BehaviorRequirement, CodeBehavior
 from gdd_rag_backbone.gdd.extraction import convert_to_behavior_requirement
-from gdd_rag_backbone.gdd.behavior_indexing import index_code_behaviors, load_behavior_index, save_behavior_index
+from gdd_rag_backbone.gdd.behavior_indexing import (
+    index_code_behaviors,
+    load_behavior_index,
+    save_behavior_index,
+    save_behavior_index_with_meta,
+    load_behavior_index_meta,
+    _compute_code_signature,
+)
 from gdd_rag_backbone.gdd.behavior_matching import find_matching_behaviors, batch_find_matching_behaviors
 from gdd_rag_backbone.llm_providers import QwenProvider, make_llm_model_func, make_embedding_func
 from gdd_rag_backbone.rag_backend.chunk_qa import get_top_chunks, load_doc_chunks
@@ -494,6 +501,7 @@ async def evaluate_requirement(
         provider=active_provider,
         embedding_func=embed_func,
         top_k=top_k,
+        similarity_threshold=0.4,
     )
     if not matches:
         return {
@@ -617,50 +625,68 @@ async def evaluate_all_requirements(
 BEHAVIOR_INDEX_CACHE_DIR = Path("rag_storage/behavior_indices")
 
 
-async def classify_behavior_implementation(
+async def _run_behavior_classification(
     requirement: BehaviorRequirement,
     code_behaviors: Sequence[Tuple[CodeBehavior, float]],
     llm_func,
+    *,
+    timeout: float = 20.0,
+    max_matches: int = 5,
 ) -> Dict[str, Any]:
     """
     Step 4: Use LLM to classify if top-matched code behaviors implement the requirement.
     Only called on top 3-5 matches (fast, lightweight).
     """
     system_prompt = (
-        "You are a QA engineer comparing a behavior requirement to code behavior descriptions. "
-        "Determine if the code behaviors implement the required behavior. "
-        "Classify as 'implemented', 'partially_implemented', or 'not_implemented'. "
-        "Be strict - only mark as implemented if the behavior fully matches."
+        "You are a senior QA engineer evaluating game feature implementation. "
+        "Compare the behavior requirement against the provided code behaviors. "
+        "Be extremely strict - only mark as 'implemented' if ALL key triggers, effects, and entities are clearly matched. "
+        "Mark as 'partially_implemented' if some aspects are implemented but critical parts are missing. "
+        "Mark as 'not_implemented' if evidence is weak, indirect, or missing. "
+        "Check triggers, effects, and acceptance criteria individually."
     )
-    
+
     # Format requirement
     req_text = requirement.to_behavior_text()
-    
+
     # Format top code behaviors (limit to top 5)
     code_descriptions = []
     for idx, (code_behavior, similarity) in enumerate(code_behaviors[:5], 1):
         code_text = code_behavior.to_behavior_text()
         code_descriptions.append(
             f"[Match {idx}] Similarity: {similarity:.3f}\n{code_text}\n"
-            f"Symbol: {code_behavior.symbol}\n"
         )
-    
+
     code_context = "\n\n".join(code_descriptions) if code_descriptions else "No matching code behaviors found."
-    
+
     user_prompt = f"""
-Behavior Requirement:
+Behavior Requirement to Evaluate:
 {req_text}
 
-Top Matching Code Behaviors:
+Matching Code Behaviors Found:
 {code_context}
 
-Compare the requirement to the code behaviors. Does the code implement the required behavior?
+ANALYSIS INSTRUCTIONS:
+1. Check TRIGGERS: Does the code handle the exact trigger conditions listed?
+2. Check EFFECTS: Does the code produce the exact effects listed?
+3. Check ENTITIES: Does the code interact with the exact entities listed?
+4. Check CONDITIONS: Are all preconditions and constraints satisfied?
+
+CLASSIFICATION RULES:
+- "implemented": ALL triggers, effects, and entities are fully implemented with clear evidence
+- "partially_implemented": Some key aspects implemented, but critical triggers/effects/entities missing
+- "not_implemented": No clear evidence of implementation, or only indirect/partial matches
+
+If evidence is weak or the match is generic, DO NOT mark as implemented.
 
 Return ONLY JSON:
 {{
   "requirement_id": "{requirement.id}",
   "status": "implemented/partially_implemented/not_implemented",
-  "reason": "Brief explanation",
+  "matched_criteria": ["triggers", "effects", "entities"],
+  "missing_criteria": ["any_missing_items"],
+  "confidence": 0.0_to_1.0,
+  "reason": "Detailed explanation of why this status was chosen, citing specific evidence",
   "matched_symbols": ["symbol1", "symbol2"]
 }}
 """
@@ -668,7 +694,7 @@ Return ONLY JSON:
     try:
         response = await asyncio.wait_for(
             llm_func(prompt=user_prompt, system_prompt=system_prompt, temperature=0.1),
-            timeout=20.0,
+            timeout=timeout,
         )
     except asyncio.TimeoutError:
         return {
@@ -694,8 +720,55 @@ Return ONLY JSON:
         }
     
     payload.setdefault("requirement_id", requirement.id)
+    payload.setdefault("matched_criteria", [])
+    payload.setdefault("missing_criteria", [])
+    payload.setdefault("confidence", 0.5)
     payload.setdefault("matched_symbols", [cb.symbol for cb, _ in code_behaviors[:3]])
     return payload
+
+
+async def classify_behavior_implementation(
+    requirement: BehaviorRequirement,
+    code_behaviors: Sequence[Tuple[CodeBehavior, float]],
+    llm_func,
+    *,
+    fast_llm_func=None,
+    best_similarity: Optional[float] = None,
+) -> Dict[str, Any]:
+    """
+    Two-stage classification:
+    1) Fast model over top-2 (cheap).
+    2) Escalate to main model for borderline/uncertain results.
+    """
+    top_matches = code_behaviors[:5]
+
+    # Stage 1: fast path (optional)
+    if fast_llm_func:
+        fast_result = await _run_behavior_classification(
+            requirement,
+            top_matches[:2],
+            fast_llm_func,
+            timeout=8.0,
+            max_matches=2,
+        )
+        fast_status = fast_result.get("status")
+        # If confident, return early
+        if fast_status == "implemented":
+            return {**fast_result, "stage": "fast"}
+        # Escalate only if similarity suggests potential match
+        similarity_ok = best_similarity is None or best_similarity >= 0.35
+        if not similarity_ok:
+            return {**fast_result, "stage": "fast"}
+
+    # Stage 2: main model (full context)
+    main_result = await _run_behavior_classification(
+        requirement,
+        top_matches,
+        llm_func,
+        timeout=20.0,
+        max_matches=5,
+    )
+    return {**main_result, "stage": "main"}
 
 
 async def evaluate_requirement_behavior(
@@ -707,8 +780,9 @@ async def evaluate_requirement_behavior(
     llm_func=None,
     embedding_func=None,
     behavior_index_path: Optional[Path] = None,
-    top_k: int = 5,
+    top_k: int = 4,
     workspace_id: Optional[str] = None,
+    fast_llm_func=None,
 ) -> Dict[str, Any]:
     """
     Evaluate requirement using behavior-based QA approach.
@@ -769,6 +843,7 @@ async def evaluate_requirement_behavior(
             provider=active_provider,
             embedding_func=embed_func,
             top_k=top_k,
+            similarity_threshold=0.4,
         )
     except Exception as e:
         logger.warning(f"Error finding behavior matches for {requirement.id}: {e}")
@@ -789,8 +864,16 @@ async def evaluate_requirement_behavior(
         }
     
     # Step 4: LLM classification on top matches only
+    best_similarity = float(matches[0][1]) if matches else None
+
     try:
-        classification = await classify_behavior_implementation(behavior_req, matches, llm)
+        classification = await classify_behavior_implementation(
+            behavior_req,
+            matches,
+            llm,
+            fast_llm_func=fast_llm_func,
+            best_similarity=best_similarity,
+        )
         classification["coverage_type"] = "behavior"
         classification["behavior_requirement"] = behavior_req.to_dict()
         classification["top_matches"] = [
@@ -820,9 +903,12 @@ async def evaluate_all_requirements_behavior(
     *,
     output_dir: Optional[Path] = None,
     provider: Optional[QwenProvider] = None,
-    top_k: int = 5,
+    top_k: int = 4,
     use_behavior_index_cache: bool = True,
     workspace_id: Optional[str] = None,
+    parallel: bool = True,
+    parallel_batch_size: Optional[int] = None,
+    fast_llm_func=None,
 ) -> Path:
     """
     Evaluate all requirements using behavior-based QA approach.
@@ -839,9 +925,12 @@ async def evaluate_all_requirements_behavior(
     
     active_provider = provider or QwenProvider()
     llm = make_llm_model_func(active_provider)
+    fast_llm = fast_llm_func or llm
     embed_func = make_embedding_func(active_provider)
     
     # Load or create behavior index (workspace-scoped if workspace_id provided)
+    signature = _compute_code_signature(code_index_id, workspace_id=workspace_id)
+
     if workspace_id:
         from gdd_rag_backbone.workspace.storage import WorkspaceStorage
         storage = WorkspaceStorage(workspace_id)
@@ -853,25 +942,33 @@ async def evaluate_all_requirements_behavior(
     behavior_index_path = behavior_cache_dir / f"{code_id_str}_behaviors.json"
     
     code_behaviors = None
-    if use_behavior_index_cache and behavior_index_path.exists():
-        logger.info(f"Loading cached behavior index from {behavior_index_path}")
+    cache_meta = load_behavior_index_meta(behavior_index_path)
+    cache_signature = cache_meta.get("signature") if cache_meta else None
+    cache_valid = cache_signature and cache_signature.get("hash") == signature["hash"]
+
+    if use_behavior_index_cache and behavior_index_path.exists() and cache_valid:
+        logger.info(f"Loading cached behavior index from {behavior_index_path} (warm cache)")
         code_behaviors = load_behavior_index(behavior_index_path)
     else:
-        logger.info(f"Creating behavior index for {code_index_id}...")
+        if cache_signature:
+            logger.info(f"Behavior cache invalidated (hash mismatch). Rebuilding for {code_index_id}.")
+        else:
+            logger.info(f"No behavior cache found for {code_index_id}. Building fresh index.")
         code_behaviors = await index_code_behaviors(
             code_index_id,
             provider=active_provider,
             llm_func=llm,
             workspace_id=workspace_id,
         )
-        save_behavior_index(code_behaviors, behavior_index_path)
+        save_behavior_index_with_meta(code_behaviors, behavior_index_path, signature)
         logger.info(f"Saved behavior index with {len(code_behaviors)} behaviors")
     
-    # Evaluate each requirement
+    # Evaluate each requirement (with optional parallelization)
     results: List[Dict[str, Any]] = []
     total = len(requirements)
     
-    for idx, requirement in enumerate(requirements, 1):
+    async def evaluate_single_requirement(idx: int, requirement: GddRequirement) -> Dict[str, Any]:
+        """Evaluate a single requirement, handling errors gracefully."""
         try:
             logger.info(f"[Behavior Coverage] Evaluating requirement {idx}/{total}: {requirement.id} - {requirement.title[:50]}")
             result = await evaluate_requirement_behavior(
@@ -880,21 +977,66 @@ async def evaluate_all_requirements_behavior(
                 code_behaviors=code_behaviors,
                 provider=active_provider,
                 llm_func=llm,
+                fast_llm_func=fast_llm,
                 workspace_id=workspace_id,
                 embedding_func=embed_func,
                 top_k=top_k,
             )
-            results.append(result)
             status = result.get("status", "unknown")
             logger.info(f"[Behavior Coverage] Requirement {idx}/{total} completed: {status}")
+            return result
         except Exception as e:
             logger.error(f"[Behavior Coverage] Error evaluating requirement {idx}/{total} ({requirement.id}): {e}", exc_info=True)
-            results.append({
+            return {
                 "requirement_id": requirement.id,
                 "status": "error",
                 "coverage_type": "behavior",
                 "reason": f"Evaluation error: {str(e)[:100]}",
-            })
+            }
+    
+    if parallel and total > 1:
+        # Parallel processing: evaluate multiple requirements concurrently
+        # Use batch size of 5-10 to avoid overwhelming the API
+        if parallel_batch_size:
+            batch_size = max(2, parallel_batch_size)
+        else:
+            batch_size = min(10, max(3, total // 4))  # Adaptive batch size
+        logger.info(f"[Behavior Coverage] Processing {total} requirements in parallel (batch size: {batch_size})")
+        
+        for batch_start in range(0, total, batch_size):
+            batch_end = min(batch_start + batch_size, total)
+            batch_requirements = requirements[batch_start:batch_end]
+            batch_indices = list(range(batch_start + 1, batch_end + 1))
+            
+            # Create tasks for this batch
+            tasks = [
+                evaluate_single_requirement(idx, req)
+                for idx, req in zip(batch_indices, batch_requirements)
+            ]
+            
+            # Execute batch in parallel
+            batch_results = await asyncio.gather(*tasks, return_exceptions=True)
+            
+            # Process results (handle exceptions)
+            for result in batch_results:
+                if isinstance(result, Exception):
+                    logger.error(f"[Behavior Coverage] Batch evaluation error: {result}", exc_info=True)
+                    results.append({
+                        "requirement_id": "unknown",
+                        "status": "error",
+                        "coverage_type": "behavior",
+                        "reason": f"Batch error: {str(result)[:100]}",
+                    })
+                else:
+                    results.append(result)
+            
+            logger.info(f"[Behavior Coverage] Completed batch {batch_start + 1}-{batch_end}/{total}")
+    else:
+        # Sequential processing (for debugging or when parallel=False)
+        logger.info(f"[Behavior Coverage] Processing {total} requirements sequentially")
+        for idx, requirement in enumerate(requirements, 1):
+            result = await evaluate_single_requirement(idx, requirement)
+            results.append(result)
     
     report_payload = {
         "doc_id": doc_id,

@@ -173,17 +173,12 @@ class BehaviorRequirement:
         return asdict(self)
     
     def to_behavior_text(self) -> str:
-        """Convert to a text representation for embedding/matching."""
-        parts = [f"Summary: {self.summary}"]
-        if self.triggers:
-            parts.append(f"Triggers: {', '.join(self.triggers)}")
-        if self.effects:
-            parts.append(f"Effects: {', '.join(self.effects)}")
-        if self.entities:
-            parts.append(f"Entities: {', '.join(self.entities)}")
-        if self.conditions:
-            parts.append(f"Conditions: {', '.join(self.conditions)}")
-        return "\n".join(parts)
+        """Convert to a structured text representation for embedding/matching."""
+        return f"""Feature: {self.summary or 'Unknown'}
+Triggers: {', '.join(self.triggers) if self.triggers else 'None'}
+Effects: {', '.join(self.effects) if self.effects else 'None'}
+Entities: {', '.join(self.entities) if self.entities else 'None'}
+Conditions: {', '.join(self.conditions) if self.conditions else 'None'}""".strip()
 
 
 @dataclass
@@ -205,15 +200,12 @@ class CodeBehavior:
         return asdict(self)
     
     def to_behavior_text(self) -> str:
-        """Convert to a text representation for embedding/matching."""
-        parts = [f"Symbol: {self.symbol}", f"Description: {self.description}"]
-        if self.trigger_patterns:
-            parts.append(f"Triggers: {', '.join(self.trigger_patterns)}")
-        if self.effect_patterns:
-            parts.append(f"Effects: {', '.join(self.effect_patterns)}")
-        if self.entities:
-            parts.append(f"Entities: {', '.join(self.entities)}")
-        return "\n".join(parts)
+        """Convert to a structured text representation for embedding/matching."""
+        return f"""Feature: {self.description or self.symbol}
+Symbol: {self.symbol}
+Triggers: {', '.join(self.trigger_patterns) if self.trigger_patterns else 'None'}
+Effects: {', '.join(self.effect_patterns) if self.effect_patterns else 'None'}
+Entities: {', '.join(self.entities) if self.entities else 'None'}""".strip()
 
 
 @dataclass

@@ -34,7 +34,6 @@ ENV/
 *~
 
 # Environment variables
-.env
 .env.local
 
 # Data directories (runtime data, not source)

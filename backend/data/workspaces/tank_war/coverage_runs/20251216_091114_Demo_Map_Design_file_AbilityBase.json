@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "20251216_091114_Demo_Map_Design_file_AbilityBase",
+  "timestamp": "2025-12-16T09:11:14.651447Z",
+  "workspaceId": "tank_war",
+  "gddDocId": "Demo_Map_Design_file",
+  "codeBatchId": "AbilityBase",
+  "mode": "dry-run",
+  "results": [
+    {
+      "requirement": {
+        "id": "req_1",
+        "title": "Mock requirement 1 for Demo_Map_Design_file",
+        "description": "This is a mock requirement for dry-run testing",
+        "triggers": [
+          "some trigger"
+        ],
+        "effects": [
+          "some effect"
+        ],
+        "acceptance_criteria": [
+          "must work"
+        ]
+      },
+      "status": "UNKNOWN",
+      "confidence": 0.0,
+      "matchedCriteria": [],
+      "missingCriteria": [
+        "dry-run mode"
+      ],
+      "evidence": [],
+      "notes": "Skipped due to dry-run mode"
+    }
+  ],
+  "dry_run": true
+}

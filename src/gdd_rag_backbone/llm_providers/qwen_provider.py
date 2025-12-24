@@ -181,7 +181,10 @@ class QwenProvider(LlmProvider, EmbeddingProvider):
             )
             
             # Extract content
-            return response.choices[0].message.content
+            content = response.choices[0].message.content
+            if content is None:
+                raise RuntimeError("Qwen API returned empty response")
+            return content
                 
         except ImportError:
             raise RuntimeError(

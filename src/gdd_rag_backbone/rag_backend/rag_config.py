@@ -4,11 +4,14 @@ RAG-Anything configuration and instance factory.
 from __future__ import annotations
 
 # Import patch FIRST, before any raganything imports
-from gdd_rag_backbone.rag_backend import lightrag_patch  # noqa: F401
+import os
+
+# Optionally disable LightRAG patching to avoid heavy native deps in constrained envs
+if not os.environ.get("LIGHTRAG_PATCH_DISABLE"):
+    from gdd_rag_backbone.rag_backend import lightrag_patch  # noqa: F401
 
 from pathlib import Path
 from typing import Callable, Optional, Union
-from raganything import RAGAnything
 from gdd_rag_backbone.config import (
     DEFAULT_WORKING_DIR,
     DEFAULT_PARSER,
@@ -31,6 +34,8 @@ def get_rag_instance(
     enable_equation_processing: Optional[bool] = None,
     **lightrag_kwargs
 ) -> RAGAnything:
+    # Lazy import to avoid crashing environments where raganything deps (numpy/blas) are unavailable
+    from raganything import RAGAnything  # type: ignore
     """
     Create and configure a RAGAnything instance.
     

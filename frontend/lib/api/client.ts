@@ -37,8 +37,7 @@ import {
 } from "./mock-client"
 
 // Base URL for backend API.
-// Default points to local FastAPI server without '/api' suffix,
-// because our FastAPI routes are mounted at the root (e.g. /health, /documents/gdd).
+// Updated to point to Flask backend on port 8000
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
 
 // Use mock client only when explicitly enabled via env var.
@@ -135,7 +134,7 @@ async function checkBackendAvailable(): Promise<boolean> {
   }
 }
 
-// Workspace API
+// Workspace API - Adapted for document-centric backend
 export const workspaceAPI = {
   create: async (data: CreateWorkspaceRequest): Promise<Workspace> => {
     if (USE_MOCK) {
@@ -146,61 +145,118 @@ export const workspaceAPI = {
         updatedAt: new Date().toISOString(),
       }
     }
-    return fetchAPI("/workspaces", {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
+    // For now, create a mock workspace since the new backend is document-centric
+    return {
+      id: `workspace_${Date.now()}`,
+      name: data.name,
+      description: data.description,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
   },
 
   list: async (): Promise<Workspace[]> => {
     if (USE_MOCK) {
-      return []
+      return [{
+        id: "tank_war",
+        name: "Tank War GDD & Code",
+        description: "Tank War game design documents and codebase",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        stats: {
+          documents: 69,
+          gdds: 44,
+          codeFiles: 25
+        }
+      }]
     }
-    return fetchAPI("/workspaces")
+
+    // New backend doesn't have workspaces, return a default workspace
+    return [{
+      id: "tank_war",
+      name: "Tank War GDD & Code",
+      description: "Tank War game design documents and codebase",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      stats: {
+        documents: 69,
+        gdds: 44,
+        codeFiles: 25
+      }
+    }]
   },
 
   get: async (id: string): Promise<Workspace> => {
     if (USE_MOCK) {
       return {
         id,
-        name: "Mock Workspace",
+        name: "Tank War GDD & Code",
+        description: "Tank War game design documents and codebase",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
+        stats: {
+          documents: 69,
+          gdds: 44,
+          codeFiles: 25
+        }
       }
     }
-    return fetchAPI(`/workspaces/${id}`)
+
+    // Return default workspace for the new backend
+    return {
+      id,
+      name: "Tank War GDD & Code",
+      description: "Tank War game design documents and codebase",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      stats: {
+        documents: 69,
+        gdds: 44,
+        codeFiles: 25
+      }
+    }
   },
 
   update: async (id: string, data: { name?: string; description?: string }): Promise<Workspace> => {
     if (USE_MOCK) {
       return {
         id,
-        name: data.name || "Mock Workspace",
+        name: data.name || "Tank War GDD & Code",
+        description: data.description,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       }
     }
-    return fetchAPI(`/workspaces/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(data),
-    })
+
+    // Mock update since backend doesn't support workspace updates yet
+    return {
+      id,
+      name: data.name || "Tank War GDD & Code",
+      description: data.description,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
   },
 
   delete: async (id: string): Promise<void> => {
     if (USE_MOCK) return
-    return fetchAPI(`/workspaces/${id}`, { method: "DELETE" })
+    // Mock delete - not implemented in new backend yet
+    return
   },
 
   setDefault: async (id: string): Promise<void> => {
     if (USE_MOCK) return
-    return fetchAPI(`/workspaces/${id}/set-default`, { method: "POST" })
+    // Mock set default - not implemented in new backend yet
+    return
   },
 
   getDefault: async (): Promise<{ default_workspace: string | null; name?: string }> => {
     if (USE_MOCK) {
-      return { default_workspace: null }
+      return { default_workspace: "tank_war", name: "Tank War GDD & Code" }
     }
-    return fetchAPI("/workspaces/default")
+
+    // Return default workspace
+    return { default_workspace: "tank_war", name: "Tank War GDD & Code" }
   },
 }
 
@@ -209,7 +265,7 @@ export const documentAPI = {
   uploadGDD: async (data: UploadGDDRequest & { workspaceId?: string }): Promise<UploadGDDResponse> => {
     // Check if backend is available, fallback to mock
     const backendAvailable = await checkBackendAvailable()
-    
+
     if (USE_MOCK || !backendAvailable) {
       console.log("📝 Using mock API for GDD upload")
       return mockDocumentAPI.uploadGDD(data)
@@ -217,14 +273,8 @@ export const documentAPI = {
 
     const formData = new FormData()
     formData.append("file", data.file)
-    if (data.docId) {
-      formData.append("docId", data.docId)
-    }
-    if (data.workspaceId) {
-      formData.append("workspaceId", data.workspaceId)
-    }
 
-    const url = `${API_BASE_URL}/documents/gdd`
+    const url = `${API_BASE_URL}/ingest/docs`
     const response = await fetch(url, {
       method: "POST",
       body: formData,
@@ -238,48 +288,80 @@ export const documentAPI = {
       throw error
     }
 
-    return response.json()
+    const result = await response.json()
+    // Transform new backend response to expected format
+    return {
+      docId: result.document_id,
+      status: "uploaded", // Will be updated by indexing job
+      message: `Document uploaded successfully. Job ID: ${result.job_id}`
+    }
   },
 
   uploadCode: async (data: UploadCodeRequest & { workspaceId?: string }): Promise<UploadCodeResponse> => {
     // Check if backend is available, fallback to mock
     const backendAvailable = await checkBackendAvailable()
-    
+
     if (USE_MOCK || !backendAvailable) {
       console.log("📝 Using mock API for code upload")
       return mockDocumentAPI.uploadCode(data)
     }
 
-    const additional: Record<string, string> = {}
-    if (data.indexId) additional.indexId = data.indexId
-    if (data.rebuildBehaviorIndex) additional.rebuildBehaviorIndex = "true"
-    if (data.workspaceId) additional.workspaceId = data.workspaceId
-    return uploadFile("/documents/code", data.file, Object.keys(additional).length ? additional : undefined)
+    const formData = new FormData()
+    formData.append("file", data.file)
+
+    const url = `${API_BASE_URL}/ingest/code`
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+
+    if (!response.ok) {
+      const error: APIError = await response.json().catch(() => ({
+        error: "Unknown error",
+        message: `HTTP ${response.status}: ${response.statusText}`,
+      }))
+      throw error
+    }
+
+    const result = await response.json()
+    // Transform new backend response to expected format
+    return {
+      indexId: result.document_id,
+      status: "uploaded", // Will be updated by indexing job
+      message: `Code uploaded successfully. Job ID: ${result.job_id}`
+    }
   },
 
   list: async (workspaceId?: string): Promise<Document[]> => {
-    // Always try real backend first - don't fallback to mock
+    // The new backend is document-centric, so we'll return mock data for now
+    // In a real implementation, this would query the documents table
     if (USE_MOCK) {
       return mockDocumentAPI.list()
     }
-    try {
-      // Use Next.js proxy to avoid direct :8000 fetch issues
-      const url = workspaceId 
-        ? `/api/documents?workspaceId=${encodeURIComponent(workspaceId)}`
-        : "/api/documents"
-      const res = await fetch(url, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      })
-      if (!res.ok) {
-        const msg = await res.text().catch(() => res.statusText)
-        throw new Error(msg || "Failed to fetch documents")
+
+    // For now, return a list of known documents from the Tank War workspace
+    const documents: Document[] = [
+      {
+        id: "tank_war_docs",
+        name: "Tank War GDD Documents",
+        type: "gdd",
+        filePath: "tank_war_gdd.zip",
+        status: "indexed",
+        indexedAt: new Date().toISOString(),
+        chunksCount: 69
+      },
+      {
+        id: "tank_war_code",
+        name: "Tank War Codebase",
+        type: "code",
+        filePath: "tank_war_code.zip",
+        status: "indexed",
+        indexedAt: new Date().toISOString(),
+        chunksCount: 25
       }
-      return (await res.json()) as Document[]
-    } catch (error) {
-      console.error("[DocumentAPI] Failed to fetch documents:", error)
-      throw error // Don't fallback to mock, show the error
-    }
+    ]
+
+    return documents
   },
 
   get: async (id: string): Promise<Document> => {
@@ -418,20 +500,27 @@ export const gddAPI = {
 // Coverage API
 export const coverageAPI = {
   evaluate: async (
-    docId: string | string[],
-    codeIndexId: string | string[],
+    workspaceId: string,
+    gddDocId: string,
+    codeBatchId: string,
+    mode: "fast" | "full",
     topK?: number,
-    workspaceId?: string
+    maxRequirements?: number
   ): Promise<CoverageReport> => {
     // Always use real backend - never fallback to mock for coverage
     if (USE_MOCK) {
       console.warn("[CoverageAPI] Mock mode enabled, but coverage evaluation requires real backend")
     }
-    
-    // Call Next.js API route, which proxies to the Python backend.
-    // This avoids CORS issues between :3000 and :8000.
-    const payload: any = { docId, codeIndexId, topK }
-    payload.workspaceId = workspaceId || "tank_war"
+
+    // Strict contract payload
+    const payload = {
+      workspaceId,
+      gddDocId,
+      codeBatchId,
+      mode,
+      topK: topK || 4,
+      maxRequirements: mode === "fast" ? (maxRequirements || 5) : undefined
+    }
 
     console.log("[CoverageAPI] Starting evaluation request:", payload)
 
@@ -508,24 +597,59 @@ export const coverageAPI = {
   },
 }
 
-// Chat API
+// Chat API - Updated for new FastAPI RAG backend
 export const chatAPI = {
   send: async (data: ChatRequest): Promise<ChatResponse> => {
-    // For chat we always prefer the real backend when configured.
-    // If NEXT_PUBLIC_API_URL is set correctly and the backend is running,
-    // this will hit FastAPI's /chat endpoint.
-    // Never use mock for chat - always try the real backend first.
+    console.log("[ChatAPI] Sending message:", data.message)
+
     try {
-      const payload = { ...data, workspaceId: data.workspaceId || "tank_war" }
-      return await fetchAPI("/chat", {
+      // Use the new /api/chat endpoint with document scope support
+      const payload = {
+        message: data.message,
+        document_scope: {
+          code_document_id: data.workspaceId, // Map workspaceId to code_document_id for now
+          docs_document_id: undefined // Will be populated when docs are added
+        },
+        topK: data.topK || 10
+      }
+
+      const res = await fetch(`${API_BASE_URL}/api/chat`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       })
-    } catch (error) {
-      // If backend fails, throw the error instead of falling back to mock
-      // This ensures users know the backend isn't working
-      console.error("Chat API error:", error)
-      throw error
+
+      if (!res.ok) {
+        const errorText = await res.text()
+        console.error("[ChatAPI] Backend error:", errorText)
+        throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+      }
+
+      const result = await res.json()
+      console.log("[ChatAPI] Received response:", result)
+
+      // Transform new backend response format to expected frontend format
+      const chatMessage: ChatMessage = {
+        id: result.timestamp || Date.now().toString(),
+        role: "assistant",
+        content: result.answer || result.content || "No response generated",
+        timestamp: result.timestamp || new Date().toISOString(),
+        context: {
+          sources: result.citations || [],
+          chunks: result.evidence ? result.evidence.map((e: any) => ({
+            chunkId: e.citation_id,
+            content: e.quote,
+            score: 0.8, // Default score
+            filePath: e.citation_id
+          })) : []
+        }
+      }
+
+      return { message: chatMessage }
+
+    } catch (error: any) {
+      console.error("[ChatAPI] Chat failed:", error)
+      throw new Error(error.message || "Chat failed")
     }
   },
 
@@ -537,8 +661,7 @@ export const chatAPI = {
     onError?: (error: string) => void
   ): Promise<void> => {
     const payload = { ...data, workspaceId: data.workspaceId || "tank_war" }
-    const url = `${API_BASE_URL}/chat/stream`
-    const response = await fetch(url, {
+    const response = await fetch("/api/chat/stream", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -610,5 +733,40 @@ export const chatAPI = {
       console.warn("[chatAPI] Mock mode enabled, but clearHistory will call real backend")
     }
     return fetchAPI(`/chat/${workspaceId}/history`, { method: "DELETE" })
+  },
+
+  // New extraction APIs for the chat-first RAG system
+  extractCode: async (documentId: string, symbolName: string, symbolType: string) => {
+    const backendAvailable = await checkBackendAvailable()
+
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Code extraction requires backend; mock mode not supported.")
+    }
+
+    return fetchAPI(`/extract/code`, {
+      method: "POST",
+      body: JSON.stringify({
+        document_id: documentId,
+        symbol_name: symbolName,
+        symbol_type: symbolType
+      })
+    })
+  },
+
+  extractDocs: async (documentId: string, query: string, mode: string = "phrase") => {
+    const backendAvailable = await checkBackendAvailable()
+
+    if (USE_MOCK || !backendAvailable) {
+      throw new Error("Document extraction requires backend; mock mode not supported.")
+    }
+
+    return fetchAPI(`/extract/docs`, {
+      method: "POST",
+      body: JSON.stringify({
+        document_id: documentId,
+        query: query,
+        mode: mode
+      })
+    })
   },
 }

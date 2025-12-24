@@ -1,11 +1,29 @@
-fastapi==0.122.0
-uvicorn[standard]==0.38.0
-python-multipart==0.0.20
+# Code QA Flask Backend Dependencies
+flask
+flask-cors
+supabase
 raganything[all]
 dashscope
 openai
 pandas
 python-dotenv
+
+# Code QA core dependencies
+lancedb
+redis
+tree-sitter
+tree-sitter-python
+tree-sitter-javascript
+tree-sitter-java
+tree-sitter-rust
+tree-sitter-go
+tree-sitter-cpp
+transformers
+torch
+sentence-transformers
+faiss-cpu
+colbert-ai
+jinja2
 
 
 
