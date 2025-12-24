@@ -3,20 +3,24 @@
 Database operations for Supabase PostgreSQL
 """
 
-import os
 import json
+import os
 import uuid
-from typing import List, Dict, Any, Optional
-from supabase import create_client, Client
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from supabase import Client, create_client
+
+from backend.app.config import get_settings
 
 class Database:
     """Supabase database operations"""
 
     def __init__(self):
         """Initialize Supabase client"""
-        self.supabase_url = os.getenv("SUPABASE_URL")
-        self.supabase_key = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_ANON_KEY")
+        settings = get_settings()
+        self.supabase_url = settings.supabase_url
+        self.supabase_key = settings.supabase_service_role_key or settings.supabase_anon_key
 
         if not self.supabase_url or not self.supabase_key:
             raise ValueError("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY/SUPABASE_ANON_KEY")

@@ -33,8 +33,8 @@ try:
 except ImportError:
     EMBEDDINGS_AVAILABLE = False
 
-from .database import Database
-from .storage import Storage
+from backend.database import Database
+from backend.storage import Storage
 
 class Indexer:
     """Handles indexing of documents and code"""
